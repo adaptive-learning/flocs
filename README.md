@@ -1,6 +1,6 @@
 # Flow of Computer Science
-Flocs is and intelligent web application for learning computer science
-aiming at creating [flow experience][1].
+Flocs is an intelligent web application for learning computer science,
+aiming at creating a [flow experience][1].
 Flocs is developed by [Adaptive Learning group][2] at Faculty of informatics, Masaryk university.
 
   [1]: https://en.wikipedia.org/wiki/Flow_(psychology)
@@ -27,10 +27,10 @@ Flocs is developed by [Adaptive Learning group][2] at Faculty of informatics, Ma
 
         $ make install
 
-  The `make install` command just calls `pip install -r requirements.txt` and `python manage.py migrate`.
+  The `make install` command just calls `pip install -r requirements.txt` and `python manage.py migrate` (see Makefile).
 
-That's all. You can check that Django has installed correctly by command `django-admin --version`,
-which should return 1.8.2.
+That's all. You can check that Django was installed correctly by command `django-admin --version`,
+which should output 1.8.2.
 You can deactivate the virtual environment by calling `deactivate`.
 
 ## Workflow
@@ -50,10 +50,10 @@ You can deactivate the virtual environment by calling `deactivate`.
 
         $ git checkout -b name_of_the_feature
 
-5. Write unit test for the implemented feature (and possibly integration tests as well).
+5. Write unit tests for the implemented feature (and possibly integration tests as well).
   Check that the tests don't pass.
 
-        $ make test
+      $ make test
 
 6. Develop the feature. Enjoy it, experience the state of flow :-)
 
@@ -77,7 +77,7 @@ You can deactivate the virtual environment by calling `deactivate`.
 
 12. Commit changes:
 
-        $ git add changed_file_name
+        $ git add changed_files
         $ git commit -m "feature X implemented"
 
 13. Merge the feature branch to the master branch:
@@ -85,11 +85,11 @@ You can deactivate the virtual environment by calling `deactivate`.
         $ git checkout master
         $ git merge name_of_the_feature
 
-13. Push changes to the GitHub:
+14. Push changes to the GitHub:
 
         $ git push
 
-14. Deactivate the virtual environment.
+15. Deactivate the virtual environment:
 
         $ deactivate
 
