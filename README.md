@@ -145,6 +145,6 @@ class SomeClass(object):
 
 ## Tips
 
-* If you are using vim, take a look at syntastic, vim-fugitive, vim-virtualenv and vim-airline plugins.
+* If you are using vim, take a look at syntastic and vim-fugitive plugins.
 
 
