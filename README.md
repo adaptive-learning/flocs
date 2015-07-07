@@ -8,9 +8,9 @@ Flocs is developed by [Adaptive Learning group][2] at Faculty of informatics, Ma
 
 ## Start working on the project
 
-1. Install Python 3, virtualenv, virtualenvwrapper and pylint:
+1. Install Python 3, virtualenv and virtualenvwrapper:
 
-        $ sudo pacman -S python python-virtualenv python-virtualenvwrapper python-pylint
+        $ sudo pacman -S python python-virtualenv python-virtualenvwrapper
 
 2. Clone the project repository:
 
@@ -27,7 +27,7 @@ Flocs is developed by [Adaptive Learning group][2] at Faculty of informatics, Ma
 
         $ make install
 
-  The `make install` command just calls `pip install -r requirements.txt` and `python manage.py migrate` (see Makefile).
+  The `make install` command just calls `pip install -r requirements.txt` (which includes django and pylint) and `python manage.py migrate` (to setup database).
 
 That's all. You can check that Django was installed correctly by command `django-admin --version`,
 which should output 1.8.2.
