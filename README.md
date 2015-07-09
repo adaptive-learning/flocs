@@ -12,11 +12,20 @@ Flocs is developed by [Adaptive Learning group][2] at Faculty of informatics, Ma
 
         $ sudo pacman -S python python-virtualenv python-virtualenvwrapper
 
-2. Clone the project repository:
+2. Configure the virtual environment by adding following two lines in your ~/.bashrc:
+
+        $ export WORKON_HOME=~/.virtualenvs
+        $ source /usr/bin/virtualenvwrapper.sh
+
+  Load the changes:
+
+        $ source ~/.bashrc
+
+3. Clone the project repository:
 
         $ git clone https://github.com/effa/flocs.git
 
-3. Create virtual environment and bind it with the project directory:
+4. Create virtual environment and bind it with the project directory:
 
         $ cd flocs
         $ mkvirtualenv flocs; setvirtualenvproject
