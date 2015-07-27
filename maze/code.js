@@ -1,5 +1,5 @@
 var workspace = Blockly.inject('blocklyDiv',
-    {media: '../../media/',
+    {media: '../blockly/media/',
      maxBlocks: 10,
      toolbox: toolbox});
      
