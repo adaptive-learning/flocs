@@ -1,6 +1,13 @@
 var toolbox = 
    '<xml id="toolbox" style="display: none">\
 	<block type="krok_vpred"></block>\
+	<block type="krok_vzad"></block>\
+	<block type="je_cesta_vpravo"></block>\
+	<block type="je_cesta_vlevo"></block>\
+	<block type="otocit_vlevo"></block>\
+	<block type="otocit_vpravo"></block>\
+	<block type="if_then"></block>\
+	<block type="if_then_else"></block>\
     </xml>';
 
 

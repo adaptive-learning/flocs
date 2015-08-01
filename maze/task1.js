@@ -44,14 +44,14 @@ function addFigure() {
 
     var symbol;
 
-    if (direction.x == 0 && direction .y == 1) {
-                symbol = '⇒';
-    } else if (direction.x == 0 && direction .y == -1) {
-                symbol = '⇐';
-    } else if (direction.x == 1 && direction .y == 0) {
-                symbol = '⇑';
-    } else if (direction.x == -1 && direction .y == 0) {
-                symbol = '⇓';
+    if (direction.x == 0 && direction.y == 1) {
+        symbol = '⇒';
+    } else if (direction.x == 0 && direction.y == -1) {
+        symbol = '⇐';
+    } else if (direction.x == 1 && direction.y == 0) {
+        symbol = '⇓';
+    } else if (direction.x == -1 && direction.y == 0) {
+        symbol = '⇑';
     }
     document.getElementById(position.x + '' + position.y).innerHTML = symbol;
 }
@@ -83,8 +83,8 @@ function stepForward() {
     removeFigure();
 
     newPosition = {
-        x:direction.x + position.x,
-        y:direction.y + position.y
+        x:position.x + direction.x,
+        y:position.y + direction.y 
     };
 
     position = newPosition;
@@ -99,6 +99,114 @@ function stepForward() {
             win = true;
             break;
     } 
+}
+
+function stepBackward() {
+    removeFigure();
+
+    newPosition = {
+        x:position.x - direction.x,
+        y:position.y - direction.y 
+    };
+
+    position = newPosition;
+    addFigure();
+    
+    switch (maze[position.x][position.y]) {
+        case 'x':
+            endCondition = true;
+            break;
+        case 't':
+            endCondition = true;
+            win = true;
+            break;
+    } 
+}
+
+function getLeftVector() {
+    if (direction.x == 0 && direction.y == 1) {
+        return {x:-1, y:0}
+    } else if (direction.x == 0 && direction.y == -1) {
+        return {x:1, y:0}
+    } else if (direction.x == 1 && direction.y == 0) {
+        return {x:0, y:1}
+    } else if (direction.x == -1 && direction.y == 0) {
+        return {x:0, y:-1}
+    }
+}
+
+function getRightVector() {
+    if (direction.x == 0 && direction.y == 1) {
+        return {x:1, y:0}
+    } else if (direction.x == 0 && direction.y == -1) {
+        return {x:-1, y:0}
+    } else if (direction.x == 1 && direction.y == 0) {
+        return {x:0, y:-1}
+    } else if (direction.x == -1 && direction.y == 0) {
+        return {x:0, y:1}
+    }
+}
+
+function checkLeft() {
+    leftVector = getLeftVector();
+
+    checkPosition = {
+        x:position.x + leftVector.x,
+        y:position.y + leftVector.y 
+    };
+
+    if (checkPosition.x < 0 
+            || checkPosition.y < 0
+            || checkPosition.x > maze.lenght
+            || checkPosition.y > maze[0].lenght) {
+        return false;
+    }
+
+    switch (maze[checkPosition.x][checkPosition.y]) {
+        case 'x':
+            return false;
+            break;
+        default:
+            return true;
+            break;
+    } 
+}
+
+function checkRight() {
+    rightVector = getRightVector();
+
+    checkPosition = {
+        x:position.x + rightVector.x,
+        y:position.y + rightVector.y 
+    };
+
+    if (checkPosition.x < 0 
+            || checkPosition.y < 0
+            || checkPosition.x > maze.lenght
+            || checkPosition.y > maze[0].lenght) {
+        return false;
+    }
+
+    switch (maze[checkPosition.x][checkPosition.y]) {
+        case 'x':
+            return false;
+            break;
+        default:
+            return true;
+            break;
+    } 
+}
+
+function turnLeft() {
+    removeFigure();
+    direction = getLeftVector();
+    addFigure();
+}
+
+function turnRight() {
+    removeFigure();
+    direction = getRightVector();
+    addFigure();
 }
 
 function announceResult() {
@@ -142,6 +250,21 @@ document.getElementById('runButton').disabled = 'disabled';
       // Add an API function for the stepForward() block.
       interpreter.setProperty(scope, 'stepForward',
           interpreter.createNativeFunction(stepForward));
+      // Add an API function for the stepBackward() block.
+      interpreter.setProperty(scope, 'stepBackward',
+          interpreter.createNativeFunction(stepBackward));
+      // Add an API function for the checkLeft() block.
+      interpreter.setProperty(scope, 'checkLeft',
+          interpreter.createNativeFunction(checkLeft));
+      // Add an API function for the checkRight() block.
+      interpreter.setProperty(scope, 'checkRight',
+          interpreter.createNativeFunction(checkRight));
+      // Add an API function for the turnLeft() block.
+      interpreter.setProperty(scope, 'turnLeft',
+          interpreter.createNativeFunction(turnLeft));
+      // Add an API function for the turnRight() block.
+      interpreter.setProperty(scope, 'turnRight',
+          interpreter.createNativeFunction(turnRight));
     }
 
     var highlightPause = false;
