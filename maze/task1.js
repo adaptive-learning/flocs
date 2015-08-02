@@ -248,23 +248,46 @@ document.getElementById('runButton').disabled = 'disabled';
           interpreter.createNativeFunction(wrapper));
           
       // Add an API function for the stepForward() block.
+      var wrapper = function() {
+          return interpreter.createPrimitive(stepForward());
+      }
       interpreter.setProperty(scope, 'stepForward',
-          interpreter.createNativeFunction(stepForward));
+          interpreter.createNativeFunction(wrapper));
+      
       // Add an API function for the stepBackward() block.
+      var wrapper = function() {
+          return interpreter.createPrimitive(stepBackward());
+      }
       interpreter.setProperty(scope, 'stepBackward',
-          interpreter.createNativeFunction(stepBackward));
+          interpreter.createNativeFunction(wrapper));
+      
       // Add an API function for the checkLeft() block.
+      var wrapper = function() {
+          return interpreter.createPrimitive(checkLeft());
+      }
       interpreter.setProperty(scope, 'checkLeft',
-          interpreter.createNativeFunction(checkLeft));
+          interpreter.createNativeFunction(wrapper));
+
       // Add an API function for the checkRight() block.
+      var wrapper = function() {
+          return interpreter.createPrimitive(checkRight());
+      }
       interpreter.setProperty(scope, 'checkRight',
-          interpreter.createNativeFunction(checkRight));
+          interpreter.createNativeFunction(wrapper));
+
       // Add an API function for the turnLeft() block.
+      var wrapper = function() {
+          return interpreter.createPrimitive(turnLeft());
+      }
       interpreter.setProperty(scope, 'turnLeft',
-          interpreter.createNativeFunction(turnLeft));
+          interpreter.createNativeFunction(wrapper));
+
       // Add an API function for the turnRight() block.
+      var wrapper = function() {
+          return interpreter.createPrimitive(turnRight());
+      }
       interpreter.setProperty(scope, 'turnRight',
-          interpreter.createNativeFunction(turnRight));
+          interpreter.createNativeFunction(wrapper));
     }
 
     var highlightPause = false;
