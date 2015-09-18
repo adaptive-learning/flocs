@@ -1,4 +1,7 @@
-angular.module('maze-game', [
-    'maze-game.services',
-    'maze-game.controllers',
-    'maze-game.directives'])
+angular.module('flocs', [
+    'flocs.services',
+    'flocs.filters',
+    'flocs.controllers',
+    'flocs.directives'])
+
+// there will be a config block for routes...

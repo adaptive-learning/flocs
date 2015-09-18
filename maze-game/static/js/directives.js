@@ -1,37 +1,116 @@
 /* Directives */
-angular.module('maze-game.directives', [])
+angular.module('flocs.directives', [])
 
-.directive('flocsMaze', ['mazeApiService', function(mazeApi) {
+.directive('flocsWorkspace', ['workspaceFactory', function(workspaceFactory) {
+  return {
+    restrict: 'E',
+    scope: {},
+    templateUrl: '/static/partials/workspace.html',
+
+    /*controller: function($scope) {
+
+      $scope.getJavaScriptCode = function() {
+        var code = Blockly.JavaScript.workspaceToCode(scope.workspace);
+        return code
+      };
+
+    },*/
+
+    link: function(scope, element) {
+
+      // initialize blockly
+      var blocksList = [// TODO: move to a service
+      {
+        "id": "maze_move_forward",
+        "lastDummyAlign0": "LEFT",
+        "message0": "krok vpred",
+        "args0": [],
+        "previousStatement": true,
+        "nextStatement": true,
+        "colour": 120,
+        "tooltip": "",
+        "helpUrl": ""
+      },
+      {
+        "id": "maze_turn_left",
+        "lastDummyAlign0": "LEFT",
+        "message0": "zatoc doleva",
+        "args0": [],
+        "previousStatement": true,
+        "nextStatement": true,
+        "colour": 120,
+        "tooltip": "",
+        "helpUrl": ""
+      },
+      {
+        "id": "maze_turn_right",
+        "lastDummyAlign0": "LEFT",
+        "message0": "zatoc doprava",
+        "args0": [],
+        "previousStatement": true,
+        "nextStatement": true,
+        "colour": 120,
+        "tooltip": "",
+        "helpUrl": ""
+      },
+
+      ];
+      // load all blocks
+      for (var i = 0, jsonBlock; jsonBlock = blocksList[i]; i++) {
+        Blockly.Blocks[jsonBlock.id] = {
+          init: (function(data) {return function() {this.jsonInit(data);};})(jsonBlock)
+        };
+      }
+      Blockly.JavaScript['maze_move_forward'] = function(block) {
+            return 'moveForward();';
+      };
+      Blockly.JavaScript['maze_turn_left'] = function(block) {
+            return 'turnLeft();';
+      };
+      Blockly.JavaScript['maze_turn_right'] = function(block) {
+            return 'turnRight();';
+      };
+      // TODO: code for Python...
+
+      var workspace = Blockly.inject('blocklyDiv',
+        {toolbox: document.getElementById('toolbox')}); // TODO: unhard-code toolbox
+      workspaceFactory.setWorkspace(workspace);
+    }
+  };
+}])
+
+.directive('flocsMaze', ['BoxType', 'mazeFactory', function(BoxType, mazeFactory) {
   return {
     restrict: 'E',
     scope: {},
     templateUrl: '/static/partials/maze.html',
-    controller: function($scope){
+    /*controller: function($scope){
+    },*/
+    link: function(scope, element){
 
-      // move one step forward [TODO: in given direction]
-      function forward(){
-        $scope.position[0] += 1;
-      };
-
-      /*
-         Run the program. Return true/false whether the goal was reached.
-      */
-      function run(){
-        //console.log(mazeApi.code);
-        // TODO: vykonavani prikazu - pomoci $timeoutu a pozdeji i s mezistavy
-        // (ulozit do nejake fronty), staci asi pozice
-        $scope.position[0] = 7;
-        // rekneme, ze to bylo uspesne:
-        mazeApi.broadcastSuccess();
+      // image paths
+      var getBoxImagePath = function(box) {
+        switch (box) {
+          case BoxType.WALL: return '/static/img/box.svg';
+          case BoxType.GOAL: return '/static/img/goal.png';
+          default: return null;
+        }
       };
 
       /*
          Reset the maze.
       */
-      function reset(){
-        hero = {
-          x: initialPosition[1],
-          y: initialPosition[0],
+      function reset(grid, initialPosition, initialDirection){
+        var gridSize = grid.length;
+        var visualization = {
+          width: 300,
+          height: 300
+        };
+        visualization.boxSize = visualization.width / gridSize,
+        scope.hero = {
+          x: initialPosition[0],
+          y: initialPosition[1],
+          direction: initialDirection,
           width: visualization.boxSize,
           height: visualization.boxSize,
           path: '/static/img/karlik2.png'
@@ -48,89 +127,26 @@ angular.module('maze-game.directives', [])
             });
           }
         }
-        visualization.boxes.push(hero)
+        visualization.boxes.push(scope.hero);
+        // publish new visualization
+        scope.visualization = visualization;
       };
 
-      // initialization
-      var grid = [
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 2, 0, 0, 0, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1],
-        [1, 1, 1, 1, 0, 0, 3, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1]];
-      var initialPosition = findInitialPosition(grid);
-      var gridSize = grid.length;
-      var visualization = {
-        width: 400,
-        height: 400
+      function move(position) {
+        // TODO: animation
+        //var vector = directionService.directionVector(scope.hero.direction);
+        scope.hero.x = position[0];
+        scope.hero.y = position[1];
       };
-      visualization.boxSize = visualization.width / gridSize,
-      reset();
 
-      // public scope
-      $scope.visualization = visualization;
+      function turn(newDirection) {
+        // TODO: animation
+        scope.hero.direction = newDirection;
+      };
 
-      // interface
-      mazeApi.listenRun(run);
-      mazeApi.listenReset(reset);
+      // interface of the maze component (via event signals)
+      mazeFactory.registerView(reset, move, turn);
 
-    },
-    link: function(scope, element){
     }
   };
 }])
-.filter('pixelCoordinates', function () {
-  return function(input, visualization) {
-    return input * visualization.boxSize;
-  };
-});
-
-
-// ------------------------------------------------------------------
-
-// constants for box types
-var BoxType = {
-  FREE: 0,
-  WALL: 1,
-  START: 2,
-  GOAL:  3
-};
-
-// constructor for box object
-/*function Box(row, col, width, height, path) {
-    this.row = row;
-    this.col = col;
-    this.width = width;
-    this.height = height;
-    this.path = path;
-
-    this.getX = function {
-        return
-    }
-}*/
-
-/*
-    Find position of the start box
-*/
-function findInitialPosition(grid) {
-  for (var i = 0; i < grid.length; i++) {
-    for (var j = 0; j < grid[i].length; j++) {
-      if (grid[i][j] == BoxType.START) {
-        return [i, j];
-      }
-    }
-  }
-};
-
-
-// image paths
-var getBoxImagePath = function(box) {
-  switch (box) {
-    case BoxType.WALL: return '/static/img/box.svg';
-    case BoxType.GOAL: return '/static/img/goal.png';
-    default: return null;
-  }
-};
