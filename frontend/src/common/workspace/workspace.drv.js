@@ -6,7 +6,7 @@ angular.module('flocs.workspace')
   return {
     restrict: 'E',
     scope: {},
-    templateUrl: '/static/components/workspace/workspace.tpl.html',
+    templateUrl: 'workspace/workspace.tpl.html',
     /*controller: function($scope){
     },*/
     link: function(scope, element, attrs) {

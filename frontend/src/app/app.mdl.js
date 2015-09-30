@@ -2,6 +2,8 @@
  * Flocs application modul
  */
 angular.module('flocs', [
+    'templates-app',
+    'templates-common',
     'ngRoute',
     'flocs.services',
     'flocs.practice',
@@ -12,7 +14,7 @@ angular.module('flocs', [
   function($routeProvider) {
     $routeProvider.
       when('/practice', {
-        templateUrl: '/static/app/practice/practice.tpl.html',
+        templateUrl: 'practice/practice.tpl.html',
         controller: 'practiceCtrl'
       }).
       otherwise({

@@ -6,7 +6,7 @@ angular.module('flocs.maze')
   return {
     restrict: 'E',
     scope: {},
-    templateUrl: '/static/components/maze/maze.tpl.html',
+    templateUrl: 'maze/maze.tpl.html',
     /*controller: function($scope){
     },*/
     link: function(scope, element, attrs) {
