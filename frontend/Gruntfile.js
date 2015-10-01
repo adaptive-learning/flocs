@@ -11,6 +11,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-include-source');
+  grunt.loadNpmTasks('grunt-wiredep');
 
   /**
    * Paths configuration.
@@ -35,12 +36,14 @@ module.exports = function (grunt) {
     // vendor files
     vendor_files: {
       js: [
+        'vendor/angular/angular.js',
+        'vendor/angular-route/angular-route.js',
         'vendor/blockly/blockly_compressed.js',
         'vendor/blockly/javascript_compressed.js',
         'vendor/blockly/python_compressed.js',
         'vendor/blockly/blocks_compressed.js',
         'vendor/blockly/msg/js/en.js',
-        'vendor/acorn_interpreter.js'
+        'vendor/JS-Interpreter/acorn_interpreter.js'
       ],
       css: [
       ],
@@ -169,6 +172,21 @@ module.exports = function (grunt) {
     },
 
 
+    /**
+     * Injecting vendor (bower) packages into index.html.
+     */
+    /*wiredep: {
+
+      development: {
+        src: '<%= development_build_dir %>/index.html',
+
+        options: {
+        }
+      }
+    }
+    */
+
+
   };
 
   grunt.initConfig(grunt.util._.extend(taskConfig, pathConfig));
@@ -184,10 +202,12 @@ module.exports = function (grunt) {
   grunt.registerTask( 'development-build', [
     'clean',
     'html2js',
-    'copy:app_assets', 'copy:vendor_assets',
-    'copy:app_scripts', 'copy:vendor_scripts',
+    'copy:app_assets',
+    'copy:vendor_assets',
+    'copy:app_scripts',
+    'copy:vendor_scripts',
     'concat:all_css',
-    'includeSource:development'
+    'includeSource:development',
   ]);
 
   /**

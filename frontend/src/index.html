@@ -3,15 +3,14 @@
 <head>
 
 <!-- TODO: use bower and move all libs to vendor/ directory -->
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 <!-- styles -->
 <!-- include: "type": "css", "files": ["static/css/**/*.css"] -->
 
-<!-- javascript -->
-<!-- include: "type": "js", "files": ["static/scripts/**/*.mdl.js", "static/scripts/**/*.js", "!static/scripts/**/*.test.js"] -->
+<!-- javascript (TODO: dependencies between vendor files) -->
+<!-- include: "type": "js", "files": ["static/scripts/vendor/angular/angular.js", "static/scripts/vendor/**/*.js"] -->
+<!-- include: "type": "js", "files": ["static/scripts/**/*.mdl.js", "static/scripts/**/*.js", "!static/scripts/**/*.test.js", "!static/scripts/vendor/**/*.js"] -->
 
 </head>
 <body>
