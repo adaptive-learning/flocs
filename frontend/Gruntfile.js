@@ -186,8 +186,85 @@ module.exports = function (grunt) {
     }
     */
 
+    /**
+     * And for rapid development, we have a watch set up that checks to see if
+     * any of the files listed below change, and then to execute the listed
+     * tasks when they do.
+     */
+    delta: {
+      /**
+       * By default, we want the Live Reload to work for all tasks; this is
+       * overridden in some tasks (like this file) where browser resources are
+       * unaffected. It runs by default on port 35729, which your browser
+       * plugin should auto-detect.
+       */
+      options: {
+        livereload: true
+      },
+
+      /**
+       * When our JavaScript source files change, we want to run lint them and
+       * run our unit tests.
+       */
+      jssrc: {
+        files: [
+          '<%= app_files.js %>'
+        ],
+        tasks: [ 'copy:app_scripts' ]
+      },
+
+      /**
+       * When assets are changed, copy them. Note that this will *not* copy new
+       * files, so this is probably not very useful.
+       */
+      assets: {
+        files: [
+          'src/assets/**/*'
+        ],
+        tasks: [ 'copy:app_assets', 'copy:vendor_assets' ]
+      },
+
+      /**
+       * When index.html changes, we need to compile it.
+       */
+      html: {
+        files: [ '<%= app_files.index %>' ],
+        tasks: [ 'includeSource:development' ]
+      },
+
+      /**
+       * When our templates change, we only rewrite the template cache.
+       */
+      tpls: {
+        files: [
+          '<%= app_files.atpl %>',
+          '<%= app_files.ctpl %>'
+        ],
+        tasks: [ 'html2js' ]
+      },
+
+      /**
+       * When the CSS files change, we need to concat them to the build folder.
+       */
+      css: {
+        files: [ '<%= app_files.css %>' ],
+        tasks: [ 'concat:all_css' ]
+      },
+
+    }
+
 
   };
+
+  /**
+   * In order to make it safe to just compile or copy *only* what was changed,
+   * we need to ensure we are starting from a clean, fresh build. So we rename
+   * the `watch` task to `delta` (that's why the configuration var above is
+   * `delta`) and then add a new task called `watch` that does a clean build
+   * before watching for changes.
+   */
+  grunt.renameTask( 'watch', 'delta' );
+  grunt.registerTask( 'watch', [ 'development-build', 'delta' ] );
 
   grunt.initConfig(grunt.util._.extend(taskConfig, pathConfig));
 
