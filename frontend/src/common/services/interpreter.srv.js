@@ -1,7 +1,7 @@
 /*
  * Service for code interpreting.
  */
-angular.module('flocs.services')
+angular.module('flocs.services.interpreter', [])
 .factory('interpreterService', ['$log', '$timeout', 'mazeService', 'workspaceService',
 function ($log, $timeout, mazeService, workspaceService) {
 

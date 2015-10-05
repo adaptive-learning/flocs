@@ -1,7 +1,7 @@
 /*
  * Service for getting new tasks
  */
-angular.module('flocs.services')
+angular.module('flocs.services.task', [])
 .factory('taskService', [function () {
 
   var currentTask;

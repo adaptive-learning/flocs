@@ -5,7 +5,6 @@ angular.module('flocs', [
     'templates-app',
     'templates-common',
     'ngRoute',
-    'flocs.services',
     'flocs.practice',
 ])
 
