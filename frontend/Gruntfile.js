@@ -122,15 +122,13 @@ module.exports = function (grunt) {
      * `grunt concat` concatenates multiple source files into a single file.
      */
     concat: {
-      /**
-       * Concatenates compiled CSS and vendor CSS together.
-       */
-      all_css: {
-        src: [
-          '<%= vendor_files.css %>',
-          '<%= app_files.css %>'
-        ],
-        dest: '<%= development_static_dir %>/css/all.css'
+      app_css: {
+        src: '<%= app_files.css %>',
+        dest: '<%= development_static_dir %>/css/app.css'
+      },
+      vendor_css: {
+        src: '<%= vendor_files.css %>',
+        dest: '<%= development_static_dir %>/css/vendor.css'
       },
     },
 
@@ -159,6 +157,7 @@ module.exports = function (grunt) {
     /**
      * Include imports of js and css source files into index.html.
      */
+    // TODO: fix problems with order of included files (both js and css)
     includeSource: {
       options: {
         basePath: '<%= development_build_dir %>/',
@@ -283,7 +282,8 @@ module.exports = function (grunt) {
     'copy:vendor_assets',
     'copy:app_scripts',
     'copy:vendor_scripts',
-    'concat:all_css',
+    'concat:app_css',
+    'concat:vendor_css',
     'includeSource:development',
   ]);
 
