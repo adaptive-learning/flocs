@@ -7,7 +7,8 @@ update:
 	@echo "== Install frontend dependencies. =="
 	cd frontend && \
 	  npm update && \
-	  bower update
+	  bower update && \
+	  grunt development-build
 
 test:
 	python manage.py test --traceback
