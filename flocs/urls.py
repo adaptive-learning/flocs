@@ -1,4 +1,4 @@
-"""flocs URL Configuration
+"""Flocs URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.8/topics/http/urls/
@@ -16,13 +16,14 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
+from practice import urls as practice_urls
 
 urlpatterns = [
     # admin
     url(r'^admin/', include(admin.site.urls)),
 
     # api
-    # TODO
+    url(r'^api/practice/', include(practice_urls)),
 
     # frontend entry point
     url('^$', TemplateView.as_view(template_name='index.html')),

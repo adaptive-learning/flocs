@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+  <object model="practice.taskmodel" pk="1">
+    <field type="TextField" name="maze_settings">
+    {
+      "grid":"tba2"
+    }
+    </field>
+    <field type="TextField" name="workspace_settings">
+    {
+      "toolbox": null
+    }
+    </field>
+  </object>
+</django-objects>

@@ -32,7 +32,7 @@ Flocs is developed by [Adaptive Learning group][2] at Faculty of informatics, Ma
 4. Create virtual environment and bind it with the project directory:
 
         $ cd flocs
-        $ mkvirtualenv flocs; setvirtualenvproject
+        $ mkvirtualenv flocs && setvirtualenvproject
 
   The name of the virtual envirnoment (flocs) should now appear in front of the prompt.
 
@@ -81,6 +81,11 @@ You can deactivate the virtual environment by calling `deactivate`.
   * If you need a testing server, call:
 
           $ ./manage.py runserver
+
+  * If you change the data model, create and apply a migration:
+
+          $ ./manage.py makemigrations
+          $ ./manage.py migrate
 
   * If you are working on frontend, you need to start the testing server and run grunt watch task to automatically apply all changes into a development build (cancatenating html partials, JavaScript and CSS files, compiling index.html, etc.).
 

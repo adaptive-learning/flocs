@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    # django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,9 +39,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # third party
     'django_extensions',
 
-    'flocs'
+    # our apps
+    'practice',
+    'flocs',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -59,10 +63,13 @@ ROOT_URLCONF = 'flocs.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'frontend/development-build'),
-        ],
+
+        # frontend home directory (where to search for index.html)
+        'DIRS': [os.path.join(BASE_DIR, 'frontend/development-build'),],
+
+        # allow for fallback index.html in flocs/templates/
         'APP_DIRS': True,
+
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
