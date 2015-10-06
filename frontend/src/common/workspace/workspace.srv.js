@@ -46,6 +46,10 @@ angular.module('flocs.workspace')
     toolbox +=    '  <block type="maze_move_forward"></block>';
     toolbox +=    '  <block type="maze_turn_left"></block>';
     toolbox +=    '  <block type="maze_turn_right"></block>';
+    toolbox +=    '  <block type="maze_check_path_left"></block>';
+    toolbox +=    '  <block type="maze_check_path_right"></block>';
+    toolbox +=    '  <block type="maze_if_then"></block>';
+    toolbox +=    '  <block type="maze_if_then_else"></block>';
     toolbox +=    '</xml>';
     blocklyDiv.updateToolbox(toolbox);
   }
@@ -75,6 +79,8 @@ angular.module('flocs.workspace')
     Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
     Blockly.JavaScript.addReservedWords('highlightBlock');
     var code = Blockly.JavaScript.workspaceToCode(blocklyDiv);
+    // trun on block highlighting 
+    blocklyDiv.traceOn(true);
     return code;
   }
 
