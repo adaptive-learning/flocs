@@ -55,7 +55,7 @@ angular.module('flocs.workspace')
         "helpUrl": ""
       },
       {
-        "id": "maze_scan_path_left",
+        "id": "maze_check_path_left",
         "lastDummyAlign0": "LEFT",
         "message0": "je cesta vlevo",
         "output": "Boolean",
@@ -64,7 +64,7 @@ angular.module('flocs.workspace')
         "helpUrl": ""
       },
       {
-        "id": "maze_scan_path_right",
+        "id": "maze_check_path_right",
         "lastDummyAlign0": "LEFT",
         "message0": "je cesta vpravo",
         "output": "Boolean",
@@ -97,7 +97,7 @@ angular.module('flocs.workspace')
         "colour": 330,
         "tooltip": "",
         "helpUrl": ""
-      }
+      },
       {
         "id": "maze_if_then_else",
         "message0": "pokud %1 %2 pak %3 %4 jinak %5 %6",
@@ -152,23 +152,29 @@ angular.module('flocs.workspace')
       return 'moveBackward();';
     };
 
-    Blockly.JavaScript['maze_scan_path_left'] = function(block) {
-      return 'scanPathLeft();';
+    Blockly.JavaScript['maze_check_path_left'] = function(block) {
+      return 'checkPathLeft()';
     };
 
-    Blockly.JavaScript['maze_scan_path_right'] = function(block) {
-      return 'scanPathRight();';
+    Blockly.JavaScript['maze_check_path_right'] = function(block) {
+      return 'checkPathRight()';
     };
 
     Blockly.JavaScript['maze_if_then'] = function(block) {
+      // turn off prefixex for condition
+      var oldPrefix = Blockly.JavaScript.STATEMENT_PREFIX;
+      Blockly.JavaScript.STATEMENT_PREFIX = '';
+      
       // get condition value (True or False)
-      var value_condition = 
-          Blockly.JavaScript.valueToCode(block,
-                  'condition',
-                  Blockly.JavaScript.ORDER_ATOMIC);
+      var value_condition
+          = Blockly.JavaScript.statementToCode(block, 'condition');
+      
+      // turn back on prefixes
+      Blockly.JavaScript.STATEMENT_PREFIX = oldPrefix;
+
       // transform inner blocks to code
-      var statements_condition_true = 
-          Blockly.JavaScript.statementToCode(block, 'condition_true');
+      var statements_condition_true 
+          = Blockly.JavaScript.statementToCode(block, 'condition_true');
       // construct Java Script if then statement
       var code = "if (" + value_condition + ") {"
           + statements_condition_true + "}";
@@ -176,22 +182,28 @@ angular.module('flocs.workspace')
     };
 
     Blockly.JavaScript['maze_if_then_else'] = function(block) {
-        // get condition value (True or False)
-        var value_condition = 
-            Blockly.JavaScript.valueToCode(block,
-                    'condition',
-                    Blockly.JavaScript.ORDER_ATOMIC);
-        // transform inner blocks to code (then branch)
-        var statements_condition_true =
-            Blockly.JavaScript.statementToCode(block, 'condition_true');
-        // transform inner blocks to code (else branch)
-        var statements_condition_false =
-            Blockly.JavaScript.statementToCode(block, 'condition_false');
-        // construct Java Script if then else statement
-        var code = "if (" + value_condition + ") {"
-            + statements_condition_true + "} else {"
-            + statements_condition_false + "}";
-        return code;
+      // turn off prefixex for condition
+      var oldPrefix = Blockly.JavaScript.STATEMENT_PREFIX;
+      Blockly.JavaScript.STATEMENT_PREFIX = '';
+
+      // get condition value (True or False)
+      var value_condition
+          = Blockly.JavaScript.statementToCode(block, 'condition');
+
+      // turn back on prefixes
+      Blockly.JavaScript.STATEMENT_PREFIX = oldPrefix;
+
+      // transform inner blocks to code (then branch)
+      var statements_condition_true =
+          Blockly.JavaScript.statementToCode(block, 'condition_true');
+      // transform inner blocks to code (else branch)
+      var statements_condition_false =
+          Blockly.JavaScript.statementToCode(block, 'condition_false');
+      // construct Java Script if then else statement
+      var code = "if (" + value_condition + ") {"
+          + statements_condition_true + "} else {"
+          + statements_condition_false + "}";
+      return code;
     };
     // TODO: code for Python...
   }

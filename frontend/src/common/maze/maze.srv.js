@@ -83,6 +83,25 @@ angular.module('flocs.maze')
     notifyViewsHeroChanged();
   }
 
+  /*
+   * Check if there is a clear path
+   * @param checkDirection: 1 = check left, -1 = check right
+   */
+  function checkPath(checkDirection) {
+    // NOTE: JavaScript modulo is not positive for positive inputs so we add 4
+    // before taking modulo to make sure it's positive
+    // direction to look at
+    var direction = gridService.directionVector(
+            (state.hero.direction + checkDirection + 4) % 4);
+    // computed direction of box to be checked
+    var checkPosition = [
+            state.hero.position[0] + direction[0],
+            state.hero.position[1] + direction[1]
+        ];
+    // is box free?
+    return gridService.boxAt(state.grid, checkPosition) == 0;
+  }
+
   /**
    * Return true if the hero reached the goal.
    */
@@ -115,6 +134,7 @@ angular.module('flocs.maze')
     reset: reset,
     moveForward: moveForward,
     turn: turn,
+    checkPath: checkPath,
     solved: solved,
     died: died,
     getState: getState
