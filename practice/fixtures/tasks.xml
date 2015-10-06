@@ -3,7 +3,19 @@
   <object model="practice.taskmodel" pk="1">
     <field type="TextField" name="maze_settings">
     {
-      "grid":"tba2"
+      "grid": [
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 2, 1, 1, 1],
+        [1, 1, 1, 1, 0, 1, 1, 1],
+        [1, 0, 0, 0, 0, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1]],
+      "hero": {
+        "position": [1, 2],
+        "direction": 0
+      }
     }
     </field>
     <field type="TextField" name="workspace_settings">
