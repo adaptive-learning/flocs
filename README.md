@@ -87,10 +87,9 @@ You can deactivate the virtual environment by calling `deactivate`.
           $ ./manage.py makemigrations
           $ ./manage.py migrate
 
-  * If you are working on frontend, you need to start the testing server and run grunt watch task to automatically apply all changes into a development build (cancatenating html partials, JavaScript and CSS files, compiling index.html, etc.).
+  * If you are working on frontend, you need to start the testing server and run `grunt watch` task to automatically apply all changes into a development build (cancatenating html partials, JavaScript and CSS files, compiling index.html, etc.). This can be done by a single command:
 
-          $ cd frontend
-          $ grunt watch
+          $ ./manage.py gruntserver
 
   * Take a regular breaks (e.g. after 25 minuts), stretch yourself (including your eyes).
 
