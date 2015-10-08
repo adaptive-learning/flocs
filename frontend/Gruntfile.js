@@ -11,7 +11,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-include-source');
-  grunt.loadNpmTasks('grunt-wiredep');
+  //grunt.loadNpmTasks('grunt-wiredep');
 
   /**
    * Paths configuration.
@@ -106,7 +106,7 @@ module.exports = function (grunt) {
           }
         ]
       },
-      vendor_scripts: {
+      /*vendor_scripts: {
         files: [
           {
             src: [ '<%= vendor_files.js %>' ],
@@ -115,7 +115,7 @@ module.exports = function (grunt) {
             expand: true
           }
         ]
-      },
+      },*/
     },
 
     /**
@@ -129,6 +129,10 @@ module.exports = function (grunt) {
       vendor_css: {
         src: '<%= vendor_files.css %>',
         dest: '<%= development_static_dir %>/css/vendor.css'
+      },
+      vendor_scripts: {
+        src: '<%= vendor_files.js %>',
+        dest: '<%= development_static_dir %>/scripts/vendor.js',
       },
     },
 
@@ -281,7 +285,7 @@ module.exports = function (grunt) {
     'copy:app_assets',
     'copy:vendor_assets',
     'copy:app_scripts',
-    'copy:vendor_scripts',
+    'concat:vendor_scripts',
     'concat:app_css',
     'concat:vendor_css',
     'includeSource:development',
