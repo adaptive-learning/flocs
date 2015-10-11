@@ -6,12 +6,12 @@ angular.module('flocs.practice')
   'workspaceService', 'interpreterService',
   function($scope, taskService, mazeService, workspaceService, interpreterService) {
 
-  var currentTask = null;
-
   function nextTask() {
-    var currentTask = taskService.getNextTask();
-    mazeService.set(currentTask.mazeSettings);
-    workspaceService.set(currentTask.workspaceSettings);
+    //taskService.taskFinished().then(function() {
+    taskService.gettingNextTask().then(function() {
+      mazeService.set(taskService.getMazeSettings());
+      workspaceService.set(taskService.getWorkspaceSettings());
+    });
   }
 
   function run() {

@@ -54,7 +54,7 @@ angular.module('flocs.maze')
   function reset() {
     console.log('mazeService:reset');
     state = angular.copy(settings);
-    notifyViewsHeroChanged();
+    notifyViewsMazeChanged();
   }
 
   /**

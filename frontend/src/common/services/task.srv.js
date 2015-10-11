@@ -2,13 +2,39 @@
  * Service for getting new tasks
  */
 angular.module('flocs.services.task', [])
-.factory('taskService', [function () {
+.factory('taskService', ['$http', function ($http) {
+
+  // public API
+  return {
+    gettingNextTask: gettingNextTask,
+    //reportResults: reportResults,
+    getMazeSettings: getMazeSettings,
+    getWorkspaceSettings: getWorkspaceSettings,
+    //taskFinished: taskFinished
+  };
+
+  // private implementation
 
   var currentTask;
 
-  function getNextTask() {
-    // TODO: unhardcode
-    currentTask = {
+  function getMazeSettings() {
+    return currentTask['maze-settings'];
+  }
+
+  function getWorkspaceSettings() {
+    return currentTask['workspace-settings'];
+  }
+
+  function gettingNextTask() {
+
+    // TODO: error handling etc., separate service
+    return $http.get('api/practice/next-task')
+      .then(function(response) {
+        currentTask = response.data;
+      });
+
+
+    /*currentTask = {
       id: 0,
       mazeSettings: {
         grid: [
@@ -29,16 +55,10 @@ angular.module('flocs.services.task', [])
         toolbox: null,
       }
     };
-    return currentTask;
+      return currentTask;*/
   }
 
   function reportResults() {
     // TODO
   }
-
-  // return public API
-  return {
-    getNextTask: getNextTask,
-    reportResults: reportResults
-  };
 }]);
