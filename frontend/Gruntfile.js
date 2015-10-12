@@ -12,6 +12,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-include-source');
   //grunt.loadNpmTasks('grunt-wiredep');
+  grunt.loadNpmTasks('grunt-karma');
 
   /**
    * Paths configuration.
@@ -26,11 +27,18 @@ module.exports = function (grunt) {
 
     // source codes of our application
     app_files: {
-      js: ['src/**/*.js', '!src/**/*.spec.js', '!src/assets/**/*.js'],
+      js: ['src/**/*.mdl.js', 'src/**/*.js', '!src/**/*.spec.js', '!src/assets/**/*.js'],
+      jsunit: ['src/**/*.spec.js'],
       atpl: ['src/app/**/*.tpl.html'],
       ctpl: ['src/common/**/*.tpl.html'],
       css: ['src/css/styles.css'],
-      index: 'src/index.html',
+      index: 'src/index.html'
+    },
+
+    test_files: {
+      js : [
+        'node_modules/angular-mocks/angular-mocks.js'
+      ]
     },
 
     // vendor files
@@ -49,6 +57,38 @@ module.exports = function (grunt) {
       ],
       assets: [
       ]
+    }
+  };
+
+  /**
+   * Tests configuration.
+   */
+  var testConfig = {
+    karma: {
+      // unit testing
+      unit: {
+        browsers: ['Chrome'],
+        frameworks: ['jasmine'],
+        basePath: '',
+        plugins: [ 'karma-jasmine', 'karma-chrome-launcher'],
+        files: [
+          // libs
+          {  src :
+              pathConfig.vendor_files.js.concat(
+                  pathConfig.test_files.js).concat(
+                  pathConfig.app_files.js).concat(
+                  pathConfig.app_files.jsunit)
+          }
+        ],
+        reporters: ['dots'],
+        port: 9019,
+        runnerPort : 9100,
+        urlRoot : '/',
+        colors: true,
+        logLevel: 'INFO',
+        autoWatch: false,
+        singleRun: true
+      }
     }
   };
 
@@ -165,13 +205,13 @@ module.exports = function (grunt) {
     includeSource: {
       options: {
         basePath: '<%= development_build_dir %>/',
-        baseUrl: '',
+        baseUrl: ''
       },
       development: {
         files: {
           '<%= development_build_dir %>/index.html': '<%= app_files.index %>'
         }
-      },
+      }
     },
 
 
@@ -269,7 +309,7 @@ module.exports = function (grunt) {
   grunt.renameTask( 'watch', 'delta' );
   grunt.registerTask( 'watch', [ 'development-build', 'delta' ] );
 
-  grunt.initConfig(grunt.util._.extend(taskConfig, pathConfig));
+  grunt.initConfig(grunt.util._.extend(taskConfig, pathConfig, testConfig));
 
   /**
    * The default task is to do the development build.

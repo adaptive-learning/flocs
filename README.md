@@ -14,7 +14,7 @@ Flocs is developed by [Adaptive Learning group][2] at Faculty of informatics, Ma
 
 2. Install Grunt and Bower using npm:
 
-        $ sudo npm install -g grunt-cli bower
+        $ sudo npm install -g grunt-cli karma-cli bower
 
 2. Configure virtualenv and virtualenvwrapper by adding the following two lines in your `~/.bashrc`:
 
