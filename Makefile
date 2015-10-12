@@ -2,11 +2,11 @@
 		dependencies backend-dependencies frontend-dependencies \
 		test test-backend test-frontend \
 		check check-backend check-frontend \
-		database-setup admin
+		db-setup db-migrate db-load-data admin
 
 # -----------------------------------------------------------
 
-update: dependencies database-setup
+update: dependencies db-setup
 
 # -----------------------------------------------------------
 
@@ -49,9 +49,15 @@ check-frontend:
 
 # -----------------------------------------------------------
 
-database-setup:
+db-setup: db-migrate db-load-data
+
+db-migrate:
 	@echo "===== Set up database ====="
 	python manage.py migrate --noinput
+
+db-load-data:
+	python manage.py flush --noinput
+	python manage.py create_admin
 	python manage.py loaddata practice/fixtures/tasks.xml
 
 admin:

@@ -82,6 +82,10 @@ You can deactivate the virtual environment by calling `deactivate`.
 
           $ ./manage.py runserver
 
+  * If you change data in fixtures and want to load them to the database:
+
+          $ make db-load-data
+
   * If you change the data model, create and apply a migration:
 
           $ ./manage.py makemigrations

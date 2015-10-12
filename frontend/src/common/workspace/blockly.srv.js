@@ -164,16 +164,16 @@ angular.module('flocs.workspace')
       // turn off prefixex for condition
       var oldPrefix = Blockly.JavaScript.STATEMENT_PREFIX;
       Blockly.JavaScript.STATEMENT_PREFIX = '';
-      
+
       // get condition value (True or False)
       var value_condition
           = Blockly.JavaScript.statementToCode(block, 'condition');
-      
+
       // turn back on prefixes
       Blockly.JavaScript.STATEMENT_PREFIX = oldPrefix;
 
       // transform inner blocks to code
-      var statements_condition_true 
+      var statements_condition_true
           = Blockly.JavaScript.statementToCode(block, 'condition_true');
       // construct Java Script if then statement
       var code = "if (" + value_condition + ") {"
