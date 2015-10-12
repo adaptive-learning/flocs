@@ -2,13 +2,13 @@
  * Workspace Service
  */
 angular.module('flocs.workspace')
-.factory('workspaceService', ['$log', 'blocklyService',
-  function($log, blocklyService) {
+.factory('workspaceService', ['$log', 'blocklyService', 'toolboxService',
+  function($log, blocklyService, toolboxService) {
 
   var blocklyDiv = null;
   // TODO: move default settings to a constant service?
   var settings = {
-    toolbox: null
+    toolbox: []
   };
 
   /**
@@ -26,8 +26,7 @@ angular.module('flocs.workspace')
   */
   function set(newSettings) {
     console.log('workspaceService:set');
-    var setting = newSettings;
-
+    settings = newSettings;
     reset();
   }
 
@@ -41,17 +40,8 @@ angular.module('flocs.workspace')
       return;
     }
 
-    // TODO: unhardcode toolbox (use toolbox from settings)
-    var toolbox = '<xml>';
-    toolbox +=    '  <block type="maze_move_forward"></block>';
-    toolbox +=    '  <block type="maze_turn_left"></block>';
-    toolbox +=    '  <block type="maze_turn_right"></block>';
-    toolbox +=    '  <block type="maze_check_path_left"></block>';
-    toolbox +=    '  <block type="maze_check_path_right"></block>';
-    toolbox +=    '  <block type="maze_if_then"></block>';
-    toolbox +=    '  <block type="maze_if_then_else"></block>';
-    toolbox +=    '</xml>';
-    blocklyDiv.updateToolbox(toolbox);
+    var toolboxXml = toolboxService.createToolboxXml(settings.toolbox);
+    blocklyDiv.updateToolbox(toolboxXml);
   }
 
   /**
@@ -79,7 +69,7 @@ angular.module('flocs.workspace')
     Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
     Blockly.JavaScript.addReservedWords('highlightBlock');
     var code = Blockly.JavaScript.workspaceToCode(blocklyDiv);
-    // trun on block highlighting 
+    // trun on block highlighting
     blocklyDiv.traceOn(true);
     return code;
   }
