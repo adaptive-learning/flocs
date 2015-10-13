@@ -46,7 +46,9 @@ check-backend:
 
 check-frontend:
 	@echo "===== Frontend linting ====="
-	@echo "(Coming soon...)"
+	cd frontend && \
+	  grunt lint
+
 
 # -----------------------------------------------------------
 

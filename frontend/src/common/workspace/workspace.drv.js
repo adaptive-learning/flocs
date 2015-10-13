@@ -19,6 +19,6 @@ angular.module('flocs.workspace')
 
       workspaceService.setBlocklyDiv(blocklyDiv);
     }
-  }
-}])
+  };
+}]);
 

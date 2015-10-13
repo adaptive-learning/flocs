@@ -201,7 +201,6 @@ module.exports = function (grunt) {
     /**
      * Include imports of js and css source files into index.html.
      */
-    // TODO: fix problems with order of included files (both js and css)
     includeSource: {
       options: {
         basePath: '<%= development_build_dir %>/',
@@ -230,6 +229,24 @@ module.exports = function (grunt) {
     */
 
     /**
+     * Linting our JS files (including this Gruntfile.js and unit tests).
+     */
+    jshint: {
+      options: {
+        jshintrc: true
+      },
+      gruntfile: [
+        'Gruntfile.js'
+      ],
+      src: [
+        '<%= app_files.js %>'
+      ],
+      test: [
+        '<%= app_files.jsunit %>'
+      ],
+    },
+
+    /**
      * And for rapid development, we have a watch set up that checks to see if
      * any of the files listed below change, and then to execute the listed
      * tasks when they do.
@@ -246,6 +263,17 @@ module.exports = function (grunt) {
       },
 
       /**
+       * When the Gruntfile changes, we just want to lint it.
+       */
+      gruntfile: {
+        files: 'Gruntfile.js',
+        tasks: [ 'jshint:gruntfile' ],
+        options: {
+          livereload: false
+        }
+      },
+
+      /**
        * When our JavaScript source files change, we want to run lint them and
        * run our unit tests.
        */
@@ -253,7 +281,20 @@ module.exports = function (grunt) {
         files: [
           '<%= app_files.js %>'
         ],
-        tasks: [ 'copy:app_scripts' ]
+        tasks: ['jshint:src', 'copy:app_scripts' ]
+      },
+
+     /**
+       * When a JavaScript unit test file changes, we only want to lint it.
+       */
+      jsunit: {
+        files: [
+          '<%= app_files.jsunit %>'
+        ],
+        tasks: ['jshint:test'],
+        options: {
+          livereload: false
+        }
       },
 
       /**
@@ -317,10 +358,16 @@ module.exports = function (grunt) {
   grunt.registerTask( 'default', ['development-build'] );
 
   /**
+   * Linting task.
+   */
+  grunt.registerTask( 'lint', ['jshint']);
+
+  /**
    * Development build task.
    */
   grunt.registerTask( 'development-build', [
     'clean',
+    'lint',
     'html2js',
     'copy:app_assets',
     'copy:vendor_assets',

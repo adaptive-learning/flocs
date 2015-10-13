@@ -99,7 +99,7 @@ function ($log, $timeout, mazeService, workspaceService) {
         executing = false;
         return result;
       }
-    }
+    };
     runCodePromise = $timeout(stepCode, 0);
     return runCodePromise;
   }

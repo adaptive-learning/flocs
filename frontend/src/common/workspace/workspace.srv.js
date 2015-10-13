@@ -79,8 +79,8 @@ angular.module('flocs.workspace')
    */
   function getPythonCode() {
     var code = Blockly.Python.workspaceToCode(blocklyDiv);
-    return code
-  };
+    return code;
+  }
 
   // initialization
   blocklyService.initializeBlockly();

@@ -16,7 +16,7 @@ angular.module('flocs.workspace')
    * @return {string} string of XML
    */
   function createToolboxXml(blockNames) {
-    xmlString = '<xml>';
+    var xmlString = '<xml>';
     angular.forEach(blockNames, function(blockName) {
       xmlString += '<block type="' + blockName + '"></block>';
     });
