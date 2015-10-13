@@ -132,12 +132,20 @@ angular.module('flocs.workspace')
         "helpUrl": ""
       }
     ];
+
     // load all blocks
-    for (var i = 0, jsonBlock; jsonBlock = blocksList[i]; i++) {
-      Blockly.Blocks[jsonBlock.id] = {
-        init: (function(data) {return function() {this.jsonInit(data);};})(jsonBlock)
+    function initBlock(jsonBlock) {
+      return function() {
+        this.jsonInit(jsonBlock);
       };
     }
+    for (var i = 0; i < blocksList.length; i++) {
+      var jsonBlock = blocksList[i];
+      Blockly.Blocks[jsonBlock.id] = {
+        init: initBlock(jsonBlock)
+      };
+    }
+
     Blockly.JavaScript['maze_move_forward'] = function(block) {
       return 'moveForward();';
     };
@@ -176,8 +184,8 @@ angular.module('flocs.workspace')
       var statements_condition_true
           = Blockly.JavaScript.statementToCode(block, 'condition_true');
       // construct Java Script if then statement
-      var code = "if (" + value_condition + ") {"
-          + statements_condition_true + "}";
+      var code = "if (" + value_condition + ") {" +
+          statements_condition_true + "}";
       return code;
     };
 
@@ -200,9 +208,9 @@ angular.module('flocs.workspace')
       var statements_condition_false =
           Blockly.JavaScript.statementToCode(block, 'condition_false');
       // construct Java Script if then else statement
-      var code = "if (" + value_condition + ") {"
-          + statements_condition_true + "} else {"
-          + statements_condition_false + "}";
+      var code = "if (" + value_condition + ") {" +
+          statements_condition_true + "} else {" +
+          statements_condition_false + "}";
       return code;
     };
     // TODO: code for Python...

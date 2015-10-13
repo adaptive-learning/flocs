@@ -2,22 +2,24 @@
     // Detailed explanation of the options: http://jshint.com/docs/options/
 
     // Enforcing options
-    "curly"       : true,     // Require {} for every new block or scope.
-    "undef"       : true,     // Prohibit use of undeclared variables.
+    "curly"         : true,     // Require {} for every new block or scope.
+    "undef"         : true,     // Prohibit use of undeclared variables.
 
     // Relaxing options
-    // ...
+    "sub"           : true,    // Tolerate `dict['key']` instead of `dict.key`.
 
     // Environments
-    "devel"       : true,     // Defines globals for simple debugging (e.g. console, alert).
-    "jasmine"     : true,     // Defines globals for Jasmine.
-    "node"        : true,     // Defines globals for Node (e.g. module).
+    "devel"         : true,     // Defines globals for simple debugging (e.g. console, alert).
+    "jasmine"       : true,     // Defines globals for Jasmine.
+    "node"          : true,     // Defines globals for Node (e.g. module).
 
 
     // Global variables (false = the variable is read-only).
     "globals": {
-      "angular"   : false,
-      "browser"   : false,
-      "Blockly"   : false
+      "angular"     : false,
+      "browser"     : false,
+      "Blockly"     : false,
+      "Interpreter" : false,
+      "inject"      : false
     }
 }

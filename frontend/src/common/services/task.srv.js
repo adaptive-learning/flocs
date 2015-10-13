@@ -4,6 +4,8 @@
 angular.module('flocs.services.task', [])
 .factory('taskService', ['$http', function ($http) {
 
+  var currentTask;
+
   // public API
   return {
     gettingNextTask: gettingNextTask,
@@ -14,8 +16,6 @@ angular.module('flocs.services.task', [])
   };
 
   // private implementation
-
-  var currentTask;
 
   function getMazeSettings() {
     return currentTask['maze-settings'];

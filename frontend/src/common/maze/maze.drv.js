@@ -22,8 +22,8 @@ angular.module('flocs.maze')
 
       var getHeroImagePath = function(direction) {
         // TODO: different images based on the direction
-        return '/static/assets/img/karlik2.png'
-      }
+        return '/static/assets/img/karlik2.png';
+      };
 
       function setMaze(state){
         scope.visualization = {
@@ -57,7 +57,7 @@ angular.module('flocs.maze')
         };
         scope.visualization.boxes.push(scope.hero);
         setHero(state.hero);
-      };
+      }
 
       function setHero(heroState) {
         // TODO: animations
@@ -88,5 +88,5 @@ angular.module('flocs.maze')
       mazeService.registerView(viewApi);
       mazeChanged();
     }
-  }
+  };
 }]);
