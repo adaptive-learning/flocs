@@ -1,14 +1,12 @@
 describe('Testing the maze filter', function() {
 
-  var filter;
-
+  // load the flocs.maze module, which contains the filter
   beforeEach( module('flocs.maze'));
 
   it('multiply real coordinates with boxSize',
       inject(function(pixelCoordinatesFilter) {
     // prepare data
     var input = 4;
-    // QUESTION should we import viualisation object from maze.dr.js ?
     var visualisation = {
       boxSize: 10
     };

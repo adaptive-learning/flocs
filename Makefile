@@ -33,7 +33,8 @@ test-backend:
 
 test-frontend:
 	@echo "===== Frontend tests ====="
-	@echo "(Coming soon...)"
+	cd frontend && \
+	  grunt karma
 
 # -----------------------------------------------------------
 
