@@ -126,4 +126,5 @@ You can deactivate the virtual environment by calling `deactivate`.
 ## Additional recommendations
 
 * Check our [style guide](https://github.com/effa/flocs/wiki/Style-Guide).
+* Check our [development tools](https://github.com/effa/flocs/wiki/Development-tools) wiki page.
 * If you are using vim, take a look at syntastic and vim-fugitive plugins.
