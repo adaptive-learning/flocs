@@ -5,7 +5,7 @@ from django.test import TestCase
 from .task import TaskModel
 
 
-class TaskServiceTest(TestCase):
+class TaskModelTest(TestCase):
 
     def test_to_json(self):
         task = TaskModel(

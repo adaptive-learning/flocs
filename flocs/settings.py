@@ -45,6 +45,7 @@ INSTALLED_APPS = (
 
     # our apps
     'practice',
+    'tasks',
     'flocs',
 )
 

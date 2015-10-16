@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <django-objects version="1.0">
-  <object model="practice.taskmodel">
+  <object model="tasks.taskmodel">
     <field name="maze_settings">
     {
       "grid": [
@@ -25,7 +25,7 @@
     </field>
   </object>
 
-  <object model="practice.taskmodel">
+  <object model="tasks.taskmodel">
     <field name="maze_settings">
     {
       "grid": [
@@ -50,7 +50,7 @@
     </field>
   </object>
 
-  <object model="practice.taskmodel">
+  <object model="tasks.taskmodel">
     <field name="maze_settings">
     {
       "grid": [

@@ -1,6 +1,6 @@
 """Service layer (domain model) of practice app
 """
-from practice.models import TaskModel
+from tasks.models import TaskModel
 
 def get_next_task():
     """Return next task (TODO: for current user)

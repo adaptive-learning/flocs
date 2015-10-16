@@ -3,13 +3,13 @@
 
 from django.http import JsonResponse
 from django.http import HttpResponseBadRequest
-from practice.services import task_service
+from practice.services import practice_service
 
 
 def get_next_task(request):
     """Return response with next task.
     """
-    task = task_service.get_next_task()
+    task = practice_service.get_next_task()
     return JsonResponse(task)
 
 
