@@ -1,0 +1,25 @@
+<div>
+  <div id="mainPanel" style="width: 320px; float: left"><!-- TODO: style with bootstrap -->
+    <flocs-maze style="width: 300px; height: 300px"></flocs-maze>
+
+    <div ng-switch="initialState">
+        <div ng-switch-when="true">
+            <button id="runBtn"
+                    ng-click="run()"
+                    ng-disabled="noTask">
+              Run
+            </button>
+        </div>
+        <div ng-switch-default>
+            <button id="resetBtn"
+                    ng-click="reset()">
+              Reset
+            </button>
+        </div>
+    </div>
+  </div>
+
+  <div style="float: left"><!-- TODO: style with bootstrap -->
+    <flocs-workspace id="workspace"></flocs-workspace>
+  </div>
+</div>

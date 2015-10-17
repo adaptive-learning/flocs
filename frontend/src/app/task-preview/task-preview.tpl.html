@@ -1,0 +1,29 @@
+<div>
+
+  <!--
+  Super text
+
+  <div>
+    <span ng-repeat="taskId in taskIds">
+      <a ui-sref="/task-preview/{{taskId}}">{{taskId}}</a>
+    </span>
+  <div>
+    -->
+
+  <form>
+    <label for="taskIdSelect">Select task ID:</label>
+    <select name="taskIdSelect"
+            ng-change="onTaskIdSelected()"
+            ng-model="tasks.selected"
+            ng-options="option for option in tasks.options">
+    </select>
+  </form>
+
+  <!--<div ui-view="task"></div>-->
+
+  <div>
+    <flocs-task-environment></flocs-task-environment>
+  </div>
+
+
+</div>

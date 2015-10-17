@@ -31,7 +31,7 @@ module.exports = function (grunt) {
       jsunit: ['src/**/*.spec.js'],
       atpl: ['src/app/**/*.tpl.html'],
       ctpl: ['src/common/**/*.tpl.html'],
-      css: ['src/css/styles.css'],
+      css: ['src/css/styles.css', 'src/**/*.css'],
       index: 'src/index.html'
     },
 
@@ -45,7 +45,7 @@ module.exports = function (grunt) {
     vendor_files: {
       js: [
         'vendor/angular/angular.js',
-        'vendor/angular-route/angular-route.js',
+        'vendor/angular-ui-router/release/angular-ui-router.js',
         'vendor/blockly/blockly_compressed.js',
         'vendor/blockly/javascript_compressed.js',
         'vendor/blockly/python_compressed.js',
@@ -332,7 +332,7 @@ module.exports = function (grunt) {
        */
       css: {
         files: [ '<%= app_files.css %>' ],
-        tasks: [ 'concat:all_css' ]
+        tasks: [ 'concat:app_css' ]
       },
 
     }

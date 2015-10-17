@@ -9,6 +9,9 @@ angular.module('flocs.services.task', [])
   // public API
   return {
     gettingNextTask: gettingNextTask,
+    gettingAllTaskIds: gettingAllTaskIds,
+    gettingTaskById: gettingTaskById,
+
     //reportResults: reportResults,
     getMazeSettings: getMazeSettings,
     getWorkspaceSettings: getWorkspaceSettings,
@@ -23,6 +26,39 @@ angular.module('flocs.services.task', [])
 
   function getWorkspaceSettings() {
     return currentTask['workspace-settings'];
+  }
+
+  function gettingAllTaskIds() {
+    return $http.get('api/tasks/get-ids')
+      .then(function(response) {
+        return response.data;
+      });
+  }
+
+  function gettingTaskById(id) {
+    //return $http.get('api/tasks/get-task/' + id); // TODO: .then
+    currentTask = {
+      id: 0,
+      mazeSettings: {
+        grid: [
+          [1, 1, 1, 1, 1, 1, 1, 1],
+          [1, 1, 1, 1, 1, 1, 1, 1],
+          [1, 0, 0, 0, 0, 1, 1, 1],
+          [1, 1, 1, 1, 0, 1, 1, 1],
+          [1, 1, 1, 1, 0, 0, 0, 1],
+          [1, 1, 1, 1, 0, 1, 1, 1],
+          [1, 1, 1, 1, 0, 0, 2, 1],
+          [1, 1, 1, 1, 1, 1, 1, 1]],
+        hero: {
+          position: [1, 2],
+          direction: 0
+        }
+      },
+      workspaceSettings: {
+        toolbox: ['maze_move_forward'],
+      }
+    };
+    //return currentTask;
   }
 
   function gettingNextTask() {

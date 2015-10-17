@@ -28,5 +28,5 @@ urlpatterns = [
     url(r'^api/tasks/', include(tasks_urls)),
 
     # frontend entry point
-    url('^$', TemplateView.as_view(template_name='index.html')),
+    url('^.*$', TemplateView.as_view(template_name='index.html')),
 ]

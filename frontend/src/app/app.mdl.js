@@ -1,24 +1,58 @@
 /**
- * Flocs application modul
+ * Flocs application module
  */
 angular.module('flocs', [
     'templates-app',
     'templates-common',
-    'ngRoute',
+    'ui.router',
+    'flocs.home',
     'flocs.practice',
+    'flocs.taskPreview',
 ])
 
 // routes configuration
-.config(['$routeProvider',
-  function($routeProvider) {
-    $routeProvider.
-      when('/practice', {
-        templateUrl: 'practice/practice.tpl.html',
-        controller: 'practiceCtrl'
-      }).
-      otherwise({
-        redirectTo: '/practice'
-      });
+.config(['$stateProvider', '$locationProvider',
+  function($stateProvider, $locationProvider) {
+
+  /*
+  // For any unmatched url, redirect to /404
+  $urlRouterProvider.otherwise("/404");
+  */
+
+  // States
+  $stateProvider
+    .state('home', {
+      url: '/',
+      templateUrl: 'home/home.tpl.html',
+      controller: 'homeCtrl'
+    })
+
+    .state('task-preview-unset', {
+      url: '/task-preview',
+      templateUrl: 'task-preview/task-preview.tpl.html',
+      controller: 'taskPreviewCtrl'
+    })
+
+    .state('task-preview-set', {
+      url: '/task-preview/{taskId:int}',
+      templateUrl: 'task-preview/task-preview.tpl.html',
+      controller: 'taskPreviewCtrl'
+    })
+
+    .state('practice', {
+      url: '/practice',
+      templateUrl: 'practice/practice.tpl.html',
+      controller: 'practiceCtrl'
+    })
+
+    .state('404', {
+      url: '*path',
+      templateUrl: '404/404.tpl.html'
+    });
+
+  // use URLs without hashes (if the browser supports HTML5 history)
+  $locationProvider.html5Mode(true);
+
 }])
 
 // Main application controller
