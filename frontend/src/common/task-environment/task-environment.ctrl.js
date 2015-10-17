@@ -12,11 +12,12 @@ angular.module('flocs.taskEnvironment')
   function run() {
     $scope.initialState = false;
     interpreterService.runCode().then(function(result) {
-      if (result.solved) {
+      taskEnvironmentService.attemptFinished(result);
+      /*if (result.solved) {
         console.log('Solved!');
       } else if (result.died) {
         console.log('Died!');
-      }
+      }*/
     });
   }
 

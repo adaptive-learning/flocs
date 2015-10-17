@@ -11,8 +11,11 @@ angular.module('flocs', [
 ])
 
 // routes configuration
-.config(['$stateProvider', '$locationProvider',
-  function($stateProvider, $locationProvider) {
+.config(['$httpProvider', '$stateProvider', '$locationProvider',
+  function($httpProvider, $stateProvider, $locationProvider) {
+
+  $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+  $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 
   /*
   // For any unmatched url, redirect to /404

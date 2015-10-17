@@ -6,12 +6,14 @@ angular.module('flocs.taskEnvironment')
     function (taskDao, mazeService, workspaceService) {
 
   var currentTask = null;
+  var afterAttemptCallback = null;
 
   // === public API ===
   return {
     settingNextTask: settingNextTask,
     settingTaskById: settingTaskById,
     setInitialState: setInitialState,
+    attemptFinished: attemptFinished,
 
     //getMazeSettings: getMazeSettings,
     //getWorkspaceSettings: getWorkspaceSettings,
@@ -52,14 +54,23 @@ angular.module('flocs.taskEnvironment')
       });
   }
 
-  function settingNextTask() {
-    taskDao.gettingNextTask()
+  function settingNextTask(callback) {
+    afterAttemptCallback = callback;
+    var taskPromise = taskDao.gettingNextTask()
       .then(function(newTask) {
         setTask(newTask);
+        return newTask;
       });
+    return taskPromise;
   }
 
-  /*function reportResults() {
-    // TODO
-  }*/
+  function attemptFinished(result) {
+    if (afterAttemptCallback) {
+      afterAttemptCallback(result);
+    }
+
+    //$rootScope.$broadcast('task:attemptFinished');
+    //console.log(result);
+  }
+
 }]);
