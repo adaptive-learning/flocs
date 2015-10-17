@@ -21,7 +21,7 @@ angular.module('flocs.maze')
   }
 
   /**
-  * Notify views about the hero change.
+  * Notify views about a move of the hero.
   */
   function notifyViewsHeroChanged() {
     angular.forEach(viewList, function(view) {
@@ -34,7 +34,7 @@ angular.module('flocs.maze')
   * @param view Api object of the directive.
   */
   function registerView(view) {
-    console.log('mazeService:register');
+    //console.log('mazeService:register');
     viewList.push(view);
   }
 
@@ -43,7 +43,7 @@ angular.module('flocs.maze')
   * @param {Object} newSettings
   */
   function set(newSettings) {
-    console.log('mazeService:set');
+    //console.log('mazeService:set');
     settings = newSettings;
     reset();
   }
@@ -52,7 +52,7 @@ angular.module('flocs.maze')
   * Reset maze settings.
   */
   function reset() {
-    console.log('mazeService:reset');
+    //console.log('mazeService:reset');
     state = angular.copy(settings);
     notifyViewsMazeChanged();
   }

@@ -8,6 +8,6 @@ from django.views.generic import TemplateView
 from tasks import views
 
 urlpatterns = [
-    url(r'^get-ids/$', views.get_all_tasks),
+    url(r'^get-ids$', views.get_all_tasks),
     url(r'^get-task/(?P<id>[0-9]+)$', views.get_task_by_id),
 ]

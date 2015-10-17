@@ -17,6 +17,8 @@ angular.module('flocs.workspace')
   */
   function setBlocklyDiv(newBlocklyDiv) {
     blocklyDiv = newBlocklyDiv;
+
+    // in case that there is already available settings waiting to be set
     reset();
   }
 
@@ -25,7 +27,7 @@ angular.module('flocs.workspace')
   * @param settings Object with toolbox and other settings for workspace.
   */
   function set(newSettings) {
-    console.log('workspaceService:set');
+    //console.log('workspaceService:set');
     settings = newSettings;
     reset();
   }
@@ -35,7 +37,7 @@ angular.module('flocs.workspace')
   * Reset workspace the with current settings.
   */
   function reset() {
-    console.log('workspaceService:reset');
+    //console.log('workspaceService:reset');
     if (!blocklyDiv) {
       return;
     }
@@ -48,8 +50,6 @@ angular.module('flocs.workspace')
    * Highlight block with given id
    */
   function highlightBlock(id) {
-    // TODO: fix highlight of block with given id (not working)
-    console.log('highlighting block with id', id);
     blocklyDiv.highlightBlock(id);
   }
 

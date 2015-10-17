@@ -2,8 +2,7 @@
  * Task Environment module
  */
 angular.module('flocs.taskEnvironment', [
-    'flocs.services.interpreter',
-    'flocs.services.task',
+    'flocs.services',
     'flocs.maze',
     'flocs.workspace',
 ]);

@@ -23,10 +23,11 @@ urlpatterns = [
     # admin
     url(r'^admin/', include(admin.site.urls)),
 
-    # api
+    # server API
     url(r'^api/practice/', include(practice_urls)),
     url(r'^api/tasks/', include(tasks_urls)),
+    url(r'^api/.*$', 'flocs.views.wrong_api_call'),
 
-    # frontend entry point
+    # all other requests are resolved by the frontend app
     url('^.*$', TemplateView.as_view(template_name='index.html')),
 ]

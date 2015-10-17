@@ -2,16 +2,11 @@
  * Task Environment controller
  */
 angular.module('flocs.taskEnvironment')
-.controller('taskEnvironmentCtrl', ['$scope', 'taskService', 'mazeService',
-  'workspaceService', 'interpreterService',
-  function($scope, taskService, mazeService, workspaceService, interpreterService) {
+.controller('taskEnvironmentCtrl', ['$scope', 'taskEnvironmentService', 'interpreterService',
+  function($scope, taskEnvironmentService, interpreterService) {
 
   /*function nextTask() {
-    //taskService.taskFinished().then(function() {
-    taskService.gettingNextTask().then(function() {
-      mazeService.set(taskService.getMazeSettings());
-      workspaceService.set(taskService.getWorkspaceSettings());
-    });
+    taskEnvironmentService.settingNextTask(); // <- move to practice ctrl
   }*/
 
   function run() {
@@ -27,10 +22,9 @@ angular.module('flocs.taskEnvironment')
 
   function reset() {
     interpreterService.stopExecution().then(function(result) {
-      if (!result.solved) {
-        mazeService.reset();
-        $scope.initialState = true;
-      }
+      //if (!result.solved) {...}
+      taskEnvironmentService.setInitialState();
+      $scope.initialState = true;
     });
   }
 
@@ -48,7 +42,7 @@ angular.module('flocs.taskEnvironment')
 
   // inital state
   $scope.initialState = true;
-  $scope.noTask = true;
+  //$scope.noTask = true;
   //$scope.resetting = false;
   $scope.run = run;
   $scope.reset = reset;
