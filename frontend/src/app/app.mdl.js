@@ -14,6 +14,8 @@ angular.module('flocs', [
 .config(['$httpProvider', '$stateProvider', '$locationProvider',
   function($httpProvider, $stateProvider, $locationProvider) {
 
+  // settings for CSRF protection
+  // (Django uses different name for CSFR cookie than Angular by default)
   $httpProvider.defaults.xsrfCookieName = 'csrftoken';
   $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 
