@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 744.09448819 1052.3622047"
+   width="44.203701mm"
+   height="191.40565mm"
+   viewBox="0 0 156.62729 678.20901"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
@@ -29,17 +29,21 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.49497475"
-     inkscape:cx="581.85606"
-     inkscape:cy="653.19559"
+     inkscape:cx="226.78988"
+     inkscape:cy="361.964"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      showguides="true"
-     inkscape:window-width="1366"
+     inkscape:window-width="451"
      inkscape:window-height="747"
-     inkscape:window-x="0"
+     inkscape:window-x="911"
      inkscape:window-y="21"
-     inkscape:window-maximized="0" />
+     inkscape:window-maximized="0"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -55,7 +59,8 @@
   <g
      inkscape:label="Vrstva 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(-291.42657,-82.921588)">
     <g
        id="g5904"
        transform="translate(-236.3757,0)"

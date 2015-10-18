@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 744.09448819 1052.3622047"
+   width="92.47197mm"
+   height="191.29706mm"
+   viewBox="0 0 327.65659 677.82422"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
@@ -26,17 +26,21 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="392.36205"
-     inkscape:cy="659.7822"
+     inkscape:cx="238.47672"
+     inkscape:cy="368.64295"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      showguides="true"
-     inkscape:window-width="1366"
+     inkscape:window-width="679"
      inkscape:window-height="747"
      inkscape:window-x="0"
      inkscape:window-y="21"
-     inkscape:window-maximized="0" />
+     inkscape:window-maximized="0"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -52,7 +56,8 @@
   <g
      inkscape:label="Vrstva 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(-153.88533,-83.398751)">
     <g
        id="g5212"
        inkscape:export-xdpi="300"
@@ -376,7 +381,7 @@
          inkscape:connector-curvature="0"
          id="path5150"
          d="m 393.92857,392.89792 37.5,-66.78572 -62.14285,-2.32143 z"
-         style="fill:#ffffff;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1" />
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <g
          transform="translate(0.75076294,0)"
          id="g4527">
