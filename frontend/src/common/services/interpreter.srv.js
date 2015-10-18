@@ -49,6 +49,11 @@ function ($log, $timeout, mazeService, workspaceService) {
       interpreter.createNativeFunction(function() {
         return interpreter.createPrimitive(mazeService.checkPath(-1));
     }));
+    // checkPathFront()
+    interpreter.setProperty(scope, 'checkPathFront',
+      interpreter.createNativeFunction(function() {
+        return interpreter.createPrimitive(mazeService.checkPath(0));
+    }));
 
   }
 

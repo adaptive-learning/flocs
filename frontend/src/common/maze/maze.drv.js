@@ -22,7 +22,19 @@ angular.module('flocs.maze')
 
       var getHeroImagePath = function(direction) {
         // TODO: different images based on the direction
-        return '/static/assets/img/karlik2.png';
+        switch(direction) {
+            case 0:
+                return '/static/assets/img/robot_right.png';
+            case 1:
+                return '/static/assets/img/robot_back.png';
+            case 2:
+                return '/static/assets/img/robot_left.png';
+            case 3:
+                return '/static/assets/img/robot_front.png';
+            default:
+                return '/static/assets/img/robot_front.png';
+        }
+        //return '/static/assets/img/karlik2.png';
       };
 
       function setMaze(state){
