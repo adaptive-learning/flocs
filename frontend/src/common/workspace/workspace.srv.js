@@ -36,12 +36,20 @@ angular.module('flocs.workspace')
   */
   function reset() {
     console.log('workspaceService:reset');
-    if (!blocklyDiv) {
-      return;
+    
+    // get rid of existing "workspace" (the actual displayed thing)
+    if (blocklyDiv) {
+      blocklyDiv.dispose();
     }
 
+    // prepare toolbox
     var toolboxXml = toolboxService.createToolboxXml(settings.toolbox);
-    blocklyDiv.updateToolbox(toolboxXml);
+
+    // inject blockly into the workspace with new toolbox
+    blocklyDiv = Blockly.inject('blocklyDiv', {
+      // TODO: create special service for initial settings
+      toolbox: toolboxXml
+    });
   }
 
   /**
@@ -71,6 +79,7 @@ angular.module('flocs.workspace')
     var code = Blockly.JavaScript.workspaceToCode(blocklyDiv);
     // trun on block highlighting
     blocklyDiv.traceOn(true);
+    console.log(code);
     return code;
   }
 
