@@ -44,6 +44,7 @@ angular.module('flocs.workspace')
 
     var toolboxXml = toolboxService.createToolboxXml(settings.toolbox);
     blocklyDiv.updateToolbox(toolboxXml);
+    blocklyDiv.clear();
   }
 
   /**
