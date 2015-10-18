@@ -99,7 +99,7 @@ angular.module('flocs.maze')
             state.hero.position[1] + direction[1]
         ];
     // is box free?
-    return gridService.boxAt(state.grid, checkPosition) === 0;
+    return gridService.boxAt(state.grid, checkPosition) !== 1;
   }
 
   /**

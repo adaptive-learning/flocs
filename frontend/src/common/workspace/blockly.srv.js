@@ -73,7 +73,17 @@ angular.module('flocs.workspace')
         "helpUrl": ""
       },
       {
-        "id": "maze_if_then",
+        "id": "maze_check_path_front",
+        "lastDummyAlign0": "LEFT",
+        "message0": "je cesta vpředu",
+        "output": "Boolean",
+        "colour": 210,
+        "tooltip": "",
+        "helpUrl": ""
+      },
+
+      {
+        "id": "if_then",
         "message0": "pokud %1 %2 pak %3 %4",
         "args0": [
         {
@@ -99,7 +109,7 @@ angular.module('flocs.workspace')
         "helpUrl": ""
       },
       {
-        "id": "maze_if_then_else",
+        "id": "if_then_else",
         "message0": "pokud %1 %2 pak %3 %4 jinak %5 %6",
         "args0": [
         {
@@ -128,6 +138,85 @@ angular.module('flocs.workspace')
         "previousStatement": null,
         "nextStatement": null,
         "colour": 330,
+        "tooltip": "",
+        "helpUrl": ""
+      },
+      {
+        "id": "for_loop_fixed",
+        "message0": "opakuj %1 krát %2 %3",
+        "args0": [
+        {
+            "type": "field_input",
+            "name": "times",
+            "text": "10"
+        },
+        
+        {
+            "type": "input_dummy"
+        },
+        {
+            "type": "input_statement",
+            "name": "body"
+        }
+        ],
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": 120,
+        "tooltip": "",
+        "helpUrl": ""
+      },
+      {
+        "id": "for_loop",
+        "message0": "pro i od %1 do %2 opakuj %3 %4",
+        "args0": [
+        {
+            "type": "field_input",
+            "name": "from",
+            "text": "1"
+        },
+        {
+            "type": "field_input",
+            "name": "to",
+            "text": "10"
+        },
+
+        {
+            "type": "input_dummy"
+        },
+        {
+            "type": "input_statement",
+            "name": "body"
+        }
+        ],
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": 120,
+        "tooltip": "Pro všechny hodnoty proměnné i od počáteční do koncové " +
+            "včetně bude opakovat vnořené příkazy.",
+        "helpUrl": ""
+      },
+
+
+      {
+        "id": "while_loop",
+        "message0": "dokud platí, že %1 pak vykonávej %2 %3",
+        "args0": [ 
+        {
+            "type": "input_value",
+            "name": "condition",
+            "check": "Boolean"
+        },
+        {
+            "type": "input_dummy"
+        },
+        {
+            "type": "input_statement",
+            "name": "body"
+        }
+        ],
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": 120,
         "tooltip": "",
         "helpUrl": ""
       }
@@ -168,7 +257,11 @@ angular.module('flocs.workspace')
       return 'checkPathRight()';
     };
 
-    Blockly.JavaScript['maze_if_then'] = function(block) {
+    Blockly.JavaScript['maze_check_path_front'] = function(block) {
+      return 'checkPathFront()';
+    };
+
+    Blockly.JavaScript['if_then'] = function(block) {
       // turn off prefixex for condition
       var oldPrefix = Blockly.JavaScript.STATEMENT_PREFIX;
       Blockly.JavaScript.STATEMENT_PREFIX = '';
@@ -189,7 +282,7 @@ angular.module('flocs.workspace')
       return code;
     };
 
-    Blockly.JavaScript['maze_if_then_else'] = function(block) {
+    Blockly.JavaScript['if_then_else'] = function(block) {
       // turn off prefixex for condition
       var oldPrefix = Blockly.JavaScript.STATEMENT_PREFIX;
       Blockly.JavaScript.STATEMENT_PREFIX = '';
@@ -213,6 +306,68 @@ angular.module('flocs.workspace')
           statements_condition_false + "}";
       return code;
     };
+
+    Blockly.JavaScript['for_loop_fixed'] = function(block) {
+      // loop statements
+      var statements =
+          Blockly.JavaScript.statementToCode(block, 'body');
+
+      var times = String(Number(block.getFieldValue('times')));
+      var code = "for (var i = 0;" +
+          "i<" + times + ";" +
+          "i++){\n" +
+          statements + "\n" +
+          "}";
+      return code;
+    };
+
+    Blockly.JavaScript['for_loop'] = function(block) {
+      // loop statements
+      var statements =
+          Blockly.JavaScript.statementToCode(block, 'body');
+
+      var from = String(Number(block.getFieldValue('from')));
+      var to = String(Number(block.getFieldValue('to')));
+
+      var loopVar = Blockly.JavaScript.variableDB_.getDistinctName(
+                    'i', Blockly.Variables.NAME_TYPE);
+      var code = "for (var " + loopVar +
+          " = " + from + ";" +
+          loopVar + "<=" + to + ";" +
+          loopVar + "++){\n" +
+          statements + "\n" +
+          "}";
+      return code;
+    };
+
+
+    Blockly.JavaScript['while_loop'] = function(block) {
+      // loop statements
+      var statements =
+          Blockly.JavaScript.statementToCode(block, 'body');
+      
+      // turn off prefixex for condition
+      var oldPrefix = Blockly.JavaScript.STATEMENT_PREFIX;
+      Blockly.JavaScript.STATEMENT_PREFIX = '';
+
+      // get condition value (True or False)
+      var value_condition
+          = Blockly.JavaScript.statementToCode(block, 'condition');
+
+      // turn back on prefixes
+      Blockly.JavaScript.STATEMENT_PREFIX = oldPrefix;
+
+
+
+      var code = "while (" +
+          value_condition +
+          "){\n" +
+          statements + "\n" +
+          "}";
+      return code;
+    };
+
+
     // TODO: code for Python...
   }
 
