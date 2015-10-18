@@ -24,15 +24,16 @@ angular.module('flocs.maze')
         // TODO: different images based on the direction
         switch(direction) {
             case 0:
-                return '/static/assets/img/robot_right.png';
+                return '/static/assets/img/robot_small_right.svg';
             case 1:
-                return '/static/assets/img/robot_back.png';
+                return '/static/assets/img/robot_small_back.svg';
             case 2:
-                return '/static/assets/img/robot_left.png';
+                return '/static/assets/img/robot_small_left.svg';
             case 3:
-                return '/static/assets/img/robot_front.png';
+                return '/static/assets/img/robot_small_front.svg';
             default:
-                return '/static/assets/img/robot_front.png';
+                // should not happen though
+                return '/static/assets/img/robot_small_front.svg';
         }
         //return '/static/assets/img/karlik2.png';
       };
