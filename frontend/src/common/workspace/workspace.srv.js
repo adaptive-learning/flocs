@@ -45,6 +45,7 @@ angular.module('flocs.workspace')
     }
 
     // prepare toolbox
+    //console.log("settings.toolbox is " + settings.toolbox);
     var toolboxXml = toolboxService.createToolboxXml(settings.toolbox);
 
     // inject blockly into the workspace with new toolbox

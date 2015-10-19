@@ -2,7 +2,7 @@
  * Toolbox Service
  */
 angular.module('flocs.workspace')
-  .factory('toolboxService', [function() {
+  .factory('toolboxService', ['blocks', function(blocks) {
 
   // public API
   return {
@@ -26,28 +26,43 @@ angular.module('flocs.workspace')
    * @return {string} string of XML without root element
    */
   function blocksToXml(blockNames) {
-    if (blockNames.length === 0) {
+    // no more blocks to process
+    if (typeof blockNames === 'undefined' || blockNames.length === 0) {
         return; 
     }
+
     var xmlString = '';
+
     angular.forEach(blockNames, function(blockName) {
-      if (typeof blockName === 'string' || blockName instanceof String) {
-          xmlString += '<block type="' + blockName + '"></block>';
-      } else {
-          if (blockName.custom) {
-            xmlString += '<category ' +
-                'name="' + blockName.category + '" ' +
-                'custom="' + blockName.custom + '">';
-          } else {
-            xmlString += '<category name="' + blockName.category + '">';
-          }
-          xmlString += blocksToXml(blockName.items);
-          xmlString += '</category>';
-      }
+        // is blockName a string (block or category name)
+        if (typeof blockName === 'string' || blockName instanceof String) {
+            // is it custom defined block/category
+            if (blocks[blockName]) {
+                // custom defined block/category identifier
+                xmlString += blocks[blockName];
+            } else {
+                // the it better be an exact name of block
+                xmlString += '<block type="' + blockName + '"></block>';
+            }
+
+        // blockName is a definiton of category
+        } else {
+            // does it contain attribute custom
+            if (blockName.custom) {
+                xmlString += '<category ' +
+                    'name="' + blockName.category + '" ' +
+                    'custom="' + blockName.custom + '">';
+            } else {
+                xmlString += '<category name="' + blockName.category + '">';
+            }
+            // process all category's items
+            xmlString += blocksToXml(blockName.items);
+            xmlString += '</category>';
+        }
     });
+    //console.log(xmlString);
     return xmlString;
   }
-
 }]);
 
 
