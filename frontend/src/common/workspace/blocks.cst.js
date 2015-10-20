@@ -10,6 +10,7 @@ angular.module('flocs.workspace')
         '<block type="maze_turn_right"></block>' +
         '<block type="maze_check_path_left"></block>' +
         '<block type="maze_check_path_right"></block>' +
+        '<block type="maze_check_path_front"></block>' +
         '</category>',
 
     'variables_category':'<category name="Variables" custom="VARIABLE"></category>',
