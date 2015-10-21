@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <django-objects version="1.0">
-  <object model="tasks.taskmodel">
+  <object pk="1" model="tasks.taskmodel">
     <field name="maze_settings">
     {
       "grid": [
@@ -25,7 +25,7 @@
     </field>
   </object>
 
-  <object model="tasks.taskmodel">
+  <object pk="2" model="tasks.taskmodel">
     <field name="maze_settings">
     {
       "grid": [
@@ -50,7 +50,7 @@
     </field>
   </object>
 
-  <object model="tasks.taskmodel">
+  <object pk="3" model="tasks.taskmodel">
     <field name="maze_settings">
     {
       "grid": [
@@ -74,4 +74,180 @@
     }
     </field>
   </object>
+
+  <object pk="4" model="tasks.taskmodel">
+    <field name="maze_settings">
+    {
+      "grid": [
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 0, 0, 1, 1, 1, 1],
+        [1, 1, 1, 0, 1, 1, 1, 1],
+        [1, 1, 1, 0, 0, 1, 1, 1],
+        [1, 1, 1, 1, 0, 2, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1]],
+      "hero": {
+        "position": [2, 2],
+        "direction": 0
+      }
+    }
+    </field>
+    <field type="TextField" name="workspace_settings">
+    {
+      "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right"]
+    }
+    </field>
+  </object>
+
+  <object pk="5" model="tasks.taskmodel">
+    <field name="maze_settings">
+    {
+      "grid": [
+        [0, 0, 0, 0, 1, 1, 1, 1],
+        [0, 0, 1, 0, 1, 1, 1, 1],
+        [1, 2, 1, 0, 1, 0, 1, 1],
+        [0, 1, 0, 0, 0, 0, 1, 1],
+        [0, 0, 0, 1, 1, 1, 1, 1],
+        [1, 1, 0, 1, 0, 0, 1, 1],
+        [1, 1, 0, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1]],
+      "hero": {
+        "position": [0, 3],
+        "direction": 0
+      }
+    }
+    </field>
+    <field type="TextField" name="workspace_settings">
+    {
+      "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right"]
+    }
+    </field>
+  </object>
+
+  <object pk="6" model="tasks.taskmodel">
+    <field name="maze_settings">
+    {
+      "grid": [
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 2, 0, 0, 1, 1, 1],
+        [1, 1, 1, 1, 0, 1, 1, 1],
+        [1, 1, 1, 0, 0, 0, 1, 1],
+        [1, 1, 1, 0, 1, 1, 1, 1],
+        [1, 1, 1, 0, 1, 1, 1, 1]],
+      "hero": {
+        "position": [3, 7],
+        "direction": 1
+      }
+    }
+    </field>
+    <field type="TextField" name="workspace_settings">
+    {
+      "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right"]
+    }
+    </field>
+  </object>
+
+  <object pk="7" model="tasks.taskmodel">
+    <field name="maze_settings">
+    {
+      "grid": [
+        [1, 1, 1, 0, 1, 1, 1, 1],
+        [1, 0, 0, 0, 0, 0, 1, 1],
+        [1, 0, 1, 1, 1, 0, 1, 1],
+        [0, 0, 0, 1, 0, 0, 0, 1],
+        [0, 1, 0, 1, 0, 1, 0, 1],
+        [0, 1, 0, 1, 0, 1, 0, 1],
+        [0, 1, 0, 1, 0, 1, 0, 1],
+        [0, 1, 0, 1, 2, 1, 0, 1]],
+      "hero": {
+        "position": [3, 0],
+        "direction": 3
+      }
+    }
+    </field>
+    <field type="TextField" name="workspace_settings">
+    {
+      "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right"]
+    }
+    </field>
+  </object>
+
+  <object pk="8" model="tasks.taskmodel">
+    <field name="maze_settings">
+    {
+      "grid": [
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 0, 1, 1, 0, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 0, 0, 1, 1, 1],
+        [1, 0, 1, 1, 1, 1, 2, 1],
+        [1, 0, 0, 1, 1, 0, 0, 1],
+        [1, 1, 0, 0, 0, 0, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1]],
+      "hero": {
+        "position": [1, 4],
+        "direction": 0
+      }
+    }
+    </field>
+    <field type="TextField" name="workspace_settings">
+    {
+      "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right"]
+    }
+    </field>
+  </object>
+
+  <object pk="9" model="tasks.taskmodel">
+    <field name="maze_settings">
+    {
+      "grid": [
+        [0, 0, 0, 0, 1, 0, 1, 0],
+        [1, 0, 1, 0, 0, 1, 0, 1],
+        [0, 1, 0, 1, 0, 0, 1, 0],
+        [0, 0, 1, 0, 1, 0, 0, 1],
+        [0, 0, 0, 1, 0, 1, 0, 0],
+        [0, 1, 0, 0, 0, 0, 1, 0],
+        [0, 0, 1, 0, 1, 0, 0, 0],
+        [0, 0, 0, 1, 0, 1, 0, 2]],
+      "hero": {
+        "position": [0, 7],
+        "direction": 0
+      }
+    }
+    </field>
+    <field type="TextField" name="workspace_settings">
+    {
+      "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right"]
+    }
+    </field>
+  </object>
+
+  <object pk="10" model="tasks.taskmodel">
+    <field name="maze_settings">
+    {
+      "grid": [
+        [0, 1, 1, 1, 1, 1, 1, 1],
+        [0, 1, 1, 1, 1, 1, 1, 1],
+        [0, 0, 0, 0, 0, 1, 1, 1],
+        [1, 0, 0, 1, 0, 1, 1, 1],
+        [1, 1, 0, 0, 0, 1, 1, 1],
+        [1, 1, 0, 1, 0, 1, 1, 1],
+        [1, 1, 0, 1, 1, 1, 1, 1],
+        [1, 1, 0, 2, 1, 1, 1, 1]],
+      "hero": {
+        "position": [0, 0],
+        "direction": 3
+      }
+    }
+    </field>
+    <field type="TextField" name="workspace_settings">
+    {
+      "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right"]
+    }
+    </field>
+  </object>
+
 </django-objects>
