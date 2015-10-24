@@ -262,16 +262,9 @@ angular.module('flocs.workspace')
     };
 
     Blockly.JavaScript['if_then'] = function(block) {
-      // turn off prefixex for condition
-      var oldPrefix = Blockly.JavaScript.STATEMENT_PREFIX;
-      Blockly.JavaScript.STATEMENT_PREFIX = '';
-
       // get condition value (True or False)
       var value_condition
-          = Blockly.JavaScript.statementToCode(block, 'condition');
-
-      // turn back on prefixes
-      Blockly.JavaScript.STATEMENT_PREFIX = oldPrefix;
+          = statementWithouHighlight(block, 'condition');
 
       // transform inner blocks to code
       var statements_condition_true
@@ -283,16 +276,9 @@ angular.module('flocs.workspace')
     };
 
     Blockly.JavaScript['if_then_else'] = function(block) {
-      // turn off prefixex for condition
-      var oldPrefix = Blockly.JavaScript.STATEMENT_PREFIX;
-      Blockly.JavaScript.STATEMENT_PREFIX = '';
-
       // get condition value (True or False)
       var value_condition
-          = Blockly.JavaScript.statementToCode(block, 'condition');
-
-      // turn back on prefixes
-      Blockly.JavaScript.STATEMENT_PREFIX = oldPrefix;
+          = statementWithouHighlight(block, 'condition');
 
       // transform inner blocks to code (then branch)
       var statements_condition_true =
@@ -346,18 +332,9 @@ angular.module('flocs.workspace')
       var statements =
           Blockly.JavaScript.statementToCode(block, 'body');
       
-      // turn off prefixex for condition
-      var oldPrefix = Blockly.JavaScript.STATEMENT_PREFIX;
-      Blockly.JavaScript.STATEMENT_PREFIX = '';
-
       // get condition value (True or False)
       var value_condition
-          = Blockly.JavaScript.statementToCode(block, 'condition');
-
-      // turn back on prefixes
-      Blockly.JavaScript.STATEMENT_PREFIX = oldPrefix;
-
-
+          = statementWithouHighlight(block, 'condition');
 
       var code = "while (" +
           value_condition +
@@ -367,6 +344,66 @@ angular.module('flocs.workspace')
       return code;
     };
 
+    /*
+     * Redefinition of standard while/until loop
+     */
+    Blockly.JavaScript['controls_whileUntil'] = function(block) {
+        // Do while/until loop.
+        var until = block.getFieldValue('MODE') == 'UNTIL';
+       
+        // get condition value (True or False)
+        var argument0
+            = statementWithouHighlight(block, 'BOOL');
+
+        var branch = Blockly.JavaScript.statementToCode(block, 'DO');
+        branch = Blockly.JavaScript.addLoopTrap(branch, block.id);
+        if (until) {
+            argument0 = '!' + argument0;
+        }
+        return 'while (' + argument0 + ') {\n' + branch + '}\n';
+    };
+
+    /*
+     * Redefinition of standard if/elseif/else block
+     */
+    Blockly.JavaScript['controls_if'] = function(block) {
+        // If/elseif/else condition.
+        var n = 0;
+        var argument = statementWithouHighlight(block, 'IF' + n);
+
+        var branch = Blockly.JavaScript.statementToCode(block, 'DO' + n);
+        var code = 'if (' + argument + ') {\n' + branch + '}';
+        
+        for (n = 1; n <= block.elseifCount_; n++) {
+            argument = statementWithouHighlight(block, 'IF' + n);
+            branch = Blockly.JavaScript.statementToCode(block, 'DO' + n);
+            code += ' else if (' + argument + ') {\n' + branch + '}';
+            }
+            if (block.elseCount_) {
+                branch = Blockly.JavaScript.statementToCode(block, 'ELSE');
+                code += ' else {\n' + branch + '}';
+            }
+        return code + '\n';
+    };
+
+    /**
+     * Return generated JS code from statement but without any highlighting.
+     * Especially useful when generating code as a condition.
+     */
+    function statementWithouHighlight(block, name) {
+        // turn off prefixes for condition
+        var oldPrefix = Blockly.JavaScript.STATEMENT_PREFIX;
+        Blockly.JavaScript.STATEMENT_PREFIX = '';
+        
+        // get condition value (True or False)
+        var statement
+            = Blockly.JavaScript.statementToCode(block, name);
+
+        // turn back on prefixes
+        Blockly.JavaScript.STATEMENT_PREFIX = oldPrefix;
+        
+        return statement;
+    }
 
     // TODO: code for Python...
   }
