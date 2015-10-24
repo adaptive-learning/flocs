@@ -93,6 +93,38 @@
       "task": 13,
       "difficulty": 0.12
     }
+  },
+
+  {
+    "model": "practice.difficultymodel",
+    "fields": {
+      "task": 14,
+      "difficulty": 0.12
+    }
+  },
+
+  {
+    "model": "practice.difficultymodel",
+    "fields": {
+      "task": 15,
+      "difficulty": 0.12
+    }
+  },
+
+  {
+    "model": "practice.difficultymodel",
+    "fields": {
+      "task": 16,
+      "difficulty": 0.13
+    }
+  },
+
+  {
+    "model": "practice.difficultymodel",
+    "fields": {
+      "task": 17,
+      "difficulty": 0.15
+    }
   }
 
 

@@ -302,7 +302,7 @@
     </field>
   </object>
 
-<!-- WhileUntil -->
+<!-- While -->
   <object pk="13" model="tasks.taskmodel">
     <field name="maze_settings">
     {
@@ -330,6 +330,132 @@
       }
     </field>
   </object>
+
+<!-- While -->
+  <object pk="14" model="tasks.taskmodel">
+    <field name="maze_settings">
+    {
+      "grid": [
+        [0, 0, 0, 0, 0, 0, 1, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0, 0],
+        [0, 0, 0, 1, 0, 0, 0, 0],
+        [0, 0, 1, 0, 0, 0, 0, 0],
+        [0, 1, 0, 0, 0, 0, 0, 0],
+        [1, 0, 0, 0, 0, 0, 2, 0]],
+      "hero": {
+        "position": [1, 1],
+        "direction": 0
+      }
+    }
+    </field>
+    <field type="TextField" name="workspace_settings">
+      {
+      "toolbox": ["maze_move_forward", 
+                  "maze_turn_right", 
+                  "maze_check_path_left",
+                  "controls_whileUntil"]
+      }
+    </field>
+  </object>
+
+<!-- Until -->
+  <object pk="15" model="tasks.taskmodel">
+    <field name="maze_settings">
+    {
+      "grid": [
+        [0, 0, 1, 0, 0, 0, 0, 0],
+        [1, 0, 1, 0, 0, 0, 0, 1],
+        [1, 0, 1, 0, 0, 0, 1, 0],
+        [1, 0, 0, 0, 0, 1, 0, 0],
+        [1, 0, 0, 0, 1, 0, 0, 0],
+        [1, 0, 0, 1, 0, 0, 0, 0],
+        [1, 0, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 2]],
+      "hero": {
+        "position": [1, 0],
+        "direction": 3
+      }
+    }
+    </field>
+    <field type="TextField" name="workspace_settings">
+      {
+      "toolbox": ["maze_move_forward", 
+                  "maze_turn_left", 
+                  "maze_turn_right", 
+                  "maze_check_path_right",
+                  "controls_whileUntil"]
+      }
+    </field>
+  </object>
+   
+<!-- Until -->
+  <object pk="16" model="tasks.taskmodel">
+    <field name="maze_settings">
+    {
+      "grid": [
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 1, 1, 1, 1, 0, 1],
+        [1, 0, 1, 1, 1, 1, 0, 1],
+        [1, 0, 1, 1, 1, 1, 0, 1],
+        [1, 0, 1, 1, 1, 1, 0, 1],
+        [1, 0, 1, 1, 1, 1, 0, 1],
+        [2, 0, 1, 1, 1, 1, 0, 1]],
+      "hero": {
+        "position": [6, 7],
+        "direction": 1
+      }
+    }
+    </field>
+    <field type="TextField" name="workspace_settings">
+      {
+      "toolbox": ["maze_move_forward", 
+                  "maze_turn_left", 
+                  "maze_turn_right", 
+                  "maze_check_path_right",
+                  "maze_check_path_left",
+                  "controls_whileUntil"]
+      }
+    </field>
+  </object>
+
+<!-- Repeat with conditions-->
+  <object pk="17" model="tasks.taskmodel">
+    <field name="maze_settings">
+    {
+      "grid": [
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 1, 1, 1, 1, 0, 1],
+        [1, 0, 1, 1, 1, 1, 0, 1],
+        [1, 0, 1, 1, 1, 1, 0, 1],
+        [1, 0, 1, 1, 1, 1, 0, 1],
+        [1, 0, 1, 1, 1, 1, 0, 1],
+        [2, 0, 1, 1, 1, 1, 0, 1]],
+      "hero": {
+        "position": [6, 7],
+        "direction": 1
+      }
+    }
+    </field>
+    <field type="TextField" name="workspace_settings">
+      {
+      "toolbox": ["maze_move_forward", 
+                  "maze_turn_left", 
+                  "maze_turn_right", 
+                  "maze_check_path_right",
+                  "maze_check_path_left",
+                  "controls_if_else",
+                  "controls_repeat"]
+      }
+    </field>
+  </object>
+
+
+
+
 
 
 
