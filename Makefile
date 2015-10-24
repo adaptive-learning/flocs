@@ -61,7 +61,10 @@ db-migrate:
 db-load-data:
 	python manage.py flush --noinput
 	python manage.py create_admin
+	# tasks
 	python manage.py loaddata tasks/fixtures/tasks.xml
+	# difficulty of tasks
+	python manage.py loaddata practice/fixtures/difficulty.json
 
 admin:
 	python manage.py create_admin

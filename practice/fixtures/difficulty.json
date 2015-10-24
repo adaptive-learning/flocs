@@ -1,0 +1,83 @@
+[
+  {
+    "model": "practice.difficultymodel",
+    "fields": {
+      "task": 1,
+      "difficulty": 0.01
+    }
+  },
+
+  {
+    "model": "practice.difficultymodel",
+    "fields": {
+      "task": 2,
+      "difficulty": 0.02
+    }
+  },
+
+  {
+    "model": "practice.difficultymodel",
+    "fields": {
+      "task": 3,
+      "difficulty": 0.02
+    }
+  },
+
+  {
+    "model": "practice.difficultymodel",
+    "fields": {
+      "task": 4,
+      "difficulty": 0.02
+    }
+  },
+
+  {
+    "model": "practice.difficultymodel",
+    "fields": {
+      "task": 5,
+      "difficulty": 0.03
+    }
+  },
+
+  {
+    "model": "practice.difficultymodel",
+    "fields": {
+      "task": 6,
+      "difficulty": 0.03
+    }
+  },
+
+  {
+    "model": "practice.difficultymodel",
+    "fields": {
+      "task": 7,
+      "difficulty": 0.03
+    }
+  },
+
+  {
+    "model": "practice.difficultymodel",
+    "fields": {
+      "task": 8,
+      "difficulty": 0.03
+    }
+  },
+
+  {
+    "model": "practice.difficultymodel",
+    "fields": {
+      "task": 9,
+      "difficulty": 0.04
+    }
+  },
+
+  {
+    "model": "practice.difficultymodel",
+    "fields": {
+      "task": 10,
+      "difficulty": 0.03
+    }
+  }
+
+
+]

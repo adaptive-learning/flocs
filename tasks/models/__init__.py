@@ -1,3 +1,3 @@
-"""Persistence layer (data model) of practice app
+"""Persistence layer (data model) of tasks app
 """
 from .task import TaskModel
