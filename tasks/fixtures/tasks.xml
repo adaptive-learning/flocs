@@ -250,4 +250,87 @@
     </field>
   </object>
 
+  <!-- Repeat -->
+  <object pk="11" model="tasks.taskmodel">
+    <field name="maze_settings">
+    {
+      "grid": [
+        [0, 0, 1, 1, 1, 1, 1, 1],
+        [1, 0, 0, 1, 1, 1, 1, 1],
+        [1, 1, 0, 0, 1, 1, 1, 1],
+        [1, 1, 1, 0, 0, 1, 1, 1],
+        [1, 1, 1, 1, 0, 0, 1, 1],
+        [1, 1, 1, 1, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1, 1, 0, 0],
+        [1, 1, 1, 1, 1, 1, 1, 2]],
+      "hero": {
+        "position": [0, 0],
+        "direction": 0
+      }
+    }
+    </field>
+    <field type="TextField" name="workspace_settings">
+    {
+      "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right", "controls_repeat"]
+    }
+    </field>
+  </object>
+
+ <!-- Repeat -->
+  <object pk="12" model="tasks.taskmodel">
+    <field name="maze_settings">
+    {
+      "grid": [
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 1, 1, 1, 1, 1, 1, 0],
+        [1, 1, 1, 1, 1, 1, 1, 0],
+        [1, 1, 1, 1, 1, 1, 1, 0],
+        [1, 1, 1, 1, 1, 1, 1, 0],
+        [1, 1, 1, 1, 1, 1, 1, 0],
+        [1, 1, 1, 1, 1, 1, 1, 0],
+        [1, 1, 1, 1, 1, 1, 1, 2]],
+      "hero": {
+        "position": [0, 0],
+        "direction": 0
+      }
+    }
+    </field>
+    <field type="TextField" name="workspace_settings">
+    {
+      "toolbox": ["maze_move_forward", "maze_turn_right", "controls_repeat"]
+    }
+    </field>
+  </object>
+
+<!-- WhileUntil -->
+  <object pk="13" model="tasks.taskmodel">
+    <field name="maze_settings">
+    {
+      "grid": [
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 1, 1, 1, 1, 1, 0, 1],
+        [1, 1, 1, 1, 1, 1, 0, 1],
+        [1, 1, 1, 1, 1, 1, 0, 1],
+        [1, 1, 1, 1, 1, 1, 0, 1],
+        [1, 1, 1, 1, 1, 1, 0, 1],
+        [1, 1, 1, 1, 1, 1, 2, 1]],
+      "hero": {
+        "position": [0, 1],
+        "direction": 0
+      }
+    }
+    </field>
+    <field type="TextField" name="workspace_settings">
+      {
+      "toolbox": ["maze_move_forward", 
+                  "maze_turn_right", 
+                  "maze_check_path_front",
+                  "controls_whileUntil"]
+      }
+    </field>
+  </object>
+
+
+
 </django-objects>

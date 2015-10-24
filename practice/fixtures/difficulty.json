@@ -77,7 +77,25 @@
       "task": 10,
       "difficulty": 0.03
     }
+  },
+
+  {
+    "model": "practice.difficultymodel",
+    "fields": {
+      "task": 11,
+      "difficulty": 0.10
+    }
+  },
+
+  {
+    "model": "practice.difficultymodel",
+    "fields": {
+      "task": 13,
+      "difficulty": 0.12
+    }
   }
+
+
 
 
 ]
