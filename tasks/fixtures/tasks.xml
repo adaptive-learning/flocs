@@ -359,10 +359,11 @@
     </field>
     <field type="TextField" name="workspace_settings">
       {
-      "toolbox": ["maze_move_forward",
-                  "maze_turn_right",
-                  "maze_check_path_front",
-                  "controls_whileUntil"]
+        "toolbox": ["maze_move_forward",
+                    "maze_turn_right",
+                    "maze_check_path_front",
+                    "controls_whileUntil"],
+        "blocksLimit": 6
       }
     </field>
   </object>
@@ -388,11 +389,12 @@
     </field>
     <field type="TextField" name="workspace_settings">
       {
-      "toolbox": ["maze_move_forward",
-                  "maze_turn_left",
-                  "maze_turn_right",
-                  "maze_check_path_right",
-                  "controls_whileUntil"]
+        "toolbox": ["maze_move_forward",
+                    "maze_turn_left",
+                    "maze_turn_right",
+                    "maze_check_path_right",
+                    "controls_whileUntil"],
+        "blocksLimit": 7
       }
     </field>
   </object>
@@ -418,12 +420,13 @@
     </field>
     <field type="TextField" name="workspace_settings">
       {
-      "toolbox": ["maze_move_forward",
-                  "maze_turn_left",
-                  "maze_turn_right",
-                  "maze_check_path_right",
-                  "maze_check_path_left",
-                  "controls_whileUntil"]
+        "toolbox": ["maze_move_forward",
+                    "maze_turn_left",
+                    "maze_turn_right",
+                    "maze_check_path_right",
+                    "maze_check_path_left",
+                    "controls_whileUntil"],
+        "blocksLimit": 7
       }
     </field>
   </object>
@@ -448,15 +451,16 @@
     }
     </field>
     <field type="TextField" name="workspace_settings">
-      {
+    {
       "toolbox": ["maze_move_forward",
                   "maze_turn_left",
                   "maze_turn_right",
                   "maze_check_path_right",
                   "maze_check_path_left",
                   "controls_if_else",
-                  "controls_repeat"]
-      }
+                  "controls_repeat"],
+      "blocksLimit": 7
+    }
     </field>
   </object>
 
@@ -482,7 +486,11 @@
     </field>
     <field type="TextField" name="workspace_settings">
     {
-      "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right", "controls_repeat"]
+      "toolbox": ["maze_move_forward",
+                  "maze_turn_left",
+                  "maze_turn_right",
+                  "controls_repeat"],
+      "blocksLimit": 3
     }
     </field>
   </object>
@@ -509,7 +517,12 @@
     </field>
     <field type="TextField" name="workspace_settings">
     {
-      "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right", "controls_whileUntil", "maze_check_path_front"]
+      "toolbox": ["maze_move_forward",
+                  "maze_turn_left",
+                  "maze_turn_right",
+                  "controls_whileUntil",
+                  "maze_check_path_front"],
+      "blocksLimit": 3
     }
     </field>
   </object>
@@ -535,7 +548,8 @@
     </field>
     <field type="TextField" name="workspace_settings">
     {
-      "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right", "controls_repeat"]
+      "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right", "controls_repeat"],
+      "blocksLimit": 7
     }
     </field>
   </object>
@@ -561,8 +575,14 @@
     </field>
     <field type="TextField" name="workspace_settings">
     {
-
-      "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right", "controls_whileUntil", "maze_check_path_front"]
+      "toolbox": [
+        "maze_move_forward",
+        "maze_turn_left",
+        "maze_turn_right",
+        "controls_whileUntil",
+        "maze_check_path_front"
+      ],
+      "blocksLimit": 7
     }
     </field>
   </object>
@@ -589,8 +609,16 @@
     </field>
     <field type="TextField" name="workspace_settings">
     {
-
-      "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right", "maze_check_path_left", "maze_check_path_right", "controls_repeat", "controls_if"]
+      "toolbox": [
+        "maze_move_forward",
+        "maze_turn_left",
+        "maze_turn_right",
+        "maze_check_path_left",
+        "maze_check_path_right",
+        "controls_repeat",
+        "controls_if"
+      ],
+      "blocksLimit": 7
     }
     </field>
   </object>
@@ -616,7 +644,9 @@
     <field type="TextField" name="workspace_settings">
     {
 
-      "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right", "controls_repeat"]
+      "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right", "controls_repeat"],
+      "blocksLimit": 5
+
     }
     </field>
   </object>
@@ -642,7 +672,8 @@
     </field>
     <field type="TextField" name="workspace_settings">
     {
-      "toolbox": ["maze_category", "loops_category", "variables_category"]
+      "toolbox": ["maze_category", "loops_category", "variables_category"],
+      "blocksLimit": 8
     }
     </field>
   </object>
@@ -668,7 +699,8 @@
     </field>
     <field type="TextField" name="workspace_settings">
     {
-      "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right", "controls_repeat"]
+      "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right", "controls_repeat"],
+      "blocksLimit": 6
     }
     </field>
   </object>
@@ -694,7 +726,8 @@
     </field>
     <field type="TextField" name="workspace_settings">
     {
-      "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right", "controls_repeat"]
+      "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right", "controls_repeat"],
+      "blocksLimit": 10
     }
     </field>
   </object>

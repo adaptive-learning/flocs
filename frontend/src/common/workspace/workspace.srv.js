@@ -68,7 +68,6 @@ angular.module('flocs.workspace')
     //console.log("settings.toolbox is " + settings.toolbox);
     var toolboxXml = toolboxService.createToolboxXml(settings.toolbox);
 
-    console.log('max', settings.maxBlocks || Infinity);
     // inject blockly into the workspace with new toolbox
     blocklyDiv = Blockly.inject('blocklyDiv', {
       toolbox: toolboxXml,
