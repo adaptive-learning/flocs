@@ -21,7 +21,6 @@ angular.module('flocs.maze')
       };
 
       var getHeroImagePath = function(direction) {
-        // TODO: different images based on the direction
         switch(direction) {
             case 0:
                 return '/static/assets/img/robot_small_right.svg';
@@ -32,29 +31,31 @@ angular.module('flocs.maze')
             case 3:
                 return '/static/assets/img/robot_small_front.svg';
             default:
-                // should not happen though
-                return '/static/assets/img/robot_small_front.svg';
+                // should not happen
+                throw "Invalid direction " + direction;
+                //return '/static/assets/img/robot_small_front.svg';
         }
         //return '/static/assets/img/karlik2.png';
       };
 
       function setMaze(state){
-        scope.visualization = {
-          width: 300,
-          height: 300,
-          boxes: [],
-          boxSize: 10
-        };
-
         // continue only if state is not null
         if (!state) {
           return;
         }
 
-        var gridSize = state.grid.length;
-        scope.visualization.boxSize = scope.visualization.width / gridSize;
-        for (var i = 0; i < gridSize; i++) {
-          for (var j = 0; j < gridSize; j++) {
+        var gridWidth = state.grid[0].length;
+        var gridHeight = state.grid.length;
+
+        scope.visualization = {};
+        // TODO: unhardcode width
+        scope.visualization.width = 400;
+        scope.visualization.boxSize = scope.visualization.width / gridWidth;
+        scope.visualization.height = gridHeight * scope.visualization.boxSize;
+
+        scope.visualization.boxes = [];
+        for (var i = 0; i < gridHeight; i++) {
+          for (var j = 0; j < gridWidth; j++) {
             scope.visualization.boxes.push({
               x: j, // * visualization.boxSize,
               y: i, // * visualization.boxSize,
