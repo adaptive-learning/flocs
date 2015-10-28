@@ -20,28 +20,14 @@ angular.module('flocs.taskEnvironment')
     });
   }
 
-  function handleTaskEnvironmentChange() {
-    //$scope.blocksUsed = taskEnvironmentService.getBlocksUsed();
-    //$scope.blocksLimit = taskEnvironmentService.getBlocksLimit();
-
+  /*function handleTaskEnvironmentChange() {
     $scope.blocksStatus.used = taskEnvironmentService.getBlocksUsed();
     $scope.blocksStatus.limit = taskEnvironmentService.getBlocksLimit();
-  }
-
-  function hack() {
-  }
+  }*/
 
   $scope.initialState = true;
-  $scope.blocksStatus = {
-    used: null,
-    limit: null
-  };
+  $scope.blocksStatus = taskEnvironmentService.blocksStatus;
   $scope.run = run;
   $scope.reset = reset;
-
-  taskEnvironmentService.addChangeListener(handleTaskEnvironmentChange);
-  // TODO remove listener on destroy...??
-  //handleTaskEnvironmentChange();
-
 
 }]);

@@ -7,7 +7,11 @@ angular.module('flocs.taskEnvironment')
 
   var currentTask = null;
   var afterAttemptCallback = null;
-  var changeListeners = [];
+  //var changeListeners = [];
+  var blocksStatus = {
+    used: null,
+    limit: null
+  };
 
   workspaceService.addChangeListener(handleWorkspaceChange);
 
@@ -17,10 +21,15 @@ angular.module('flocs.taskEnvironment')
     settingTaskById: settingTaskById,
     setInitialState: setInitialState,
     attemptFinished: attemptFinished,
-    addChangeListener: addChangeListener,
 
-    getBlocksUsed: getBlocksUsed,
-    getBlocksLimit: getBlocksLimit,
+    // NOTE: we have used shared data (blocksStatus instead of listeners)
+    //addChangeListener: addChangeListener,
+    //getBlocksUsed: getBlocksUsed,
+    //getBlocksLimit: getBlocksLimit,
+
+    // shared data
+    blocksStatus: blocksStatus
+
 
     //getMazeSettings: getMazeSettings,
     //getWorkspaceSettings: getWorkspaceSettings,
@@ -33,23 +42,23 @@ angular.module('flocs.taskEnvironment')
   /**
    * Add new listener which will be called when the environment changes.
    */
-  function addChangeListener(listener) {
+  /*function addChangeListener(listener) {
     changeListeners.push(listener);
 
     // if a task has been already set, call the listener to get initital state
     if (currentTask !== null) {
       listener();
     }
-  }
+  }*/
 
   /**
    * Call all change listeners
    */
-  function changeNotification() {
+  /*function changeNotification() {
     angular.forEach(changeListeners, function(listener) {
       listener();
     });
-  }
+  }*/
 
   function getMazeSettings() {
     if (currentTask === null) {
@@ -77,7 +86,7 @@ angular.module('flocs.taskEnvironment')
     currentTask = newTask;
     mazeService.set(getMazeSettings());
     workspaceService.set(getWorkspaceSettings());
-    changeNotification();
+    //changeNotification();
   }
 
   function setInitialState() {
@@ -111,7 +120,9 @@ angular.module('flocs.taskEnvironment')
   }
 
   function handleWorkspaceChange() {
-    changeNotification();
+    //changeNotification();
+    blocksStatus.used = getBlocksUsed();
+    blocksStatus.limit = getBlocksLimit();
   }
 
 }]);

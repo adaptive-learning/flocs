@@ -96,7 +96,7 @@ function ($log, $timeout, mazeService, workspaceService) {
         var pauseTime = 0;
         if (highlightPause)  {
           // TODO: unhardcode the pause time
-          pauseTime = 500;
+          pauseTime = 200;
           highlightPause = false;
         }
         return $timeout(stepCode, pauseTime);

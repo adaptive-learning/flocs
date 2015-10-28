@@ -74,11 +74,12 @@ angular.module('flocs.workspace')
       maxBlocks: settings.blocksLimit || Infinity,
       trashcan: true
     });
-
     blocklyDiv.addChangeListener(handleBlocklyDivChange);
 
-    // what dose clear() do? Is it necessary after inject?
-    blocklyDiv.clear();
+    changeNotification();
+    // NOTE: now we create (inject) new blockly div on reset, so there we do
+    // not need to clear it (clear = set an empty program in workspace)
+    //blocklyDiv.clear();
   }
 
   /**
