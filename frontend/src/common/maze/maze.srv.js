@@ -68,6 +68,34 @@ angular.module('flocs.maze')
     //console.log('moveForward');
     //console.log('position: ', state.heroPosition, state.heroDirection);
     notifyViewsHeroChanged();
+    // remove token if the robot step on it
+    if (isToken(state.hero.position, true)) {
+        notifyViewsMazeChanged();
+    }
+  }
+
+  /**
+   * Check if there is token on given position.
+   * If remove flag is true, it will remove the token.
+   *
+   * @param position of checking
+   * @param remove if true, it will remove token
+   * @returns {boolean} true if there is token
+   */
+  function isToken(position, remove) {
+      if (state.tokens === undefined) {
+        return false;
+      }
+      for (var k = 0; k < state.tokens.length; k++) {
+          if ((position[0] == state.tokens[k][0]) && (position[1] == state.tokens[k][1])) {
+              // if remove is true, remove the token
+              if (remove) {
+                  state.tokens.splice(k, 1);
+              }
+              return true;
+          }
+      }
+      return false;
   }
 
   /*
@@ -106,6 +134,28 @@ angular.module('flocs.maze')
     return box === BoxType.FREE || box === BoxType.GOAL;
   }
 
+  /*
+   * Check if the robot is on the specified color
+   * @param color: BoxType.RED, BoxType.GREEN, BoxType.BLUE
+   */
+  function checkColor(color) {
+    // direction of hero
+    var checkPosition = [
+      state.hero.position[0],
+      state.hero.position[1]
+    ];
+    // get type of the box
+    var box = gridService.boxAt(state.grid, checkPosition);
+
+    // check undefined
+    if (box === undefined) {
+      return false;
+    }
+
+    // return whether the box is of color 'color'
+    return box === color;
+  }
+
   /**
    * Return true if the hero reached the goal.
    */
@@ -138,9 +188,11 @@ angular.module('flocs.maze')
     moveForward: moveForward,
     turn: turn,
     checkPath: checkPath,
+    checkColor: checkColor,
     solved: solved,
     died: died,
-    getState: getState
+    getState: getState,
+    isToken: isToken
   };
 }]);
 

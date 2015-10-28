@@ -12,10 +12,17 @@ angular.module('flocs.maze')
     link: function(scope, element, attrs) {
 
       // image paths
-      var getBoxImagePath = function(box) {
+      var getBoxImagePath = function(box, token) {
+        // if there is token, return token path
+        if (token) {
+          return '/static/assets/img/token.png';
+        }
         switch (box) {
           case BoxType.WALL: return '/static/assets/img/box.svg';
           case BoxType.GOAL: return '/static/assets/img/goal.png';
+          case BoxType.RED: return '/static/assets/img/red.jpg';
+          case BoxType.GREEN: return '/static/assets/img/green.jpg';
+          case BoxType.BLUE: return '/static/assets/img/blue.jpg';
           default: return null;
         }
       };
@@ -61,13 +68,13 @@ angular.module('flocs.maze')
               y: i, // * visualization.boxSize,
               width: scope.visualization.boxSize,
               height: scope.visualization.boxSize,
-              path: getBoxImagePath(state.grid[i][j])
+              path: getBoxImagePath(state.grid[i][j], mazeService.isToken([j,i], false))
             });
           }
         }
         scope.hero = {
           width: scope.visualization.boxSize,
-          height: scope.visualization.boxSize,
+          height: scope.visualization.boxSize
         };
         scope.visualization.boxes.push(scope.hero);
         setHero(state.hero);
