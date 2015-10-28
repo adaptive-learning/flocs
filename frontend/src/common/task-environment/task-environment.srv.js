@@ -7,6 +7,9 @@ angular.module('flocs.taskEnvironment')
 
   var currentTask = null;
   var afterAttemptCallback = null;
+  var changeListeners = [];
+
+  workspaceService.addChangeListener(handleWorkspaceChange);
 
   // === public API ===
   return {
@@ -14,6 +17,10 @@ angular.module('flocs.taskEnvironment')
     settingTaskById: settingTaskById,
     setInitialState: setInitialState,
     attemptFinished: attemptFinished,
+    addChangeListener: addChangeListener,
+
+    getBlocksUsed: getBlocksUsed,
+    getBlocksLimit: getBlocksLimit,
 
     //getMazeSettings: getMazeSettings,
     //getWorkspaceSettings: getWorkspaceSettings,
@@ -22,6 +29,27 @@ angular.module('flocs.taskEnvironment')
   };
 
   // === private implementation ===
+
+  /**
+   * Add new listener which will be called when the environment changes.
+   */
+  function addChangeListener(listener) {
+    changeListeners.push(listener);
+
+    // if a task has been already set, call the listener to get initital state
+    if (currentTask !== null) {
+      listener();
+    }
+  }
+
+  /**
+   * Call all change listeners
+   */
+  function changeNotification() {
+    angular.forEach(changeListeners, function(listener) {
+      listener();
+    });
+  }
 
   function getMazeSettings() {
     if (currentTask === null) {
@@ -37,10 +65,19 @@ angular.module('flocs.taskEnvironment')
     return currentTask['workspace-settings'];
   }
 
+  function getBlocksUsed() {
+    return workspaceService.getBlocksUsed();
+  }
+
+  function getBlocksLimit() {
+    return workspaceService.getBlocksLimit();
+  }
+
   function setTask(newTask) {
     currentTask = newTask;
     mazeService.set(getMazeSettings());
     workspaceService.set(getWorkspaceSettings());
+    changeNotification();
   }
 
   function setInitialState() {
@@ -71,6 +108,10 @@ angular.module('flocs.taskEnvironment')
 
     //$rootScope.$broadcast('task:attemptFinished');
     //console.log(result);
+  }
+
+  function handleWorkspaceChange() {
+    changeNotification();
   }
 
 }]);

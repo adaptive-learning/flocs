@@ -5,19 +5,10 @@ angular.module('flocs.taskEnvironment')
 .controller('taskEnvironmentCtrl', ['$scope', 'taskEnvironmentService', 'interpreterService',
   function($scope, taskEnvironmentService, interpreterService) {
 
-  /*function nextTask() {
-    taskEnvironmentService.settingNextTask(); // <- move to practice ctrl
-  }*/
-
   function run() {
     $scope.initialState = false;
     interpreterService.runCode().then(function(result) {
       taskEnvironmentService.attemptFinished(result);
-      /*if (result.solved) {
-        console.log('Solved!');
-      } else if (result.died) {
-        console.log('Died!');
-      }*/
     });
   }
 
@@ -29,26 +20,28 @@ angular.module('flocs.taskEnvironment')
     });
   }
 
-  /*function runOrReset() {
-    if ($scope.initialState) {
-      $scope.initialState = false;
-      run();
-    } else if (!($scope.resetting)) {
-      $scope.resetting = true;
-      reset();
-      $scope.initialState = true;
-      $scope.resetting = false;
-    }
-  }*/
+  function handleTaskEnvironmentChange() {
+    //$scope.blocksUsed = taskEnvironmentService.getBlocksUsed();
+    //$scope.blocksLimit = taskEnvironmentService.getBlocksLimit();
 
-  // inital state
+    $scope.blocksStatus.used = taskEnvironmentService.getBlocksUsed();
+    $scope.blocksStatus.limit = taskEnvironmentService.getBlocksLimit();
+  }
+
+  function hack() {
+  }
+
   $scope.initialState = true;
-  //$scope.noTask = true;
-  //$scope.resetting = false;
+  $scope.blocksStatus = {
+    used: null,
+    limit: null
+  };
   $scope.run = run;
   $scope.reset = reset;
 
-  /*// set first task
-  nextTask();*/
+  taskEnvironmentService.addChangeListener(handleTaskEnvironmentChange);
+  // TODO remove listener on destroy...??
+  //handleTaskEnvironmentChange();
+
 
 }]);

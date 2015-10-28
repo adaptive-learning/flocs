@@ -2,14 +2,32 @@
  * Workspace Service
  */
 angular.module('flocs.workspace')
-.factory('workspaceService', ['$log', 'blocklyService', 'toolboxService',
-  function($log, blocklyService, toolboxService) {
+.factory('workspaceService', ['$rootScope', '$log', 'blocklyService', 'toolboxService',
+  function($rootScope, $log, blocklyService, toolboxService) {
 
   var blocklyDiv = null;
   // TODO: move default settings to a constant service?
   var settings = {
-    toolbox: []
+    toolbox: [],
+    blocksLimit: null
   };
+  var changeListeners = [];
+
+  /**
+   * Register new listener for changes
+   */
+  function addChangeListener(listener) {
+    changeListeners.push(listener);
+  }
+
+  /**
+   * Notify all change listeners about a change
+   */
+  function changeNotification() {
+    angular.forEach(changeListeners, function(listener) {
+      listener();
+    });
+  }
 
   /**
   * Register workspace view.
@@ -29,6 +47,8 @@ angular.module('flocs.workspace')
   function set(newSettings) {
     //console.log('workspaceService:set');
     settings = newSettings;
+    // make sure blocksLimit is not undefined
+    settings.blocksLimit = settings.blocksLimit || null;
     reset();
   }
 
@@ -38,7 +58,7 @@ angular.module('flocs.workspace')
   */
   function reset() {
     //console.log('workspaceService:reset');
-    
+
     // get rid of existing "workspace" (the actual displayed thing)
     if (blocklyDiv) {
       blocklyDiv.dispose();
@@ -48,14 +68,43 @@ angular.module('flocs.workspace')
     //console.log("settings.toolbox is " + settings.toolbox);
     var toolboxXml = toolboxService.createToolboxXml(settings.toolbox);
 
+    console.log('max', settings.maxBlocks || Infinity);
     // inject blockly into the workspace with new toolbox
     blocklyDiv = Blockly.inject('blocklyDiv', {
-      // TODO: create special service for initial settings
-      toolbox: toolboxXml
+      toolbox: toolboxXml,
+      maxBlocks: settings.blocksLimit || Infinity,
+      trashcan: true
     });
+
+    blocklyDiv.addChangeListener(handleBlocklyDivChange);
 
     // what dose clear() do? Is it necessary after inject?
     blocklyDiv.clear();
+  }
+
+  /**
+   * Handle signals from blocklyDiv
+   */
+  function handleBlocklyDivChange() {
+    // We need to call $apply after the notification to make views updated,
+    // because the event is fired from non-angular component (Blockly).
+    $rootScope.$apply(changeNotification);
+  }
+
+  /**
+   * Return blocks limit or null if there is no limit.
+   */
+  function getBlocksLimit() {
+    return settings.blocksLimit;
+  }
+
+  /**
+   * Return number of currently used blocks.
+   */
+  function getBlocksUsed() {
+    var blocksLeft = blocklyDiv.remainingCapacity();
+    var blocksUsed = getBlocksLimit() - blocksLeft;
+    return blocksUsed;
   }
 
   /**
@@ -69,7 +118,7 @@ angular.module('flocs.workspace')
    * Hide current highlight
    */
   function noHighlight() {
-    // TODO...
+    // TODO... if needed
     console.log('TODO:noHighlight');
   }
 
@@ -103,9 +152,12 @@ angular.module('flocs.workspace')
     setBlocklyDiv: setBlocklyDiv,
     set: set,
     reset: reset,
+    addChangeListener: addChangeListener,
     highlightBlock: highlightBlock,
     noHighlight: noHighlight,
     getJavaScriptCode: getJavaScriptCode,
-    getPythonCode: getPythonCode
+    getPythonCode: getPythonCode,
+    getBlocksUsed: getBlocksUsed,
+    getBlocksLimit: getBlocksLimit
   };
 }]);
