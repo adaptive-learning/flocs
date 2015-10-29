@@ -15,14 +15,14 @@ angular.module('flocs.maze')
       var getBoxImagePath = function(box, token) {
         // if there is token, return token path
         if (token) {
-          return '/static/assets/img/token.png';
+          return '/static/assets/img/token.svg';
         }
         switch (box) {
           case BoxType.WALL: return '/static/assets/img/box.svg';
-          case BoxType.GOAL: return '/static/assets/img/goal.png';
-          case BoxType.RED: return '/static/assets/img/red.jpg';
-          case BoxType.GREEN: return '/static/assets/img/green.jpg';
-          case BoxType.BLUE: return '/static/assets/img/blue.jpg';
+          case BoxType.GOAL: return '/static/assets/img/bomb.svg';
+          case BoxType.YELLOW: return '/static/assets/img/yellow.svg';
+          case BoxType.GREEN: return '/static/assets/img/green.svg';
+          case BoxType.BLUE: return '/static/assets/img/blue.svg';
           default: return null;
         }
       };

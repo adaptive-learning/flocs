@@ -10,7 +10,8 @@ angular.module('flocs.maze', [])
   FREE:  0,
   WALL:  1,
   GOAL:  2,
-  RED:   3,
+  YELLOW:3,
   GREEN: 4,
   BLUE:  5
-});
+})
+.constant('SolidBlocks', [1]);

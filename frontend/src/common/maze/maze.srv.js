@@ -2,8 +2,8 @@
  * Maze Service
  */
 angular.module('flocs.maze')
-.factory('mazeService', ['BoxType', 'gridService',
-  function(BoxType, gridService) {
+.factory('mazeService', ['BoxType', 'SolidBlocks', 'gridService',
+  function(BoxType, SolidBlocks, gridService) {
 
   // NOTE: We use observer pattern to notify views. Alternative would be to use
   //       $broadcast (but it would pollute $rootScope).
@@ -131,7 +131,8 @@ angular.module('flocs.maze')
     if (box === undefined) {
       return false;
     }
-    return box === BoxType.FREE || box === BoxType.GOAL;
+    // not a block thats cannot be walked through
+    return SolidBlocks.indexOf(box) === -1;
   }
 
   /*
