@@ -39,6 +39,14 @@ function ($log, $timeout, mazeService, workspaceService) {
       interpreter.createNativeFunction(function() {
         return interpreter.createPrimitive(mazeService.turn(-1));
     }));
+
+    // turn
+    var wrapper = function(direction) {
+        return interpreter.createPrimitive(mazeService.turn(direction));
+    };
+    interpreter.setProperty(scope, 'turn',
+      interpreter.createNativeFunction(wrapper));
+
     // checkPathLeft()
     interpreter.setProperty(scope, 'checkPathLeft',
       interpreter.createNativeFunction(function() {
@@ -54,7 +62,12 @@ function ($log, $timeout, mazeService, workspaceService) {
       interpreter.createNativeFunction(function() {
         return interpreter.createPrimitive(mazeService.checkPath(0));
     }));
-
+    // checkPath()
+    wrapper = function(direction) {
+        return interpreter.createPrimitive(mazeService.checkPath(direction));
+    };
+    interpreter.setProperty(scope, 'checkPath',
+      interpreter.createNativeFunction(wrapper));
   }
 
   /**

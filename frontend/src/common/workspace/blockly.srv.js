@@ -54,6 +54,35 @@ angular.module('flocs.workspace')
         "tooltip": "",
         "helpUrl": ""
       },
+
+      {
+        "id": "maze_turn",
+        "lastDummyAlign0": "LEFT",
+        "message0": "zatoc %1",
+        "args0": [
+        {
+            "type":"field_dropdown",
+            "name":"direction",
+            "options":[
+                [
+                    "doleva",
+                    "1"
+                ],
+                [
+                    "doprava",
+                    "-1"
+                ]
+            ],
+        }
+        ],
+        "previousStatement": true,
+        "nextStatement": true,
+        "colour": 120,
+        "tooltip": "",
+        "helpUrl": ""
+      },
+
+
       {
         "id": "maze_check_path_left",
         "lastDummyAlign0": "LEFT",
@@ -80,6 +109,38 @@ angular.module('flocs.workspace')
         "colour": 210,
         "tooltip": "",
         "helpUrl": ""
+      },
+
+      {
+        "id":"maze_check_path",
+        "lastDummyAlign0": "LEFT",
+        "message0": "je cesta %1",
+        "args0":[
+        {
+            "type":"field_dropdown",
+            "name":"direction",
+            "options":[
+                [
+                    "vlevo",
+                    "1"
+                ],
+                [
+                    "vpředu",
+                    "0"
+                ],
+                [
+                    "vpravo",
+                    "-1"
+                ]
+            ],
+        }
+        ],
+        "output": "Boolean",
+        "colour": 210,
+        "tooltip": "",
+        "helpUrl": ""
+
+
       },
 
       {
@@ -198,7 +259,7 @@ angular.module('flocs.workspace')
 
 
       {
-        "id": "while_loop",
+        "id": "controls_while",
         "message0": "dokud platí, že %1 pak vykonávej %2 %3",
         "args0": [ 
         {
@@ -238,11 +299,18 @@ angular.module('flocs.workspace')
     Blockly.JavaScript['maze_move_forward'] = function(block) {
       return 'moveForward();';
     };
+
     Blockly.JavaScript['maze_turn_left'] = function(block) {
       return 'turnLeft();';
     };
+
     Blockly.JavaScript['maze_turn_right'] = function(block) {
       return 'turnRight();';
+    };
+
+    Blockly.JavaScript['maze_turn'] = function(block) {
+      var direction = block.getFieldValue('direction');
+      return 'turn(' + direction + ');';
     };
 
     Blockly.JavaScript['maze_move_backward'] = function(block) {
@@ -260,6 +328,12 @@ angular.module('flocs.workspace')
     Blockly.JavaScript['maze_check_path_front'] = function(block) {
       return 'checkPathFront()';
     };
+
+    Blockly.JavaScript['maze_check_path'] = function(block) {
+      var direction = block.getFieldValue('direction');
+      return 'checkPath(' + direction + ')';
+    };
+
 
     Blockly.JavaScript['if_then'] = function(block) {
       // get condition value (True or False)
@@ -327,7 +401,7 @@ angular.module('flocs.workspace')
     };
 
 
-    Blockly.JavaScript['while_loop'] = function(block) {
+    Blockly.JavaScript['controls_while'] = function(block) {
       // loop statements
       var statements =
           Blockly.JavaScript.statementToCode(block, 'body');
