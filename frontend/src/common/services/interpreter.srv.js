@@ -47,6 +47,24 @@ function ($log, $timeout, mazeService, workspaceService) {
     interpreter.setProperty(scope, 'turn',
       interpreter.createNativeFunction(wrapper));
 
+    // checkBomb()
+    interpreter.setProperty(scope, 'checkBomb',
+      interpreter.createNativeFunction(function() {
+        return interpreter.createPrimitive(
+                mazeService.checkBox(
+                    mazeService.getBoxType('GOAL')));
+    }));
+
+    // checkColour()
+    wrapper = function(color) {
+        return interpreter.createPrimitive(
+                mazeService.checkBox(
+                    mazeService.getBoxType(color)));
+    };
+
+    interpreter.setProperty(scope, 'checkColor',
+        interpreter.createNativeFunction(wrapper));
+
     // checkPathLeft()
     interpreter.setProperty(scope, 'checkPathLeft',
       interpreter.createNativeFunction(function() {

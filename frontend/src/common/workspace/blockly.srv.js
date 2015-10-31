@@ -82,6 +82,69 @@ angular.module('flocs.workspace')
         "helpUrl": ""
       },
 
+      {
+        "id": "maze_check_bomb",
+        "lastDummyAlign0": "LEFT",
+        "message0": "robot %1 na políčku s %2",
+        "args0": [
+          {
+            "type":"field_dropdown",
+            "name":"negation",
+            "options":[
+                [
+                    "není",
+                    "!"
+                ],
+                [
+                    "je",
+                    ""
+                ]
+            ],
+          },
+          {
+            "type": "field_image",
+            "src": "static/assets/img/bomb.svg",
+            "width": 15,
+            "height": 15,
+            "alt": "bombou"
+          },
+        ],
+        "output":"Boolean",
+        "colour": 210,
+        "tooltip": "",
+        "helpUrl": ""
+      },
+
+      {
+        "id": "maze_check_color",
+        "lastDummyAlign0": "LEFT",
+        "message0": "robot je na políčku %1 barvy",
+        "args0": [
+          {
+            "type":"field_dropdown",
+            "name":"color",
+            "options":[
+                [
+                    "žluté",
+                    "YELLOW"
+                ],
+                [
+                    "modré",
+                    "BLUE"
+                ],
+                [
+                    "zelené",
+                    "GREEN"
+                ]
+            ],
+          }
+        ],
+        "output":"Boolean",
+        "colour": 210,
+        "tooltip": "",
+        "helpUrl": ""
+      },
+
 
       {
         "id": "maze_check_path_left",
@@ -315,6 +378,16 @@ angular.module('flocs.workspace')
 
     Blockly.JavaScript['maze_move_backward'] = function(block) {
       return 'moveBackward();';
+    };
+
+    Blockly.JavaScript['maze_check_bomb'] = function(block) {
+      var negation = block.getFieldValue('negation');
+      return negation + 'checkBomb()';
+    };
+
+    Blockly.JavaScript['maze_check_color'] = function(block) {
+      var color = block.getFieldValue('color');
+      return 'checkColor(\'' + color + '\')';
     };
 
     Blockly.JavaScript['maze_check_path_left'] = function(block) {

@@ -136,10 +136,30 @@ angular.module('flocs.maze')
   }
 
   /*
-   * Check if the robot is on the specified color
-   * @param color: BoxType.RED, BoxType.GREEN, BoxType.BLUE
+   * Returns BoxType constant to given string representation of box type
+   * @param type: string representation of BoxType
+   * @return corresponding BoxType constant (number)
    */
-  function checkColor(color) {
+  function getBoxType(type) {
+    if (type == 'GOAL') {
+      return BoxType.GOAL;
+    } else if (type == 'YELLOW') {
+        return BoxType.YELLOW;
+    } else if (type == 'BLUE') {
+        return BoxType.BLUE;
+    } else if (type == 'GREEN') {
+        return BoxType.GREEN;
+    } else {
+        return undefined;
+    }
+  }
+
+  /*
+   * Check if the robot is on the specified type of box
+   * @param boxType: any available BoxType
+   * @return {boolean} true if robot is on the given type of box
+   */
+  function checkBox(boxType) {
     // direction of hero
     var checkPosition = [
       state.hero.position[0],
@@ -154,8 +174,9 @@ angular.module('flocs.maze')
     }
 
     // return whether the box is of color 'color'
-    return box === color;
+    return box === boxType;
   }
+
 
   /**
    * Return true if the hero reached the goal.
@@ -189,7 +210,8 @@ angular.module('flocs.maze')
     moveForward: moveForward,
     turn: turn,
     checkPath: checkPath,
-    checkColor: checkColor,
+    checkBox: checkBox,
+    getBoxType: getBoxType,
     solved: solved,
     died: died,
     getState: getState,
