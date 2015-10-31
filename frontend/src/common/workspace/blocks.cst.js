@@ -6,11 +6,10 @@ angular.module('flocs.workspace')
     'maze_category':'<category name="Maze">' +
         '<block type="maze_move_forward"></block>' +
         '<block type="maze_move_backward"></block>' +
-        '<block type="maze_turn_left"></block>' +
-        '<block type="maze_turn_right"></block>' +
-        '<block type="maze_check_path_left"></block>' +
-        '<block type="maze_check_path_right"></block>' +
-        '<block type="maze_check_path_front"></block>' +
+        '<block type="maze_turn"></block>' +
+        '<block type="maze_check_path"></block>' +
+        '<block type="maze_check_bomb"></block>' +
+        '<block type="maze_check_color"></block>' +
         '</category>',
 
     'variables_category':'<category name="Variables" custom="VARIABLE"></category>',
@@ -42,7 +41,7 @@ angular.module('flocs.workspace')
         '</block>' +
         '</value>' +
         '</block>' +
-        '<block type="controls_whileUntil"></block>' +
+        '<block type="controls_while"></block>' +
         '<block type="controls_for">' +
         '<field name="VAR">i</field>' +
         '<value name="FROM">' +
