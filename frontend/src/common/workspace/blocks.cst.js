@@ -8,7 +8,7 @@ angular.module('flocs.workspace')
         '<block type="maze_move_backward"></block>' +
         '<block type="maze_turn"></block>' +
         '<block type="maze_check_path"></block>' +
-        '<block type="maze_check_bomb"></block>' +
+        '<block type="maze_check_goal"></block>' +
         '<block type="maze_check_color"></block>' +
         '</category>',
 
@@ -23,15 +23,15 @@ angular.module('flocs.workspace')
         '<block type="controls_if">' +
         '<mutation elseif="1" else="1"></mutation>' +
         '</block>' +
-        '</category>', 
+        '</category>',
 
     'controls_if_else':'<block type="controls_if">' +
         '<mutation else="1"></mutation>' +
-        '</block>', 
+        '</block>',
 
     'constrols_if_elseif_else':'<block type="controls_if">' +
         '<mutation elseif="1" else="1"></mutation>' +
-        '</block>', 
+        '</block>',
 
     'loops_category':'<category name="Loops">' +
         '<block type="controls_repeat_ext">' +
@@ -62,7 +62,7 @@ angular.module('flocs.workspace')
         '</block>' +
         '<block type="controls_forEach"></block>' +
         '<block type="controls_flow_statements"></block>' +
-        '</category>', 
+        '</category>',
 
     'controls_repeat':'<block type="controls_repeat_ext">' +
         '<value name="TIMES">' +
@@ -70,7 +70,7 @@ angular.module('flocs.workspace')
         '<field name="NUM">10</field>' +
         '</block>' +
         '</value>' +
-        '</block>', 
+        '</block>',
 
     'constrols_for':'<block type="controls_for">' +
         '<field name="VAR">i</field>' +
@@ -89,7 +89,7 @@ angular.module('flocs.workspace')
         '<field name="NUM">1</field>' +
         '</block>' +
         '</value>' +
-        '</block>', 
+        '</block>',
 
     'boolean_category':'<category name="Boolean">' +
         '<block type="logic_compare"></block>' +
@@ -167,5 +167,5 @@ angular.module('flocs.workspace')
         '<field name="NUM">5</field>' +
         '</block>' +
         '</value>' +
-        '</block>' 
+        '</block>'
 });

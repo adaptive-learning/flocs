@@ -83,7 +83,7 @@ angular.module('flocs.workspace')
       },
 
       {
-        "id": "maze_check_bomb",
+        "id": "maze_check_goal",
         "lastDummyAlign0": "LEFT",
         "message0": "robot %1 na políčku s %2",
         "args0": [
@@ -323,7 +323,7 @@ angular.module('flocs.workspace')
 
       {
         "id": "controls_while",
-        "message0": "dokud platí, že %1 pak vykonávej %2 %3",
+        "message0": "dokud %1 vykonávej %2 %3",
         "args0": [
         {
             "type": "input_value",
@@ -380,7 +380,7 @@ angular.module('flocs.workspace')
       return 'moveBackward();';
     };
 
-    Blockly.JavaScript['maze_check_bomb'] = function(block) {
+    Blockly.JavaScript['maze_check_goal'] = function(block) {
       var negation = block.getFieldValue('negation');
       return negation + 'checkBomb()';
     };
