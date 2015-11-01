@@ -252,7 +252,6 @@ angular.module('flocs.maze')
     solved: solved,
     died: died,
     getState: getState,
-    isToken: isToken,
     getToolsPicked: getToolsPicked,
     getToolsAll: getToolsAll
   };
