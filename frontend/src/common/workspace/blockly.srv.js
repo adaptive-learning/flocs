@@ -13,7 +13,7 @@ angular.module('flocs.workspace')
       {
         "id": "maze_move_forward",
         "lastDummyAlign0": "LEFT",
-        "message0": "krok vpred",
+        "message0": "krok vpřed",
         "args0": [],
         "previousStatement": true,
         "nextStatement": true,
@@ -35,7 +35,7 @@ angular.module('flocs.workspace')
       {
         "id": "maze_turn_left",
         "lastDummyAlign0": "LEFT",
-        "message0": "zatoc doleva",
+        "message0": "zatoč doleva",
         "args0": [],
         "previousStatement": true,
         "nextStatement": true,
@@ -46,7 +46,7 @@ angular.module('flocs.workspace')
       {
         "id": "maze_turn_right",
         "lastDummyAlign0": "LEFT",
-        "message0": "zatoc doprava",
+        "message0": "zatoč doprava",
         "args0": [],
         "previousStatement": true,
         "nextStatement": true,
@@ -58,7 +58,7 @@ angular.module('flocs.workspace')
       {
         "id": "maze_turn",
         "lastDummyAlign0": "LEFT",
-        "message0": "zatoc %1",
+        "message0": "zatoč %1",
         "args0": [
         {
             "type":"field_dropdown",
@@ -274,7 +274,7 @@ angular.module('flocs.workspace')
             "name": "times",
             "text": "10"
         },
-        
+
         {
             "type": "input_dummy"
         },
@@ -324,7 +324,7 @@ angular.module('flocs.workspace')
       {
         "id": "controls_while",
         "message0": "dokud platí, že %1 pak vykonávej %2 %3",
-        "args0": [ 
+        "args0": [
         {
             "type": "input_value",
             "name": "condition",
@@ -478,7 +478,7 @@ angular.module('flocs.workspace')
       // loop statements
       var statements =
           Blockly.JavaScript.statementToCode(block, 'body');
-      
+
       // get condition value (True or False)
       var value_condition
           = statementWithouHighlight(block, 'condition');
@@ -497,7 +497,7 @@ angular.module('flocs.workspace')
     Blockly.JavaScript['controls_whileUntil'] = function(block) {
         // Do while/until loop.
         var until = block.getFieldValue('MODE') == 'UNTIL';
-       
+
         // get condition value (True or False)
         var argument0
             = statementWithouHighlight(block, 'BOOL');
@@ -520,7 +520,7 @@ angular.module('flocs.workspace')
 
         var branch = Blockly.JavaScript.statementToCode(block, 'DO' + n);
         var code = 'if (' + argument + ') {\n' + branch + '}';
-        
+
         for (n = 1; n <= block.elseifCount_; n++) {
             argument = statementWithouHighlight(block, 'IF' + n);
             branch = Blockly.JavaScript.statementToCode(block, 'DO' + n);
@@ -541,14 +541,14 @@ angular.module('flocs.workspace')
         // turn off prefixes for condition
         var oldPrefix = Blockly.JavaScript.STATEMENT_PREFIX;
         Blockly.JavaScript.STATEMENT_PREFIX = '';
-        
+
         // get condition value (True or False)
         var statement
             = Blockly.JavaScript.statementToCode(block, name);
 
         // turn back on prefixes
         Blockly.JavaScript.STATEMENT_PREFIX = oldPrefix;
-        
+
         return statement;
     }
 
