@@ -8,8 +8,10 @@ angular.module('flocs.maze')
   // NOTE: We use observer pattern to notify views. Alternative would be to use
   //       $broadcast (but it would pollute $rootScope).
   var viewList = [];
+  var changeListeners = [];
   var settings = null;
   var state = null;
+
 
   /**
   * Notify views about the maze change.
@@ -18,6 +20,7 @@ angular.module('flocs.maze')
     angular.forEach(viewList, function(view) {
       view.mazeChanged();
     });
+    changeNotification();
   }
 
   /**
@@ -27,6 +30,7 @@ angular.module('flocs.maze')
     angular.forEach(viewList, function(view) {
       view.heroChanged();
     });
+    changeNotification();
   }
 
   /**
@@ -36,6 +40,22 @@ angular.module('flocs.maze')
   function registerView(view) {
     //console.log('mazeService:register');
     viewList.push(view);
+  }
+
+  /**
+   * Register new listener for changes
+   */
+  function addChangeListener(listener) {
+    changeListeners.push(listener);
+  }
+
+  /**
+   * Notify all change listeners about a change
+   */
+  function changeNotification() {
+    angular.forEach(changeListeners, function(listener) {
+      listener();
+    });
   }
 
   /**
@@ -183,7 +203,8 @@ angular.module('flocs.maze')
    */
   function solved() {
     var isSolved = (gridService.boxAt(state.grid, state.hero.position) ==
-                    BoxType.GOAL);
+                    BoxType.GOAL) &&
+                   (getToolsAll() - getToolsPicked() === 0);
     return isSolved;
   }
 
@@ -202,9 +223,25 @@ angular.module('flocs.maze')
     return state;
   }
 
-  // public API
+  function getToolsPicked() {
+    if (state.tokens === undefined) {
+      return null;
+    }
+    return (settings.tokens.length - state.tokens.length);
+  }
+
+  function getToolsAll() {
+    if (state.tokens === undefined) {
+      return null;
+    }
+    return (settings.tokens.length);
+  }
+
+
+    // public API
   return {
     registerView: registerView,
+    addChangeListener: addChangeListener,
     set: set,
     reset: reset,
     moveForward: moveForward,
@@ -215,7 +252,9 @@ angular.module('flocs.maze')
     solved: solved,
     died: died,
     getState: getState,
-    isToken: isToken
+    isToken: isToken,
+    getToolsPicked: getToolsPicked,
+    getToolsAll: getToolsAll
   };
 }]);
 

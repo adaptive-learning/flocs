@@ -5,8 +5,8 @@
       <span ng-show='blocksStatus.limit !== null'>
         Bloky: {{blocksStatus.used}} / {{blocksStatus.limit}} |
       </span>
-      <span ng-show='true'>
-        Nástroje: 0 / 5
+      <span ng-show='toolsStatus.all !== null'>
+        Nástroje: {{toolsStatus.picked}} / {{toolsStatus.all}}
       </span>
     </div>
 
@@ -26,13 +26,6 @@
               Reset
             </button>
         </div>
-        <!-- TODO - create token notifying
-        <div ng-switch-default>
-            <p id="tokens">
-                {{ tokenPic }} {{ collectedTokens }} / {{ tokens }}
-            </p>
-        </div>
-        -->
     </div>
   </div>
 

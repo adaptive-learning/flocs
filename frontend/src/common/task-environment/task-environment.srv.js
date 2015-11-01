@@ -12,8 +12,13 @@ angular.module('flocs.taskEnvironment')
     used: null,
     limit: null
   };
+  var toolsStatus = {
+    picked: null,
+    all: null
+  };
 
   workspaceService.addChangeListener(handleWorkspaceChange);
+  mazeService.addChangeListener(handleMazeChange);
 
   // === public API ===
   return {
@@ -28,7 +33,8 @@ angular.module('flocs.taskEnvironment')
     //getBlocksLimit: getBlocksLimit,
 
     // shared data
-    blocksStatus: blocksStatus
+    blocksStatus: blocksStatus,
+    toolsStatus: toolsStatus
 
 
     //getMazeSettings: getMazeSettings,
@@ -82,6 +88,14 @@ angular.module('flocs.taskEnvironment')
     return workspaceService.getBlocksLimit();
   }
 
+  function getToolsPicked() {
+    return mazeService.getToolsPicked();
+  }
+
+  function getToolsAll() {
+    return mazeService.getToolsAll();
+  }
+
   function setTask(newTask) {
     currentTask = newTask;
     mazeService.set(getMazeSettings());
@@ -123,6 +137,11 @@ angular.module('flocs.taskEnvironment')
     //changeNotification();
     blocksStatus.used = getBlocksUsed();
     blocksStatus.limit = getBlocksLimit();
+  }
+
+  function handleMazeChange() {
+    toolsStatus.picked = getToolsPicked();
+    toolsStatus.all = getToolsAll();
   }
 
 }]);

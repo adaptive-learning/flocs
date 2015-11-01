@@ -27,6 +27,7 @@ angular.module('flocs.taskEnvironment')
 
   $scope.initialState = true;
   $scope.blocksStatus = taskEnvironmentService.blocksStatus;
+  $scope.toolsStatus = taskEnvironmentService.toolsStatus;
   $scope.run = run;
   $scope.reset = reset;
 
