@@ -118,8 +118,23 @@ angular.module('flocs.workspace')
       {
         "id": "maze_check_color",
         "lastDummyAlign0": "LEFT",
-        "message0": "robot je na políčku %1 barvy",
+        "message0": "robot %1 na políčku %2 barvy",
         "args0": [
+          {
+            "type":"field_dropdown",
+            "name":"negation",
+            "options":[
+                [
+                    "je",
+                    ""
+                ],
+                [
+                    "není",
+                    "!"
+                ],
+            ],
+          },
+
           {
             "type":"field_dropdown",
             "name":"color",
@@ -135,7 +150,11 @@ angular.module('flocs.workspace')
                 [
                     "zelené",
                     "GREEN"
-                ]
+                ],
+                [
+                    "bilé",
+                    "FREE"
+                ],
             ],
           }
         ],
@@ -386,8 +405,9 @@ angular.module('flocs.workspace')
     };
 
     Blockly.JavaScript['maze_check_color'] = function(block) {
+      var negation = block.getFieldValue('negation');
       var color = block.getFieldValue('color');
-      return 'checkColor(\'' + color + '\')';
+      return negation + 'checkColor(\'' + color + '\')';
     };
 
     Blockly.JavaScript['maze_check_path_left'] = function(block) {
@@ -411,7 +431,7 @@ angular.module('flocs.workspace')
     Blockly.JavaScript['if_then'] = function(block) {
       // get condition value (True or False)
       var value_condition
-          = statementWithouHighlight(block, 'condition');
+          = statementWithoutHighlight(block, 'condition');
 
       // transform inner blocks to code
       var statements_condition_true
@@ -425,7 +445,7 @@ angular.module('flocs.workspace')
     Blockly.JavaScript['if_then_else'] = function(block) {
       // get condition value (True or False)
       var value_condition
-          = statementWithouHighlight(block, 'condition');
+          = statementWithoutHighlight(block, 'condition');
 
       // transform inner blocks to code (then branch)
       var statements_condition_true =
@@ -481,7 +501,7 @@ angular.module('flocs.workspace')
 
       // get condition value (True or False)
       var value_condition
-          = statementWithouHighlight(block, 'condition');
+          = statementWithoutHighlight(block, 'condition');
 
       var code = "while (" +
           value_condition +
@@ -500,7 +520,7 @@ angular.module('flocs.workspace')
 
         // get condition value (True or False)
         var argument0
-            = statementWithouHighlight(block, 'BOOL');
+            = statementWithoutHighlight(block, 'BOOL');
 
         var branch = Blockly.JavaScript.statementToCode(block, 'DO');
         branch = Blockly.JavaScript.addLoopTrap(branch, block.id);
@@ -516,13 +536,13 @@ angular.module('flocs.workspace')
     Blockly.JavaScript['controls_if'] = function(block) {
         // If/elseif/else condition.
         var n = 0;
-        var argument = statementWithouHighlight(block, 'IF' + n);
+        var argument = statementWithoutHighlight(block, 'IF' + n);
 
         var branch = Blockly.JavaScript.statementToCode(block, 'DO' + n);
         var code = 'if (' + argument + ') {\n' + branch + '}';
 
         for (n = 1; n <= block.elseifCount_; n++) {
-            argument = statementWithouHighlight(block, 'IF' + n);
+            argument = statementWithoutHighlight(block, 'IF' + n);
             branch = Blockly.JavaScript.statementToCode(block, 'DO' + n);
             code += ' else if (' + argument + ') {\n' + branch + '}';
             }
@@ -532,12 +552,86 @@ angular.module('flocs.workspace')
             }
         return code + '\n';
     };
+            
+    /*
+     * Redefinition of standard logcial compare
+     */
+            Blockly.JavaScript['logic_compare'] = function(block) {
+                // Comparison operator.
+                var OPERATORS = {
+                    'EQ': '==',
+                    'NEQ': '!=',
+                    'LT': '<',
+                    'LTE': '<=',
+                    'GT': '>',
+                    'GTE': '>='
+                };
+                var operator = OPERATORS[block.getFieldValue('OP')];
+                var order = (operator == '==' || operator == '!=') ?
+                    Blockly.JavaScript.ORDER_EQUALITY : Blockly.JavaScript.ORDER_RELATIONAL;
+
+                // valueToCode changed to statementWithoutHighlight
+                var argument0 = statementWithoutHighlight(block, 'A');
+                var argument1 = statementWithoutHighlight(block, 'B');
+                var code = argument0 + ' ' + operator + ' ' + argument1;
+                return code;
+            };
+
+            /*
+             * Redefinition of standard logical oeprations
+             */
+            Blockly.JavaScript['logic_operation'] = function(block) {
+                // Operations 'and', 'or'.
+                var operator = (block.getFieldValue('OP') == 'AND') ? '&&' : '||';
+                var order = (operator == '&&') ? Blockly.JavaScript.ORDER_LOGICAL_AND :
+                    Blockly.JavaScript.ORDER_LOGICAL_OR;
+
+                // valueToCode changed to statementWithoutHighlight
+                var argument0 = statementWithoutHighlight(block, 'A');
+                var argument1 = statementWithoutHighlight(block, 'B');
+                if (!argument0 && !argument1) {
+                    // If there are no arguments, then the return value is false.
+                    argument0 = 'false';
+                    argument1 = 'false';
+                } else {
+                    // Single missing arguments have no effect on the return value.
+                    var defaultArgument = (operator == '&&') ? 'true' : 'false';
+                    if (!argument0) {
+                        argument0 = defaultArgument;
+                    }
+                    if (!argument1) {
+                        argument1 = defaultArgument;
+                    }
+                }
+                var code = argument0 + ' ' + operator + ' ' + argument1;
+                //return [code, order];
+                return code;
+            };
+
+            /*
+             * Redefinition of standard negation
+             */
+            Blockly.JavaScript['logic_negate'] = function(block) {
+                // Negation.
+                var order = Blockly.JavaScript.ORDER_LOGICAL_NOT;
+
+                // valueToCode changed to statementWithoutHighlight
+                var argument0 = statementWithoutHighlight(block, 'BOOL');
+                var code = '!' + argument0;
+                //return [code, order];
+                return code;
+            };
 
     /**
      * Return generated JS code from statement but without any highlighting.
      * Especially useful when generating code as a condition.
+     *
+     * @param block block to which the statement is connected
+     * @param name name of the statement
+     * 
+     * @return JS code of given statement withou ani highlighing commands
      */
-    function statementWithouHighlight(block, name) {
+    function statementWithoutHighlight(block, name) {
         // turn off prefixes for condition
         var oldPrefix = Blockly.JavaScript.STATEMENT_PREFIX;
         Blockly.JavaScript.STATEMENT_PREFIX = '';

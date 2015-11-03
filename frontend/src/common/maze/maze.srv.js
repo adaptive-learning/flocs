@@ -161,17 +161,8 @@ angular.module('flocs.maze')
    * @return corresponding BoxType constant (number)
    */
   function getBoxType(type) {
-    if (type == 'GOAL') {
-      return BoxType.GOAL;
-    } else if (type == 'YELLOW') {
-        return BoxType.YELLOW;
-    } else if (type == 'BLUE') {
-        return BoxType.BLUE;
-    } else if (type == 'GREEN') {
-        return BoxType.GREEN;
-    } else {
-        return undefined;
-    }
+    // gets the boxtype constant from it name
+    return BoxType[type];
   }
 
   /*

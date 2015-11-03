@@ -12,6 +12,26 @@ angular.module('flocs.workspace')
         '<block type="maze_check_color"></block>' +
         '</category>',
 
+    'maze_check_path':'<block type="maze_check_path">' +
+        '<field name="direction">0</field>' +
+        '</block>',
+
+    'maze_check_path_left':'<block type="maze_check_path">' +
+        '<field name="direction">1</field>' +
+        '</block>',
+    
+    'maze_check_path_right':'<block type="maze_check_path">' +
+        '<field name="direction">-1</field>' +
+        '</block>',
+
+    'maze_turn_left':'<block type="maze_turn">' +
+        '<field name="direction">1</field>' +
+        '</block>',
+
+    'maze_turn_right':'<block type="maze_turn">' +
+        '<field name="direction">-1</field>' +
+        '</block>',
+
     'variables_category':'<category name="Variables" custom="VARIABLE"></category>',
     'functions_category':'<category name="Functions" custom="PROCEDURE"></category>',
 
