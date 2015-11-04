@@ -2,7 +2,9 @@
  * Toolbox Service
  */
 angular.module('flocs.workspace')
-  .factory('toolboxService', ['blocks', function(blocks) {
+  .factory('toolboxService', ['blocks', 'blocksOrder', function(blocks, blocksOrder) {
+
+  var blocksOrderMap = null;
 
   // public API
   return {
@@ -16,7 +18,8 @@ angular.module('flocs.workspace')
    * @return {string} string of XML
    */
   function createToolboxXml(blockNames) {
-    return '<xml>' + blocksToXml(blockNames) + '</xml>';
+    // generate toolbox from sorted list
+    return '<xml>' + blocksToXml(blockNames.sort(blockComparator)) + '</xml>';
   }
 
   /**
@@ -62,6 +65,49 @@ angular.module('flocs.workspace')
     });
     //console.log(xmlString);
     return xmlString;
+  }
+
+  /*
+   * Coparator for comparing two blocks
+   *
+   * @param a block to compare
+   * @param b block to compare
+   */
+  function blockComparator(a,b) {
+    // prepare block ordering map if it does not already exist
+    if (blocksOrderMap === null) {
+      buildOrderMap();
+    }
+
+    // list items are strings
+    if ((typeof a === 'string' || a instanceof String) &&
+            (typeof b === 'string' || b instanceof String)) {
+        // get ordinal values for blocks
+        var orderA = blocksOrderMap[a];
+        var orderB = blocksOrderMap[b];
+
+        // compaer ordinal values
+        if (orderA !== null && orderB !== null) {
+            return orderA >= orderB;
+        } else {
+            return a >= b;
+        }
+    // Compare user defined category with predefined category. That is an 
+    // undefined operation.
+    } else {
+        return 1;
+    }
+  }
+
+  /*
+   * Helper function for building object from list
+   */
+  function buildOrderMap() {
+    blocksOrderMap = {};
+    // every item from list becomes object's attribute
+    for (var i = 0; i < blocksOrder.length; i++) {
+      blocksOrderMap[blocksOrder[i]] = i;
+    }
   }
 }]);
 
