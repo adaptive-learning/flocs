@@ -22,6 +22,7 @@ angular.module('flocs.maze')
           case BoxType.YELLOW: return '/static/assets/img/yellow.svg';
           case BoxType.GREEN: return '/static/assets/img/green.svg';
           case BoxType.BLUE: return '/static/assets/img/blue.svg';
+          case BoxType.PIT: return '/static/assets/img/pit.svg';
           default: return null;
         }
       };

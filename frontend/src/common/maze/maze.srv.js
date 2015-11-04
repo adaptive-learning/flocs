@@ -203,8 +203,8 @@ angular.module('flocs.maze')
    * Return true if the hero died.
    */
   function died() {
-    return (gridService.boxAt(state.grid, state.hero.position) ==
-            BoxType.WALL);
+    var boxType = gridService.boxAt(state.grid, state.hero.position);
+    return ((boxType == BoxType.WALL) || (boxType == BoxType.PIT));
   }
 
   /**
