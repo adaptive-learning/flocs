@@ -1,7 +1,9 @@
-"""Service layer (domain model) of practice app
 """
+Main service functions of practice app.
+"""
+
 from tasks.models import TaskModel
-from random import choice
+from practice.services.task_selection import ScoreTaskSelector as TaskSelector
 
 def get_next_task():
     """Return next task (TODO: for current user)
@@ -15,7 +17,7 @@ def get_next_task():
     tasks = TaskModel.objects.all()
     if not tasks:
         raise LookupError('No tasks available.')
-    # NOTE: for now, we just take a random item
-    task = choice(tasks)
+    task_selector = TaskSelector()
+    task = task_selector.select(tasks, student=None, practice_context=None)
     task_dictionary = task.to_json()
     return task_dictionary

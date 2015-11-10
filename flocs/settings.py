@@ -44,8 +44,9 @@ INSTALLED_APPS = (
     'django_extensions',
 
     # our apps
-    'practice',
+    'common',
     'tasks',
+    'practice',
     'flocs',
 )
 
