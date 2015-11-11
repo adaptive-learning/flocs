@@ -55,7 +55,9 @@ class ScoreTaskSelector(TaskSelector):
             return score
 
         scored_tasks = [(score(task), task) for task in tasks]
-        best_task = min(scored_tasks)[1]
+        # necessary to sort only according to the 0th column (scores)
+        # (because TaskModel in unsortable)
+        best_task = min(scored_tasks, key=lambda st: st[0])[1]
         return best_task
 
     def _score_time_since_last_attempt(self, last_attempt_time, time):
