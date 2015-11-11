@@ -1,3 +1,4 @@
 """Persistence layer (data model) of practice app
 """
-from .difficulty import DifficultyModel
+from .tasks_difficulty import TasksDifficultyModel
+from .students_skill import StudentsSkillModel

@@ -1,0 +1,31 @@
+[
+
+  {
+    "model": "practice.tasksdifficultymodel",
+    "fields": {
+      "task": 1,
+      "programming": -0.5,
+      "conditions": false,
+      "loops": false,
+      "logic_expr": false,
+      "colors": false,
+      "tokens": false,
+      "pits": false
+    }
+  },
+
+  {
+    "model": "practice.tasksdifficultymodel",
+    "fields": {
+      "task": 2,
+      "programming": -0.4,
+      "conditions": true,
+      "loops": false,
+      "logic_expr": false,
+      "colors": false,
+      "tokens": false,
+      "pits": false
+    }
+  }
+
+]
