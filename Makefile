@@ -52,7 +52,7 @@ check-frontend:
 
 # -----------------------------------------------------------
 
-db-setup: db-migrate db-load-data
+db-setup: db-migrate db-load-data db-generate-tasks-difficulty
 
 db-migrate:
 	@echo "===== Set up database ====="
@@ -65,6 +65,9 @@ db-load-data:
 	python manage.py loaddata tasks/fixtures/tasks.xml
 	# difficulties of tasks
 	python manage.py loaddata practice/fixtures/tasks_difficulty.json
+
+db-generate-tasks-difficulty:
+	python manage.py generate_tasks_difficulty
 
 admin:
 	python manage.py create_admin
