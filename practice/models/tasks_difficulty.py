@@ -66,12 +66,6 @@ class TasksDifficultyModel(models.Model):
             num += 1
         return num
 
-    def __str__(self):
-        """Return string representation of the difficulty.
-        """
-        json_string = json.dumps(str(self.difficulty))
-        return json_string
-
     def __convert_boolean_to_number__(self,boolean):
         if boolean:
             return 1
