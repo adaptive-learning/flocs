@@ -2,16 +2,12 @@
 Models for flow prediction
 
 Flow factors given by a task:
-    - global difficulty
-    - discrimination (-1)
-    - local concepts (conditions, loops, game concepts, ...)
+    - global difficulty (task bias)
+    - concept discriminations (conditions, loops, game concepts, ...)
 
-Flow factors given by a task and a user:
-    - solution count
-    - (length of recent sequence of tasks with the same concept description)
-
-Flow factors given by practice context and user:
-    - time from the last answer
+Flow factors given by a user:
+    - global problem solving skill (student bias)
+    - concept skills
 """
 
 from common.utils.activation import activation

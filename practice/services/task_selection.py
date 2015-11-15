@@ -3,6 +3,7 @@ Models for task selection.
 """
 
 from random import choice
+from common.utils.activation import AMPLITUDE
 from practice.services.flow_prediction import predict_flow
 import math
 
@@ -44,7 +45,8 @@ class ScoreTaskSelector(TaskSelector):
         exploration gain (how much information a task brings to the system).
         """
         def score(task):
-            flow_score = predict_flow(student, task, practice_context)
+            flow = predict_flow(student, task, practice_context)
+            flow_score = self._score_flow(flow)
 
             # last_attempt_time = ??  # TODO
             #time = _score_time_since_last_attempt(last_attempt_time, practice_context.time)
@@ -55,16 +57,27 @@ class ScoreTaskSelector(TaskSelector):
             return score
 
         scored_tasks = [(score(task), task) for task in tasks]
-        # necessary to sort only according to the 0th column (scores)
+        # necessary to sort only according to the 0th column (scores) only
         # (because TaskModel in unsortable)
-        best_task = min(scored_tasks, key=lambda st: st[0])[1]
+        best_task = max(scored_tasks, key=lambda st: st[0])[1]
         return best_task
+
+    def _score_flow(self, flow):
+        """
+        Compute partial score for flow prediction.
+
+        Return:
+            score - real number between -1 and 0
+        """
+        score (-1) * ((flow / AMPLITUDE) ** 2)
+        return score
+
 
     def _score_time_since_last_attempt(self, last_attempt_time, time):
         """
         Compute partial score for time since last attempt.
 
-        The score is real number between -1 (the last attempt is recent) and 0
+        The score is a real number between -1 (the last attempt is recent) and 0
         (= the last attempt was long time ago).
         """
         if last_attempt_time is None:
