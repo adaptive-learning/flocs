@@ -1,16 +1,18 @@
 from django.db import models
 from tasks.models import TaskModel
 
+# weight (discriminacy) of a single concept in a task
+CONCEPT_WEIGHT = 0.2
 
 class TasksDifficultyModel(models.Model):
     """Model for a task's difficulty
-      
-       For every concept there is a boolean value, where true means that 
+
+       For every concept there is a boolean value, where true means that
        the task requires some knowledge of the specified concept.
        The first value is decimal number and represents general difficulty of
        the task.
     """
-    
+
     # task to refer
     task = models.OneToOneField(TaskModel, primary_key=True)
 
@@ -37,18 +39,19 @@ class TasksDifficultyModel(models.Model):
 
     def to_vector(self):
        """Return vector representation of the task difficulty.
-          For each concept holds: 
-           1 - the concept is related with the task
-          -1 - the concept is not related with the task
+
+       For each concept holds:
+       CONCEPT_WEIGHT - the concept is related with the task
+       0 - the concept is not related with the task
        """
-       return [self.programming,
-               self.__convert_boolean_to_number__(self.conditions),
-               self.__convert_boolean_to_number__(self.loops),
-               self.__convert_boolean_to_number__(self.logic_expr),
-               self.__convert_boolean_to_number__(self.colors),
-               self.__convert_boolean_to_number__(self.tokens),
-               self.__convert_boolean_to_number__(self.pits)
-               ]
+       return [float(self.programming),
+               _convert_boolean_to_concept_weight(self.conditions),
+               _convert_boolean_to_concept_weight(self.loops),
+               _convert_boolean_to_concept_weight(self.logic_expr),
+               _convert_boolean_to_concept_weight(self.colors),
+               _convert_boolean_to_concept_weight(self.tokens),
+               _convert_boolean_to_concept_weight(self.pits)
+              ]
 
     def number_of_concepts(self):
         num = 0
@@ -66,8 +69,10 @@ class TasksDifficultyModel(models.Model):
             num += 1
         return num
 
-    def __convert_boolean_to_number__(self,boolean):
-        if boolean:
-            return 1
-        else:
-            return -1
+    def __str__(self):
+        return 'task={task}, difficulty={difficulty}'.format(
+            task=self.task.pk,
+            difficulty=self.to_vector())
+
+def _convert_boolean_to_concept_weight(boolean):
+    return CONCEPT_WEIGHT if boolean else 0
