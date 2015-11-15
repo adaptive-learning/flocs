@@ -1,15 +1,14 @@
 from django.contrib.auth.models import User #this will be replaced by our class user
 from django.contrib.auth import authenticate, login, logout
 
-def createUser(username,firstname,lastname, email, passwd):
+def register(username,firstname,lastname, email, passwd):
     user = User.objects.create_user(username, email= email, password=passwd)
     user.first_name = firstname
     user.last_name = lastname
-    user.save()
+    return user.save()
+    
 
-def login(request):
-    username = request.POST['username']
-    passwd = request.POST['password']
+def login(username, passwd):
     user = authenticate(username, passwd)
     if user is not None:
         login(request, user)
@@ -18,6 +17,6 @@ def login(request):
         return 0
 
 def logout(request):
-    logout(request)
+    return logout(request)
 
 

@@ -13,10 +13,10 @@ angular.module('flocs.user', [])
 			'firstname':firstname,
 			'lastname':lastname,
 			'email':email,
-			'passwd':passwd
+			'password':passwd
 		};
 		return $http.post({
-				url: './register',
+				url: 'api/user/register',
 			        data: data,
 		});
 	}
@@ -27,14 +27,14 @@ angular.module('flocs.user', [])
 			'password':passwd
 		};
 		return $http.post({
-				url:'./login',
+				url:'api/user/login',
 				data: data
 		});
 	}
 
 }])
 .controller('loginCtrl',['$scope','UserDao',
-	function($scope,UserDato){
+	function($scope,UserDao){
 		var username = $scope['username'];
 		var passwd = $scope['passwd'];
 		return UserDao.login(username, passwd);

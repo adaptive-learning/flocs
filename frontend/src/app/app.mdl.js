@@ -10,6 +10,7 @@ angular.module('flocs', [
     'flocs.taskPreview',
     'ngDialog'
     'flocs.login'
+    'flocs.user'
 ])
 
 // routes configuration

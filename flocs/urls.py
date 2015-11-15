@@ -17,13 +17,15 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
 from practice import urls as practice_urls
+from userManagement import urls as user_urls
 from tasks import urls as tasks_urls
 
 urlpatterns = [
     # admin
     url(r'^admin/', include(admin.site.urls)),
 
-    # server API
+    # server APiI
+    url(r'^api/user/',include(user_urls))
     url(r'^api/practice/', include(practice_urls)),
     url(r'^api/tasks/', include(tasks_urls)),
     url(r'^api/.*$', 'flocs.views.wrong_api_call'),
