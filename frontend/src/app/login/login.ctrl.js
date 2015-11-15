@@ -33,11 +33,10 @@ angular.module('flocs.user', [])
 	}
 
 }])
-.controller('loginCtrl',['$scope',function(UserDato){
-	var username = $scope['username'];
-	var passwd = $scope['passwd'];
-	return UserDao.login(username, passwd);
-	
-
+.controller('loginCtrl',['$scope','UserDao',
+	function($scope,UserDato){
+		var username = $scope['username'];
+		var passwd = $scope['passwd'];
+		return UserDao.login(username, passwd);
 }]);
 
