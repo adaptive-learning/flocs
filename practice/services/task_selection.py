@@ -69,7 +69,7 @@ class ScoreTaskSelector(TaskSelector):
         Return:
             score - real number between -1 and 0
         """
-        score (-1) * ((flow / AMPLITUDE) ** 2)
+        score = (-1) * ((flow / AMPLITUDE) ** 2)
         return score
 
 

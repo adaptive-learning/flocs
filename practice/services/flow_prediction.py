@@ -11,6 +11,7 @@ Flow factors given by a user:
 """
 
 from common.utils.activation import activation
+from common.flow_factors import FlowFactor
 
 def predict_flow(student, task, practice_context):
     """
@@ -22,9 +23,15 @@ def predict_flow(student, task, practice_context):
     """
     return 0.71  # temporary for testing
     # TODO: adjust the flow computation according to user/tasks model
+
     student_flow_factors = student.get_flow_factors()
-    task_context_flow_factors = compute_task_context_flow_factors(student, task, practice_context)
-    potential = dict_product(student_flow_factors, task_context_flow_factors)
+    task_flow_factors = task.get_flow_factors()
+    student_flow_factors[FlowFactor.TASK_BIAS] = -1
+    task_flow_factors[FlowFactor.STUDENT_BIAS] = 1
+
+    # NOTE: We are ignoring practice context for now.
+
+    potential = dict_product(student_flow_factors, task_flow_factors)
     flow = activation(potential)
     return flow
 
@@ -33,7 +40,6 @@ def compute_task_context_flow_factors(student, task, practice_context):
     """
     Computes dictionary of factors affecting flow from both task and context.
     """
-    flow_factors = task.get_flow_factors()
     context_flow_factors = practice_context.get_flow_factors()
     flow_factors.update(context_flow_factors)
     # TODO: add factors which depends also on the user (e.g. solution count)
