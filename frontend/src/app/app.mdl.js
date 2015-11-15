@@ -9,6 +9,7 @@ angular.module('flocs', [
     'flocs.practice',
     'flocs.taskPreview',
     'ngDialog'
+    'flocs.login'
 ])
 
 // routes configuration
@@ -49,6 +50,18 @@ angular.module('flocs', [
       url: '/practice',
       templateUrl: 'practice/practice.tpl.html',
       controller: 'practiceCtrl'
+    })
+
+    .state('login',{
+      url: '/login',
+      templateUrl: 'login/login.tpl.html',
+      controller: 'loginCtrl'
+    })
+
+    .state('register',{
+      url:'/register',
+      templateUrl: 'register/register.tpl.html',
+      controller: 'registerCtrl'
     })
 
     .state('404', {
