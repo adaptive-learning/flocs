@@ -10,13 +10,13 @@ class FlowFactor(Enum):
     CONDITIONS      = 3
     LOGIC_EXPR      = 4
     COLORS          = 5
-    PITS            = 6
-    TOOLS           = 7
+    TOKENS          = 6
+    PITS            = 7
 
 
     @classmethod
     def game_factors(cls):
-        return [cls.COLORS, cls.PITS, cls.TOOLS]
+        return [cls.COLORS, cls.TOKENS, cls.PITS]
 
     @classmethod
     def concept_factors(cls):

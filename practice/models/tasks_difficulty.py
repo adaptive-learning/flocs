@@ -1,4 +1,5 @@
 from django.db import models
+from common.flow_factors import FlowFactor
 from tasks.models import TaskModel
 
 # weight (discriminacy) of a single concept in a task
@@ -37,21 +38,23 @@ class TasksDifficultyModel(models.Model):
     # pits concept difficulty
     pits = models.BooleanField(verbose_name="Difficulty of the pits concept in the task")
 
-    def to_vector(self):
-       """Return vector representation of the task difficulty.
+    def get_difficulty_dict(self):
+        """Return dictionary representation of the task difficulty.
 
-       For each concept holds:
-       CONCEPT_WEIGHT - the concept is related with the task
-       0 - the concept is not related with the task
-       """
-       return [float(self.programming),
-               _convert_boolean_to_concept_weight(self.conditions),
-               _convert_boolean_to_concept_weight(self.loops),
-               _convert_boolean_to_concept_weight(self.logic_expr),
-               _convert_boolean_to_concept_weight(self.colors),
-               _convert_boolean_to_concept_weight(self.tokens),
-               _convert_boolean_to_concept_weight(self.pits)
-              ]
+        For each concept holds:
+        CONCEPT_WEIGHT - the concept is related with the task
+        0 - the concept is not related with the task
+        """
+        difficulty_dict = {
+            FlowFactor.TASK_BIAS: float(self.programming),
+            FlowFactor.LOOPS: _convert_boolean_to_concept_weight(self.loops),
+            FlowFactor.CONDITIONS: _convert_boolean_to_concept_weight(self.conditions),
+            FlowFactor.LOGIC_EXPR: _convert_boolean_to_concept_weight(self.logic_expr),
+            FlowFactor.COLORS: _convert_boolean_to_concept_weight(self.colors),
+            FlowFactor.TOKENS: _convert_boolean_to_concept_weight(self.tokens),
+            FlowFactor.PITS: _convert_boolean_to_concept_weight(self.pits)
+        }
+        return difficulty_dict
 
     def number_of_concepts(self):
         num = 0
@@ -72,7 +75,7 @@ class TasksDifficultyModel(models.Model):
     def __str__(self):
         return 'task={task}, difficulty={difficulty}'.format(
             task=self.task.pk,
-            difficulty=self.to_vector())
+            difficulty=self.get_difficulty_dict())
 
 def _convert_boolean_to_concept_weight(boolean):
     return CONCEPT_WEIGHT if boolean else 0

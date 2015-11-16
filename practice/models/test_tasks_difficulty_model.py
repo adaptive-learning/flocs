@@ -2,11 +2,12 @@
 """
 
 from django.test import TestCase
-from .tasks_difficulty import TasksDifficultyModel, CONCEPT_WEIGHT
+from common.flow_factors import FlowFactor
 from decimal import Decimal
+from .tasks_difficulty import TasksDifficultyModel, CONCEPT_WEIGHT
 
 class TasksDifficultyModelTest(TestCase):
-    def test_to_vector(self):
+    def test_get_difficulty_dict(self):
         task_difficulties = TasksDifficultyModel(
                 programming=Decimal('-0.58'),
                 conditions=False,
@@ -16,14 +17,14 @@ class TasksDifficultyModelTest(TestCase):
                 tokens=False,
                 pits=False,
                 )
-        task_vector = task_difficulties.to_vector()
-        self.assertAlmostEquals(-0.58, task_vector[0])
-        self.assertEquals(0, task_vector[1])
-        self.assertEquals(CONCEPT_WEIGHT, task_vector[2])
-        self.assertEquals(0, task_vector[3])
-        self.assertEquals(0, task_vector[4])
-        self.assertEquals(0, task_vector[5])
-        self.assertEquals(0, task_vector[6])
+        task_vector = task_difficulties.get_difficulty_dict()
+        self.assertAlmostEquals(-0.58, task_vector[FlowFactor.TASK_BIAS])
+        self.assertEquals(0, task_vector[FlowFactor.CONDITIONS])
+        self.assertEquals(CONCEPT_WEIGHT, task_vector[FlowFactor.LOOPS])
+        self.assertEquals(0, task_vector[FlowFactor.LOGIC_EXPR])
+        self.assertEquals(0, task_vector[FlowFactor.COLORS])
+        self.assertEquals(0, task_vector[FlowFactor.TOKENS])
+        self.assertEquals(0, task_vector[FlowFactor.PITS])
 
     def test_number_of_concepts(self):
         task_difficulties = TasksDifficultyModel(
