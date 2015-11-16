@@ -11,6 +11,7 @@ Flow factors given by a user:
 """
 
 from common.utils.activation import activation
+from common.utils.math import dict_product
 from common.flow_factors import FlowFactor
 
 def predict_flow(student, task, practice_context):
@@ -21,11 +22,8 @@ def predict_flow(student, task, practice_context):
         ~  0: optimaly difficul task (leading to flow)
         ~ +1: too easy task (leading to boredome)
     """
-    return 0.71  # temporary for testing
-    # TODO: adjust the flow computation according to user/tasks model
-
-    student_flow_factors = student.get_flow_factors()
-    task_flow_factors = task.get_flow_factors()
+    student_flow_factors = student.get_skill_dict()
+    task_flow_factors = task.get_difficulty_dict()
     student_flow_factors[FlowFactor.TASK_BIAS] = -1
     task_flow_factors[FlowFactor.STUDENT_BIAS] = 1
 
@@ -36,23 +34,11 @@ def predict_flow(student, task, practice_context):
     return flow
 
 
-def compute_task_context_flow_factors(student, task, practice_context):
-    """
-    Computes dictionary of factors affecting flow from both task and context.
-    """
-    context_flow_factors = practice_context.get_flow_factors()
-    flow_factors.update(context_flow_factors)
-    # TODO: add factors which depends also on the user (e.g. solution count)
-    return flow_factors
-
-
-def dict_product(dict1, dict2):
-    """
-    Computes dot product of vectors represented by dictionaries.
-    """
-    assert dict1.keys() == dict2.keys()
-
-    product = 0.0
-    for key in dict1:
-        product += dict1[key] * dict2[key]
-    return product
+#def compute_task_context_flow_factors(student, task, practice_context):
+#    """
+#    Computes dictionary of factors affecting flow from both task and context.
+#    """
+#    context_flow_factors = practice_context.get_flow_factors()
+#    flow_factors.update(context_flow_factors)
+#    # TODO: add factors which depends also on the user (e.g. solution count)
+#    return flow_factors

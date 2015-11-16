@@ -3,10 +3,12 @@ Main service functions of practice app.
 """
 
 from tasks.models import TaskModel
-from practice.services.task_selection import ScoreTaskSelector as TaskSelector
 
-def get_next_task():
-    """Return next task (TODO: for current user)
+from practice.services.task_selection import RandomTaskSelector as TaskSelector
+#from practice.services.task_selection import ScoreTaskSelector as TaskSelector
+
+def get_next_task(student):
+    """Return next task for given student.
 
     Returns:
         dictionary with settings for next task
@@ -18,6 +20,9 @@ def get_next_task():
     if not tasks:
         raise LookupError('No tasks available.')
     task_selector = TaskSelector()
-    task = task_selector.select(tasks, student=None, practice_context=None)
+
+    # TODO: use ScoreTaskSelector: pass correct parameters!
+    task = task_selector.select(tasks, student=student, practice_context=None)
+
     task_dictionary = task.to_json()
     return task_dictionary

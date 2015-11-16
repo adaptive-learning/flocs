@@ -9,7 +9,8 @@ from practice.services import practice_service
 def get_next_task(request):
     """Return response with next task.
     """
-    task = practice_service.get_next_task()
+    # TODO: get current student
+    task = practice_service.get_next_task(student=None)
     return JsonResponse(task)
 
 

@@ -8,14 +8,20 @@ from . import practice_service
 
 class PracticeServiceTest(TestCase):
 
+    class FakeStudent():
+        def get_skill_dict(self):
+            return {}
+
+    FAKE_STUDENT = FakeStudent()
+
     def test_get_next_task(self):
         stored_task = TaskModel.objects.create(maze_settings="{}",
                 workspace_settings='{"foo": "bar"}')
-        retrieved_task = practice_service.get_next_task()
+        retrieved_task = practice_service.get_next_task(student=self.FAKE_STUDENT)
         self.assertIsNotNone(retrieved_task)
         self.assertEqual(stored_task.to_json(), retrieved_task)
 
     def test_no_task_available(self):
         # if there are no tasks available, task_servise should raise
         # LookupError
-        self.assertRaises(LookupError, practice_service.get_next_task)
+        self.assertRaises(LookupError, practice_service.get_next_task, None)
