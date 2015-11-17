@@ -1,6 +1,6 @@
 from enum import Enum
 
-class FlowFactor(Enum):
+class FlowFactors(Enum):
     """
     Common constants to denote factors affecting flow
     """
@@ -21,4 +21,12 @@ class FlowFactor(Enum):
     @classmethod
     def concept_factors(cls):
         return [cls.LOOPS, cls.CONDITIONS, cls.LOGIC_EXPR]
+
+    @classmethod
+    def student_factors(cls):
+        return [cls.STUDENT_BIAS] + cls.concept_factors() + cls.game_factors()
+
+    @classmethod
+    def task_factors(cls):
+        return [cls.TASK_BIAS] + cls.concept_factors() + cls.game_factors()
 

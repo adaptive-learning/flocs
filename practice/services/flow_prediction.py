@@ -12,9 +12,9 @@ Flow factors given by a user:
 
 from common.utils.activation import activation
 from common.utils.math import dict_product
-from common.flow_factors import FlowFactor
+from common.flow_factors import FlowFactors
 
-def predict_flow(student, task, practice_context):
+def predict_flow(student_id, task_id, practice_context):
     """
     Predict flow from information about student, task and practice context.
     Return real number with the following interpretation:
@@ -22,23 +22,10 @@ def predict_flow(student, task, practice_context):
         ~  0: optimaly difficul task (leading to flow)
         ~ +1: too easy task (leading to boredome)
     """
-    student_flow_factors = student.get_skill_dict()
-    task_flow_factors = task.get_difficulty_dict()
-    student_flow_factors[FlowFactor.TASK_BIAS] = -1
-    task_flow_factors[FlowFactor.STUDENT_BIAS] = 1
-
-    # NOTE: We are ignoring practice context for now.
-
+    student_flow_factors = practice_context.get_skill_dict(student_id)
+    task_flow_factors = practice_context.get_difficulty_dict(task_id)
+    student_flow_factors[FlowFactors.TASK_BIAS] = -1
+    task_flow_factors[FlowFactors.STUDENT_BIAS] = 1
     potential = dict_product(student_flow_factors, task_flow_factors)
     flow = activation(potential)
     return flow
-
-
-#def compute_task_context_flow_factors(student, task, practice_context):
-#    """
-#    Computes dictionary of factors affecting flow from both task and context.
-#    """
-#    context_flow_factors = practice_context.get_flow_factors()
-#    flow_factors.update(context_flow_factors)
-#    # TODO: add factors which depends also on the user (e.g. solution count)
-#    return flow_factors

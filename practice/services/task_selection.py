@@ -13,18 +13,18 @@ class TaskSelector(object):
     Base class for task selection.
     """
 
-    def select(self, tasks, student, practice_context):
+    def select(self, task_ids, student_id, practice_context):
         NotImplementedError("Abstract method 'select' not implemented.")
 
 
 class RandomTaskSelector(TaskSelector):
 
-    def select(self, tasks, student, practice_context):
+    def select(self, task_ids, student_id, practice_context):
         """
         Select a random task.
         """
-        task = choice(tasks)
-        return task
+        task_id = choice(task_ids)
+        return task_id
 
 
 class ScoreTaskSelector(TaskSelector):
@@ -36,16 +36,19 @@ class ScoreTaskSelector(TaskSelector):
     TIME_FOR_HALF_SCORE = 60 * 60  # 1 hour
 
 
-    def select(self, tasks, student, practice_context):
+    def select(self, task_ids, student_id, practice_context):
         """
         Select task which maximizes score which is based on flow prediction
         and time from the last attempt to solve this task.
 
         It may use additional criteria in future, e.g. task effetiveness or
         exploration gain (how much information a task brings to the system).
+
+        Return:
+            id of selected task
         """
-        def score(task):
-            flow = predict_flow(student, task, practice_context)
+        def score(task_id):
+            flow = predict_flow(student_id, task_id, practice_context)
             flow_score = self._score_flow(flow)
 
             # last_attempt_time = ??  # TODO
@@ -56,11 +59,12 @@ class ScoreTaskSelector(TaskSelector):
                     + self.WEIGHT_TIME * time_score
             return score
 
-        scored_tasks = [(score(task), task) for task in tasks]
-        # necessary to sort only according to the 0th column (scores) only
-        # (because TaskModel in unsortable)
-        best_task = max(scored_tasks, key=lambda st: st[0])[1]
-        return best_task
+        scored_tasks = [(score(task_id), task_id) for task_id in task_ids]
+        ## necessary to sort only according to the 0th column (scores) only
+        ## (because TaskModel in unsortable)
+        #best_task = max(scored_tasks, key=lambda st: st[0])[1]
+        best_task_id = max(scored_tasks)[1]
+        return best_task_id
 
     def _score_flow(self, flow):
         """

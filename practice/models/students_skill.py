@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from common.flow_factors import FlowFactor
+from common.flow_factors import FlowFactors
 from decimal import Decimal
 
 
@@ -62,13 +62,13 @@ class StudentsSkillModel(models.Model):
         ~ +1 - the factor is already mastered
         """
         skill_dict = {
-            FlowFactor.STUDENT_BIAS: float(self.programming),
-            FlowFactor.LOOPS: float(self.loops),
-            FlowFactor.CONDITIONS: float(self.conditions),
-            FlowFactor.LOGIC_EXPR: float(self.logic_expr),
-            FlowFactor.COLORS: float(self.colors),
-            FlowFactor.TOKENS: float(self.tokens),
-            FlowFactor.PITS: float(self.pits)
+            FlowFactors.STUDENT_BIAS: float(self.programming),
+            FlowFactors.LOOPS: float(self.loops),
+            FlowFactors.CONDITIONS: float(self.conditions),
+            FlowFactors.LOGIC_EXPR: float(self.logic_expr),
+            FlowFactors.COLORS: float(self.colors),
+            FlowFactors.TOKENS: float(self.tokens),
+            FlowFactors.PITS: float(self.pits)
         }
         return skill_dict
 

@@ -1,5 +1,5 @@
 from django.db import models
-from common.flow_factors import FlowFactor
+from common.flow_factors import FlowFactors
 from tasks.models import TaskModel
 
 # weight (discriminacy) of a single concept in a task
@@ -46,13 +46,13 @@ class TasksDifficultyModel(models.Model):
         0 - the concept is not related with the task
         """
         difficulty_dict = {
-            FlowFactor.TASK_BIAS: float(self.programming),
-            FlowFactor.LOOPS: _convert_boolean_to_concept_weight(self.loops),
-            FlowFactor.CONDITIONS: _convert_boolean_to_concept_weight(self.conditions),
-            FlowFactor.LOGIC_EXPR: _convert_boolean_to_concept_weight(self.logic_expr),
-            FlowFactor.COLORS: _convert_boolean_to_concept_weight(self.colors),
-            FlowFactor.TOKENS: _convert_boolean_to_concept_weight(self.tokens),
-            FlowFactor.PITS: _convert_boolean_to_concept_weight(self.pits)
+            FlowFactors.TASK_BIAS: float(self.programming),
+            FlowFactors.LOOPS: _convert_boolean_to_concept_weight(self.loops),
+            FlowFactors.CONDITIONS: _convert_boolean_to_concept_weight(self.conditions),
+            FlowFactors.LOGIC_EXPR: _convert_boolean_to_concept_weight(self.logic_expr),
+            FlowFactors.COLORS: _convert_boolean_to_concept_weight(self.colors),
+            FlowFactors.TOKENS: _convert_boolean_to_concept_weight(self.tokens),
+            FlowFactors.PITS: _convert_boolean_to_concept_weight(self.pits)
         }
         return difficulty_dict
 
