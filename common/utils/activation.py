@@ -13,4 +13,4 @@ def activation(potential):
     """
     Compute activation function - hyperbolic tangent.
     """
-    return AMPLITUDE * tanh(FREQUENCY * x);
+    return AMPLITUDE * tanh(FREQUENCY * potential);
