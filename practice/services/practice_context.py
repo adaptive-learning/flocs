@@ -22,7 +22,7 @@ def generate_practice_context(student, time=None):
         for key, value in task_difficulty.get_difficulty_dict().items():
             practice_context.set(key, task=task_id, value=value)
 
-    student_skill = StudentsSkillModel.objects.get(student=student)
+    student_skill, _ = StudentsSkillModel.objects.get_or_create(student=student)
     for key, value in student_skill.get_skill_dict().items():
         practice_context.set(key, student=student.id, value=value)
 

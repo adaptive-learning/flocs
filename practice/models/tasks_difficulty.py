@@ -18,25 +18,39 @@ class TasksDifficultyModel(models.Model):
     task = models.OneToOneField(TaskModel, primary_key=True)
 
     # programming concept difficulty
-    programming = models.DecimalField(max_digits=4, decimal_places=3, verbose_name="General difficulty of the task")
+    programming = models.DecimalField(max_digits=4, decimal_places=3,
+            default=0.0,
+            verbose_name="General difficulty of the task")
 
     # conditions concept difficulty
-    conditions = models.BooleanField(verbose_name="Difficulty of the conditions concept in the task")
+    conditions = models.BooleanField(
+            default=False,
+            verbose_name="Difficulty of the conditions concept in the task")
 
     # loops concept difficulty
-    loops = models.BooleanField(verbose_name="Difficulty of the loops concept in the task")
+    loops = models.BooleanField(
+            default=False,
+            verbose_name="Difficulty of the loops concept in the task")
 
     # logic expressions concept difficulty
-    logic_expr = models.BooleanField(verbose_name="Difficulty of the logic expressions concept in the task")
+    logic_expr = models.BooleanField(
+            default=False,
+            verbose_name="Difficulty of the logic expressions concept in the task")
 
     # colors concept difficulty
-    colors = models.BooleanField(verbose_name="Difficulty of the colors concept in the task")
+    colors = models.BooleanField(
+            default=False,
+            verbose_name="Difficulty of the colors concept in the task")
 
     # tokens concept difficulty
-    tokens = models.BooleanField(verbose_name="Difficulty of the tokens concept in the task")
+    tokens = models.BooleanField(
+            default=False,
+            verbose_name="Difficulty of the tokens concept in the task")
 
     # pits concept difficulty
-    pits = models.BooleanField(verbose_name="Difficulty of the pits concept in the task")
+    pits = models.BooleanField(
+            default=False,
+            verbose_name="Difficulty of the pits concept in the task")
 
     def get_difficulty_dict(self):
         """Return dictionary representation of the task difficulty.
