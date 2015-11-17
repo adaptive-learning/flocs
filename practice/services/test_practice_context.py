@@ -109,3 +109,13 @@ class PracticeContextTest(TestCase):
         self.assertAlmostEquals(0.5,
             context.get(FlowFactors.LOOPS, student=student.id))
         self.assertEquals(time, context.get_time())
+
+    def test_get_all_task_ids(self):
+        context = PracticeContext([
+                ('i', 10,   None, 1),
+                ('i', None, 12, 1),
+                ('i', 10,   12, 1)
+        ])
+        context.set('q', task=12, value=1)
+        context.set('q', student=10, task=13, value=1)
+        self.assertEquals({12, 13}, set(context.get_all_task_ids()))

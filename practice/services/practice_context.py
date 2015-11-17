@@ -41,10 +41,17 @@ class PracticeContext(object):
         Initialize a new practice context.
         """
         self._parameters = dict()
+        self._task_ids = set()
         for name, student, task, value in parameters:
             self.set(name, student, task, value)
         for name, value in kwargs.items():
             self.set(name, value=value)
+
+    def get_all_task_ids(self):
+        """
+        Return list of IDs of all tasks in the context.
+        """
+        return list(self._task_ids)
 
     def get_time(self):
         """
@@ -101,3 +108,5 @@ class PracticeContext(object):
             value: value to set
         """
         self._parameters[(parameter_name, student, task)] = value
+        if task:
+            self._task_ids.add(task)
