@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
-from common.flow_factors import FlowFactors
 from decimal import Decimal
+
+from common.flow_factors import FlowFactors
+from .students_skill_manager import StudentsSkillManager
 
 
 class StudentsSkillModel(models.Model):
@@ -10,6 +12,8 @@ class StudentsSkillModel(models.Model):
        For every concept there is number between -1 and 1 representing skill in
        certain concept.
     """
+    # Manager
+    objects = StudentsSkillManager()
 
     # init values
     INITIAL_STUDENT_BIAS = Decimal(-1)
