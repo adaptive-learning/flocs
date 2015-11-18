@@ -78,7 +78,7 @@ class PracticeContextTest(TestCase):
         self.assertAlmostEquals(0, task_difficulty[FlowFactors.TOKENS])
         self.assertAlmostEquals(0, task_difficulty[FlowFactors.PITS])
 
-    def test_generate_practice_context(self):
+    def test_generate_practice_context_with_student_and_time(self):
         task = TaskModel.objects.create()
         difficulty = TasksDifficultyModel.objects.create(
                 task=task,
@@ -109,6 +109,15 @@ class PracticeContextTest(TestCase):
         self.assertAlmostEquals(0.5,
             context.get(FlowFactors.LOOPS, student=student.id))
         self.assertEquals(time, context.get_time())
+
+    def test_generate_practice_context_with_student_and_time(self):
+        task1 = TaskModel.objects.create()
+        task2 = TaskModel.objects.create()
+        difficulty1 = TasksDifficultyModel.objects.create(task=task1)
+        difficulty2 = TasksDifficultyModel.objects.create(task=task2)
+        student = User.objects.create()
+        context = generate_practice_context(student=student, task=task1)
+        self.assertEquals([task1.id], context.get_all_task_ids())
 
     def test_get_all_task_ids(self):
         context = PracticeContext([
