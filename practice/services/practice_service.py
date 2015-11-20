@@ -15,6 +15,7 @@ def get_next_task(student):
         dictionary with settings for next task
 
     Raises:
+        ValueError: If the student argument is None.
         LookupError: If there is no task available.
     """
     if not student:
@@ -31,3 +32,31 @@ def get_next_task(student):
     task = TaskModel.objects.get(pk=task_id)
     task_dictionary = task.to_json()
     return task_dictionary
+
+
+def process_attempt_report(student, report):
+    """Process reported result of a solution attempt of a task
+
+    Args:
+        student: user who took the attempt
+        report: dictionary with the fields specified in:
+            https://github.com/effa/flocs/wiki/Server-API#apipracticeattempt-report
+    Raises:
+        ValueError: If the student argument is None.
+    """
+    if not student:
+        raise ValueError('Student is required for process_task_result')
+
+    if not report['solved']:
+        return
+
+    task = TaskModel.objects.get(id=report['task-id'])
+    reported_flow = report['flow-report']
+    practice_context = create_practice_context(student=student, task=task)
+    # TODO: call update of model parameters
+    # with the args: task_id, student_id, reported_flow, predicted_flow, practice_context
+    practice_context.save()
+
+
+
+

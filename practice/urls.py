@@ -9,5 +9,5 @@ from practice import views
 
 urlpatterns = [
     url(r'^next-task$', views.get_next_task),
-    url(r'^attempt-report$', views.post_task_result),
+    url(r'^attempt-report$', views.post_attempt_report),
 ]
