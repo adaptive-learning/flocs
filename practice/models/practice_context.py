@@ -40,6 +40,8 @@ def create_practice_context(student=None, task=None, time=None):
         task_id = task_difficulty.task.id
         for key, value in task_difficulty.get_difficulty_dict().items():
             practice_context.set(key, task=task_id, value=value)
+        practice_context.set('solution-count', task=task_id,
+                value=task_difficulty.solution_count)
 
     if student is not None:
         student_skill, _ = StudentsSkillModel.objects.get_or_create(student=student)
@@ -149,6 +151,13 @@ class PracticeContext(object):
         if student:
             self._student_ids.add(student)
 
+    def update(self, parameter_name, student=None, task=None, update=None):
+        assert update is not None
+        old_value = self._parameters[(parameter_name, student, task)]
+        new_value = update(old_value)
+        self._parameters[(parameter_name, student, task)] = new_value
+
+
     def save(self):
         """Save changes in the practice context to DB
         """
@@ -157,6 +166,7 @@ class PracticeContext(object):
         for task in self.get_all_task_ids():
             task_difficulty = TasksDifficultyModel.objects.get(task_id=task)
             task_difficulty.programming = self.get(FlowFactors.TASK_BIAS, task=task)
+            task_difficulty.solution_count = self.get_solution_count(task=task)
             task_difficulty.save()
         for student in self.get_all_student_ids():
             student_skill = StudentsSkillModel.objects.get(student_id=student)

@@ -52,6 +52,12 @@ class TasksDifficultyModel(models.Model):
             default=False,
             verbose_name="Difficulty of the pits concept in the task")
 
+    # how many times the task was solved (useful to estimate a noise in
+    # parameters estimates)
+    solution_count = models.IntegerField(
+            default=0,
+            verbose_name='How many times the task was solved')
+
     def get_difficulty_dict(self):
         """Return dictionary representation of the task difficulty.
 

@@ -25,6 +25,7 @@ class TasksDifficultyModelTest(TestCase):
         self.assertEquals(0, task_vector[FlowFactors.COLORS])
         self.assertEquals(0, task_vector[FlowFactors.TOKENS])
         self.assertEquals(0, task_vector[FlowFactors.PITS])
+        self.assertEquals(0, task_difficulties.solution_count)
 
     def test_number_of_concepts(self):
         task_difficulties = TasksDifficultyModel(

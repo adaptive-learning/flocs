@@ -3,7 +3,6 @@ Main service functions of practice app.
 """
 
 from tasks.models import TaskModel
-
 from practice.models.practice_context import create_practice_context
 #from practice.services.task_selection import RandomTaskSelector as TaskSelector
 from practice.services.task_selection import ScoreTaskSelector as TaskSelector
@@ -47,16 +46,14 @@ def process_attempt_report(student, report):
     if not student:
         raise ValueError('Student is required for process_task_result')
 
-    if not report['solved']:
+    if not report['result']['solved']:
         return
 
-    task = TaskModel.objects.get(id=report['task-id'])
+    task_id = report['task-id']
+    task = TaskModel.objects.get(id=task_id)
     reported_flow = report['flow-report']
     practice_context = create_practice_context(student=student, task=task)
+    practice_context.update('solution-count', task=task_id, update=lambda n: n + 1)
     # TODO: call update of model parameters
     # with the args: task_id, student_id, reported_flow, predicted_flow, practice_context
     practice_context.save()
-
-
-
-

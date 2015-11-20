@@ -40,6 +40,22 @@ class PracticeContextTest(TestCase):
         self.assertEquals(6, context.get('iq', task=12))
         self.assertEquals(8, context.get('iq', student=10, task=12))
 
+    def test_update(self):
+        context = PracticeContext([
+                ('iq', None, None, 5),
+                ('iq', 11, None, 4),
+                ('iq', None, 12, 6),
+                ('iq', 10, 12, 8)
+        ])
+        context.update('iq', update=lambda x: 10)
+        context.update('iq', student=11, update=lambda x: x + 1)
+        context.update('iq', task=12, update=lambda x: x * 2)
+        context.update('iq', student=10, task=12, update=lambda x: x - 0.5)
+        self.assertEquals(10, context.get('iq'))
+        self.assertEquals(5, context.get('iq', student=11))
+        self.assertEquals(12, context.get('iq', task=12))
+        self.assertAlmostEquals(7.5, context.get('iq', student=10, task=12))
+
     def test_get_skill_dict(self):
         context = PracticeContext([
             (FlowFactors.STUDENT_BIAS, 11, None, 0.14),
@@ -102,10 +118,12 @@ class PracticeContextTest(TestCase):
         )
         context = PracticeContext([
             (FlowFactors.TASK_BIAS, None, task.id, 1.1),
+            ('solution-count', None, task.id, 5),
         ])
         context.save()
         new_difficulty = TasksDifficultyModel.objects.get(task_id=task.id)
         self.assertAlmostEquals(1.1, float(new_difficulty.programming))
+        self.assertEquals(5, new_difficulty.solution_count)
 
     def test_save_student(self):
         student = User.objects.create()

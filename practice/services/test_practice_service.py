@@ -26,3 +26,21 @@ class PracticeServiceTest(TestCase):
         # LookupError
         self.assertRaises(LookupError,
                 practice_service.get_next_task, self.student)
+
+    def test_process_attempt_report(self):
+        TaskModel.objects.create(id=1)
+        TasksDifficultyModel.objects.create(task_id=1, solution_count=5)
+        report = {
+            "task-id": 1,
+            "attempt": 5,
+            "result": {
+                "solved": True,
+                "time": 23456
+            },
+            "flow-report": 1
+        }
+        practice_service.process_attempt_report(self.student, report)
+        difficulty = TasksDifficultyModel.objects.get(task_id=1)
+        self.assertEquals(6, difficulty.solution_count)
+        # TODO: check that the difficulty and skill parameters were changed in
+        # DB
