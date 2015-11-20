@@ -20,7 +20,7 @@ class TaskModel(models.Model):
         maze_settings_dict = json.loads(self.maze_settings)
         workspace_settings_dict = json.loads(self.workspace_settings)
         task_dict = {
-            'id': self.pk,
+            'task-id': self.pk,
             'maze-settings': maze_settings_dict,
             'workspace-settings': workspace_settings_dict
         }
