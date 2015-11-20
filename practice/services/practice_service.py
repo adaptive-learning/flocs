@@ -4,7 +4,7 @@ Main service functions of practice app.
 
 from tasks.models import TaskModel
 
-from practice.services.practice_context import generate_practice_context
+from practice.services.practice_context_service import generate_practice_context
 #from practice.services.task_selection import RandomTaskSelector as TaskSelector
 from practice.services.task_selection import ScoreTaskSelector as TaskSelector
 

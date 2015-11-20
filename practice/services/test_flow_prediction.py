@@ -6,7 +6,7 @@ from decimal import Decimal
 
 from common.flow_factors import FlowFactors
 from common.utils.activation import activation
-from .practice_context import PracticeContext
+from practice.models.practice_context import PracticeContext
 from .flow_prediction import predict_flow
 
 

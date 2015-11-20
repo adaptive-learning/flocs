@@ -5,7 +5,7 @@ from datetime import datetime
 from django.test import TestCase
 from common.flow_factors import FlowFactors
 from common.utils.activation import AMPLITUDE
-from .practice_context import PracticeContext
+from practice.models.practice_context import PracticeContext
 from .task_selection import ScoreTaskSelector
 
 
