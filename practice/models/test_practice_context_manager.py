@@ -9,10 +9,12 @@ from practice.models import StudentsSkillModel
 from common.flow_factors import FlowFactors
 from decimal import Decimal
 from datetime import datetime
-from .practice_context_service import generate_practice_context
+
+#from .practice_context_manager import PracticeContextManager
+from .practice_context import create_practice_context
 
 
-class PracticeContextServiceTest(TestCase):
+class PracticeContextManagerTest(TestCase):
 
     def test_generate_practice_context_with_student_and_time(self):
         task = TaskModel.objects.create()
@@ -38,7 +40,7 @@ class PracticeContextServiceTest(TestCase):
                 pits=0,
         )
         time = datetime(2015, 1, 2, 3, 4, 5)
-        context = generate_practice_context(student, time=time)
+        context = create_practice_context(student, time=time)
         #print(context._parameters)
         self.assertAlmostEquals(-0.58,
             context.get(FlowFactors.TASK_BIAS, task=task.id))
@@ -52,5 +54,5 @@ class PracticeContextServiceTest(TestCase):
         difficulty1 = TasksDifficultyModel.objects.create(task=task1)
         difficulty2 = TasksDifficultyModel.objects.create(task=task2)
         student = User.objects.create()
-        context = generate_practice_context(student=student, task=task1)
+        context = create_practice_context(student=student, task=task1)
         self.assertEquals([task1.id], context.get_all_task_ids())

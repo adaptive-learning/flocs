@@ -4,7 +4,7 @@ Main service functions of practice app.
 
 from tasks.models import TaskModel
 
-from practice.services.practice_context_service import generate_practice_context
+from practice.models.practice_context import create_practice_context
 #from practice.services.task_selection import RandomTaskSelector as TaskSelector
 from practice.services.task_selection import ScoreTaskSelector as TaskSelector
 
@@ -20,7 +20,7 @@ def get_next_task(student):
     if not student:
         raise ValueError('Student is required for get_next_task')
 
-    practice_context = generate_practice_context(student=student)
+    practice_context = create_practice_context(student=student)
     task_ids = practice_context.get_all_task_ids()
     if not task_ids:
         raise LookupError('No tasks available.')
