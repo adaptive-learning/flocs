@@ -7,7 +7,10 @@ def login(request):
         return HttpResponseBadRequest('Has to be POST request.')
     user = request.POST['username']
     passwd = request.POST['password']
-    response = UserManager.login(user, passwd)
+    if UserManager.login(user, passwd):
+        response = true
+    else:
+        response = false
     return JsonResponse(response)
 
 def register(request):
@@ -19,8 +22,8 @@ def register(request):
     lastname = request.POST['lastname']
     email = request.POST['email']
     response = UserManager.register(username, firstname, lastname, email, passwd)
-    response = JsonResponse(response)
+    return JsonResponse(response)
 
 def logout(request):
     response = UserManager.logout(request)
-    return response
+    return JsonResponse(response)
