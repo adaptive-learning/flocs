@@ -2,8 +2,8 @@
  * Task Environment Service
  */
 angular.module('flocs.taskEnvironment')
-.factory('taskEnvironmentService', ['taskDao', 'mazeService', 'workspaceService',
-    function (taskDao, mazeService, workspaceService) {
+.factory('taskEnvironmentService', ['taskDao', 'mazeService', 'workspaceService', 'interpreterService',
+    function (taskDao, mazeService, workspaceService, interpreterService) {
 
   var currentTask = null;
   var afterAttemptCallback = null;
@@ -16,16 +16,23 @@ angular.module('flocs.taskEnvironment')
     picked: null,
     all: null
   };
+  var executionStatus = {
+    initialState: true
+  };
 
   workspaceService.addChangeListener(handleWorkspaceChange);
   mazeService.addChangeListener(handleMazeChange);
 
   // === public API ===
   return {
-    settingNextTask: settingNextTask,
+    setTask:         setTask,
     settingTaskById: settingTaskById,
-    setInitialState: setInitialState,
-    attemptFinished: attemptFinished,
+    //setInitialState: setInitialState,
+    //attemptFinished: attemptFinished,
+
+    runningCode: runningCode,
+    stoppingExecution: stoppingExecution,
+
 
     // NOTE: we have used shared data (blocksStatus instead of listeners)
     //addChangeListener: addChangeListener,
@@ -34,7 +41,8 @@ angular.module('flocs.taskEnvironment')
 
     // shared data
     blocksStatus: blocksStatus,
-    toolsStatus: toolsStatus
+    toolsStatus: toolsStatus,
+    executionStatus: executionStatus
 
 
     //getMazeSettings: getMazeSettings,
@@ -96,15 +104,22 @@ angular.module('flocs.taskEnvironment')
     return mazeService.getToolsAll();
   }
 
-  function setTask(newTask) {
+  /*
+   * Set a new task in the environment. Optionally specify a callback to call
+   * after each attempt of the user.
+   */
+  function setTask(newTask, _afterAttemptCallback) {
+    afterAttemptCallback = _afterAttemptCallback || null;
     currentTask = newTask;
     mazeService.set(getMazeSettings());
     workspaceService.set(getWorkspaceSettings());
+    executionStatus.initialState = true;
     //changeNotification();
   }
 
   function setInitialState() {
     mazeService.reset();
+    executionStatus.initialState = true;
   }
 
   function settingTaskById(id) {
@@ -114,16 +129,6 @@ angular.module('flocs.taskEnvironment')
       });
   }
 
-  function settingNextTask(callback) {
-    afterAttemptCallback = callback;
-    var taskPromise = taskDao.gettingNextTask()
-      .then(function(newTask) {
-        setTask(newTask);
-        return newTask;
-      });
-    return taskPromise;
-  }
-
   function attemptFinished(result) {
     if (afterAttemptCallback) {
       afterAttemptCallback(result);
@@ -131,6 +136,21 @@ angular.module('flocs.taskEnvironment')
 
     //$rootScope.$broadcast('task:attemptFinished');
     //console.log(result);
+  }
+
+  function runningCode() {
+    executionStatus.initialState = false;
+    var promise = interpreterService.runCode().then(function(result) {
+      attemptFinished(result);
+    });
+    return promise;
+  }
+
+  function stoppingExecution() {
+    var promise = interpreterService.stopExecution().then(function(result) {
+      setInitialState();
+    });
+    return promise;
   }
 
   function handleWorkspaceChange() {
