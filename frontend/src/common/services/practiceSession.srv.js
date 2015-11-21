@@ -2,10 +2,11 @@
  * Practice Session Service
  */
 angular.module('flocs.services')
-.factory('practiceSessionService', ['$http', '$timeout', 'taskEnvironmentService',
-    function ($http, $timeout, taskEnvironmentService) {
+.factory('practiceSessionService', ['$http', '$timeout', 'practiceDao', 'taskEnvironmentService',
+    function ($http, $timeout, practiceDao, taskEnvironmentService) {
 
     var attemptReport = null;
+    var taskInstanceId = null;
 
   // === public API ===
   return {
@@ -19,7 +20,7 @@ angular.module('flocs.services')
    */
   function startPracticeSession() {
     // start first task
-    nextTask();
+    settingNextTask();
   }
 
   function attemptFinished(result) {
@@ -27,8 +28,8 @@ angular.module('flocs.services')
     if (attemptReport !== null) {
       // TODO: add time information to the report
       attemptReport.attempt += 1;
-      attemptReport.result = result;
-      reportAttempt(attemptReport);
+      attemptReport.solved = result.solved;
+      practiceDao.sendingAttemptReport(attemptReport);
     }
 
     if (result.solved) {
@@ -40,32 +41,35 @@ angular.module('flocs.services')
     }
   }
 
-  function nextTask() {
-    taskEnvironmentService.settingNextTask(attemptFinished)
-      .then(function(task) {
-        newAttemptReport(task);
+  function settingNextTask() {
+    // TODO: measure time
+    var taskPromise = practiceDao.gettingNextTask()
+      .then(function(newTaskInstance) {
+        taskInstanceId = newTaskInstance['task-instance-id'];
+        var newTask = newTaskInstance['task'];
+        newAttemptReport(newTask);
+        taskEnvironmentService.setTask(newTask, attemptFinished);
+        return newTask;
       });
+    return taskPromise;
   }
 
   function nextTaskDialog() {
     // TODO: show modal ("Continue to next task?")
     alert('Solved. Next task?');
-    nextTask();
+    settingNextTask();
   }
 
-  function newAttemptReport(task) {
-    // TODO: measure time
-    attemptReport = {
-      'task-id': task.id,
-      'attempt': 0,
-      'result': null
-    };
-  }
-
-  /**
-   * Send results of last attempt to server
+  /*
+   * Create new report for new attempt
    */
-  function reportAttempt(report) {
-    $http.post('api/practice/attempt-report', report);
+  function newAttemptReport(task) {
+    attemptReport = {
+      'task-instance-id': taskInstanceId,
+      //'task-id': task['task-id'],
+      'attempt': 0,
+      'time': 0,
+      'solved': false
+    };
   }
 }]);

@@ -2,22 +2,24 @@
  * Task Environment controller
  */
 angular.module('flocs.taskEnvironment')
-.controller('taskEnvironmentCtrl', ['$scope', 'taskEnvironmentService', 'interpreterService',
-  function($scope, taskEnvironmentService, interpreterService) {
+.controller('taskEnvironmentCtrl', ['$scope', 'taskEnvironmentService',
+  function($scope, taskEnvironmentService) {
 
   function run() {
-    $scope.initialState = false;
-    interpreterService.runCode().then(function(result) {
-      taskEnvironmentService.attemptFinished(result);
-    });
+    //$scope.initialState = false;
+    taskEnvironmentService.runningCode();
+    /*.then(function(result) {
+      if (result.solved) {
+        $scope.initialState = true;
+      }
+    });*/
   }
 
   function reset() {
-    interpreterService.stopExecution().then(function(result) {
-      //if (!result.solved) {...}
-      taskEnvironmentService.setInitialState();
+    taskEnvironmentService.stoppingExecution();
+    /*.then(function(result) {
       $scope.initialState = true;
-    });
+    });*/
   }
 
   /*function handleTaskEnvironmentChange() {
@@ -25,7 +27,7 @@ angular.module('flocs.taskEnvironment')
     $scope.blocksStatus.limit = taskEnvironmentService.getBlocksLimit();
   }*/
 
-  $scope.initialState = true;
+  $scope.executionStatus = taskEnvironmentService.executionStatus;
   $scope.blocksStatus = taskEnvironmentService.blocksStatus;
   $scope.toolsStatus = taskEnvironmentService.toolsStatus;
   $scope.run = run;

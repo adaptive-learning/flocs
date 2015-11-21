@@ -20,8 +20,8 @@ class PracticeServiceTest(TestCase):
         TasksDifficultyModel.objects.create(task=stored_task)
         retrieved_task = practice_service.get_next_task(student=self.student)
         self.assertIsNotNone(retrieved_task)
-        self.assertEquals({"foo": "bar"}, retrieved_task['workspace-settings'])
-        self.assertEquals({}, retrieved_task['maze-settings'])
+        self.assertEquals({"foo": "bar"}, retrieved_task['task']['workspace-settings'])
+        self.assertEquals({}, retrieved_task['task']['maze-settings'])
         self.assertEquals(TaskInstanceModel.objects.first().id,
                 retrieved_task['task-instance-id'])
 
@@ -40,10 +40,8 @@ class PracticeServiceTest(TestCase):
             "task-instance-id": 1,
             "task-id": 1,
             "attempt": 7,
-            "result": {
-                "solved": True,
-                "time": 234
-            },
+            "solved": True,
+            "time": 234,
             "flow-report": 1
         }
         practice_service.process_attempt_report(self.student, report)

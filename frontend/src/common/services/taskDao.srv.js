@@ -1,5 +1,5 @@
 /*
- * Data Access Object for Tasks.
+ * Communication with server Task API.
  */
 angular.module('flocs.services')
 .factory('taskDao', ['$http', function ($http) {
@@ -8,7 +8,6 @@ angular.module('flocs.services')
   return {
     gettingAllTaskIds: gettingAllTaskIds,
     gettingTaskById: gettingTaskById,
-    gettingNextTask: gettingNextTask,
   };
 
   // private implementation
@@ -28,16 +27,6 @@ angular.module('flocs.services')
    */
   function gettingTaskById(id) {
     return $http.get('api/tasks/get-task/' + id)
-      .then(function(response) {
-        return response.data;
-      });
-  }
-
-  /**
-   * Return promise of getting next task in current session.
-   */
-  function gettingNextTask() {
-    return $http.get('api/practice/next-task')
       .then(function(response) {
         return response.data;
       });
