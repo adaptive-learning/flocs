@@ -2,11 +2,12 @@
 		dependencies backend-dependencies frontend-dependencies \
 		test test-backend test-frontend \
 		check check-backend check-frontend \
-		db-setup db-migrate db-load-data admin
+		db-setup db-migrate db-load-data db-generate-tasks-difficulty admin \
+		logs
 
 # -----------------------------------------------------------
 
-update: dependencies db-setup
+update: dependencies db-setup logs
 
 # -----------------------------------------------------------
 
@@ -71,3 +72,9 @@ db-generate-tasks-difficulty:
 
 admin:
 	python manage.py create_admin
+
+# -----------------------------------------------------------
+
+logs:
+	@mkdir -p logs >/dev/null
+	touch logs/practice.log

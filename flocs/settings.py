@@ -120,3 +120,30 @@ STATICFILES_DIRS = (
     os.path.join(FRONTEND_DIR, "development-build/static"),
 )
 
+LOGGING = {
+        'version': 1,
+        'formatters': {
+            'production': {
+                'format': '%(levelname)s %(asctime)s %(module)s %(message)s'
+                },
+            'devel': {
+                'format': '%(levelname)s %(module)s/%(filename)s/%(funcName)s : %(message)s'
+                }
+            },
+        'handlers': {
+            'practice': {
+                'level': 'DEBUG',
+                'class': 'logging.FileHandler',
+                'filename': 'logs/practice.log',
+                'formatter': 'devel'
+                }
+            },
+        'loggers': {
+            'practice': {
+                'handlers': ['practice'],
+                'level': 'DEBUG',
+                'propagate': True
+                }
+            }
+        }
+

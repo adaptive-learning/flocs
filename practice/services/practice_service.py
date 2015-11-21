@@ -2,12 +2,15 @@
 Main service functions of practice app.
 """
 
+import logging
 from tasks.models import TaskModel
 from practice.models.practice_context import create_practice_context
 from practice.models import TaskInstanceModel
 #from practice.services.task_selection import RandomTaskSelector as TaskSelector
 from practice.services.task_selection import ScoreTaskSelector as TaskSelector
 from practice.services.flow_prediction import predict_flow
+
+logger = logging.getLogger(__name__)
 
 def get_next_task(student):
     """Return next task for given student.
@@ -19,6 +22,7 @@ def get_next_task(student):
         ValueError: If the student argument is None.
         LookupError: If there is no task available.
     """
+    logger.info("Getting next task for student id %s", student.id)
     if not student:
         raise ValueError('Student is required for get_next_task')
 
@@ -39,6 +43,7 @@ def get_next_task(student):
         'task-instance-id': task_instance.pk,
         'task': task_dictionary
     }
+    logger.info("Task %s successfully picked for student %s", task_id, student.id)
     return task_instance_dictionary
 
 
@@ -60,6 +65,8 @@ def process_attempt_report(student, report):
     solved = report['solved']
     time = report['time']
     reported_flow = report.get('flow-report')
+
+    logger.info("Reporting attempt for student %s with result %s", student.id, solved)
 
     task_instance = TaskInstanceModel.objects.get(id=task_instance_id)
     if  attempt_count <= task_instance.attempt_count:
@@ -99,3 +106,5 @@ def process_attempt_report(student, report):
     # select_for_update current parameters, update them at once ("in parallel")
     # and save.
     practice_context.save()
+    logger.info("Reporting attempt was successful for student %s with result %s", student.id, solved)
+
