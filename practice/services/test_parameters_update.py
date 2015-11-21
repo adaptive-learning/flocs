@@ -4,7 +4,7 @@
 from django.test import TestCase
 from common.flow_factors import FlowFactors
 from practice.models.practice_context import PracticeContext
-import practice.services.skill_update as skill_update
+import practice.services.parameters_update as parameters_update
 
 class UpdateSkillTest(TestCase):
 
@@ -14,7 +14,7 @@ class UpdateSkillTest(TestCase):
         reported_flow = -1
         expected = -0.50769169
 
-        result = skill_update.update_global_skill_function(
+        result = parameters_update.update_global_skill_function(
             skill, predicted_flow, reported_flow)
 
         self.assertAlmostEquals(result, expected)
@@ -24,20 +24,20 @@ class UpdateSkillTest(TestCase):
 
         for skill in range(-1, 2, 1):
             for reported_flow in range(-1, 2, 1):
-                result = skill_update.update_other_skill_function(
+                result = parameters_update.update_other_skill_function(
                     skill, reported_flow, discrimination)
                 self.assertEquals(result, skill)
 
         discrimination = 1
         skill = -1
         for reported_flow in range(-1, 2, 1):
-            result = skill_update.update_other_skill_function(
+            result = parameters_update.update_other_skill_function(
                 skill, reported_flow, discrimination)
             self.assertEquals(result, reported_flow)
 
         skill = 1
         for reported_flow in range(-1, 2, 1):
-            result = skill_update.update_other_skill_function(
+            result = parameters_update.update_other_skill_function(
                 skill, reported_flow, discrimination)
             self.assertEquals(result, 1)
 
@@ -48,7 +48,7 @@ class UpdateSkillTest(TestCase):
         reported_flow = 1
         expected = 0.15
 
-        result = skill_update.update_global_difficulty_function(
+        result = parameters_update.update_global_difficulty_function(
             difficulty, solution_count, predicted_flow, reported_flow)
 
         self.assertAlmostEquals(result, expected)
@@ -89,7 +89,7 @@ class UpdateSkillTest(TestCase):
             (FlowFactors.PITS,          None, 2, 0),
             ('solution-count',          None, 2, 10)
         ])
-        skill_update.update_skill(1, 2, 1, 0, context)
+        parameters_update.update_parameters(1, 2, 1, 0, context)
 
         for key in context.get_skill_dict(1):
             self.assertAlmostEquals(
