@@ -1,11 +1,11 @@
 <div>
-	<form ng-submit="register()" ng-controller="registerCtrl">
-		<input type="text" name="username" placeholder="NickName"/><br/>
-		<input type="text" name="firstname" placeholder="First Name"/>
-		<input type="text" name="lastname" placeholder="Last Name" /><br/>
-		<input type="email" name="email" placeholder="E-mail" /><br/>
-		<input type="password" name="passwd" placeholder="Password" />	
-		<input type="password" name="validatePasswd" placeholder="Passwor check" /><br/>
+	<form ng-app="flocs.user" ng-submit="send()" ng-controller="registerCtrl">
+		<input type="text" name="username" ng-model="username" placeholder="NickName"/><br/>
+		<input type="text" name="firstname" ng-model="firstname" placeholder="First Name"/>
+		<input type="text" name="lastname" ng-model="lastname" placeholder="Last Name" /><br/>
+		<input type="email" name="email" ng-model="email" placeholder="E-mail" /><br/>
+		<input type="password" name="password" ng-model="password" placeholder="Password" />	
+		<input type="password" name="validatePassword" ng-model="vpassword" placeholder="Password check" /><br/>
 		<input type="submit" value="Register!"/>
 	</form>
 </div>

@@ -2,11 +2,12 @@
  * Service for userManagement
  */
 angular.module('flocs.services')
-.factory('UserDao',['$http', function($http) {
+.factory('userDao',['$http', '$log', function($http, $log) {
 	//
 	return {
         registerUser: registerUser,
-        login : login
+        login : login,
+        loggedIn : loggedIn
 	};
 
 	function registerUser(username,firstname,lastname,email,passwd) {
@@ -17,12 +18,9 @@ angular.module('flocs.services')
 			'email':email,
 			'password':passwd
 		};
-		return $http({
-            method: 'POST',
-			url:'api/user/register',
-			data: data,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-		}).then(function(response){
+        $log.log(data);
+		return $http.post ('api/user/register', data)
+            .success(function(response){
 		return response;
 		});	
     }
@@ -32,16 +30,16 @@ angular.module('flocs.services')
 			'username':username,
 			'password':passwd
 		};
-		return $http({
-            method: 'POST',
-			url:'api/user/login',
-			data: data,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-		}).then(function(response){
+		return $http.post('api/user/login',data)
+            .success(function(response){
 		return response;
 		});
 
 	}
+
+     function loggedIn(){
+     return $http.get('api/user/loggedin');
+     }
 
 }]);
 

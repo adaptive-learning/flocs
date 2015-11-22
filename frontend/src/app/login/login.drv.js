@@ -6,13 +6,19 @@ angular.module('flocs.user')
 	return{
 		restrict:'EA',
 		template:
-		    '<div>'	+
+		    '<div ng-app="flocs.user">'	+
+            '<div ng-if="!user">' +
+            'user: {{user}}' +
 			'<form ng-submit="send()" ng-controller="loginCtrl">' +
-			'<input type="text" placeholder="Username" /><br/>' +
-			'<input type="password" placeholder="Password"/><br/>' +
+			'<input type="text" ng-model="username" placeholder="Username" /><br/>' +
+			'<input type="password" ng-model="password" placeholder="Password"/><br/>' +
 			'<input type="submit" value="LogIn" />' +
 			'<a href="/register">Create profile</a><br/>' +
 			'</form>' +
+            '</div>' +
+            '<div ng-if="user">' +
+            'user: {{user}}' +
+            '</div>' +
 			'</div>'
 	};
 });

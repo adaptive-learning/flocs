@@ -1,20 +1,23 @@
 from django.contrib.auth.models import User #this will be replaced by our class user
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login as log, logout
 
 def register(username,firstname,lastname, email, passwd):
     user = User.objects.create_user(username, email= email, password=passwd)
     user.first_name = firstname
     user.last_name = lastname
-    return user.save()
+    user.save()
     
 
-def login(username, passwd):
-    user = authenticate(username, passwd)
+def login(request, username, password):
+    user = authenticate(username=username, password=password)
     if user is not None:
-        login(request, user)
-        return 1
+        if user.is_active:
+            log(request, user)
+            return True
+        else:       
+            return False
     else:
-        return 0
+        return False
 
 def logout(request):
     return logout(request)
