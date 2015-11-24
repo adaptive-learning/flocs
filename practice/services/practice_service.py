@@ -6,6 +6,7 @@ import logging
 from tasks.models import TaskModel
 from practice.models.practice_context import create_practice_context
 from practice.models import TaskInstanceModel
+from practice.models import StudentTaskInfoModel
 #from practice.services.task_selection import RandomTaskSelector as TaskSelector
 from practice.services.task_selection import ScoreTaskSelector as TaskSelector
 from practice.services.flow_prediction import predict_flow
@@ -14,7 +15,10 @@ from practice.services.parameters_update import update_parameters
 logger = logging.getLogger(__name__)
 
 def get_next_task(student):
-    """Return next task for given student.
+    """
+    Return next task for given student. Also create a new task instance record
+    in DB and update student-task info for selected task (namely the reference
+    to last task instance).
 
     Returns:
         dictionary with information about assigned task
@@ -38,6 +42,10 @@ def get_next_task(student):
     task = TaskModel.objects.get(pk=task_id)
     task_instance = TaskInstanceModel.objects.create(student=student,
             task=task, predicted_flow=predicted_flow)
+    student_task_info = StudentTaskInfoModel.objects.get_or_create(
+            student=student, task=task)[0]
+    student_task_info.last_instance = task_instance
+    student_task_info.save()
 
     task_dictionary = task.to_json()
     task_instance_dictionary = {

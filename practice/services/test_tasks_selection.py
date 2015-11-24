@@ -12,8 +12,9 @@ from .task_selection import ScoreTaskSelector
 class ScoreTaskSelectorTest(TestCase):
 
     def test_select_single(self):
-        # mock practice context
+        # semi-mock practice context
         context = PracticeContext()
+        context.get = lambda parameter_name, student=None, task=None: None
         context.get_difficulty_dict = lambda x: {FlowFactors.TASK_BIAS: 0}
         context.get_skill_dict = lambda x: {FlowFactors.STUDENT_BIAS: 0}
 
@@ -22,8 +23,9 @@ class ScoreTaskSelectorTest(TestCase):
         self.assertEqual(12, result)
 
     def test_select_best(self):
-        # mock practice context
+        # semi-mock practice context
         context = PracticeContext()
+        context.get = lambda parameter_name, student=None, task=None: None
         context.get_difficulty_dict = lambda x: {FlowFactors.TASK_BIAS: 0.4}\
                 if x == 5 else {FlowFactors.TASK_BIAS: 0.3}
         context.get_skill_dict = lambda x: {FlowFactors.STUDENT_BIAS: 0.5}
@@ -32,6 +34,37 @@ class ScoreTaskSelectorTest(TestCase):
         result = selector.select([i for i in range(20)], student_id=11,
                 practice_context=context)
         self.assertEqual(5, result)
+
+    def test_select_prefer_not_seen_task(self):
+        date1 = datetime(2015, 1, 1, 0, 0, 0)
+        date2 = datetime(2015, 1, 1, 0, 1, 0)
+        context = PracticeContext([
+            ('time', None, None, date2),
+            ('last-time', 11, 5, None),
+            ('last-time', 11, 6, date1)
+        ])
+        context.get_difficulty_dict = lambda x: {FlowFactors.TASK_BIAS: 0}
+        context.get_skill_dict = lambda x: {FlowFactors.STUDENT_BIAS: 0}
+
+        selector = ScoreTaskSelector()
+        result = selector.select([5, 6], student_id=11, practice_context=context)
+        self.assertEqual(5, result)
+
+    def test_select_prefer_longer_not_seen_task(self):
+        date1 = datetime(2015, 1, 1, 0, 0, 0)
+        date2 = datetime(2015, 1, 1, 0, 1, 0)
+        date3 = datetime(2015, 1, 1, 0, 2, 0)
+        context = PracticeContext([
+            ('time', None, None, date3),
+            ('last-time', 11, 5, date2),
+            ('last-time', 11, 6, date1)
+        ])
+        context.get_difficulty_dict = lambda x: {FlowFactors.TASK_BIAS: 0}
+        context.get_skill_dict = lambda x: {FlowFactors.STUDENT_BIAS: 0}
+
+        selector = ScoreTaskSelector()
+        result = selector.select([5, 6], student_id=11, practice_context=context)
+        self.assertEqual(6, result)
 
     def test_score_flow(self):
         self.assertAlmostEquals(0, ScoreTaskSelector()._score_flow(0))

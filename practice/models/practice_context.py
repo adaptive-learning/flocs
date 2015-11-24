@@ -1,8 +1,10 @@
-from common.flow_factors import FlowFactors
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
+from common.flow_factors import FlowFactors
 from tasks.models import TaskModel
 from practice.models import TasksDifficultyModel
 from practice.models import StudentsSkillModel
+from practice.models import StudentTaskInfoModel
 from datetime import datetime
 #from .practice_context_manager import PracticeContextManager
 
@@ -30,10 +32,11 @@ def create_practice_context(student=None, task=None, time=None):
     #practice_context = self.model(time=time)
     practice_context = PracticeContext(time=time)
 
-    #tasks = TaskModel.objects.all()
     if task is not None:
+        tasks = [task]
         task_difficulties = [TasksDifficultyModel.objects.get(task=task)]
     else:
+        tasks = TaskModel.objects.all()
         task_difficulties = TasksDifficultyModel.objects.all()
 
     for task_difficulty in task_difficulties:
@@ -44,16 +47,30 @@ def create_practice_context(student=None, task=None, time=None):
                 value=task_difficulty.solution_count)
 
     if student is not None:
+        students = [student]
         student_skill, _ = StudentsSkillModel.objects.get_or_create(student=student)
         student_skills = [student_skill]
     else:
+        students = [User.objects.all()]
         student_skills = StudentsSkillModel.objects.all()
 
     for student_skill in student_skills:
         for key, value in student_skill.get_skill_dict().items():
             practice_context.set(key, student=student.id, value=value)
 
-    # TODO: load last attempt time
+    # load last attempt time
+    for student in students:
+        for task in tasks:
+            # NOTE: we probably don't want to create info objects for all tasks
+            #last_instance = StudentTaskInfoModel.objects\
+            #        .get_or_create(student=student, task=task)[0].last_instance
+            try:
+                last_instance = StudentTaskInfoModel.objects.get(
+                    student=student, task=task).last_instance
+            except ObjectDoesNotExist:
+                last_instance = None
+            last_time = last_instance.time_end if last_instance is not None else None
+            practice_context.set('last-time', student.id, task.id, last_time)
 
     return practice_context
 

@@ -51,9 +51,11 @@ class ScoreTaskSelector(TaskSelector):
             flow = predict_flow(student_id, task_id, practice_context)
             flow_score = self._score_flow(flow)
 
-            # last_attempt_time = practice_context.get_last_attempt_time(student_id, task_id)
-            #time = _score_time_since_last_attempt(last_attempt_time, practice_context.get_time())
-            time_score = 0.0
+            last_attempt_time = practice_context.get_last_attempt_time(
+                    student=student_id, task=task_id)
+            current_time = practice_context.get_time()
+            time_score = self._score_time_since_last_attempt(
+                    last_attempt_time, current_time)
 
             score = self.WEIGHT_FLOW * flow_score\
                     + self.WEIGHT_TIME * time_score

@@ -24,8 +24,14 @@ class TaskInstanceModel(models.Model):
     # when the task was shown to the student
     time_start = models.DateTimeField(default=datetime.now)
 
+    # when the last attempt report was sent
+    time_end = models.DateTimeField(null=True, default=None)
+
     # number of seconds the student spent solving the task
     time_spent = models.IntegerField(default=0)
+    # NOTE: we probably want to do not calculate it as (time_end - time start),
+    # because the task might not be shown to the user immediately after
+    # sending, we might want to not to include between-attempts pauses etc.
 
     # flag whether the user eventually solved the task
     solved = models.BooleanField(default=False)
@@ -96,6 +102,7 @@ class TaskInstanceModel(models.Model):
             # obsolete attempt, ignore
             return
 
+        self.time_end = datetime.now()
         self.attempt_count = attempt_count
         self.time_spent = time
         self.solved = solved
