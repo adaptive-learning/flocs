@@ -67,11 +67,11 @@ class TaskInstanceModel(models.Model):
         provided.
         """
         if self.reported_flow == FlowRating.DIFFICULT:
-            return -activation.AMPLITUDE
+            return -1.0 # -activation.AMPLITUDE
         elif self.reported_flow == FlowRating.RIGHT:
             return 0
         elif self.reported_flow == FlowRating.EASY:
-            return activation.AMPLITUDE
+            return 1.0 # activation.AMPLITUDE
         else:
             return None
 

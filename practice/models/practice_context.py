@@ -153,9 +153,10 @@ class PracticeContext(object):
 
     def update(self, parameter_name, student=None, task=None, update=None):
         assert update is not None
-        old_value = self._parameters[(parameter_name, student, task)]
+        old_value = self.get(parameter_name, student, task)
         new_value = update(old_value)
-        self._parameters[(parameter_name, student, task)] = new_value
+        #self._parameters[(parameter_name, student, task)] = new_value
+        self.set(parameter_name, student, task, new_value)
 
 
     def save(self):

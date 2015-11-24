@@ -16,18 +16,19 @@ STUDENT_GLOBAL_STEEPNESS = 1/8
 # Speed of task difficulty prediction learning
 TASK_GLOBAL_SPEED = 1
 
-def update_parameters(
-        student_id, task_id, reported_flow, predicted_flow, practice_context):
-    """Updates student's skills as well as task's global difficulty base on
+def update_parameters(practice_context, student_id, task_id, reported_flow,
+        predicted_flow):
+    """
+    Updates student's skills as well as task's global difficulty base on
     difference beween predicted and real feedback collected from the student.
     Update is somewhat based on ELO.
 
     Args:
+        practice_context: object with skill a difficulty parameters
         student_id: id of student
         task_id: id of task the student finnished
-        reported_flow: real flow collected from the student
-        predicted_flow: flow predicted by our model for student and task
-        practice_context: object with skill a difficulty vectors
+        reported_flow (float): real flow collected from the student
+        predicted_flow (float): flow predicted by our model for student and task
     """
     update_student_skills(
         student_id,
@@ -126,11 +127,11 @@ def update_task_difficulty(
 def update_global_skill_function(
         original, predicted_flow, reported_flow):
     """ A function for computing a new value of student's global skill. The
-    difference of the two flow (times constant that corresponds to the "speed
+    difference of the two flows (times constant that corresponds to the "speed
     of learning") is subtracted from original skill. Than some small number is
     added as learning profit of solving the given task. The profit is in form
     of a exponetial function that is slighly linearized (according to the
-    constants). These inscrements tend to fade out as the student already has
+    constants). These increments tend to fade out as the student already has
     high skill (the unlimited growth is practically imposible).
 
     Args:
@@ -138,8 +139,15 @@ def update_global_skill_function(
         predicted_flow: flow predicted by our model for student and task
         reported_flow: real flow collected from the student
     """
-    return original - STUDENT_GLOBAL_SPEED * (predicted_flow - reported_flow) \
-            + STUDENT_GLOBAL_STEP * exp((-STUDENT_GLOBAL_STEEPNESS) * original)
+    refined_skill_estimate = original \
+        - STUDENT_GLOBAL_SPEED * flow_deviation(predicted_flow, reported_flow)
+
+    # NOTE: the learning update is calculated using the already refined
+    # before-task skill estimate
+    learning_update = STUDENT_GLOBAL_STEP * exp(
+            (-STUDENT_GLOBAL_STEEPNESS) * refined_skill_estimate)
+    updated_skill = refined_skill_estimate + learning_update
+    return updated_skill
 
 def update_other_skill_function(original, reported_flow, discrimination):
     """ A function for computing a new value of student's game and programming
@@ -154,7 +162,7 @@ def update_other_skill_function(original, reported_flow, discrimination):
         reported_flow: real flow collected from the student
         dicscrimination: how much the concept contributes to task difficulty
     """
-    if discrimination > 0.0:
+    if reported_flow is not None and discrimination > 0.0:
         return max(original, reported_flow)
     else:
         return original
@@ -175,4 +183,13 @@ def update_global_difficulty_function(
         reported_flow: real flow collected from the student
     """
     return original + TASK_GLOBAL_SPEED/solution_count \
-            * (predicted_flow - reported_flow)
+            * flow_deviation(predicted_flow, reported_flow)
+
+
+def flow_deviation(predicted_flow, reported_flow):
+    """
+    Return deviation (surprise measure) between predicted and reported flow.
+    The deviation can be negative, if predicted flow is lower then reported
+    flow. If the reported_flow is None, the surprise is zero.
+    """
+    return predicted_flow - reported_flow if reported_flow is not None else 0.

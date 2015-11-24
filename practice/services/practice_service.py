@@ -9,6 +9,7 @@ from practice.models import TaskInstanceModel
 #from practice.services.task_selection import RandomTaskSelector as TaskSelector
 from practice.services.task_selection import ScoreTaskSelector as TaskSelector
 from practice.services.flow_prediction import predict_flow
+from practice.services.parameters_update import update_parameters
 
 logger = logging.getLogger(__name__)
 
@@ -90,10 +91,9 @@ def process_attempt_report(student, report):
     task = task_instance.task
     practice_context = create_practice_context(student=student, task=task)
     practice_context.update('solution-count', task=task.id, update=lambda n: n + 1)
-    # TODO: call update of model parameters
-    # with the args: task_id, student_id, reported_flow, predicted_flow, practice_context
-    #print('call update of model parameters ...', student.id, task.id,
-    #        task_instance.get_reported_flow(), task_instance.get_predicted_flow())
+    update_parameters(practice_context, student.id, task.id,
+            task_instance.get_reported_flow(),
+            task_instance.get_predicted_flow())
 
     # NOTE: There is a race condition when 2 students are updating parameters
     # for the same task at the same time. In the current conditons, this is
