@@ -9,9 +9,10 @@ angular.module('flocs.services')
     var taskInstanceId = null;
     var taskFinishedDeferred = null;
 
+
   // === public API ===
   return {
-    practicingTask: practicingTask
+    practicingTask: practicingTask,
   };
 
   function practicingTask() {
@@ -51,7 +52,9 @@ angular.module('flocs.services')
         taskInstanceId = newTaskInstance['task-instance-id'];
         var newTask = newTaskInstance['task'];
         newAttemptReport(newTask);
-        taskEnvironmentService.setTask(newTask, attemptFinished);
+        var instructionsText = newTaskInstance['instructions'];
+        taskEnvironmentService.setTask(
+                newTask, attemptFinished, instructionsText);
         return newTask;
       });
     return taskPromise;

@@ -11,6 +11,7 @@ from practice.models import StudentTaskInfoModel
 from practice.services.task_selection import ScoreTaskSelector as TaskSelector
 from practice.services.flow_prediction import predict_flow
 from practice.services.parameters_update import update_parameters
+from practice.services.instructions_service import get_instructions
 
 logger = logging.getLogger(__name__)
 
@@ -47,10 +48,13 @@ def get_next_task(student):
     student_task_info.last_instance = task_instance
     student_task_info.save()
 
+    instructions = get_instructions(student, task) 
+
     task_dictionary = task.to_json()
     task_instance_dictionary = {
         'task-instance-id': task_instance.pk,
-        'task': task_dictionary
+        'task': task_dictionary,
+        'instructions': instructions
     }
     logger.info("Task %s successfully picked for student %s", task_id, student.id)
     return task_instance_dictionary

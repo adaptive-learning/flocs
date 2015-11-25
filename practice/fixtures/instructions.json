@@ -2,7 +2,7 @@
   {
     "model": "practice.instructionsmodel",
     "fields": {
-        "flow_factor": -1,
+        "flow_factor": 255,
         "text": "Ukolem hry je dostat robota k truhle s pokladem. Robot je křeký a pokud narazíte do zdi, rozbije se."
     }
   },

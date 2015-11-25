@@ -20,6 +20,10 @@ angular.module('flocs.taskEnvironment')
     initialState: true
   };
 
+  var instructions = {
+      text: null
+  };
+
   workspaceService.addChangeListener(handleWorkspaceChange);
   mazeService.addChangeListener(handleMazeChange);
 
@@ -42,8 +46,8 @@ angular.module('flocs.taskEnvironment')
     // shared data
     blocksStatus: blocksStatus,
     toolsStatus: toolsStatus,
-    executionStatus: executionStatus
-
+    executionStatus: executionStatus,
+    instructions: instructions,
 
     //getMazeSettings: getMazeSettings,
     //getWorkspaceSettings: getWorkspaceSettings,
@@ -108,13 +112,14 @@ angular.module('flocs.taskEnvironment')
    * Set a new task in the environment. Optionally specify a callback to call
    * after each attempt of the user.
    */
-  function setTask(newTask, _afterAttemptCallback) {
+  function setTask(newTask, _afterAttemptCallback, instructionsText) {
     afterAttemptCallback = _afterAttemptCallback || null;
     currentTask = newTask;
     mazeService.set(getMazeSettings());
     workspaceService.set(getWorkspaceSettings());
     executionStatus.initialState = true;
     //changeNotification();
+    instructions.text = instructionsText.join(' ');
   }
 
   function setInitialState() {
