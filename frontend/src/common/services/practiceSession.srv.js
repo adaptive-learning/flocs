@@ -2,26 +2,26 @@
  * Practice Session Service
  */
 angular.module('flocs.services')
-.factory('practiceSessionService', ['$http', '$timeout', 'practiceDao', 'taskEnvironmentService',
-    function ($http, $timeout, practiceDao, taskEnvironmentService) {
+.factory('practiceSessionService', ['$http', '$timeout', '$q', 'practiceDao', 'taskEnvironmentService',
+    function ($http, $timeout, $q, practiceDao, taskEnvironmentService) {
 
     var attemptReport = null;
     var taskInstanceId = null;
+    var taskFinishedDeferred = null;
 
   // === public API ===
   return {
-    startPracticeSession: startPracticeSession
+    practicingTask: practicingTask
   };
 
-  // === private implementation ===
-
-  /**
-   * Start a new practice session
-   */
-  function startPracticeSession() {
-    // start first task
+  function practicingTask() {
+    taskFinishedDeferred = $q.defer();
     settingNextTask();
+    return taskFinishedDeferred.promise;
   }
+
+
+  // === private implementation ===
 
   function attemptFinished(result) {
     // we don't count additional attempts after the first successful one
@@ -29,13 +29,16 @@ angular.module('flocs.services')
       // TODO: add time information to the report
       attemptReport.attempt += 1;
       attemptReport.solved = result.solved;
+      /*if (result.solved) {
+      //  attemptReport.flowReport = askForFlowReport();
+      }*/
       practiceDao.sendingAttemptReport(attemptReport);
     }
 
     if (result.solved) {
       console.log('Task solved!');
       attemptReport = null;
-      $timeout(nextTaskDialog, 400);
+        taskFinishedDeferred.resolve();
     } else {
       console.log('Unsuccessful attempt.');
     }
@@ -54,12 +57,6 @@ angular.module('flocs.services')
     return taskPromise;
   }
 
-  function nextTaskDialog() {
-    // TODO: show modal ("Continue to next task?")
-    alert('Solved. Next task?');
-    settingNextTask();
-  }
-
   /*
    * Create new report for new attempt
    */
@@ -69,7 +66,9 @@ angular.module('flocs.services')
       //'task-id': task['task-id'],
       'attempt': 0,
       'time': 0,
-      'solved': false
+      'solved': false,
+      'flowReport': 0
     };
   }
+
 }]);
