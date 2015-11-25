@@ -1,0 +1,51 @@
+[
+  {
+    "model": "practice.instructionsmodel",
+    "fields": {
+        "flow_factor": -1,
+        "text": "Ukolem hry je dostat robota k truhle s pokladem. Robot je křeký a pokud narazíte do zdi, rozbije se."
+    }
+  },
+  {
+      "model": "practice.instructionsmodel",
+      "fields": {
+          "flow_factor": 2,
+          "text": "Při řešení úlohy můžete využít cykly. Cykly se hodí pro opakované vykonávání stejných příkazů bez nutnoti zbytečně psát nadbitený kód."
+      }
+  },
+  {
+      "model": "practice.instructionsmodel",
+      "fields": {
+          "flow_factor": 3,
+          "text": "V této úloze bude potřeba využít větvení programu pomocí podmínek. V určité chvíli se bude robot muset rozhodnou, jakou další akci vykoná podle aktuální situace, ve které se bude nacházet."
+      }
+  },
+  {
+      "model": "practice.instructionsmodel",
+      "fields": {
+          "flow_factor": 4,
+          "text": "Tato úloha vyžaduje použít nějaké logické výrazy v podmínkách pro úspěšné vyřešení úlohy."
+      }
+  },
+  {
+      "model": "practice.instructionsmodel",
+      "fields": {
+          "flow_factor": 5,
+          "text": "Některá políčka v tomto bludišti mají jinou než bílou barvu. Robot si těchto barev umí všímat a využít je k navigaci v bludišti."
+      }
+  },
+  {
+      "model": "practice.instructionsmodel",
+      "fields": {
+          "flow_factor": 6,
+          "text": "Po bludišti jsou různě rozmístěné klíče od truhly, které robot potřebuje sesbírat. Bez nich nelze truhlu s pokladme otevřít."
+      }
+  },
+  {
+      "model": "practice.instructionsmodel",
+      "fields": {
+          "flow_factor": 7,
+          "text": "Při procházení bludiště si dejte pozor na jámy. Robot je neumí odhalit a pokud do některé spadne, tak se z nich už neumí dostat."
+      }
+  }
+]

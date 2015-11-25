@@ -13,12 +13,12 @@ angular.module('flocs.maze')
 
       // TODO: move paths to a configuration service
       // token image path
-      var TOKEN_IMG_PATH = '/static/assets/img/token.svg';
+      var TOKEN_IMG_PATH = '/static/assets/img/key.svg';
       // blocks image paths
       var getBoxImagePath = function(box) {
         switch (box) {
           case BoxType.WALL: return '/static/assets/img/box.svg';
-          case BoxType.GOAL: return '/static/assets/img/bomb.svg';
+          case BoxType.GOAL: return '/static/assets/img/chest.svg';
           case BoxType.YELLOW: return '/static/assets/img/yellow.svg';
           case BoxType.GREEN: return '/static/assets/img/green.svg';
           case BoxType.BLUE: return '/static/assets/img/blue.svg';

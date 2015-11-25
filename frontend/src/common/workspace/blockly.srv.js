@@ -103,10 +103,10 @@ angular.module('flocs.workspace')
           },
           {
             "type": "field_image",
-            "src": "static/assets/img/bomb.svg",
+            "src": "static/assets/img/goal.svg",
             "width": 15,
             "height": 15,
-            "alt": "bombou"
+            "alt": "cílem"
           },
         ],
         "output":"Boolean",
