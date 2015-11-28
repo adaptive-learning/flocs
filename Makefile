@@ -78,3 +78,4 @@ admin:
 logs:
 	@mkdir -p logs >/dev/null
 	touch logs/practice.log
+	touch logs/requests.log

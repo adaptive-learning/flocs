@@ -124,10 +124,13 @@ LOGGING = {
         'version': 1,
         'formatters': {
             'production': {
-                'format': '%(levelname)s %(asctime)s %(module)s %(message)s'
+                'format': '[%(asctime)s] %(levelname)s %(module)s "%(message)s"'
                 },
             'devel': {
-                'format': '%(levelname)s %(module)s/%(filename)s/%(funcName)s : %(message)s'
+                'format': '[%(asctime)s] %(levelname)s %(module)s : "%(message)s" in %(filename)s:%(lineno)s'
+                },
+            'request': {
+                'format': '[%(asctime)s] %(levelname)s %(message)s'
                 }
             },
         'handlers': {
@@ -136,6 +139,12 @@ LOGGING = {
                 'class': 'logging.FileHandler',
                 'filename': 'logs/practice.log',
                 'formatter': 'devel'
+                },
+            'requests': {
+                'level': 'DEBUG',
+                'class': 'logging.FileHandler',
+                'filename': 'logs/requests.log',
+                'formatter': 'request'
                 }
             },
         'loggers': {
@@ -143,7 +152,11 @@ LOGGING = {
                 'handlers': ['practice'],
                 'level': 'DEBUG',
                 'propagate': True
-                }
+                },
+            'django.request' : {
+                'handlers': ['requests'],
+                'level': 'DEBUG',
+                'propagate': True
             }
         }
-
+    }

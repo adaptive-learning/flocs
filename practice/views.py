@@ -1,16 +1,19 @@
 """Access layer (controller) of practice app
 """
 
+from common.logUtils import LoggingUtils
 from django.contrib.auth.models import User
 from django.http import JsonResponse, HttpResponse
 from django.http import HttpResponseBadRequest
 from practice.services import practice_service
 import json
 
+logger = LoggingUtils()
 
 def get_next_task(request):
     """Return response with next task.
     """
+    logger.log_request(request)
     # TODO: get current student, user=request.user ?
     # hack for testing purposes
     user, _ = User.objects.get_or_create(id=17, username='LosKarlos')
@@ -24,6 +27,8 @@ def post_attempt_report(request):
     """
     if request.method != "POST":
         return HttpResponseBadRequest('Has to be POST request.')
+
+    logger.log_request(request)
 
     body_unicode = request.body.decode('utf-8')
     data = json.loads(body_unicode)
