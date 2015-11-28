@@ -64,8 +64,6 @@ db-load-data:
 	python manage.py create_admin
 	# tasks
 	python manage.py loaddata tasks/fixtures/tasks.xml
-	# difficulties of tasks
-	python manage.py loaddata practice/fixtures/tasks_difficulty.json
 	# instructions for flow factors
 	python manage.py loaddata practice/fixtures/instructions.json
 
