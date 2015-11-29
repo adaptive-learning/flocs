@@ -7,6 +7,7 @@ angular.module('flocs.services')
 
     var attemptReport = null;
     var taskInstanceId = null;
+    var taskStartTimestamp = null;
     var taskFinishedDeferred = null;
 
 
@@ -27,7 +28,7 @@ angular.module('flocs.services')
   function attemptFinished(result) {
     // we don't count additional attempts after the first successful one
     if (attemptReport !== null) {
-      // TODO: add time information to the report
+      attemptReport.time = calculateSolvingTime();
       attemptReport.attempt += 1;
       attemptReport.solved = result.solved;
       /*if (result.solved) {
@@ -45,13 +46,23 @@ angular.module('flocs.services')
     }
   }
 
+  /*
+   * Return time the user spent solving the task as a number of seconds.
+   */
+  function calculateSolvingTime() {
+    var taskFinishedTimestamp = Date.now();
+    var milisecondsSpent = taskFinishedTimestamp - taskStartTimestamp;
+    var secondsSpent = Math.ceil(milisecondsSpent / 1000);
+    return secondsSpent;
+  }
+
   function settingNextTask() {
-    // TODO: measure time
     var taskPromise = practiceDao.gettingNextTask()
       .then(function(newTaskInstance) {
         taskInstanceId = newTaskInstance['task-instance-id'];
         var newTask = newTaskInstance['task'];
         newAttemptReport(newTask);
+        taskStartTimestamp = Date.now();
         var instructionsText = newTaskInstance['instructions'];
         taskEnvironmentService.setTask(
                 newTask, attemptFinished, instructionsText);
