@@ -48,7 +48,7 @@ def get_next_task(student):
     student_task_info.last_instance = task_instance
     student_task_info.save()
 
-    instructions = get_instructions(student, task) 
+    instructions = get_instructions(student, task)
 
     task_dictionary = task.to_json()
     task_instance_dictionary = {

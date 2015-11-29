@@ -10,16 +10,16 @@ class InstructionsModel(models.Model):
     Represents the instruction messages that are shown to the user when dealing
     with new concept.
     """
-    
+
     GENERAL_COMMENT = 255
 
     FLOWS_FACTOR_VALUES = (
-        (GENERAL_COMMENT,                          'instructions on basics of the game'),
-        (FlowFactors.LOGIC_EXPR.value, 'instructions conserning logical expresions'),
-        (FlowFactors.COLORS.value,     'instructions conserning colors'),
-        (FlowFactors.TOKENS.value,     'instructions conserning tokens'),
-        (FlowFactors.PITS.value,       'instructions conserning pits'),
-        (FlowFactors.LOOPS.value,      'instructions conserning loops'),
+        (GENERAL_COMMENT,              'instructions on basics of the game'),
+        (FlowFactors.LOGIC_EXPR.value, 'instructions concerning logical expresions'),
+        (FlowFactors.COLORS.value,     'instructions concerning colors'),
+        (FlowFactors.TOKENS.value,     'instructions concerning tokens'),
+        (FlowFactors.PITS.value,       'instructions concerning pits'),
+        (FlowFactors.LOOPS.value,      'instructions concerning loops'),
         (FlowFactors.CONDITIONS.value, 'instructions on how to use conditions')
     )
 

@@ -11,6 +11,8 @@ from . import practice_service
 
 class PracticeServiceTest(TestCase):
 
+    fixtures = ['instructions.json']
+
     def setUp(self):
         self.student = User.objects.create()
 
