@@ -8,6 +8,7 @@ angular.module('flocs', [
     'flocs.home',
     'flocs.practice',
     'flocs.taskPreview',
+    'ngDialog'
 ])
 
 // routes configuration
@@ -71,4 +72,19 @@ angular.module('flocs', [
 // Main application controller
 .controller('appCtrl', ['$scope', function($scope) {
   // global configuration (user, language) functions go here
+}])
+
+// Configuration of ngDialog module
+.config(['ngDialogProvider', function (ngDialogProvider) {
+  ngDialogProvider.setDefaults({
+    className: 'ngdialog-theme-default',
+    plain: false,
+    showClose: true,
+    closeByDocument: true,
+    closeByEscape: true,
+    appendTo: false,
+    preCloseCallback: function () {
+      console.log('default pre-close callback');
+    }
+  });
 }]);

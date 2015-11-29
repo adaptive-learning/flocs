@@ -51,9 +51,13 @@ module.exports = function (grunt) {
         'vendor/blockly/python_compressed.js',
         'vendor/blockly/blocks_compressed.js',
         'vendor/blockly/msg/js/en.js',
-        'vendor/JS-Interpreter/acorn_interpreter.js'
+        'vendor/JS-Interpreter/acorn_interpreter.js',
+        'vendor/ngDialog/js/ngDialog.js'
       ],
       css: [
+        'vendor/ngDialog/css/ngDialog.css',
+        'vendor/ngDialog/css/ngDialog-theme-plain.css',
+        'vendor/ngDialog/css/ngDialog-theme-default.css'
       ],
       assets: [
       ]
