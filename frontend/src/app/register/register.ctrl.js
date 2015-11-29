@@ -2,10 +2,9 @@
  * Controller for register page
  */
 angular.module('flocs.user')
-.controller('registerCtrl', ['$scope','$location','$log','userDao', 
-    function($scope,$location,$log,userDao){
-
-	    function send(){
+.controller('registerCtrl', ['$scope','$location','$log','$state','userDao', 
+    function($scope,$location,$log, $state,userDao){
+	    function register(){
             var username = $scope['username'];
             $log.log($scope['username']);
             var firstname = $scope['firstname'];
@@ -13,10 +12,10 @@ angular.module('flocs.user')
             var email = $scope['email'];
 			var passwd = $scope['password'];
 			if (userDao.registerUser(username,firstname,lastname,email,passwd) === true){
-				$location.url("/succes.html");
+				$state.go('home'); 
 			}else{
-				$location.url("/");
+				$state.go($state.current, {}, {reload: true}); 
 			}
         }
-        $scope.send = send;
+        $scope.register = register;
 }]);

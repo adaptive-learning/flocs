@@ -11,12 +11,16 @@ def login(request):
     response = {}
     try:
         username = data['username']
+    except KeyError:
+        response['loggedIn'] = '0'
+        response['msg'] = 'request doesnt contain username'
+        return JsonResponse(response)
+    try:
         password = data['password']
     except KeyError:
         response['loggedIn'] = '0'
-        response['msg'] = 'request doesnt contain username or password'
+        response['msg'] = 'request doesnt contain password'
         return JsonResponse(response)
-    print (username,password)
     if UserManager.login(request = request, username = username, password = password):
         response['loggedIn'] = '1'
         response['username'] = username
@@ -26,11 +30,8 @@ def login(request):
     return JsonResponse(response)
 
 def register(request):
-    print (request)
-    print (request.body)
     if request.method != "POST":
         return HttpResponseBadRequest('Has to be POST request.')
-    print (request.POST)
     body_unicode = request.body.decode('utf-8')
     data = json.loads(body_unicode)
     response = {}
@@ -45,18 +46,16 @@ def register(request):
         response['msg'] = 'request doesnt contain one of fields'
         return JsonResponse(response)
     UserManager.register(username, firstname, lastname, email, passwd)
-    response['registred']= '1'
-    print ('user ', username, ' is created')
+    response['registred']= True
     return JsonResponse(response)
 
 def logout(request):
-    response = UserManager.logout(request)
+    UserManager.logout(request)
+    response = {}
+    response['data'] = True
     return JsonResponse(response)
 
 def loggedIn(request):
     response = {}
-    if request.user.is_authenticated():
-        response['username'] = request.user.username
-    else:
-        response['username'] = ''
+    response['username'] = UserManager.loggedIn(request)
     return JsonResponse(response)

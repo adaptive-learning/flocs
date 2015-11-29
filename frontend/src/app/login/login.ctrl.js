@@ -2,27 +2,38 @@
  * Controller for login form
  */
 angular.module('flocs.user',[])
-.controller('loginCtrl',['$scope','$location', '$log','userDao',
-	function($scope,$location, $log,userDao){
+.controller('loginCtrl',['$scope','$location', '$log', '$state', 'userDao',
+	function($scope,$location, $log, $state ,userDao){
+        $scope.loginForm = {};
+        $scope.model = {
+            username: undefined,
+            password: undefined
+        };
+        $scope.user = {username: undefined};
         userDao.loggedIn().then(function(response){
-            $scope.user = response.data.username;
+            $scope.user = {username:response.data.username};
         });
-		function send(){
-			var username = $scope['username'];
-            $log.log($scope['username']);
-			var passwd = $scope['password'];
+		function login(){
+			var username = $scope.model.username;
+			var passwd = $scope.model.password;
             userDao.login(username, passwd)
                 .then(function(response){
-                    $log.log(response);
 			        if (response.data.loggedIn  == 1){
-				        $location.url(".");
+                        $scope.errormsg = "";
+                        $state.go($state.current, {}, {reload: true}); 
         			}else{
                         $log.log(response.data.msg);
-		        		$location.url("/403.html");
+                        $scope.errormsg = "Zadali jste špatné údaje!";
 			        }
                 });
 
 		}
-    $scope.send = send;
+        function logout(){
+            userDao.logout().then(function(response){
+                $state.go($state.current, {}, {reload: true}); 
+            });
+        }
+    $scope.login = login;
+    $scope.logout = logout;
 }]);
 

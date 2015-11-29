@@ -3,11 +3,11 @@
  */
 angular.module('flocs.services')
 .factory('userDao',['$http', '$log', function($http, $log) {
-	//
 	return {
         registerUser: registerUser,
         login : login,
-        loggedIn : loggedIn
+        loggedIn : loggedIn,
+        logout: logout
 	};
 
 	function registerUser(username,firstname,lastname,email,passwd) {
@@ -18,7 +18,6 @@ angular.module('flocs.services')
 			'email':email,
 			'password':passwd
 		};
-        $log.log(data);
 		return $http.post ('api/user/register', data)
             .success(function(response){
 		return response;
@@ -39,6 +38,10 @@ angular.module('flocs.services')
 
      function loggedIn(){
      return $http.get('api/user/loggedin');
+     }
+
+     function logout(){
+     return $http.get('api/user/logout');
      }
 
 }]);

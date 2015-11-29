@@ -24,7 +24,7 @@ urlpatterns = [
     # admin
     url(r'^admin/', include(admin.site.urls)),
 
-    # server APiI
+    # server API
     url(r'^api/user/',include(user_urls)),
     url(r'^api/practice/', include(practice_urls)),
     url(r'^api/tasks/', include(tasks_urls)),
