@@ -58,6 +58,14 @@ angular.module('flocs', [
   // use URLs without hashes (if the browser supports HTML5 history)
   $locationProvider.html5Mode(true);
 
+
+  // --- global (re)definitions ---
+  // Date.now() to work with older browsers (e.g. IE8)
+  // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Date/now
+  if (!Date.now) {
+    Date.now = function now() { return new Date().getTime(); };
+  }
+
 }])
 
 // Main application controller
