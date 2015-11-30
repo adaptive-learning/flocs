@@ -10,8 +10,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         generated = tasks_difficulty_generator.generate()
-        if bool(generated):
-            self.stdout.write("Tasks difficulty successfully generated: " + str(generated))
-        else:
-            self.stdout.write("No tasks difficulties were generated.")
-
+        self.stdout.write("Task difficulties generated: "
+                + str(len(generated))
+                + " [practice/fixtures/task-difficulties.json]")

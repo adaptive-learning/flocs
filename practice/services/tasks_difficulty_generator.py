@@ -2,11 +2,12 @@
     Tools for generating task's difficulty and guessing relation to concept
 """
 
-from tasks.models.task import TaskModel
-from practice.models.tasks_difficulty import TasksDifficultyModel
-
+from django.core import management
 from decimal import Decimal
 from math import tanh
+
+from tasks.models.task import TaskModel
+from practice.models.tasks_difficulty import TasksDifficultyModel
 
 """
     Specifies which blocks in some task implies game concept of the task.
@@ -57,8 +58,8 @@ def generate():
 
         If there is already model for some task, it will NOT update it.
     """
-    # dictionary for returned generated tasks
-    generated = {}
+    # list of generated difficulties
+    generated = []
     # take only those tasks, which do not have yet difficulty defined
     tasks = TaskModel.objects.filter(tasksdifficultymodel__pk__isnull=True)
     for task in tasks:
@@ -110,11 +111,11 @@ def generate():
         points += 7 * ('variables_category' in blocks) - 4
         # functions used
         points += 7 * ('functions_category' in blocks) - 4
-        # transfer to [-1,1] 
+        # transfer to [-1,1]
         programming = tanh(points/50)
 
         # create task difficulty row in the db
-        TasksDifficultyModel.objects.create(
+        task_difficulty = TasksDifficultyModel.objects.create(
                 task=task,
                 programming=Decimal(programming),
                 conditions=('conditions' in concepts),
@@ -124,8 +125,23 @@ def generate():
                 tokens=('tokens' in concepts),
                 pits=('pits' in concepts)
                 )
-        generated[task.pk] = [TasksDifficultyModel.objects.get(task=task).programming, concepts]
+        #generated[task.pk] = [TasksDifficultyModel.objects.get(task=task).programming, concepts]
+        generated.append(task_difficulty)
+
+    # Store all task difficulties as fixture, necessary for isolated testing
+    # and simulations
+    create_task_difficulties_fixture()
+
     return generated
+
+def create_task_difficulties_fixture():
+    """
+    Create fixture of all task difficultes
+    """
+    with open('practice/fixtures/task-difficulties.json', 'w') as f:
+        management.call_command('dumpdata', 'practice.TasksDifficultyModel',
+                indent=2, stdout=f)
+
 
 def __number_of_blocks__(blocks):
     if blocks[0].endswith('category'):

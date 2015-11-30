@@ -1,0 +1,72 @@
+[
+{
+  "pk": 1,
+  "model": "practice.tasksdifficultymodel",
+  "fields": {
+    "conditions": false,
+    "loops": true,
+    "tokens": true,
+    "logic_expr": true,
+    "solution_count": 0,
+    "pits": true,
+    "colors": false,
+    "programming": "0.020"
+  }
+},
+{
+  "pk": 2,
+  "model": "practice.tasksdifficultymodel",
+  "fields": {
+    "conditions": false,
+    "loops": false,
+    "tokens": true,
+    "logic_expr": true,
+    "solution_count": 0,
+    "pits": true,
+    "colors": false,
+    "programming": "-0.327"
+  }
+},
+{
+  "pk": 3,
+  "model": "practice.tasksdifficultymodel",
+  "fields": {
+    "conditions": false,
+    "loops": false,
+    "tokens": true,
+    "logic_expr": true,
+    "solution_count": 0,
+    "pits": false,
+    "colors": false,
+    "programming": "-0.345"
+  }
+},
+{
+  "pk": 4,
+  "model": "practice.tasksdifficultymodel",
+  "fields": {
+    "conditions": false,
+    "loops": false,
+    "tokens": false,
+    "logic_expr": true,
+    "solution_count": 0,
+    "pits": false,
+    "colors": false,
+    "programming": "-0.363"
+  }
+},
+{
+  "pk": 5,
+  "model": "practice.tasksdifficultymodel",
+  "fields": {
+    "conditions": false,
+    "loops": false,
+    "tokens": false,
+    "logic_expr": true,
+    "solution_count": 0,
+    "pits": false,
+    "colors": false,
+    "programming": "-0.446"
+  }
+}
+]
