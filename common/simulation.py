@@ -2,6 +2,7 @@ from abc import ABCMeta, abstractmethod
 from collections import OrderedDict
 from datetime import datetime
 from django.test import TestCase
+import csv
 import json
 import os
 
@@ -35,6 +36,13 @@ class SimulationLogger(object):
     def save_json(self, path):
         with open(path, 'w') as outfile:
             json.dump(self.rounds, outfile, indent=2, ensure_ascii=False)
+
+    def save_csv(self, path):
+        fieldnames = self.rounds[0].keys() if self.rounds else []
+        with open(path, 'w') as outfile:
+            writer = csv.DictWriter(outfile, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(self.rounds)
 
 
 class Simulation(TestCase, metaclass=ABCMeta):

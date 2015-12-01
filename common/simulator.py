@@ -10,7 +10,7 @@ class Simulator(object):
 
     def run(self, simulation):
         self._test_runner.run_single_test(simulation)
-        simulation.logger.save(file_format='json')
+        simulation.logger.save(file_format='csv')
 
 
 class _PassiveTestRunner(DiscoverRunner):
