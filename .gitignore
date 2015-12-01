@@ -4,6 +4,7 @@ __pycache__/
 
 #  Generated data
 simulated-data/
+practice/fixtures/task-difficulties.json
 
 # DB
 db.*
