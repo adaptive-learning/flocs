@@ -1,0 +1,11 @@
+instance,student-STUDENT_BIAS,student-LOOPS,student-CONDITIONS,student-LOGIC_EXPR,student-COLORS,student-TOKENS,student-PITS,task-id,task-TASK_BIAS,task-LOOPS,task-CONDITIONS,task-LOGIC_EXPR,task-COLORS,task-TOKENS,task-PITS,instructions,flow-prediction,time-spent,flow-report,updated-task-difficulty
+1,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,10,-0.493,0,0,0,0,0,0,"Úkolem hry je dostat robota k truhle s pokladem. Pokud robot robot narazí do zdi, rozbije se.",-0.5588527150080483,1800,1,-0.052
+2,-1.142,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,9,-0.493,0,0,0,0,0,0,"Úkolem hry je dostat robota k truhle s pokladem. Pokud robot robot narazí do zdi, rozbije se.",-0.6993107340691898,1800,1,-0.192
+3,-1.143,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,8,-0.493,0,0,0,0,0,0,"Úkolem hry je dostat robota k truhle s pokladem. Pokud robot robot narazí do zdi, rozbije se.",-0.7002644066425073,1800,1,-0.193
+4,-1.143,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,6,-0.493,0,0,0,0,0,0,"Úkolem hry je dostat robota k truhle s pokladem. Pokud robot robot narazí do zdi, rozbije se.",-0.7002644066425073,1800,1,-0.193
+5,-1.143,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,5,-0.493,0,0,0,0,0,0,"Úkolem hry je dostat robota k truhle s pokladem. Pokud robot robot narazí do zdi, rozbije se.",-0.7002644066425073,1800,1,-0.193
+6,-1.143,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,4,-0.493,0,0,0,0,0,0,"Úkolem hry je dostat robota k truhle s pokladem. Pokud robot robot narazí do zdi, rozbije se.",-0.7002644066425073,1800,1,-0.193
+7,-1.143,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,3,-0.493,0,0,0,0,0,0,"Úkolem hry je dostat robota k truhle s pokladem. Pokud robot robot narazí do zdi, rozbije se.",-0.7002644066425073,1800,1,-0.193
+8,-1.143,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,2,-0.493,0,0,0,0,0,0,"Úkolem hry je dostat robota k truhle s pokladem. Pokud robot robot narazí do zdi, rozbije se.",-0.7002644066425073,1800,1,-0.193
+9,-1.143,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,1,-0.493,0,0,0,0,0,0,"Úkolem hry je dostat robota k truhle s pokladem. Pokud robot robot narazí do zdi, rozbije se.",-0.7002644066425073,1800,1,-0.193
+10,-1.143,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,7,-0.478,0,0,0,0,0,0,"Úkolem hry je dostat robota k truhle s pokladem. Pokud robot robot narazí do zdi, rozbije se.",-0.7145070061245643,1800,1,-0.193
