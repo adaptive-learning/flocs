@@ -6,6 +6,7 @@ from common.flow_factors import FlowFactors
 from common.simulation import Simulation
 from tasks.models import TaskModel
 from practice.models import TasksDifficultyModel
+from practice.models import TaskInstanceModel
 from practice.models import StudentsSkillModel
 from practice.services import practice_service
 
@@ -55,8 +56,10 @@ class PracticeSimulation(Simulation):
             task_difficulty = task_difficulty.get_difficulty_dict()
             for factor in FlowFactors.task_factors():
                 self.logger.log('task-' + factor.name, task_difficulty[factor])
-
             self.logger.log('instructions', ' '.join(task_dict['instructions']))
+
+            self.logger.log('flow-prediction', TaskInstanceModel.objects
+                .get(id=task_dict['task-instance-id']).predicted_flow)
 
             time = self.behavior.spent_time(task_difficulty)
             flow = self.behavior.report_flow(task_difficulty)
@@ -79,5 +82,3 @@ class PracticeSimulation(Simulation):
 
             instances_count += 1
             time_spent += time
-
-            # TODO: add predictions
