@@ -13,7 +13,6 @@ class FlowFactors(Enum):
     TOKENS          = 6
     PITS            = 7
 
-
     @classmethod
     def game_factors(cls):
         return [cls.COLORS, cls.TOKENS, cls.PITS]

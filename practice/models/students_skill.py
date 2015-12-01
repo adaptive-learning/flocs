@@ -77,6 +77,8 @@ class StudentsSkillModel(models.Model):
         return skill_dict
 
     def __str__(self):
-        return 'student={student}, skill={skill}'.format(
+        skill_dict = self.get_skill_dict()
+        skills = [str(skill_dict[factor]) for factor in FlowFactors.student_factors()]
+        return 'student={student}, skill=({skills})'.format(
             student=self.student.pk,
-            skill=self.get_skill_dict())
+            skills=','.join(skills))

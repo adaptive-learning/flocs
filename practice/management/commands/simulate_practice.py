@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from math import inf
 from common.simulator import Simulator
-from practice.services.practice_simulation import SIMULATED_STUDENTS
+from practice.services.simulated_students import SIMULATED_STUDENTS
 from practice.services.practice_simulation import PracticeSimulation
 
 class Command(BaseCommand):

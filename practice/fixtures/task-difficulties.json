@@ -1,72 +1,506 @@
 [
 {
   "pk": 1,
-  "model": "practice.tasksdifficultymodel",
   "fields": {
+    "logic_expr": false,
+    "loops": false,
     "conditions": false,
-    "loops": true,
-    "tokens": true,
-    "logic_expr": true,
-    "solution_count": 0,
-    "pits": true,
+    "pits": false,
     "colors": false,
-    "programming": "0.020"
-  }
+    "tokens": false,
+    "programming": "-0.493",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
 },
 {
   "pk": 2,
-  "model": "practice.tasksdifficultymodel",
   "fields": {
-    "conditions": false,
+    "logic_expr": false,
     "loops": false,
-    "tokens": true,
-    "logic_expr": true,
-    "solution_count": 0,
-    "pits": true,
+    "conditions": false,
+    "pits": false,
     "colors": false,
-    "programming": "-0.327"
-  }
+    "tokens": false,
+    "programming": "-0.493",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
 },
 {
   "pk": 3,
-  "model": "practice.tasksdifficultymodel",
   "fields": {
-    "conditions": false,
+    "logic_expr": false,
     "loops": false,
-    "tokens": true,
-    "logic_expr": true,
-    "solution_count": 0,
+    "conditions": false,
     "pits": false,
     "colors": false,
-    "programming": "-0.345"
-  }
+    "tokens": false,
+    "programming": "-0.493",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
 },
 {
   "pk": 4,
-  "model": "practice.tasksdifficultymodel",
   "fields": {
-    "conditions": false,
+    "logic_expr": false,
     "loops": false,
-    "tokens": false,
-    "logic_expr": true,
-    "solution_count": 0,
+    "conditions": false,
     "pits": false,
     "colors": false,
-    "programming": "-0.363"
-  }
+    "tokens": false,
+    "programming": "-0.493",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
 },
 {
   "pk": 5,
-  "model": "practice.tasksdifficultymodel",
   "fields": {
-    "conditions": false,
+    "logic_expr": false,
     "loops": false,
-    "tokens": false,
-    "logic_expr": true,
-    "solution_count": 0,
+    "conditions": false,
     "pits": false,
     "colors": false,
-    "programming": "-0.446"
-  }
+    "tokens": false,
+    "programming": "-0.493",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 6,
+  "fields": {
+    "logic_expr": false,
+    "loops": false,
+    "conditions": false,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.493",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 7,
+  "fields": {
+    "logic_expr": false,
+    "loops": false,
+    "conditions": false,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.478",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 8,
+  "fields": {
+    "logic_expr": false,
+    "loops": false,
+    "conditions": false,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.493",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 9,
+  "fields": {
+    "logic_expr": false,
+    "loops": false,
+    "conditions": false,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.493",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 10,
+  "fields": {
+    "logic_expr": false,
+    "loops": false,
+    "conditions": false,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.493",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 11,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": false,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.273",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 12,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": false,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.291",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 13,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": true,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.254",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 14,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": true,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.273",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 15,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": true,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.273",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 16,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": true,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.254",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 17,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": true,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.217",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 18,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": false,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.273",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 19,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": true,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.100",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 20,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": false,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.254",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 21,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": true,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.235",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 22,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": true,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.197",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 23,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": false,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.291",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 24,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": false,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "0.080",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 25,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": false,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.273",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 26,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": false,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.273",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 27,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": false,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.139",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 28,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": true,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.060",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 29,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": true,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.060",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 30,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": true,
+    "pits": false,
+    "colors": false,
+    "tokens": false,
+    "programming": "-0.020",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 31,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": true,
+    "pits": false,
+    "colors": true,
+    "tokens": true,
+    "programming": "-0.159",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 32,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": true,
+    "pits": false,
+    "colors": true,
+    "tokens": false,
+    "programming": "-0.060",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 33,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": true,
+    "pits": false,
+    "colors": true,
+    "tokens": true,
+    "programming": "0.000",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 34,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": true,
+    "pits": false,
+    "colors": false,
+    "tokens": true,
+    "programming": "-0.040",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 35,
+  "fields": {
+    "logic_expr": false,
+    "loops": true,
+    "conditions": true,
+    "pits": false,
+    "colors": true,
+    "tokens": true,
+    "programming": "-0.040",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
+},
+{
+  "pk": 36,
+  "fields": {
+    "logic_expr": true,
+    "loops": true,
+    "conditions": true,
+    "pits": false,
+    "colors": true,
+    "tokens": true,
+    "programming": "0.139",
+    "solution_count": 0
+  },
+  "model": "practice.tasksdifficultymodel"
 }
 ]

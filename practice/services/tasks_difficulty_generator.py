@@ -49,7 +49,7 @@ AVG_BLOCKS = 5
 # average number of tokens
 AVG_TOKENS= 5
 
-def generate():
+def generate(create_fixture=False):
     """
         Method generates data in tasks_difficulty model.
 
@@ -130,7 +130,8 @@ def generate():
 
     # Store all task difficulties as fixture, necessary for isolated testing
     # and simulations
-    create_task_difficulties_fixture()
+    if create_fixture:
+        create_task_difficulties_fixture()
 
     return generated
 

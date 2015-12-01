@@ -1,75 +1,13 @@
 from django.contrib.auth.models import User
-from abc import ABCMeta, abstractmethod
 from math import inf
+from collections import OrderedDict
+
+from common.flow_factors import FlowFactors
 from common.simulation import Simulation
 from tasks.models import TaskModel
-from practice.models.task_instance import FlowRating
 from practice.models import TasksDifficultyModel
+from practice.models import StudentsSkillModel
 from practice.services import practice_service
-
-class SimulatedStudent(metaclass=ABCMeta):
-    """
-    Base class for a simulated user
-    """
-    @abstractmethod
-    def spent_time(self, task_difficulty):
-        """
-        Return number of second it took the student to solve the task
-        """
-        pass
-
-    @abstractmethod
-    def report_flow(self, task_difficulty):
-        """
-        Return flow report after a task (1=difficult, 2=right, 3=easy)
-        """
-        pass
-
-
-class GeniusStudent(SimulatedStudent):
-    """
-    Genius student solves any task in 10 seconds and all are too easy for her.
-    """
-    def spent_time(self, *args, **kwargs):
-        return 10
-
-    def report_flow(self, *args, **kwargs):
-        return FlowRating.EASY
-
-
-class StupidStudent(SimulatedStudent):
-    """
-    Stupid student solves any task in 30 minuts and all are too difficult for
-    him.
-    """
-    def spent_time(self, *args, **kwargs):
-        return 60 * 30
-
-    def report_flow(self, *args, **kwargs):
-        return FlowRating.DIFFICULT
-
-
-class InteractiveStudent(SimulatedStudent):
-    """
-    Allows for interactive simulation
-    """
-    def spent_time(self, *args, **kwargs):
-        time_input = input('Spent time (seconds): ')
-        time = int(time_input)
-        return time
-
-    def report_flow(self, task_difficulty):
-        #print('Task:', task_difficulty)
-        flow_input = input('Report flow (1=difficult, 2=right, 3=easy): ')
-        flow = int(flow_input) if flow_input in '123' else 0
-        return flow
-
-
-SIMULATED_STUDENTS = {
-    'genius': GeniusStudent,
-    'stupid': StupidStudent,
-    'interactive': InteractiveStudent
-}
 
 
 class PracticeSimulation(Simulation):
@@ -78,9 +16,7 @@ class PracticeSimulation(Simulation):
     """
 
     fixtures = ['tasks', 'task-difficulties', 'instructions']
-
-    def setUp(self):
-        print('::setUp')
+    log_path_pattern = 'practice/simulated-data/practice-simulation-{timestamp}'
 
     def prepare(self, behavior, max_instances=20, max_time=inf):
         """
@@ -96,29 +32,52 @@ class PracticeSimulation(Simulation):
         self.max_time = max_time
 
     def run_simulation(self):
-        print('::run')
-        print(self.behavior)
-        print(len(TasksDifficultyModel.objects.all()))
-        print(len(TaskModel.objects.all()))
-
+        """
+        Run the simulation and create simulation log as a list of dictionaries,
+        each dictonary for one task instance taken.
+        """
+        # TODO: decomposition
         user = User.objects.create()
-
         instances_count, time_spent = 0, 0
         while instances_count < self.max_instances and time_spent < self.max_time:
-            print('TODO: print info about student skill')
+            self.logger.new_round()
+            self.logger.log('instance', instances_count + 1)
+
             task_dict = practice_service.get_next_task(user)
-            print('TODO: output task ...')
-            print('TODO: get task_difficulty')
-            task_difficulty = None
+            task_id = task_dict['task']['task-id']
+            task_difficulty = TasksDifficultyModel.objects.get(task_id=task_id)
+
+            student_skill = StudentsSkillModel.objects.get(student=user.id).get_skill_dict()
+            for factor in FlowFactors.student_factors():
+                self.logger.log('student-' + factor.name, student_skill[factor])
+
+            self.logger.log('task-id', task_id)
+            task_difficulty = task_difficulty.get_difficulty_dict()
+            for factor in FlowFactors.task_factors():
+                self.logger.log('task-' + factor.name, task_difficulty[factor])
+
+            self.logger.log('instructions', ' '.join(task_dict['instructions']))
+
             time = self.behavior.spent_time(task_difficulty)
             flow = self.behavior.report_flow(task_difficulty)
+
+            self.logger.log('time-spent', time)
+            self.logger.log('flow-report', flow)
+
             report = {
                 'task-instance-id': task_dict['task-instance-id'],
-                'attempt': 0,
+                'attempt': 1,
                 'solved': True,
                 'time': time,
                 'flow-report': flow
             }
             practice_service.process_attempt_report(user, report)
+
+            self.logger.log('updated-task-difficulty',
+                    TasksDifficultyModel.objects.get(task_id=task_id) \
+                    .get_difficulty_dict()[FlowFactors.TASK_BIAS])
+
             instances_count += 1
             time_spent += time
+
+            # TODO: add predictions

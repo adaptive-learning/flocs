@@ -93,9 +93,17 @@ class TasksDifficultyModel(models.Model):
         return num
 
     def __str__(self):
-        return 'task={task}, difficulty={difficulty}'.format(
+        return ('task={task}, difficulty={difficulty}, '
+                'concepts={loops}{conditions}{logic_expr}'
+                '|{colors}{tokens}{pits}').format(
             task=self.task.pk,
-            difficulty=self.get_difficulty_dict())
+            difficulty=self.programming,
+            loops=str(int(self.loops)),
+            conditions=str(int(self.conditions)),
+            logic_expr=str(int(self.logic_expr)),
+            colors=str(int(self.colors)),
+            tokens=str(int(self.tokens)),
+            pits=str(int(self.pits)))
 
 def _convert_boolean_to_concept_weight(boolean):
     return CONCEPT_WEIGHT if boolean else 0

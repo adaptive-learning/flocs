@@ -68,7 +68,11 @@ def process_attempt_report(student, report):
         report: dictionary with the fields specified in:
             https://github.com/effa/flocs/wiki/Server-API#apipracticeattempt-report
     Raises:
-        ValueError: If the student argument is None.
+        ValueError:
+            - If the student argument is None.
+            - If the report doesn't belong to the student.
+            - If it's reporting an obsolete attempt (i.e. new attempt was
+              already processed).
     """
     if not student:
         raise ValueError('Student is required for process_task_result')
@@ -84,7 +88,7 @@ def process_attempt_report(student, report):
     task_instance = TaskInstanceModel.objects.get(id=task_instance_id)
     if  attempt_count <= task_instance.attempt_count:
         # it means that this report is obsolete
-        return
+        raise ValueError("Obsolete attempt report can't be processed.")
 
     if student.id != task_instance.student.id:
         raise ValueError("Report doesn't belong to the student.")

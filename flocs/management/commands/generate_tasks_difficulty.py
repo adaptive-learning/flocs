@@ -9,7 +9,7 @@ class Command(BaseCommand):
             "have no difficulty specified - no overwriting.")
 
     def handle(self, *args, **options):
-        generated = tasks_difficulty_generator.generate()
+        generated = tasks_difficulty_generator.generate(create_fixture=True)
         self.stdout.write("Task difficulties generated: "
                 + str(len(generated))
                 + " [practice/fixtures/task-difficulties.json]")
