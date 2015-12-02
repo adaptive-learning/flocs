@@ -15,7 +15,7 @@ dependencies: backend-dependencies frontend-dependencies
 
 backend-dependencies:
 	@echo "== Install Python dependencies. =="
-	pip install -r requirements.txt --quiet
+	pip install -r requirements.txt
 
 frontend-dependencies:
 	@echo "== Install frontend dependencies. =="
