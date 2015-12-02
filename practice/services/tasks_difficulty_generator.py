@@ -95,7 +95,7 @@ def generate(create_fixture=False):
         # number of concepts
         points += len(concepts) - AVG_CONCEPTS
         # number of blocks
-        points += __number_of_blocks__(blocks) - AVG_BLOCKS
+        points += number_of_blocks(blocks) - AVG_BLOCKS
         # if there is blocks limit
         points += 5 * ('blocksLimit' in workspace) - 3
         # maze grid size
@@ -111,6 +111,9 @@ def generate(create_fixture=False):
         points += 7 * ('variables_category' in blocks) - 4
         # functions used
         points += 7 * ('functions_category' in blocks) - 4
+        # number of free space in the maze
+        points += number_of_free_space(grid) / 5
+
         # transfer to [-1,1]
         programming = tanh(points/50)
 
@@ -144,9 +147,16 @@ def create_task_difficulties_fixture():
                 indent=2, stdout=f)
 
 
-def __number_of_blocks__(blocks):
+def number_of_blocks(blocks):
     if blocks[0].endswith('category'):
         return 5*len(blocks)
     else:
         return len(blocks)
 
+def number_of_free_space(grid):
+    num = 0
+    for row in grid:
+        for position in row:
+            if position == 0:
+                num += 1
+    return num

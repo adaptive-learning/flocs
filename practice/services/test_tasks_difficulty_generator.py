@@ -63,12 +63,12 @@ class TasksDifficultyGeneratorTest(TestCase):
 
     def test_number_of_blocks_category(self):
         blocks = ["loops_category", "foo_category", "bar_category"]
-        num = tasks_difficulty_generator.__number_of_blocks__(blocks)
+        num = tasks_difficulty_generator.number_of_blocks(blocks)
         self.assertEquals(3 * 5, num)
 
     def test_number_of_blocks(self):
         blocks = ["loops", "foo", "bar"]
-        num = tasks_difficulty_generator.__number_of_blocks__(blocks)
+        num = tasks_difficulty_generator.number_of_blocks(blocks)
         self.assertEquals(3, num)
 
     def test_reasonable_difficulty(self):
