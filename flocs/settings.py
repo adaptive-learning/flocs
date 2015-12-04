@@ -14,7 +14,12 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 FRONTEND_DIR = os.path.join(BASE_DIR, 'frontend')
+# for development:
+FRONTEND_BUILD_DIR = os.path.join(BASE_DIR, 'frontend', 'development-build')
+# for production:
+#FRONTEND_BUILD_DIR = os.path.join(BASE_DIR, 'frontend', 'production-build')
 
 
 # Quick-start development settings - unsuitable for production
@@ -68,7 +73,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
 
         # frontend home directory (where to search for index.html)
-        'DIRS': [os.path.join(FRONTEND_DIR, 'development-build'),],
+        'DIRS': [FRONTEND_BUILD_DIR],
 
         # allow for fallback index.html in flocs/templates/
         'APP_DIRS': True,
@@ -117,7 +122,7 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(FRONTEND_DIR, "development-build/static"),
+    os.path.join(FRONTEND_BUILD_DIR, 'static'),
 )
 
 LOGGING = {

@@ -18,7 +18,7 @@ class Command(StaticfilesRunserverCommand):
         FRONTEND_PATH = settings.FRONTEND_DIR
         self.stdout.write('>>> Starting grunt')
         self.grunt_process = subprocess.Popen(
-            ['grunt watch --gruntfile={0}/Gruntfile.js --base={0}'.format(FRONTEND_PATH)],
+            ['grunt work --gruntfile={0}/Gruntfile.js --base={0}'.format(FRONTEND_PATH)],
             shell=True,
             stdin=subprocess.PIPE,
             stdout=self.stdout,

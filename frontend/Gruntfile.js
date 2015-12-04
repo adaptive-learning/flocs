@@ -11,7 +11,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-include-source');
-  //grunt.loadNpmTasks('grunt-wiredep');
   grunt.loadNpmTasks('grunt-karma');
 
   /**
@@ -19,20 +18,26 @@ module.exports = function (grunt) {
    */
   var pathConfig = {
     // where to store compiled files during development
-    development_build_dir: 'development-build',
+    development_build_dir:  'development-build',
     development_static_dir: 'development-build/static',
 
     // where to store compiled files ready for production
-    production_build_dir: 'production-build',
+    production_build_dir:  'production-build',
+    production_static_dir: 'production-build/static',
 
-    // source codes of our application
+    app_dirs: {
+      assets: 'src/assets/'
+    },
     app_files: {
-      js: ['src/**/*.mdl.js', 'src/**/*.js', '!src/**/*.spec.js', '!src/assets/**/*.js'],
+      assets: 'src/assets/**/*',
+      js: ['src/common/**/*.mdl.js', 'src/app/**/*.mdl.js',
+           'src/common/**/*.js', 'src/app/**/*.js',
+           '!src/**/*.spec.js'],
       jsunit: ['src/**/*.spec.js'],
-      atpl: ['src/app/**/*.tpl.html'],
-      ctpl: ['src/common/**/*.tpl.html'],
+      app_tpl: ['src/app/**/*.tpl.html'],
+      common_tpl: ['src/common/**/*.tpl.html'],
       css: ['src/css/styles.css', 'src/**/*.css'],
-      index: 'src/index.html'
+      index: 'src/index.html',
     },
 
     test_files: {
@@ -41,7 +46,6 @@ module.exports = function (grunt) {
       ]
     },
 
-    // vendor files
     vendor_files: {
       js: [
         'vendor/angular/angular.js',
@@ -61,13 +65,255 @@ module.exports = function (grunt) {
       ],
       assets: [
       ]
-    }
+    },
+
+    // directory for temporary files (for semi-results of the building process)
+    temp: '.tmp',
   };
 
+
   /**
-   * Tests configuration.
+   * Tasks configuration.
    */
-  var testConfig = {
+  var taskConfig = {
+    // package information
+    pkg: grunt.file.readJSON("package.json"),
+
+    clean: {
+      temp: ['<%= temp %>'],
+      build: ['<%= development_build_dir %>', '<%= production_build_dir %>']
+    },
+
+    copy: {
+      // copy from temporary to development directory
+      development: {
+        files: [
+          {
+            expand: true,
+            cwd: '<%= temp %>',
+            src: [
+              'assets/**',
+              'css/**',
+              'js/**',
+            ],
+            dest: '<%= development_static_dir %>'
+          },
+          /*{
+            expand: true,
+            cwd: '<%= temp %>',
+            src: ['index.html'],
+            dest: '<%= development_build_dir %>'
+          }*/
+        ]
+      },
+      // copy from temporary to production directory
+      production: {
+        files: [
+          {
+            expand: true,
+            cwd: '<%= temp %>',
+            src: [
+              'assets/**',
+              'css/vendor.css',
+              'css/app.css',
+              'js/vendor.min.js',
+              'js/app.min.js',
+            ],
+            dest: '<%= production_static_dir %>'
+          },
+          /*{
+            expand: true,
+            cwd: '<%= temp %>',
+            src: ['index.html'],
+            dest: '<%= production_build_dir %>'
+          }*/
+        ]
+      },
+      // copy both app and vendor assets to temporary directory for assets
+      assets: {
+        files: [
+          {
+            expand: true,
+            cwd: '<%= app_dirs.assets %>',
+            src: ['**'],
+            dest: '<%= temp %>/assets/'
+          },
+          {
+            expand: true,
+            cwd: '.',
+            src: ['<%= vendor_files.assets %>'],
+            dest: '<%= temp %>/assets/',
+            flatten: true
+          }
+       ]
+      },
+      // copy app scripts to temporary directory for scripts
+      app_js: {
+        files: [
+          {
+            expand: true,
+            cwd: '.',
+            src: ['<%= app_files.js %>'],
+            dest: '<%= temp %>/js/'
+          }
+        ]
+      }
+    },
+
+    // Concatenation of js and css files
+    concat: {
+      app_css: {
+        src: '<%= app_files.css %>',
+        dest: '<%= temp %>/css/app.css'
+      },
+      vendor_css: {
+        src: '<%= vendor_files.css %>',
+        dest: '<%= temp %>/css/vendor.css'
+      },
+      app_js: {
+        src: [
+          '<%= app_files.js %>',
+          '<%= html2js.app.dest %>',
+          '<%= html2js.common.dest %>'
+        ],
+        dest: '<%= temp %>/js/app.js',
+      },
+      vendor_js: {
+        src: '<%= vendor_files.js %>',
+        dest: '<%= temp %>/js/vendor.js',
+      },
+    },
+
+    // Create a js files containing html templates
+    html2js: {
+      options: {
+        singleModule: true
+      },
+      app: {
+        options: {base: 'src/app'},
+        src: ['<%= app_files.app_tpl %>'],
+        dest: '<%= temp %>/js/templates-app.js'
+      },
+      common: {
+        options: {base: 'src/common'},
+        src: ['<%= app_files.common_tpl %>'],
+        dest: '<%= temp %>/js/templates-common.js'
+      }
+    },
+
+    // Include imports of js and css source files into index.html
+    includeSource: {
+      options: {
+        baseUrl: '/static/'
+      },
+      development: {
+        options: {
+          basePath: '<%= development_static_dir %>'
+        },
+        files: {
+          '<%= development_build_dir %>/index.html': '<%= app_files.index %>'
+        }
+      },
+      production: {
+        options: {
+          basePath: '<%= production_static_dir %>'
+        },
+        files: {
+          '<%= production_build_dir %>/index.html': '<%= app_files.index %>'
+        }
+      }
+    },
+
+    // Linting js files (including this Gruntfile.js and unit tests).
+    jshint: {
+      options: {
+        jshintrc: true
+      },
+      gruntfile: ['Gruntfile.js'],
+      src: ['<%= app_files.js %>'],
+      test: ['<%= app_files.jsunit %>'],
+    },
+
+    // Minification of source codes
+    uglify: {
+      js: {
+        files: {
+          '<%= temp %>/js/vendor.min.js': '<%= temp %>/js/vendor.js',
+          '<%= temp %>/js/app.min.js': '<%= temp %>/js/app.js'
+        }
+      }
+    },
+
+    // Watch for changes
+    watch: {
+      // Live reload runs by default on port 35729, which should by
+      // auto-detected by browser.
+      options: {
+        livereload: true
+      },
+
+      // When the Gruntfile changes, we just want to lint it.
+      gruntfile: {
+        files: 'Gruntfile.js',
+        tasks: ['jshint:gruntfile'],
+        options: {livereload: false}
+      },
+
+      // When js source files change, lint them and copy to development dir.
+      // Note that it only works for change of already existing assets - if
+      // you add a new asset, you need to run `grunt development-build` (or
+      // restart `grunt work`).
+      jssrc: {
+        files: [
+          '<%= app_files.js %>'
+        ],
+        tasks: ['jshint:src', 'clean:temp', 'copy:app_js', 'copy:development']
+      },
+
+      // When a js unit tests change, we only want to lint them
+      jsunit: {
+        files: [
+          '<%= app_files.jsunit %>'
+        ],
+        tasks: ['jshint:test'],
+        options: {livereload: false}
+      },
+
+      // When assets are changed, copy them. Note that it only works for change
+      // of already existing assets - if you add a new asset, you need to run
+      // `grunt development-build` (or restart `grunt work`).
+      assets: {
+        files: [
+          '<%= vendor_files.assets %>',
+          '<%= app_files.assets %>'
+        ],
+        tasks: ['clean:temp', 'copy:assets', 'copy:development']
+      },
+
+      // When index.html changes, compile it (and move to dev dir).
+      index: {
+        files: ['<%= app_files.index %>'],
+        tasks: ['compileIndex:development']
+      },
+
+      // When templates change, rewrite the template cache.
+      tpls: {
+        files: [
+          '<%= app_files.app_tpl %>',
+          '<%= app_files.common_tpl %>'
+        ],
+        tasks: ['clean:temp', 'compileTemplates', 'copy:development']
+      },
+
+      // When the CSS files change, concat them to the dev dir.
+      css: {
+        files: ['<%= app_files.css %>'],
+        tasks: ['clean:temp', 'concat:app_css', 'copy:development']
+      },
+
+    },
+
+    // Tests configuration.
     karma: {
       // unit testing
       unit: {
@@ -96,297 +342,56 @@ module.exports = function (grunt) {
     }
   };
 
+  // TODO: the following is deprecated, find another way
+  grunt.initConfig(grunt.util._.extend(taskConfig, pathConfig));
 
-  /**
-   * Tasks configuration.
-   */
-  var taskConfig = {
-    /**
-     * Load package information
-     */
-    pkg: grunt.file.readJSON("package.json"),
+  // Lingint task
+  grunt.registerTask('lint', ['jshint']);
 
-    /**
-     * The directories to delete when `grunt clean` is executed.
-     */
-    clean: [
-      '<%= development_build_dir %>',
-      '<%= production_build_dir %>'
-    ],
+  // Create js with all html templates
+  grunt.registerTask('compileTemplates', ['html2js:common', 'html2js:app']);
 
-    /**
-     * Copy project assets (images, fonts, etc.) and javascripts into
-     * `development_build_dir` and `production_build_dir`.
-     */
-    copy: {
-      app_assets: {
-        files: [
-          {
-            expand: true,
-            cwd: 'src/assets',
-            src: [ '**' ],
-            dest: '<%= development_static_dir %>/assets/'
-          }
-       ]
-      },
-      vendor_assets: {
-        files: [
-          {
-            src: [ '<%= vendor_files.assets %>' ],
-            dest: '<%= development_static_dir %>/assets/',
-            cwd: '.',
-            expand: true,
-            flatten: true
-          }
-       ]
-      },
-      app_scripts: {
-        files: [
-          {
-            src: [ '<%= app_files.js %>' ],
-            dest: '<%= development_static_dir %>/scripts/',
-            cwd: '.',
-            expand: true
-          }
-        ]
-      },
-      /*vendor_scripts: {
-        files: [
-          {
-            src: [ '<%= vendor_files.js %>' ],
-            dest: '<%= development_static_dir %>/scripts/',
-            cwd: '.',
-            expand: true
-          }
-        ]
-      },*/
-    },
+  // Compile index to include css and js imports
+  grunt.registerTask('compileIndex', 'Compile index.html', function (target) {
+    grunt.task.run('includeSource:' + target);
+  });
 
-    /**
-     * `grunt concat` concatenates multiple source files into a single file.
-     */
-    concat: {
-      app_css: {
-        src: '<%= app_files.css %>',
-        dest: '<%= development_static_dir %>/css/app.css'
-      },
-      vendor_css: {
-        src: '<%= vendor_files.css %>',
-        dest: '<%= development_static_dir %>/css/vendor.css'
-      },
-      vendor_scripts: {
-        src: '<%= vendor_files.js %>',
-        dest: '<%= development_static_dir %>/scripts/vendor.js',
-      },
-    },
-
-    /**
-     * Take all of template files and place them into AngularJS's template
-     * cache so that all templates are loaded at once.
-     */
-    html2js: {
-      app: {
-        options: {
-          base: 'src/app'
-        },
-        src: [ '<%= app_files.atpl %>' ],
-        dest: '<%= development_static_dir %>/scripts/templates-app.js'
-      },
-
-      common: {
-        options: {
-          base: 'src/common'
-        },
-        src: [ '<%= app_files.ctpl %>' ],
-        dest: '<%= development_static_dir %>/scripts/templates-common.js'
-      }
-    },
-
-    /**
-     * Include imports of js and css source files into index.html.
-     */
-    includeSource: {
-      options: {
-        basePath: '<%= development_build_dir %>/',
-        baseUrl: ''
-      },
-      development: {
-        files: {
-          '<%= development_build_dir %>/index.html': '<%= app_files.index %>'
-        }
-      }
-    },
-
-
-    /**
-     * Injecting vendor (bower) packages into index.html.
-     */
-    /*wiredep: {
-
-      development: {
-        src: '<%= development_build_dir %>/index.html',
-
-        options: {
-        }
-      }
-    }
-    */
-
-    /**
-     * Linting our JS files (including this Gruntfile.js and unit tests).
-     */
-    jshint: {
-      options: {
-        jshintrc: true
-      },
-      gruntfile: [
-        'Gruntfile.js'
-      ],
-      src: [
-        '<%= app_files.js %>'
-      ],
-      test: [
-        '<%= app_files.jsunit %>'
-      ],
-    },
-
-    /**
-     * And for rapid development, we have a watch set up that checks to see if
-     * any of the files listed below change, and then to execute the listed
-     * tasks when they do.
-     */
-    delta: {
-      /**
-       * By default, we want the Live Reload to work for all tasks; this is
-       * overridden in some tasks (like this file) where browser resources are
-       * unaffected. It runs by default on port 35729, which your browser
-       * plugin should auto-detect.
-       */
-      options: {
-        livereload: true
-      },
-
-      /**
-       * When the Gruntfile changes, we just want to lint it.
-       */
-      gruntfile: {
-        files: 'Gruntfile.js',
-        tasks: [ 'jshint:gruntfile' ],
-        options: {
-          livereload: false
-        }
-      },
-
-      /**
-       * When our JavaScript source files change, we want to run lint them and
-       * run our unit tests.
-       */
-      jssrc: {
-        files: [
-          '<%= app_files.js %>'
-        ],
-        tasks: ['jshint:src', 'copy:app_scripts' ]
-      },
-
-     /**
-       * When a JavaScript unit test file changes, we only want to lint it.
-       */
-      jsunit: {
-        files: [
-          '<%= app_files.jsunit %>'
-        ],
-        tasks: ['jshint:test'],
-        options: {
-          livereload: false
-        }
-      },
-
-      /**
-       * When assets are changed, copy them. Note that this will *not* copy new
-       * files, so this is probably not very useful.
-       */
-      assets: {
-        files: [
-          'src/assets/**/*'
-        ],
-        tasks: [ 'copy:app_assets', 'copy:vendor_assets' ]
-      },
-
-      /**
-       * When index.html changes, we need to compile it.
-       */
-      html: {
-        files: [ '<%= app_files.index %>' ],
-        tasks: [ 'includeSource:development' ]
-      },
-
-      /**
-       * When our templates change, we only rewrite the template cache.
-       */
-      tpls: {
-        files: [
-          '<%= app_files.atpl %>',
-          '<%= app_files.ctpl %>'
-        ],
-        tasks: [ 'html2js' ]
-      },
-
-      /**
-       * When the CSS files change, we need to concat them to the build folder.
-       */
-      css: {
-        files: [ '<%= app_files.css %>' ],
-        tasks: [ 'concat:app_css' ]
-      },
-
-    }
-
-
-  };
-
-  /**
-   * In order to make it safe to just compile or copy *only* what was changed,
-   * we need to ensure we are starting from a clean, fresh build. So we rename
-   * the `watch` task to `delta` (that's why the configuration var above is
-   * `delta`) and then add a new task called `watch` that does a clean build
-   * before watching for changes.
-   */
-  grunt.renameTask( 'watch', 'delta' );
-  grunt.registerTask( 'watch', [ 'development-build', 'delta' ] );
-
-  grunt.initConfig(grunt.util._.extend(taskConfig, pathConfig, testConfig));
-
-  /**
-   * The default task is to do the development build.
-   */
-  grunt.registerTask( 'default', ['development-build'] );
-
-  /**
-   * Linting task.
-   */
-  grunt.registerTask( 'lint', ['jshint']);
-
-  /**
-   * Development build task.
-   */
+  // Development build task.
   grunt.registerTask( 'development-build', [
     'clean',
     'lint',
-    'html2js',
-    'copy:app_assets',
-    'copy:vendor_assets',
-    'copy:app_scripts',
-    'concat:vendor_scripts',
+    'compileTemplates',
+    'copy:app_js',
+    'concat:vendor_js',
     'concat:app_css',
     'concat:vendor_css',
-    'includeSource:development',
+    'copy:assets',
+    'copy:development',
+    'compileIndex:development',
+    'clean:temp'
   ]);
 
-  /**
-   * Production build task (gets the application ready for deployment.
-   */
+  // Production build task (gets the application ready for deployment).
   grunt.registerTask( 'production-build', [
-      // TODO
+    'clean',
+    'lint',
+    'compileTemplates',
+    'concat:app_js',
+    'concat:vendor_js',
+    'concat:app_css',
+    'concat:vendor_css',
+    'copy:assets',
+    'uglify',
+    'copy:production',
+    'compileIndex:production',
+    'clean:temp'
   ]);
+
+  // For developing we want to run development-build and then watch for changes
+  grunt.registerTask('work', ['development-build', 'watch']);
+
+  // Default task (when `grunt` without additional arguments is run)
+  grunt.registerTask('default', ['work']);
+
 
 };
