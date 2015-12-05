@@ -1,0 +1,22 @@
+#taskEnvironment {
+  margin: 8px;
+}
+
+#mainPanel {
+  width: 400px;
+  float: left;
+  margin-right: 20px;
+}
+
+#maze {
+  width: 400px;
+  height: 400px;
+}
+
+#instructions {
+  margin-top: 10px;
+}
+
+#workspace {
+  float: left;
+}

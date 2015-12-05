@@ -1,28 +1,57 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-
-<!-- base path is important for html5mode -->
+<!-- base path is important for Angular html5mode -->
 <base href="/">
 
-<!-- TODO: use bower and move all libs to vendor/ directory -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- styles -->
-<!-- include: "type": "css", "files": "css/**/*.css" -->
+<!-- include: "type": "css", "files": ["css/vendor*.css", "css/**/*.css"] -->
 
 <!-- javascript -->
 <!-- include: "type": "js", "files": ["js/vendor*.js", "js/**/*.mdl.js", "js/**/*.js"] -->
 
 </head>
-<body>
-<div ng-app="flocs" ng-controller="appCtrl">
+<body ng-app="flocs" ng-controller="appCtrl">
+<div id="page-wrapper">
 
-  <!-- TODO: header -->
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Adaptabilní programování</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Přihlásit se</a></li>
+          </ul>
+      </div><!--/.navbar-collapse -->
+    </div>
+  </nav>
 
-  <div ui-view></div>
+  <!-- content -->
+  <div id="content" ui-view></div>
 
-  <!-- TODO: footer -->
+  <footer class="container-fluid">
+      <span class="pull-left">
+        <!-- TBA: about, credits, write to us ... -->
+      </span>
+      <span class="pull-right">
+        <a href="http://www.fi.muni.cz/adaptivelearning/">
+          <img src="/static/assets/img/alg-logo.png" alt="Adaptive Learning Group logo"/>
+        </a>
+        <a href="http://www.fi.muni.cz/index.xhtml.en">
+          <img src="/static/assets/img/fi-logo.png" alt="Faculty of Informatics, Masaryk University logo"
+            height="80px"/>
+        </a>
+      </span>
+  </footer>
 
 </div>
 </body>

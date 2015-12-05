@@ -50,20 +50,24 @@ module.exports = function (grunt) {
       js: [
         'vendor/angular/angular.js',
         'vendor/angular-ui-router/release/angular-ui-router.js',
+        'vendor/jquery/dist/jquery.js',
         'vendor/blockly/blockly_compressed.js',
         'vendor/blockly/javascript_compressed.js',
         'vendor/blockly/python_compressed.js',
         'vendor/blockly/blocks_compressed.js',
         'vendor/blockly/msg/js/en.js',
         'vendor/JS-Interpreter/acorn_interpreter.js',
-        'vendor/ngDialog/js/ngDialog.js'
+        'vendor/ngDialog/js/ngDialog.js',
+        'vendor/bootstrap/dist/js/bootstrap.js'
       ],
       css: [
+        'vendor/bootstrap/dist/css/bootstrap.min.css',
         'vendor/ngDialog/css/ngDialog.css',
         'vendor/ngDialog/css/ngDialog-theme-plain.css',
         'vendor/ngDialog/css/ngDialog-theme-default.css'
       ],
       assets: [
+        //'vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.svg'
       ]
     },
 

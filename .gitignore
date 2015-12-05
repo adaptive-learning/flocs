@@ -6,6 +6,9 @@ __pycache__/
 simulated-data/
 practice/fixtures/task-difficulties.json
 
+# Temporary data
+.tmp
+
 # DB
 db.*
 

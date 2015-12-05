@@ -1,5 +1,7 @@
-<div>
-  <div id="mainPanel" style="width: 420px; float: left"><!-- TODO: style with bootstrap -->
+<div id="taskEnvironment" class="container-fluid">
+<div class="row">
+
+  <div id="mainPanel">
 
     <div id="statusPanel">
       <span ng-show='blocksStatus.limit !== null'>
@@ -10,31 +12,35 @@
       </span>
     </div>
 
-    <flocs-maze style="width: 400px; height: 400px"></flocs-maze>
+    <flocs-maze id="maze"></flocs-maze>
 
     <div ng-switch="executionStatus.initialState">
-        <div ng-switch-when="true">
-            <button id="runBtn"
-                    ng-click="run()">
-                    <!--ng-disabled="noTask">-->
-              Spusť program
-            </button>
-        </div>
-        <div ng-switch-default>
-            <button id="resetBtn"
-                    ng-click="reset()">
-              Reset
-            </button>
-        </div>
+      <div ng-switch-when="true">
+        <button id="runBtn"
+                ng-click="run()"
+                type="button" class="btn btn-primary">
+                <!--ng-disabled="noTask">-->
+          Spusť program
+        </button>
+      </div>
+      <div ng-switch-default>
+        <button id="resetBtn"
+                ng-click="reset()"
+                type="button" class="btn btn-warning">
+          Reset
+        </button>
+      </div>
     </div>
-  </div>
-
-  <div style="float: left"><!-- TODO: style with bootstrap -->
-    <flocs-workspace id="workspace"></flocs-workspace>
-  </div>
 
   <div id="instructions">
+    <p>
       Instrukce: {{instructions.text}}
+    </p>
   </div>
 
+  </div>
+
+  <flocs-workspace id="workspace"></flocs-workspace>
+
+</div>
 </div>
