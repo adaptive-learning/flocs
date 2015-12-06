@@ -22,10 +22,14 @@ class FlowFactors(Enum):
         return [cls.LOOPS, cls.CONDITIONS, cls.LOGIC_EXPR]
 
     @classmethod
+    def common_factors(cls):
+        return cls.concept_factors() + cls.game_factors()
+
+    @classmethod
     def student_factors(cls):
-        return [cls.STUDENT_BIAS] + cls.concept_factors() + cls.game_factors()
+        return [cls.STUDENT_BIAS] + cls.common_factors()
 
     @classmethod
     def task_factors(cls):
-        return [cls.TASK_BIAS] + cls.concept_factors() + cls.game_factors()
+        return [cls.TASK_BIAS] + cls.common_factors()
 
