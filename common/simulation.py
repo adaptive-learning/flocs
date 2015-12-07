@@ -6,7 +6,12 @@ import csv
 import json
 import os
 
+from analysis.plot_practice_session import show_practice_session_plot
+
+
 class SimulationLogger(object):
+
+    # NOTE: consider renaming to SimulationOutput
 
     def __init__(self, path_pattern):
         self.time = datetime.now()
@@ -22,9 +27,13 @@ class SimulationLogger(object):
         self.rounds[-1][key] = value
         print('{key}: {value}'.format(key=key, value=value))
 
-    def save(self, file_format):
+    def get_path(self, file_format):
         timestamp = self.time.strftime('%Y-%m-%d-%H-%M-%S')
         path = self.path_pattern.format(timestamp=timestamp) + '.' + file_format
+        return path
+
+    def save(self, file_format):
+        path = self.get_path(file_format)
         os.makedirs(os.path.dirname(path), exist_ok=True)
         if file_format == 'json':
             self.save_json(path)
@@ -43,6 +52,10 @@ class SimulationLogger(object):
             writer = csv.DictWriter(outfile, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(self.rounds)
+
+    def show_plot(self):
+        path = self.get_path('csv')
+        show_practice_session_plot(path)
 
 
 class Simulation(TestCase, metaclass=ABCMeta):

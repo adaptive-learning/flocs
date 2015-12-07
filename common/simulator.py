@@ -6,12 +6,22 @@ class Simulator(object):
     """
     Base class for running simulations in an isolated environment
     """
-    def __init__(self):
+    def __init__(self, save=None, plot=False):
+        """
+        Args:
+            save: format for saveing simulation output (e.g. 'csv')
+            plot: whether show plot of the simulation after it's finished
+        """
         self._test_runner = _PassiveTestRunner()
+        self._save = save
+        self._plot = plot
 
     def run(self, simulation):
         self._test_runner.run_single_test(simulation)
-        simulation.logger.save(file_format='csv')
+        if self._save:
+            simulation.logger.save(file_format=self._save)
+        if self._plot:
+            simulation.logger.show_plot()
 
 
 class _PassiveTestRunner(DiscoverRunner):

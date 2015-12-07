@@ -10,9 +10,28 @@ COLORS = {
 }
 
 
-def plot_practice_simulation(name):
-    simulation = pd.read_csv('data/{name}.csv'.format(name=name))
+def store_practice_session_plot(name):
+    """
+    NOTE: For now, this function is limited to be run from analysis directory.
+    """
+    session = pd.read_csv('data/{name}.csv'.format(name=name))
+    plot_practice_session(session)
+    plt.savefig('plots/{name}.pdf'.format(name=name))
 
+
+def show_practice_session_plot(data_path):
+    session = pd.read_csv(data_path)
+    plot_practice_session(session)
+    plt.show()
+
+
+def plot_practice_session(simulation):
+    """
+    Plot a practice session (just plot, don't show or store it).
+
+    Args:
+        simulation: dataframe with simulation data
+    """
     too_difficult = simulation[simulation['flow-report'] == 1]
     just_right = simulation[simulation['flow-report'] == 2]
     too_easy = simulation[simulation['flow-report'] == 3]
@@ -56,9 +75,9 @@ def plot_practice_simulation(name):
     plt.xticks(np.arange(1, len(simulation) + 1, 1))
     plt.ylabel('')
     ax.legend(loc='upper center', scatterpoints=1, ncol=2)
-    plt.savefig('plots/{name}.pdf'.format(name=name))
+
 
 if __name__ == '__main__':
-    plot_practice_simulation('practice-simulation-stupid')
-    plot_practice_simulation('practice-simulation-genius')
-    plot_practice_simulation('practice-simulation-normal')
+    store_practice_session_plot('practice-simulation-stupid')
+    store_practice_session_plot('practice-simulation-genius')
+    store_practice_session_plot('practice-simulation-normal')
