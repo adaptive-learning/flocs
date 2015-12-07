@@ -16,7 +16,10 @@ STUDENT_GLOBAL_STEP = 0.20
 STUDENT_GLOBAL_STEEPNESS = 0.1
 
 # Speed of task difficulty prediction learning
-TASK_GLOBAL_SPEED = 1
+TASK_GLOBAL_SPEED = 0.6
+
+# Number we add to demoninator of normalizator of task difficulty update
+SOLUTION_COUNT_START = 4
 
 def update_parameters(practice_context, student_id, task_id, reported_flow,
         predicted_flow):
@@ -184,7 +187,7 @@ def update_global_difficulty_function(
         predicted_flow: flow predicted by our model for student and task
         reported_flow: real flow collected from the student
     """
-    return original + TASK_GLOBAL_SPEED/solution_count \
+    return original + TASK_GLOBAL_SPEED/(solution_count + SOLUTION_COUNT_START)\
             * flow_deviation(predicted_flow, reported_flow)
 
 
