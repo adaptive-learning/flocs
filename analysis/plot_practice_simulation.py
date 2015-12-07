@@ -18,26 +18,29 @@ def plot_practice_simulation(name):
     too_easy = simulation[simulation['flow-report'] == 3]
 
     simulation = simulation.set_index('instance')
-    difficulty = simulation['task-TASK_BIAS']\
-            + simulation['task-LOOPS'] * simulation['task-LOOPS']\
-            + simulation['task-CONDITIONS'] * simulation['task-CONDITIONS']\
-            + simulation['task-LOGIC_EXPR'] * simulation['task-LOGIC_EXPR']\
-            + simulation['task-COLORS'] * simulation['task-COLORS']\
-            + simulation['task-TOKENS'] * simulation['task-TOKENS']\
-            + simulation['task-PITS'] * simulation['task-PITS']
+    difficulty = simulation['task-TASK_BIAS'] -\
+            ( simulation['student-LOOPS'] * simulation['task-LOOPS']\
+            + simulation['student-CONDITIONS'] * simulation['task-CONDITIONS']\
+            + simulation['student-LOGIC_EXPR'] * simulation['task-LOGIC_EXPR']\
+            + simulation['student-COLORS'] * simulation['task-COLORS']\
+            + simulation['student-TOKENS'] * simulation['task-TOKENS']\
+            + simulation['student-PITS'] * simulation['task-PITS']\
+            )
 
     plt.style.use('ggplot')
     fig, ax = plt.subplots()
 
     simulation['student-STUDENT_BIAS'].plot(ax=ax, kind='line',
             color=COLORS['student'], label='skill estimate')
-    simulation['task-TASK_BIAS'].plot(ax=ax, kind='line',
-            color=COLORS['task'], linestyle='--', label='task bias')
     difficulty.plot(ax=ax, kind='line',
-            color=COLORS['task'], label='difficulty')
+            color=COLORS['task'], label='difficulty', marker='o')
+    #difficulty.reset_index().plot(ax=ax, kind='scatter', x='instance', y=0,
+    #        marker='o', s=50, color=COLORS['task'])
 
-    difficulty.reset_index().plot(ax=ax, kind='scatter', x='instance', y=0,
-            marker='o', s=50, color=COLORS['task'])
+    simulation.reset_index().plot(ax=ax, kind='scatter', label='task bias',
+            x='instance', y='task-TASK_BIAS',
+            color=COLORS['task'], s=70, marker='+')
+
     if len(too_difficult) > 0:
         too_difficult.plot(ax=ax, kind='scatter', x='instance', y='student-STUDENT_BIAS',
                 marker='v', s=100, color=COLORS['student'], label='too difficult')
