@@ -39,7 +39,7 @@ BLOCK_CONCEPT_MAPPING = {
         }
 
 # average number of concepts
-AVG_CONCEPTS = 3
+AVG_CONCEPTS = 1.5
 # average number of blocks
 AVG_BLOCKS = 5
 # average number of tokens
@@ -73,7 +73,7 @@ def generate(create_fixture=False):
                 concepts.append(concept)
 
         # concept: tokens
-        if 'tokens' in maze:
+        if 'tokens' in maze and maze['tokens']:
             concepts.append('tokens')
 
         # concept: pits
@@ -112,7 +112,7 @@ def generate(create_fixture=False):
         programming = tanh(points/53)
 
         # concepts
-        programming += (len(concepts) - AVG_CONCEPTS) * 0.2
+        programming += (len(concepts) - AVG_CONCEPTS) * 0.4
 
 
         # create task difficulty row in the db
