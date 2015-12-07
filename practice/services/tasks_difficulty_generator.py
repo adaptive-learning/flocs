@@ -4,7 +4,7 @@
 
 from django.core import management
 from decimal import Decimal
-from math import tanh
+from math import tanh, log
 
 from tasks.models.task import TaskModel
 from practice.models.tasks_difficulty import TasksDifficultyModel
@@ -14,10 +14,6 @@ from practice.models.tasks_difficulty import TasksDifficultyModel
 """
 BLOCK_CONCEPT_MAPPING = {
         # conditions
-        "maze_check_path"         : "conditions",
-        "maze_check_path_left"    : "conditions",
-        "maze_check_path_right"   : "conditions",
-        "maze_check_path_front"   : "conditions",
         "controls_if"             : "conditions",
         "controls_if_else"        : "conditions",
         "controls_if_elseif_else" : "conditions",
@@ -43,7 +39,7 @@ BLOCK_CONCEPT_MAPPING = {
         }
 
 # average number of concepts
-AVG_CONCEPTS = 5
+AVG_CONCEPTS = 3
 # average number of blocks
 AVG_BLOCKS = 5
 # average number of tokens
@@ -92,8 +88,6 @@ def generate(create_fixture=False):
 
         # concept: programming
         points = 0
-        # number of concepts
-        points += len(concepts) - AVG_CONCEPTS
         # number of blocks
         points += number_of_blocks(blocks) - AVG_BLOCKS
         # if there is blocks limit
@@ -112,10 +106,14 @@ def generate(create_fixture=False):
         # functions used
         points += 7 * ('functions_category' in blocks) - 4
         # number of free space in the maze
-        points += number_of_free_space(grid) / 5
+        points += log(number_of_free_space(grid)) * 0.5
 
         # transfer to [-1,1]
-        programming = tanh(points/50)
+        programming = tanh(points/53)
+
+        # concepts
+        programming += (len(concepts) - AVG_CONCEPTS) * 0.2
+
 
         # create task difficulty row in the db
         task_difficulty = TasksDifficultyModel.objects.create(
