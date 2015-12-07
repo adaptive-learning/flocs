@@ -12,7 +12,7 @@ class UpdateParametersTest(TestCase):
         skill = 0.25
         predicted_flow = 0
         reported_flow = -1
-        expected = -0.47542871
+        expected = 0.151002504171
 
         result = parameters_update.update_global_skill_function(
             skill, predicted_flow, reported_flow)
@@ -46,7 +46,7 @@ class UpdateParametersTest(TestCase):
         solution_count = 10
         predicted_flow = 0
         reported_flow = 1
-        expected = 0.15
+        expected = 0.2071428571428 
 
         result = parameters_update.update_global_difficulty_function(
             difficulty, solution_count, predicted_flow, reported_flow)
@@ -73,14 +73,14 @@ class UpdateParametersTest(TestCase):
         ])
 
         expected_context = PracticeContext([
-            (FlowFactors.STUDENT_BIAS,  1, None, 1.41517699),
+            (FlowFactors.STUDENT_BIAS,  1, None, 0.690245884900),
             (FlowFactors.CONDITIONS,    1, None, 1),
             (FlowFactors.LOOPS,         1, None, 0),
             (FlowFactors.LOGIC_EXPR,    1, None, -1),
             (FlowFactors.COLORS,        1, None, 1),
             (FlowFactors.TOKENS,        1, None, 1),
             (FlowFactors.PITS,          1, None, -1),
-            (FlowFactors.TASK_BIAS,     None, 2, 3.6),
+            (FlowFactors.TASK_BIAS,     None, 2, 3.657142857142),
             (FlowFactors.CONDITIONS,    None, 2, 1),
             (FlowFactors.LOOPS,         None, 2, 0),
             (FlowFactors.LOGIC_EXPR,    None, 2, 0),
@@ -122,7 +122,7 @@ class UpdateParametersTest(TestCase):
         ])
 
         expected_context = PracticeContext([
-            (FlowFactors.STUDENT_BIAS,  1, None, 0.25),
+            (FlowFactors.STUDENT_BIAS,  1, None, 0.2),
             (FlowFactors.CONDITIONS,    1, None, 0),
             (FlowFactors.LOOPS,         1, None, 0),
             (FlowFactors.LOGIC_EXPR,    1, None, -1),
@@ -173,7 +173,7 @@ class UpdateParametersTest(TestCase):
         ])
 
         expected_context = PracticeContext([
-            (FlowFactors.STUDENT_BIAS,  1, None, 0.25),
+            (FlowFactors.STUDENT_BIAS,  1, None, 0.2),
             (FlowFactors.CONDITIONS,    1, None, 0),
             (FlowFactors.LOOPS,         1, None, 0),
             (FlowFactors.LOGIC_EXPR,    1, None, -1),

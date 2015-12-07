@@ -162,7 +162,7 @@ class TasksDifficultyGeneratorTest(TestCase):
         tasks_difficulty_generator.generate()
         tasks_difs = TasksDifficultyModel.objects.all()
         progr_difs = [tasks_dif.programming for tasks_dif in tasks_difs]
-        prev = 1
+        prev = 5
         for dif in progr_difs:
             # check that previous task is harder than thisone
             self.assertTrue(dif < prev, msg="dif: " + str(dif) + " prev: " + str(prev))
