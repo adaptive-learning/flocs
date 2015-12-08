@@ -16,7 +16,7 @@ angular.module('flocs.services')
    * Return promise of getting next task instance in current session.
    */
   function gettingNextTask() {
-    return $http.get('api/practice/next-task')
+    return $http.get('/api/practice/next-task')
       .then(function(response) {
         return response.data;
       });
@@ -26,7 +26,7 @@ angular.module('flocs.services')
    * Send results of an attempt to server
    */
   function sendingAttemptReport(report) {
-    $http.post('api/practice/attempt-report', report);
+    $http.post('/api/practice/attempt-report', report);
   }
 
 }]);

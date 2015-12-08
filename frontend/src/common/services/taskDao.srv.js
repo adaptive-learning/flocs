@@ -16,7 +16,7 @@ angular.module('flocs.services')
    * Return promise of getting list of ids of all tasks.
    */
   function gettingAllTaskIds() {
-    return $http.get('api/tasks/get-ids')
+    return $http.get('/api/tasks/get-ids')
       .then(function(response) {
         return response.data.ids;
       });
@@ -26,7 +26,7 @@ angular.module('flocs.services')
    * Return promise of getting task by given id.
    */
   function gettingTaskById(id) {
-    return $http.get('api/tasks/get-task/' + id)
+    return $http.get('/api/tasks/get-task/' + id)
       .then(function(response) {
         return response.data;
       });
