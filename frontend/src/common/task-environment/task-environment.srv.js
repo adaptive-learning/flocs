@@ -114,6 +114,7 @@ angular.module('flocs.taskEnvironment')
    */
   function setTask(newTask, _afterAttemptCallback, instructionsText) {
     afterAttemptCallback = _afterAttemptCallback || null;
+    instructionsText = instructionsText || [];
     currentTask = newTask;
     mazeService.set(getMazeSettings());
     workspaceService.set(getWorkspaceSettings());
