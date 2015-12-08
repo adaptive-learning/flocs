@@ -103,7 +103,7 @@ angular.module('flocs.workspace')
           },
           {
             "type": "field_image",
-            "src": "static/assets/img/goal.svg",
+            "src": "/static/assets/img/goal.svg",
             "width": 15,
             "height": 15,
             "alt": "cílem"
@@ -552,7 +552,7 @@ angular.module('flocs.workspace')
             }
         return code + '\n';
     };
-            
+
     /*
      * Redefinition of standard logcial compare
      */
@@ -628,7 +628,7 @@ angular.module('flocs.workspace')
      *
      * @param block block to which the statement is connected
      * @param name name of the statement
-     * 
+     *
      * @return JS code of given statement withou ani highlighing commands
      */
     function statementWithoutHighlight(block, name) {
