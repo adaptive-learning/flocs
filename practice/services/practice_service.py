@@ -86,8 +86,10 @@ def process_attempt_report(student, report):
     logger.info("Reporting attempt for student %s with result %s", student.id, solved)
 
     task_instance = TaskInstanceModel.objects.get(id=task_instance_id)
-    if  attempt_count <= task_instance.attempt_count:
-        # it means that this report is obsolete
+    if  attempt_count < task_instance.attempt_count:
+        # It means that this report is obsolete. Note that we allow for
+        # equality of attempts count, which means that we want to update the
+        # last report with more information (e.g. added flow report).
         raise ValueError("Obsolete attempt report can't be processed.")
 
     if student.id != task_instance.student.id:
@@ -101,7 +103,12 @@ def process_attempt_report(student, report):
     )
     task_instance.save()
 
-    if not solved:
+    # Currently, we only update parameters, when the "task completion" report
+    # is sent (which means that the task was solved and flow was reported)
+    # TODO: there should be more explicit control (condition) for not updating
+    # parameters twice (e.g. the following would not work correctly, if the
+    # report comes duplicated).
+    if not solved or not reported_flow:
         return
 
     task = task_instance.task

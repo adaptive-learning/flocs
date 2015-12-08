@@ -13,7 +13,7 @@ angular.module('flocs.services')
       // === public API ===
       return {
         practicingTask: practicingTask,
-        sendFinalAttempt: sendFinalAttempt,
+        taskCompleted: taskCompleted
       };
 
       /*
@@ -29,32 +29,39 @@ angular.module('flocs.services')
       /*
        * Send final report about task resolving including flow report.
        */
-      function sendFinalAttempt(flowReport) {
-        // add flow report
-        attemptReport.flowReport = flowReport;
-
-        // send
+      function taskCompleted(flowReport) {
+        // add flow report and send it to server
+        attemptReport['flow-report'] = flowReport;
         practiceDao.sendingAttemptReport(attemptReport);
 
-        // reset attempt object -> prepare for next task
+        // reset attempt object
         attemptReport = null;
+
+        // resolve taskFinnished promise
+        taskFinishedDeferred.resolve();
       }
 
       function attemptFinished(result) {
+        if (attemptReport === null) {
+          return;
+        }
+
         // we don't count additional attempts after the first successful one
-        if (attemptReport !== null) {
+        if (!attemptReport.solved) {
           attemptReport.time = calculateSolvingTime();
           attemptReport.attempt += 1;
           attemptReport.solved = result.solved;
-          if (result.solved) {
-            // give control back to practice controller
-            taskFinishedDeferred.resolve();
-          } else {
-            // send unfinished attempt
-            console.log('Unsuccessful attempt.');
-            practiceDao.sendingAttemptReport(attemptReport);
-          }
+
+          // If the task has just been solved, it's likely that we will soon
+          // send another report with reported flow, but we still send this
+          // not-complete report in case a student does not fill the report.
+          practiceDao.sendingAttemptReport(attemptReport);
         }
+
+        // Notify about the attempt - even if the task was already solved by a
+        // previous attemp (this is necessary, as the user might have closed
+        // the report dialog the first time he solved the task)
+        taskFinishedDeferred.notify(result);
       }
 
       /*
@@ -68,6 +75,7 @@ angular.module('flocs.services')
       }
 
       function settingNextTask() {
+        attemptReport = null;
         var taskPromise = practiceDao.gettingNextTask()
           .then(function (newTaskInstance) {
             taskInstanceId = newTaskInstance['task-instance-id'];
@@ -75,8 +83,8 @@ angular.module('flocs.services')
             newAttemptReport(newTask);
             taskStartTimestamp = Date.now();
             var instructionsText = newTaskInstance['instructions'];
-            taskEnvironmentService.setTask(
-              newTask, attemptFinished, instructionsText);
+            taskEnvironmentService.setTask(newTask, attemptFinished,
+                  instructionsText);
             return newTask;
           });
         return taskPromise;
@@ -92,7 +100,7 @@ angular.module('flocs.services')
           'attempt': 0,
           'time': 0,
           'solved': false,
-          'flowReport': 0
+          'flow-report': 0
         };
       }
 

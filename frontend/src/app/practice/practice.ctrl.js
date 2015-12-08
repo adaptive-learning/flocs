@@ -24,31 +24,56 @@ angular.module('flocs.practice')
         showclose: false
       };
 
+      /**
+       * Filling the report completes the task
+       */
+      function reportFilled(report) {
+        practiceSessionService.taskCompleted(report);
+      }
+
+      /**
+       * If the report dialog is closed, continue with the current task
+       */
+      function reportClosed() {
+        console.log('report closed');
+        // continue practicing without sending final report
+      }
+
+      /**
+       * Open a report dialog and return a promise of filling the report
+       */
+      function flowReportFilling() {
+        var fillingPromise = ngDialog.openConfirm(dialogOptions);
+        return fillingPromise;
+      }
+
+      function taskFinished() {
+        practiceNextTask();
+      }
+
+      // TODO: implement "giving up a task" ("Give me easier task")
+      function taskRejected() {
+        throw "Function taskRejected() not implemented yet.";
+      }
+
+      function taskAttempted(attemptResult) {
+        if (attemptResult.solved) {
+            flowReportFilling().then(reportFilled, reportClosed);
+        }
+      }
+
+      /**
+       * Practice new task
+       */
+      function practiceNextTask() {
+        practiceSessionService.practicingTask().then(
+            taskFinished,
+            taskRejected,
+            taskAttempted);
+      }
+
       // start a new practice session
-      practice();
-
-      function practice() {
-        // set task
-        practiceSessionService.practicingTask().then(function () {
-            // task resolved
-            console.log('Task solved!');
-
-            // ask for flow report
-            var dialog = flowReportOpening();
-            dialog.then(function (report) {
-              practiceSessionService.sendFinalAttempt(report);
-
-              // continue practicing
-              practice();
-            });
-          }
-        );
-      }
-
-      function flowReportOpening() {
-        var dialog = ngDialog.openConfirm(dialogOptions);
-        return dialog;
-      }
+      practiceNextTask();
 
     }]);
 

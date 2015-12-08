@@ -98,8 +98,10 @@ class TaskInstanceModel(models.Model):
             reported_flow: number with the interpetration given by
                 FlowRating (see above) or None if no rating was included
         """
-        if attempt_count <= self.attempt_count:
-            # obsolete attempt, ignore
+        if attempt_count < self.attempt_count:
+            # Obsolete attempt, ignore. Note that we allow for equality of
+            # attempts count, which means that we want to update the last
+            # report with more information (e.g. added flow report).
             return
 
         self.time_end = datetime.now()
