@@ -13,7 +13,8 @@ angular.module('flocs.workspace')
 
       // inject blockly into the workspace
       var blocklyDiv = Blockly.inject('blocklyDiv', {
-        toolbox: '<xml></xml>'
+        toolbox: '<xml></xml>',
+        trashcan: true
       });
 
       workspaceService.setBlocklyDiv(blocklyDiv);

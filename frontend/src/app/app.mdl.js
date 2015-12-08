@@ -56,8 +56,12 @@ angular.module('flocs', [
       templateUrl: '404/404.tpl.html'
     });
 
-  // use URLs without hashes (if the browser supports HTML5 history)
-  $locationProvider.html5Mode(true);
+  // Use URLs without hashes (if the browser supports HTML5 history).
+  // Note that we need to omit <base> for svg (e.g. in blockly workspace) to
+  // work (https://github.com/angular/angular.js/issues/8934). As the
+  // consequence, we should use absolute URLs (otherwise, our app might
+  // not work correctly in IE9 according to Angular docs).
+  $locationProvider.html5Mode({enabled: true, requireBase: false});
 
 
   // --- global (re)definitions ---

@@ -8,7 +8,7 @@
     "ngDialog": "~0.3.0",
     "jquery": "~2.1.4",
     "bootstrap": "~3.3.6",
-    "blockly": "https://github.com/google/blockly.git#c82c460da8",
+    "blockly": "https://github.com/google/blockly.git#fa279b91cec68abcc1301bd41aa241cb0de23989",
     "JS-Interpreter": "https://github.com/NeilFraser/JS-Interpreter.git#c82c57f010"
   }
 }
