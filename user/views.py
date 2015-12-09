@@ -38,12 +38,12 @@ def register(request):
     try:
         username = data['username']
         passwd = data['password']
-        firstname = data['firstname']
-        lastname = data['lastname']
+        firstname = data.get('firstname','')
+        lastname = data.get('lastname','')
         email = data['email']
     except KeyError:
         response['registred'] = '0'
-        response['msg'] = 'request doesnt contain one of fields'
+        response['errorMSG'] = 'request doesnt contain one of fields'
         return JsonResponse(response)
     UserManager.register(username, firstname, lastname, email, passwd)
     response['registred']= True
