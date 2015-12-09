@@ -14,9 +14,10 @@ def get_next_task(request):
     """Return response with next task.
     """
     logger.log_request(request)
-    # TODO: get current student, user=request.user ?
+
     # hack for testing purposes
-    user, _ = User.objects.get_or_create(id=17, username='LosKarlos')
+    #user, _ = User.objects.get_or_create(id=17, username='LosKarlos')
+    user=request.user
 
     task = practice_service.get_next_task(student=user)
     return JsonResponse(task)
@@ -33,9 +34,9 @@ def post_attempt_report(request):
     body_unicode = request.body.decode('utf-8')
     data = json.loads(body_unicode)
 
-    # TODO: get current student, user=request.user ?
     # hack for testing purposes
-    user = User.objects.get(id=17)
+    #user = User.objects.get(id=17)
+    user=request.user
 
     practice_service.process_attempt_report(student=user, report=data)
 
