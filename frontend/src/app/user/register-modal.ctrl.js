@@ -2,8 +2,8 @@
  * Controller for register page
  */
 angular.module('flocs.user')
-.controller('registerModalCtrl', ['$scope','$uibModalInstance','$log','$state','userDao',
-    function($scope, $uibModalInstance, $log, $state,userDao){
+.controller('registerModalCtrl', ['$scope','$uibModalInstance','$log','$state','userDao', 'userService',
+    function($scope, $uibModalInstance, $log, $state, userDao, userService) {
         $scope.registrationData = {
           username: '',
           email: '',
@@ -11,7 +11,7 @@ angular.module('flocs.user')
           vpassword: ''
         };
 
-	    function register(){
+	    function register() {
           var username = $scope.registrationData.username;
           //$log.log($scope['username']);
           //var firstname = $scope['firstname'];
@@ -26,7 +26,9 @@ angular.module('flocs.user')
                 // should be rejectet not solved with data.errorMSG!!
 				if(!response.data.errorMSG){
                   // TODO: show message: registration successful
-                  $uibModalInstance.dismiss('registration-successful');
+                  $uibModalInstance.close({username: username, password: password});
+                } else {
+                  $scope.errorMSG = response.data.errorMSG;
                 }
               }, function(errorMessage) {
                 // TODO: implement registration rejection

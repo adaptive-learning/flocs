@@ -78,9 +78,12 @@ angular.module('flocs.practice')
       if (userService.user.logged) {
         practiceNextTask();
       } else {
-        $uibModal.open({
-            templateUrl: 'login/login-modal.tpl.html',
-            controller: 'loginCtrl',  //'loginModalCtrl',
+        var loginModal = $uibModal.open({
+            templateUrl: 'user/login-modal.tpl.html',
+            controller: 'loginModalCtrl',
+        });
+        loginModal.result.then(function () {
+          practiceNextTask();
         });
       }
 }]);

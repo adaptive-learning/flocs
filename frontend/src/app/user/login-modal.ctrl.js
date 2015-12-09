@@ -27,10 +27,15 @@ angular.module('flocs.user')
       }
 
       function register() {
-        $uibModalInstance.dismiss('clicked-register');
         var modalInstance = $uibModal.open({
             templateUrl: 'user/register-modal.tpl.html',
             controller: 'registerModalCtrl',
+        });
+        modalInstance.result.then(function(result) {
+          // and log the user in
+          userService.loggingIn(result.username, result.password).then(function() {
+            $uibModalInstance.close();
+          });
         });
       }
 
