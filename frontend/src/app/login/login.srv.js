@@ -26,11 +26,13 @@ angular.module('flocs.user')
       });
     }
 
-    // first find wheter user is already logged in (this is necessary e.g.
+    // first find whether user is already logged in (this is necessary e.g.
     // because of refresh, opening new tab etc.
+    // Current behavior: if the user is not logged in, it just returns empty
+    // username. TODO: make it more explicit, that the user is not logged in.
     userDao.loggedIn().then(function(response) {
-      user.logged = true;
       user.username = response.data.username;
+      user.logged = (user.username) ? true : false;
     });
 
     // public API

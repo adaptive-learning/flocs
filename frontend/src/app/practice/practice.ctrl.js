@@ -2,10 +2,10 @@
  * Main practice controller
  */
 angular.module('flocs.practice')
-  .controller('practiceCtrl', ['$scope', '$timeout', 'ngDialog', 'practiceSessionService',
-    function ($scope, $timeout, ngDialog, practiceSessionService) {
+  .controller('practiceCtrl', ['$scope', '$timeout', 'ngDialog', '$uibModal', 'practiceSessionService', 'userService',
+    function ($scope, $timeout, ngDialog, $uibModal, practiceSessionService, userService) {
 
-      // TODO move it to the template
+      // TODO move it to a template
       var template = '<div class=\"ngdialog-message\"> ' +
         ' <h3>Výborně, vyřešil si úlohu !</h3> ' +
         ' <h4>Jak těžká pro tebe byla?</h4> ' +
@@ -72,8 +72,15 @@ angular.module('flocs.practice')
             taskAttempted);
       }
 
+      // NOTE: quick a dirty solution to make usert to log in; TODO: use lazy
+      // user at backend, do not force to log in immediately
       // start a new practice session
-      practiceNextTask();
-
-    }]);
-
+      if (userService.user.logged) {
+        practiceNextTask();
+      } else {
+        $uibModal.open({
+            templateUrl: 'login/login-modal.tpl.html',
+            controller: 'loginCtrl',  //'loginModalCtrl',
+        });
+      }
+}]);

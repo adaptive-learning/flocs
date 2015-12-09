@@ -12,7 +12,7 @@
     <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
 
-          <!--<li class="navbar-text" ng-if="user.logged">{{user.username}}</li>-->
+          <li class="navbar-text" ng-if="user.logged">{{user.username}}</li>
           <li ng-if="user.logged"><a ng-click="logout()">Odhlásit se</a></li>
           <li ng-if="!user.logged"><a ng-click="openLoginModal()">Přihlásit se</a></li>
 
