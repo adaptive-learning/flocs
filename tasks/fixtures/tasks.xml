@@ -1327,6 +1327,41 @@
     </field>
   </object>
 
+  <object pk="42" model="tasks.taskmodel">
+    <field name="maze_settings">
+    {
+      "grid": [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 0, 6, 0, 0, 6, 0, 0, 1],
+        [1, 6, 0, 0, 0, 0, 0, 0, 1],
+        [1, 6, 0, 6, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 6, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 2, 6, 0, 1],
+        [1, 0, 6, 0, 0, 6, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1]],
+      "tokens": [
+        [2,2], [2,5]
+        ],
+
+      "hero": {
+        "position": [5, 4],
+        "direction": 1
+      }
+    }
+    </field>
+    <field type="TextField" name="workspace_settings">
+    {
+    "toolbox": ["maze_move_forward", 
+                "maze_turn_left", 
+                "maze_turn_right", 
+                "controls_while", 
+                "maze_check_goal"],
+      "blocksLimit": 6
+    }
+    </field>
+  </object>
+
   <object pk="43" model="tasks.taskmodel">
     <field name="maze_settings">
       {
@@ -1367,41 +1402,6 @@
     </field>
   </object>
 
-  <object pk="42" model="tasks.taskmodel">
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 6, 0, 0, 6, 0, 0, 1],
-        [1, 6, 0, 0, 0, 0, 0, 0, 1],
-        [1, 6, 0, 6, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 6, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 2, 6, 0, 1],
-        [1, 0, 6, 0, 0, 6, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "tokens": [
-        [2,2], [2,5]
-        ],
-
-      "hero": {
-        "position": [5, 4],
-        "direction": 1
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-    "toolbox": ["maze_move_forward", 
-                "maze_turn_left", 
-                "maze_turn_right", 
-                "controls_while", 
-                "maze_check_goal"],
-      "blocksLimit": 6
-    }
-    </field>
-  </object>
-
   <object pk="44" model="tasks.taskmodel">
     <field name="maze_settings">
     {
@@ -1436,4 +1436,119 @@
     }
     </field>
   </object>
+
+  <object pk="45" model="tasks.taskmodel">
+    <field name="maze_settings">
+    {
+      "grid": [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 4, 0, 4, 0, 4, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 2, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1]],
+      "tokens": [ [3,1], [5,1], [7,1], [3,7], [5,7] ],
+
+      "hero": {
+        "position": [1, 4],
+        "direction": 0
+      }
+    }
+    </field>
+    <field type="TextField" name="workspace_settings">
+    {
+    "toolbox": ["maze_move_forward",
+                "maze_turn", 
+                "controls_while", 
+                "maze_check_goal", 
+                "maze_check_color",
+                "maze_check_path"],
+      "blocksLimit": 21
+    }
+    </field>
+  </object>
+
+  <object pk="46" model="tasks.taskmodel">
+    <field name="maze_settings">
+      {
+      "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+      [1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1],
+      [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+      [1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1],
+      [1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1],
+      [1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1],
+      [1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1],
+      [1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 2, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+      "tokens": [],
+      "hero": {
+      "position": [1,1],
+      "direction": 0
+      }
+      }
+    </field>
+    <field type="TextField" name="workspace_settings">
+      {
+      "toolbox": ["maze_move_forward",
+      "maze_turn",
+      "maze_check_path",
+      "maze_check_goal",
+      "controls_if", 
+      "controls_while"],
+      "blocksLimit": 15
+      }
+    </field>
+  </object>
+
+ <object pk="47" model="tasks.taskmodel">
+    <field name="maze_settings">
+      {
+      "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 6, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 5, 0, 0, 0, 2, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 6, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+      "tokens": [ [6,1], [1,8], [6,14]],
+      "hero": {
+      "position": [6,8],
+      "direction": 1
+      }
+      }
+    </field>
+    <field type="TextField" name="workspace_settings">
+      {
+      "toolbox": ["maze_move_forward",
+      "maze_turn",
+      "maze_check_path",
+      "maze_check_goal",
+      "maze_check_color",
+      "controls_while"],
+      "blocksLimit": 13
+      }
+    </field>
+  </object>
+
 </django-objects>
