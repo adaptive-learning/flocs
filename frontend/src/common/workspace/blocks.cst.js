@@ -5,7 +5,6 @@ angular.module('flocs.workspace')
 .constant('blocks', {
     'maze_category':'<category name="Maze">' +
         '<block type="maze_move_forward"></block>' +
-        '<block type="maze_move_backward"></block>' +
         '<block type="maze_turn"></block>' +
         '<block type="maze_check_path"></block>' +
         '<block type="maze_check_goal"></block>' +

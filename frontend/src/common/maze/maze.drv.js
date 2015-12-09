@@ -17,7 +17,7 @@ angular.module('flocs.maze')
       // blocks image paths
       var getBoxImagePath = function(box) {
         switch (box) {
-          case BoxType.WALL: return '/static/assets/img/box.svg';
+          case BoxType.WALL: return '/static/assets/img/wall.svg';
           case BoxType.GOAL: return '/static/assets/img/goal.svg';
           case BoxType.YELLOW: return '/static/assets/img/yellow.svg';
           case BoxType.GREEN: return '/static/assets/img/green.svg';
