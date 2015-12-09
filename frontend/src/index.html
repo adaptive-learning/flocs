@@ -13,48 +13,9 @@
 </head>
 <body ng-app="flocs" ng-controller="appCtrl">
 <div id="page-wrapper">
-
-  <nav class="navbar navbar-inverse navbar-static-top" ng-controller="headerCtrl">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Adaptabilní programování</a>
-      </div>
-      <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-
-            <li ng-if="user.logged">{{user.username}}</li>
-            <li ng-if="user.logged"><a ng-click="logout()">Odhlásit se</a></li>
-            <li ng-if="!user.logged"><a ng-click="openLoginModal()">Přihlásit se</a></li>
-
-          </ul>
-      </div><!--/.navbar-collapse -->
-    </div>
-  </nav>
-
-  <!-- content -->
-  <div id="content" ui-view></div>
-
-  <footer class="container-fluid">
-      <span class="pull-left">
-        <!-- TBA: about, credits, write to us ... -->
-      </span>
-      <span class="pull-right">
-        <a href="http://www.fi.muni.cz/adaptivelearning/">
-          <img src="/static/assets/img/alg-logo.png" alt="Adaptive Learning Group logo"/>
-        </a>
-        <a href="http://www.fi.muni.cz/index.xhtml.en">
-          <img src="/static/assets/img/fi-logo.png" alt="Faculty of Informatics, Masaryk University logo"
-            height="80px"/>
-        </a>
-      </span>
-  </footer>
-
+  <ng-include src="'header/header.tpl.html'"/></ng-include>
+  <ui-view id="content"></ui-view>
+  <ng-include src="'footer/footer.tpl.html'"></ng-include>
 </div>
 </body>
 </html>

@@ -18,7 +18,6 @@ angular.module('flocs.services')
           'email': email,
           'password': passwd
       };
-      console.log('register', username, email, passwd);
       return $http.post('api/user/register', data);
     }
 

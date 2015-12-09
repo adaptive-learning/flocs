@@ -6,11 +6,11 @@ angular.module('flocs', [
     'templates-common',
     'ui.bootstrap',
     'ui.router',
+    'ngDialog',
     'flocs.header',
     'flocs.home',
     'flocs.practice',
     'flocs.taskPreview',
-    'ngDialog',
     'flocs.user'
 ])
 

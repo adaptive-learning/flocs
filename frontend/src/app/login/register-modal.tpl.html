@@ -8,7 +8,7 @@
 
     <form name="registerForm">
       <div class="form-group">
-        <input class="form-control" type="text" name="username" ng-model="username" placeholder="Uživatelské jméno"/>
+        <input class="form-control" type="text" name="username" ng-model="registrationData.username" placeholder="Uživatelské jméno"/>
       </div>
 
       <!--
@@ -21,15 +21,15 @@
       -->
 
       <div class="form-group">
-        <input class="form-control" type="email" name="email" ng-model="email" placeholder="E-mail" />
+        <input class="form-control" type="email" name="email" ng-model="registrationData.email" placeholder="E-mail" />
       </div>
 
       <div class="form-group">
-        <input class="form-control" type="password" name="password" ng-model="password" placeholder="Heslo" />
+        <input class="form-control" type="password" name="password" ng-model="registrationData.password" placeholder="Heslo" />
       </div>
 
       <div class="form-group">
-        <input class="form-control" type="password" name="validatePassword" ng-model="vpassword" placeholder="Kontrola hesla" />
+        <input class="form-control" type="password" name="validatePassword" ng-model="registrationData.vpassword" placeholder="Kontrola hesla" />
       </div>
     </form>
 

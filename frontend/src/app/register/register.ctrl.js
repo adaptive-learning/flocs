@@ -4,14 +4,21 @@
 angular.module('flocs.user')
 .controller('registerCtrl', ['$scope','$uibModalInstance','$log','$state','userDao',
     function($scope, $uibModalInstance, $log, $state,userDao){
+        $scope.registrationData = {
+          username: '',
+          email: '',
+          password: '',
+          vpassword: ''
+        };
+
 	    function register(){
-          var username = $scope['username'];
+          var username = $scope.registrationData.username;
           //$log.log($scope['username']);
           //var firstname = $scope['firstname'];
           //var lastname = $scope['lastname'];
-          var email = $scope['email'];
-          var password = $scope['password'];
-          var passwdCheck = $scope.model.vpassword;
+          var email = $scope.registrationData.email;
+          var password = $scope.registrationData.password;
+          var passwdCheck = $scope.registrationData.vpassword;
           if (password === passwdCheck){
             userDao.register(username, email, password)
               .then(function(response) {

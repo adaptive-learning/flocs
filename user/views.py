@@ -38,8 +38,8 @@ def register(request):
     try:
         username = data['username']
         passwd = data['password']
-        firstname = data.get('firstname','')
-        lastname = data.get('lastname','')
+        firstname = '' #data.get('firstname', '')
+        lastname = '' #data.get('lastname', '')
         email = data['email']
     except KeyError:
         response['registred'] = '0'

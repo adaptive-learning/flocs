@@ -12,9 +12,8 @@ angular.module('flocs.user')
       return userDao.login(username, password).then(function(response) {
         if (response.data.loggedIn == 1) {
           // successfully logged in
-          user = {
-            username: username,
-          };
+          user.logged = true;
+          user.username = username;
         } else {
           return $q.reject('authentication failed');
         }
@@ -30,9 +29,8 @@ angular.module('flocs.user')
     // first find wheter user is already logged in (this is necessary e.g.
     // because of refresh, opening new tab etc.
     userDao.loggedIn().then(function(response) {
-      user = {
-        username: response.data.username
-      };
+      user.logged = true;
+      user.username = response.data.username;
     });
 
     // public API

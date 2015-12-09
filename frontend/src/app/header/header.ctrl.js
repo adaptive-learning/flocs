@@ -11,6 +11,10 @@ angular.module('flocs.header')
     });
   };
 
+  $scope.logout = function() {
+    userService.loggingOut();
+  };
+
   // access to user info
   $scope.user = userService.user;
 
