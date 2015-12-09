@@ -8,8 +8,7 @@ angular.module('flocs', [
     'flocs.home',
     'flocs.practice',
     'flocs.taskPreview',
-    'ngDialog'
-    'flocs.login'
+    'ngDialog',
     'flocs.user'
 ])
 
