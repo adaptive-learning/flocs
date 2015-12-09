@@ -1356,13 +1356,12 @@
     <field type="TextField" name="workspace_settings">
       {
       "toolbox": ["maze_move_forward",
-      "maze_move_backward",
       "maze_turn",
       "logic_operation",
       "maze_check_path",
       "maze_check_goal",
       "controls_while"],
-      "blocksLimit": 10
+      "blocksLimit": 15
       }
     </field>
   </object>
