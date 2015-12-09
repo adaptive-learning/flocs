@@ -54,6 +54,7 @@ angular.module('flocs', [
       controller: 'practiceCtrl'
     })
 
+    /*
     .state('login',{
       url: '/login',
       templateUrl: 'login/login.tpl.html',
@@ -65,6 +66,7 @@ angular.module('flocs', [
       templateUrl: 'register/register.tpl.html',
       controller: 'registerCtrl'
     })
+    */
 
     .state('404', {
       url: '*path',

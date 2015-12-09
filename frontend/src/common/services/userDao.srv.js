@@ -4,26 +4,24 @@
 angular.module('flocs.services')
 .factory('userDao',['$http', '$log', function($http, $log) {
 	return {
-        registerUser: registerUser,
+        register: register,
         login : login,
         loggedIn : loggedIn,
         logout: logout
 	};
 
-	function registerUser(username,firstname,lastname,email,passwd) {
-		var data = {
-			'username':username,
-			'firstname':firstname,
-			'lastname':lastname,
-			'email':email,
-			'password':passwd
-		};
-		return $http.post ('api/user/register', data)
-            .success(function(response){
-		return response;
-		});	
+	function register(username, email, passwd) {
+      var data = {
+          'username': username,
+          'firstname': null, //firstname,
+          'lastname': null, //lastname,
+          'email': email,
+          'password': passwd
+      };
+      console.log('register', username, email, passwd);
+      return $http.post('api/user/register', data);
     }
-	
+
      function login (username,passwd){
 		var data = {
 			'username':username,
