@@ -2,7 +2,7 @@
  * Controller for login form
  */
 angular.module('flocs.user')
-.controller('loginCtrl',['$scope', '$log', '$state', '$uibModalInstance', '$uibModal', 'userService',
+.controller('loginModalCtrl',['$scope', '$log', '$state', '$uibModalInstance', '$uibModal', 'userService',
 	function($scope, $log, $state, $uibModalInstance, $uibModal, userService){
 
       $scope.loginForm = {};
@@ -29,8 +29,8 @@ angular.module('flocs.user')
       function register() {
         $uibModalInstance.dismiss('clicked-register');
         var modalInstance = $uibModal.open({
-            templateUrl: 'login/register-modal.tpl.html',
-            controller: 'registerCtrl',  //'registerModalCtrl',
+            templateUrl: 'user/register-modal.tpl.html',
+            controller: 'registerModalCtrl',
         });
       }
 

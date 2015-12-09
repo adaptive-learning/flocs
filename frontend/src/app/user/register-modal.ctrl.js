@@ -2,7 +2,7 @@
  * Controller for register page
  */
 angular.module('flocs.user')
-.controller('registerCtrl', ['$scope','$uibModalInstance','$log','$state','userDao',
+.controller('registerModalCtrl', ['$scope','$uibModalInstance','$log','$state','userDao',
     function($scope, $uibModalInstance, $log, $state,userDao){
         $scope.registrationData = {
           username: '',

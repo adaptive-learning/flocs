@@ -6,8 +6,8 @@ angular.module('flocs.header')
 
   $scope.openLoginModal = function() {
     var modalInstance = $uibModal.open({
-        templateUrl: 'login/login-modal.tpl.html',
-        controller: 'loginCtrl',  //'loginModalCtrl',
+        templateUrl: 'user/login-modal.tpl.html',
+        controller: 'loginModalCtrl',
     });
   };
 
