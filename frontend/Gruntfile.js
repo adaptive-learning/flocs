@@ -58,7 +58,8 @@ module.exports = function (grunt) {
         'vendor/blockly/msg/js/en.js',
         'vendor/JS-Interpreter/acorn_interpreter.js',
         'vendor/ngDialog/js/ngDialog.js',
-        'vendor/bootstrap/dist/js/bootstrap.js'
+        //'vendor/bootstrap/dist/js/bootstrap.js'
+        'vendor/angular-bootstrap/ui-bootstrap-tpls.js'
       ],
       css: [
         'vendor/bootstrap/dist/css/bootstrap.min.css',

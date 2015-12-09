@@ -34,3 +34,8 @@ footer{
   background-color: #222;
   color: #7EB5D6;
 }
+
+/* Button-like classes */
+.nav, .pagination, .carousel, .panel-title a {
+  cursor: pointer;
+}

@@ -4,7 +4,9 @@
 angular.module('flocs', [
     'templates-app',
     'templates-common',
+    'ui.bootstrap',
     'ui.router',
+    'flocs.header',
     'flocs.home',
     'flocs.practice',
     'flocs.taskPreview',
