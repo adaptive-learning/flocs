@@ -674,7 +674,7 @@
     </field>
     <field type="TextField" name="workspace_settings">
     {
-      "toolbox": ["maze_category", "loops_category", "variables_category"],
+      "toolbox": ["maze_category", "loops_category"],
       "blocksLimit": 8
     }
     </field>
