@@ -2,11 +2,12 @@
  * User service
  */
 angular.module('flocs.user')
-.factory('userService', ['$q', 'userDao', function($q, userDao) {
+.factory('userService', ['$q', '$uibModal', 'userDao', function($q, $uibModal, userDao) {
     var user = {
       logged: false,
       username: undefined
     };
+    var deferredUser = $q.defer();
 
     function loggingIn(username, password) {
       return userDao.login(username, password).then(function(response) {
@@ -17,6 +18,26 @@ angular.module('flocs.user')
         } else {
           return $q.reject('authentication failed');
         }
+      });
+    }
+
+    function checkingIfLoggedIn() {
+      return deferredUser.promise.then(function() {
+        return user.logged;
+      });
+    }
+
+    function ensuringLoggedIn() {
+      return checkingIfLoggedIn().then(function(isLogged) {
+        if (isLogged) {
+          return;
+        }
+        // if not logged, open login modal
+        var loginModal = $uibModal.open({
+            templateUrl: 'user/login-modal.tpl.html',
+            controller: 'loginModalCtrl',
+        });
+        return loginModal.result;
       });
     }
 
@@ -33,15 +54,18 @@ angular.module('flocs.user')
     userDao.loggedIn().then(function(response) {
       user.username = response.data.username;
       user.logged = (user.username) ? true : false;
+      deferredUser.resolve();
+    }, function() {
+      deferredUser.resolve();
     });
 
     // public API
 	return {
       user: user,
       loggingIn: loggingIn,
-      loggingOut: loggingOut
+      loggingOut: loggingOut,
+      ensuringLoggedIn: ensuringLoggedIn
 	};
-
 
 }]);
 

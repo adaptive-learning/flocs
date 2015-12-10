@@ -75,15 +75,5 @@ angular.module('flocs.practice')
       // NOTE: quick a dirty solution to make usert to log in; TODO: use lazy
       // user at backend, do not force to log in immediately
       // start a new practice session
-      if (userService.user.logged) {
-        practiceNextTask();
-      } else {
-        var loginModal = $uibModal.open({
-            templateUrl: 'user/login-modal.tpl.html',
-            controller: 'loginModalCtrl',
-        });
-        loginModal.result.then(function () {
-          practiceNextTask();
-        });
-      }
+      userService.ensuringLoggedIn().then(practiceNextTask);
 }]);

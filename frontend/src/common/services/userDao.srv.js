@@ -28,9 +28,8 @@ angular.module('flocs.services')
 		};
 		return $http.post('api/user/login',data)
             .success(function(response){
-		return response;
+		  return response;
 		});
-
 	}
 
      function loggedIn(){
