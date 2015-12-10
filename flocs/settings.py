@@ -10,17 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import dj_database_url
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 FRONTEND_DIR = os.path.join(BASE_DIR, 'frontend')
-# for development:
-FRONTEND_BUILD_DIR = os.path.join(BASE_DIR, 'frontend', 'development-build')
-# for production:
-#FRONTEND_BUILD_DIR = os.path.join(BASE_DIR, 'frontend', 'production-build')
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -28,10 +23,18 @@ FRONTEND_BUILD_DIR = os.path.join(BASE_DIR, 'frontend', 'development-build')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '-zocq!_l$gw_@cc1u7l$7j8y=b&+t2e4^e9bmx1&rk0ztp*&dj'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+ON_SERVER = os.getenv('ON_AL', "False") == "True"
+DEBUG = os.getenv('DJANGO_DEBUG', "False") == "True"
+if not ON_SERVER:
+    DEBUG = True
+ALLOWED_HOSTS = ['*']
 
-ALLOWED_HOSTS = []
+if ON_SERVER:
+    # for production:
+    FRONTEND_BUILD_DIR = os.path.join(BASE_DIR, 'frontend', 'production-build')
+else:
+    # for development:
+    FRONTEND_BUILD_DIR = os.path.join(BASE_DIR, 'frontend', 'development-build')
 
 
 # Application definition
@@ -95,12 +98,7 @@ WSGI_APPLICATION = 'flocs.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+DATABASES = {"default": dj_database_url.config(default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'))}
 
 
 # Internationalization
@@ -124,7 +122,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(FRONTEND_BUILD_DIR, 'static'),
 )
+STATIC_ROOT = os.path.join(BASE_DIR, '../static')
 
+LOGGING_DIR = os.getenv('LOGGING_DIR', "logs")
 LOGGING = {
         'version': 1,
         'formatters': {
@@ -142,13 +142,13 @@ LOGGING = {
             'practice': {
                 'level': 'DEBUG',
                 'class': 'logging.FileHandler',
-                'filename': 'logs/practice.log',
+                'filename': LOGGING_DIR + '/practice.log',
                 'formatter': 'devel'
                 },
             'requests': {
                 'level': 'DEBUG',
                 'class': 'logging.FileHandler',
-                'filename': 'logs/requests.log',
+                'filename': LOGGING_DIR + '/requests.log',
                 'formatter': 'request'
                 }
             },
