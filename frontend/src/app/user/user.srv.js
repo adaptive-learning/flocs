@@ -2,7 +2,7 @@
  * User service
  */
 angular.module('flocs.user')
-.factory('userService', ['$q', '$uibModal', 'userDao', function($q, $uibModal, userDao) {
+.factory('userService', ['$q', '$state', '$uibModal', 'userDao', function($q, $state, $uibModal, userDao) {
     var user = {
       logged: false,
       username: undefined
@@ -44,6 +44,7 @@ angular.module('flocs.user')
     function loggingOut() {
       return userDao.logout().then(function(){
         user.logged = false;
+        $state.go('home', {});
       });
     }
 
