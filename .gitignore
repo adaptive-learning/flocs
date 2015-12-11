@@ -2,6 +2,11 @@
 __pycache__/
 *.py[cod]
 
+# Generated files
+*.pdf
+*.ps
+*.dvi
+
 #  Generated data
 simulated-data/
 practice/fixtures/task-difficulties.json
@@ -57,14 +62,24 @@ coverage.xml
 *.mo
 *.pot
 
-# Django stuff:
-*.log
-
 # Sphinx documentation
 docs/_build/
 
 # PyBuilder
 target/
 
-# logs
+# all logs (our, Django, TeX)
 logs/
+*.log
+
+# TeX auxiliary files
+*.aux
+*.out
+*.toc
+*.synctex.gz
+*.bbl *.blg
+*.bcf
+*.run.xml
+*.nav
+*.snm
+*.vrb

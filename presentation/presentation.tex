@@ -1,0 +1,130 @@
+\documentclass[xcolor=dvipsnames, 14pt]{beamer}
+%\documentclass[xcolor=dvipsnames, bigger, aspectratio=169]{beamer}
+
+\definecolor{Saffron}{HTML}{F4C430}
+\usecolortheme[named=Saffron]{structure}
+
+\mode<presentation> {
+	\usetheme[height=2em]{Rochester}
+	\setbeamercovered{transparent}
+}
+
+\setbeamertemplate{caption}{\raggedright Obr\'azek: %\arabic{figure}.
+\insertcaption\par}
+\setbeamertemplate{navigation symbols}{}%remove navigation symbols
+
+\setbeamercolor{frametitle}{fg=black}
+\setbeamercolor{title}{fg=black}
+\setbeamercolor{navigation symbols dimmed}{fg=black!10}
+\setbeamercolor{navigation symbols}{fg=black!30}
+\setbeamercolor{section number projected}{fg=black}
+\setbeamercolor{item projected}{fg=black}
+
+
+\usepackage[utf8x]{inputenc}
+\usepackage[resetfonts]{cmap}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{microtype}
+
+\usepackage{hyperref}
+\hypersetup{unicode=true}
+
+\title{Adaptive Programming}
+\author{Jaroslav~Čechák \and Tomáš~Effenberger \and  Jiří~Mauritz \and Jakub Peschel}
+\institute{Faculty of Informatics, Masaryk University}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Goal}
+TODO (both long term and short term goal = within RecSys course)
+\end{frame}
+
+\begin{frame}
+\frametitle{Flow}
+TODO (flow plot to remind the concept of flow as we will use this term later and is essential to the domain of educational recommendations)
+\end{frame}
+
+\begin{frame}
+\frametitle{Existing projects and research}
+TODO (this can be similar to what we prepared for the ALG seminar, but should be brief)
+\end{frame}
+
+\begin{frame}
+\frametitle{Screenshots}
+TODO: some screenshots so that everyone has an idea about what we are doing
+(+ better slide name or just large screenshots without frame title)
+\end{frame}
+
+\begin{frame}
+\frametitle{Models}
+TODO: model of student skills and task difficulty
+\end{frame}
+
+\begin{frame}
+\frametitle{Tasks}
+TODO: details about tasks, incl.generating initial difficulty
+\end{frame}
+
+\begin{frame}
+\frametitle{Prediction}
+TODO: how we predict flow
+\end{frame}
+
+\begin{frame}
+\frametitle{Task selection}
+TODO: how we select the best task
+\end{frame}
+
+\begin{frame}
+\frametitle{Parameters update}
+TODO: 2 phases: (1) update based on report, (2) learning shift
+\end{frame}
+
+\begin{frame}
+\frametitle{Simulations}
+TODO: plots of normal, stupid, genius students...
+\end{frame}
+
+\begin{frame}
+\frametitle{Implementation}
+TODO: implementation details (overview + interesting parts)
+\end{frame}
+
+\begin{frame}
+\frametitle{Evaluation}
+\begin{itemize}
+\item not enough data
+\end{itemize}
+TODO: (at least we can show some basic statistics and how the task difficulties changed in time)
+\end{frame}
+
+\begin{frame}
+\frametitle{Experience report}
+TODO: present experience reports from users
+\end{frame}
+
+\begin{frame}
+\frametitle{Summary}
+\begin{itemize}
+\item system for adpative learning of programming
+\item Blockly language, tasks in a maze
+\item concept of flow, Elo model
+\item first prototype: link
+\item source codes: link
+\end{itemize}
+\end{frame}
+
+\end{document}
