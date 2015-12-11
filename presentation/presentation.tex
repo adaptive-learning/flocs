@@ -9,8 +9,7 @@
 	\setbeamercovered{transparent}
 }
 
-\setbeamertemplate{caption}{\raggedright Obr\'azek: %\arabic{figure}.
-\insertcaption\par}
+\setbeamertemplate{caption}{\insertcaption\par}
 \setbeamertemplate{navigation symbols}{}%remove navigation symbols
 
 \setbeamercolor{frametitle}{fg=black}
@@ -32,10 +31,18 @@
 \usepackage{amssymb}
 \usepackage{listings}
 \usepackage{microtype}
+\usepackage{tikz}
 
 \usepackage{hyperref}
 \hypersetup{unicode=true}
 
+% ----- macros -----
+\newcommand{\imageW}[1]{%
+  \makebox[\textwidth][c]{\includegraphics[width=1.12\textwidth]{img/#1}}}
+\newcommand{\imageH}[1]{%
+  \makebox[\textwidth][c]{\includegraphics[height=0.86\textheight]{img/#1}}}
+
+% ---- info -----
 \title{Adaptive Programming}
 \author{Jaroslav~Čechák \and Tomáš~Effenberger \and  Jiří~Mauritz \and Jakub Peschel}
 \institute{Faculty of Informatics, Masaryk University}
@@ -54,7 +61,20 @@ TODO (both long term and short term goal = within RecSys course)
 
 \begin{frame}
 \frametitle{Flow}
-TODO (flow plot to remind the concept of flow as we will use this term later and is essential to the domain of educational recommendations)
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[font=\sffamily,xscale=5, yscale=5]
+  \large
+  %\draw [lightgray, fill=gray] (0,0) -- (0.1,0) -- (1,0.8) -- (0.8,1) -- (0,0.1) -- (0,0);
+  \draw (0.1,0) -- (1,0.8);
+  \draw (0,0.1) -- (0.8,1);
+  \draw [thick, <->] (0,1) node [left] {$challenge$} -- (0,0) -- (1,0) node [below right] {$skill$};
+  \node at (0.27,0.82) {frustration};
+  \node at (0.6,0.6) {flow};
+  \node at (0.7,0.2) {boredom};
+  \end{tikzpicture}
+  %\caption{Relationship between challenge and skill.}
+\end{figure}
 \end{frame}
 
 \begin{frame}
@@ -63,9 +83,43 @@ TODO (this can be similar to what we prepared for the ALG seminar, but should be
 \end{frame}
 
 \begin{frame}
-\frametitle{Screenshots}
-TODO: some screenshots so that everyone has an idea about what we are doing
-(+ better slide name or just large screenshots without frame title)
+\frametitle{Developed prototype}
+\imageW{easy-task-initial.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{Developed prototype}
+\imageW{easy-task-program.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{Developed prototype}
+\imageW{easy-task-solved.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{Developed prototype}
+\imageW{task-loops-initial.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{Developed prototype}
+\imageW{complex-program.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{Developed prototype}
+\imageW{task-colors.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{Developed prototype}
+\imageW{task-keys.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{Developed prototype}
+\imageW{task-pits.png}
 \end{frame}
 
 \begin{frame}
@@ -76,7 +130,23 @@ TODO: model of student skills and task difficulty
 \begin{frame}
 \frametitle{Tasks}
 TODO: details about tasks, incl.generating initial difficulty
+\begin{itemize}
+\item initial task difficulty generated
+% note: what information are we using to generate initial difficulty (number of concepts, number of blocks, plan size, number of free fields, number of tokens, block limit)
+\end{itemize}
 \end{frame}
+
+%\begin{frame}
+%\frametitle{Initial tasks difficulty}
+%\small
+%\begin{equation*}
+%\begin{split}
+%  \mbox{diff}(t) = & \tanh ((b_t - K_1) + (5 m - K_2) + (5 l_t - K_3) \\
+%                   & + 0.5\ln{(f)}) / K_{13}) \\
+%                   & + K_8 (c_t - K_8)
+%\end{split}
+%\end{equation*}
+%\end{frame}
 
 \begin{frame}
 \frametitle{Prediction}
@@ -95,7 +165,7 @@ TODO: 2 phases: (1) update based on report, (2) learning shift
 
 \begin{frame}
 \frametitle{Simulations}
-TODO: plots of normal, stupid, genius students...
+TODO: plots of normal, stupid, genius students..
 \end{frame}
 
 \begin{frame}
