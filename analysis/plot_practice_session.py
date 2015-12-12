@@ -75,6 +75,7 @@ def plot_practice_session(simulation):
     plt.xticks(np.arange(1, len(simulation) + 1, 1))
     plt.ylabel('')
     ax.legend(loc='upper center', scatterpoints=1, ncol=2)
+    fig.tight_layout()
 
 
 if __name__ == '__main__':
