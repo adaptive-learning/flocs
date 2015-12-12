@@ -56,7 +56,15 @@
 
 \begin{frame}
 \frametitle{Goal}
-TODO (both long term and short term goal = within RecSys course)
+\begin{itemize}
+\item application for learning programming efficiently
+  \begin{itemize}
+  \item teaching useful skills
+  \item engaging tasks of optimal difficulty
+  \item state of flow $\rightarrow$ learning maximized
+  \end{itemize}
+\item short term (this course): first prototype
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -79,7 +87,17 @@ TODO (both long term and short term goal = within RecSys course)
 
 \begin{frame}
 \frametitle{Existing projects and research}
-TODO (this can be similar to what we prepared for the ALG seminar, but should be brief)
+\begin{itemize}
+\item many websites for learning programming
+  \begin{itemize}
+  \item code.org, codecademy.com, Khan Academy, \ldots
+  \item great in motivation, but no adaptivity
+  \end{itemize}
+\item engagement: robot in a grid, (turtle) graphics
+\item avoiding syntax problems (Blockly, Scratch)
+\item research: ITS (outer/inner loop, hints)
+\item Problem Solving Tutor -- using time %-- skills and difficulties estimation
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -250,8 +268,8 @@ $K_{am} = 1.7$, $K_{st} = \frac{2}{3}$
 \begin{itemize}
 \item student bias update
   \begin{itemize}
-  \item report: $\beta_s \leftarrow \beta_s - K (\hat{f}_{st} - f_{st})$
-  \item learning: $\beta_s \leftarrow \beta_s + K e^{- K \beta_s}$
+  \item report: $\beta_s \leftarrow \beta_s - K_r(\hat{f}_{st} - f_{st})$
+  \item learning: $\beta_s \leftarrow \beta_s + K_{l} e^{- K_{j} \beta_s}$
   \end{itemize}
 \item skill factors update
   \begin{itemize}
@@ -260,7 +278,7 @@ $K_{am} = 1.7$, $K_{st} = \frac{2}{3}$
   \end{itemize}
 \item task bias update
   \begin{itemize}
-  \item $b_s \leftarrow b_s + \frac{K}{n + K}(\hat{f}_{st} - f_{st})$
+  \item $b_s \leftarrow b_s + \frac{K_t}{n + K_n}(\hat{f}_{st} - f_{st})$
   \item $n$ -- updates count
   \end{itemize}
 \item task factors -- fixed
@@ -273,7 +291,7 @@ $K_{am} = 1.7$, $K_{st} = \frac{2}{3}$
 \end{frame}
 
 \begin{frame}
-\frametitle{Simulation - stupid}
+\frametitle{Simulation -- stupid}
 \imageH{practice-simulation-stupid.pdf}
 \end{frame}
 
@@ -284,7 +302,15 @@ $K_{am} = 1.7$, $K_{st} = \frac{2}{3}$
 
 \begin{frame}
 \frametitle{Implementation}
-TODO: implementation details (overview + interesting parts)
+\begin{itemize}
+\item core: Python 3.5
+\item backend: Django, layered architecture
+\item frontend: AngularJS (modularity, promises), Blockly, JS-interpreter, Bootstrap
+\item analysis: pandas, matplotlib
+\item infrastructure: Git, GitHub, Virtualenv, pip, make, Django, Grunt, Bower, Karma
+\item deployment: Nginx, Gunicorn, PostgreSQL
+\item 45 unit tests, 195 commits, 44 closed issues
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -303,11 +329,11 @@ TODO: present experience reports from users
 \begin{frame}
 \frametitle{Summary}
 \begin{itemize}
-\item system for adpative learning of programming
+\item system for adaptive learning of programming
 \item Blockly language, tasks in a maze
-\item concept of flow, Elo model
-\item first prototype: link
-\item source codes: link
+\item flow, Elo model, factors
+\item first prototype: \url{http://flocs.thran.cz}
+\item repo: \url{https://github.com/effa/flocs}
 \end{itemize}
 \end{frame}
 
