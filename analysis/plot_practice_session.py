@@ -78,6 +78,59 @@ def plot_practice_session(simulation):
     fig.tight_layout()
 
 
+def index_scatter(ax, df, y, marker, label):
+    if len(df) > 0:
+        df.reset_index().plot(ax=ax, kind='scatter',
+                x='index', y=y,
+                marker=marker,
+                s=100, color=COLORS['task'],
+                label=label)
+
+
+def plot_practice_session_from_real_data(student=15):
+    # load data
+    # TODO: use paths to versioned data
+    taskinstances = pd.read_csv('data/TaskInstanceModel-2015-12-15.csv')
+    tasks = pd.read_csv('data/TasksDifficultyModel-2015-12-15.csv')
+    students = pd.read_csv('data/StudentsSkillModel-2015-12-15.csv')
+    skills = list(students.set_index('student').loc[student])
+
+    # prepare data
+    session = taskinstances[taskinstances.student == student]
+    session = session.sort_values(by='time_start')
+    session = pd.merge(session, tasks)
+    too_difficult = session[session['reported_flow'] == 1]
+    just_right = session[session['reported_flow'] == 2]
+    too_easy = session[session['reported_flow'] == 3]
+
+    with_report_count = len(too_difficult) + len(just_right) + len(too_easy)
+    if with_report_count < 7:
+        print('Too few data for student ', student)
+        return
+
+    # plot
+    plt.style.use('ggplot')
+    fig, ax = plt.subplots()
+
+    session['programming'].plot(ax=ax, kind='line',
+            color=COLORS['task'], label='difficulty')
+    index_scatter(ax, too_difficult, 'programming', 'v', 'too difficult')
+    index_scatter(ax, just_right, 'programming', 's', 'just right')
+    index_scatter(ax, too_easy, 'programming', '^', 'too easy')
+
+    ax.set_xlim([-0.1, len(session) - 0.9])
+    ax.set_ylim([-2, 2])
+    plt.xticks(np.arange(0, len(session), 1))
+    plt.ylabel('difficulty')
+    plt.figtext(0.01, .01, r"skill: $\beta = {beta:.1f}$, $\alpha = {alpha}$"\
+            .format(beta=skills[0], alpha=tuple(map(int, skills[1:]))),
+        fontdict={'size': 14})
+    ax.legend(loc='upper center', scatterpoints=1, ncol=2)
+    fig.tight_layout()
+    plt.show()
+    #plt.savefig('plots/student-{student}.pdf'.format(student=student))
+
+
 if __name__ == '__main__':
     store_practice_session_plot('practice-simulation-stupid')
     store_practice_session_plot('practice-simulation-genius')
