@@ -50,6 +50,7 @@ INSTALLED_APPS = (
 
     # third party
     'django_extensions',
+    'import_export',
 
     # our apps
     'common',
