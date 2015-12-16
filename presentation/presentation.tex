@@ -168,8 +168,8 @@
   \item 1 = too easy
   \end{itemize}
 \item $\hat{f}_{st}$ -- predicted flow
-\item $\beta_s, \alpha_s$ -- skill bias, skill factors vector
-\item $b_t, a_t$ -- difficulty, difficulty factors vector
+\item $\beta_s$ -- skill bias, $\alpha_s$ -- skill factors
+\item $b_t$ -- difficulty bias, $a_t$ -- difficulty factors
 \end{itemize}
 \end{frame}
 
@@ -274,7 +274,7 @@ $K_{am} = 1.7$, $K_{st} = \frac{2}{3}$
 \item skill factors update
   \begin{itemize}
   \item only for factors in tasks ($a_t[i] > 0$)
-  \item $\alpha_s[i] \leftarrow \max(\alpha_s[i], \hat{f}_{st})$
+  \item $\alpha_s[i] \leftarrow \max(\alpha_s[i], f_{st})$
   \end{itemize}
 \item task bias update
   \begin{itemize}
