@@ -34,7 +34,7 @@ Flocs is developed by [Adaptive Learning group][2] at Faculty of informatics, Ma
         $ cd flocs
         $ mkvirtualenv flocs && setvirtualenvproject
 
-  The name of the virtual envirnoment (flocs) should now appear in front of the prompt.
+  The name of the virtual environment (flocs) should now appear in front of the prompt.
 
 5. Install dependencies and initialize DB:
 
@@ -61,7 +61,8 @@ You can deactivate the virtual environment by calling `deactivate`.
         $ make update
 
 4. Take a look at the code written by your friends (quick code review).
-  Also look at the documentation, diagrams and issues to decide what feature you want to implement.
+  Also look at the [issues](https://github.com/effa/flocs/issues), documentation and diagrams
+  to decide what feature you want to implement.
 
 5. Create and checkout a git branch for the implemented feature.
 
@@ -91,11 +92,11 @@ You can deactivate the virtual environment by calling `deactivate`.
           $ ./manage.py makemigrations
           $ ./manage.py migrate
 
-  * If you are working on frontend, you need to start the testing server and run `grunt work` task to automatically apply all changes into a development build (cancatenating html partials, JavaScript and CSS files, compiling index.html, etc.). This can be done by a single command:
+  * If you are working on frontend, you need to start the testing server and run `grunt work` task to automatically apply all changes into a development build (concatenating html partials, JavaScript and CSS files, compiling index.html, etc.). This can be done by a single command:
 
           $ ./manage.py gruntserver
 
-  * Take a regular breaks (e.g. after 25 minuts), stretch yourself (including your eyes).
+  * Take a regular breaks (e.g. after 25 minutes), stretch yourself (including your eyes).
 
 8. Test the implemented feature and check the code by pylint:
 
@@ -105,7 +106,7 @@ You can deactivate the virtual environment by calling `deactivate`.
 9. Commit changes:
 
         $ git add changed_files
-        $ git commit -m "feature X implemented"
+        $ git commit -m "Implement feature X"
 
 10. Merge the feature branch to the master branch:
 
@@ -125,6 +126,6 @@ You can deactivate the virtual environment by calling `deactivate`.
 
 ## Additional recommendations
 
+* A lot of information about the project can be found in our [wiki](https://github.com/effa/flocs/wiki).
+* Check useful [development tools](https://github.com/effa/flocs/wiki/Development-tools).
 * Check our [style guide](https://github.com/effa/flocs/wiki/Style-Guide).
-* Check our [development tools](https://github.com/effa/flocs/wiki/Development-tools) wiki page.
-* If you are using vim, take a look at syntastic and vim-fugitive plugins.
