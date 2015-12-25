@@ -195,7 +195,7 @@ angular.module('flocs.maze')
   function solved() {
     var isSolved = (gridService.boxAt(state.grid, state.hero.position) ==
                     BoxType.GOAL) &&
-                   (getToolsAll() - getToolsPicked() === 0);
+                   (getTokensAll() - getTokensPicked() === 0);
     return isSolved;
   }
 
@@ -214,14 +214,14 @@ angular.module('flocs.maze')
     return state;
   }
 
-  function getToolsPicked() {
+  function getTokensPicked() {
     if (state.tokens === undefined) {
       return null;
     }
     return (settings.tokens.length - state.tokens.length);
   }
 
-  function getToolsAll() {
+  function getTokensAll() {
     if (state.tokens === undefined) {
       return null;
     }
@@ -247,8 +247,8 @@ angular.module('flocs.maze')
     solved: solved,
     died: died,
     getState: getState,
-    getToolsPicked: getToolsPicked,
-    getToolsAll: getToolsAll
+    getTokensPicked: getTokensPicked,
+    getTokensAll: getTokensAll
   };
 }]);
 

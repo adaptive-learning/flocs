@@ -100,12 +100,12 @@ angular.module('flocs.taskEnvironment')
     return workspaceService.getBlocksLimit();
   }
 
-  function getToolsPicked() {
-    return mazeService.getToolsPicked();
+  function getTokensPicked() {
+    return mazeService.getTokensPicked();
   }
 
-  function getToolsAll() {
-    return mazeService.getToolsAll();
+  function getTokensAll() {
+    return mazeService.getTokensAll();
   }
 
   /*
@@ -166,8 +166,8 @@ angular.module('flocs.taskEnvironment')
   }
 
   function handleMazeChange() {
-    toolsStatus.picked = getToolsPicked();
-    toolsStatus.all = getToolsAll();
+    toolsStatus.picked = getTokensPicked();
+    toolsStatus.all = getTokensAll();
   }
 
 }]);
