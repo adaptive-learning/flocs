@@ -225,7 +225,11 @@ angular.module('flocs.maze')
     if (state.tokens === undefined) {
       return null;
     }
-    return (settings.tokens.length);
+    var tokensTotal = settings.tokens.length;
+    if (tokensTotal === 0) {
+      return null;
+    }
+    return tokensTotal;
   }
 
 
