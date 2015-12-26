@@ -9,6 +9,13 @@ function ($log, $timeout, mazeService, workspaceService) {
   var runCodePromise = null;
   var highlightPause = false;
 
+  // speed settings
+  var MIN_PAUSE = 0;
+  var MAX_PAUSE = 400;
+  var MIN_SPEED_LEVEL = 1;
+  var MAX_SPEED_LEVEL = 3;
+  var speed = 2;
+
   /**
    * Define commands semantics.
    */
@@ -124,13 +131,12 @@ function ($log, $timeout, mazeService, workspaceService) {
 
       // check whether to continue
       if (ok && executing && !result.died && !result.solved) {
-        var pauseTime = 0;
+        var pauseLength = 0;
         if (highlightPause)  {
-          // TODO: unhardcode the pause time
-          pauseTime = 200;
+          pauseLength = getPauseLength();
           highlightPause = false;
         }
-        return $timeout(stepCode, pauseTime);
+        return $timeout(stepCode, pauseLength);
       } else {
         executing = false;
         return result;
@@ -148,10 +154,47 @@ function ($log, $timeout, mazeService, workspaceService) {
     return runCodePromise;
   }
 
+  /**
+   * Return list of available speed levels
+   */
+  function getAvailableSpeeds() {
+    var levels = [];
+    for (var level = MIN_SPEED_LEVEL; level <= MAX_SPEED_LEVEL; level++){
+      levels.push(level);
+    }
+    return levels;
+  }
+
+  /**
+   * Return current speed level
+   */
+  function getSpeed() {
+    return speed;
+  }
+
+  /**
+   * Set new speed level
+   */
+  function setSpeed(newSpeed) {
+    speed = newSpeed;
+  }
+
+  /**
+   * Calculate length of pause in milliseconds from current speed level
+   */
+  function getPauseLength() {
+    var slope = (MIN_PAUSE - MAX_PAUSE) / (MAX_SPEED_LEVEL - MIN_SPEED_LEVEL);
+    var pause = MAX_PAUSE + slope * (speed - MIN_SPEED_LEVEL);
+    return pause;
+  }
+
   // return public API
   return {
     runCode: runCode,
-    stopExecution: stopExecution
+    stopExecution: stopExecution,
+    getAvailableSpeeds: getAvailableSpeeds,
+    getSpeed: getSpeed,
+    setSpeed: setSpeed
   };
 
 }]);

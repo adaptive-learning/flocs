@@ -14,29 +14,38 @@
 
     <flocs-maze id="maze"></flocs-maze>
 
-    <div ng-switch="executionStatus.initialState">
-      <div ng-switch-when="true">
-        <button id="runBtn"
-                ng-click="run()"
-                type="button" class="btn btn-primary">
-                <!--ng-disabled="noTask">-->
-          Spusť program
-        </button>
-      </div>
-      <div ng-switch-default>
-        <button id="resetBtn"
-                ng-click="reset()"
-                type="button" class="btn btn-warning">
-          Reset
-        </button>
-      </div>
+    <div>
+      <span ng-switch="executionStatus.initialState">
+        <span ng-switch-when="true">
+          <button id="runBtn"
+                  ng-click="run()"
+                  type="button" class="btn btn-primary">
+                  <!--ng-disabled="noTask">-->
+            Spusť program
+          </button>
+        </span>
+        <span ng-switch-default>
+          <button id="resetBtn"
+                  ng-click="reset()"
+                  type="button" class="btn btn-warning">
+            Reset
+          </button>
+        </span>
+      </span>
+
+      <span id="speedStatus">
+        Rychlost:
+        <span class="btn-group" ng-click="changeSpeedClicked()">
+          <label ng-repeat="s in availableSpeeds" ng-model="settings.speed" class="btn btn-xs btn-default" uib-btn-radio="s">{{s}}</label>
+        </span>
+      </span>
     </div>
 
-  <div id="instructions">
-    <p>
-      {{instructions.text}}
-    </p>
-  </div>
+    <div id="instructions">
+      <p>
+        {{instructions.text}}
+      </p>
+    </div>
 
   </div>
 

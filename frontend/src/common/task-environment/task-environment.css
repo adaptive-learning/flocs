@@ -13,6 +13,11 @@
   height: 400px;
 }
 
+#speedStatus {
+  float: right;
+  padding: 3px 7px;
+}
+
 #instructions {
   margin-top: 10px;
 }
