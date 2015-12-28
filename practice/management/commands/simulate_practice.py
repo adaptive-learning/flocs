@@ -1,8 +1,8 @@
 from django.core.management.base import BaseCommand, CommandError
 from math import inf
 from common.simulator import Simulator
-from practice.services.simulated_students import SIMULATED_STUDENTS
 from practice.services.practice_simulation import PracticeSimulation
+from practice.core.simulated_students import SIMULATED_STUDENTS
 
 
 class Command(BaseCommand):
@@ -10,7 +10,7 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument('--behavior',
-                help='Student behavior. You can add another behaviors in practice/services/simulated_students.py.',
+                help='Student behavior. You can add another behaviors in practice/core/simulated_students.py.',
                 choices=SIMULATED_STUDENTS.keys(),
                 default='interactive')
         parser.add_argument('--max-instances',

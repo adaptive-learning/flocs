@@ -7,11 +7,10 @@ from tasks.models import TaskModel
 from practice.models.practice_context import create_practice_context
 from practice.models import TaskInstanceModel
 from practice.models import StudentTaskInfoModel
-#from practice.services.task_selection import RandomTaskSelector as TaskSelector
-from practice.services.task_selection import ScoreTaskSelector as TaskSelector
-from practice.services.flow_prediction import predict_flow
 from practice.services.parameters_update import update_parameters
 from practice.services.instructions_service import get_instructions
+from practice.core.task_selection import ScoreTaskSelector as TaskSelector
+from practice.core.flow_prediction import predict_flow
 
 logger = logging.getLogger(__name__)
 

@@ -4,7 +4,7 @@ Models for task selection.
 
 from random import choice
 from common.utils.activation import AMPLITUDE
-from practice.services.flow_prediction import predict_flow
+from practice.core.flow_prediction import predict_flow
 import math
 
 
