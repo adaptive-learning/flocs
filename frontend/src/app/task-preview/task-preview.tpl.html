@@ -1,16 +1,6 @@
 <div>
 
-  <!--
-  Super text
-
-  <div>
-    <span ng-repeat="taskId in taskIds">
-      <a ui-sref="/task-preview/{{taskId}}">{{taskId}}</a>
-    </span>
-  <div>
-    -->
-
-  <form>
+  <form id="task-preview-selector">
     <label for="taskIdSelect">Select task ID:</label>
     <select name="taskIdSelect"
             ng-change="onTaskIdSelected()"

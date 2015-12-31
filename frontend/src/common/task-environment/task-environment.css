@@ -1,16 +1,21 @@
-#taskEnvironment {
-  margin: 8px;
-}
-
 #mainPanel {
-  width: 400px;
+  /*width: 400px;
   float: left;
-  margin-right: 20px;
+  margin-right: 20px;*/
+  position: absolute;
+  top: 50px;
+  bottom: 0px;
+  right: 0px;
+  width: 400px;
+  background-color: #eee;
+  padding: 2px 4px;
 }
 
 #maze {
-  width: 400px;
-  height: 400px;
+  /*width: 400px;
+  height: 400px;*/
+  /* setting size on #maze does not have any effect,
+     size can be set in maze directive */
 }
 
 #speedStatus {
@@ -23,5 +28,16 @@
 }
 
 #workspace {
-  float: left;
+  /*float: left;*/
+  position: absolute;
+  top: 50px;
+  bottom: 0px;
+  left: 0px;
+  right: 400px;
+  /*background-color: #ccd;*/
+}
+
+#workspace-separator {
+  width: 10px;
+  margin: 0 10px;
 }

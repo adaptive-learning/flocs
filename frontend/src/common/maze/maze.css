@@ -1,3 +1,4 @@
 #svgMaze {
-  border: 1px solid gray;
+  /*border: 1px solid gray;*/
+  margin-left: -4px;
 }

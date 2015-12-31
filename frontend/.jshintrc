@@ -16,6 +16,7 @@
 
     // Global variables (false = the variable is read-only).
     "globals": {
+      "document"    : false,
       "angular"     : false,
       "browser"     : false,
       "Blockly"     : false,
