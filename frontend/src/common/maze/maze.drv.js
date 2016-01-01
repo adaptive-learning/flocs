@@ -1,8 +1,9 @@
-/*
+/**
  * Maze Directive
+ * @ngInject
  */
 angular.module('flocs.maze')
-.directive('flocsMaze', ['mazeService', 'BoxType', function(mazeService, BoxType) {
+.directive('flocsMaze', function(mazeService, BoxType) {
   return {
     restrict: 'E',
     scope: {},
@@ -123,4 +124,4 @@ angular.module('flocs.maze')
       mazeChanged();
     }
   };
-}]);
+});

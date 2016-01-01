@@ -15,8 +15,7 @@ angular.module('flocs', [
 ])
 
 // routes configuration
-.config(['$httpProvider', '$stateProvider', '$locationProvider',
-  function($httpProvider, $stateProvider, $locationProvider) {
+.config(function($httpProvider, $stateProvider, $locationProvider) {
 
   // settings for CSRF protection
   // (Django uses different name for CSFR cookie than Angular by default)
@@ -88,15 +87,15 @@ angular.module('flocs', [
     Date.now = function now() { return new Date().getTime(); };
   }
 
-}])
+})
 
 // Main application controller
-.controller('appCtrl', ['$scope', function($scope) {
+.controller('appCtrl', function($scope) {
   // global configuration (user, language) functions go here
-}])
+})
 
 // Configuration of ngDialog module
-.config(['ngDialogProvider', function (ngDialogProvider) {
+.config(function (ngDialogProvider) {
   ngDialogProvider.setDefaults({
     className: 'ngdialog-theme-default',
     plain: false,
@@ -108,4 +107,4 @@ angular.module('flocs', [
       console.log('default pre-close callback');
     }
   });
-}]);
+});

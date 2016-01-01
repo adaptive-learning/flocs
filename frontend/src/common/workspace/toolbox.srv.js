@@ -2,7 +2,7 @@
  * Toolbox Service
  */
 angular.module('flocs.workspace')
-  .factory('toolboxService', ['blocks', 'blocksOrder', function(blocks, blocksOrder) {
+.factory('toolboxService', function(blocks, blocksOrder) {
 
   var blocksOrderMap = null;
 
@@ -31,7 +31,7 @@ angular.module('flocs.workspace')
   function blocksToXml(blockNames) {
     // no more blocks to process
     if (typeof blockNames === 'undefined' || blockNames.length === 0) {
-        return; 
+        return;
     }
 
     var xmlString = '';
@@ -92,7 +92,7 @@ angular.module('flocs.workspace')
         } else {
             return a >= b;
         }
-    // Compare user defined category with predefined category. That is an 
+    // Compare user defined category with predefined category. That is an
     // undefined operation.
     } else {
         return 1;
@@ -109,7 +109,4 @@ angular.module('flocs.workspace')
       blocksOrderMap[blocksOrder[i]] = i;
     }
   }
-}]);
-
-
-
+});

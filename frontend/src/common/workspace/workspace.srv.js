@@ -2,8 +2,8 @@
  * Workspace Service
  */
 angular.module('flocs.workspace')
-.factory('workspaceService', ['$rootScope', '$log', 'blocklyService', 'toolboxService',
-  function($rootScope, $log, blocklyService, toolboxService) {
+.factory('workspaceService', function($rootScope, $log, blocklyService,
+      toolboxService) {
 
   var blocklyDiv = null;
   // TODO: move default settings to a constant service?
@@ -160,4 +160,4 @@ angular.module('flocs.workspace')
     getBlocksUsed: getBlocksUsed,
     getBlocksLimit: getBlocksLimit
   };
-}]);
+});

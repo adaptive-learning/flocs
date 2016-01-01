@@ -1,9 +1,9 @@
-/*
+/**
  * Service for code interpreting.
+ * @ngInject
  */
 angular.module('flocs.services')
-.factory('interpreterService', ['$log', '$timeout', 'mazeService', 'workspaceService',
-function ($log, $timeout, mazeService, workspaceService) {
+.factory('interpreterService', function ($log, $timeout, mazeService, workspaceService) {
 
   var executing = false;
   var runCodePromise = null;
@@ -197,4 +197,4 @@ function ($log, $timeout, mazeService, workspaceService) {
     setSpeed: setSpeed
   };
 
-}]);
+});

@@ -1,9 +1,9 @@
-/*
+/**
  * Maze Service
+ * @ngInject
  */
 angular.module('flocs.maze')
-.factory('mazeService', ['BoxType', 'SolidBlocks', 'gridService',
-  function(BoxType, SolidBlocks, gridService) {
+.factory('mazeService', function(BoxType, SolidBlocks, gridService) {
 
   // NOTE: We use observer pattern to notify views. Alternative would be to use
   //       $broadcast (but it would pollute $rootScope).
@@ -233,7 +233,7 @@ angular.module('flocs.maze')
   }
 
 
-    // public API
+   // public API
   return {
     registerView: registerView,
     addChangeListener: addChangeListener,
@@ -250,5 +250,5 @@ angular.module('flocs.maze')
     getTokensPicked: getTokensPicked,
     getTokensAll: getTokensAll
   };
-}]);
+});
 

@@ -1,8 +1,9 @@
-/*
+/**
  * Communication with server Practice API.
+ * @ngInject
  */
 angular.module('flocs.services')
-.factory('practiceDao', ['$http', function ($http) {
+.factory('practiceDao', function ($http) {
 
   // public API
   return {
@@ -29,4 +30,4 @@ angular.module('flocs.services')
     $http.post('/api/practice/attempt-report', report);
   }
 
-}]);
+});

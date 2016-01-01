@@ -2,7 +2,7 @@
  * Blockly Service
  */
 angular.module('flocs.workspace')
-.factory('blocklyService', [function() {
+.factory('blocklyService', function() {
 
   /**
   * Blockly initialization (blocks description).
@@ -653,7 +653,4 @@ angular.module('flocs.workspace')
   return {
     initializeBlockly: initializeBlockly
   };
-}]);
-
-
-
+});

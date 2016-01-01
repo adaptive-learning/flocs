@@ -2,7 +2,7 @@
  * Workspace Directive
  */
 angular.module('flocs.workspace')
-.directive('flocsWorkspace', ['$window', 'workspaceService', function($window, workspaceService) {
+.directive('flocsWorkspace', function($window, workspaceService) {
   return {
     restrict: 'E',
     scope: {},
@@ -27,7 +27,7 @@ angular.module('flocs.workspace')
       //workspaceService.setBlocklyDiv(blocklyDiv);
     }
   };
-}]);
+});
 
 
 /*angular.module('flocs.workspace')

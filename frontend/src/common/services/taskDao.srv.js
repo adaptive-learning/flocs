@@ -1,8 +1,9 @@
-/*
+/**
  * Communication with server Task API.
+ * @ngInject
  */
 angular.module('flocs.services')
-.factory('taskDao', ['$http', function ($http) {
+.factory('taskDao', function ($http) {
 
   // public API
   return {
@@ -32,4 +33,4 @@ angular.module('flocs.services')
       });
   }
 
-}]);
+});

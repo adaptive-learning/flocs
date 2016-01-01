@@ -1,8 +1,9 @@
-/*
+/**
  * Service for userManagement
+ * @ngInject
  */
 angular.module('flocs.services')
-.factory('userDao',['$http', '$log', function($http, $log) {
+.factory('userDao', function($http, $log) {
 	return {
         register: register,
         login : login,
@@ -40,5 +41,4 @@ angular.module('flocs.services')
      return $http.get('api/user/logout');
      }
 
-}]);
-
+});

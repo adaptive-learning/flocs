@@ -12,6 +12,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-include-source');
   grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-ng-annotate');
 
   /**
    * Paths configuration.
@@ -165,6 +166,15 @@ module.exports = function (grunt) {
       }
     },
 
+    ngAnnotate: {
+      all: {
+        files: [{
+          expand: true,
+          src: ['<%= temp %>/js/**/*.js'],
+        }]
+      }
+    },
+
     // Concatenation of js and css files
     concat: {
       app_css: {
@@ -272,7 +282,13 @@ module.exports = function (grunt) {
         files: [
           '<%= app_files.js %>'
         ],
-        tasks: ['jshint:src', 'clean:temp', 'copy:app_js', 'copy:development']
+        tasks: [
+          'jshint:src',
+          'clean:temp',
+          'copy:app_js',
+          'ngAnnotate:all',
+          'copy:development'
+        ]
       },
 
       // When a js unit tests change, we only want to lint them
@@ -362,11 +378,12 @@ module.exports = function (grunt) {
   });
 
   // Development build task.
-  grunt.registerTask( 'development-build', [
+  grunt.registerTask('development-build', [
     'clean',
     'lint',
     'compileTemplates',
     'copy:app_js',
+    'ngAnnotate:all',
     'concat:vendor_js',
     'concat:app_css',
     'concat:vendor_css',
@@ -377,11 +394,12 @@ module.exports = function (grunt) {
   ]);
 
   // Production build task (gets the application ready for deployment).
-  grunt.registerTask( 'production-build', [
+  grunt.registerTask('production-build', [
     'clean',
     'lint',
     'compileTemplates',
     'concat:app_js',
+    'ngAnnotate:all',
     'concat:vendor_js',
     'concat:app_css',
     'concat:vendor_css',

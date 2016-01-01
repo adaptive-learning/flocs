@@ -2,8 +2,8 @@
  * Task Environment Service
  */
 angular.module('flocs.taskEnvironment')
-.factory('taskEnvironmentService', ['taskDao', 'mazeService', 'workspaceService', 'interpreterService',
-    function (taskDao, mazeService, workspaceService, interpreterService) {
+.factory('taskEnvironmentService', function (taskDao, mazeService,
+      workspaceService, interpreterService) {
 
   var currentTask = null;
   var afterAttemptCallback = null;
@@ -170,4 +170,4 @@ angular.module('flocs.taskEnvironment')
     toolsStatus.all = getTokensAll();
   }
 
-}]);
+});

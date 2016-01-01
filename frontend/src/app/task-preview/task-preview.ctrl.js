@@ -1,9 +1,10 @@
-/*
+/**
  * Task preview controller
+ * @ngInject
  */
 angular.module('flocs.taskPreview')
-.controller('taskPreviewCtrl', ['$scope', '$state', '$stateParams', 'taskEnvironmentService', 'taskDao',
-    function($scope, $state, $stateParams, taskEnvironmentService, taskDao) {
+.controller('taskPreviewCtrl', function($scope, $state, $stateParams,
+      taskEnvironmentService, taskDao) {
 
   function taskIdSelected() {
     $state.go('task-preview-set', {taskId: $scope.tasks.selected});
@@ -29,4 +30,4 @@ angular.module('flocs.taskPreview')
 
   $scope.onTaskIdSelected = taskIdSelected;
 
-}]);
+});

@@ -1,8 +1,9 @@
-/*
+/**
  * Main home controller
+ * @ngInject
  */
 angular.module('flocs.home')
-.controller('homeCtrl', ['$scope', function($scope) {
+.controller('homeCtrl', function($scope) {
 
-}]);
+});
 

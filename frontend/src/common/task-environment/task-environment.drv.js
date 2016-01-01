@@ -2,7 +2,7 @@
  * Task Environment Directive
  */
 angular.module('flocs.taskEnvironment')
-.directive('flocsTaskEnvironment', [function() {
+.directive('flocsTaskEnvironment', function() {
   return {
     restrict: 'E',
     scope: {},
@@ -11,4 +11,4 @@ angular.module('flocs.taskEnvironment')
     link: function(scope, element, attrs) {
     }
   };
-}]);
+});

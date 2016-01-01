@@ -1,8 +1,9 @@
-/*
- ** Direction Service
+/**
+ * Direction Service
+ * @ngInject
  */
 angular.module('flocs.maze')
-.service('gridService', ['BoxType', function(BoxType) {
+.service('gridService', function(BoxType) {
   /**
    * Convert direction ID to direction vector.
    */
@@ -22,4 +23,4 @@ angular.module('flocs.maze')
     return grid[position[1]][position[0]];
   };
 
-}]);
+});

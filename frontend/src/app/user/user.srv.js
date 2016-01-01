@@ -2,7 +2,7 @@
  * User service
  */
 angular.module('flocs.user')
-.factory('userService', ['$q', '$state', '$uibModal', 'userDao', function($q, $state, $uibModal, userDao) {
+.factory('userService', function($q, $state, $uibModal, userDao) {
     var user = {
       logged: false,
       username: undefined
@@ -68,5 +68,4 @@ angular.module('flocs.user')
       ensuringLoggedIn: ensuringLoggedIn
 	};
 
-}]);
-
+});
