@@ -2,8 +2,8 @@
  * Practice Session Service
  * @ngInject
  */
-angular.module('flocs.services')
-.factory('practiceSessionService', function ($http, $timeout, $q, practiceDao, taskEnvironmentService) {
+angular.module('flocs.practice')
+.factory('practiceService', function ($http, $timeout, $q, practiceDao, taskEnvironmentService) {
 
   var attemptReport = null;
   var taskInstanceId = null;

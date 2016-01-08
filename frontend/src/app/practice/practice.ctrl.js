@@ -4,7 +4,7 @@
  */
 angular.module('flocs.practice')
 .controller('practiceCtrl', function ($scope, $timeout, ngDialog, $uibModal,
-      practiceSessionService, userService) {
+      practiceService, userService) {
 
   // TODO: move it to a template and unhardcode report values
   var template = '<div class=\"ngdialog-message\"> ' +
@@ -26,7 +26,7 @@ angular.module('flocs.practice')
   };
 
   function practiceNextTask() {
-    practiceSessionService.practicingTask().then(
+    practiceService.practicingTask().then(
         taskFinished,
         taskRejected,
         taskAttempted);
@@ -58,7 +58,7 @@ angular.module('flocs.practice')
    * Filling the report completes the task
    */
   function reportFilled(report) {
-    practiceSessionService.taskCompleted(report);
+    practiceService.taskCompleted(report);
   }
 
   /**
@@ -70,7 +70,7 @@ angular.module('flocs.practice')
   }
 
   function giveUp() {
-    practiceSessionService.giveUpTask();
+    practiceService.giveUpTask();
   }
 
   // NOTE: quick a dirty solution to make usert to log in; TODO: use lazy
