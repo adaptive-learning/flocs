@@ -43,6 +43,7 @@ class PracticeServiceTest(TestCase):
             "task-id": 1,
             "attempt": 7,
             "solved": True,
+            "given-up": False,
             "time": 234,
             "flow-report": 1
         }

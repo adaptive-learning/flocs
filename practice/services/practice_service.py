@@ -3,10 +3,12 @@ Main service functions of practice app.
 """
 
 import logging
+
 from tasks.models import TaskModel
 from practice.models.practice_context import create_practice_context
 from practice.models import TaskInstanceModel
 from practice.models import StudentTaskInfoModel
+from practice.models.task_instance import FlowRating
 from practice.services.parameters_update import update_parameters
 from practice.services.instructions_service import get_instructions
 from practice.core.task_selection import ScoreTaskSelector as TaskSelector
@@ -79,8 +81,10 @@ def process_attempt_report(student, report):
     task_instance_id = report['task-instance-id']
     attempt_count = report['attempt']
     solved = report['solved']
+    given_up = report['given-up']
     time = report['time']
-    reported_flow = report.get('flow-report')
+    reported_flow = report.get('flow-report') if not given_up\
+            else FlowRating.VERY_DIFFICULT
 
     logger.info("Reporting attempt for student %s with result %s", student.id, solved)
 
@@ -107,7 +111,7 @@ def process_attempt_report(student, report):
     # TODO: there should be more explicit control (condition) for not updating
     # parameters twice (e.g. the following would not work correctly, if the
     # report comes duplicated).
-    if not solved or not reported_flow:
+    if not reported_flow:
         return
 
     task = task_instance.task

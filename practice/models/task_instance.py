@@ -6,9 +6,10 @@ from datetime import datetime
 
 class FlowRating(object):
     UNKNOWN = 0
-    DIFFICULT = 1
-    RIGHT = 2
-    EASY = 3
+    VERY_DIFFICULT = 1
+    DIFFICULT = 2
+    RIGHT = 3
+    EASY = 4
 
 class TaskInstanceModel(models.Model):
     """
@@ -39,9 +40,10 @@ class TaskInstanceModel(models.Model):
     # self-report about subjective difficulty feeling
     REPORTED_FLOW_VALUES = (
         (FlowRating.UNKNOWN,   'unknown'),
-        (FlowRating.DIFFICULT, 'too difficult'),
-        (FlowRating.RIGHT,     'just right'),
-        (FlowRating.EASY,      'too easy'),
+        (FlowRating.VERY_DIFFICULT, 'very difficult'),
+        (FlowRating.DIFFICULT, 'difficult'),
+        (FlowRating.RIGHT, 'just right'),
+        (FlowRating.EASY, 'easy'),
     )
     reported_flow = models.SmallIntegerField(choices=REPORTED_FLOW_VALUES,
             default=FlowRating.UNKNOWN)
@@ -72,12 +74,14 @@ class TaskInstanceModel(models.Model):
         Return reported flow as a real number or None if no feedback was
         provided.
         """
-        if self.reported_flow == FlowRating.DIFFICULT:
-            return -1.0 # -activation.AMPLITUDE
+        if self.reported_flow == FlowRating.VERY_DIFFICULT:
+            return -activation.AMPLITUDE
+        elif self.reported_flow == FlowRating.DIFFICULT:
+            return -1.0
         elif self.reported_flow == FlowRating.RIGHT:
             return 0
         elif self.reported_flow == FlowRating.EASY:
-            return 1.0 # activation.AMPLITUDE
+            return 1.0
         else:
             return None
 
@@ -110,6 +114,6 @@ class TaskInstanceModel(models.Model):
         self.solved = solved
 
         if reported_flow is not None:
-            if reported_flow not in range(4):
+            if reported_flow not in range(5):
                 raise ValueError('Invalid flow report number %s' % reported_flow)
             self.reported_flow = reported_flow

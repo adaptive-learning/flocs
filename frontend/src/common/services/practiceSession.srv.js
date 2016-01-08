@@ -13,8 +13,17 @@ angular.module('flocs.services')
   // === public API ===
   return {
     practicingTask: practicingTask,
-    taskCompleted: taskCompleted
+    taskCompleted: taskCompleted,
+    giveUpTask: giveUpTask
   };
+
+  function giveUpTask() {
+    attemptReport['given-up'] = true;
+    attemptReport['time'] = calculateSolvingTime();
+    practiceDao.sendingAttemptReport(attemptReport);
+    attemptReport = null;
+    taskFinishedDeferred.reject();
+  }
 
   /*
    * Start practicing task.
@@ -100,6 +109,7 @@ angular.module('flocs.services')
       'attempt': 0,
       'time': 0,
       'solved': false,
+      'given-up': false,
       'flow-report': 0
     };
   }
