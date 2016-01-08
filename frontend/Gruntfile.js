@@ -49,9 +49,9 @@ module.exports = function (grunt) {
 
     vendor_files: {
       js: [
+        'vendor/jquery/dist/jquery.js',
         'vendor/angular/angular.js',
         'vendor/angular-ui-router/release/angular-ui-router.js',
-        'vendor/jquery/dist/jquery.js',
         'vendor/blockly/blockly_compressed.js',
         'vendor/blockly/javascript_compressed.js',
         'vendor/blockly/python_compressed.js',
@@ -59,7 +59,6 @@ module.exports = function (grunt) {
         'vendor/blockly/msg/js/cs.js',
         'vendor/JS-Interpreter/acorn_interpreter.js',
         'vendor/ngDialog/js/ngDialog.js',
-        //'vendor/bootstrap/dist/js/bootstrap.js'
         'vendor/angular-bootstrap/ui-bootstrap-tpls.js'
       ],
       css: [
