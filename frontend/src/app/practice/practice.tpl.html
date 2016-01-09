@@ -1,9 +1,13 @@
 <div>
 
-  <flocs-task-environment>
+  <flocs-task-environment ng-class="{'invisible': !taskPrepared}">
     <button id="giveUpBtn" ng-click="giveUp()" type="button" class="btn btn-default btn-sm">
       Jednodušší úlohu
     </button>
   </flocs-task-environment>
+
+  <div ng-show="taskLoading">
+    <wave-spinner></wave-spinner>
+  </div>
 
 </div>

@@ -29,13 +29,16 @@ footer{
 }
 
 /* ===== Colors ===== */
-
 footer{
   background-color: #222;
   color: #7EB5D6;
 }
 
-/* Pointer on links */
+/* ===== Other styles ===== */
 a {
   cursor: pointer;
+}
+
+.invisible {
+  visibility: hidden;
 }

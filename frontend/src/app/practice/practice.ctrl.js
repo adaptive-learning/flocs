@@ -26,10 +26,16 @@ angular.module('flocs.practice')
   };
 
   function practiceNextTask() {
-    practiceService.practicingTask().then(
+    $scope.taskPrepared = false;
+    $scope.taskLoading = true;
+    practiceService.settingNextTask().then(function() {
+      $scope.taskPrepared = true;
+      $scope.taskLoading = false;
+      practiceService.practicingTask().then(
         taskFinished,
         taskRejected,
         taskAttempted);
+    });
   }
 
   function taskFinished() {
@@ -72,6 +78,9 @@ angular.module('flocs.practice')
   function giveUp() {
     practiceService.giveUpTask();
   }
+
+  $scope.taskPrepared = false;
+  $scope.taskLoading = false;
 
   // NOTE: quick a dirty solution to make usert to log in; TODO: use lazy
   // user at backend, do not force to log in immediately

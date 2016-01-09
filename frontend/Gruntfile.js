@@ -59,13 +59,15 @@ module.exports = function (grunt) {
         'vendor/blockly/msg/js/cs.js',
         'vendor/JS-Interpreter/acorn_interpreter.js',
         'vendor/ngDialog/js/ngDialog.js',
-        'vendor/angular-bootstrap/ui-bootstrap-tpls.js'
+        'vendor/angular-bootstrap/ui-bootstrap-tpls.js',
+        'vendor/angular-spinkit/build/angular-spinkit.min.js'
       ],
       css: [
         'vendor/bootstrap/dist/css/bootstrap.min.css',
         'vendor/ngDialog/css/ngDialog.css',
         'vendor/ngDialog/css/ngDialog-theme-plain.css',
-        'vendor/ngDialog/css/ngDialog-theme-default.css'
+        'vendor/ngDialog/css/ngDialog-theme-default.css',
+        'vendor/angular-spinkit/build/angular-spinkit.min.css'
       ],
       assets: [
         //'vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.svg'

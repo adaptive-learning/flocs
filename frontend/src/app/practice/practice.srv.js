@@ -12,6 +12,7 @@ angular.module('flocs.practice')
 
   // === public API ===
   return {
+    settingNextTask: settingNextTask,
     practicingTask: practicingTask,
     taskCompleted: taskCompleted,
     giveUpTask: giveUpTask
@@ -31,7 +32,6 @@ angular.module('flocs.practice')
    */
   function practicingTask() {
     taskFinishedDeferred = $q.defer();
-    settingNextTask();
     return taskFinishedDeferred.promise;
   }
 
