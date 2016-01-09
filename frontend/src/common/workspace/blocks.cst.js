@@ -18,7 +18,7 @@ angular.module('flocs.workspace')
     'maze_check_path_left':'<block type="maze_check_path">' +
         '<field name="direction">1</field>' +
         '</block>',
-    
+
     'maze_check_path_right':'<block type="maze_check_path">' +
         '<field name="direction">-1</field>' +
         '</block>',
@@ -84,6 +84,9 @@ angular.module('flocs.workspace')
         '</category>',
 
     'controls_repeat':'<block type="controls_repeat_ext">' +
+        '</block>',
+
+    'controls_repeat:10':'<block type="controls_repeat_ext">' +
         '<value name="TIMES">' +
         '<block type="math_number">' +
         '<field name="NUM">10</field>' +
@@ -186,5 +189,6 @@ angular.module('flocs.workspace')
         '<field name="NUM">5</field>' +
         '</block>' +
         '</value>' +
-        '</block>'
+        '</block>',
+
 });

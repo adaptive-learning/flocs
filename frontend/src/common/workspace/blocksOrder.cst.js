@@ -3,14 +3,14 @@
  */
 angular.module('flocs.workspace')
 .constant('blocksOrder', [
-    
+
     'maze_move_forward',
     'maze_move_backward',
 
     'maze_turn',
     'maze_turn_left',
     'maze_turn_right',
-    
+
     'maze_check_path',
     'maze_check_path_left',
     'maze_check_path_right',
@@ -23,6 +23,7 @@ angular.module('flocs.workspace')
     'constrols_if_elseif_else',
 
     'controls_repeat',
+    'controls_repeat:10',
     'controls_while',
     'constrols_for',
     'controls_forEach',
@@ -34,6 +35,9 @@ angular.module('flocs.workspace')
     'logic_boolean',
     'logic_null',
     'logic_ternary',
+
+    'variables_set',
+    'variables_get',
 
     'math_number',
     'math_arithmetic',
