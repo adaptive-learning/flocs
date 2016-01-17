@@ -68,6 +68,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+
+    'flocs.aspects.localization.LocalizationMiddleware',
 )
 
 ROOT_URLCONF = 'flocs.urls'
@@ -104,16 +106,19 @@ DATABASES = {"default": dj_database_url.config(default='sqlite:///' + os.path.jo
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = False
+#TIME_ZONE = 'UTC'
+LANGUAGES = [
+    ('cs', 'Česky'),
+    ('en', 'English')
+]
+LANGUAGE_DOMAINS = [
+    ('en', r'^en'),
+    ('cs', r'')
+]
+LANGUAGE_CODE = 'en'  # fallback language
 
 
 # Static files (CSS, JavaScript, Images)

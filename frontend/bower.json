@@ -11,6 +11,7 @@
     "blockly": "https://github.com/google/blockly.git#a485e63df2d4995a60453862e123e817293fb5cd",
     "JS-Interpreter": "https://github.com/NeilFraser/JS-Interpreter.git#c82c57f010",
     "angular-bootstrap": "~0.14.3",
-    "angular-spinkit": "~0.3.3"
+    "angular-spinkit": "~0.3.3",
+    "angular-translate": "~2.8.1"
   }
 }

@@ -4,6 +4,5 @@
  */
 angular.module('flocs.home')
 .controller('homeCtrl', function($scope) {
-
 });
 

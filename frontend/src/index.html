@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en-US">
+{% load i18n %} {% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}" ng-app="flocs" ng-controller="appCtrl"
+      ng-init="setLanguage('{{ LANGUAGE_CODE }}')" ng-strict-di>
 <head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +13,7 @@
 <!-- include: "type": "js", "files": ["js/vendor*.js", "js/**/*.mdl.js", "js/**/*.js"] -->
 
 </head>
-<body ng-app="flocs" ng-controller="appCtrl" ng-strict-di>
+<body>
 <div id="page-wrapper">
   <ng-include src="'header/header.tpl.html'"/></ng-include>
   <ui-view id="content"></ui-view>

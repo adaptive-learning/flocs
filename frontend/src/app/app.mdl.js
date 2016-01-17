@@ -7,6 +7,7 @@ angular.module('flocs', [
     'ui.bootstrap',
     'ui.router',
     'ngDialog',
+    'pascalprecht.translate',
     'flocs.header',
     'flocs.home',
     'flocs.practice',
@@ -78,20 +79,29 @@ angular.module('flocs', [
   // consequence, we should use absolute URLs (otherwise, our app might
   // not work correctly in IE9 according to Angular docs).
   $locationProvider.html5Mode({enabled: true, requireBase: false});
+})
 
+// localization
+.config(function($translateProvider) {
+  var TRANSLATIONS = {};
+  TRANSLATIONS['en'] = {
+    'TITLE': 'Adaptive programming',
+  };
+  TRANSLATIONS['cs'] = {
+    'TITLE': 'Adaptabilní programování'
+  };
+  $translateProvider.translations('en', TRANSLATIONS['en']);
+  $translateProvider.translations('cs', TRANSLATIONS['cs']);
+  $translateProvider.preferredLanguage('en');
+})
 
-  // --- global (re)definitions ---
+// global (re)definitions
+.config(function() {
   // Date.now() to work with older browsers (e.g. IE8)
   // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Date/now
   if (!Date.now) {
     Date.now = function now() { return new Date().getTime(); };
   }
-
-})
-
-// Main application controller
-.controller('appCtrl', function($scope) {
-  // global configuration (user, language) functions go here
 })
 
 // Configuration of ngDialog module

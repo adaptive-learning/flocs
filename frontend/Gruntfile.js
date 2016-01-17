@@ -56,11 +56,12 @@ module.exports = function (grunt) {
         'vendor/blockly/javascript_compressed.js',
         'vendor/blockly/python_compressed.js',
         'vendor/blockly/blocks_compressed.js',
-        'vendor/blockly/msg/js/cs.js',
+        'vendor/blockly/msg/js/en.js',
         'vendor/JS-Interpreter/acorn_interpreter.js',
         'vendor/ngDialog/js/ngDialog.js',
         'vendor/angular-bootstrap/ui-bootstrap-tpls.js',
-        'vendor/angular-spinkit/build/angular-spinkit.min.js'
+        'vendor/angular-spinkit/build/angular-spinkit.min.js',
+        'vendor/angular-translate/angular-translate.js'
       ],
       css: [
         'vendor/bootstrap/dist/css/bootstrap.min.css',
