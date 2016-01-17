@@ -3,7 +3,6 @@
  */
 angular.module('flocs.locales')
 .factory('blocklyMessages', function(csBlocklyMessages, enBlocklyMessages) {
-  console.log('once');
   return {
     'cs': csBlocklyMessages,
     'en': enBlocklyMessages,
