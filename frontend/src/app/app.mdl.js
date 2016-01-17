@@ -8,6 +8,7 @@ angular.module('flocs', [
     'ui.router',
     'ngDialog',
     'pascalprecht.translate',
+    'flocs.locales',
     'flocs.header',
     'flocs.home',
     'flocs.practice',
@@ -82,17 +83,10 @@ angular.module('flocs', [
 })
 
 // localization
-.config(function($translateProvider) {
-  var TRANSLATIONS = {};
-  TRANSLATIONS['en'] = {
-    'TITLE': 'Adaptive programming',
-  };
-  TRANSLATIONS['cs'] = {
-    'TITLE': 'Adaptabilní programování'
-  };
-  $translateProvider.translations('en', TRANSLATIONS['en']);
-  $translateProvider.translations('cs', TRANSLATIONS['cs']);
-  $translateProvider.preferredLanguage('en');
+.config(function($translateProvider, localeEn, localeCs) {
+  $translateProvider.translations('en', localeEn);
+  $translateProvider.translations('cs', localeCs);
+  $translateProvider.preferredLanguage('en');  // overridden by ng-init in index.html
 })
 
 // global (re)definitions
