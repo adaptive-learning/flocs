@@ -56,7 +56,6 @@ module.exports = function (grunt) {
         'vendor/blockly/javascript_compressed.js',
         'vendor/blockly/python_compressed.js',
         'vendor/blockly/blocks_compressed.js',
-        'vendor/blockly/msg/js/en.js',
         'vendor/JS-Interpreter/acorn_interpreter.js',
         'vendor/ngDialog/js/ngDialog.js',
         'vendor/angular-bootstrap/ui-bootstrap-tpls.js',
