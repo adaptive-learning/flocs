@@ -23,17 +23,15 @@ FRONTEND_DIR = os.path.join(BASE_DIR, 'frontend')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '-zocq!_l$gw_@cc1u7l$7j8y=b&+t2e4^e9bmx1&rk0ztp*&dj'
 
-ON_SERVER = os.getenv('ON_AL', "False") == "True"
-DEBUG = os.getenv('DJANGO_DEBUG', "False") == "True"
-if not ON_SERVER:
-    DEBUG = True
-ALLOWED_HOSTS = ['*']
+ON_PRODUCTION = os.getenv('ON_AL', "False") == "True"
+DEBUG = (not ON_PRODUCTION) or (os.getenv('DJANGO_DEBUG', "False") == "True")
+ALLOWED_HOSTS = [
+    'thran.cz'
+]
 
-if ON_SERVER:
-    # for production:
+if ON_PRODUCTION:
     FRONTEND_BUILD_DIR = os.path.join(BASE_DIR, 'frontend', 'production-build')
 else:
-    # for development:
     FRONTEND_BUILD_DIR = os.path.join(BASE_DIR, 'frontend', 'development-build')
 
 
@@ -114,11 +112,17 @@ LANGUAGES = [
     ('cs', 'Česky'),
     ('en', 'English')
 ]
-LANGUAGE_DOMAINS = [
-    ('en', r'^en'),
-    ('cs', r'')
-]
-LANGUAGE_CODE = 'en'  # fallback language
+if ON_PRODUCTION:
+    LANGUAGE_DOMAINS = {
+        'cs': 'thran.cz',
+        'en': 'en.thran.cz',
+    }
+else:
+    LANGUAGE_DOMAINS = {
+        'cs': 'localhost:8000',
+        'en': 'en.localhost:8000',
+    }
+LANGUAGE_CODE = 'cs'  # fallback language
 
 
 # Static files (CSS, JavaScript, Images)

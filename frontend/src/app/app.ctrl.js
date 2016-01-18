@@ -3,9 +3,12 @@
  * @ngInject
  */
 angular.module('flocs')
-.controller('appCtrl', function($scope, $translate, blocklyMessages) {
+.controller('appCtrl', function($scope, localesService) {
   $scope.setLanguage = function(languageCode) {
-    $translate.use(languageCode);
-    Blockly.Msg = blocklyMessages[languageCode];
+    localesService.setLanguage(languageCode);
+  };
+
+  $scope.setLanguageDomains = function(languageDomains) {
+    localesService.setLanguageDomains(languageDomains);
   };
 });

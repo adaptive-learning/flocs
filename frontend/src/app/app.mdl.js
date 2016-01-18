@@ -9,11 +9,13 @@ angular.module('flocs', [
     'ngDialog',
     'pascalprecht.translate',
     'flocs.locales',
+    'flocs.services',
+    'flocs.directives',
     'flocs.header',
     'flocs.home',
     'flocs.practice',
     'flocs.taskPreview',
-    'flocs.user'
+    'flocs.user',
 ])
 
 // routes configuration

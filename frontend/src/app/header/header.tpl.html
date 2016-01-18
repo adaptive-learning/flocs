@@ -1,5 +1,6 @@
 <nav class="navbar navbar-inverse navbar-static-top" ng-controller="headerCtrl">
   <div class="container-fluid">
+
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -9,6 +10,7 @@
       </button>
       <a class="navbar-brand" ui-sref="home" translate>TITLE</a>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
 
@@ -16,7 +18,19 @@
           <li ng-if="user.logged"><a ng-click="logout()">Odhlásit se</a></li>
           <li ng-if="!user.logged"><a ng-click="openLoginModal()" translate>LOG_IN</a></li>
 
+          <li uib-dropdown id="language-selector" class="dropdown">
+            <a id="language-selector-button" uib-dropdown-toggle class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+              {{currentLanguageCode}} <span class="caret"></span>
+            </a>
+            <ul uib-dropdown-menu class="dropdown-menu" role="menu" aria-labelled-by="language-selector-button">
+              <li ng-repeat="(code, domain) in languageDomains" role="menuitem">
+                <a switch-domain="http://{{domain}}">{{code | languageNativeName}}</a>
+              </li>
+            </ul>
+          </li>
+
         </ul>
     </div>
+
   </div>
 </nav>
