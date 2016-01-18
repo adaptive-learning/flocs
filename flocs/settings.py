@@ -38,18 +38,15 @@ else:
 # Application definition
 
 INSTALLED_APPS = (
-    # django
+    'django_extensions',
+    'import_export',
+    'modeltranslation', # must be before django.contrib.admin
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # third party
-    'django_extensions',
-    'import_export',
-
     # our apps
     'common',
     'tasks',
@@ -103,13 +100,12 @@ DATABASES = {"default": dj_database_url.config(default='sqlite:///' + os.path.jo
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/1.8/topics/i18n/
 USE_I18N = True
 USE_L10N = True
 USE_TZ = False
 #TIME_ZONE = 'UTC'
 LANGUAGES = [
-    ('cs', 'Česky'),
+    ('cs', 'Czech'),
     ('en', 'English')
 ]
 if ON_PRODUCTION:
@@ -123,6 +119,10 @@ else:
         'en': 'en.localhost:8000',
     }
 LANGUAGE_CODE = 'cs'  # fallback language
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
+MODELTRANSLATION_TRANSLATION_FILES = (
+    'practice.models.translation',
+)
 
 
 # Static files (CSS, JavaScript, Images)

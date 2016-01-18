@@ -5,6 +5,7 @@ dj-database-url==0.3.0
 Django==1.8.2
 django-extensions==1.5.5
 django-import-export==0.4.1
+django-modeltranslation==0.10.2
 ipython==3.2.0
 logilab-common==1.0.1
 matplotlib==1.5.0
