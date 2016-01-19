@@ -1,40 +1,52 @@
-/*
- * Blocks constant
+/**
+ * Blockly Toolbox XML factory
+ * @ngInject
  */
 angular.module('flocs.workspace')
-.constant('blocks', {
-    'maze_category':'<category name="Maze">' +
+.factory('blocksXml', function() {
+  return {
+    'maze_category':
+      '<category name="' + Blockly.Msg.MAZE + '">' +
         '<block type="maze_move_forward"></block>' +
         '<block type="maze_turn"></block>' +
         '<block type="maze_check_path"></block>' +
         '<block type="maze_check_goal"></block>' +
         '<block type="maze_check_color"></block>' +
-        '</category>',
+      '</category>',
 
-    'maze_check_path':'<block type="maze_check_path">' +
+    'maze_check_path':
+      '<block type="maze_check_path">' +
         '<field name="direction">0</field>' +
-        '</block>',
+      '</block>',
 
-    'maze_check_path_left':'<block type="maze_check_path">' +
+    'maze_check_path_left':
+      '<block type="maze_check_path">' +
         '<field name="direction">1</field>' +
-        '</block>',
+      '</block>',
 
-    'maze_check_path_right':'<block type="maze_check_path">' +
+    'maze_check_path_right':
+      '<block type="maze_check_path">' +
         '<field name="direction">-1</field>' +
-        '</block>',
+      '</block>',
 
-    'maze_turn_left':'<block type="maze_turn">' +
+    'maze_turn_left':
+      '<block type="maze_turn">' +
         '<field name="direction">1</field>' +
-        '</block>',
+      '</block>',
 
-    'maze_turn_right':'<block type="maze_turn">' +
+    'maze_turn_right':
+      '<block type="maze_turn">' +
         '<field name="direction">-1</field>' +
-        '</block>',
+      '</block>',
 
-    'variables_category':'<category name="Variables" custom="VARIABLE"></category>',
-    'functions_category':'<category name="Functions" custom="PROCEDURE"></category>',
+    'variables_category':
+      '<category name="Variables" custom="VARIABLE"></category>',
 
-    'if_category':'<category name="If">' +
+    'functions_category':
+      '<category name="Functions" custom="PROCEDURE"></category>',
+
+    'if_category':
+      '<category name="' + Blockly.Msg.CONDITIONS + '">' +
         '<block type="controls_if"></block>' +
         '<block type="controls_if">' +
         '<mutation else="1"></mutation>' +
@@ -42,17 +54,20 @@ angular.module('flocs.workspace')
         '<block type="controls_if">' +
         '<mutation elseif="1" else="1"></mutation>' +
         '</block>' +
-        '</category>',
+      '</category>',
 
-    'controls_if_else':'<block type="controls_if">' +
+    'controls_if_else':
+      '<block type="controls_if">' +
         '<mutation else="1"></mutation>' +
-        '</block>',
+      '</block>',
 
-    'constrols_if_elseif_else':'<block type="controls_if">' +
+    'constrols_if_elseif_else':
+      '<block type="controls_if">' +
         '<mutation elseif="1" else="1"></mutation>' +
-        '</block>',
+      '</block>',
 
-    'loops_category':'<category name="Loops">' +
+    'loops_category':
+      '<category name="' + Blockly.Msg.LOOPS + '">' +
         '<block type="controls_repeat_ext">' +
         '<value name="TIMES">' +
         '<block type="math_number">' +
@@ -81,20 +96,23 @@ angular.module('flocs.workspace')
         '</block>' +
         '<block type="controls_forEach"></block>' +
         '<block type="controls_flow_statements"></block>' +
-        '</category>',
+      '</category>',
 
-    'controls_repeat':'<block type="controls_repeat_ext">' +
-        '</block>',
+    'controls_repeat':
+      '<block type="controls_repeat_ext">' +
+      '</block>',
 
-    'controls_repeat:10':'<block type="controls_repeat_ext">' +
+    'controls_repeat:10':
+      '<block type="controls_repeat_ext">' +
         '<value name="TIMES">' +
         '<block type="math_number">' +
         '<field name="NUM">10</field>' +
         '</block>' +
         '</value>' +
-        '</block>',
+      '</block>',
 
-    'constrols_for':'<block type="controls_for">' +
+    'constrols_for':
+      '<block type="controls_for">' +
         '<field name="VAR">i</field>' +
         '<value name="FROM">' +
         '<block type="math_number">' +
@@ -111,18 +129,20 @@ angular.module('flocs.workspace')
         '<field name="NUM">1</field>' +
         '</block>' +
         '</value>' +
-        '</block>',
+      '</block>',
 
-    'boolean_category':'<category name="Boolean">' +
+    'boolean_category':
+      '<category name="Boolean">' +
         '<block type="logic_compare"></block>' +
         '<block type="logic_operation"></block>' +
         '<block type="logic_negate"></block>' +
         '<block type="logic_boolean"></block>' +
         '<block type="logic_null"></block>' +
         '<block type="logic_ternary"></block>' +
-        '</category>' ,
+      '</category>' ,
 
-    'math_category':'<category name="Math">' +
+    'math_category':
+      '<category name="Math">' +
         '<block type="math_number"></block>' +
         '<block type="math_arithmetic"></block>' +
         '<block type="math_single"></block>' +
@@ -164,9 +184,10 @@ angular.module('flocs.workspace')
         '</value>' +
         '</block>' +
         '<block type="math_random_float"></block>' +
-        '</category>',
+      '</category>',
 
-    'lists_category':'<category name="Lists">' +
+    'lists_category':
+      '<category name="Lists">' +
         '<block type="lists_create_empty"></block>' +
         '<block type="lists_create_with"></block>' +
         '<block type="lists_repeat">' +
@@ -181,14 +202,15 @@ angular.module('flocs.workspace')
         '<block type="lists_indexOf"></block>' +
         '<block type="lists_getIndex"></block>' +
         '<block type="lists_setIndex"></block>' +
-        '</category>',
+      '</category>',
 
-    'list_repeat':'<block type="lists_repeat">' +
+    'list_repeat':
+      '<block type="lists_repeat">' +
         '<value name="NUM">' +
         '<block type="math_number">' +
         '<field name="NUM">5</field>' +
         '</block>' +
         '</value>' +
-        '</block>',
-
+      '</block>',
+  };
 });

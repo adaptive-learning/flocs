@@ -2,7 +2,7 @@
  * Toolbox Service
  */
 angular.module('flocs.workspace')
-.factory('toolboxService', function(blocks, blocksOrder) {
+.factory('toolboxService', function(blocksXml, blocksOrder) {
 
   var blocksOrderMap = null;
 
@@ -40,9 +40,9 @@ angular.module('flocs.workspace')
         // is blockName a string (block or category name)
         if (typeof blockName === 'string' || blockName instanceof String) {
             // is it custom defined block/category
-            if (blocks[blockName]) {
+            if (blocksXml[blockName]) {
                 // custom defined block/category identifier
-                xmlString += blocks[blockName];
+                xmlString += blocksXml[blockName];
             } else {
                 // the it better be an exact name of block
                 xmlString += '<block type="' + blockName + '"></block>';

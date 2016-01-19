@@ -408,6 +408,7 @@ angular.module('flocs.locales')
   messages.CONTROLS_WHILE = "dokud %1: %2 %3";
   messages.MAZE = "bludiště";
   messages.LOOPS = "cykly";
+  messages.CONDITIONS = "podmínky";
 
   return messages;
 })
@@ -811,6 +812,7 @@ angular.module('flocs.locales')
   messages.CONTROLS_WHILE = "while %1: %2 %3";
   messages.MAZE = "maze";
   messages.LOOPS = "loops";
+  messages.CONDITIONS = "conditions";
 
   return messages;
 });
