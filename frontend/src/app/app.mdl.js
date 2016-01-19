@@ -87,10 +87,10 @@ angular.module('flocs', [
 
 // localization
 .config(function($translateProvider, localeEn, localeCs) {
-  $translateProvider.useSanitizeValueStrategy('escape');
-    // NOTE: Currently, we just escape HTML completely, but if there is a
-    // demand for HTML in translation texts, it's possible to use sanitization
-    // instead, see http://angular-translate.github.io/docs/#/guide/19_security
+  $translateProvider.useSanitizeValueStrategy('escapeParameters');
+    // NOTE: If requested, it's possible to sanitize parameters or the
+    // complete translation (needs angular-sanitize as a dependency,
+    // see http://angular-translate.github.io/docs/#/guide/19_security).
   $translateProvider.translations('en', localeEn);
   $translateProvider.translations('cs', localeCs);
   $translateProvider.preferredLanguage('en');  // overridden by ng-init in index.html

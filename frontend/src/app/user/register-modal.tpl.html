@@ -1,14 +1,20 @@
 <div>
 
   <div class="modal-header">
-      <h3 class="modal-title">Registrovat se</h3>
+      <h3 class="modal-title" translate>SIGN_UP</h3>
   </div>
 
   <div class="modal-body">
 
     <form name="registerForm">
       <div class="form-group">
-        <input class="form-control" type="text" name="username" ng-model="registrationData.username" placeholder="Uživatelské jméno"/>
+        <input
+            class="form-control"
+            type="text"
+            name="username"
+            ng-model="registrationData.username"
+            placeholder="{{'USERNAME' | translate}}"
+        />
       </div>
 
       <!--
@@ -21,21 +27,43 @@
       -->
 
       <div class="form-group">
-        <input class="form-control" type="email" name="email" ng-model="registrationData.email" placeholder="E-mail" />
+        <input
+            class="form-control"
+            type="email"
+            name="email"
+            ng-model="registrationData.email"
+            placeholder="E-mail"
+        />
       </div>
 
       <div class="form-group">
-        <input class="form-control" type="password" name="password" ng-model="registrationData.password" placeholder="Heslo" />
+        <input
+            class="form-control"
+            type="password"
+            name="password"
+            ng-model="registrationData.password"
+            placeholder="{{'PASSWORD' | translate}}"
+        />
       </div>
 
       <div class="form-group">
-        <input class="form-control" type="password" name="validatePassword" ng-model="registrationData.vpassword" placeholder="Kontrola hesla" />
+        <input
+            class="form-control"
+            type="password"
+            name="validatePassword"
+            ng-model="registrationData.vpassword"
+            placeholder="{{'PASSWORD_AGAIN' | translate}}"
+        />
       </div>
     </form>
 
     <div class="form-group">
-      <button class="btn btn-primary" type="button" ng-click="register()">
-      Zaregistrovat se
+      <button
+          class="btn btn-primary"
+          type="button"
+          ng-click="register()"
+          translate>
+        SIGN_UP
       </button>
     </div>
 
