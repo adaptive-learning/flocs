@@ -13,7 +13,7 @@ angular.module('flocs.workspace')
       {
         "id": "maze_move_forward",
         "lastDummyAlign0": "LEFT",
-        "message0": "krok vpřed",
+        "message0": Blockly.Msg.MAZE_MOVE_FORWARD,
         "args0": [],
         "previousStatement": true,
         "nextStatement": true,
@@ -24,29 +24,7 @@ angular.module('flocs.workspace')
       {
         "id": "maze_move_backward",
         "lastDummyAlign0": "LEFT",
-        "message0": "krok vzad",
-        "args0": [],
-        "previousStatement": true,
-        "nextStatement": true,
-        "colour": 120,
-        "tooltip": "",
-        "helpUrl": ""
-      },
-      {
-        "id": "maze_turn_left",
-        "lastDummyAlign0": "LEFT",
-        "message0": "zatoč doleva",
-        "args0": [],
-        "previousStatement": true,
-        "nextStatement": true,
-        "colour": 120,
-        "tooltip": "",
-        "helpUrl": ""
-      },
-      {
-        "id": "maze_turn_right",
-        "lastDummyAlign0": "LEFT",
-        "message0": "zatoč doprava",
+        "message0": Blockly.Msg.MAZE_MOVE_BACKWARD,
         "args0": [],
         "previousStatement": true,
         "nextStatement": true,
@@ -58,18 +36,18 @@ angular.module('flocs.workspace')
       {
         "id": "maze_turn",
         "lastDummyAlign0": "LEFT",
-        "message0": "zatoč %1",
+        "message0": Blockly.Msg.MAZE_TURN,
         "args0": [
         {
             "type":"field_dropdown",
             "name":"direction",
             "options":[
                 [
-                    "doleva",
+                    Blockly.Msg.LEFT,
                     "1"
                 ],
                 [
-                    "doprava",
+                    Blockly.Msg.RIGHT,
                     "-1"
                 ]
             ],
@@ -85,18 +63,18 @@ angular.module('flocs.workspace')
       {
         "id": "maze_check_goal",
         "lastDummyAlign0": "LEFT",
-        "message0": "robot %1 na políčku s %2",
+        "message0": Blockly.Msg.MAZE_CHECK_GOAL,
         "args0": [
           {
             "type":"field_dropdown",
             "name":"negation",
             "options":[
                 [
-                    "není",
+                    Blockly.Msg.IS_NOT,
                     "!"
                 ],
                 [
-                    "je",
+                    Blockly.Msg.IS,
                     ""
                 ]
             ],
@@ -118,18 +96,18 @@ angular.module('flocs.workspace')
       {
         "id": "maze_check_color",
         "lastDummyAlign0": "LEFT",
-        "message0": "robot %1 na políčku %2 barvy",
+        "message0": Blockly.Msg.MAZE_CHECK_COLOR,
         "args0": [
           {
             "type":"field_dropdown",
             "name":"negation",
             "options":[
                 [
-                    "je",
+                    Blockly.Msg.IS,
                     ""
                 ],
                 [
-                    "není",
+                    Blockly.Msg.IS_NOT,
                     "!"
                 ],
             ],
@@ -140,19 +118,19 @@ angular.module('flocs.workspace')
             "name":"color",
             "options":[
                 [
-                    "žluté",
+                    Blockly.Msg.OF_YELLOW,
                     "YELLOW"
                 ],
                 [
-                    "modré",
+                    Blockly.Msg.OF_BLUE,
                     "BLUE"
                 ],
                 [
-                    "zelené",
+                    Blockly.Msg.OF_GREEN,
                     "GREEN"
                 ],
                 [
-                    "bilé",
+                    Blockly.Msg.OF_WHITE,
                     "FREE"
                 ],
             ],
@@ -164,54 +142,25 @@ angular.module('flocs.workspace')
         "helpUrl": ""
       },
 
-
-      {
-        "id": "maze_check_path_left",
-        "lastDummyAlign0": "LEFT",
-        "message0": "je cesta vlevo",
-        "output": "Boolean",
-        "colour": 210,
-        "tooltip": "",
-        "helpUrl": ""
-      },
-      {
-        "id": "maze_check_path_right",
-        "lastDummyAlign0": "LEFT",
-        "message0": "je cesta vpravo",
-        "output": "Boolean",
-        "colour": 210,
-        "tooltip": "",
-        "helpUrl": ""
-      },
-      {
-        "id": "maze_check_path_front",
-        "lastDummyAlign0": "LEFT",
-        "message0": "je cesta vpředu",
-        "output": "Boolean",
-        "colour": 210,
-        "tooltip": "",
-        "helpUrl": ""
-      },
-
       {
         "id":"maze_check_path",
         "lastDummyAlign0": "LEFT",
-        "message0": "je cesta %1",
+        "message0": Blockly.Msg.MAZE_CHECK_PATH,
         "args0":[
         {
             "type":"field_dropdown",
             "name":"direction",
             "options":[
                 [
-                    "vlevo",
+                    Blockly.Msg.TO_THE_LEFT,
                     "1"
                 ],
                 [
-                    "vpředu",
+                    Blockly.Msg.AHEAD,
                     "0"
                 ],
                 [
-                    "vpravo",
+                    Blockly.Msg.TO_THE_RIGHT,
                     "-1"
                 ]
             ],
@@ -221,13 +170,12 @@ angular.module('flocs.workspace')
         "colour": 210,
         "tooltip": "",
         "helpUrl": ""
-
-
       },
 
-      {
+      // NOT USED (we use original blockly ones):
+      /*{
         "id": "if_then",
-        "message0": "pokud %1 %2 pak %3 %4",
+        "message0": Blockly.Msg.CONTROLS_IF_MSG_IF + " %1 %2 " + Blockly.Msg.THEN + " %3 %4",
         "args0": [
         {
             "type": "input_dummy"
@@ -253,7 +201,9 @@ angular.module('flocs.workspace')
       },
       {
         "id": "if_then_else",
-        "message0": "pokud %1 %2 pak %3 %4 jinak %5 %6",
+        "message0": Blockly.Msg.CONTROLS_IF_MSG_IF + " %1 %2 " +
+                    Blockly.Msg.THEN + " %3 %4 " +
+                    Blockly.Msg.ELSE + " %5 %6",
         "args0": [
         {
             "type": "input_dummy"
@@ -284,6 +234,9 @@ angular.module('flocs.workspace')
         "tooltip": "",
         "helpUrl": ""
       },
+      */
+
+      // TODO: if it's used, then i18n, otherwise delete
       {
         "id": "for_loop_fixed",
         "message0": "opakuj %1 krát %2 %3",
@@ -308,6 +261,8 @@ angular.module('flocs.workspace')
         "tooltip": "",
         "helpUrl": ""
       },
+
+      // TODO: if it's used, then i18n, otherwise delete
       {
         "id": "for_loop",
         "message0": "pro i od %1 do %2 opakuj %3 %4",
@@ -342,7 +297,7 @@ angular.module('flocs.workspace')
 
       {
         "id": "controls_while",
-        "message0": "dokud %1 vykonávej %2 %3",
+        "message0": Blockly.Msg.CONTROLS_WHILE,
         "args0": [
         {
             "type": "input_value",

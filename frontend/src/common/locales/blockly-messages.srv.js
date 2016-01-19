@@ -385,6 +385,30 @@ angular.module('flocs.locales')
   messages.TEXT_CREATE_JOIN_ITEM_TITLE_ITEM = messages.VARIABLES_DEFAULT_NAME;
   messages.LISTS_INDEX_OF_INPUT_IN_LIST = messages.LISTS_INLIST;
   messages.LISTS_SET_INDEX_INPUT_IN_LIST = messages.LISTS_INLIST;
+
+  messages.MAZE_CHECK_COLOR = 'robot %1 na políčku %2 barvy';
+  messages.MAZE_CHECK_GOAL = 'robot %1 na políčku s %2';
+  messages.MAZE_CHECK_PATH = "je cesta %1";
+  messages.MAZE_MOVE_FORWARD = 'krok vpřed';
+  messages.MAZE_MOVE_BACKWARD = 'krok dozadu';
+  messages.MAZE_TURN = 'zatoč %1';
+  messages.LEFT = 'doleva';
+  messages.RIGHT = 'doprava';
+  messages.TO_THE_LEFT = 'vlevo';
+  messages.TO_THE_RIGHT = 'vpravo';
+  messages.AHEAD = 'vepředu';
+  messages.IS = 'je';
+  messages.IS_NOT = 'není';
+  messages.OF_YELLOW = 'žluté';
+  messages.OF_BLUE = 'modré';
+  messages.OF_GREEN = 'zelené';
+  messages.OF_WHITE = 'bílé';
+  messages.THEN = 'pak';
+  messages.ELSE = 'jinak';
+  messages.CONTROLS_WHILE = "dokud %1: %2 %3";
+  messages.MAZE = "bludiště";
+  messages.LOOPS = "cykly";
+
   return messages;
 })
 
@@ -764,5 +788,29 @@ angular.module('flocs.locales')
   messages.TEXT_CREATE_JOIN_ITEM_TITLE_ITEM = messages.VARIABLES_DEFAULT_NAME;
   messages.LISTS_INDEX_OF_INPUT_IN_LIST = messages.LISTS_INLIST;
   messages.LISTS_SET_INDEX_INPUT_IN_LIST = messages.LISTS_INLIST;
+
+  messages.MAZE_CHECK_COLOR = 'robot %1 at %2 field';
+  messages.MAZE_CHECK_GOAL = 'robot %1 at %2';
+  messages.MAZE_CHECK_PATH = "path %1";
+  messages.MAZE_MOVE_FORWARD = 'move forward';
+  messages.MAZE_MOVE_BACKWARD = 'move backward';
+  messages.MAZE_TURN = 'turn %1';
+  messages.LEFT = 'left';
+  messages.RIGHT = 'right';
+  messages.TO_THE_LEFT = 'to the left';
+  messages.TO_THE_RIGHT = 'to the right';
+  messages.AHEAD = 'ahead';
+  messages.IS = 'is';
+  messages.IS_NOT = 'is not';
+  messages.OF_YELLOW = 'yellow';
+  messages.OF_BLUE = 'blue';
+  messages.OF_GREEN = 'green';
+  messages.OF_WHITE = 'white';
+  messages.THEN = 'then';
+  messages.ELSE = 'else';
+  messages.CONTROLS_WHILE = "while %1: %2 %3";
+  messages.MAZE = "maze";
+  messages.LOOPS = "loops";
+
   return messages;
 });

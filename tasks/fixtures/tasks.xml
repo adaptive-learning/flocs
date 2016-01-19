@@ -524,7 +524,7 @@
                   "maze_turn_left",
                   "maze_turn_right",
                   "controls_while",
-                  "maze_check_path_front"],
+                  "maze_check_path"],
       "blocksLimit": 3
     }
     </field>
