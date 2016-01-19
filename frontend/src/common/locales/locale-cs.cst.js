@@ -3,13 +3,18 @@
  */
 angular.module('flocs.locales')
 .constant('localeCs', {
+  BLOCKS: 'Bloky',
+  EASIER_TASK: 'Jednodušší úlohu',
   ERROR_404: "Tato stránka neexistuje.",
+  KEYS: 'Klíče',
   LEARN_PROGRAMMING: 'Nauč se programovat!',
   LOG_IN: 'Přihlásit se',
   LOG_OUT: 'Odhlásit se',
   PASSWORD: 'Heslo',
   PASSWORD_AGAIN: 'Heslo znovu',
+  RUN_PROGRAM: 'Spusť program',
   SIGN_UP: 'Registrovat se',
+  SPEED: 'Rychlost',
   TITLE: 'Adaptabilní programování',
   TOGGLE_NAVIGATION: 'Přepnout navigaci',
   USERNAME:  'Uživatelské jméno',

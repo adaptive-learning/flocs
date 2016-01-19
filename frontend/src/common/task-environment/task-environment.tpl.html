@@ -9,10 +9,10 @@
 
     <div id="statusPanel">
       <span ng-show='blocksStatus.limit !== null'>
-        Bloky: {{blocksStatus.used}} / {{blocksStatus.limit}} |
+        <span translate>BLOCKS</span>: {{blocksStatus.used}} / {{blocksStatus.limit}} |
       </span>
       <span ng-show='toolsStatus.all !== null'>
-        Klíče: {{toolsStatus.picked}} / {{toolsStatus.all}}
+        <span translate>KEYS</span>: {{toolsStatus.picked}} / {{toolsStatus.all}}
       </span>
     </div>
 
@@ -21,11 +21,13 @@
     <div>
       <span ng-switch="executionStatus.initialState">
         <span ng-switch-when="true">
-          <button id="runBtn"
-                  ng-click="run()"
-                  type="button" class="btn btn-primary">
-                  <!--ng-disabled="noTask">-->
-            Spusť program
+          <button
+              id="runBtn"
+              ng-click="run()"
+              type="button"
+              class="btn btn-primary"
+              translate>
+            RUN_PROGRAM
           </button>
         </span>
         <span ng-switch-default>
@@ -38,9 +40,12 @@
       </span>
 
       <span id="speedStatus">
-        Rychlost:
+        <span translate>SPEED</span>:
         <span class="btn-group" ng-click="changeSpeedClicked()">
-          <label ng-repeat="s in availableSpeeds" ng-model="settings.speed" class="btn btn-xs btn-default" uib-btn-radio="s">{{s}}</label>
+          <label ng-repeat="s in availableSpeeds"
+              ng-model="settings.speed"
+              class="btn btn-xs btn-default"
+              uib-btn-radio="s">{{s}}</label>
         </span>
       </span>
     </div>
