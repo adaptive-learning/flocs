@@ -4,6 +4,7 @@
 angular.module('flocs', [
     'templates-app',
     'templates-common',
+    'ngAnimate',
     'ui.bootstrap',
     'ui.router',
     'ngDialog',

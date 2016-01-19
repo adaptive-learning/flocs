@@ -15,9 +15,10 @@ angular.module('flocs.header')
     userService.loggingOut();
   };
 
-  // access to user info
-  $scope.user = userService.user;
 
+  $scope.navCollapsed = true;
   $scope.currentLanguageCode = localesService.getLanguage();
   $scope.languageDomains = localesService.getLanguageDomains();
+  $scope.user = userService.user;
+
 });

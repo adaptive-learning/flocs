@@ -52,6 +52,7 @@ module.exports = function (grunt) {
         'vendor/jquery/dist/jquery.js',
         'vendor/angular/angular.js',
         'vendor/angular-ui-router/release/angular-ui-router.js',
+        'vendor/angular-animate/angular-animate.min.js',
         'vendor/blockly/blockly_compressed.js',
         'vendor/blockly/javascript_compressed.js',
         'vendor/blockly/python_compressed.js',
