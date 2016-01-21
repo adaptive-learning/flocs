@@ -21,7 +21,7 @@ angular.module('flocs.locales')
 
   HOME: {
     INTRO_TEXT: 'Toto je první prototyp aplikace pro adaptabilní výuku programování.' +
-                'Pomoz nám aplikaci vylepšit tím, že po vyzkoušení zodpovíš krátký ' +
+                ' Pomoz nám aplikaci vylepšit tím, že po vyzkoušení zodpovíš krátký ' +
                 '<a href="https://docs.google.com/forms/d/1PUcvwcmdGU18fWUEvXbteuI4FnN_9KKebahHHRHwr7c/viewform">' +
                 'dotazník</a>.',
 
