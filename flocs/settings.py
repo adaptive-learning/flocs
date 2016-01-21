@@ -24,12 +24,13 @@ FRONTEND_DIR = os.path.join(BASE_DIR, 'frontend')
 SECRET_KEY = '-zocq!_l$gw_@cc1u7l$7j8y=b&+t2e4^e9bmx1&rk0ztp*&dj'
 
 ON_PRODUCTION = os.getenv('ON_AL', "False") == "True"
+ON_STAGING = os.getenv('ON_STAGING', "False") == "True"
 DEBUG = (not ON_PRODUCTION) or (os.getenv('DJANGO_DEBUG', "False") == "True")
 ALLOWED_HOSTS = [
     'thran.cz'
 ]
 
-if ON_PRODUCTION:
+if ON_PRODUCTION or ON_STAGING:
     FRONTEND_BUILD_DIR = os.path.join(BASE_DIR, 'frontend', 'production-build')
 else:
     FRONTEND_BUILD_DIR = os.path.join(BASE_DIR, 'frontend', 'development-build')
@@ -112,6 +113,11 @@ if ON_PRODUCTION:
     LANGUAGE_DOMAINS = {
         'cs': 'thran.cz',
         'en': 'en.thran.cz',
+    }
+elif ON_STAGING:
+    LANGUAGE_DOMAINS = {
+        'cs': 'staging.thran.cz',
+        'en': 'en.staging.thran.cz',
     }
 else:
     LANGUAGE_DOMAINS = {
