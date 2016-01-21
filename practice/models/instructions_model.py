@@ -27,7 +27,6 @@ class InstructionsModel(models.Model):
     flow_factor = models.SmallIntegerField(
         choices=FLOWS_FACTOR_VALUES,
         default=GENERAL_COMMENT,
-        unique=True,
         verbose_name="Factor to which these instructions belong"
     )
 
