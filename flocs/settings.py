@@ -23,8 +23,8 @@ FRONTEND_DIR = os.path.join(BASE_DIR, 'frontend')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '-zocq!_l$gw_@cc1u7l$7j8y=b&+t2e4^e9bmx1&rk0ztp*&dj'
 
-ON_PRODUCTION = os.getenv('ON_AL', "False") == "True"
 ON_STAGING = os.getenv('ON_STAGING', "False") == "True"
+ON_PRODUCTION = os.getenv('ON_AL', "False") == "True" and not ON_STAGING
 DEBUG = (not ON_PRODUCTION) or (os.getenv('DJANGO_DEBUG', "False") == "True")
 ALLOWED_HOSTS = [
     'thran.cz'
