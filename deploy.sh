@@ -9,7 +9,7 @@ cd $DIR
 #requirements
 pip install -r $DIR/requirements.txt
 cd frontend && \
-  npm update && \
+  npm install && \
   bower install && \
   grunt production-build
 
