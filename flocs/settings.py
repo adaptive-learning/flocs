@@ -111,13 +111,13 @@ LANGUAGES = [
 ]
 if ON_PRODUCTION:
     LANGUAGE_DOMAINS = {
-        'cs': 'thran.cz',
-        'en': 'en.thran.cz',
+        'cs': 'flocs.thran.cz',
+        'en': 'en.flocs.thran.cz',
     }
 elif ON_STAGING:
     LANGUAGE_DOMAINS = {
-        'cs': 'staging.thran.cz',
-        'en': 'en.staging.thran.cz',
+        'cs': 'staging.flocs.thran.cz',
+        'en': 'en.staging.flocs.thran.cz',
     }
 else:
     LANGUAGE_DOMAINS = {
