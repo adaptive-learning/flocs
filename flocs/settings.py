@@ -27,7 +27,7 @@ ON_STAGING = os.getenv('ON_STAGING', "False") == "True"
 ON_PRODUCTION = os.getenv('ON_AL', "False") == "True" and not ON_STAGING
 DEBUG = (not ON_PRODUCTION) or (os.getenv('DJANGO_DEBUG', "False") == "True")
 ALLOWED_HOSTS = [
-    'thran.cz'
+    '.thran.cz'
 ]
 
 if ON_PRODUCTION or ON_STAGING:
