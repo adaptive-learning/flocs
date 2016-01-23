@@ -396,7 +396,7 @@ angular.module('flocs.locales')
   messages.RIGHT = 'doprava';
   messages.TO_THE_LEFT = 'vlevo';
   messages.TO_THE_RIGHT = 'vpravo';
-  messages.AHEAD = 'vepředu';
+  messages.AHEAD = 'vpředu';
   messages.IS = 'je';
   messages.IS_NOT = 'není';
   messages.OF_YELLOW = 'žluté';
@@ -409,6 +409,7 @@ angular.module('flocs.locales')
   messages.MAZE = "bludiště";
   messages.LOOPS = "cykly";
   messages.CONDITIONS = "podmínky";
+  messages.START = "začátek programu";
 
   return messages;
 })

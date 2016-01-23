@@ -104,14 +104,25 @@ angular.module('flocs.services')
       $log.warn('Already executing code. Ignoring another request to runCode.');
       return;
     }
+     
     executing = true;
-    var code = workspaceService.getJavaScriptCode();
-    var interpreter = new Interpreter(code, initApi);
     var result = {
       solved: false,
       died: false
     };
     var ok = true;
+    // code generation is safe and checked in workspaceService
+    var code = workspaceService.getJavaScriptCode();
+
+    try {
+      var interpreter = new Interpreter(code, initApi);
+    } catch (err) {
+      // TODO: proper exception handling
+      $log.warn("There has been a syntax error in user code.");
+      $log.warn(err);
+      runCodePromise = $timeout(function () {return result;}, 0); 
+      return runCodePromise;
+    }
 
     var stepCode = function () {
       // check executing flag (= request to stop execution)
@@ -119,8 +130,16 @@ angular.module('flocs.services')
         return result;
       }
 
-      // do one step of execution
-      ok = interpreter.step();
+      try {
+        // do one step of execution
+        ok = interpreter.step();
+      } catch (err) {
+        // TODO: properly handle execption
+        $log.warn("User code caused exception while interpreting.");   
+        $log.warn(err);   
+        executing = false;
+        return result;
+      }
 
       // check the maze status
       if (mazeService.died()) {

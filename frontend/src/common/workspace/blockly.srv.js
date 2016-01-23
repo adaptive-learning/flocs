@@ -172,6 +172,16 @@ angular.module('flocs.workspace')
         "helpUrl": ""
       },
 
+      {
+        "id": "start",
+        "message0": Blockly.Msg.START,
+        "args0": [],
+        "nextStatement": null,
+        "colour": 120,
+        "tooltip": "",
+        "helpUrl": ""
+      },
+
       // NOT USED (we use original blockly ones):
       /*{
         "id": "if_then",
@@ -506,6 +516,13 @@ angular.module('flocs.workspace')
                 code += ' else {\n' + branch + '}';
             }
         return code + '\n';
+    };
+
+    /*
+     * No code is genereted for start block
+     */
+    Blockly.JavaScript['start'] = function(block) {
+        return '';
     };
 
     /*

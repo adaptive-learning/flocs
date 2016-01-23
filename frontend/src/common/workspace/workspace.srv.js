@@ -12,6 +12,7 @@ angular.module('flocs.workspace')
     blocksLimit: null
   };
   var changeListeners = [];
+  var startBlock = null;
 
   /**
    * Register new listener for changes
@@ -48,7 +49,8 @@ angular.module('flocs.workspace')
     //console.log('workspaceService:set');
     settings = newSettings;
     // make sure blocksLimit is not undefined
-    settings.blocksLimit = settings.blocksLimit || null;
+    // +1 for the start block
+    settings.blocksLimit = (settings.blocksLimit + 1) || null;
     reset();
   }
 
@@ -75,6 +77,14 @@ angular.module('flocs.workspace')
       trashcan: true
     });
     blocklyDiv.addChangeListener(handleBlocklyDivChange);
+
+    // add start root block
+    // Block.obtain call is depricated in newer versions of Blockly!
+    startBlock = Blockly.Block.obtain(blocklyDiv, 'start');
+    startBlock.moveBy(10,10);
+    startBlock.initSvg();
+    startBlock.render();
+    startBlock.setDeletable(false);
 
     changeNotification();
     // NOTE: now we create (inject) new blockly div on reset, so there we do
@@ -126,14 +136,22 @@ angular.module('flocs.workspace')
    * Return JavaScript representation of current code in the workspace
    */
   function getJavaScriptCode() {
-    // TODO: make the highlight optional
-    Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
-    Blockly.JavaScript.addReservedWords('highlightBlock');
-    var code = Blockly.JavaScript.workspaceToCode(blocklyDiv);
-    // trun on block highlighting
-    blocklyDiv.traceOn(true);
-    console.log(code);
-    return code;
+    try {
+      // TODO: make the highlight optional
+      Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+      Blockly.JavaScript.addReservedWords('highlightBlock');
+      // get code form block only under the start block
+      var code = Blockly.JavaScript.blockToCode(startBlock);
+      // turn on block highlighting
+      blocklyDiv.traceOn(true);
+      console.log(code);
+      return code;
+    } catch (err) {
+      // TODO: do a proper exception handling and maybe inform the user
+      $log.warn("Could not generate code from blocks. Some blocks might be missing an input.");
+      $log.warn(err);
+      return "";
+    }
   }
 
   /**
