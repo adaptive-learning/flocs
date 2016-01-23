@@ -3,7 +3,7 @@
  */
 angular.module('flocs.user')
 .controller('registerModalCtrl', function($scope, $uibModalInstance, $log,
-      $state, userDao, userService) {
+      $state, userService) {
   $scope.registrationData = {
     username: '',
     email: '',
@@ -20,13 +20,14 @@ angular.module('flocs.user')
     var password = $scope.registrationData.password;
     var passwdCheck = $scope.registrationData.vpassword;
     if (password === passwdCheck){
-      userDao.register(username, email, password)
+      userService.signingUp(username, email, password)
         .then(function(response) {
           // TODO: if the registration is not succesful, the promise
-          // should be rejectet not solved with data.errorMSG!!
+          // should be rejected not solved with data.errorMSG!!
           if(!response.data.errorMSG){
             // TODO: show message: registration successful
             $uibModalInstance.close({username: username, password: password});
+            $state.go($state.current, {}, {reload: true});
           } else {
             $scope.errorMSG = response.data.errorMSG;
           }

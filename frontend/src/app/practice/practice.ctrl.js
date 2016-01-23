@@ -85,7 +85,8 @@ angular.module('flocs.practice')
   // NOTE: quick a dirty solution to make usert to log in; TODO: use lazy
   // user at backend, do not force to log in immediately
   // start a new practice session
-  userService.ensuringLoggedIn().then(practiceNextTask);
+  //userService.ensuringLoggedIn().then(practiceNextTask);
+  practiceNextTask();
 
   $scope.giveUp = giveUp;
 });

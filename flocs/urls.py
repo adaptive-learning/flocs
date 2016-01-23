@@ -31,6 +31,5 @@ urlpatterns = [
     url(r'^api/.*$', 'flocs.views.wrong_api_call'),
 
     # all other requests are resolved by the frontend app
-    #url('^.*$', TemplateView.as_view(template_name='index.html')),
     url('^.*$', 'flocs.views.frontend_app'),
 ]

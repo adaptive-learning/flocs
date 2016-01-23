@@ -39,8 +39,6 @@ else:
 # Application definition
 
 INSTALLED_APPS = (
-    'django_extensions',
-    'import_export',
     'modeltranslation', # must be before django.contrib.admin
     'django.contrib.admin',
     'django.contrib.auth',
@@ -48,6 +46,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
+    'import_export',
+    'lazysignup',
     # our apps
     'common',
     'tasks',
@@ -139,6 +140,13 @@ STATICFILES_DIRS = (
     os.path.join(FRONTEND_BUILD_DIR, 'static'),
 )
 STATIC_ROOT = os.path.join(BASE_DIR, '../static')
+
+
+AUTHENTICATION_BACKENDS = (
+  'django.contrib.auth.backends.ModelBackend',
+  'lazysignup.backends.LazySignupBackend',
+)
+
 
 LOGGING_DIR = os.getenv('LOGGING_DIR', "logs")
 LOGGING = {

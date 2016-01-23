@@ -18,7 +18,7 @@ angular.module('flocs.user')
       userService.loggingIn(username, passwd)
         .then(function() {
             $scope.errormsg = "";
-            $uibModalInstance.dismiss('login-successful');
+            $uibModalInstance.close('login-successful');
             $state.go($state.current, {}, {reload: true});
           }, function() {
             //$log.log(response.data.msg);
@@ -31,11 +31,15 @@ angular.module('flocs.user')
         templateUrl: 'user/register-modal.tpl.html',
         controller: 'registerModalCtrl',
     });
+    $uibModalInstance.close();
     modalInstance.result.then(function(result) {
+      /*
+      NOTE: logging after successful signing up was moved to the server
       // and log the user in
       userService.loggingIn(result.username, result.password).then(function() {
         $uibModalInstance.close();
       });
+      */
     });
   }
 

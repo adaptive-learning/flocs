@@ -48,6 +48,19 @@ angular.module('flocs.user')
       });
     }
 
+    function signingUp(username, email, password) {
+      return userDao.signingUp(username, email, password)
+        .then(function(response) {
+          // TODO: if the registration is not succesful, the promise
+          // should be rejected not solved with data.errorMSG!!
+          if(!response.data.errorMSG){
+            user.logged = true;
+            user.username = username;
+          }
+          return response;
+        });
+    }
+
     // first find whether user is already logged in (this is necessary e.g.
     // because of refresh, opening new tab etc.
     // Current behavior: if the user is not logged in, it just returns empty
@@ -63,9 +76,10 @@ angular.module('flocs.user')
     // public API
 	return {
       user: user,
+      ensuringLoggedIn: ensuringLoggedIn,
       loggingIn: loggingIn,
       loggingOut: loggingOut,
-      ensuringLoggedIn: ensuringLoggedIn
+      signingUp: signingUp,
 	};
 
 });

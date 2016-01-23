@@ -21,13 +21,14 @@ def login(request):
         response['loggedIn'] = '0'
         response['msg'] = 'request doesnt contain password'
         return JsonResponse(response)
-    if UserManager.login(request = request, username = username, password = password):
+    if UserManager.login(request=request, username=username, password=password):
         response['loggedIn'] = '1'
         response['username'] = username
     else:
         response['loggedIn'] = '0'
         response['msg'] = 'login failed'
     return JsonResponse(response)
+
 
 def register(request):
     if request.method != "POST":
@@ -45,15 +46,19 @@ def register(request):
         response['registred'] = '0'
         response['errorMSG'] = 'request doesnt contain one of fields'
         return JsonResponse(response)
-    UserManager.register(username, firstname, lastname, email, passwd)
-    response['registred']= True
+    UserManager.register(request, username, firstname, lastname, email, passwd)
+
+
+    response['registred'] = True
     return JsonResponse(response)
+
 
 def logout(request):
     UserManager.logout(request)
     response = {}
     response['data'] = True
     return JsonResponse(response)
+
 
 def loggedIn(request):
     response = {}

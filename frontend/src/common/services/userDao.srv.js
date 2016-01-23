@@ -5,13 +5,13 @@
 angular.module('flocs.services')
 .factory('userDao', function($http, $log) {
 	return {
-        register: register,
+        signingUp: signingUp,
         login : login,
         loggedIn : loggedIn,
         logout: logout
 	};
 
-	function register(username, email, passwd) {
+	function signingUp(username, email, passwd) {
       var data = {
           'username': username,
           'firstname': null, //firstname,
