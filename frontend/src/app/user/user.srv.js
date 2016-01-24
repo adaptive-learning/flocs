@@ -67,7 +67,7 @@ angular.module('flocs.user')
     // username. TODO: make it more explicit, that the user is not logged in.
     userDao.loggedIn().then(function(response) {
       user.username = response.data.username;
-      user.logged = (user.username) ? true : false;
+      user.logged = Boolean(user.username) && !response.data['is-lazy-user'];
       deferredUser.resolve();
     }, function() {
       deferredUser.resolve();

@@ -1,7 +1,9 @@
 from django.http import JsonResponse, HttpResponse
 from django.http import HttpResponseBadRequest
-from user.services import UserManager
+from lazysignup.utils import is_lazy_user
 import json
+
+from user.services import UserManager
 
 def login(request):
     if request.method != "POST":
@@ -63,4 +65,7 @@ def logout(request):
 def loggedIn(request):
     response = {}
     response['username'] = UserManager.loggedIn(request)
+        # TODO: refactor - not clear why loggedIn should return username, use
+        # correct names and make it more explicit
+    response['is-lazy-user'] = is_lazy_user(request.user)
     return JsonResponse(response)

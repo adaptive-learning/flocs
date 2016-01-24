@@ -33,12 +33,13 @@ angular.module('flocs.services')
 		});
 	}
 
-     function loggedIn(){
-     return $http.get('api/user/loggedin');
-     }
+    function loggedIn(){
+      return $http.get('api/user/loggedin');
+    }
 
-     function logout(){
-     return $http.get('api/user/logout');
-     }
+    function logout(){
+      // TODO: logout should not be GET!
+      return $http.get('api/user/logout');
+    }
 
 });
