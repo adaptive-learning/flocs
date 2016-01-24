@@ -814,6 +814,7 @@ angular.module('flocs.locales')
   messages.MAZE = "maze";
   messages.LOOPS = "loops";
   messages.CONDITIONS = "conditions";
+  messages.START = "program start";
 
   return messages;
 });

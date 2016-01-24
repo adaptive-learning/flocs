@@ -80,8 +80,9 @@ angular.module('flocs.workspace')
 
     // add start root block
     // Block.obtain call is depricated in newer versions of Blockly!
+    //Blockly.BlockSvg.START_HAT = true;
     startBlock = Blockly.Block.obtain(blocklyDiv, 'start');
-    startBlock.moveBy(10,10);
+    startBlock.moveBy(10, 10);
     startBlock.initSvg();
     startBlock.render();
     startBlock.setDeletable(false);

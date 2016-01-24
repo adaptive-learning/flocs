@@ -177,7 +177,7 @@ angular.module('flocs.workspace')
         "message0": Blockly.Msg.START,
         "args0": [],
         "nextStatement": null,
-        "colour": 120,
+        "colour": 60,
         "tooltip": "",
         "helpUrl": ""
       },
