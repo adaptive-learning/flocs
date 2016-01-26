@@ -13,17 +13,17 @@ angular.module('flocs.user')
   };
 
   function login() {
-      var username = $scope.model.username;
-      var passwd = $scope.model.password;
-      userService.loggingIn(username, passwd)
-        .then(function() {
-            $scope.errormsg = "";
-            $uibModalInstance.close('login-successful');
-            $state.go($state.current, {}, {reload: true});
-          }, function() {
-            //$log.log(response.data.msg);
-            $scope.errormsg = "Zadali jste špatné údaje!";
-          });
+    var username = $scope.model.username;
+    var passwd = $scope.model.password;
+    userService.loggingIn(username, passwd)
+      .then(function() {
+          $scope.errormsg = "";
+          $uibModalInstance.close('login-successful');
+          $state.go($state.current, {}, {reload: true});
+        }, function() {
+          //$log.log(response.data.msg);
+          $scope.errormsg = "Zadali jste špatné údaje!";
+        });
   }
 
   function register() {
@@ -43,14 +43,19 @@ angular.module('flocs.user')
     });
   }
 
-  function logout(){
+  function logout() {
       userService.loggingOut().then(function(response){
           $state.go($state.current, {}, {reload: true});
       });
   }
 
+  function close() {
+    $uibModalInstance.dismiss('cancel');
+  }
+
   $scope.login = login;
   $scope.register = register;
   $scope.logout = logout;
+  $scope.close = close;
 });
 

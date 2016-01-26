@@ -1,18 +1,27 @@
 <div>
 
   <div class="modal-header">
-      <h3 class="modal-title" translate>SIGN_UP</h3>
+      <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          ng-click="close()"
+          >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title" translate>SIGN_UP</h4>
   </div>
 
   <div class="modal-body">
 
-    <form name="registerForm">
+    <form name="registerForm" ng-submit="register()">
       <div class="form-group">
         <input
             class="form-control"
             type="text"
             name="username"
             ng-model="registrationData.username"
+            autofocus
             placeholder="{{'USERNAME' | translate}}"
         />
       </div>
@@ -55,17 +64,16 @@
             placeholder="{{'PASSWORD_AGAIN' | translate}}"
         />
       </div>
-    </form>
 
-    <div class="form-group">
-      <button
-          class="btn btn-primary"
-          type="button"
-          ng-click="register()"
-          translate>
-        SIGN_UP
-      </button>
-    </div>
+      <div class="form-group">
+        <button
+            class="btn btn-primary"
+            type="submit"
+            translate>
+          SIGN_UP
+        </button>
+      </div>
+    </form>
 
     <div class="alert alert-danger" role="alert" ng-show="errormsg">
       {{errormsg}}

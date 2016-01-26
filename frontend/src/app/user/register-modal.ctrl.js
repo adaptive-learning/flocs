@@ -43,5 +43,11 @@ angular.module('flocs.user')
     //  $state.go($state.current, {}, {reload: true});
     //}
   }
+
+  function close() {
+    $uibModalInstance.dismiss('cancel');
+  }
+
   $scope.register = register;
+  $scope.close = close;
 });
