@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
         "flow_factor": 255,
-        "text_en": "Your task is to get the robot to the treasure box. If the robot goes into a wall, it breaks.",
+        "text_en": "Your task is to get the robot to the treasure box. If the robot goes into a wall, it breaks down.",
         "text_cs": "Úkolem hry je dostat robota k truhle s pokladem. Pokud robot robot narazí do zdi, rozbije se."
     }
   },
@@ -40,7 +40,7 @@
       "pk": 5,
       "fields": {
           "flow_factor": 5,
-          "text_en": "There different colors of the path. The robot can detect colors and use them to navigate through the maze.",
+          "text_en": "There are different colors of the path. The robot can detect colors and use them to navigate through the maze.",
           "text_cs": "Některá políčka v tomto bludišti mají jinou než bílou barvu. Robot umí barvy rozlišovat a využít je k navigaci v bludišti."
       }
   },
