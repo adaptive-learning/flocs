@@ -25,6 +25,7 @@ SECRET_KEY = '-zocq!_l$gw_@cc1u7l$7j8y=b&+t2e4^e9bmx1&rk0ztp*&dj'
 
 ON_STAGING = os.getenv('ON_STAGING', "False") == "True"
 ON_PRODUCTION = os.getenv('ON_AL', "False") == "True" and not ON_STAGING
+DEVELOPMENT = not ON_STAGING and not ON_PRODUCTION
 DEBUG = (not ON_PRODUCTION) or (os.getenv('DJANGO_DEBUG', "False") == "True")
 ALLOWED_HOSTS = [
     '.thran.cz'
@@ -149,64 +150,72 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # --------------------------------------------------------------------------
-# emails
+# Email
 # --------------------------------------------------------------------------
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 25
-SERVER_EMAIL = 'feedback-modal@flocs.thran.cz'
+EMAIL_SUBJECT_PREFIX = '[flocs]'
+EMAIL_ADMINS = ['adaptive-programming@googlegroups.com']
+if DEVELOPMENT:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # --------------------------------------------------------------------------
-# logging
+# Logging
 # --------------------------------------------------------------------------
 LOGGING_DIR = os.getenv('LOGGING_DIR', "logs")
 LOGGING = {
-        'version': 1,
-        'formatters': {
-            'short': {
-                'format': '[%(asctime)s] %(message)s----------'
-                },
-            'devel': {
-                'format': '[%(asctime)s] %(levelname)s %(module)s : "%(message)s" in %(filename)s:%(lineno)s'
-                },
-            'request': {
-                'format': '[%(asctime)s] %(levelname)s %(message)s'
-                }
+    'version': 1,
+    'formatters': {
+        'simple': {
+            'format': '[%(asctime)s] %(levelname)s %(message)s'
+        },
+        'long-messages': {
+            'format': '[%(asctime)s] %(message)s----------'
+        },
+        'verbose': {
+            'format': '[%(asctime)s] %(levelname)s %(module)s : "%(message)s" in %(filename)s:%(lineno)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+        'practice-file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': LOGGING_DIR + '/practice.log',
+            'formatter': 'verbose'
+        },
+        'feedback-file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': LOGGING_DIR + '/feedback.log',
+            'formatter': 'long-messages'
+        },
+        'requests-file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': LOGGING_DIR + '/requests.log',
+            'formatter': 'simple'
+        }
+    },
+    'loggers': {
+        'feedback': {
+            'handlers': ['feedback-file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'practice': {
+            'handlers': ['practice-file'],
+            'level': 'DEBUG',
+            'propagate': True
             },
-        'handlers': {
-            'practice': {
-                'level': 'DEBUG',
-                'class': 'logging.FileHandler',
-                'filename': LOGGING_DIR + '/practice.log',
-                'formatter': 'devel'
-                },
-            'feedback': {
-                'level': 'DEBUG',
-                'class': 'logging.FileHandler',
-                'filename': LOGGING_DIR + '/feedback.log',
-                'formatter': 'short'
-                },
-            'requests': {
-                'level': 'DEBUG',
-                'class': 'logging.FileHandler',
-                'filename': LOGGING_DIR + '/requests.log',
-                'formatter': 'request'
-                }
-            },
-        'loggers': {
-            'feedback': {
-                'handlers': ['feedback'],
-                'level': 'DEBUG',
-                'propagate': True,
-            },
-            'practice': {
-                'handlers': ['practice'],
-                'level': 'DEBUG',
-                'propagate': True
-                },
-            'django.request' : {
-                'handlers': ['requests'],
-                'level': 'DEBUG',
-                'propagate': True
-            }
+        'django.request' : {
+            'handlers': ['requests-file'],
+            'level': 'DEBUG',
+            'propagate': True
         }
     }
+}

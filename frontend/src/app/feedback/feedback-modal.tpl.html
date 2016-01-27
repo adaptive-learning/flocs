@@ -1,0 +1,44 @@
+<div>
+
+  <div class="modal-header">
+      <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          ng-click="close()"
+          >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title" translate>FEEDBACK</h4>
+  </div>
+
+  <div class="modal-body">
+    <div ng-show="status.processed && status.success">
+      <div class="alert alert-success" role="alert" translate>
+        FEEDBACK_MODAL.SUCCESS_MESSAGE
+      </div>
+    </div>
+    <div ng-show="status.processed && !status.success">
+      <div class="alert alert-danger" role="alert" translate>
+        FEEDBACK_MODAL.INVALID_MESSAGE
+      </div>
+    </div>
+
+    <form>
+      <div class="form-group">
+        <label for="message-text" class="control-label" translate>FEEDBACK_MODAL.MESSAGE_FIELD</label>
+        <textarea class="form-control" id="message-text" ng-model="feedback.text" rows="7" autofocus></textarea>
+      </div>
+      <div class="form-group">
+        <label for="email-field" class="control-label" translate>FEEDBACK_MODAL.EMAIL_FIELD</label>
+        <input type="text" class="form-control" id="email-field" ng-model="feedback.email">
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" ng-click="sendFeedback()" translate>SEND</button>
+    <button type="button" class="btn btn-default" ng-click="close()" translate>CLOSE</button>
+  </div>
+
+</div>
