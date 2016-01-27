@@ -4,8 +4,8 @@
     "pk": 1,
     "fields": {
         "flow_factor": 255,
-        "text_en": "Your task is to get the robot to the treasure box. If the robot goes into a wall, it breaks down.",
-        "text_cs": "Úkolem hry je dostat robota k truhle s pokladem. Pokud robot robot narazí do zdi, rozbije se."
+        "text_en": "Your task is to get the robot to the treasure chest. If the robot hits a wall, it breaks down.",
+        "text_cs": "Úkolem hry je dostat robota k truhle s pokladem. Pokud robot narazí do zdi, rozbije se."
     }
   },
   {
@@ -13,7 +13,7 @@
       "pk": 2,
       "fields": {
           "flow_factor": 2,
-          "text_en": "You can use loops to solve the task. Loops serve for repeating some actions multiple times.",
+          "text_en": "You can use loops to solve this task. Loops are useful for repeating some actions multiple times.",
           "text_cs": "Při řešení úlohy můžete využít cykly. Cykly se hodí pro opakované vykonávání stejných příkazů bez nutnosti zbytečně psát nadbytečný kód."
       }
   },
@@ -40,7 +40,7 @@
       "pk": 5,
       "fields": {
           "flow_factor": 5,
-          "text_en": "There are different colors of the path. The robot can detect colors and use them to navigate through the maze.",
+          "text_en": "There are different colors of the tiles. The robot can detect colors and use them to navigate through the maze.",
           "text_cs": "Některá políčka v tomto bludišti mají jinou než bílou barvu. Robot umí barvy rozlišovat a využít je k navigaci v bludišti."
       }
   },
@@ -49,7 +49,7 @@
       "pk": 6,
       "fields": {
           "flow_factor": 6,
-          "text_en": "There are keys in the maze and the robot must pick all of them to open the treasure box.",
+          "text_en": "There are keys in the maze and the robot must pick all of them in order to open the treasure chest.",
           "text_cs": "Po bludišti jsou různě rozmístěné klíče od truhly, které robot potřebuje sesbírat. Bez nich nelze truhlu s pokladem otevřít."
       }
   },
