@@ -16,9 +16,11 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
+
+from feedback import urls as feedback_urls
 from practice import urls as practice_urls
-from user import urls as user_urls
 from tasks import urls as tasks_urls
+from user import urls as user_urls
 
 urlpatterns = [
     # admin
@@ -26,6 +28,7 @@ urlpatterns = [
 
     # server API
     url(r'^api/user/',include(user_urls)),
+    url(r'^api/feedback/',include(feedback_urls)),
     url(r'^api/practice/', include(practice_urls)),
     url(r'^api/tasks/', include(tasks_urls)),
     url(r'^api/.*$', 'flocs.views.wrong_api_call'),

@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'lazysignup',
     # our apps
     'common',
+    'feedback',
     'tasks',
     'practice',
     'flocs',
@@ -147,13 +148,22 @@ AUTHENTICATION_BACKENDS = (
   'lazysignup.backends.LazySignupBackend',
 )
 
+# --------------------------------------------------------------------------
+# emails
+# --------------------------------------------------------------------------
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+SERVER_EMAIL = 'feedback-modal@flocs.thran.cz'
 
+# --------------------------------------------------------------------------
+# logging
+# --------------------------------------------------------------------------
 LOGGING_DIR = os.getenv('LOGGING_DIR', "logs")
 LOGGING = {
         'version': 1,
         'formatters': {
-            'production': {
-                'format': '[%(asctime)s] %(levelname)s %(module)s "%(message)s"'
+            'short': {
+                'format': '[%(asctime)s] %(message)s----------'
                 },
             'devel': {
                 'format': '[%(asctime)s] %(levelname)s %(module)s : "%(message)s" in %(filename)s:%(lineno)s'
@@ -169,6 +179,12 @@ LOGGING = {
                 'filename': LOGGING_DIR + '/practice.log',
                 'formatter': 'devel'
                 },
+            'feedback': {
+                'level': 'DEBUG',
+                'class': 'logging.FileHandler',
+                'filename': LOGGING_DIR + '/feedback.log',
+                'formatter': 'short'
+                },
             'requests': {
                 'level': 'DEBUG',
                 'class': 'logging.FileHandler',
@@ -177,6 +193,11 @@ LOGGING = {
                 }
             },
         'loggers': {
+            'feedback': {
+                'handlers': ['feedback'],
+                'level': 'DEBUG',
+                'propagate': True,
+            },
             'practice': {
                 'handlers': ['practice'],
                 'level': 'DEBUG',

@@ -13,6 +13,8 @@ angular.module('flocs', [
     'flocs.services',
     'flocs.directives',
     'flocs.header',
+    'flocs.footer',
+    'flocs.feedback',
     'flocs.home',
     'flocs.practice',
     'flocs.taskPreview',

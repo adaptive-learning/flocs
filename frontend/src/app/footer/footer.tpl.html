@@ -1,6 +1,24 @@
-<footer class="container-fluid">
+<footer class="container-fluid" ng-controller="footerCtrl">
     <span class="pull-left">
-      <!-- TBA: about, credits, write to us ... -->
+      <div class="btn-toolbar">
+        <button
+            type="button"
+            class="navbar-btn btn btn-primary"
+            ng-click="openFeedbackModal()"
+            translate
+            >
+          FEEDBACK
+        </button>
+        <button
+            type="button"
+            class="navbar-btn btn btn-primary"
+            translate
+            >
+          ABOUT
+        </button>
+      </div>
+    </span>
+
     </span>
     <span class="pull-right">
       <a href="http://www.fi.muni.cz/adaptivelearning/">
