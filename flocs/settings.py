@@ -156,6 +156,8 @@ EMAIL_HOST = 'localhost'
 EMAIL_PORT = 25
 EMAIL_SUBJECT_PREFIX = '[flocs]'
 EMAIL_ADMINS = ['adaptive-programming@googlegroups.com']
+SERVER_EMAIL = 'error-reporting@flocs.thran.cz'
+ADMINS = (('Errors', 'adaptive-programming-errors@googlegroups.com'),)
 if DEVELOPMENT:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -199,6 +201,10 @@ LOGGING = {
             'class': 'logging.FileHandler',
             'filename': LOGGING_DIR + '/requests.log',
             'formatter': 'simple'
+        },
+        'mail-admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
         }
     },
     'loggers': {
@@ -213,7 +219,7 @@ LOGGING = {
             'propagate': True
             },
         'django.request' : {
-            'handlers': ['requests-file'],
+            'handlers': ['requests-file', 'mail-admins'],
             'level': 'DEBUG',
             'propagate': True
         }
