@@ -1327,6 +1327,7 @@
     </field>
   </object>
 
+  <!-- title: jezdec/kun (pohyb do L)-->
   <object pk="42" model="tasks.taskmodel">
     <field name="maze_settings">
     {
@@ -1589,6 +1590,53 @@
     }
     </field>
   </object>
+
+  <!-- title: linked list -->
+<object pk="49" model="tasks.taskmodel">
+    <field name="maze_settings">
+      {
+      "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [6, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [6, 4, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1],
+      [6, 4, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1],
+      [6, 4, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
+      [6, 4, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+      [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+      [6, 4, 0, 0, 0, 0, 0, 0, 2, 6, 1, 1],
+      [6, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [6, 4, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
+      [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+      [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+      [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+      [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+      [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+      "tokens": [ [5,2], [3,5], [6,3], [9, 6], [4, 9], [7, 4]],
+      "hero": {
+      "position": [1,2],
+      "direction": 0
+      }
+      }
+    </field>
+    <field type="TextField" name="workspace_settings">
+      {
+      "toolbox": ["maze_move_forward",
+      "maze_turn",
+      "maze_check_path",
+      "maze_check_goal",
+      "maze_check_color",
+      "math_number",
+      "math_arithmetic",
+      "variables_set",
+      "variables_get",
+      "controls_repeat",
+      "controls_while"],
+      "blocksLimit": 50
+      }
+    </field>
+  </object>
+
 
 
 </django-objects>
