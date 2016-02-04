@@ -1678,5 +1678,38 @@
     </field>
   </object>
 
+  <!-- title: zmena na zelene -->
+  <object pk="51" model="tasks.taskmodel">
+    <field name="maze_settings">
+    {
+      "grid": [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
+        [6, 0, 0, 0, 0, 0, 4, 0, 0, 6],
+        [6, 6, 6, 6, 6, 6, 6, 6, 0, 6],
+        [6, 6, 6, 6, 6, 6, 2, 0, 0, 6],
+        [6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
+        [6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+      "hero": {
+        "position": [1, 3],
+        "direction": 0
+      }
+    }
+    </field>
+    <field type="TextField" name="workspace_settings">
+    {
+      "toolbox": ["maze_move_forward",
+                  "maze_turn_right",
+                  "maze_check_color",
+                  "controls_repeat:10",
+                  "controls_while"
+                  ],
+      "blocksLimit": 16
+    }
+    </field>
+  </object>
 
 </django-objects>
