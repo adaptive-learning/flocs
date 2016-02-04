@@ -1632,11 +1632,51 @@
       "variables_get",
       "controls_repeat",
       "controls_while"],
-      "blocksLimit": 50
+      "blocksLimit": 30
       }
     </field>
   </object>
 
+<object pk="50" model="tasks.taskmodel">
+    <field name="maze_settings">
+      {
+      "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 3, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 3, 0, 0, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 0, 3, 0, 0, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+      [1, 1, 2, 0, 1, 1, 0, 0, 4, 0, 1, 1],
+      [1, 1, 1, 0, 1, 1, 3, 1, 1, 1, 1, 1],
+      [1, 1, 1, 4, 1, 1, 0, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 0, 3, 0, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+      "tokens": [],
+      "hero": {
+      "position": [1,1],
+      "direction": 0
+      }
+      }
+    </field>
+    <field type="TextField" name="workspace_settings">
+      {
+      "toolbox": ["maze_move_forward",
+      "maze_turn",
+      "maze_check_path",
+      "maze_check_goal",
+      "maze_check_color",
+      "controls_if",
+      "controls_while"],
+      "blocksLimit": 14
+      }
+    </field>
+  </object>
 
 
 </django-objects>
