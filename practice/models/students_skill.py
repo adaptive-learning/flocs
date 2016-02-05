@@ -4,6 +4,8 @@ from decimal import Decimal
 
 from common.flow_factors import FlowFactors
 from .students_skill_manager import StudentsSkillManager
+from .tasks_difficulty import TasksDifficultyModel
+from django.db.models import Min
 
 
 class StudentsSkillModel(models.Model):
@@ -16,7 +18,8 @@ class StudentsSkillModel(models.Model):
     objects = StudentsSkillManager()
 
     # init values
-    INITIAL_STUDENT_BIAS = Decimal(-1)
+    dif_of_easiest_task = TasksDifficultyModel.objects.all().aggregate(Min('programming'))['programming__min']
+    INITIAL_STUDENT_BIAS = dif_of_easiest_task
     INITIAL_CONCEPT_SKILL = Decimal(-1)
 
     # student to refer with foreign key

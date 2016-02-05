@@ -6,6 +6,12 @@ from .students_skill import StudentsSkillModel
 from common.flow_factors import FlowFactors
 from decimal import Decimal
 
+from django.contrib.auth.models import User
+from tasks.models import TaskModel
+from practice.models import TasksDifficultyModel
+from practice.core.task_selection import ScoreTaskSelector as TaskSelector
+from practice.models.practice_context import create_practice_context
+
 class StudentsSkillModelTest(TestCase):
 
     def test_get_skill_dict(self):
@@ -26,3 +32,59 @@ class StudentsSkillModelTest(TestCase):
         self.assertAlmostEquals(0, student_vector[FlowFactors.COLORS])
         self.assertAlmostEquals(0, student_vector[FlowFactors.TOKENS])
         self.assertAlmostEquals(0, student_vector[FlowFactors.PITS])
+
+    def test_initial_skill(self):
+        """
+        This test should prove that bias of the new student is initialized well.
+        The first task should be the easiest one.
+        """
+        # create user
+        user = User.objects.create()
+        # create tasks
+        task1 = TaskModel.objects.create()
+        task2 = TaskModel.objects.create()
+        # simple task with few factors
+        task_dif_1 = TasksDifficultyModel(
+                task=task1,
+                programming=Decimal('-0.59'),
+                conditions=False,
+                loops=True,
+                logic_expr=False,
+                colors=True,
+                tokens=False,
+                pits=False,
+                )
+        # difficult task with few factors
+        task_dif_1 = TasksDifficultyModel(
+                task=task1,
+                programming=Decimal('-0.58'),
+                conditions=False,
+                loops=True,
+                logic_expr=False,
+                colors=True,
+                tokens=False,
+                pits=False,
+                )
+        # easier task but with more factors
+        task_dif_2 = TasksDifficultyModel(
+                task=task2,
+                programming=Decimal('-0.59'),
+                conditions=True,
+                loops=True,
+                logic_expr=False,
+                colors=True,
+                tokens=False,
+                pits=False,
+                )
+        task_dif_1.save()
+        task_dif_2.save()
+        student = StudentsSkillModel.objects.create(student=user)
+        task_selector = TaskSelector()
+        # create practice context
+        practice_context = create_practice_context(student=user)
+        # select task
+        task_ids = [task1.id, task2.id]
+        task_id = task_selector.select(task_ids, user.id, practice_context)
+        # assert the selected task
+        self.assertEquals(task_id, 1)
+
