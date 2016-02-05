@@ -141,8 +141,12 @@ angular.module('flocs.workspace')
       // TODO: make the highlight optional
       Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
       Blockly.JavaScript.addReservedWords('highlightBlock');
-      // get code form block only under the start block
+      // initialize code generation (prepare variables etc.)
+      Blockly.JavaScript.init(blocklyDiv);
+      // get code from only those blocks that are connected to the start block
       var code = Blockly.JavaScript.blockToCode(startBlock);
+      // add variable definitions if required
+      code = Blockly.JavaScript.finish(code);
       // turn on block highlighting
       blocklyDiv.traceOn(true);
       console.log(code);
