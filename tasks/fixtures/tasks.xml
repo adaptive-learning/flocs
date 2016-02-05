@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <django-objects version="1.0">
   <object pk="1" model="tasks.taskmodel">
+    <field name="title_en">
+      Three steps forward
+    </field>
+    <field name="title_cs">
+      Tři kroky vpřed
+    </field>
     <field name="maze_settings">
     {
       "grid": [
@@ -26,6 +32,12 @@
   </object>
 
   <object pk="2" model="tasks.taskmodel">
+    <field name="title_en">
+      Zig-zag
+    </field>
+    <field name="title_cs">
+      Cik-cak
+    </field>
     <field name="maze_settings">
     {
       "grid": [
@@ -51,6 +63,12 @@
   </object>
 
   <object pk="3" model="tasks.taskmodel">
+    <field name="title_en">
+      Small turn
+    </field>
+    <field name="title_cs">
+      Malá zatáčka
+    </field>
     <field name="maze_settings">
     {
       "grid": [
@@ -76,6 +94,12 @@
   </object>
 
   <object pk="4" model="tasks.taskmodel">
+    <field name="title_en">
+      Zig-zag-zag
+    </field>
+    <field name="title_cs">
+      Cik-cak-cak
+    </field>
     <field name="maze_settings">
     {
       "grid": [
@@ -101,6 +125,12 @@
   </object>
 
   <object pk="5" model="tasks.taskmodel">
+    <field name="title_en">
+      Very easy maze
+    </field>
+    <field name="title_cs">
+      Velmi jednoduché bludiště
+    </field>
     <field name="maze_settings">
     {
       "grid": [
@@ -126,6 +156,12 @@
   </object>
 
   <object pk="6" model="tasks.taskmodel">
+    <field name="title_en">
+      Four paths
+    </field>
+    <field name="title_cs">
+      Čtyři cesty
+    </field>
     <field name="maze_settings">
     {
       "grid": [

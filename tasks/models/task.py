@@ -5,6 +5,7 @@ import json
 class TaskModel(models.Model):
     """Model for a task (exercise)
     """
+    title = models.TextField()
     maze_settings = models.TextField(verbose_name="Maze settings in JSON")
     workspace_settings = models.TextField(verbose_name="Workspace settings in JSON")
 

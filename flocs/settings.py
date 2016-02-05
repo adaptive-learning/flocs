@@ -130,6 +130,7 @@ else:
 LANGUAGE_CODE = 'cs'  # fallback language
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
 MODELTRANSLATION_TRANSLATION_FILES = (
+    'tasks.models.translation',
     'practice.models.translation',
 )
 
