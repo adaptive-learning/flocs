@@ -71,6 +71,7 @@ class PracticeSimulation(Simulation):
                 'task-instance-id': task_dict['task-instance-id'],
                 'attempt': 1,
                 'solved': True,
+                'given-up': False,
                 'time': time,
                 'flow-report': flow
             }
@@ -82,3 +83,4 @@ class PracticeSimulation(Simulation):
 
             instances_count += 1
             time_spent += time
+            print(instances_count, ' ', time_spent)
