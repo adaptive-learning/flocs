@@ -10,10 +10,7 @@ class TaskModel(models.Model):
     workspace_settings = models.TextField(verbose_name="Workspace settings in JSON")
 
     def __str__(self):
-        """Return JSON string representation of the task.
-        """
-        json_string = json.dumps(self.to_json())
-        return json_string
+        return '[{pk}] {title}'.format(pk=self.pk, title=self.title)
 
     def to_json(self):
         """Return JSON (dictionary) representation of the task.

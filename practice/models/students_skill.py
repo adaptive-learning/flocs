@@ -3,9 +3,15 @@ from django.contrib.auth.models import User
 from decimal import Decimal
 
 from common.flow_factors import FlowFactors
-from .students_skill_manager import StudentsSkillManager
 from .tasks_difficulty import TasksDifficultyModel
 from django.db.models import Min
+
+
+def calculate_initial_skill():
+    difficulty_of_easiest_task = TasksDifficultyModel.objects.all().aggregate(Min('programming'))['programming__min']
+    if difficulty_of_easiest_task is None:
+        return Decimal(-1)
+    return difficulty_of_easiest_task
 
 
 class StudentsSkillModel(models.Model):
@@ -14,12 +20,7 @@ class StudentsSkillModel(models.Model):
        For every concept there is number between -1 and 1 representing skill in
        certain concept.
     """
-    # Manager
-    objects = StudentsSkillManager()
-
     # init values
-    dif_of_easiest_task = TasksDifficultyModel.objects.all().aggregate(Min('programming'))['programming__min']
-    INITIAL_STUDENT_BIAS = dif_of_easiest_task
     INITIAL_CONCEPT_SKILL = Decimal(-1)
 
     # student to refer with foreign key
@@ -27,7 +28,7 @@ class StudentsSkillModel(models.Model):
 
     # programming concept difficulty
     programming = models.DecimalField(max_digits=4, decimal_places=3,
-            default=INITIAL_STUDENT_BIAS,
+            default=calculate_initial_skill,
             verbose_name="General skill")
 
     # conditions concept difficulty
