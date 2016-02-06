@@ -19,7 +19,6 @@ angular.module('flocs.taskEnvironment')
   var executionStatus = {
     initialState: true
   };
-
   var instructions = {
       text: null
   };
@@ -48,6 +47,7 @@ angular.module('flocs.taskEnvironment')
     toolsStatus: toolsStatus,
     executionStatus: executionStatus,
     instructions: instructions,
+    getCurrentTask: getCurrentTask,
 
     //getMazeSettings: getMazeSettings,
     //getWorkspaceSettings: getWorkspaceSettings,
@@ -168,6 +168,10 @@ angular.module('flocs.taskEnvironment')
   function handleMazeChange() {
     toolsStatus.picked = getTokensPicked();
     toolsStatus.all = getTokensAll();
+  }
+
+  function getCurrentTask() {
+    return currentTask;
   }
 
 });

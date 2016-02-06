@@ -8,11 +8,12 @@
   <div id="mainPanel">
 
     <div id="statusPanel">
+      {{getCurrentTask().title}}
       <span ng-show='blocksStatus.limit !== null'>
-        <span translate>BLOCKS</span>: {{blocksStatus.used}} / {{blocksStatus.limit}} |
+        | <span translate>BLOCKS</span>: {{blocksStatus.used}} / {{blocksStatus.limit}}
       </span>
       <span ng-show='toolsStatus.all !== null'>
-        <span translate>KEYS</span>: {{toolsStatus.picked}} / {{toolsStatus.all}}
+        | <span translate>KEYS</span>: {{toolsStatus.picked}} / {{toolsStatus.all}}
       </span>
     </div>
 
