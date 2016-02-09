@@ -17,6 +17,17 @@ class TaskSelector(object):
         NotImplementedError("Abstract method 'select' not implemented.")
 
 
+class IdSpecifidedTaskSelector(TaskSelector):
+
+    def __init__(self, task_id):
+        self.task_id = task_id
+
+    def select(self, task_ids, student_id, practice_context):
+        if self.task_id not in task_ids:
+            raise LookupError('Task with ID %s is not available.' % self.task_id)
+        return self.task_id
+
+
 class RandomTaskSelector(TaskSelector):
 
     def select(self, task_ids, student_id, practice_context):

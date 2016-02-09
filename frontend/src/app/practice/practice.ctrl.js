@@ -4,7 +4,7 @@
  */
 angular.module('flocs.practice')
 .controller('practiceCtrl', function ($scope, $timeout, ngDialog, $uibModal,
-      practiceService, userService) {
+      $stateParams, practiceService, userService) {
 
   // TODO: move it to a template and unhardcode report values
   var template = '<div class=\"ngdialog-message\"> ' +
@@ -25,10 +25,10 @@ angular.module('flocs.practice')
     showclose: false
   };
 
-  function practiceNextTask() {
+  function practiceTask(taskId) {
     $scope.taskPrepared = false;
     $scope.taskLoading = true;
-    practiceService.settingNextTask().then(function() {
+    practiceService.settingTaskById(taskId).then(function() {
       $scope.taskPrepared = true;
       $scope.taskLoading = false;
       practiceService.practicingTask().then(
@@ -39,11 +39,11 @@ angular.module('flocs.practice')
   }
 
   function taskFinished() {
-    practiceNextTask();
+    practiceService.settingNextTask();
   }
 
   function taskRejected() {
-    practiceNextTask();
+    practiceService.settingNextTask();
   }
 
   function taskAttempted(attemptResult) {
@@ -51,6 +51,7 @@ angular.module('flocs.practice')
         flowReportFilling().then(reportFilled, reportClosed);
     }
   }
+
 
   /**
    * Open a report dialog and return a promise of filling the report
@@ -81,12 +82,8 @@ angular.module('flocs.practice')
 
   $scope.taskPrepared = false;
   $scope.taskLoading = false;
-
-  // NOTE: quick a dirty solution to make usert to log in; TODO: use lazy
-  // user at backend, do not force to log in immediately
-  // start a new practice session
-  //userService.ensuringLoggedIn().then(practiceNextTask);
-  practiceNextTask();
-
   $scope.giveUp = giveUp;
+
+  var taskId = $stateParams.taskId;
+  practiceTask(taskId);
 });

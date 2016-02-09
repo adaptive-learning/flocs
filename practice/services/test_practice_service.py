@@ -33,6 +33,17 @@ class PracticeServiceTest(TestCase):
         self.assertRaises(LookupError,
                 practice_service.get_next_task, self.student)
 
+    def test_get_task_by_id(self):
+        stored_task = TaskModel.objects.create(maze_settings="{}",
+                workspace_settings='{"foo": "bar"}')
+        TasksDifficultyModel.objects.create(task=stored_task)
+        retrieved_task = practice_service.get_task_by_id(student=self.student, task_id=stored_task.pk)
+        self.assertIsNotNone(retrieved_task)
+        self.assertEquals({"foo": "bar"}, retrieved_task['task']['workspace-settings'])
+        self.assertEquals({}, retrieved_task['task']['maze-settings'])
+        self.assertEquals(TaskInstanceModel.objects.first().id,
+                retrieved_task['task-instance-id'])
+
     def test_process_attempt_report(self):
         TaskModel.objects.create(id=1)
         TasksDifficultyModel.objects.create(task_id=1, solution_count=5)

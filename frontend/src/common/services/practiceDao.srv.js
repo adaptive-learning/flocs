@@ -8,6 +8,7 @@ angular.module('flocs.services')
   // public API
   return {
     gettingNextTask: gettingNextTask,
+    gettingTaskById: gettingTaskById,
     sendingAttemptReport: sendingAttemptReport,
   };
 
@@ -18,6 +19,16 @@ angular.module('flocs.services')
    */
   function gettingNextTask() {
     return $http.get('/api/practice/next-task')
+      .then(function(response) {
+        return response.data;
+      });
+  }
+
+  /**
+   * Return promise of getting task by given id (in the current session).
+   */
+  function gettingTaskById(id) {
+    return $http.get('/api/practice/task/' + id)
       .then(function(response) {
         return response.data;
       });

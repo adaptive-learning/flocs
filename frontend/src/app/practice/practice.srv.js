@@ -3,20 +3,56 @@
  * @ngInject
  */
 angular.module('flocs.practice')
-.factory('practiceService', function ($http, $timeout, $q, practiceDao, taskEnvironmentService) {
+.factory('practiceService', function ($state, $timeout, $q, practiceDao, taskEnvironmentService) {
 
   var attemptReport = null;
-  var taskInstanceId = null;
   var taskStartTimestamp = null;
   var taskFinishedDeferred = null;
+  var taskInstance = null;
 
   // === public API ===
   return {
+    settingTaskById: settingTaskById,
     settingNextTask: settingNextTask,
     practicingTask: practicingTask,
     taskCompleted: taskCompleted,
     giveUpTask: giveUpTask
   };
+
+  function settingNextTask() {
+    return practiceDao.gettingNextTask().then(function(newTaskInstance) {
+      taskInstance = newTaskInstance;
+      var newTaskId = taskInstance.task['task-id'];
+      $state.go('practice-task', {'taskId': newTaskId});
+    });
+  }
+
+  function settingTaskById(taskId) {
+    if (taskInstance === null || taskInstance.task['task-id'] != taskId) {
+      return practiceDao.gettingTaskById(taskId).then(function (newTaskInstance) {
+        taskInstance = newTaskInstance;
+        startCurrentTask();
+        return taskInstance;
+      }, function() {
+        $state.go('404');
+      });
+    } else {
+      return $timeout(function() {
+        startCurrentTask();
+        return taskInstance;
+      });
+    }
+  }
+
+  function startCurrentTask() {
+    attemptReport = null;
+    var newTask = taskInstance['task'];
+    newAttemptReport(newTask);
+    taskStartTimestamp = Date.now();
+    var instructionsText = taskInstance['instructions'];
+    taskEnvironmentService.setTask(newTask, attemptFinished,
+          instructionsText);
+  }
 
   function giveUpTask() {
     attemptReport['given-up'] = true;
@@ -83,29 +119,13 @@ angular.module('flocs.practice')
     return secondsSpent;
   }
 
-  function settingNextTask() {
-    attemptReport = null;
-    var taskPromise = practiceDao.gettingNextTask()
-      .then(function (newTaskInstance) {
-        taskInstanceId = newTaskInstance['task-instance-id'];
-        var newTask = newTaskInstance['task'];
-        newAttemptReport(newTask);
-        taskStartTimestamp = Date.now();
-        var instructionsText = newTaskInstance['instructions'];
-        taskEnvironmentService.setTask(newTask, attemptFinished,
-              instructionsText);
-        return newTask;
-      });
-    return taskPromise;
-  }
 
   /*
    * Create new report for new attempt
    */
   function newAttemptReport(task) {
     attemptReport = {
-      'task-instance-id': taskInstanceId,
-      //'task-id': task['task-id'],
+      'task-instance-id': taskInstance['task-instance-id'],
       'attempt': 0,
       'time': 0,
       'solved': false,

@@ -11,12 +11,21 @@ from practice.models import StudentTaskInfoModel
 from practice.models.task_instance import FlowRating
 from practice.services.parameters_update import update_parameters
 from practice.services.instructions_service import get_instructions
-from practice.core.task_selection import ScoreTaskSelector as TaskSelector
+from practice.core.task_selection import ScoreTaskSelector, IdSpecifidedTaskSelector
 from practice.core.flow_prediction import predict_flow
 
 logger = logging.getLogger(__name__)
 
+
+def get_task_by_id(student, task_id):
+    return get_task(student, IdSpecifidedTaskSelector(task_id))
+
+
 def get_next_task(student):
+    return get_task(student, ScoreTaskSelector())
+
+
+def get_task(student, task_selector):
     """
     Return next task for given student. Also create a new task instance record
     in DB and update student-task info for selected task (namely the reference
@@ -38,7 +47,6 @@ def get_next_task(student):
     if not task_ids:
         raise LookupError('No tasks available.')
 
-    task_selector = TaskSelector()
     task_id = task_selector.select(task_ids, student.id, practice_context)
     predicted_flow = predict_flow(student.id, task_id, practice_context)
     task = TaskModel.objects.get(pk=task_id)

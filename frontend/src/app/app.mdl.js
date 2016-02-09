@@ -22,17 +22,15 @@ angular.module('flocs', [
 ])
 
 // routes configuration
-.config(function($httpProvider, $stateProvider, $locationProvider) {
+.config(function($httpProvider, $stateProvider, $urlRouterProvider, $locationProvider) {
 
   // settings for CSRF protection
   // (Django uses different name for CSFR cookie than Angular by default)
   $httpProvider.defaults.xsrfCookieName = 'csrftoken';
   $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 
-  /*
   // For any unmatched url, redirect to /404
   $urlRouterProvider.otherwise("/404");
-  */
 
   // States
   $stateProvider
@@ -54,28 +52,20 @@ angular.module('flocs', [
       controller: 'taskPreviewCtrl'
     })
 
-    .state('practice', {
+    .state('practice-start', {
       url: '/practice',
+      templateUrl: 'practice/practice-start.tpl.html',
+      controller: 'practiceStartCtrl'
+    })
+
+    .state('practice-task', {
+      url: '/practice/task/{taskId:int}',
       templateUrl: 'practice/practice.tpl.html',
       controller: 'practiceCtrl'
     })
 
-    /*
-    .state('login',{
-      url: '/login',
-      templateUrl: 'login/login.tpl.html',
-      controller: 'loginCtrl'
-    })
-
-    .state('register',{
-      url:'/register',
-      templateUrl: 'register/register.tpl.html',
-      controller: 'registerCtrl'
-    })
-    */
-
     .state('404', {
-      url: '*path',
+      url: '/404',
       templateUrl: '404/404.tpl.html'
     });
 
