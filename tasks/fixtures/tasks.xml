@@ -2062,7 +2062,7 @@
                       "controls_repeat",
                       "controls_while"
                       ],
-         "blocksLimit": 14
+         "blocksLimit": 20
       }
     </field>
   </object>
