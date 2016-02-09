@@ -182,9 +182,8 @@ angular.module('flocs.workspace')
         "helpUrl": ""
       },
 
-      // NOT USED (we use original blockly ones):
-      /*{
-        "id": "if_then",
+      {
+        "id": "controls_if",
         "message0": Blockly.Msg.CONTROLS_IF_MSG_IF + " %1 %2 " + Blockly.Msg.THEN + " %3 %4",
         "args0": [
         {
@@ -205,12 +204,12 @@ angular.module('flocs.workspace')
         ],
         "previousStatement": null,
         "nextStatement": null,
-        "colour": 330,
+        "colour": 210,
         "tooltip": "",
         "helpUrl": ""
       },
       {
-        "id": "if_then_else",
+        "id": "controls_if_else",
         "message0": Blockly.Msg.CONTROLS_IF_MSG_IF + " %1 %2 " +
                     Blockly.Msg.THEN + " %3 %4 " +
                     Blockly.Msg.ELSE + " %5 %6",
@@ -240,70 +239,10 @@ angular.module('flocs.workspace')
         ],
         "previousStatement": null,
         "nextStatement": null,
-        "colour": 330,
+        "colour": 210,
         "tooltip": "",
         "helpUrl": ""
       },
-      */
-
-      // TODO: if it's used, then i18n, otherwise delete
-      {
-        "id": "for_loop_fixed",
-        "message0": "opakuj %1 krát %2 %3",
-        "args0": [
-        {
-            "type": "field_input",
-            "name": "times",
-            "text": "10"
-        },
-
-        {
-            "type": "input_dummy"
-        },
-        {
-            "type": "input_statement",
-            "name": "body"
-        }
-        ],
-        "previousStatement": null,
-        "nextStatement": null,
-        "colour": 120,
-        "tooltip": "",
-        "helpUrl": ""
-      },
-
-      // TODO: if it's used, then i18n, otherwise delete
-      {
-        "id": "for_loop",
-        "message0": "pro i od %1 do %2 opakuj %3 %4",
-        "args0": [
-        {
-            "type": "field_input",
-            "name": "from",
-            "text": "1"
-        },
-        {
-            "type": "field_input",
-            "name": "to",
-            "text": "10"
-        },
-
-        {
-            "type": "input_dummy"
-        },
-        {
-            "type": "input_statement",
-            "name": "body"
-        }
-        ],
-        "previousStatement": null,
-        "nextStatement": null,
-        "colour": 120,
-        "tooltip": "Pro všechny hodnoty proměnné i od počáteční do koncové " +
-            "včetně bude opakovat vnořené příkazy.",
-        "helpUrl": ""
-      },
-
 
       {
         "id": "controls_while",
@@ -393,7 +332,7 @@ angular.module('flocs.workspace')
     };
 
 
-    Blockly.JavaScript['if_then'] = function(block) {
+    Blockly.JavaScript['controls_if'] = function(block) {
       // get condition value (True or False)
       var value_condition
           = statementWithoutHighlight(block, 'condition');
@@ -407,7 +346,7 @@ angular.module('flocs.workspace')
       return code;
     };
 
-    Blockly.JavaScript['if_then_else'] = function(block) {
+    Blockly.JavaScript['controls_if_else'] = function(block) {
       // get condition value (True or False)
       var value_condition
           = statementWithoutHighlight(block, 'condition');
@@ -424,40 +363,6 @@ angular.module('flocs.workspace')
           statements_condition_false + "}";
       return code;
     };
-
-    Blockly.JavaScript['for_loop_fixed'] = function(block) {
-      // loop statements
-      var statements =
-          Blockly.JavaScript.statementToCode(block, 'body');
-
-      var times = String(Number(block.getFieldValue('times')));
-      var code = "for (var i = 0;" +
-          "i<" + times + ";" +
-          "i++){\n" +
-          statements + "\n" +
-          "}";
-      return code;
-    };
-
-    Blockly.JavaScript['for_loop'] = function(block) {
-      // loop statements
-      var statements =
-          Blockly.JavaScript.statementToCode(block, 'body');
-
-      var from = String(Number(block.getFieldValue('from')));
-      var to = String(Number(block.getFieldValue('to')));
-
-      var loopVar = Blockly.JavaScript.variableDB_.getDistinctName(
-                    'i', Blockly.Variables.NAME_TYPE);
-      var code = "for (var " + loopVar +
-          " = " + from + ";" +
-          loopVar + "<=" + to + ";" +
-          loopVar + "++){\n" +
-          statements + "\n" +
-          "}";
-      return code;
-    };
-
 
     Blockly.JavaScript['controls_while'] = function(block) {
       // loop statements
@@ -493,29 +398,6 @@ angular.module('flocs.workspace')
             argument0 = '!' + argument0;
         }
         return 'while (' + argument0 + ') {\n' + branch + '}\n';
-    };
-
-    /*
-     * Redefinition of standard if/elseif/else block
-     */
-    Blockly.JavaScript['controls_if'] = function(block) {
-        // If/elseif/else condition.
-        var n = 0;
-        var argument = statementWithoutHighlight(block, 'IF' + n);
-
-        var branch = Blockly.JavaScript.statementToCode(block, 'DO' + n);
-        var code = 'if (' + argument + ') {\n' + branch + '}';
-
-        for (n = 1; n <= block.elseifCount_; n++) {
-            argument = statementWithoutHighlight(block, 'IF' + n);
-            branch = Blockly.JavaScript.statementToCode(block, 'DO' + n);
-            code += ' else if (' + argument + ') {\n' + branch + '}';
-            }
-            if (block.elseCount_) {
-                branch = Blockly.JavaScript.statementToCode(block, 'ELSE');
-                code += ' else {\n' + branch + '}';
-            }
-        return code + '\n';
     };
 
     /*

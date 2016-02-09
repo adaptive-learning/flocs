@@ -48,24 +48,9 @@ angular.module('flocs.workspace')
     'if_category':
       '<category name="' + Blockly.Msg.CONDITIONS + '">' +
         '<block type="controls_if"></block>' +
-        '<block type="controls_if">' +
-        '<mutation else="1"></mutation>' +
-        '</block>' +
-        '<block type="controls_if">' +
-        '<mutation elseif="1" else="1"></mutation>' +
-        '</block>' +
+        '<block type="controls_if_else"></block>' +
       '</category>',
-
-    'controls_if_else':
-      '<block type="controls_if">' +
-        '<mutation else="1"></mutation>' +
-      '</block>',
-
-    'constrols_if_elseif_else':
-      '<block type="controls_if">' +
-        '<mutation elseif="1" else="1"></mutation>' +
-      '</block>',
-
+    
     'loops_category':
       '<category name="' + Blockly.Msg.LOOPS + '">' +
         '<block type="controls_repeat_ext">' +

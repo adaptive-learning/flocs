@@ -20,12 +20,11 @@ angular.module('flocs.workspace')
 
     'controls_if',
     'controls_if_else',
-    'constrols_if_elseif_else',
 
     'controls_repeat',
     'controls_repeat:10',
     'controls_while',
-    'constrols_for',
+    'controls_for',
     'controls_forEach',
     'controls_flow_statements',
 
