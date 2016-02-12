@@ -4,6 +4,7 @@ from decimal import Decimal
 
 from common.flow_factors import FlowFactors
 from .tasks_difficulty import TasksDifficultyModel
+from .practice_session import PracticeSession
 from django.db.models import Min
 
 
@@ -14,17 +15,22 @@ def calculate_initial_skill():
     return difficulty_of_easiest_task
 
 
-class StudentsSkillModel(models.Model):
-    """Model for a student skill matrix
+class StudentModel(models.Model):
+    """Model for a student
 
+       The student model keeps track of the current practice session.
        For every concept there is number between -1 and 1 representing skill in
        certain concept.
     """
+
+    # current session
+    session = models.OneToOneField(PracticeSession, null=True, blank=True)
+
     # init values
     INITIAL_CONCEPT_SKILL = Decimal(-1)
 
     # student to refer with foreign key
-    student = models.OneToOneField(User, primary_key=True)
+    user = models.OneToOneField(User, primary_key=True)
 
     # programming concept difficulty
     programming = models.DecimalField(max_digits=4, decimal_places=3,

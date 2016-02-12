@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import practice.models.students_skill
+import practice.models.student
 
 
 class Migration(migrations.Migration):
@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='studentsskillmodel',
             name='programming',
-            field=models.DecimalField(max_digits=4, verbose_name='General skill', decimal_places=3, default=practice.models.students_skill.calculate_initial_skill),
+            field=models.DecimalField(max_digits=4, verbose_name='General skill', decimal_places=3, default=practice.models.student.calculate_initial_skill),
         ),
     ]

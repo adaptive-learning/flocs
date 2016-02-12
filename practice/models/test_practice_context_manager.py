@@ -5,7 +5,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from tasks.models import TaskModel
 from practice.models import TasksDifficultyModel
-from practice.models import StudentsSkillModel
+from practice.models import StudentModel
 from common.flow_factors import FlowFactors
 from decimal import Decimal
 from datetime import datetime
@@ -29,8 +29,8 @@ class PracticeContextManagerTest(TestCase):
                 pits=False,
         )
         student = User.objects.create()
-        students_skills = StudentsSkillModel.objects.create(
-                student=student,
+        students_skills = StudentModel.objects.create(
+                user=student,
                 programming=Decimal('0.14'),
                 conditions=0,
                 loops=0.5,
@@ -54,5 +54,5 @@ class PracticeContextManagerTest(TestCase):
         difficulty1 = TasksDifficultyModel.objects.create(task=task1)
         difficulty2 = TasksDifficultyModel.objects.create(task=task2)
         student = User.objects.create()
-        context = create_practice_context(student=student, task=task1)
+        context = create_practice_context(user=student, task=task1)
         self.assertEquals([task1.id], context.get_all_task_ids())

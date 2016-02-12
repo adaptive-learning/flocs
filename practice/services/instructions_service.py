@@ -2,7 +2,7 @@
 Service for obtaining correct instructions.
 """
 import logging
-from practice.models import StudentsSkillModel
+from practice.models import StudentModel
 from practice.models import TasksDifficultyModel
 from practice.models import InstructionsModel
 from common.flow_factors import FlowFactors
@@ -21,7 +21,7 @@ def get_instructions(student, task):
         list of strings with instructions
     """
 
-    skills = StudentsSkillModel.objects.get(student=student).get_skill_dict()
+    skills = StudentModel.objects.get(user=student).get_skill_dict()
 
     difficulties = \
             TasksDifficultyModel.objects.get(task=task).get_difficulty_dict()

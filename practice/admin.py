@@ -1,15 +1,15 @@
 from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
-from .models import StudentsSkillModel
+from .models import StudentModel
 from .models import TasksDifficultyModel
 from .models import TaskInstanceModel
 from .models import StudentTaskInfoModel
 
 
-class StudentsSkillResource(resources.ModelResource):
+class StudentResource(resources.ModelResource):
     class Meta:
-        model = StudentsSkillModel
+        model = StudentModel
 
 
 class TasksDifficultyResource(resources.ModelResource):
@@ -22,9 +22,9 @@ class TaskInstanceResource(resources.ModelResource):
         model = TaskInstanceModel
 
 
-@admin.register(StudentsSkillModel)
+@admin.register(StudentModel)
 class StudentsSkillAdmin(ImportExportModelAdmin):
-    resource_class = StudentsSkillResource
+    resource_class = StudentResource
 
 @admin.register(TasksDifficultyModel)
 class TasksDifficultyAdmin(ImportExportModelAdmin):
@@ -36,7 +36,7 @@ class TaskInstanceAdmin(ImportExportModelAdmin):
 
 
 # other models registration
-#admin.site.register(StudentsSkillModel)
+#admin.site.register(StudentModel)
 #admin.site.register(TasksDifficultyModel)
 #admin.site.register(TaskInstanceModel, TaskInstanceAdmin)
 admin.site.register(StudentTaskInfoModel)

@@ -5,7 +5,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from tasks.models import TaskModel
 from practice.models import TasksDifficultyModel
-from practice.models import StudentsSkillModel
+from practice.models import StudentModel
 from common.flow_factors import FlowFactors
 from decimal import Decimal
 from datetime import datetime
@@ -127,8 +127,8 @@ class PracticeContextTest(TestCase):
 
     def test_save_student(self):
         student = User.objects.create()
-        StudentsSkillModel.objects.create(
-                student=student,
+        StudentModel.objects.create(
+                user=student,
                 programming=Decimal('0.14'),
                 conditions=0,
                 loops=0.5,
@@ -147,7 +147,7 @@ class PracticeContextTest(TestCase):
         context.set(FlowFactors.STUDENT_BIAS, student=student.id, value=-0.1)
         context.set(FlowFactors.PITS, student=student.id, value=-0.5)
         context.save()
-        skill = StudentsSkillModel.objects.get(student_id=student.id)
+        skill = StudentModel.objects.get(user_id=student.id)
         self.assertAlmostEquals(-0.1, float(skill.programming))
         self.assertAlmostEquals(1.1, float(skill.conditions))
         self.assertAlmostEquals(1.2, float(skill.loops))

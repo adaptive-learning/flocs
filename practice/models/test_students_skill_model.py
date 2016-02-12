@@ -2,7 +2,7 @@
 """
 
 from django.test import TestCase
-from .students_skill import StudentsSkillModel
+from practice.models import StudentModel
 from common.flow_factors import FlowFactors
 from decimal import Decimal
 
@@ -12,10 +12,10 @@ from practice.models import TasksDifficultyModel
 from practice.core.task_selection import ScoreTaskSelector as TaskSelector
 from practice.models.practice_context import create_practice_context
 
-class StudentsSkillModelTest(TestCase):
+class StudentModelTest(TestCase):
 
     def test_get_skill_dict(self):
-        students_skills = StudentsSkillModel(
+        students_skills = StudentModel(
                 programming=Decimal('0.14'),
                 conditions=0,
                 loops=0.5,
@@ -78,10 +78,10 @@ class StudentsSkillModelTest(TestCase):
                 )
         task_dif_1.save()
         task_dif_2.save()
-        student = StudentsSkillModel.objects.create(student=user)
+        student = StudentModel.objects.create(user=user)
         task_selector = TaskSelector()
         # create practice context
-        practice_context = create_practice_context(student=user)
+        practice_context = create_practice_context(user=user)
         # select task
         task_ids = [task1.id, task2.id]
         task_id = task_selector.select(task_ids, user.id, practice_context)

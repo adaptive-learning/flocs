@@ -42,7 +42,7 @@ def get_task(student, task_selector):
     if not student:
         raise ValueError('Student is required for get_next_task')
 
-    practice_context = create_practice_context(student=student)
+    practice_context = create_practice_context(user=student)
     task_ids = practice_context.get_all_task_ids()
     if not task_ids:
         raise LookupError('No tasks available.')
@@ -123,7 +123,7 @@ def process_attempt_report(student, report):
         return
 
     task = task_instance.task
-    practice_context = create_practice_context(student=student, task=task)
+    practice_context = create_practice_context(user=student, task=task)
     practice_context.update('solution-count', task=task.id, update=lambda n: n + 1)
     update_parameters(practice_context, student.id, task.id,
             task_instance.get_reported_flow(),
