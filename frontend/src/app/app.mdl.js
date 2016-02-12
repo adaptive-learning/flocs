@@ -22,15 +22,12 @@ angular.module('flocs', [
 ])
 
 // routes configuration
-.config(function($httpProvider, $stateProvider, $urlRouterProvider, $locationProvider) {
+.config(function($httpProvider, $stateProvider, $locationProvider) {
 
   // settings for CSRF protection
   // (Django uses different name for CSFR cookie than Angular by default)
   $httpProvider.defaults.xsrfCookieName = 'csrftoken';
   $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
-
-  // For any unmatched url, redirect to /404
-  $urlRouterProvider.otherwise("/404");
 
   // States
   $stateProvider
@@ -65,7 +62,7 @@ angular.module('flocs', [
     })
 
     .state('404', {
-      url: '/404',
+      url: '/*path',
       templateUrl: '404/404.tpl.html'
     });
 

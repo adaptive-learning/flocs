@@ -34,7 +34,7 @@ angular.module('flocs.practice')
         startCurrentTask();
         return taskInstance;
       }, function() {
-        $state.go('404');
+        $state.go('404', null, {'location': false});
       });
     } else {
       return $timeout(function() {
