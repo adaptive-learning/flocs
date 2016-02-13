@@ -4,6 +4,7 @@ Main service functions of practice app.
 
 import logging
 
+from common.flow_factors import FlowFactors
 from tasks.models import TaskModel
 from practice.models.practice_context import create_practice_context
 from practice.models import TaskInstanceModel
@@ -11,8 +12,9 @@ from practice.models import StudentTaskInfoModel
 from practice.models.task_instance import FlowRating
 from practice.services.parameters_update import update_parameters
 from practice.services.instructions_service import get_instructions
-from practice.core.task_selection import ScoreTaskSelector, IdSpecifidedTaskSelector
+from practice.core.credits import difficulty_to_credits
 from practice.core.flow_prediction import predict_flow
+from practice.core.task_selection import ScoreTaskSelector, IdSpecifidedTaskSelector
 
 logger = logging.getLogger(__name__)
 
@@ -145,10 +147,12 @@ def process_attempt_report(student, report):
     # select_for_update current parameters, update them at once ("in parallel")
     # and save.
     practice_context.save()
-    logger.info("Reporting attempt was successful for student %s with result %s", student.id, solved)
+    task_difficulty = practice_context.get(FlowFactors.TASK_BIAS, task=task.id)
+    credits = difficulty_to_credits(task_difficulty)
     response = {
         'task-instance-closed': True,
-        'earned-credits':  10
+        'earned-credits': credits
     }
+    logger.info("Reporting attempt was successful for student %s with result %s", student.id, solved)
     return response
 

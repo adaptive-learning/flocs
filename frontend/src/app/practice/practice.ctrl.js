@@ -38,7 +38,8 @@ angular.module('flocs.practice')
     });
   }
 
-  function taskFinished() {
+  function taskFinished(result) {
+    console.log('result:', result); // TODO: show modal
     practiceService.settingNextTask();
   }
 
