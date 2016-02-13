@@ -181,24 +181,24 @@ LOGGING = {
     },
     'handlers': {
         'console': {
-            'level': 'DEBUG',
+            'level': 'INFO',
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
         'practice-file': {
-            'level': 'DEBUG',
+            'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': LOGGING_DIR + '/practice.log',
             'formatter': 'verbose'
         },
         'feedback-file': {
-            'level': 'DEBUG',
+            'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': LOGGING_DIR + '/feedback.log',
             'formatter': 'long-messages'
         },
         'requests-file': {
-            'level': 'DEBUG',
+            'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': LOGGING_DIR + '/requests.log',
             'formatter': 'simple'
@@ -211,17 +211,17 @@ LOGGING = {
     'loggers': {
         'feedback': {
             'handlers': ['feedback-file'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'propagate': True,
         },
         'practice': {
             'handlers': ['practice-file'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'propagate': True
             },
         'django.request' : {
             'handlers': ['requests-file', 'mail-admins'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'propagate': True
         }
     }
