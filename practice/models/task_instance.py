@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from common.utils import activation
 from tasks.models import TaskModel
+from practice.models import StudentModel
+from practice.models import PracticeSession
 from datetime import datetime
 
 class FlowRating(object):
@@ -21,6 +23,9 @@ class TaskInstanceModel(models.Model):
 
     # task which was assigned to the user
     task = models.ForeignKey(TaskModel)
+
+    # practice session in which the task is being solved
+    session = models.ForeignKey(PracticeSession, null=True, blank=True, default=None)
 
     # when the task was shown to the student
     time_start = models.DateTimeField(default=datetime.now)

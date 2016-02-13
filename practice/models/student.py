@@ -23,8 +23,9 @@ class StudentModel(models.Model):
        certain concept.
     """
 
-    # current session
-    session = models.OneToOneField(PracticeSession, null=True, blank=True)
+    # current session, has value None if there is no active session
+    session = models.OneToOneField(PracticeSession, null=True, blank=True,
+            default=None)
 
     # init values
     INITIAL_CONCEPT_SKILL = Decimal(-1)
