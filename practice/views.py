@@ -44,19 +44,23 @@ def get_task_by_id(request, id):
 
 def post_attempt_report(request):
     """Store and process task result.
+
+    POST params:
+        task-instance-id: int,
+        attempt: int, counted from 1,
+        solved: bool,
+        given-up: bool,
+        time: int, number of seconds,
+        flow-report:  0=unknown, 1=very_difficult, 2=difficult, 3=just_right, 4=easy
+
+    Returns:
+        task-instance-closed: true after the task is solved or given up
+        earned-credits: int
     """
     if request.method != "POST":
         return HttpResponseBadRequest('Has to be POST request.')
-
     logger.log_request(request)
-
     body_unicode = request.body.decode('utf-8')
     data = json.loads(body_unicode)
-
-    # hack for testing purposes
-    #user = User.objects.get(id=17)
-    user=request.user
-
-    practice_service.process_attempt_report(student=user, report=data)
-
-    return HttpResponse('ok')
+    result = practice_service.process_attempt_report(student=request.user, report=data)
+    return JsonResponse(result)

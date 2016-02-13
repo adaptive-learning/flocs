@@ -149,7 +149,7 @@ angular.module('flocs.workspace')
       code = Blockly.JavaScript.finish(code);
       // turn on block highlighting
       blocklyDiv.traceOn(true);
-      console.log(code);
+      //console.log(code);
       return code;
     } catch (err) {
       // TODO: do a proper exception handling and maybe inform the user

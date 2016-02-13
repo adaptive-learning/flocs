@@ -76,6 +76,11 @@ def process_attempt_report(student, report):
         student: user who took the attempt
         report: dictionary with the fields specified in:
             https://github.com/effa/flocs/wiki/Server-API#apipracticeattempt-report
+
+    Returns:
+        task-instance-closed: true after the task is solved or given up
+        earned-credits: int
+
     Raises:
         ValueError:
             - If the student argument is None.
@@ -120,7 +125,7 @@ def process_attempt_report(student, report):
     # parameters twice (e.g. the following would not work correctly, if the
     # report comes duplicated).
     if not reported_flow:
-        return
+        return {'task-instance-closed': False}
 
     task = task_instance.task
     practice_context = create_practice_context(user=student, task=task)
@@ -141,4 +146,9 @@ def process_attempt_report(student, report):
     # and save.
     practice_context.save()
     logger.info("Reporting attempt was successful for student %s with result %s", student.id, solved)
+    response = {
+        'task-instance-closed': True,
+        'earned-credits':  10
+    }
+    return response
 

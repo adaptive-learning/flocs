@@ -77,13 +77,13 @@ angular.module('flocs.practice')
   function taskCompleted(flowReport) {
     // add flow report and send it to server
     attemptReport['flow-report'] = flowReport;
-    practiceDao.sendingAttemptReport(attemptReport);
-
-    // reset attempt object
-    attemptReport = null;
-
-    // resolve taskFinnished promise
-    taskFinishedDeferred.resolve();
+    practiceDao.sendingAttemptReport(attemptReport).then(function(result) {
+      console.log(result);
+      // reset attempt object
+      attemptReport = null;
+      // resolve taskFinnished promise
+      taskFinishedDeferred.resolve();
+      });
   }
 
   function attemptFinished(result) {

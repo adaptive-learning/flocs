@@ -38,7 +38,10 @@ angular.module('flocs.services')
    * Send results of an attempt to server
    */
   function sendingAttemptReport(report) {
-    $http.post('/api/practice/attempt-report', report);
+    return $http.post('/api/practice/attempt-report', report)
+      .then(function(response) {
+        return response.data;
+      });
   }
 
 });
