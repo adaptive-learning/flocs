@@ -19,6 +19,7 @@ angular.module('flocs', [
     'flocs.practice',
     'flocs.taskPreview',
     'flocs.user',
+    'flocs.profile',
 ])
 
 // routes configuration
@@ -59,6 +60,12 @@ angular.module('flocs', [
       url: '/practice/task/{taskId:int}',
       templateUrl: 'practice/practice.tpl.html',
       controller: 'practiceCtrl'
+    })
+
+    .state('profile', {
+      url: '/profile',
+      templateUrl: 'profile/profile.tpl.html',
+      controller: 'profileCtrl'
     })
 
     .state('404', {

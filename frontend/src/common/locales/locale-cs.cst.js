@@ -22,6 +22,15 @@ angular.module('flocs.locales')
   TITLE: 'Adaptabilní programování',
   TOGGLE_NAVIGATION: 'Přepnout navigaci',
   USERNAME:  'Uživatelské jméno',
+  PROFILE: 'Profil',
+  PROFILE_PAGE: {
+    USERPROFILE: 'Uživateslký profil',
+    EMAIL: 'E-mail',
+    SOLVED_TASKS_COUNT: 'Počet vyřešených úloh',
+    SOLVED_DISTINCT_TASKS_COUNT: 'Z toho unikátních úloh',
+    LOGGED_USER_NEEDED: 'Pro správné fungování této stránky je potřeba se prihlásit.'
+  },
+  
 
   HOME: {
     INTRO_TEXT: 'Toto je první prototyp aplikace pro adaptabilní výuku programování.' +
@@ -32,7 +41,7 @@ angular.module('flocs.locales')
 
   FEEDBACK_MODAL: {
     MESSAGE_FIELD: 'Zpráva:',
-    EMAIL_FIELD: 'Email (nepovinné):',
+    EMAIL_FIELD: 'E-mail (nepovinné):',
     SUCCESS_MESSAGE: 'Zpráva přijata, děkujeme!',
     INVALID_MESSAGE: 'Neplatná zpráva!',
   },

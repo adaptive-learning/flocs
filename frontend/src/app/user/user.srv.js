@@ -61,6 +61,10 @@ angular.module('flocs.user')
         });
     }
 
+    function getUserDetails() {
+      return userDao.getUserDetails();
+    }
+
     // first find whether user is already logged in (this is necessary e.g.
     // because of refresh, opening new tab etc.
     // Current behavior: if the user is not logged in, it just returns empty
@@ -80,6 +84,7 @@ angular.module('flocs.user')
       loggingIn: loggingIn,
       loggingOut: loggingOut,
       signingUp: signingUp,
+      getUserDetails: getUserDetails,
 	};
 
 });

@@ -51,3 +51,18 @@ def loggedIn(request):
         return request.user.username
     else:
         return None
+
+def getUserInformation(request):
+    """
+    Returns user with all the fields from the database.
+
+    Args:
+        request: request that envoked this method
+
+    Returns:
+        Object holding all the user information or None if there is not any.
+    """
+    if not (request.user.is_anonymous() or is_lazy_user(request.user)):
+        return User.objects.get(username=request.user)
+    else:
+        return None

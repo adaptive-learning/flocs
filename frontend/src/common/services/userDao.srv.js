@@ -8,7 +8,8 @@ angular.module('flocs.services')
         signingUp: signingUp,
         login : login,
         loggedIn : loggedIn,
-        logout: logout
+        logout: logout,
+        getUserDetails: getUserDetails
 	};
 
 	function signingUp(username, email, passwd) {
@@ -40,6 +41,13 @@ angular.module('flocs.services')
     function logout(){
       // TODO: logout should not be GET!
       return $http.get('api/user/logout');
+    }
+
+    function getUserDetails(){
+      return $http.get('api/user/details')
+        .then(function(response) {
+          return response;
+        });
     }
 
 });

@@ -1,0 +1,22 @@
+<div class="jumbotron">
+  <div class="container" ng-if="data.details">
+    <h2 translate>PROFILE_PAGE.USERPROFILE</h2>
+    <p>
+    <dl class="dl-horizontal">
+      <dt translate>USERNAME</dt>
+      <dd>{{data.details.username}}</dd>
+      <dt translate>PROFILE_PAGE.EMAIL</dt>
+      <dd>{{data.details.email}}</dd>
+      <dt translate>PROFILE_PAGE.SOLVED_TASKS_COUNT</dt>
+      <dd>{{data.details.solved_task_count}}</dd>
+      <dt translate>PROFILE_PAGE.SOLVED_DISTINCT_TASKS_COUNT</dt>
+      <dd>{{data.details.solved_distinct_task_count}}</dd>
+    </dl>
+    </p>
+  </div>
+  <div class="container" ng-if="!data.details">
+    <p translate>
+    PROFILE_PAGE.LOGGED_USER_NEEDED
+    </p>
+  </div>
+</div>
