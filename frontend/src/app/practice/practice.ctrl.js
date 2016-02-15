@@ -39,7 +39,6 @@ angular.module('flocs.practice')
   }
 
   function taskFinished(result) {
-    console.log('result:', result); // TODO: show modal
     practiceService.settingNextTask();
   }
 
@@ -49,17 +48,21 @@ angular.module('flocs.practice')
 
   function taskAttempted(attemptResult) {
     if (attemptResult.solved) {
-        flowReportFilling().then(reportFilled, reportClosed);
+      taskCompletionReporting().then(reportFilled, reportClosed);
     }
   }
-
 
   /**
    * Open a report dialog and return a promise of filling the report
    */
-  function flowReportFilling() {
-    var fillingPromise = ngDialog.openConfirm(dialogOptions);
-    return fillingPromise;
+  function taskCompletionReporting() {
+    var modalInstance = $uibModal.open({
+      templateUrl: 'practice/task-completion-modal.tpl.html',
+      controller: 'taskCompletionModalCtrl',
+    });
+    return modalInstance.result;
+    //var fillingPromise = ngDialog.openConfirm(dialogOptions);
+    //return fillingPromise;
   }
 
   /**

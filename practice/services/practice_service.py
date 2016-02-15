@@ -138,12 +138,9 @@ def process_attempt_report(student, report):
         if not solved_before:
             task_difficulty = practice_context.get(FlowFactors.TASK_BIAS, task=task.id)
             credits = difficulty_to_credits(task_difficulty)
-    response = {
-        'task-solved-first-time': solved and not solved_before,
-        'earned-credits': credits
-    }
+    task_solved_first_time = solved and not solved_before,
     logger.info("Reporting attempt was successful for student %s with result %s", student.id, solved)
-    return response
+    return (task_solved_first_time, credits)
 
 
 def process_flow_report(student, task_instance_id, given_up=False, reported_flow=None):

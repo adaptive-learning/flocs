@@ -1,0 +1,28 @@
+<div>
+
+  <div class="modal-header">
+      <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          ng-click="$dismiss('cancel')"
+          >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title">Úloha vyřešena</h4>
+  </div>
+
+  <div class="modal-body">
+    Získal jsi {{evaluation.earnedCredits}} kredit/y/ů!
+  </div>
+
+  <div class="modal-footer">
+    <div class="flow-report-form">
+      <p>Jak těžká pro tebe úloha byla?</p>
+      <button type="button" class="btn btn-danger" ng-click="reportFlow(2)">Těžká</button>
+      <button type="button" class="btn btn-success" ng-click="reportFlow(3)">Akorát</button>
+      <button type="button" class="btn btn-info" ng-click="reportFlow(4)">Lehká</button>
+    <div>
+  </div>
+
+</div>

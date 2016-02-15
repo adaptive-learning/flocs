@@ -75,10 +75,7 @@ def post_flow_report(request):
 
     POST params:
         task-instance-id: int,
-        attempt: int, counted from 1,
-        solved: bool,
         given-up: bool,
-        time: int, number of seconds,
         flow-report:  0=unknown, 1=very_difficult, 2=difficult, 3=just_right, 4=easy
     """
     if request.method != "POST":

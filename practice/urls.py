@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^next-task$', views.get_next_task),
     url(r'^task/(?P<id>[0-9]+)$', views.get_task_by_id),
     url(r'^attempt-report$', views.post_attempt_report),
+    url(r'^flow-report$', views.post_flow_report),
 ]

@@ -10,6 +10,7 @@ angular.module('flocs.services')
     gettingNextTask: gettingNextTask,
     gettingTaskById: gettingTaskById,
     sendingAttemptReport: sendingAttemptReport,
+    sendingFlowReport: sendingFlowReport,
   };
 
   // private implementation
@@ -44,4 +45,13 @@ angular.module('flocs.services')
       });
   }
 
+  /**
+   * Send a flow report to server
+   */
+  function sendingFlowReport(report) {
+    return $http.post('/api/practice/flow-report', report)
+      .then(function(response) {
+        return response.data;
+      });
+  }
 });

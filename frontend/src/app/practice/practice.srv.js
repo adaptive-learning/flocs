@@ -9,6 +9,9 @@ angular.module('flocs.practice')
   var taskStartTimestamp = null;
   var taskFinishedDeferred = null;
   var taskInstance = null;
+  var attemptEvaluation = {
+    'earned-credits': null
+  };
 
   // === public API ===
   return {
@@ -16,7 +19,8 @@ angular.module('flocs.practice')
     settingNextTask: settingNextTask,
     practicingTask: practicingTask,
     taskCompleted: taskCompleted,
-    giveUpTask: giveUpTask
+    giveUpTask: giveUpTask,
+    attemptEvaluation: attemptEvaluation,
   };
 
   function settingNextTask() {
@@ -74,10 +78,13 @@ angular.module('flocs.practice')
   /*
    * Send final report about task resolving including flow report.
    */
-  function taskCompleted(flowReport) {
-    // add flow report and send it to server
-    attemptReport['flow-report'] = flowReport;
-    practiceDao.sendingAttemptReport(attemptReport).then(function(result) {
+  function taskCompleted(taskReport) {
+    var flowReport = {
+      'task-instance-id': attemptReport['task-instance-id'],
+      'given-up': attemptReport['task-instance-id'],
+      'flow-report': taskReport['flow']
+    };
+    practiceDao.sendingFlowReport(flowReport).then(function(result) {
       // reset attempt object
       attemptReport = null;
       // resolve taskFinnished promise
@@ -89,23 +96,17 @@ angular.module('flocs.practice')
     if (attemptReport === null) {
       return;
     }
-
-    // we don't count additional attempts after the first successful one
+    // ignore additional attempts after the first successful one
     if (!attemptReport.solved) {
       attemptReport.time = calculateSolvingTime();
       attemptReport.attempt += 1;
       attemptReport.solved = result.solved;
-
-      // If the task has just been solved, it's likely that we will soon
-      // send another report with reported flow, but we still send this
-      // not-complete report in case a student does not fill the report.
-      practiceDao.sendingAttemptReport(attemptReport);
+      practiceDao.sendingAttemptReport(attemptReport).then(function(response) {
+        attemptEvaluation.earnedCredits = response['earned-credits'];
+        //result.evaluation = evaluation;
+        taskFinishedDeferred.notify(result);
+      });
     }
-
-    // Notify about the attempt - even if the task was already solved by a
-    // previous attemp (this is necessary, as the user might have closed
-    // the report dialog the first time he solved the task)
-    taskFinishedDeferred.notify(result);
   }
 
   /*
