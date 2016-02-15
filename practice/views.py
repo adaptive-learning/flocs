@@ -51,10 +51,9 @@ def post_attempt_report(request):
         solved: bool,
         given-up: bool,
         time: int, number of seconds,
-        flow-report:  0=unknown, 1=very_difficult, 2=difficult, 3=just_right, 4=easy
 
     Returns:
-        task-instance-closed: true after the task is solved or given up
+        task-solved-first-time: bool
         earned-credits: int
     """
     if request.method != "POST":
@@ -62,5 +61,34 @@ def post_attempt_report(request):
     logger.log_request(request)
     body_unicode = request.body.decode('utf-8')
     data = json.loads(body_unicode)
-    result = practice_service.process_attempt_report(student=request.user, report=data)
-    return JsonResponse(result)
+    task_solved_first_time, credits = practice_service.process_attempt_report(
+            student=request.user, report=data)
+    response = {
+        'task-solved-first-time': task_solved_first_time,
+        'earned-credits': credits
+    }
+    return JsonResponse(response)
+
+
+def post_flow_report(request):
+    """Store and process flow_report after a task is solved.
+
+    POST params:
+        task-instance-id: int,
+        attempt: int, counted from 1,
+        solved: bool,
+        given-up: bool,
+        time: int, number of seconds,
+        flow-report:  0=unknown, 1=very_difficult, 2=difficult, 3=just_right, 4=easy
+    """
+    if request.method != "POST":
+        return HttpResponseBadRequest('Has to be POST request.')
+    logger.log_request(request)
+    body_unicode = request.body.decode('utf-8')
+    data = json.loads(body_unicode)
+    result = practice_service.process_flow_report(
+            student=request.user,
+            task_instance_id=data['task-instance-id'],
+            given_up=data['given-up'],
+            reported_flow=data.get('flow-report'))
+    return HttpResponse('ok')

@@ -95,7 +95,7 @@ class TaskInstanceModel(models.Model):
         """
         return self.predicted_flow
 
-    def update_after_attempt(self, attempt_count, time, solved, reported_flow=None):
+    def update_after_attempt(self, attempt_count, time, solved):
         """
         Update information about the task instnace after a new attempt
 
@@ -104,13 +104,11 @@ class TaskInstanceModel(models.Model):
             time: total number of seconds the student has been already solving
                 the task
             solved: True if the student has solved the task
-            reported_flow: number with the interpetration given by
-                FlowRating (see above) or None if no rating was included
         """
         if attempt_count < self.attempt_count:
             # Obsolete attempt, ignore. Note that we allow for equality of
-            # attempts count, which means that we want to update the last
-            # report with more information (e.g. added flow report).
+            # attempts count, which means that we can add more information to
+            # the already reported attempt later.
             return
 
         self.time_end = datetime.now()
@@ -118,7 +116,15 @@ class TaskInstanceModel(models.Model):
         self.time_spent = time
         self.solved = solved
 
-        if reported_flow is not None:
-            if reported_flow not in range(5):
-                raise ValueError('Invalid flow report number %s' % reported_flow)
-            self.reported_flow = reported_flow
+
+    def set_reported_flow(self, reported_flow):
+        """
+        Args:
+            reported_flow: number with the interpetration given by
+                FlowRating (see above) or None if no flow was provided
+        """
+        if reported_flow is None:
+            return
+        if reported_flow not in range(5):
+            raise ValueError('Invalid flow report number %s' % reported_flow)
+        self.reported_flow = reported_flow

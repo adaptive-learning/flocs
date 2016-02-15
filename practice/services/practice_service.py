@@ -87,8 +87,8 @@ def process_attempt_report(student, report):
             https://github.com/effa/flocs/wiki/Server-API#apipracticeattempt-report
 
     Returns:
-        task-instance-closed: true after the task is solved or given up
-        earned-credits: int
+        - whether the task is solved for the first time
+        - number of earned-credits
 
     Raises:
         ValueError:
@@ -105,8 +105,6 @@ def process_attempt_report(student, report):
     solved = report['solved']
     given_up = report['given-up']
     time = report['time']
-    reported_flow = report.get('flow-report') if not given_up\
-            else FlowRating.VERY_DIFFICULT
 
     logger.info("Reporting attempt for student %s with result %s", student.id, solved)
 
@@ -124,25 +122,47 @@ def process_attempt_report(student, report):
             attempt_count=attempt_count,
             time=time,
             solved=solved,
-            reported_flow=reported_flow
     )
     task_instance.save()
+    task = task_instance.task
+    student_task_info = StudentTaskInfoModel.objects.get_or_create(student=student, task=task)[0]
+    solved_before = student_task_info.last_solved_instance is not None
+    student_task_info.update(task_instance)
 
-    # Currently, we only update parameters, when the "task completion" report
-    # is sent (which means that the task was solved and flow was reported)
-    # TODO: there should be more explicit control (condition) for not updating
-    # parameters twice (e.g. the following would not work correctly, if the
-    # report comes duplicated).
+    credits = 0
+    if solved:
+        task = task_instance.task
+        practice_context = create_practice_context(user=student, task=task)
+        practice_context.update('solution-count', task=task.id, update=lambda n: n + 1)
+        practice_context.save()
+        if not solved_before:
+            task_difficulty = practice_context.get(FlowFactors.TASK_BIAS, task=task.id)
+            credits = difficulty_to_credits(task_difficulty)
+    response = {
+        'task-solved-first-time': solved and not solved_before,
+        'earned-credits': credits
+    }
+    logger.info("Reporting attempt was successful for student %s with result %s", student.id, solved)
+    return response
+
+
+def process_flow_report(student, task_instance_id, given_up=False, reported_flow=None):
+    """Process reported flow after the task completion (or giving up)
+    """
+    if given_up:
+        reported_flow = FlowRating.VERY_DIFFICULT
     if not reported_flow:
-        return {'task-instance-closed': False}
-
+        return
+    task_instance = TaskInstanceModel.objects.get(id=task_instance_id)
+    if student.id != task_instance.student.id:
+        raise ValueError("The task instance doesn't belong to this student.")
+    task_instance.set_reported_flow(reported_flow)
+    task_instance.save()
     task = task_instance.task
     practice_context = create_practice_context(user=student, task=task)
-    practice_context.update('solution-count', task=task.id, update=lambda n: n + 1)
     update_parameters(practice_context, student.id, task.id,
             task_instance.get_reported_flow(),
             task_instance.get_predicted_flow())
-
     # NOTE: There is a race condition when 2 students are updating parameters
     # for the same task at the same time. In the current conditons, this is
     # rare and if it happens it does not cause any problems (one update is
@@ -154,12 +174,3 @@ def process_attempt_report(student, report):
     # select_for_update current parameters, update them at once ("in parallel")
     # and save.
     practice_context.save()
-    task_difficulty = practice_context.get(FlowFactors.TASK_BIAS, task=task.id)
-    credits = difficulty_to_credits(task_difficulty)
-    response = {
-        'task-instance-closed': True,
-        'earned-credits': credits
-    }
-    logger.info("Reporting attempt was successful for student %s with result %s", student.id, solved)
-    return response
-
