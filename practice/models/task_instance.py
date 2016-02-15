@@ -105,10 +105,14 @@ class TaskInstanceModel(models.Model):
                 the task
             solved: True if the student has solved the task
         """
+        # Obsolete attempt, ignore. Note that we allow for equality of
+        # attempts count, which means that we can add more information to
+        # the already reported attempt later.
         if attempt_count < self.attempt_count:
-            # Obsolete attempt, ignore. Note that we allow for equality of
-            # attempts count, which means that we can add more information to
-            # the already reported attempt later.
+            return
+
+        # Ignore additional attempts after the first successful one.
+        if self.solved and attempt_count != self.attempt_count:
             return
 
         self.time_end = datetime.now()
