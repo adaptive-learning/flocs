@@ -16,33 +16,32 @@ class PracticeServiceTest(TestCase):
     fixtures = ['instructions.json']
 
     def setUp(self):
-        self.student = User.objects.create()
-        self.student_model = StudentModel.objects.create(user_id = self.student.pk)
+        self.user = User.objects.create()
 
     def test_get_next_task(self):
         stored_task = TaskModel.objects.create(maze_settings="{}",
                 workspace_settings='{"foo": "bar"}')
         TasksDifficultyModel.objects.create(task=stored_task)
-        retrieved_task = practice_service.get_next_task(student=self.student)
+        retrieved_task = practice_service.get_next_task(student=self.user)
         self.assertIsNotNone(retrieved_task)
         self.assertEquals({"foo": "bar"}, retrieved_task['task']['workspace-settings'])
         self.assertEquals({}, retrieved_task['task']['maze-settings'])
         self.assertEquals(TaskInstanceModel.objects.first().id,
                 retrieved_task['task-instance-id'])
-        student_model = StudentModel.objects.get(user_id=self.student.pk)
-        self.assertEquals(student_model.session.task_counter, retrieved_task['task_in_session'])
+        student = StudentModel.objects.get(user_id=self.user.pk)
+        self.assertEquals(student.session.task_counter, retrieved_task['task_in_session'])
 
     def test_no_task_available(self):
         # if there are no tasks available, task_servise should raise
         # LookupError
         self.assertRaises(LookupError,
-                practice_service.get_next_task, self.student)
+                practice_service.get_next_task, self.user)
 
     def test_get_task_by_id(self):
         stored_task = TaskModel.objects.create(maze_settings="{}",
                 workspace_settings='{"foo": "bar"}')
         TasksDifficultyModel.objects.create(task=stored_task)
-        retrieved_task = practice_service.get_task_by_id(student=self.student, task_id=stored_task.pk)
+        retrieved_task = practice_service.get_task_by_id(student=self.user, task_id=stored_task.pk)
         self.assertIsNotNone(retrieved_task)
         self.assertEquals({"foo": "bar"}, retrieved_task['task']['workspace-settings'])
         self.assertEquals({}, retrieved_task['task']['maze-settings'])
@@ -52,17 +51,16 @@ class PracticeServiceTest(TestCase):
     def test_process_attempt_report(self):
         TaskModel.objects.create(id=1)
         TasksDifficultyModel.objects.create(task_id=1, solution_count=5)
-        TaskInstanceModel.objects.create(id=1, task_id=1, student=self.student,
+        TaskInstanceModel.objects.create(id=1, task_id=1, student=self.user,
                 predicted_flow=0.22)
         report = {
             "task-instance-id": 1,
             "task-id": 1,
             "attempt": 12,
             "solved": True,
-            "given-up": False,
             "time": 234,
         }
-        practice_service.process_attempt_report(self.student, report)
+        practice_service.process_attempt_report(self.user, report)
         difficulty = TasksDifficultyModel.objects.get(task_id=1)
         self.assertEquals(6, difficulty.solution_count)
         task_instance = TaskInstanceModel.objects.get(id=1)
@@ -75,10 +73,10 @@ class PracticeServiceTest(TestCase):
         skill_before_report = -1.0
         TaskModel.objects.create(id=1)
         TasksDifficultyModel.objects.create(task_id=1, programming=difficulty_before_report)
-        TaskInstanceModel.objects.create(id=1, task_id=1, student=self.student, predicted_flow=-1.0)
-        student = StudentModel.objects.create(user=self.student, programming=skill_before_report)
+        TaskInstanceModel.objects.create(id=1, task_id=1, student=self.user, predicted_flow=-1.0)
+        student = StudentModel.objects.create(user=self.user, programming=skill_before_report)
         practice_service.process_flow_report(
-                student=self.student,
+                student=self.user,
                 task_instance_id=1,
                 reported_flow=FlowRating.EASY)
         task_instance = TaskInstanceModel.objects.get(id=1)
@@ -91,11 +89,11 @@ class PracticeServiceTest(TestCase):
     def test_process_giveup_report(self):
         TaskModel.objects.create(id=1)
         TasksDifficultyModel.objects.create(task_id=1, programming=-1.0)
-        TaskInstanceModel.objects.create(id=1, task_id=1, student=self.student, predicted_flow=1.0)
-        student = StudentModel.objects.create(user=self.student, programming=1.0)
+        TaskInstanceModel.objects.create(id=1, task_id=1, student=self.user, predicted_flow=1.0)
+        student = StudentModel.objects.create(user=self.user, programming=1.0)
         skill_before_report = student.programming
         practice_service.process_giveup_report(
-                student=self.student,
+                student=self.user,
                 task_instance_id=1,
                 time_spent=987)
         task_instance = TaskInstanceModel.objects.get(id=1)
