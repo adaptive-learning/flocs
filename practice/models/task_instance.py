@@ -120,6 +120,9 @@ class TaskInstanceModel(models.Model):
         self.time_spent = time
         self.solved = solved
 
+    def update_after_giveup(self, time_spent):
+        self.time_end = datetime.now()
+        self.time_spent = time_spent
 
     def set_reported_flow(self, reported_flow):
         """

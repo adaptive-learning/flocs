@@ -10,7 +10,7 @@ angular.module('flocs.practice')
   var taskFinishedDeferred = null;
   var taskInstance = null;
   var attemptEvaluation = {
-    'earned-credits': null
+    earnedCredits: null
   };
 
   // === public API ===
@@ -59,11 +59,14 @@ angular.module('flocs.practice')
   }
 
   function giveUpTask() {
-    attemptReport['given-up'] = true;
-    attemptReport['time'] = calculateSolvingTime();
-    practiceDao.sendingAttemptReport(attemptReport);
+    var giveUpReport = {
+      'task-instance-id': attemptReport['task-instance-id'],
+      'time': calculateSolvingTime()
+    };
     attemptReport = null;
-    taskFinishedDeferred.reject();
+    // rejecting the task is postponed after successfuly giving up, in order to
+    // make sure the skill has been updated before requesting next task
+    practiceDao.sendingGiveUpReport(giveUpReport).then(taskFinishedDeferred.reject);
   }
 
   /*
@@ -81,7 +84,6 @@ angular.module('flocs.practice')
   function taskCompleted(taskReport) {
     var flowReport = {
       'task-instance-id': attemptReport['task-instance-id'],
-      'given-up': attemptReport['task-instance-id'],
       'flow-report': taskReport['flow']
     };
     practiceDao.sendingFlowReport(flowReport).then(function(result) {
@@ -96,14 +98,14 @@ angular.module('flocs.practice')
     if (attemptReport === null) {
       return;
     }
-    // ignore additional attempts after the first successful one
-    if (!attemptReport.solved) {
+    if (attemptReport.solved) {
+      taskFinishedDeferred.notify(result);
+    } else {
       attemptReport.time = calculateSolvingTime();
       attemptReport.attempt += 1;
       attemptReport.solved = result.solved;
       practiceDao.sendingAttemptReport(attemptReport).then(function(response) {
         attemptEvaluation.earnedCredits = response['earned-credits'];
-        //result.evaluation = evaluation;
         taskFinishedDeferred.notify(result);
       });
     }
@@ -129,8 +131,6 @@ angular.module('flocs.practice')
       'attempt': 0,
       'time': 0,
       'solved': false,
-      'given-up': false,
-      'flow-report': 0
     };
   }
 

@@ -49,7 +49,6 @@ def post_attempt_report(request):
         task-instance-id: int,
         attempt: int, counted from 1,
         solved: bool,
-        given-up: bool,
         time: int, number of seconds,
 
     Returns:
@@ -70,12 +69,30 @@ def post_attempt_report(request):
     return JsonResponse(response)
 
 
+def post_giveup_report(request):
+    """Process a report about user having given up a task
+
+    POST params:
+        task-instance-id: int,
+        time: int, number of seconds,
+    """
+    if request.method != "POST":
+        return HttpResponseBadRequest('Has to be POST request.')
+    logger.log_request(request)
+    body_unicode = request.body.decode('utf-8')
+    data = json.loads(body_unicode)
+    practice_service.process_giveup_report(
+            student=request.user,
+            task_instance_id=data['task-instance-id'],
+            time_spent=data['time'])
+    return HttpResponse('ok')
+
+
 def post_flow_report(request):
     """Store and process flow_report after a task is solved.
 
     POST params:
         task-instance-id: int,
-        given-up: bool,
         flow-report:  0=unknown, 1=very_difficult, 2=difficult, 3=just_right, 4=easy
     """
     if request.method != "POST":
@@ -86,6 +103,5 @@ def post_flow_report(request):
     result = practice_service.process_flow_report(
             student=request.user,
             task_instance_id=data['task-instance-id'],
-            given_up=data['given-up'],
             reported_flow=data.get('flow-report'))
     return HttpResponse('ok')

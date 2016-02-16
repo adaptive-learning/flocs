@@ -48,7 +48,7 @@ angular.module('flocs.practice')
 
   function taskAttempted(attemptResult) {
     if (attemptResult.solved) {
-      taskCompletionReporting().then(reportFilled, reportClosed);
+      taskCompletionReporting().then(reportFilled);
     }
   }
 
@@ -65,19 +65,9 @@ angular.module('flocs.practice')
     //return fillingPromise;
   }
 
-  /**
-   * Filling the report completes the task
-   */
   function reportFilled(report) {
+    // filling the report completes the task
     practiceService.taskCompleted(report);
-  }
-
-  /**
-   * If the report dialog is closed, continue with the current task
-   */
-  function reportClosed() {
-    console.log('report closed');
-    // continue practicing without sending final report
   }
 
   function giveUp() {

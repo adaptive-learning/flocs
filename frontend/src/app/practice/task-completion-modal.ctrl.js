@@ -11,6 +11,5 @@ angular.module('flocs.user')
   };
 
   $scope.evaluation = practiceService.attemptEvaluation;
-
 });
 

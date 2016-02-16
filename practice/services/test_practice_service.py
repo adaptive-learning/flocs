@@ -80,7 +80,6 @@ class PracticeServiceTest(TestCase):
         practice_service.process_flow_report(
                 student=self.student,
                 task_instance_id=1,
-                given_up=False,
                 reported_flow=FlowRating.EASY)
         task_instance = TaskInstanceModel.objects.get(id=1)
         skill_after_report = StudentModel.objects.get(user_id=student.pk).programming
@@ -89,17 +88,18 @@ class PracticeServiceTest(TestCase):
         self.assertGreater(skill_after_report, skill_before_report)
         self.assertLess(difficulty_after_report, difficulty_before_report)
 
-    def test_process_flow_report_given_up(self):
+    def test_process_giveup_report(self):
         TaskModel.objects.create(id=1)
         TasksDifficultyModel.objects.create(task_id=1, programming=-1.0)
         TaskInstanceModel.objects.create(id=1, task_id=1, student=self.student, predicted_flow=1.0)
         student = StudentModel.objects.create(user=self.student, programming=1.0)
         skill_before_report = student.programming
-        practice_service.process_flow_report(
+        practice_service.process_giveup_report(
                 student=self.student,
                 task_instance_id=1,
-                given_up=True)
+                time_spent=987)
         task_instance = TaskInstanceModel.objects.get(id=1)
         self.assertEqual(task_instance.reported_flow, FlowRating.VERY_DIFFICULT)
+        self.assertEqual(task_instance.time_spent, 987)
         skill_after_report = StudentModel.objects.get(user_id=student.pk).programming
         self.assertLess(skill_after_report, skill_before_report)

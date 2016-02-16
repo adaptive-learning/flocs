@@ -13,15 +13,17 @@
   </div>
 
   <div class="modal-body">
-    Získal jsi {{evaluation.earnedCredits}} kredit/y/ů!
+    <div ng-show="evaluation.earnedCredits != 0">
+      Získal jsi {{evaluation.earnedCredits}} kredit/y/ů!
+    </div>
   </div>
 
   <div class="modal-footer">
     <div class="flow-report-form">
       <p>Jak těžká pro tebe úloha byla?</p>
-      <button type="button" class="btn btn-danger" ng-click="reportFlow(2)">Těžká</button>
-      <button type="button" class="btn btn-success" ng-click="reportFlow(3)">Akorát</button>
       <button type="button" class="btn btn-info" ng-click="reportFlow(4)">Lehká</button>
+      <button type="button" class="btn btn-success" ng-click="reportFlow(3)">Akorát</button>
+      <button type="button" class="btn btn-danger" ng-click="reportFlow(2)">Těžká</button>
     <div>
   </div>
 

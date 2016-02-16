@@ -103,7 +103,6 @@ def process_attempt_report(student, report):
     task_instance_id = report['task-instance-id']
     attempt_count = report['attempt']
     solved = report['solved']
-    given_up = report['given-up']
     time = report['time']
 
     logger.info("Reporting attempt for student %s with result %s", student.id, solved)
@@ -128,6 +127,7 @@ def process_attempt_report(student, report):
     student_task_info = StudentTaskInfoModel.objects.get_or_create(student=student, task=task)[0]
     solved_before = student_task_info.last_solved_instance is not None
     student_task_info.update(task_instance)
+    student_task_info.save()
 
     credits = 0
     if solved:
@@ -143,11 +143,19 @@ def process_attempt_report(student, report):
     return (task_solved_first_time, credits)
 
 
-def process_flow_report(student, task_instance_id, given_up=False, reported_flow=None):
+def process_giveup_report(student, task_instance_id, time_spent):
+    task_instance = TaskInstanceModel.objects.get(id=task_instance_id)
+    if student.id != task_instance.student.id:
+        raise ValueError("Report doesn't belong to the student.")
+    task_instance.update_after_giveup(time_spent=time_spent)
+    task_instance.save()
+    reported_flow = FlowRating.VERY_DIFFICULT
+    process_flow_report(student, task_instance_id, reported_flow)
+
+
+def process_flow_report(student, task_instance_id, reported_flow=None):
     """Process reported flow after the task completion (or giving up)
     """
-    if given_up:
-        reported_flow = FlowRating.VERY_DIFFICULT
     if not reported_flow:
         return
     task_instance = TaskInstanceModel.objects.get(id=task_instance_id)

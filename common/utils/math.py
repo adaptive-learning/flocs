@@ -1,6 +1,10 @@
 """
 Math utilities
 """
+from math import exp
+
+def sigmoid(x):
+    return 1 / (1 + exp(-x))
 
 def dict_product(dict1, dict2):
     """

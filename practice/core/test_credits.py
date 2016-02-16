@@ -1,4 +1,5 @@
 from django.test import SimpleTestCase
+from unittest import skipIf
 from .credits import difficulty_to_credits, MAX_CREDITS
 
 
@@ -29,3 +30,10 @@ class CreditsTest(SimpleTestCase):
     def test_average_difficulty_to_credits(self):
         self.assertEquals(difficulty_to_credits(0), MAX_CREDITS / 2)
         self.assertEquals(difficulty_to_credits(-0.1), MAX_CREDITS / 2)
+
+    @skipIf(True, 'prints overview table')
+    def test_print_credits(self):
+        print('||\nDifficulty -> Credits')
+        for difficulty in [0.1 * n for n in range(-10, 11)]:
+            print('{d:+.1f} -> {c}'.format(d=difficulty, c=difficulty_to_credits(difficulty)))
+        print(difficulty_to_credits(-0.95), difficulty_to_credits(-0.88))

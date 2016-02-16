@@ -11,6 +11,7 @@ angular.module('flocs.services')
     gettingTaskById: gettingTaskById,
     sendingAttemptReport: sendingAttemptReport,
     sendingFlowReport: sendingFlowReport,
+    sendingGiveUpReport: sendingGiveUpReport,
   };
 
   // private implementation
@@ -35,9 +36,6 @@ angular.module('flocs.services')
       });
   }
 
-  /**
-   * Send results of an attempt to server
-   */
   function sendingAttemptReport(report) {
     return $http.post('/api/practice/attempt-report', report)
       .then(function(response) {
@@ -45,13 +43,11 @@ angular.module('flocs.services')
       });
   }
 
-  /**
-   * Send a flow report to server
-   */
+  function sendingGiveUpReport(report) {
+    return $http.post('/api/practice/giveup-report', report);
+  }
+
   function sendingFlowReport(report) {
-    return $http.post('/api/practice/flow-report', report)
-      .then(function(response) {
-        return response.data;
-      });
+    return $http.post('/api/practice/flow-report', report);
   }
 });

@@ -1,7 +1,8 @@
-from common.utils.activation import activation, AMPLITUDE
 from math import ceil
+from common.utils.math import sigmoid
 
 MAX_CREDITS = 10
+SLOPE = 2.4
 
 def difficulty_to_credits(difficulty):
     """
@@ -9,6 +10,6 @@ def difficulty_to_credits(difficulty):
     Assumes that difficulty is approx. normally distributed around 0 with
     standard deviation approx. 1.
     """
-    credits_ratio = (activation(difficulty) + AMPLITUDE) / (2 * AMPLITUDE)
-    credits = ceil(credits_ratio * MAX_CREDITS)
+    credits_value = sigmoid(SLOPE * difficulty) * MAX_CREDITS
+    credits = ceil(credits_value)
     return credits
