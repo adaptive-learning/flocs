@@ -181,7 +181,7 @@ LOGGING = {
     },
     'handlers': {
         'console': {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
@@ -211,17 +211,17 @@ LOGGING = {
     'loggers': {
         'feedback': {
             'handlers': ['feedback-file'],
-            'level': 'INFO',
+            'level': 'DEBUG',
             'propagate': True,
         },
         'practice': {
             'handlers': ['practice-file'],
-            'level': 'INFO',
+            'level': 'DEBUG',
             'propagate': True
             },
         'django.request' : {
             'handlers': ['requests-file', 'mail-admins'],
-            'level': 'INFO',
+            'level': 'DEBUG',
             'propagate': True
         }
     }
