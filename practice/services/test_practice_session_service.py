@@ -31,15 +31,34 @@ class PracticeSessionServiceTest(TestCase):
         # assert again
         self.assertEquals(2, sess.task_counter)
 
+        # set last task
+        sess.task_counter = service.TASKS_IN_SESSION
+        service.next_task_in_session(self.student)
 
-    def get_task_in_session(self):
+        # assert new session was created
+        self.student.session != sess
+        self.assertEquals(1, self.student.session.task_counter)
+
+    def test_get_task_in_session(self):
         # set up
         sess = PracticeSession.objects.create()
         sess.task_counter = 6
-        student.session = sess
+        self.student.session = sess
 
         # ask for task counter
         task_counter = service.get_task_in_session(self.student)
 
         # assert we picked the right session
         self.assertEquals(6, task_counter)
+
+    def test_end_session(self):
+        # set up
+        sess = PracticeSession.objects.create()
+        self.student.session = sess
+
+        # end session
+        service.end_session(self.student)
+
+        # assert it has really ended
+        retrieved_student = StudentModel.objects.get(pk = self.student.pk)
+        self.assertIsNone(retrieved_student.session)

@@ -6,6 +6,7 @@ from django.test import TestCase
 from tasks.models import TaskModel
 from practice.models import TasksDifficultyModel
 from practice.models import TaskInstanceModel
+from practice.models import StudentModel
 from . import practice_service
 
 
@@ -15,6 +16,7 @@ class PracticeServiceTest(TestCase):
 
     def setUp(self):
         self.student = User.objects.create()
+        self.student_model = StudentModel.objects.create(user_id = self.student.pk)
 
     def test_get_next_task(self):
         stored_task = TaskModel.objects.create(maze_settings="{}",
@@ -26,6 +28,8 @@ class PracticeServiceTest(TestCase):
         self.assertEquals({}, retrieved_task['task']['maze-settings'])
         self.assertEquals(TaskInstanceModel.objects.first().id,
                 retrieved_task['task-instance-id'])
+        student_model = StudentModel.objects.get(user_id=self.student.pk)
+        self.assertEquals(student_model.session.task_counter, retrieved_task['task_in_session'])
 
     def test_no_task_available(self):
         # if there are no tasks available, task_servise should raise

@@ -9,9 +9,11 @@ from tasks.models import TaskModel
 from practice.models.practice_context import create_practice_context
 from practice.models import TaskInstanceModel
 from practice.models import StudentTaskInfoModel
+from practice.models import StudentModel
 from practice.models.task_instance import FlowRating
 from practice.services.parameters_update import update_parameters
 from practice.services.instructions_service import get_instructions
+from practice.services import practice_session_service
 from practice.core.credits import difficulty_to_credits
 from practice.core.flow_prediction import predict_flow
 from practice.core.task_selection import ScoreTaskSelector, IdSpecifidedTaskSelector
@@ -49,11 +51,15 @@ def get_task(student, task_selector):
     if not task_ids:
         raise LookupError('No tasks available.')
 
+    # set next task in session
+    student_model = StudentModel.objects.get(user_id=student.pk)
+    practice_session_service.next_task_in_session(student_model)
+
     task_id = task_selector.select(task_ids, student.id, practice_context)
     predicted_flow = predict_flow(student.id, task_id, practice_context)
     task = TaskModel.objects.get(pk=task_id)
     task_instance = TaskInstanceModel.objects.create(student=student,
-            task=task, predicted_flow=predicted_flow)
+            task=task, predicted_flow=predicted_flow, session=student_model.session)
     student_task_info = StudentTaskInfoModel.objects.get_or_create(
             student=student, task=task)[0]
     student_task_info.last_instance = task_instance
@@ -65,6 +71,7 @@ def get_task(student, task_selector):
     task_instance_dictionary = {
         'task-instance-id': task_instance.pk,
         'task': task_dictionary,
+        'task_in_session' : student_model.session.task_counter,
         'instructions': instructions
     }
     logger.info("Task %s successfully picked for student %s", task_id, student.id)
