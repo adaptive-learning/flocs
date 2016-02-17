@@ -48,6 +48,16 @@ angular.module('flocs.services')
   }
 
   function sendingFlowReport(report) {
+    report['flow-report'] = flowRatingToNumber(report['flow-report']);
     return $http.post('/api/practice/flow-report', report);
+  }
+
+  function flowRatingToNumber(rating) {
+    switch (rating) {
+      case 'difficult': return 2;
+      case 'right': return 3;
+      case 'easy': return 4;
+      default: throw "Unknown flow rating: " + rating;
+    }
   }
 });
