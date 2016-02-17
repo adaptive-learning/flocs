@@ -13,6 +13,7 @@
     "JS-Interpreter": "https://github.com/NeilFraser/JS-Interpreter.git#c82c57f010",
     "angular-bootstrap": "~0.14.3",
     "angular-spinkit": "~0.3.3",
-    "angular-translate": "~2.8.1"
+    "angular-translate": "~2.9.1",
+    "angular-translate-interpolation-messageformat": "~2.9.1"
   }
 }

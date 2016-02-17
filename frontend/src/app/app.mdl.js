@@ -32,6 +32,7 @@ angular.module('flocs', [
 
   // States
   $stateProvider
+
     .state('home', {
       url: '/',
       templateUrl: 'home/home.tpl.html',
@@ -83,6 +84,7 @@ angular.module('flocs', [
 
 // localization
 .config(function($translateProvider, localeEn, localeCs) {
+  $translateProvider.useMessageFormatInterpolation();
   $translateProvider.useSanitizeValueStrategy('escapeParameters');
     // NOTE: If requested, it's possible to sanitize parameters or the
     // complete translation (needs angular-sanitize as a dependency,

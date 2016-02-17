@@ -31,14 +31,24 @@ angular.module('flocs.locales')
     LOGGED_USER_NEEDED: 'In order to make this page function properly you must first log in.'
   },
 
-  HOME: {
-    INTRO_TEXT: 'This is a first prototype of application for adaptive learning of programming.',
-  },
-
   FEEDBACK_MODAL: {
     MESSAGE_FIELD: 'Message:',
     EMAIL_FIELD: 'Your email address (optional):',
     SUCCESS_MESSAGE: 'Feedback received, thank you!',
     INVALID_MESSAGE: 'Invalid message!',
   },
+
+  HOME: {
+    INTRO_TEXT: 'This is a first prototype of application for adaptive learning of programming.',
+  },
+
+  TASK_COMPLETION: {
+    TASK_SOLVED: 'Task solved!',
+    CREDITS_INFO: 'You have earned {CREDITS, plural, one{1 credit} other{# credits} }.',
+    FLOW_QUESTION: 'How difficult was the task for you?',
+    EASY: 'Too Easy',
+    RIGHT: 'Just Right',
+    DIFFICULT: 'Too Difficult'
+  },
+
 });

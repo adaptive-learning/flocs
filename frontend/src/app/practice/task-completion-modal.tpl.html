@@ -9,21 +9,21 @@
           >
         <span aria-hidden="true">&times;</span>
       </button>
-      <h4 class="modal-title">Úloha vyřešena</h4>
+      <h4 class="modal-title" translate>TASK_COMPLETION.TASK_SOLVED</h4>
   </div>
 
   <div class="modal-body">
     <div ng-show="evaluation.earnedCredits != 0">
-      Získal jsi {{evaluation.earnedCredits}} kredit/y/ů!
+      <span translate="TASK_COMPLETION.CREDITS_INFO" translate-values="{CREDITS: evaluation.earnedCredits}"/>
     </div>
   </div>
 
   <div class="modal-footer">
     <div class="flow-report-form">
-      <p>Jak těžká pro tebe úloha byla?</p>
-      <button type="button" class="btn btn-info" ng-click="reportFlow(4)">Lehká</button>
-      <button type="button" class="btn btn-success" ng-click="reportFlow(3)">Akorát</button>
-      <button type="button" class="btn btn-danger" ng-click="reportFlow(2)">Těžká</button>
+      <p translate>TASK_COMPLETION.FLOW_QUESTION</p>
+      <button type="button" class="btn btn-info" ng-click="reportFlow(4)" translate>TASK_COMPLETION.EASY</button>
+      <button type="button" class="btn btn-success" ng-click="reportFlow(3)" translate>TASK_COMPLETION.RIGHT</button>
+      <button type="button" class="btn btn-danger" ng-click="reportFlow(2)" translate>TASK_COMPLETION.DIFFICULT</button>
     <div>
   </div>
 

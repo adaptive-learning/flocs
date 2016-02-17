@@ -61,7 +61,11 @@ module.exports = function (grunt) {
         'vendor/ngDialog/js/ngDialog.js',
         'vendor/angular-bootstrap/ui-bootstrap-tpls.js',
         'vendor/angular-spinkit/build/angular-spinkit.min.js',
-        'vendor/angular-translate/angular-translate.js'
+        'vendor/angular-translate/angular-translate.js',
+        'vendor/messageformat/messageformat.js',
+        'vendor/messageformat/locale/cs.js',
+        'vendor/messageformat/locale/en.js',
+        'vendor/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.min.js',
       ],
       css: [
         'vendor/bootstrap/dist/css/bootstrap.min.css',
