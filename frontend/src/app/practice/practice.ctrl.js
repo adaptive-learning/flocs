@@ -6,25 +6,6 @@ angular.module('flocs.practice')
 .controller('practiceCtrl', function ($scope, $timeout, ngDialog, $uibModal,
       $stateParams, practiceService, userService) {
 
-  // TODO: move it to a template and unhardcode report values
-  var template = '<div class=\"ngdialog-message\"> ' +
-    ' <h3>Výborně, vyřešil si úlohu!</h3> ' +
-    ' <h4>Jak těžká pro tebe byla?</h4> ' +
-    '</div>' +
-    '<div class="ngdialog-buttons">' +
-    '<button type="button" style="background-color: orangered" class="ngdialog-button ngdialog-button-primary" ng-click="confirm(2)">Těžká</button>' +
-    '<button type="button" style="background-color: #0040D0" class="ngdialog-button ngdialog-button-primary" ng-click="confirm(3)">Akorát</button>' +
-    '<button type="button" style="background-color: #00A000" class="ngdialog-button ngdialog-button-primary" ng-click="confirm(4)">Lehká</button>' +
-    '</div>';
-
-  // report flow dialog options
-  var dialogOptions = {
-    template: template,
-    plain: true,
-    scope: $scope,
-    showclose: false
-  };
-
   function practiceTask(taskId) {
     $scope.taskPrepared = false;
     $scope.taskLoading = true;
@@ -61,8 +42,6 @@ angular.module('flocs.practice')
       controller: 'taskCompletionModalCtrl',
     });
     return modalInstance.result;
-    //var fillingPromise = ngDialog.openConfirm(dialogOptions);
-    //return fillingPromise;
   }
 
   function reportFilled(report) {
