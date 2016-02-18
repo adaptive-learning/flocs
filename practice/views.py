@@ -16,21 +16,32 @@ logger = LoggingUtils()
 
 @allow_lazy_user
 def get_next_task(request):
-    """Return response with next task.
+    """Return response with next task for the current user.
+
+    Returns:
+        task-instance-id: int
+        task: task object
+        instructions: list of instructions
     """
     logger.log_request(request)
-
-    # hack for testing purposes
-    #user, _ = User.objects.get_or_create(id=17, username='LosKarlos')
     user=request.user
-
     task = practice_service.get_next_task(student=user)
     return JsonResponse(task)
 
 
 @allow_lazy_user
 def get_task_by_id(request, id):
-    """Return response with requested task.
+    """Return specific task for the current user.
+
+    It's similar to api/practice/next-task/ except that it returns requested
+    task, not a task chosen by the system. It's also similar to
+    api/tasks/get-task/{taskId}, but adds user-specific informations, such as
+    task instance ID and instructions.
+
+    Returns:
+        task-instance-id: int
+        task : task object
+        instructions: list of instructions
     """
     logger.log_request(request)
     try:
@@ -43,7 +54,7 @@ def get_task_by_id(request, id):
 
 
 def post_attempt_report(request):
-    """Store and process task result.
+    """Store and process result of a single attempt
 
     POST params:
         task-instance-id: int,
@@ -93,7 +104,8 @@ def post_flow_report(request):
 
     POST params:
         task-instance-id: int,
-        flow-report:  0=unknown, 1=very_difficult, 2=difficult, 3=just_right, 4=easy
+        flow-report:  0=unknown, 1=very_difficult, 2=difficult,
+                      3=just_right, 4=easy
     """
     if request.method != "POST":
         return HttpResponseBadRequest('Has to be POST request.')

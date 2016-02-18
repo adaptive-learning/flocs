@@ -9,7 +9,9 @@ from tasks.services import task_service
 
 
 def get_all_tasks(request):
-    """Return response with all task.
+    """Return an object with IDs of all task.
+
+    Example: {"ids": [1, 2, 3]}
     """
     id_list = task_service.get_all_tasks()
     return JsonResponse({'ids' : id_list})
@@ -17,6 +19,22 @@ def get_all_tasks(request):
 
 def get_task_by_id(request, id):
     """Get task by its id.
+
+    Example of returned task:
+    {
+        "task-id": 1,
+        "title": "Three steps forward",
+        "maze-settings": {
+            "grid": [ ... ]
+            "hero": {
+                "position": [1, 4],
+                "direction": 0
+            }
+        },
+        "workspace-settings": {
+            "toolbox":  ["maze_move_forward", "maze_turn"]
+        }
+    }
     """
     try:
         task = task_service.get_task_by_id(id)

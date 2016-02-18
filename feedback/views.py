@@ -9,6 +9,16 @@ import json
 from .services import process_feedback_message
 
 def add_feedback_message(request):
+    """Process new feedback message.
+
+    POST params:
+        text: string
+        email: string
+
+    Returns:
+        success: bool
+        error-message (if success is False): string
+    """
     post_data = json.loads(request.body.decode('utf-8'))
     text = post_data.get('text')
     email = post_data.get('email')
