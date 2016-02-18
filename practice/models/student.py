@@ -68,6 +68,23 @@ class StudentModel(models.Model):
             default=INITIAL_CONCEPT_SKILL,
             verbose_name="Skill in pits concept")
 
+    total_credits = models.IntegerField(
+            verbose_name="total number of credits earned",
+            default=0)
+
+    free_credits = models.IntegerField(
+            verbose_name="number of free credits to spend",
+            default=0)
+
+    def earn_credits(self, credits):
+        self.total_credits += credits
+        self.free_credits += credits
+
+    def spend_credits(self, credits):
+        if self.free_credits < credits:
+            raise ValueError("Student doesn't have enough credits to spend.")
+        self.free_credits -= credits
+
     def get_skill_dict(self):
         """Return dictionary of skill factors for the student
 

@@ -67,6 +67,9 @@ class PracticeServiceTest(TestCase):
         self.assertAlmostEquals(0.22, task_instance.predicted_flow)
         self.assertEquals(12, task_instance.attempt_count)
         self.assertEquals(234, task_instance.time_spent)
+        student = StudentModel.objects.get(user_id=self.user.pk)
+        self.assertGreater(student.total_credits, 0)
+        self.assertEqual(student.total_credits, student.free_credits)
 
     def test_process_flow_report_solved_task(self):
         difficulty_before_report = 1.0

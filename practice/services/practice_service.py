@@ -83,13 +83,14 @@ def process_attempt_report(student, report):
 
     Args:
         student: user who took the attempt
-        report: dictionary with the fields specified in:
-            https://github.com/effa/flocs/wiki/Server-API#apipracticeattempt-report
-
+        report: dictionary with the following fiels:
+            - task-instance-id
+            - attempt
+            - solved
+            - time
     Returns:
         - whether the task is solved for the first time
         - number of earned-credits
-
     Raises:
         ValueError:
             - If the student argument is None.
@@ -138,6 +139,10 @@ def process_attempt_report(student, report):
         if not solved_before:
             task_difficulty = practice_context.get(FlowFactors.TASK_BIAS, task=task.id)
             credits = difficulty_to_credits(task_difficulty)
+            student_model = StudentModel.objects.get(user_id=student.pk)
+            student_model.earn_credits(credits)
+            student_model.save()
+
     task_solved_first_time = solved and not solved_before,
     logger.info("Reporting attempt was successful for student %s with result %s", student.id, solved)
     return (task_solved_first_time, credits)
