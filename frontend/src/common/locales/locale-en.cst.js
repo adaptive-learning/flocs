@@ -28,7 +28,9 @@ angular.module('flocs.locales')
     EMAIL: 'Email',
     SOLVED_TASKS_COUNT: 'Number of solved tasks',
     SOLVED_DISTINCT_TASKS_COUNT: 'Of which distinct',
-    LOGGED_USER_NEEDED: 'In order to make this page function properly you must first log in.'
+    LOGGED_USER_NEEDED: 'In order to make this page function properly you must first log in.',
+    TOTAL_CREDITS: 'Total credits',
+    FREE_CREDITS: 'Credits to spend',
   },
 
   FEEDBACK_MODAL: {

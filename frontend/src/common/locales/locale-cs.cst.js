@@ -43,7 +43,9 @@ angular.module('flocs.locales')
     EMAIL: 'E-mail',
     SOLVED_TASKS_COUNT: 'Počet vyřešených úloh',
     SOLVED_DISTINCT_TASKS_COUNT: 'Z toho unikátních úloh',
-    LOGGED_USER_NEEDED: 'Pro správné fungování této stránky je potřeba se prihlásit.'
+    LOGGED_USER_NEEDED: 'Pro správné fungování této stránky je potřeba se prihlásit.',
+    TOTAL_CREDITS: 'Kreditů celkem',
+    FREE_CREDITS: 'Neutracených kreditů',
   },
 
   TASK_COMPLETION: {
