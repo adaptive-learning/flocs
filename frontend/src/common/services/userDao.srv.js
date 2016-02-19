@@ -20,7 +20,7 @@ angular.module('flocs.services')
           'email': email,
           'password': passwd
       };
-      return $http.post('api/user/register', data);
+      return $http.post('/api/user/register', data);
     }
 
      function login (username,passwd){
@@ -28,23 +28,23 @@ angular.module('flocs.services')
 			'username':username,
 			'password':passwd
 		};
-		return $http.post('api/user/login',data)
+		return $http.post('/api/user/login',data)
             .success(function(response){
 		  return response;
 		});
 	}
 
     function loggedIn(){
-      return $http.get('api/user/loggedin');
+      return $http.get('/api/user/loggedin');
     }
 
     function logout(){
       // TODO: logout should not be GET!
-      return $http.get('api/user/logout');
+      return $http.get('/api/user/logout');
     }
 
     function getUserDetails(){
-      return $http.get('api/user/details')
+      return $http.get('/api/user/details')
         .then(function(response) {
           return response;
         });
