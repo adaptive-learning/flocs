@@ -54,19 +54,28 @@ angular.module('flocs', [
     .state('practice-start', {
       url: '/practice',
       templateUrl: 'practice/practice-start.tpl.html',
-      controller: 'practiceStartCtrl'
+      controller: 'practiceStartCtrl',
+      data: {
+          titleTraslationKey: 'PRACTICE'
+      }
     })
 
     .state('practice-task', {
       url: '/practice/task/{taskId:int}',
       templateUrl: 'practice/practice.tpl.html',
-      controller: 'practiceCtrl'
+      controller: 'practiceCtrl',
+      data: {
+          titleTraslationKey: 'PRACTICE'
+      }
     })
 
     .state('profile', {
       url: '/profile',
       templateUrl: 'profile/profile.tpl.html',
-      controller: 'profileCtrl'
+      controller: 'profileCtrl',
+      data: {
+          titleTraslationKey: 'PROFILE'
+      }
     })
 
     .state('404', {

@@ -15,6 +15,8 @@ angular.module('flocs.locales')
   LOG_OUT: 'Odhlásit se',
   PASSWORD: 'Heslo',
   PASSWORD_AGAIN: 'Heslo znovu',
+  PRACTICE: 'Trénink',
+  PROFILE: 'Profil',
   RUN_PROGRAM: 'Spusť program',
   SEND: 'Odeslat',
   SIGN_UP: 'Registrovat se',
@@ -22,7 +24,6 @@ angular.module('flocs.locales')
   TITLE: 'Adaptabilní programování',
   TOGGLE_NAVIGATION: 'Přepnout navigaci',
   USERNAME:  'Uživatelské jméno',
-  PROFILE: 'Profil',
 
   FEEDBACK_MODAL: {
     MESSAGE_FIELD: 'Zpráva:',

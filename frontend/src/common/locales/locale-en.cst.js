@@ -15,6 +15,8 @@ angular.module('flocs.locales')
   LOG_OUT: 'Log out',
   PASSWORD: 'Password',
   PASSWORD_AGAIN: 'Password again',
+  PRACTICE: 'Practice',
+  PROFILE: 'Profile',
   RUN_PROGRAM: 'Run program',
   SEND: 'Send',
   SIGN_UP: 'Sign up',
@@ -22,7 +24,7 @@ angular.module('flocs.locales')
   TITLE: 'Adaptive programming',
   TOGGLE_NAVIGATION: 'Toggle navigation',
   USERNAME:  'Username',
-  PROFILE: 'Profile',
+
   PROFILE_PAGE: {
     USERPROFILE: 'User profile',
     EMAIL: 'Email',
