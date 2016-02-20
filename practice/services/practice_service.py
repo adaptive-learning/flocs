@@ -71,7 +71,8 @@ def get_task(student, task_selector):
     task_instance_dictionary = {
         'task-instance-id': task_instance.pk,
         'task': task_dictionary,
-        'task_in_session' : student_model.session.task_counter,
+        'session' : {'task': student_model.session.task_counter, 
+                      'max': practice_session_service.TASKS_IN_SESSION},
         'instructions': instructions
     }
     logger.info("Task %s successfully picked for student %s", task_id, student.id)
