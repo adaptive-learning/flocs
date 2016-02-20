@@ -4,6 +4,7 @@
 angular.module('flocs.locales')
 .constant('localeEn', {
   ABOUT: 'About',
+  AUTHORS: 'About Authors',
   BLOCKS: 'Blocks',
   CLOSE: 'Close',
   EASIER_TASK: 'Easier task',
@@ -16,23 +17,37 @@ angular.module('flocs.locales')
   PASSWORD: 'Password',
   PASSWORD_AGAIN: 'Password again',
   PRACTICE: 'Practice',
+  PRIVACY: 'Privacy',
   PROFILE: 'Profile',
   RUN_PROGRAM: 'Run program',
   SEND: 'Send',
   SIGN_UP: 'Sign up',
   SPEED: 'Speed',
+  SUPPORT: 'Support',
   TITLE: 'Adaptive programming',
   TOGGLE_NAVIGATION: 'Toggle navigation',
   USERNAME:  'Username',
 
-  PROFILE_PAGE: {
-    USERPROFILE: 'User profile',
-    EMAIL: 'Email',
-    SOLVED_TASKS_COUNT: 'Number of solved tasks',
-    SOLVED_DISTINCT_TASKS_COUNT: 'Of which distinct',
-    LOGGED_USER_NEEDED: 'In order to make this page function properly you must first log in.',
-    TOTAL_CREDITS: 'Total credits',
-    FREE_CREDITS: 'Credits to spend',
+  ABOUT_PAGE: {
+    INTRO_TEXT: 'The goal of the project is efficient and entertaining learning of programming for everybody.',
+    AUTHORS_TEXT: 'Project is developed by <a href="http://www.fi.muni.cz/adaptivelearning/">Adaptive Learning research group</a>' +
+                  ' at <a href="http://www.fi.muni.cz/">Faculty of Informatics, Masaryk University</a>.' +
+                  ' Other projects by this group include:' +
+                  '  <ul>' +
+                  '    <li><a href="http://outlinemaps.org/">Outline Maps</a></li>' +
+                  '    <li><a href="https://practiceanatomy.com/">Practice Anatomy</a></li>' +
+                  '    <li><a href="http://tutor.fi.muni.cz/index.php?&changelang=en">Problem Solving Tutor</a></li>' +
+                  '  </ul>' +
+                  ' The application is developed by Jaroslav Čechák, Tomáš Effenberger and Jiří Mauritz.' +
+                  ' You can send suggestions and issues to' +
+                  ' <a href="mailto:adaptive-programming@googlegroups.com">adaptive-programming@googlegroups.com</a>.',
+    SUPPORT_TEXT: ' We would like to thank ' +
+                  ' <a href="http://www.fi.muni.cz/">Fakulty of Informatics, Masaryk University</a>' +
+                  ' and <a href="https://www.redhat.com">RedHat</a>' +
+                  ' for the support.',
+    PRIVACY_TEXT: ' We use data from the learning process to determine difficulty of tasks, to select appropriate tasks and for research purposes.' +
+                  ' All the data is processed anonymously. ' +
+                  ' Login data is only used to determine identity during repeated visits, otherwise we do not work with it.'
   },
 
   FEEDBACK_MODAL: {
@@ -44,6 +59,16 @@ angular.module('flocs.locales')
 
   HOME: {
     INTRO_TEXT: 'This is a first prototype of application for adaptive learning of programming.',
+  },
+
+  PROFILE_PAGE: {
+    USERPROFILE: 'User profile',
+    EMAIL: 'Email',
+    SOLVED_TASKS_COUNT: 'Number of solved tasks',
+    SOLVED_DISTINCT_TASKS_COUNT: 'Of which distinct',
+    LOGGED_USER_NEEDED: 'In order to make this page function properly you must first log in.',
+    TOTAL_CREDITS: 'Total credits',
+    FREE_CREDITS: 'Credits to spend',
   },
 
   TASK_COMPLETION: {

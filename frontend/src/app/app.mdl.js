@@ -20,6 +20,7 @@ angular.module('flocs', [
     'flocs.taskPreview',
     'flocs.user',
     'flocs.profile',
+    'flocs.about',
 ])
 
 // routes configuration
@@ -75,6 +76,14 @@ angular.module('flocs', [
       controller: 'profileCtrl',
       data: {
           titleTraslationKey: 'PROFILE'
+      }
+    })
+
+    .state('about', {
+      url: '/about',
+      templateUrl: 'about/about.tpl.html',
+      data: {
+          titleTraslationKey: 'ABOUT'
       }
     })
 
