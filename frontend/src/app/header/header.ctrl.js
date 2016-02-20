@@ -2,7 +2,8 @@
  * Header controller
  */
 angular.module('flocs.header')
-.controller('headerCtrl', function($scope, userService, $uibModal, localesService) {
+.controller('headerCtrl', function($scope, userService, $uibModal, localesService,
+      practiceService) {
 
   $scope.openLoginModal = function() {
     var modalInstance = $uibModal.open({
@@ -20,5 +21,6 @@ angular.module('flocs.header')
   $scope.currentLanguageCode = localesService.getLanguage();
   $scope.languageDomains = localesService.getLanguageDomains();
   $scope.user = userService.user;
+  $scope.session = practiceService.session;
 
 });

@@ -9,6 +9,12 @@ angular.module('flocs.practice')
   var taskStartTimestamp = null;
   var taskFinishedDeferred = null;
   var taskInstance = null;
+  var session = {
+    task: null,
+    max: null,
+    progress: null
+  };
+
   var attemptEvaluation = {
     earnedCredits: null
   };
@@ -21,6 +27,7 @@ angular.module('flocs.practice')
     taskCompleted: taskCompleted,
     giveUpTask: giveUpTask,
     attemptEvaluation: attemptEvaluation,
+    session: session,
   };
 
   function settingNextTask() {
@@ -54,6 +61,10 @@ angular.module('flocs.practice')
     newAttemptReport(newTask);
     taskStartTimestamp = Date.now();
     var instructionsText = taskInstance['instructions'];
+    var returnedSession = taskInstance['session'];
+    session.task = returnedSession.task;
+    session.max = returnedSession.max;
+    session.progress = (100 / session.max) * (session.task - 1) + 1;
     taskEnvironmentService.setTask(newTask, attemptFinished,
           instructionsText);
   }
@@ -133,5 +144,4 @@ angular.module('flocs.practice')
       'solved': false,
     };
   }
-
 });
