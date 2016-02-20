@@ -29,7 +29,7 @@ class PracticeServiceTest(TestCase):
         self.assertEquals(TaskInstanceModel.objects.first().id,
                 retrieved_task['task-instance-id'])
         student = StudentModel.objects.get(user_id=self.user.pk)
-        self.assertEquals(student.session.task_counter, retrieved_task['task_in_session'])
+        self.assertEquals(student.session.task_counter, retrieved_task['session']['task'])
 
     def test_no_task_available(self):
         # if there are no tasks available, task_servise should raise
