@@ -70,7 +70,7 @@ angular.module('flocs.locales')
   },
 
   PROFILE_PAGE: {
-    USERPROFILE: 'Uživateslký profil',
+    USERPROFILE: 'Uživatelský profil',
     EMAIL: 'E-mail',
     SOLVED_TASKS_COUNT: 'Počet vyřešených úloh',
     SOLVED_DISTINCT_TASKS_COUNT: 'Z toho unikátních úloh',
