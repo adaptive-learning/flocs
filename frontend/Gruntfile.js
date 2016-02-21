@@ -74,8 +74,13 @@ module.exports = function (grunt) {
         'vendor/ngDialog/css/ngDialog-theme-default.css',
         'vendor/angular-spinkit/build/angular-spinkit.min.css'
       ],
+      fonts: [
+        'vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.svg',
+        'vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf',
+        'vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.woff',
+        'vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2'
+      ],
       assets: [
-        //'vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.svg'
       ]
     },
 
@@ -104,6 +109,7 @@ module.exports = function (grunt) {
             expand: true,
             cwd: '<%= temp %>',
             src: [
+              'fonts/**',
               'assets/**',
               'css/**',
               'js/**',
@@ -125,6 +131,7 @@ module.exports = function (grunt) {
             expand: true,
             cwd: '<%= temp %>',
             src: [
+              'fonts/**',
               'assets/**',
               'css/vendor.css',
               'css/app.css',
@@ -155,6 +162,13 @@ module.exports = function (grunt) {
             cwd: '.',
             src: ['<%= vendor_files.assets %>'],
             dest: '<%= temp %>/assets/',
+            flatten: true
+          },
+          {
+            expand: true,
+            cwd: '.',
+            src: ['<%= vendor_files.fonts %>'],
+            dest: '<%= temp %>/fonts/',
             flatten: true
           }
        ]

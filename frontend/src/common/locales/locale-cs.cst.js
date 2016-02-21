@@ -10,6 +10,7 @@ angular.module('flocs.locales')
   EASIER_TASK: 'Jednodušší úlohu',
   ERROR_404: "Tato stránka neexistuje.",
   FEEDBACK: 'Napiš nám',
+  FREE_CREDITS: 'Neutracených kreditů',
   KEYS: 'Klíče',
   LEARN_PROGRAMMING: 'Nauč se programovat!',
   LOG_IN: 'Přihlásit se',
@@ -26,6 +27,7 @@ angular.module('flocs.locales')
   SUPPORT: 'Podpora',
   TITLE: 'Adaptabilní programování',
   TOGGLE_NAVIGATION: 'Přepnout navigaci',
+  TOTAL_CREDITS: 'Kreditů celkem',
   USERNAME:  'Uživatelské jméno',
 
   ABOUT_PAGE: {
@@ -73,8 +75,6 @@ angular.module('flocs.locales')
     SOLVED_TASKS_COUNT: 'Počet vyřešených úloh',
     SOLVED_DISTINCT_TASKS_COUNT: 'Z toho unikátních úloh',
     LOGGED_USER_NEEDED: 'Pro správné fungování této stránky je potřeba se prihlásit.',
-    TOTAL_CREDITS: 'Kreditů celkem',
-    FREE_CREDITS: 'Neutracených kreditů',
   },
 
   TASK_COMPLETION: {

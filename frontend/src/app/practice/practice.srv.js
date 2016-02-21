@@ -3,7 +3,7 @@
  * @ngInject
  */
 angular.module('flocs.practice')
-.factory('practiceService', function ($state, $timeout, $q, practiceDao, taskEnvironmentService) {
+.factory('practiceService', function ($state, $timeout, $q, practiceDao, taskEnvironmentService, userService) {
 
   var attemptReport = null;
   var taskStartTimestamp = null;
@@ -19,6 +19,14 @@ angular.module('flocs.practice')
     earnedCredits: null
   };
 
+  var practiceInfo = {
+    available: false,
+    totalCredits: null,
+    freeCredits: null,
+  };
+
+  userService.onUserChange(userChangeListener);
+
   // === public API ===
   return {
     settingTaskById: settingTaskById,
@@ -28,7 +36,26 @@ angular.module('flocs.practice')
     giveUpTask: giveUpTask,
     attemptEvaluation: attemptEvaluation,
     session: session,
+    practiceInfo: practiceInfo,
   };
+
+  function userChangeListener() {
+    if (userService.isUserAvailable()) {
+      updatePracticeInfo();
+    } else {
+      practiceInfo.available = false;
+    }
+  }
+
+  function updatePracticeInfo() {
+    practiceDao.gettingPracticeDetails().then(function(details) {
+      practiceInfo.available = true;
+      practiceInfo.totalCredits = details.totalCredits;
+      practiceInfo.freeCredits = details.freeCredits;
+    }, function() {
+      practiceInfo.available = false;
+    });
+  }
 
   function settingNextTask() {
     return practiceDao.gettingNextTask().then(function(newTaskInstance) {
@@ -56,6 +83,7 @@ angular.module('flocs.practice')
   }
 
   function startCurrentTask() {
+    userService.setUserAvailable();
     attemptReport = null;
     var newTask = taskInstance['task'];
     newAttemptReport(newTask);
@@ -117,6 +145,7 @@ angular.module('flocs.practice')
       attemptReport.solved = result.solved;
       practiceDao.sendingAttemptReport(attemptReport).then(function(response) {
         attemptEvaluation.earnedCredits = response['earned-credits'];
+        updatePracticeInfo();
         taskFinishedDeferred.notify(result);
       });
     }

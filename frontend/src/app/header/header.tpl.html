@@ -58,6 +58,31 @@
           </ul>
         </li>
 
+        <li ng-if="practiceInfo.available" uib-dropdown id="credtis-info" class="dropdown">
+          <a href id="credits-info-button"
+              uib-dropdown-toggle
+              class="dropdown-toggle"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+              >
+            <span class="glyphicon glyphicon-cd"></span> {{practiceInfo.freeCredits}} <span class="caret"></span>
+          </a>
+          <ul uib-dropdown-menu
+              class="dropdown-menu"
+              role="menu"
+              aria-labelled-by="credits-info-button"
+              >
+            <li class="dropdown-header">
+              <span translate>TOTAL_CREDITS</span>: {{practiceInfo.totalCredits}}
+            </li>
+            <li class="dropdown-header">
+              <span translate>FREE_CREDITS</span>: {{practiceInfo.freeCredits}}
+            </li>
+
+          </ul>
+        </li>
+
         <li ng-if="user.logged" uib-dropdown class="dropdown">
           <a href id="logged-menu-button"
               uib-dropdown-toggle

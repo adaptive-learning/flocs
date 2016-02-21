@@ -2,12 +2,17 @@
  * User service
  */
 angular.module('flocs.user')
-.factory('userService', function($q, $state, $uibModal, userDao) {
+.factory('userService', function($rootScope, $q, $state, $uibModal, userDao) {
     var user = {
       logged: false,
-      username: undefined
+      lazyLogged: false,
+      username: undefined,
     };
     var deferredUser = $q.defer();
+
+    function onUserChange(callback) {
+      $rootScope.$on("flocs:user:change", callback);
+    }
 
     function loggingIn(username, password) {
       return userDao.login(username, password).then(function(response) {
@@ -15,6 +20,7 @@ angular.module('flocs.user')
           // successfully logged in
           user.logged = true;
           user.username = username;
+          $rootScope.$emit("flocs:user:change");
         } else {
           return $q.reject('authentication failed');
         }
@@ -44,7 +50,9 @@ angular.module('flocs.user')
     function loggingOut() {
       return userDao.logout().then(function(){
         user.logged = false;
+        user.lazyLogged = false;
         $state.go('home', {});
+        $rootScope.$emit("flocs:user:change");
       });
     }
 
@@ -55,7 +63,9 @@ angular.module('flocs.user')
           // should be rejected not solved with data.errorMSG!!
           if(!response.data.errorMSG){
             user.logged = true;
+            user.lazyLogged = false;
             user.username = username;
+            $rootScope.$emit("flocs:user:change");
           }
           return response;
         });
@@ -72,19 +82,37 @@ angular.module('flocs.user')
     userDao.loggedIn().then(function(response) {
       user.username = response.data.username;
       user.logged = Boolean(user.username) && !response.data['is-lazy-user'];
+      user.lazyLogged = response.data['is-lazy-user'];
+      if (isUserAvailable()) {
+        $rootScope.$emit("flocs:user:change");
+      }
       deferredUser.resolve();
     }, function() {
       deferredUser.resolve();
     });
 
+    function isUserAvailable() {
+      return user.logged || user.lazyLogged;
+    }
+
+    function setUserAvailable() {
+      if (!user.logged && !user.lazyLogged) {
+        user.lazyLogged = true;
+        $rootScope.$emit("flocs:user:change");
+      }
+    }
+
     // public API
 	return {
       user: user,
+      setUserAvailable: setUserAvailable,
+      isUserAvailable: isUserAvailable,
       ensuringLoggedIn: ensuringLoggedIn,
       loggingIn: loggingIn,
       loggingOut: loggingOut,
       signingUp: signingUp,
       getUserDetails: getUserDetails,
+      onUserChange: onUserChange,
 	};
 
 });

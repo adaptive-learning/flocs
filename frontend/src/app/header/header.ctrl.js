@@ -22,5 +22,6 @@ angular.module('flocs.header')
   $scope.languageDomains = localesService.getLanguageDomains();
   $scope.user = userService.user;
   $scope.session = practiceService.session;
+  $scope.practiceInfo = practiceService.practiceInfo;
 
 });

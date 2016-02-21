@@ -10,6 +10,7 @@ import json
 
 from common.logUtils import LoggingUtils
 from practice.services import practice_service
+from practice.services import details
 
 logger = LoggingUtils()
 
@@ -117,3 +118,15 @@ def post_flow_report(request):
             task_instance_id=data['task-instance-id'],
             reported_flow=data.get('flow-report'))
     return HttpResponse('ok')
+
+
+def get_practice_details(request):
+    """Get information about practice and skill of current user.
+
+    Returns:
+        - total-credits
+        - free-credits
+    """
+    logger.log_request(request)
+    details_dict = details.get_practice_details(user=request.user)
+    return JsonResponse(details_dict)

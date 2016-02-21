@@ -9,6 +9,7 @@ angular.module('flocs.services')
   return {
     gettingNextTask: gettingNextTask,
     gettingTaskById: gettingTaskById,
+    gettingPracticeDetails: gettingPracticeDetails,
     sendingAttemptReport: sendingAttemptReport,
     sendingFlowReport: sendingFlowReport,
     sendingGiveUpReport: sendingGiveUpReport,
@@ -34,6 +35,18 @@ angular.module('flocs.services')
       .then(function(response) {
         return response.data;
       });
+  }
+
+  function gettingPracticeDetails() {
+    return $http.get('/api/practice/practice-details').then(parseResponse);
+
+    function parseResponse(response) {
+      var practiceDetails = {
+        totalCredits: response.data['total-credits'],
+        freeCredits: response.data['free-credits'],
+      };
+      return practiceDetails;
+    }
   }
 
   function sendingAttemptReport(report) {
