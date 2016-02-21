@@ -3,7 +3,7 @@
  */
 angular.module('flocs.header')
 .controller('headerCtrl', function($scope, userService, $uibModal, localesService,
-      practiceService) {
+      practiceService, $state) {
 
   $scope.openLoginModal = function() {
     var modalInstance = $uibModal.open({
@@ -23,5 +23,6 @@ angular.module('flocs.header')
   $scope.user = userService.user;
   $scope.session = practiceService.session;
   $scope.practiceInfo = practiceService.practiceInfo;
+  $scope.$state = $state;
 
 });
