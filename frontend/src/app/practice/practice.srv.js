@@ -12,7 +12,8 @@ angular.module('flocs.practice')
   var session = {
     task: null,
     max: null,
-    progress: null
+    progress: null,
+    active: false
   };
 
   var attemptEvaluation = {
@@ -64,6 +65,11 @@ angular.module('flocs.practice')
     return practiceDao.gettingNextTask().then(function(newTaskInstance) {
       taskInstance = newTaskInstance;
       var newTaskId = taskInstance.task['task-id'];
+      var returnedSession = taskInstance['session'];
+      session.task = returnedSession.task;
+      session.max = returnedSession.max;
+      session.progress = (100 / session.max) * (session.task - 1) + 1;
+      session.active = true;
       $state.go('practice-task', {'taskId': newTaskId});
     });
   }
@@ -72,6 +78,7 @@ angular.module('flocs.practice')
     if (taskInstance === null || taskInstance.task['task-id'] != taskId) {
       return practiceDao.gettingTaskById(taskId).then(function (newTaskInstance) {
         taskInstance = newTaskInstance;
+        session.active = false;
         startCurrentTask();
         return taskInstance;
       }, function() {
@@ -92,10 +99,6 @@ angular.module('flocs.practice')
     newAttemptReport(newTask);
     taskStartTimestamp = Date.now();
     var instructionsText = taskInstance['instructions'];
-    var returnedSession = taskInstance['session'];
-    session.task = returnedSession.task;
-    session.max = returnedSession.max;
-    session.progress = (100 / session.max) * (session.task - 1) + 1;
     taskEnvironmentService.setTask(newTask, attemptFinished,
           instructionsText);
   }

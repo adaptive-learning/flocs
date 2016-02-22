@@ -26,7 +26,19 @@ def get_task_by_id(student, task_id):
 
 
 def get_next_task(student):
-    return get_task(student, ScoreTaskSelector())
+    # set next task in session
+    student_model = StudentModel.objects.get_or_create(user_id=student.pk)[0]
+    practice_session_service.next_task_in_session(student_model)
+
+    taskInfo = get_task(student, ScoreTaskSelector())
+    # add info about session
+    taskInfo['session'] = {
+            'task': student_model.session.task_counter,
+            'max': practice_session_service.TASKS_IN_SESSION
+    }
+    return taskInfo
+
+
 
 
 def get_task(student, task_selector):
@@ -51,10 +63,7 @@ def get_task(student, task_selector):
     if not task_ids:
         raise LookupError('No tasks available.')
 
-    # set next task in session
     student_model = StudentModel.objects.get(user_id=student.pk)
-    practice_session_service.next_task_in_session(student_model)
-
     task_id = task_selector.select(task_ids, student.id, practice_context)
     predicted_flow = predict_flow(student.id, task_id, practice_context)
     task = TaskModel.objects.get(pk=task_id)
@@ -71,8 +80,6 @@ def get_task(student, task_selector):
     task_instance_dictionary = {
         'task-instance-id': task_instance.pk,
         'task': task_dictionary,
-        'session' : {'task': student_model.session.task_counter, 
-                      'max': practice_session_service.TASKS_IN_SESSION},
         'instructions': instructions
     }
     logger.info("Task %s successfully picked for student %s", task_id, student.id)

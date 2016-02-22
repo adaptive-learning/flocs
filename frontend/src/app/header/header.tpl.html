@@ -14,7 +14,7 @@
               <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" ui-sref="home" translate>TITLE</a>
-      <span ng-show="$state.is('practice-task')">
+      <span ng-show="$state.is('practice-task') && session.active">
         <div id="session-bar" class="nav navbar-text progress pull-down">
           <div ng-style="progressBar" class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
                aria-valuemin="0" aria-valuemax="7" style="width: {{session.progress}}%">
