@@ -9,7 +9,7 @@ angular.module('flocs.services')
         login : login,
         loggedIn : loggedIn,
         logout: logout,
-        getUserDetails: getUserDetails
+        gettingUserDetails: gettingUserDetails,
 	};
 
 	function signingUp(username, email, passwd) {
@@ -43,11 +43,10 @@ angular.module('flocs.services')
       return $http.get('/api/user/logout');
     }
 
-    function getUserDetails(){
+    function gettingUserDetails() {
       return $http.get('/api/user/details')
         .then(function(response) {
-          return response;
+          return response.data;
         });
     }
-
 });

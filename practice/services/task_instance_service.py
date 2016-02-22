@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 def get_solved_tasks_count(student):
     """
     Returns number of successfully solved tasks by the given user.
-    
+
     Args:
         student: student to whom we search solved tasks
 
@@ -30,7 +30,7 @@ def get_solved_tasks_count(student):
 def get_solved_distinct_tasks_count(student):
     """
     Returns number of successfully solved distinct tasks by the given user.
-    
+
     Args:
         student: student to whom we search solved tasks
 

@@ -54,7 +54,7 @@ class TaskInstanceModel(models.Model):
             default=FlowRating.UNKNOWN)
 
     # predicted flow value
-    predicted_flow = models.FloatField()
+    predicted_flow = models.FloatField(default=None, null=True)
 
     # how many attempts did the user take (attempt = running a program)
     attempt_count = models.IntegerField(

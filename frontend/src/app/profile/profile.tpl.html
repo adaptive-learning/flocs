@@ -1,26 +1,36 @@
 <div class="jumbotron">
-  <div class="container" ng-if="data.details">
+  <div class="container">
     <h2 translate>PROFILE_PAGE.USERPROFILE</h2>
+
+    <div ng-if="user.logged">
     <p>
-    <dl class="dl-horizontal">
-      <dt translate>USERNAME</dt>
-      <dd>{{data.details.username}}</dd>
-      <dt translate>PROFILE_PAGE.EMAIL</dt>
-      <dd>{{data.details.email}}</dd>
-      <dt translate>PROFILE_PAGE.SOLVED_TASKS_COUNT</dt>
-      <dd>{{data.details.solved_task_count}}</dd>
-      <dt translate>PROFILE_PAGE.SOLVED_DISTINCT_TASKS_COUNT</dt>
-      <dd>{{data.details.solved_distinct_task_count}}</dd>
-      <dt translate>TOTAL_CREDITS</dt>
-      <dd>{{data.details["practice-info"]["total-credits"]}}</dd>
-      <dt translate>FREE_CREDITS</dt>
-      <dd>{{data.details["practice-info"]["free-credits"]}}</dd>
-    </dl>
+      <dl class="dl-horizontal">
+        <dt translate>USERNAME</dt>
+        <dd>{{user.username}}</dd>
+        <dt translate>PROFILE_PAGE.EMAIL</dt>
+        <dd>{{user.email}}</dd>
+      </dl>
     </p>
-  </div>
-  <div class="container" ng-if="!data.details">
-    <p translate>
-    PROFILE_PAGE.LOGGED_USER_NEEDED
+    </div>
+
+    <div ng-if="!user.logged">
+      <p translate>
+      PROFILE_PAGE.LOGGED_USER_NEEDED
+      </p>
+    </div>
+
+    <div ng-if="practiceInfo.available">
+    <p>
+      <dl class="dl-horizontal">
+        <dt translate>PROFILE_PAGE.SOLVED_TASKS_COUNT</dt>
+        <dd>{{practiceInfo.solvedTasksCount}}</dd>
+        <dt translate>TOTAL_CREDITS</dt>
+        <dd>{{practiceInfo.totalCredits}}</dd>
+        <dt translate>FREE_CREDITS</dt>
+        <dd>{{practiceInfo.freeCredits}}</dd>
+      </dl>
     </p>
+    </div>
+
   </div>
 </div>

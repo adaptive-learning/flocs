@@ -7,6 +7,7 @@ angular.module('flocs.user')
       logged: false,
       lazyLogged: false,
       username: undefined,
+      email: undefined,
     };
     var deferredUser = $q.defer();
 
@@ -71,8 +72,12 @@ angular.module('flocs.user')
         });
     }
 
-    function getUserDetails() {
-      return userDao.getUserDetails();
+    function gettingUserDetails() {
+      return userDao.gettingUserDetails().then(function(details) {
+        user.username = details.username;
+        user.email = details.email;
+        return user;
+      });
     }
 
     // first find whether user is already logged in (this is necessary e.g.
@@ -111,7 +116,7 @@ angular.module('flocs.user')
       loggingIn: loggingIn,
       loggingOut: loggingOut,
       signingUp: signingUp,
-      getUserDetails: getUserDetails,
+      gettingUserDetails: gettingUserDetails,
       onUserChange: onUserChange,
 	};
 

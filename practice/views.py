@@ -2,6 +2,7 @@
 """
 
 from lazysignup.decorators import allow_lazy_user
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import JsonResponse, HttpResponse
 from django.http import HttpResponseBadRequest
@@ -120,13 +121,21 @@ def post_flow_report(request):
     return HttpResponse('ok')
 
 
+@login_required
 def get_practice_details(request):
     """Get information about practice and skill of current user.
 
     Returns:
         - total-credits
         - free-credits
+        - solved-tasks-count
     """
+    print('jsem tady nebo ne')
     logger.log_request(request)
-    details_dict = details.get_practice_details(user=request.user)
+    practice_details = details.get_practice_details(user=request.user)
+    details_dict = {
+        'total-credits': practice_details.total_credits,
+        'free-credits': practice_details.free_credits,
+        'solved-tasks-count': practice_details.solved_tasks_count
+    }
     return JsonResponse(details_dict)

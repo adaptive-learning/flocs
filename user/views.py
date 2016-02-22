@@ -4,9 +4,6 @@ from lazysignup.utils import is_lazy_user
 import json
 
 from user.services import UserManager
-from practice.services.details import get_practice_details
-from practice.services.task_instance_service import get_solved_tasks_count, \
-        get_solved_distinct_tasks_count
 
 def login(request):
     if request.method != "POST":
@@ -74,17 +71,10 @@ def loggedIn(request):
     return JsonResponse(response)
 
 def details(request):
-    details_dict = {}
-
+    if not request.user.is_authenticated() or is_lazy_user(request.user):
+        return HttpResponseBadRequest('Requires logged-in user.')
     user = UserManager.getUserInformation(request)
+    details_dict = {}
     details_dict["username"] = user.username
     details_dict["email"] = user.email
-
-    details_dict["solved_task_count"] = len(
-        get_solved_tasks_count(request.user)
-    )
-    details_dict["solved_distinct_task_count"] = len(
-        get_solved_distinct_tasks_count(request.user)
-    )
-    details_dict['practice-info'] = get_practice_details(user=request.user)
     return JsonResponse(details_dict)

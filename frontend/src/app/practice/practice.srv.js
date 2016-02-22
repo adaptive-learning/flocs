@@ -31,6 +31,7 @@ angular.module('flocs.practice')
   return {
     settingTaskById: settingTaskById,
     settingNextTask: settingNextTask,
+    gettingPracticeInfo: gettingPracticeInfo,
     practicingTask: practicingTask,
     taskCompleted: taskCompleted,
     giveUpTask: giveUpTask,
@@ -41,17 +42,19 @@ angular.module('flocs.practice')
 
   function userChangeListener() {
     if (userService.isUserAvailable()) {
-      updatePracticeInfo();
+      gettingPracticeInfo();
     } else {
       practiceInfo.available = false;
     }
   }
 
-  function updatePracticeInfo() {
-    practiceDao.gettingPracticeDetails().then(function(details) {
+  function gettingPracticeInfo() {
+    return practiceDao.gettingPracticeDetails().then(function(details) {
       practiceInfo.available = true;
       practiceInfo.totalCredits = details.totalCredits;
       practiceInfo.freeCredits = details.freeCredits;
+      practiceInfo.solvedTasksCount = details.solvedTasksCount;
+      return practiceInfo;
     }, function() {
       practiceInfo.available = false;
     });
@@ -145,7 +148,7 @@ angular.module('flocs.practice')
       attemptReport.solved = result.solved;
       practiceDao.sendingAttemptReport(attemptReport).then(function(response) {
         attemptEvaluation.earnedCredits = response['earned-credits'];
-        updatePracticeInfo();
+        gettingPracticeInfo();
         taskFinishedDeferred.notify(result);
       });
     }
