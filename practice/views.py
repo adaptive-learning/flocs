@@ -11,6 +11,7 @@ import json
 
 from common.logUtils import LoggingUtils
 from practice.services import practice_service
+from practice.services import practice_session_service
 from practice.services import details
 
 logger = LoggingUtils()
@@ -27,8 +28,8 @@ def get_next_task(request):
     """
     logger.log_request(request)
     user=request.user
-    task = practice_service.get_next_task(student=user)
-    return JsonResponse(task)
+    task_info = practice_service.get_next_task(student=user)
+    return JsonResponse(task_info_to_json(task_info))
 
 
 @allow_lazy_user
@@ -50,7 +51,7 @@ def get_task_by_id(request, id):
         task = practice_service.get_task_by_id(
                 student=request.user,
                 task_id=int(id))
-        return JsonResponse(task)
+        return JsonResponse(task_info_to_json(task))
     except LookupError:
         raise Http404('This task is not available.')
 
@@ -130,7 +131,6 @@ def get_practice_details(request):
         - free-credits
         - solved-tasks-count
     """
-    print('jsem tady nebo ne')
     logger.log_request(request)
     practice_details = details.get_practice_details(user=request.user)
     details_dict = {
@@ -139,3 +139,18 @@ def get_practice_details(request):
         'solved-tasks-count': practice_details.solved_tasks_count
     }
     return JsonResponse(details_dict)
+
+
+def task_info_to_json(task_info):
+    session = None
+    if task_info.session != None:
+        session = {
+                'task': task_info.session.task_counter,
+                'max': practice_session_service.TASKS_IN_SESSION
+                }
+    return {
+            'task-instance-id': task_info.task_instance.pk,
+            'task': task_info.task.to_json(),
+            'instructions': task_info.instructions,
+            'session': session
+            }

@@ -4,6 +4,7 @@ Main service functions of practice app.
 
 import logging
 
+from collections import namedtuple
 from common.flow_factors import FlowFactors
 from tasks.models import TaskModel
 from practice.models.practice_context import create_practice_context
@@ -20,25 +21,35 @@ from practice.core.task_selection import ScoreTaskSelector, IdSpecifidedTaskSele
 
 logger = logging.getLogger(__name__)
 
+TaskInfo = namedtuple('TaskInfo',
+        ['task_instance', 'task', 'instructions', 'session'])
 
 def get_task_by_id(student, task_id):
     return get_task(student, IdSpecifidedTaskSelector(task_id))
 
 
 def get_next_task(student):
-    # set next task in session
+    # ask if the student is in the middle of the session
     student_model = StudentModel.objects.get_or_create(user_id=student.pk)[0]
-    practice_session_service.next_task_in_session(student_model)
+    active_task = practice_session_service.get_active_task(student_model)
+    if active_task is None:
+        task_info = get_task(student, ScoreTaskSelector())
+        # set next task in session
+        practice_session_service.next_task_in_session(student_model, task_info.task)
+        task_info.task_instance.session = student_model.session
+        task_info.task_instance.save()
+    else:
+        task_info = get_task(student, IdSpecifidedTaskSelector(active_task.pk))
 
-    taskInfo = get_task(student, ScoreTaskSelector())
     # add info about session
-    taskInfo['session'] = {
-            'task': student_model.session.task_counter,
-            'max': practice_session_service.TASKS_IN_SESSION
-    }
-    return taskInfo
+    task_info_with_sess = TaskInfo(
+        task_instance = task_info.task_instance,
+        task = task_info.task,
+        instructions = task_info.instructions,
+        session = student_model.session
+    )
 
-
+    return task_info_with_sess
 
 
 def get_task(student, task_selector):
@@ -68,7 +79,7 @@ def get_task(student, task_selector):
     predicted_flow = predict_flow(student.id, task_id, practice_context)
     task = TaskModel.objects.get(pk=task_id)
     task_instance = TaskInstanceModel.objects.create(student=student,
-            task=task, predicted_flow=predicted_flow, session=student_model.session)
+            task=task, predicted_flow=predicted_flow)
     student_task_info = StudentTaskInfoModel.objects.get_or_create(
             student=student, task=task)[0]
     student_task_info.last_instance = task_instance
@@ -76,14 +87,14 @@ def get_task(student, task_selector):
 
     instructions = get_instructions(student, task)
 
-    task_dictionary = task.to_json()
-    task_instance_dictionary = {
-        'task-instance-id': task_instance.pk,
-        'task': task_dictionary,
-        'instructions': instructions
-    }
+    task_info = TaskInfo(
+        task_instance = task_instance,
+        task = task,
+        instructions = instructions,
+        session = None
+    )
     logger.info("Task %s successfully picked for student %s", task_id, student.id)
-    return task_instance_dictionary
+    return task_info
 
 
 def process_attempt_report(student, report):

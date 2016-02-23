@@ -22,14 +22,16 @@ class PracticeServiceTest(TestCase):
         stored_task = TaskModel.objects.create(maze_settings="{}",
                 workspace_settings='{"foo": "bar"}')
         TasksDifficultyModel.objects.create(task=stored_task)
-        retrieved_task = practice_service.get_next_task(student=self.user)
-        self.assertIsNotNone(retrieved_task)
-        self.assertEquals({"foo": "bar"}, retrieved_task['task']['workspace-settings'])
-        self.assertEquals({}, retrieved_task['task']['maze-settings'])
+        task_info = practice_service.get_next_task(student=self.user)
+        self.assertIsNotNone(task_info)
+        self.assertEquals('{"foo": "bar"}', task_info.task.workspace_settings)
+        self.assertEquals('{}', task_info.task.maze_settings)
         self.assertEquals(TaskInstanceModel.objects.first().id,
-                retrieved_task['task-instance-id'])
+                task_info.task_instance.pk)
         student = StudentModel.objects.get(user_id=self.user.pk)
-        self.assertEquals(student.session.task_counter, retrieved_task['session']['task'])
+        self.assertEquals(student.session, task_info.session)
+        task_instance = TaskInstanceModel.objects.get(student=self.user)
+        self.assertEquals(student.session, task_instance.session)
 
     def test_no_task_available(self):
         # if there are no tasks available, task_servise should raise
@@ -41,12 +43,13 @@ class PracticeServiceTest(TestCase):
         stored_task = TaskModel.objects.create(maze_settings="{}",
                 workspace_settings='{"foo": "bar"}')
         TasksDifficultyModel.objects.create(task=stored_task)
-        retrieved_task = practice_service.get_task_by_id(student=self.user, task_id=stored_task.pk)
-        self.assertIsNotNone(retrieved_task)
-        self.assertEquals({"foo": "bar"}, retrieved_task['task']['workspace-settings'])
-        self.assertEquals({}, retrieved_task['task']['maze-settings'])
+        task_info = practice_service.get_task_by_id(student=self.user, task_id=stored_task.pk)
+        self.assertIsNotNone(task_info)
+        self.assertEquals('{"foo": "bar"}', task_info.task.workspace_settings)
+        self.assertEquals('{}', task_info.task.maze_settings)
         self.assertEquals(TaskInstanceModel.objects.first().id,
-                retrieved_task['task-instance-id'])
+                task_info.task_instance.pk)
+        self.assertIsNone(task_info.session)
 
     def test_process_attempt_report(self):
         TaskModel.objects.create(id=1)
