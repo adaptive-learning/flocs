@@ -3,7 +3,7 @@ from django.http import HttpResponseBadRequest
 from lazysignup.utils import is_lazy_user
 import json
 
-from user.services import UserManager
+from user.services import user_service
 
 def login(request):
     if request.method != "POST":
@@ -23,7 +23,7 @@ def login(request):
         response['loggedIn'] = '0'
         response['msg'] = 'request doesnt contain password'
         return JsonResponse(response)
-    if UserManager.login(request=request, username=username, password=password):
+    if user_service.login(request=request, username=username, password=password):
         response['loggedIn'] = '1'
         response['username'] = username
     else:
@@ -48,7 +48,7 @@ def register(request):
         response['registred'] = '0'
         response['errorMSG'] = 'request doesnt contain one of fields'
         return JsonResponse(response)
-    UserManager.register(request, username, firstname, lastname, email, passwd)
+    user_service.register(request, username, firstname, lastname, email, passwd)
 
 
     response['registred'] = True
@@ -56,7 +56,7 @@ def register(request):
 
 
 def logout(request):
-    UserManager.logout(request)
+    user_service.logout(request)
     response = {}
     response['data'] = True
     return JsonResponse(response)
@@ -64,7 +64,7 @@ def logout(request):
 
 def loggedIn(request):
     response = {}
-    response['username'] = UserManager.loggedIn(request)
+    response['username'] = user_service.loggedIn(request)
         # TODO: refactor - not clear why loggedIn should return username, use
         # correct names and make it more explicit
     response['is-lazy-user'] = is_lazy_user(request.user)
@@ -73,7 +73,7 @@ def loggedIn(request):
 def details(request):
     if not request.user.is_authenticated() or is_lazy_user(request.user):
         return HttpResponseBadRequest('Requires logged-in user.')
-    user = UserManager.getUserInformation(request)
+    user = user_service.get_user_information(request)
     details_dict = {}
     details_dict["username"] = user.username
     details_dict["email"] = user.email

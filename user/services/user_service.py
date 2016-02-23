@@ -52,7 +52,7 @@ def loggedIn(request):
     else:
         return None
 
-def getUserInformation(request):
+def get_user_information(request):
     """
     Returns user with all the fields from the database.
 
