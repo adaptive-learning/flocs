@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from tasks.models import TaskModel
 from practice.models import StudentModel
+from practice.models import StudentTaskInfoModel
 from practice.models import TaskInstanceModel
 from practice.services import details
 
@@ -11,9 +12,9 @@ class DetailsServiceTest(TestCase):
     def setUp(self):
         self.user = User.objects.create()
         self.student = StudentModel.objects.create(user=self.user)
-        TaskModel.objects.create(id=1)
-        TaskModel.objects.create(id=2)
-        TaskModel.objects.create(id=3)
+        self.task1 = TaskModel.objects.create(id=1)
+        self.task2 = TaskModel.objects.create(id=2)
+        self.task3 = TaskModel.objects.create(id=3)
 
     def test_get_practice_details_no_solved_tasks(self):
         self.student.total_credits = 7
@@ -25,10 +26,20 @@ class DetailsServiceTest(TestCase):
         self.assertEqual(practice_details.solved_tasks_count, 0)
 
     def test_get_practice_details_with_solved_tasks(self):
-        TaskInstanceModel.objects.create(task_id=1, student=self.user, solved=True)
-        TaskInstanceModel.objects.create(task_id=1, student=self.user, solved=True)
-        TaskInstanceModel.objects.create(task_id=2, student=self.user, solved=True)
-        TaskInstanceModel.objects.create(task_id=3, student=self.user, solved=False)
+        instance1 = TaskInstanceModel.objects.create(task_id=1, student=self.user, solved=True)
+        instance2 = TaskInstanceModel.objects.create(task_id=1, student=self.user, solved=True)
+        instance3 = TaskInstanceModel.objects.create(task_id=2, student=self.user, solved=True)
+        instance4 = TaskInstanceModel.objects.create(task_id=3, student=self.user, solved=False)
+        info1 = StudentTaskInfoModel.objects.create(student=self.user, task=self.task1)
+        info2 =StudentTaskInfoModel.objects.create(student=self.user, task=self.task2)
+        info3 = StudentTaskInfoModel.objects.create(student=self.user, task=self.task3)
+        info1.update(instance1)
+        info1.update(instance2)
+        info2.update(instance3)
+        info3.update(instance4)
+        info1.save()
+        info2.save()
+        info3.save()
         practice_details = details.get_practice_details(self.user)
         self.assertEqual(practice_details.total_credits, 0)
         self.assertEqual(practice_details.free_credits, 0)

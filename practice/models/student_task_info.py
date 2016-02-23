@@ -27,6 +27,9 @@ class StudentTaskInfoModel(models.Model):
             null=True,
             default=None)
 
+    def is_solved(self):
+        return self.last_solved_instance is not None
+
     def update(self, new_instance):
         self.last_instance = new_instance
         if new_instance.solved:
