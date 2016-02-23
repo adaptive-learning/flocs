@@ -48,9 +48,13 @@ angular.module('flocs.workspace')
   function set(newSettings) {
     //console.log('workspaceService:set');
     settings = newSettings;
-    // make sure blocksLimit is not undefined
-    // +1 for the start block
-    settings.blocksLimit = (settings.blocksLimit + 1) || null;
+    if (!settings.blocksLimit) {
+      // make sure blocksLimit is not undefined
+      settings.blocksLimit = null;
+    } else {
+      // +1 for the start block
+      settings.blocksLimit += 1;
+    }
     reset();
   }
 
