@@ -25,6 +25,12 @@ TaskInfo = namedtuple('TaskInfo',
         ['task_instance', 'task', 'instructions', 'session'])
 
 def get_task_by_id(student, task_id):
+    # ask if the student is in the middle of the session
+    student_model = StudentModel.objects.get_or_create(user_id=student.pk)[0]
+    active_task = practice_session_service.get_active_task(student_model)
+    if active_task != None and active_task.pk == task_id:
+        return get_next_task(student)
+
     return get_task(student, IdSpecifidedTaskSelector(task_id))
 
 
