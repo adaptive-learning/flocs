@@ -14,22 +14,19 @@ def get_instructions(student, task):
     Returns list of instruction valid for the given student and task
 
     Args:
-        student: user to whom the instructions are ment
+        student: student to whom the instructions are ment
         task: task which needs these instructions
 
     Returns:
         list of strings with instructions
     """
-
-    skills = StudentModel.objects.get(user=student).get_skill_dict()
-
+    skills = student.get_skill_dict()
     difficulties = \
             TasksDifficultyModel.objects.get(task=task).get_difficulty_dict()
 
     instructions = [InstructionsModel.objects.get(
         flow_factor=InstructionsModel.GENERAL_COMMENT).get_text()
     ]
-
 
     for factor in FlowFactors.game_factors() + FlowFactors.concept_factors():
         #logger.info("Factor: %s, skill: %s, difficulty: %s", factor,\

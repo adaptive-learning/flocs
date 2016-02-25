@@ -28,7 +28,7 @@ def next_task_in_session(student, taskInstance):
     if session is None:
         session = create_session(taskInstance)
         logger.debug(('Session id {session_id}'
-                      ' created for student {student}').format( 
+                      ' created for student {student}').format(
                          session_id=session.pk, student=student))
     elif session.task_counter < TASKS_IN_SESSION:
         session.task_counter += 1
@@ -36,7 +36,7 @@ def next_task_in_session(student, taskInstance):
         session.save()
         logger.debug(('Session id {session_id}'
                       ' proceed to the next task with session number '
-                      '{counter}.').format( 
+                      '{counter}.').format(
                          session_id=session.pk, counter=session.task_counter))
     else:
         # student finished last task of the session, creating new one
@@ -81,8 +81,8 @@ def get_active_task_instance(session):
 def get_session(student):
     """
     Retrieve session for the given student.
-    If there is no such a session,  
-    
+    If there is no such a session,
+
     Returns:
         session
     """
@@ -107,12 +107,12 @@ def create_session(taskInstance):
     """
     # first close one, if exists
     # TODO: replace with session = get_session(taskInstance.student)
-    student_model = StudentModel.objects.get(user=taskInstance.student)
-    session = get_session(student_model)
+    student = taskInstance.student
+    session = get_session(student)
     if session is not None:
         end_session(session)
     # create
-    return PracticeSession.objects.create(student=student_model, last_task=taskInstance)
+    return PracticeSession.objects.create(student=student, last_task=taskInstance)
 
 
 def end_session(session):

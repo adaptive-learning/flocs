@@ -1,6 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
 from tasks.models import TaskModel
+from practice.models import StudentModel
 from practice.models import TaskInstanceModel
 
 class StudentTaskInfoModel(models.Model):
@@ -8,20 +8,20 @@ class StudentTaskInfoModel(models.Model):
     Persistent information about a student-task pair
     """
 
-    student = models.ForeignKey(User)
+    student = models.ForeignKey(StudentModel)
     task = models.ForeignKey(TaskModel)
 
     class Meta:
         unique_together = ('student', 'task')
         index_together = ['student', 'task']
 
-    # last instance of the task attempted by the user (not necessarily solved)
+    # last instance of the task attempted by the student (not necessarily solved)
     last_instance = models.OneToOneField(TaskInstanceModel,
             related_name='+',  # = don't create backwards relation
             null=True,
             default=None)
 
-    # last instance of the task solved by the user
+    # last instance of the task solved by the student
     last_solved_instance = models.OneToOneField(TaskInstanceModel,
             related_name='+',  # = don't create backwards relation
             null=True,

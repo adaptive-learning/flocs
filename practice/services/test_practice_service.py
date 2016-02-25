@@ -23,16 +23,16 @@ class PracticeServiceTest(TestCase):
         stored_task = TaskModel.objects.create(maze_settings="{}",
                 workspace_settings='{"foo": "bar"}')
         TasksDifficultyModel.objects.create(task=stored_task)
-        task_info = practice_service.get_next_task_in_session(student=self.user)
+        task_info = practice_service.get_next_task_in_session(user=self.user)
         self.assertIsNotNone(task_info)
         self.assertEquals('{"foo": "bar"}', task_info.task.workspace_settings)
         self.assertEquals('{}', task_info.task.maze_settings)
         self.assertEquals(TaskInstanceModel.objects.first().id,
                 task_info.task_instance.pk)
-        student = StudentModel.objects.get(user_id=self.user.pk)
+        student = StudentModel.objects.get(user=self.user)
         session = PracticeSession.objects.filter(student=student, active=True)[0]
         self.assertEquals(session, task_info.session)
-        task_instance = TaskInstanceModel.objects.get(student=self.user)
+        task_instance = TaskInstanceModel.objects.get(student=student)
         self.assertEquals(session.last_task, task_instance)
 
     def test_no_task_available(self):
@@ -45,7 +45,7 @@ class PracticeServiceTest(TestCase):
         stored_task = TaskModel.objects.create(maze_settings="{}",
                 workspace_settings='{"foo": "bar"}')
         TasksDifficultyModel.objects.create(task=stored_task)
-        task_info = practice_service.get_task_by_id(student=self.user, task_id=stored_task.pk)
+        task_info = practice_service.get_task_by_id(user=self.user, task_id=stored_task.pk)
         self.assertIsNotNone(task_info)
         self.assertEquals('{"foo": "bar"}', task_info.task.workspace_settings)
         self.assertEquals('{}', task_info.task.maze_settings)
@@ -54,9 +54,10 @@ class PracticeServiceTest(TestCase):
         self.assertIsNone(task_info.session)
 
     def test_process_attempt_report(self):
+        student = StudentModel.objects.create(user=self.user)
         TaskModel.objects.create(id=1)
         TasksDifficultyModel.objects.create(task_id=1, solution_count=5)
-        TaskInstanceModel.objects.create(id=1, task_id=1, student=self.user,
+        TaskInstanceModel.objects.create(id=1, task_id=1, student=student,
                 predicted_flow=0.22)
         report = {
             "task-instance-id": 1,
@@ -72,7 +73,7 @@ class PracticeServiceTest(TestCase):
         self.assertAlmostEquals(0.22, task_instance.predicted_flow)
         self.assertEquals(12, task_instance.attempt_count)
         self.assertEquals(234, task_instance.time_spent)
-        student = StudentModel.objects.get(user_id=self.user.pk)
+        student = StudentModel.objects.get(user=self.user)
         self.assertGreater(student.total_credits, 0)
         self.assertEqual(student.total_credits, student.free_credits)
 
@@ -81,10 +82,10 @@ class PracticeServiceTest(TestCase):
         skill_before_report = -1.0
         TaskModel.objects.create(id=1)
         TasksDifficultyModel.objects.create(task_id=1, programming=difficulty_before_report)
-        TaskInstanceModel.objects.create(id=1, task_id=1, student=self.user, predicted_flow=-1.0)
         student = StudentModel.objects.create(user=self.user, programming=skill_before_report)
+        TaskInstanceModel.objects.create(id=1, task_id=1, student=student, predicted_flow=-1.0)
         practice_service.process_flow_report(
-                student=self.user,
+                user=self.user,
                 task_instance_id=1,
                 reported_flow=FlowRating.EASY)
         task_instance = TaskInstanceModel.objects.get(id=1)
@@ -97,11 +98,11 @@ class PracticeServiceTest(TestCase):
     def test_process_giveup_report(self):
         TaskModel.objects.create(id=1)
         TasksDifficultyModel.objects.create(task_id=1, programming=-1.0)
-        TaskInstanceModel.objects.create(id=1, task_id=1, student=self.user, predicted_flow=1.0)
         student = StudentModel.objects.create(user=self.user, programming=1.0)
+        TaskInstanceModel.objects.create(id=1, task_id=1, student=student, predicted_flow=1.0)
         skill_before_report = student.programming
         practice_service.process_giveup_report(
-                student=self.user,
+                user=self.user,
                 task_instance_id=1,
                 time_spent=987)
         task_instance = TaskInstanceModel.objects.get(id=1)

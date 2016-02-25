@@ -28,8 +28,9 @@ def get_next_task_in_session(request):
     """
     logger.log_request(request)
     user=request.user
-    task_info = practice_service.get_next_task_in_session(student=user)
-    return JsonResponse(task_info_to_json(task_info))
+    task_info = practice_service.get_next_task_in_session(user=user)
+    task_dict = task_info_to_json(task_info)
+    return JsonResponse(task_dict)
 
 
 @allow_lazy_user
@@ -49,7 +50,7 @@ def get_task_by_id(request, id):
     logger.log_request(request)
     try:
         task = practice_service.get_task_by_id(
-                student=request.user,
+                user=request.user,
                 task_id=int(id))
         return JsonResponse(task_info_to_json(task))
     except LookupError:
@@ -75,7 +76,7 @@ def post_attempt_report(request):
     body_unicode = request.body.decode('utf-8')
     data = json.loads(body_unicode)
     task_solved_first_time, credits = practice_service.process_attempt_report(
-            student=request.user, report=data)
+            user=request.user, report=data)
     response = {
         'task-solved-first-time': task_solved_first_time,
         'earned-credits': credits
@@ -96,7 +97,7 @@ def post_giveup_report(request):
     body_unicode = request.body.decode('utf-8')
     data = json.loads(body_unicode)
     practice_service.process_giveup_report(
-            student=request.user,
+            user=request.user,
             task_instance_id=data['task-instance-id'],
             time_spent=data['time'])
     return HttpResponse('ok')
@@ -116,7 +117,7 @@ def post_flow_report(request):
     body_unicode = request.body.decode('utf-8')
     data = json.loads(body_unicode)
     result = practice_service.process_flow_report(
-            student=request.user,
+            user=request.user,
             task_instance_id=data['task-instance-id'],
             reported_flow=data.get('flow-report'))
     return HttpResponse('ok')

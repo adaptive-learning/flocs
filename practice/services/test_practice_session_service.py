@@ -13,13 +13,13 @@ class PracticeSessionServiceTest(TestCase):
 
     def setUp(self):
         self.user = User.objects.create()
-        self.student = StudentModel.objects.create(user_id = self.user.id)
+        self.student = StudentModel.objects.create(user=self.user)
         self.task = TaskModel.objects.create()
         self.taskInstance = TaskInstanceModel.objects.create(
                 task=self.task,
-                student=self.user)
+                student=self.student)
         self.session = PracticeSession.objects.create(
-                student=self.student, 
+                student=self.student,
                 last_task=self.taskInstance)
 
     def test_next_task_in_session(self):
@@ -27,7 +27,7 @@ class PracticeSessionServiceTest(TestCase):
         # create new task instance
         taskInstance = TaskInstanceModel.objects.create(
                 task=self.task,
-                student=self.user)
+                student=self.student)
         # start session
         service.next_task_in_session(self.student, taskInstance)
         # assert counter was increased
@@ -41,7 +41,7 @@ class PracticeSessionServiceTest(TestCase):
         # assert new session was created
         new_session = PracticeSession.objects.filter(
                 student=self.student, active=True)[0]
-        self.assertNotEquals(self.session,new_session)
+        self.assertNotEquals(self.session, new_session)
         self.assertEquals(1, new_session.task_counter)
 
     def test_has_unresolved_task(self):
@@ -53,7 +53,6 @@ class PracticeSessionServiceTest(TestCase):
         in_session = service.has_unresolved_task(self.student)
         self.assertFalse(in_session)
 
-
     def test_get_active_task_instance(self):
         taskInstance = service.get_active_task_instance(self.session)
         self.assertEquals(self.taskInstance, taskInstance)
@@ -62,7 +61,6 @@ class PracticeSessionServiceTest(TestCase):
         taskInstance.save()
         taskInstance = service.get_active_task_instance(self.session)
         self.assertIsNone(taskInstance)
-
 
     def test_get_session(self):
         session = service.get_session(self.student)
@@ -75,7 +73,6 @@ class PracticeSessionServiceTest(TestCase):
         self.assertIsNotNone(new_session)
         self.assertNotEquals(old_session, new_session)
         self.assertEquals(1, new_session.task_counter)
-
 
     def test_end_session(self):
         # end session

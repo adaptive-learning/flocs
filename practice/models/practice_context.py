@@ -1,5 +1,4 @@
 from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.auth.models import User
 from common.flow_factors import FlowFactors
 from tasks.models import TaskModel
 from practice.models import TasksDifficultyModel
@@ -14,10 +13,9 @@ from datetime import datetime
 # the Django way) and not vice versa.
 # Instead of calling create_practice_context(), one would then use
 # PracticeContext.objects.create().
-def create_practice_context(user=None, task=None, time=None):
+def create_practice_context(student=None, task=None, time=None):
     """
     Return a new practice context for given student.
-    If a student does not have any skills in DB yet, it will create them.
 
     Args:
         student: a student to include into practice context
@@ -46,31 +44,25 @@ def create_practice_context(user=None, task=None, time=None):
         practice_context.set('solution-count', task=task_id,
                 value=task_difficulty.solution_count)
 
-    if user is not None:
-        users = [user]
-        student_skill, _ = StudentModel.objects.get_or_create(user=user)
-        student_skills = [student_skill]
-    else:
-        users = [User.objects.all()]
-        student_skills = StudentModel.objects.all()
+    students = [student] if student is not None else StudentModel.objects.all()
 
-    for student_skill in student_skills:
-        for key, value in student_skill.get_skill_dict().items():
-            practice_context.set(key, student=user.id, value=value)
+    for student in students:
+        for key, value in student.get_skill_dict().items():
+            practice_context.set(key, student=student.pk, value=value)
 
     # load last attempt time
-    for user in users:
+    for student in students:
         for task in tasks:
             # NOTE: we probably don't want to create info objects for all tasks
             #last_instance = StudentTaskInfoModel.objects\
             #        .get_or_create(student=student, task=task)[0].last_instance
             try:
                 last_instance = StudentTaskInfoModel.objects.get(
-                    student=user, task=task).last_instance
+                    student=student, task=task).last_instance
             except ObjectDoesNotExist:
                 last_instance = None
             last_time = last_instance.time_end if last_instance is not None else None
-            practice_context.set('last-time', user.id, task.id, last_time)
+            practice_context.set('last-time', student.pk, task.pk, last_time)
 
     return practice_context
 
@@ -182,12 +174,12 @@ class PracticeContext(object):
         # NOTE: this is quite ugly ad-hoc solution and we should definitely
         # change the underlaying model for parameters to be more flexible
         for task in self.get_all_task_ids():
-            task_difficulty = TasksDifficultyModel.objects.get(task_id=task)
+            task_difficulty = TasksDifficultyModel.objects.get(pk=task)
             task_difficulty.programming = self.get(FlowFactors.TASK_BIAS, task=task)
             task_difficulty.solution_count = self.get_solution_count(task=task)
             task_difficulty.save()
         for student in self.get_all_student_ids():
-            student_skill = StudentModel.objects.get(user_id=student)
+            student_skill = StudentModel.objects.get(pk=student)
             student_skill.programming = self.get(FlowFactors.STUDENT_BIAS, student=student)
             student_skill.conditions = self.get(FlowFactors.CONDITIONS, student=student)
             student_skill.loops = self.get(FlowFactors.LOOPS, student=student)

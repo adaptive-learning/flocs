@@ -126,9 +126,9 @@ class PracticeContextTest(TestCase):
         self.assertEquals(5, new_difficulty.solution_count)
 
     def test_save_student(self):
-        student = User.objects.create()
-        StudentModel.objects.create(
-                user=student,
+        user = User.objects.create()
+        student = StudentModel.objects.create(
+                user=user,
                 programming=Decimal('0.14'),
                 conditions=0,
                 loops=0.5,
@@ -138,16 +138,16 @@ class PracticeContextTest(TestCase):
                 pits=0,
         )
         context = PracticeContext([
-            (FlowFactors.CONDITIONS, student.id, None, 1.1),
-            (FlowFactors.LOOPS,      student.id, None, 1.2),
-            (FlowFactors.LOGIC_EXPR, student.id, None, 1.3),
-            (FlowFactors.COLORS,     student.id, None, 1.4),
-            (FlowFactors.TOKENS,     student.id, None, 1.5),
+            (FlowFactors.CONDITIONS, student.pk, None, 1.1),
+            (FlowFactors.LOOPS,      student.pk, None, 1.2),
+            (FlowFactors.LOGIC_EXPR, student.pk, None, 1.3),
+            (FlowFactors.COLORS,     student.pk, None, 1.4),
+            (FlowFactors.TOKENS,     student.pk, None, 1.5),
         ])
-        context.set(FlowFactors.STUDENT_BIAS, student=student.id, value=-0.1)
-        context.set(FlowFactors.PITS, student=student.id, value=-0.5)
+        context.set(FlowFactors.STUDENT_BIAS, student=student.pk, value=-0.1)
+        context.set(FlowFactors.PITS, student=student.pk, value=-0.5)
         context.save()
-        skill = StudentModel.objects.get(user_id=student.id)
+        skill = StudentModel.objects.get(user=user)
         self.assertAlmostEquals(-0.1, float(skill.programming))
         self.assertAlmostEquals(1.1, float(skill.conditions))
         self.assertAlmostEquals(1.2, float(skill.loops))

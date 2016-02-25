@@ -28,9 +28,9 @@ class PracticeContextManagerTest(TestCase):
                 tokens=False,
                 pits=False,
         )
-        student = User.objects.create()
-        students_skills = StudentModel.objects.create(
-                user=student,
+        user = User.objects.create()
+        student = StudentModel.objects.create(
+                user=user,
                 programming=Decimal('0.14'),
                 conditions=0,
                 loops=0.5,
@@ -40,12 +40,12 @@ class PracticeContextManagerTest(TestCase):
                 pits=0,
         )
         time = datetime(2015, 1, 2, 3, 4, 5)
-        context = create_practice_context(student, time=time)
+        context = create_practice_context(student=student, time=time)
         #print(context._parameters)
         self.assertAlmostEquals(-0.58,
-            context.get(FlowFactors.TASK_BIAS, task=task.id))
+            context.get(FlowFactors.TASK_BIAS, task=task.pk))
         self.assertAlmostEquals(0.5,
-            context.get(FlowFactors.LOOPS, student=student.id))
+            context.get(FlowFactors.LOOPS, student=student.pk))
         self.assertEquals(time, context.get_time())
 
     def test_generate_practice_context_with_student_and_task(self):
@@ -53,6 +53,7 @@ class PracticeContextManagerTest(TestCase):
         task2 = TaskModel.objects.create()
         difficulty1 = TasksDifficultyModel.objects.create(task=task1)
         difficulty2 = TasksDifficultyModel.objects.create(task=task2)
-        student = User.objects.create()
-        context = create_practice_context(user=student, task=task1)
+        user = User.objects.create()
+        student = StudentModel.objects.create(user=user)
+        context = create_practice_context(student=student, task=task1)
         self.assertEquals([task1.id], context.get_all_task_ids())

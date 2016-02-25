@@ -48,7 +48,7 @@ class PracticeSimulation(Simulation):
             task_id = task_dict['task']['task-id']
             task_difficulty = TasksDifficultyModel.objects.get(task_id=task_id)
 
-            student_skill = StudentModel.objects.get(user=user.id).get_skill_dict()
+            student_skill = StudentModel.objects.get(user=user).get_skill_dict()
             for factor in FlowFactors.student_factors():
                 self.logger.log('student-' + factor.name, student_skill[factor])
 

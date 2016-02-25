@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
 from common.utils import activation
 from tasks.models import TaskModel
 from practice.models import StudentModel
@@ -14,13 +13,13 @@ class FlowRating(object):
 
 class TaskInstanceModel(models.Model):
     """
-    Representation of a task taken by a user.
+    Representation of a task taken by a student.
     """
 
     # student who took the task
-    student = models.ForeignKey(User)
+    student = models.ForeignKey(StudentModel)
 
-    # task which was assigned to the user
+    # task which was assigned to the student
     task = models.ForeignKey(TaskModel)
 
     # when the task was shown to the student
@@ -32,10 +31,10 @@ class TaskInstanceModel(models.Model):
     # number of seconds the student spent solving the task
     time_spent = models.IntegerField(default=0)
     # NOTE: we probably want to do not calculate it as (time_end - time start),
-    # because the task might not be shown to the user immediately after
+    # because the task might not be shown to the student immediately after
     # sending, we might want to not to include between-attempts pauses etc.
 
-    # flag whether the user eventually solved the task
+    # flag whether the student eventually solved the task
     solved = models.BooleanField(default=False)
 
     # self-report about subjective difficulty feeling
@@ -52,7 +51,7 @@ class TaskInstanceModel(models.Model):
     # predicted flow value
     predicted_flow = models.FloatField(default=None, null=True)
 
-    # how many attempts did the user take (attempt = running a program)
+    # how many attempts did the student take (attempt = running a program)
     attempt_count = models.IntegerField(
             default=0)
 

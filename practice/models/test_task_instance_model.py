@@ -4,12 +4,14 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 from tasks.models import TaskModel
+from practice.models import StudentModel
 from .task_instance import TaskInstanceModel
 
 class TaskInstanceModelTest(TestCase):
 
     def test_create_task_instance(self):
-        student = User.objects.create()
+        user = User.objects.create()
+        student = StudentModel.objects.create(user=user)
         task = TaskModel.objects.create()
         task_instance = TaskInstanceModel(
             student=student,

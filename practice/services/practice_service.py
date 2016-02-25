@@ -24,23 +24,23 @@ logger = logging.getLogger(__name__)
 TaskInfo = namedtuple('TaskInfo',
         ['task_instance', 'task', 'instructions', 'session'])
 
-def get_task_by_id(student, task_id):
+def get_task_by_id(user, task_id):
+    student = StudentModel.objects.get_or_create(user=user)[0]
     # ask if the student is in the middle of the session task
-    student_model = StudentModel.objects.get_or_create(user_id=student.pk)[0]
-    if sess_service.has_unresolved_task(student_model):
-        session = sess_service.get_session(student_model)
+    if sess_service.has_unresolved_task(student):
+        session = sess_service.get_session(student)
         active_task = sess_service.get_active_task_instance(session)
         if active_task.task.pk == task_id:
             # if the given task is same as active, go in session
-            return get_next_task_in_session(student)
+            return get_next_task_in_session(user)
     return get_task(student, IdSpecifidedTaskSelector(task_id))
 
 
-def get_next_task_in_session(student):
-    student_model = StudentModel.objects.get_or_create(user_id=student.pk)[0]
-    if sess_service.has_unresolved_task(student_model):
+def get_next_task_in_session(user):
+    student = StudentModel.objects.get_or_create(user=user)[0]
+    if sess_service.has_unresolved_task(student):
         # student is in the middle of solving a task in the session
-        session = sess_service.get_session(student_model)
+        session = sess_service.get_session(student)
         active_task = sess_service.get_active_task_instance(session)
         task_info = get_task(student, IdSpecifidedTaskSelector(active_task.task.pk))
         # update task instance
@@ -49,10 +49,10 @@ def get_next_task_in_session(student):
     else:
         # next task in the session or new session
         task_info = get_task(student, ScoreTaskSelector())
-        sess_service.next_task_in_session(student_model, task_info.task_instance)
+        sess_service.next_task_in_session(student, task_info.task_instance)
 
     # add info about session
-    session = sess_service.get_session(student_model)
+    session = sess_service.get_session(student)
     task_info_with_sess = TaskInfo(
         task_instance = task_info.task_instance,
         task = task_info.task,
@@ -76,18 +76,15 @@ def get_task(student, task_selector):
         ValueError: If the student argument is None.
         LookupError: If there is no task available.
     """
-    logger.info("Getting next task for student id %s", student.id)
+    logger.info("Getting next task for student id %s", student.pk)
     if not student:
         raise ValueError('Student is required for get_next_task_in_session')
-
-    practice_context = create_practice_context(user=student)
+    practice_context = create_practice_context(student=student)
     task_ids = practice_context.get_all_task_ids()
     if not task_ids:
         raise LookupError('No tasks available.')
-
-    student_model = StudentModel.objects.get(user_id=student.pk)
-    task_id = task_selector.select(task_ids, student.id, practice_context)
-    predicted_flow = predict_flow(student.id, task_id, practice_context)
+    task_id = task_selector.select(task_ids, student.pk, practice_context)
+    predicted_flow = predict_flow(student.pk, task_id, practice_context)
     task = TaskModel.objects.get(pk=task_id)
     task_instance = TaskInstanceModel.objects.create(student=student,
             task=task, predicted_flow=predicted_flow)
@@ -104,15 +101,15 @@ def get_task(student, task_selector):
         instructions = instructions,
         session = None
     )
-    logger.info("Task %s successfully picked for student %s", task_id, student.id)
+    logger.info("Task %s successfully picked for student %s", task_id, student.pk)
     return task_info
 
 
-def process_attempt_report(student, report):
+def process_attempt_report(user, report):
     """Process reported result of a solution attempt of a task
 
     Args:
-        student: user who took the attempt
+        user: current user (user who took the attempt
         report: dictionary with the following fiels:
             - task-instance-id
             - attempt
@@ -123,20 +120,19 @@ def process_attempt_report(student, report):
         - number of earned-credits
     Raises:
         ValueError:
-            - If the student argument is None.
+            - If the user argument is None.
             - If the report doesn't belong to the student.
             - If it's reporting an obsolete attempt (i.e. new attempt was
               already processed).
     """
-    if not student:
-        raise ValueError('Student is required for process_task_result')
-
+    student = StudentModel.objects.get(user=user)
+    # TODO: move the parsing of parameters to the view
     task_instance_id = report['task-instance-id']
     attempt_count = report['attempt']
     solved = report['solved']
     time = report['time']
 
-    logger.info("Reporting attempt for student %s with result %s", student.id, solved)
+    logger.info("Reporting attempt for student %s with result %s", student.pk, solved)
 
     task_instance = TaskInstanceModel.objects.get(id=task_instance_id)
     if  attempt_count < task_instance.attempt_count:
@@ -145,7 +141,7 @@ def process_attempt_report(student, report):
         # last report with more information (e.g. added flow report).
         raise ValueError("Obsolete attempt report can't be processed.")
 
-    if student.id != task_instance.student.id:
+    if student.pk != task_instance.student.pk:
         raise ValueError("Report doesn't belong to the student.")
 
     task_instance.update_after_attempt(
@@ -163,44 +159,45 @@ def process_attempt_report(student, report):
     credits = 0
     if solved:
         task = task_instance.task
-        practice_context = create_practice_context(user=student, task=task)
+        practice_context = create_practice_context(student=student, task=task)
         practice_context.update('solution-count', task=task.id, update=lambda n: n + 1)
         practice_context.save()
         if not solved_before:
-            task_difficulty = practice_context.get(FlowFactors.TASK_BIAS, task=task.id)
+            task_difficulty = practice_context.get(FlowFactors.TASK_BIAS, task=task.pk)
             credits = difficulty_to_credits(task_difficulty)
-            student_model = StudentModel.objects.get(user_id=student.pk)
-            student_model.earn_credits(credits)
-            student_model.save()
+            student.earn_credits(credits)
+            student.save()
 
     task_solved_first_time = solved and not solved_before,
-    logger.info("Reporting attempt was successful for student %s with result %s", student.id, solved)
+    logger.info("Reporting attempt was successful for student %s with result %s", student.pk, solved)
     return (task_solved_first_time, credits)
 
 
-def process_giveup_report(student, task_instance_id, time_spent):
+def process_giveup_report(user, task_instance_id, time_spent):
+    student = StudentModel.objects.get(user=user)
     task_instance = TaskInstanceModel.objects.get(id=task_instance_id)
-    if student.id != task_instance.student.id:
+    if student.pk != task_instance.student.pk:
         raise ValueError("Report doesn't belong to the student.")
     task_instance.update_after_giveup(time_spent=time_spent)
     task_instance.save()
     reported_flow = FlowRating.VERY_DIFFICULT
-    process_flow_report(student, task_instance_id, reported_flow)
+    process_flow_report(user, task_instance_id, reported_flow)
 
 
-def process_flow_report(student, task_instance_id, reported_flow=None):
+def process_flow_report(user, task_instance_id, reported_flow=None):
     """Process reported flow after the task completion (or giving up)
     """
     if not reported_flow:
         return
+    student = StudentModel.objects.get(user=user)
     task_instance = TaskInstanceModel.objects.get(id=task_instance_id)
-    if student.id != task_instance.student.id:
+    if student.pk != task_instance.student.pk:
         raise ValueError("The task instance doesn't belong to this student.")
     task_instance.set_reported_flow(reported_flow)
     task_instance.save()
     task = task_instance.task
-    practice_context = create_practice_context(user=student, task=task)
-    update_parameters(practice_context, student.id, task.id,
+    practice_context = create_practice_context(student=student, task=task)
+    update_parameters(practice_context, student.pk, task.pk,
             task_instance.get_reported_flow(),
             task_instance.get_predicted_flow())
     # NOTE: There is a race condition when 2 students are updating parameters

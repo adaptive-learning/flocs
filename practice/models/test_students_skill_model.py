@@ -81,10 +81,10 @@ class StudentModelTest(TestCase):
         student = StudentModel.objects.create(user=user)
         task_selector = TaskSelector()
         # create practice context
-        practice_context = create_practice_context(user=user)
+        practice_context = create_practice_context(student=student)
         # select task
         task_ids = [task1.id, task2.id]
-        task_id = task_selector.select(task_ids, user.id, practice_context)
+        task_id = task_selector.select(task_ids, student.pk, practice_context)
         # assert the selected task
         self.assertEquals(task_id, 1)
 
