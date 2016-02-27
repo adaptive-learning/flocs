@@ -73,7 +73,7 @@ def get_active_task_instance(session):
     """
     if session is None or session.active is None:
         return None
-    if session.last_task.solved == True:
+    if session.last_task.is_completed():
         return None
     return session.last_task
 

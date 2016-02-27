@@ -34,8 +34,9 @@ class TaskInstanceModel(models.Model):
     # because the task might not be shown to the student immediately after
     # sending, we might want to not to include between-attempts pauses etc.
 
-    # flag whether the student eventually solved the task
+    # flags whether the student eventually solved/given up the task
     solved = models.BooleanField(default=False)
+    given_up = models.BooleanField(default=False)
 
     # self-report about subjective difficulty feeling
     REPORTED_FLOW_VALUES = (
@@ -90,6 +91,9 @@ class TaskInstanceModel(models.Model):
         """
         return self.predicted_flow
 
+    def is_completed(self):
+        return self.solved or self.given_up
+
     def update_after_attempt(self, attempt_count, time, solved):
         """
         Update information about the task instnace after a new attempt
@@ -118,6 +122,7 @@ class TaskInstanceModel(models.Model):
     def update_after_giveup(self, time_spent):
         self.time_end = datetime.now()
         self.time_spent = time_spent
+        self.given_up = True
 
     def set_reported_flow(self, reported_flow):
         """
