@@ -14,7 +14,7 @@ from practice.models import StudentModel
 from practice.models.task_instance import FlowRating
 from practice.services.parameters_update import update_parameters
 from practice.services.instructions_service import get_instructions
-from practice.services import practice_session_service
+from practice.services import practice_session_service as sess_service
 from practice.core.credits import difficulty_to_credits
 from practice.core.flow_prediction import predict_flow
 from practice.core.task_selection import ScoreTaskSelector, IdSpecifidedTaskSelector
@@ -25,34 +25,39 @@ TaskInfo = namedtuple('TaskInfo',
         ['task_instance', 'task', 'instructions', 'session'])
 
 def get_task_by_id(student, task_id):
-    # ask if the student is in the middle of the session
+    # ask if the student is in the middle of the session task
     student_model = StudentModel.objects.get_or_create(user_id=student.pk)[0]
-    active_task = practice_session_service.get_active_task(student_model)
-    if active_task != None and active_task.pk == task_id:
-        return get_next_task(student)
-
+    if sess_service.has_unresolved_task(student_model):
+        session = sess_service.get_session(student_model)
+        active_task = sess_service.get_active_task_instance(session)
+        if active_task.task.pk == task_id:
+            # if the given task is same as active, go in session
+            return get_next_task_in_session(student)
     return get_task(student, IdSpecifidedTaskSelector(task_id))
 
 
-def get_next_task(student):
-    # ask if the student is in the middle of the session
+def get_next_task_in_session(student):
     student_model = StudentModel.objects.get_or_create(user_id=student.pk)[0]
-    active_task = practice_session_service.get_active_task(student_model)
-    if active_task is None:
-        task_info = get_task(student, ScoreTaskSelector())
-        # set next task in session
-        practice_session_service.next_task_in_session(student_model, task_info.task)
-        task_info.task_instance.session = student_model.session
-        task_info.task_instance.save()
+    if sess_service.has_unresolved_task(student_model):
+        # student is in the middle of solving a task in the session
+        session = sess_service.get_session(student_model)
+        active_task = sess_service.get_active_task_instance(session)
+        task_info = get_task(student, IdSpecifidedTaskSelector(active_task.task.pk))
+        # update task instance
+        session.last_task = task_info.task_instance
+        session.save()
     else:
-        task_info = get_task(student, IdSpecifidedTaskSelector(active_task.pk))
+        # next task in the session or new session
+        task_info = get_task(student, ScoreTaskSelector())
+        sess_service.next_task_in_session(student_model, task_info.task_instance)
 
     # add info about session
+    session = sess_service.get_session(student_model)
     task_info_with_sess = TaskInfo(
         task_instance = task_info.task_instance,
         task = task_info.task,
         instructions = task_info.instructions,
-        session = student_model.session
+        session = session
     )
 
     return task_info_with_sess
@@ -73,7 +78,7 @@ def get_task(student, task_selector):
     """
     logger.info("Getting next task for student id %s", student.id)
     if not student:
-        raise ValueError('Student is required for get_next_task')
+        raise ValueError('Student is required for get_next_task_in_session')
 
     practice_context = create_practice_context(user=student)
     task_ids = practice_context.get_all_task_ids()

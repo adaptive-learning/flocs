@@ -7,6 +7,7 @@ from tasks.models import TaskModel
 from practice.models import StudentModel
 from practice.models import TasksDifficultyModel
 from practice.models import TaskInstanceModel
+from practice.models import PracticeSession
 from practice.models.task_instance import FlowRating
 from . import practice_service
 
@@ -18,26 +19,27 @@ class PracticeServiceTest(TestCase):
     def setUp(self):
         self.user = User.objects.create()
 
-    def test_get_next_task(self):
+    def test_get_next_task_in_session(self):
         stored_task = TaskModel.objects.create(maze_settings="{}",
                 workspace_settings='{"foo": "bar"}')
         TasksDifficultyModel.objects.create(task=stored_task)
-        task_info = practice_service.get_next_task(student=self.user)
+        task_info = practice_service.get_next_task_in_session(student=self.user)
         self.assertIsNotNone(task_info)
         self.assertEquals('{"foo": "bar"}', task_info.task.workspace_settings)
         self.assertEquals('{}', task_info.task.maze_settings)
         self.assertEquals(TaskInstanceModel.objects.first().id,
                 task_info.task_instance.pk)
         student = StudentModel.objects.get(user_id=self.user.pk)
-        self.assertEquals(student.session, task_info.session)
+        session = PracticeSession.objects.filter(student=student, active=True)[0]
+        self.assertEquals(session, task_info.session)
         task_instance = TaskInstanceModel.objects.get(student=self.user)
-        self.assertEquals(student.session, task_instance.session)
+        self.assertEquals(session.last_task, task_instance)
 
     def test_no_task_available(self):
-        # if there are no tasks available, task_servise should raise
+        # if there are no tasks available, task_service should raise
         # LookupError
         self.assertRaises(LookupError,
-                practice_service.get_next_task, self.user)
+                practice_service.get_next_task_in_session, self.user)
 
     def test_get_task_by_id(self):
         stored_task = TaskModel.objects.create(maze_settings="{}",

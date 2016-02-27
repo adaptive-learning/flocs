@@ -18,7 +18,7 @@ logger = LoggingUtils()
 
 
 @allow_lazy_user
-def get_next_task(request):
+def get_next_task_in_session(request):
     """Return response with next task for the current user.
 
     Returns:
@@ -28,7 +28,7 @@ def get_next_task(request):
     """
     logger.log_request(request)
     user=request.user
-    task_info = practice_service.get_next_task(student=user)
+    task_info = practice_service.get_next_task_in_session(student=user)
     return JsonResponse(task_info_to_json(task_info))
 
 

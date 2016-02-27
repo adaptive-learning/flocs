@@ -4,7 +4,6 @@ from decimal import Decimal
 
 from common.flow_factors import FlowFactors
 from .tasks_difficulty import TasksDifficultyModel
-from .practice_session import PracticeSession
 from django.db.models import Min
 
 
@@ -22,10 +21,6 @@ class StudentModel(models.Model):
        For every concept there is number between -1 and 1 representing skill in
        certain concept.
     """
-
-    # current session, has value None if there is no active session
-    session = models.OneToOneField(PracticeSession, null=True, blank=True,
-            default=None)
 
     # init values
     INITIAL_CONCEPT_SKILL = Decimal(-1)

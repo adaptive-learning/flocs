@@ -73,15 +73,6 @@ angular.module('flocs.practice')
     if (taskInstance === null || taskInstance.task['task-id'] != taskId) {
       return practiceDao.gettingTaskById(taskId).then(function (newTaskInstance) {
         taskInstance = newTaskInstance;
-        var returnedSession = taskInstance['session'];
-        if (returnedSession !== null) {
-          session.task = returnedSession.task;
-          session.max = returnedSession.max;
-          session.progress = (100 / session.max) * (session.task - 1) + 1;
-          session.active = true;
-        } else {
-          session.active = false;
-        }
         startCurrentTask();
         return taskInstance;
       }, function() {
@@ -96,6 +87,16 @@ angular.module('flocs.practice')
   }
 
   function startCurrentTask() {
+    console.log(taskInstance['session']);
+    var returnedSession = taskInstance['session'];
+    if (returnedSession !== null) {
+      session.task = returnedSession.task;
+      session.max = returnedSession.max;
+      session.progress = (100 / session.max) * (session.task - 1) + 1;
+      session.active = true;
+    } else {
+      session.active = false;
+    }
     userService.setUserAvailable();
     attemptReport = null;
     var newTask = taskInstance['task'];
