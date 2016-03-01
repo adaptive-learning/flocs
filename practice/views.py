@@ -25,6 +25,7 @@ def get_next_task_in_session(request):
         task-instance-id: int
         task: task object
         instructions: list of instructions
+        session: session object
     """
     logger.log_request(request)
     user=request.user
@@ -44,8 +45,9 @@ def get_task_by_id(request, id):
 
     Returns:
         task-instance-id: int
-        task : task object
+        task: task object
         instructions: list of instructions
+        session: session object
     """
     logger.log_request(request)
     try:
@@ -146,12 +148,25 @@ def task_info_to_json(task_info):
     session = None
     if task_info.session != None:
         session = {
-                'task': task_info.session.task_counter,
-                'max': practice_session_service.TASKS_IN_SESSION
-                }
-    return {
-            'task-instance-id': task_info.task_instance.pk,
-            'task': task_info.task.to_json(),
-            'instructions': task_info.instructions,
-            'session': session
-            }
+            'task': task_info.session.task_counter,
+            'max': practice_session_service.TASKS_IN_SESSION
+        }
+    task_dict = {
+        'task-instance-id': task_info.task_instance.pk,
+        'task': task_info.task.to_json(),
+        'instructions': task_info.instructions,
+        'session': session
+    }
+    return task_dict
+
+
+def task_instance_to_json(task_instance):
+    task_instance_dict = {
+        'task': task_instance.task.to_json(),
+        'solved': task_instance.solved,
+        'given-up': task_instance.given_up,
+        'time-spent': task_instance.time_spent,
+        'reported-flow': task_instance.reported_flow,
+        'attempt-count': task_instance.attept_count
+    }
+    return task_instance_dict
