@@ -6,13 +6,14 @@ import logging
 
 from practice.models import StudentModel
 from practice.models import PracticeSession
+from practice.models import SessionTaskInstance
 
 logger = logging.getLogger(__name__)
 
 TASKS_IN_SESSION = 7
 
 
-def next_task_in_session(student, taskInstance):
+def next_task_in_session(student, task_instance):
     """
     Move to next task in the session.
     Method increases task counter in the student's session.
@@ -20,33 +21,37 @@ def next_task_in_session(student, taskInstance):
 
     Args:
         session - must be active session
-        taskInstance - new task to assign
+        task_instance - new task to assign
 
     """
     # get or create session
     session = get_session(student)
     if session is None:
-        session = create_session(taskInstance)
+        session = create_session(task_instance)
         logger.debug(('Session id {session_id}'
                       ' created for student {student}').format(
                          session_id=session.pk, student=student))
     elif session.task_counter < TASKS_IN_SESSION:
-        session.task_counter += 1
-        session.last_task = taskInstance
-        session.save()
-        logger.debug(('Session id {session_id}'
-                      ' proceed to the next task with session number '
-                      '{counter}.').format(
-                         session_id=session.pk, counter=session.task_counter))
+        add_task_instance_to_session(task_instance, session)
     else:
         # student finished last task of the session, creating new one
         session.active = False
         session.save()
         new_session = PracticeSession.objects.create(
                 student=session.student,
-                last_task=taskInstance)
+                last_task=task_instance)
         logger.debug('Student id ', session.student.pk, ' finished current session, '
                      'creating new session id ', new_session.pk, ' .')
+
+
+def add_task_instance_to_session(task_instance, session):
+    session.task_counter += 1
+    session.last_task = task_instance
+    session.save()
+    SessionTaskInstance.objects.create(session=session, order=session.task_counter,
+            task_instance=task_instance)
+    logger.debug('Session {session_pk} proceed to the {counter}. task instance.'
+                .format(session_pk=session.pk, counter=session.task_counter))
 
 
 def has_unresolved_task(student):
@@ -78,6 +83,14 @@ def get_active_task_instance(session):
     return session.last_task
 
 
+def get_all_task_instances(session):
+    """
+    Return list of task instances in this session in order they were taken
+    by the student.
+    """
+    return session.get_task_instances()
+
+
 def get_session(student):
     """
     Retrieve session for the given student.
@@ -97,7 +110,7 @@ def get_session(student):
         raise ValueError('More active sessions for student ' + student.pk)
 
 
-def create_session(taskInstance):
+def create_session(task_instance):
     """
     Creates session for specified task instance.
     If there is active session, it will close it first.
@@ -106,13 +119,16 @@ def create_session(taskInstance):
         new created session
     """
     # first close one, if exists
-    # TODO: replace with session = get_session(taskInstance.student)
-    student = taskInstance.student
-    session = get_session(student)
-    if session is not None:
-        end_session(session)
-    # create
-    return PracticeSession.objects.create(student=student, last_task=taskInstance)
+    # TODO: replace with session = get_session(task_instance.student)
+    student = task_instance.student
+    old_session = get_session(student)
+    if old_session is not None:
+        end_session(old_session)
+    # create new session
+    session = PracticeSession.objects.create(student=student, last_task=task_instance)
+    SessionTaskInstance.objects.create(session=session, order=session.task_counter,
+            task_instance=task_instance)
+    return session
 
 
 def end_session(session):

@@ -82,3 +82,14 @@ class PracticeSessionServiceTest(TestCase):
                 student=self.student, active=True)
         # assert it has really ended
         self.assertEquals(0, len(new_session))
+
+    def test_get_all_task_instances(self):
+        instance1 = TaskInstanceModel.objects.create(task=self.task, student=self.student)
+        instance2 = TaskInstanceModel.objects.create(task=self.task, student=self.student)
+        instance3 = TaskInstanceModel.objects.create(task=self.task, student=self.student)
+        session = service.create_session(instance3)
+        service.next_task_in_session(self.student, instance1)
+        task_instances = service.get_all_task_instances(session)
+        self.assertEquals(len(task_instances), 2)
+        self.assertEquals(task_instances[0].pk, instance3.pk)
+        self.assertEquals(task_instances[1].pk, instance1.pk)
