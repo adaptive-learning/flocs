@@ -145,17 +145,20 @@ def get_practice_details(request):
 
 
 def task_info_to_json(task_info):
-    session = None
+    session_dict = None
     if task_info.session != None:
-        session = {
+        task_instances = practice_session_service.get_all_task_instances(task_info.session)
+        session_dict = {
             'task': task_info.session.task_counter,
-            'max': practice_session_service.TASKS_IN_SESSION
+            'max': practice_session_service.TASKS_IN_SESSION,
+            'task-instances': [task_instance_to_json(task_instance)
+                               for task_instance in task_instances]
         }
     task_dict = {
         'task-instance-id': task_info.task_instance.pk,
         'task': task_info.task.to_json(),
         'instructions': task_info.instructions,
-        'session': session
+        'session': session_dict
     }
     return task_dict
 
@@ -167,6 +170,6 @@ def task_instance_to_json(task_instance):
         'given-up': task_instance.given_up,
         'time-spent': task_instance.time_spent,
         'reported-flow': task_instance.reported_flow,
-        'attempt-count': task_instance.attept_count
+        'attempt-count': task_instance.attempt_count
     }
     return task_instance_dict
