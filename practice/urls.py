@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^giveup-report$', views.post_giveup_report),
     url(r'^flow-report$', views.post_flow_report),
     url(r'^practice-details$', views.get_practice_details),
+    url(r'^session-overview$', views.get_session_overview),
 ]

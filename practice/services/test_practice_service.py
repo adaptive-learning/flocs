@@ -8,6 +8,7 @@ from practice.models import StudentModel
 from practice.models import TasksDifficultyModel
 from practice.models import TaskInstanceModel
 from practice.models import PracticeSession
+from practice.models import SessionTaskInstance
 from practice.models.task_instance import FlowRating
 from . import practice_service
 
@@ -110,3 +111,18 @@ class PracticeServiceTest(TestCase):
         self.assertEqual(task_instance.time_spent, 987)
         skill_after_report = StudentModel.objects.get(user_id=student.pk).programming
         self.assertLess(skill_after_report, skill_before_report)
+
+    def test_get_session_overview(self):
+        # set up
+        student = StudentModel.objects.create(user=self.user)
+        TaskModel.objects.create(id=1)
+        task_instance = TaskInstanceModel.objects.create(id=1, task_id=1, student=student)
+        session = PracticeSession.objects.create(id=1, student=student, last_task=task_instance)
+        SessionTaskInstance.objects.create(session=session, task_instance=task_instance, order=1)
+
+        # check
+        sess_overview = practice_service.get_session_overview(self.user)
+        task_instances = sess_overview.task_instances
+        self.assertEquals(1, len(task_instances))
+        self.assertEquals(task_instance, task_instances[0])
+

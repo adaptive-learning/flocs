@@ -24,6 +24,8 @@ logger = logging.getLogger(__name__)
 # TODO: remove task field - it is redundant (task is in task_instance.task)
 TaskInfo = namedtuple('TaskInfo',
         ['task_instance', 'task', 'instructions', 'session'])
+SessionOverview = namedtuple('SessionOverview',
+        ['task_instances'])
 
 def get_task_by_id(user, task_id):
     student = StudentModel.objects.get_or_create(user=user)[0]
@@ -217,3 +219,22 @@ def process_flow_report(user, task_instance_id, reported_flow=None):
     # select_for_update current parameters, update them at once ("in parallel")
     # and save.
     practice_context.save()
+
+def get_session_overview(user):
+    """
+    Returns information about the last session student has been practicing.
+
+    Returns:
+        namedtuple 'session_overview'
+    """
+    student = StudentModel.objects.get_or_create(user=user)[0]
+    session = sess_service.get_session(student)
+    if session is None:
+        instances = []
+    else:
+        instances = session.get_task_instances()
+    return SessionOverview(
+            task_instances = instances
+            )
+
+

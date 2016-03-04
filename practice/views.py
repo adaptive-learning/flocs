@@ -145,6 +145,20 @@ def get_practice_details(request):
     }
     return JsonResponse(details_dict)
 
+@allow_lazy_user
+def get_session_overview(request):
+    """
+    Returns information about student's last session.
+
+    Returns:
+        task_instances: objects
+    """
+    logger.log_request(request)
+    user=request.user
+    session_overview = practice_service.get_session_overview(user)
+    sess_overview_dict = session_overview_to_json(session_overview)
+    return JsonResponse(sess_overview_dict)
+
 
 def task_info_to_json(task_info):
     session_dict = None
@@ -175,3 +189,9 @@ def task_instance_to_json(task_instance):
         'attempt-count': task_instance.attempt_count
     }
     return task_instance_dict
+
+def session_overview_to_json(session_overview):
+    sess_overview_dict = {
+            'task-instances': list(map(task_instance_to_json, session_overview.task_instances))
+            }
+    return sess_overview_dict
