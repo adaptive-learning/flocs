@@ -3,3 +3,13 @@
   margin-bottom: 0px;
   margin-left: 250px
 }
+
+/* definition of custom circle glyphicon */
+.glyphicon.glyphicon-circle {
+    margin-bottom: 0.15em;
+    overflow: hidden;
+}
+.glyphicon.glyphicon-circle:before {
+    content:"\25cb";
+    font-size: 1.2em;
+}

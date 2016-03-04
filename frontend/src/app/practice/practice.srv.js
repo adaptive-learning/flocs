@@ -3,7 +3,13 @@
  * @ngInject
  */
 angular.module('flocs.practice')
-.factory('practiceService', function ($state, $timeout, $q, practiceDao, taskEnvironmentService, userService) {
+.factory('practiceService', function ($state,
+                                      $timeout,
+                                      $q,
+                                      practiceDao,
+                                      taskEnvironmentService,
+                                      sessionBarService,
+                                      userService) {
 
   var attemptReport = null;
   var taskStartTimestamp = null;
@@ -13,6 +19,7 @@ angular.module('flocs.practice')
     task: null,
     max: null,
     progress: null,
+    taskInstances: null,
     active: false
   };
 
@@ -87,13 +94,14 @@ angular.module('flocs.practice')
   }
 
   function startCurrentTask() {
-    console.log(taskInstance['session']);
     var returnedSession = taskInstance['session'];
     if (returnedSession !== null) {
+      session.taskInstances = returnedSession['task-instances'];
       session.task = returnedSession.task;
       session.max = returnedSession.max;
       session.progress = (100 / session.max) * (session.task - 1) + 1;
       session.active = true;
+      sessionBarService.updateSessionTasksStatutes(session);
     } else {
       session.active = false;
     }

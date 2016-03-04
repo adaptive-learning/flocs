@@ -3,14 +3,14 @@
  * @ngInject
  */
 angular.module('flocs.sessionBar')
-.directive('flocsSessionBar', function(practiceService) {
+.directive('flocsSessionBar', function(sessionBarService) {
   return {
     restrict: 'E',
     scope: {},
     templateUrl: 'session-bar/session-bar.tpl.html',
     // @ngInject
     controller: function($scope) {
-      $scope.session = practiceService.session;
+      $scope.sessionTasksStatuses = sessionBarService.sessionTasksStatuses;
     },
     link: function(scope, element, attrs) {
     }

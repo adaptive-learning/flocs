@@ -1,8 +1,20 @@
 <span>
-<span id="session-bar" class="nav navbar-text progress pull-down">
-  <span ng-style="progressBar" class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
-        aria-valuemin="0" aria-valuemax="7" style="width: {{session.progress}}%">
+<span id="session-bar" class="nav navbar-text">
+  <span ng-repeat="status in sessionTasksStatuses track by $index">
+    <span ng-switch="status">
+      <span ng-switch-when="solved">
+        <span class="glyphicon glyphicon-ok-circle"></span>
+      </span>
+      <span ng-switch-when="given-up">
+        <span class="glyphicon glyphicon-remove-circle"></span>
+      </span>
+      <span ng-switch-when="current">
+        <span class="glyphicon glyphicon-play-circle"></span>
+      </span>
+      <span ng-switch-default>
+        <span class="glyphicon glyphicon-circle"></span>
+      </span>
+    </span>
   </span>
 </span>
-<span class="nav navbar-text pull-right">{{session.task}}/{{session.max}}</span>
 </span>
