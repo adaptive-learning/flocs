@@ -5,6 +5,7 @@ from decimal import Decimal
 from common.flow_factors import FlowFactors
 from .tasks_difficulty import TasksDifficultyModel
 from django.db.models import Min
+from blocks.models import BlockModel
 
 
 def calculate_initial_skill():
@@ -70,6 +71,9 @@ class StudentModel(models.Model):
     free_credits = models.IntegerField(
             verbose_name="number of free credits to spend",
             default=0)
+
+    available_blocks = models.ManyToManyField(BlockModel,
+            verbose_name="blocks that has been purchased by the student")
 
     def earn_credits(self, credits):
         self.total_credits += credits
