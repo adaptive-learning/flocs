@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+  <object pk="1" model="blocks.blockmodel">
+    <field name="name_en">
+      Step forward
+    </field>
+    <field name="name_cs">
+      Krok vpřed
+    </field>
+    <field name="identifier">
+      maze_move_forward
+    </field>
+    <field name="price">
+      0
+    </field>
+  </object>
+</django-objects>

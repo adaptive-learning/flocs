@@ -55,6 +55,7 @@ INSTALLED_APPS = (
     'feedback',
     'tasks',
     'practice',
+    'blocks',
     'flocs',
 )
 
@@ -131,6 +132,7 @@ LANGUAGE_CODE = 'cs'  # fallback language
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
 MODELTRANSLATION_TRANSLATION_FILES = (
     'tasks.models.translation',
+    'blocks.models.translation',
     'practice.models.translation',
 )
 
