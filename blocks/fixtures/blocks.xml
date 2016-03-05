@@ -8,7 +8,201 @@
       Krok vpřed
     </field>
     <field name="identifier">
-      maze_move_forward
+      {
+      id: ['maze_move_forward']
+      }
+    </field>
+    <field name="price">
+      0
+    </field>
+  </object>
+  <object pk="2" model="blocks.blockmodel">
+    <field name="name_en">
+      Step backward
+    </field>
+    <field name="name_cs">
+      Krok vzad
+    </field>
+    <field name="identifier">
+      {
+      id: ['maze_move_backward']
+      }
+    </field>
+    <field name="price">
+      0
+    </field>
+  </object>
+  <object pk="3" model="blocks.blockmodel">
+    <field name="name_en">
+      Make a turn
+    </field>
+    <field name="name_cs">
+      Zatoč
+    </field>
+    <field name="identifier">
+      {
+      id: ['maze_turn', 'maze_turn_left', 'maze_turn_right']
+      }
+    </field>
+    <field name="price">
+      0
+    </field>
+  </object>
+  <object pk="4" model="blocks.blockmodel">
+    <field name="name_en">
+      Check path
+    </field>
+    <field name="name_cs">
+      Kontrola cesty
+    </field>
+    <field name="identifier">
+      {
+      id: ['maze_check_path', 'maze_check_path_left', 'maze_check_path_right']
+      }
+    </field>
+    <field name="price">
+      0
+    </field>
+  </object>
+  <object pk="5" model="blocks.blockmodel">
+    <field name="name_en">
+      Check goal
+    </field>
+    <field name="name_cs">
+      Kontrola cíle
+    </field>
+    <field name="identifier">
+      {
+      id: ['maze_check_goal']
+      }
+    </field>
+    <field name="price">
+      0
+    </field>
+  </object>
+  <object pk="6" model="blocks.blockmodel">
+    <field name="name_en">
+      Check color
+    </field>
+    <field name="name_cs">
+      Krok barvy
+    </field>
+    <field name="identifier">
+      {
+      id: ['maze_check_color']
+      }
+    </field>
+    <field name="price">
+      0
+    </field>
+  </object>
+  <object pk="7" model="blocks.blockmodel">
+    <field name="name_en">
+      If (else) statement
+    </field>
+    <field name="name_cs">
+      Podmínka If (else)
+    </field>
+    <field name="identifier">
+      {
+      id: ['controls_if', 'controls_if_else']
+      }
+    </field>
+    <field name="price">
+      0
+    </field>
+  </object>
+  <object pk="8" model="blocks.blockmodel">
+    <field name="name_en">
+      Number constant
+    </field>
+    <field name="name_cs">
+      Číselná konstanta
+    </field>
+    <field name="identifier">
+      {
+      id: ['math_number']
+      }
+    </field>
+    <field name="price">
+      0
+    </field>
+  </object>
+  <object pk="9" model="blocks.blockmodel">
+    <field name="name_en">
+      Repeat statement
+    </field>
+    <field name="name_cs">
+      Cyklus repeat
+    </field>
+    <field name="identifier">
+      {
+      id: ['controls_repeat', 'controls_repeat:10']
+      }
+    </field>
+    <field name="price">
+      0
+    </field>
+  </object>
+  <object pk="10" model="blocks.blockmodel">
+    <field name="name_en">
+      While loop
+    </field>
+    <field name="name_cs">
+      Cyklus while
+    </field>
+    <field name="identifier">
+      {
+      id: ['controls_while']
+      }
+    </field>
+    <field name="price">
+      0
+    </field>
+  </object>
+  <object pk="11" model="blocks.blockmodel">
+    <field name="name_en">
+      Equals
+    </field>
+    <field name="name_cs">
+      Rovná se
+    </field>
+    <field name="identifier">
+      {
+      id: ['logic_compare']
+      }
+    </field>
+    <field name="price">
+      0
+    </field>
+  </object>
+  <object pk="12" model="blocks.blockmodel">
+    <field name="name_en">
+      Logical operator
+    </field>
+    <field name="name_cs">
+      Logická operace
+    </field>
+    <field name="identifier">
+      {
+      id: ['logic_operation']
+      }
+    </field>
+    <field name="price">
+      0
+    </field>
+  </object>
+  <object pk="13" model="blocks.blockmodel">
+    <field name="name_en">
+      Variables
+    </field>
+    <field name="name_cs">
+      Proměnné
+    </field>
+    <field name="identifier">
+      {
+      id: ['variables_set', 'variables_get']
+      }
     </field>
     <field name="price">
       0
