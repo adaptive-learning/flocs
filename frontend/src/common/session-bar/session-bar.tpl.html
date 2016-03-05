@@ -3,10 +3,10 @@
   <span ng-repeat="status in sessionTasksStatuses track by $index">
     <span ng-switch="status">
       <span ng-switch-when="solved">
-        <span class="glyphicon glyphicon-ok-circle"></span>
+        <span class="glyphicon glyphicon-ok-circle status-ok"></span>
       </span>
       <span ng-switch-when="given-up">
-        <span class="glyphicon glyphicon-remove-circle"></span>
+        <span class="glyphicon glyphicon-remove-circle status-nok"></span>
       </span>
       <span ng-switch-when="current">
         <span class="glyphicon glyphicon-play-circle"></span>

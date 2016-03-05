@@ -1,15 +1,23 @@
 #session-bar {
-  width: 250px;
-  margin-bottom: 0px;
-  margin-left: 250px
+  font-size: 22px;
+  letter-spacing: -2px;
+  margin: 12px 0 0 0
+}
+
+#session-bar .status-ok {
+  color: #00CC00;
+}
+
+#session-bar .status-nok {
+  color: #CC0000;
 }
 
 /* definition of custom circle glyphicon */
 .glyphicon.glyphicon-circle {
-    margin-bottom: 0.15em;
-    overflow: hidden;
+  top: -2.7px;
+  margin-top: -5px;
 }
 .glyphicon.glyphicon-circle:before {
-    content:"\25cb";
-    font-size: 1.2em;
+  content:"\25cb";
+  font-size: 1.2em;
 }

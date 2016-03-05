@@ -14,13 +14,7 @@
               <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" ui-sref="home" translate>TITLE</a>
-
-      <span ng-show="$state.is('practice-task') && session.active">
-        <flocs-session-bar ></flocs-session-bar>
-      </span>
     </div>
-
-
 
     <div id="navbar"
          class="navbar-collapse collapse"
@@ -33,6 +27,14 @@
            but the newer versions require newer Angular (>= 1.4). Another workaround
            is to use collapse, instead of uib-collapse, but it's deprecated.
          -->
+
+      <span class="nav navbar-center">
+        <!-- place for state specific header info -->
+        <span ng-show="$state.is('practice-task') && session.active">
+          <flocs-session-bar ></flocs-session-bar>
+        </span>
+      </span>
+
       <ul class="nav navbar-nav navbar-right">
 
         <li uib-dropdown id="language-selector" class="dropdown">

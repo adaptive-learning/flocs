@@ -1,0 +1,13 @@
+@media (min-width: 768px) {
+  .navbar .navbar-nav {
+      display: inline-block;
+  }
+  .navbar .navbar-collapse {
+      text-align: center;
+  }
+  .navbar .navbar-center {
+      display: inline-block;
+      float: none;
+  }
+}
+
