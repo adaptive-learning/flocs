@@ -31,6 +31,7 @@ angular.module('flocs.practice')
     available: false,
     totalCredits: null,
     freeCredits: null,
+    availableBlocks: null,
   };
 
   userService.onUserChange(userChangeListener);
@@ -62,6 +63,7 @@ angular.module('flocs.practice')
       practiceInfo.totalCredits = details.totalCredits;
       practiceInfo.freeCredits = details.freeCredits;
       practiceInfo.solvedTasksCount = details.solvedTasksCount;
+      practiceInfo.availableBlocks = details.availableBlocks;
       return practiceInfo;
     }, function() {
       practiceInfo.available = false;

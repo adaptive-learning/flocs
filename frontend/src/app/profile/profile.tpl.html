@@ -28,6 +28,8 @@
         <dd>{{practiceInfo.totalCredits}}</dd>
         <dt translate>FREE_CREDITS</dt>
         <dd>{{practiceInfo.freeCredits}}</dd>
+        <dt translate>PROFILE_PAGE.AVAILABLE_BLOCKS</dt>
+        <dd ng-repeat="block in practiceInfo.availableBlocks">{{block.name}}</dd>
       </dl>
     </p>
     </div>

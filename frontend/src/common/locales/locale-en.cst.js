@@ -64,11 +64,12 @@ angular.module('flocs.locales')
   },
 
   PROFILE_PAGE: {
-    USERPROFILE: 'User profile',
+    AVAILABLE_BLOCKS: 'Available blocks',
     EMAIL: 'Email',
+    LOGGED_USER_NEEDED: 'In order to make this page function properly you must first log in.',
     SOLVED_TASKS_COUNT: 'Number of solved tasks',
     SOLVED_DISTINCT_TASKS_COUNT: 'Of which distinct',
-    LOGGED_USER_NEEDED: 'In order to make this page function properly you must first log in.',
+    USERPROFILE: 'User profile',
   },
 
   TASK_COMPLETION: {

@@ -70,11 +70,12 @@ angular.module('flocs.locales')
   },
 
   PROFILE_PAGE: {
-    USERPROFILE: 'Uživatelský profil',
+    AVAILABLE_BLOCKS: 'Dostupné bloky',
     EMAIL: 'E-mail',
+    LOGGED_USER_NEEDED: 'Pro správné fungování této stránky je potřeba se prihlásit.',
     SOLVED_TASKS_COUNT: 'Počet vyřešených úloh',
     SOLVED_DISTINCT_TASKS_COUNT: 'Z toho unikátních úloh',
-    LOGGED_USER_NEEDED: 'Pro správné fungování této stránky je potřeba se prihlásit.',
+    USERPROFILE: 'Uživatelský profil',
   },
 
   TASK_COMPLETION: {

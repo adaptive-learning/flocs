@@ -2,6 +2,7 @@
 """
 
 from django.db import models
+import json
 
 class BlockModel(models.Model):
     """Model for a block inside the Blockly environment
@@ -9,11 +10,12 @@ class BlockModel(models.Model):
     name = models.TextField(
         verbose_name="name of a block")
 
-    identifier = models.TextField(
-        verbose_name="unique identifier of a block used internally")
+    identifiers = models.TextField(
+        verbose_name="unique identifier(s) of a block(s) used internally")
 
     price = models.IntegerField(
-        verbose_name="number of currency units required to buy this block")
+        verbose_name="number of currency units required to buy this block",
+        default=0)
 
     def __str__(self):
         return '[{pk}] {name}'.format(pk=self.pk, name=self.name)
@@ -24,7 +26,7 @@ class BlockModel(models.Model):
         block_dict = {
             'block-id': self.pk,
             'name': self.name,
-            'identifier': self.identifier,
+            'identifiers': json.loads(self.identifiers),
             'price': self.price
         }
         return block_dict

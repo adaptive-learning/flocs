@@ -12,16 +12,17 @@ class BlockModelTest(TestCase):
         """Test of to_json method of block model class
         """
         name = 'foo'
-        identifier = 'bar'
+        identifiers = '{"identifiers": ["bar"]}'
+        identifiers_json = {'identifiers': ['bar']}
         price = 12
         block = BlockModel(
             name=name,
-            identifier=identifier,
+            identifiers=identifiers,
             price=price)
         block_json = block.to_json()
         self.assertIn('name', block_json)
-        self.assertIn('identifier', block_json)
+        self.assertIn('identifiers', block_json)
         self.assertIn('price', block_json)
         self.assertEquals(block_json['name'], name)
-        self.assertEquals(block_json['identifier'], identifier)
+        self.assertEquals(block_json['identifiers'], identifiers_json)
         self.assertEquals(block_json['price'], price)

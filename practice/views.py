@@ -139,7 +139,9 @@ def get_practice_details(request):
     details_dict = {
         'total-credits': practice_details.total_credits,
         'free-credits': practice_details.free_credits,
-        'solved-tasks-count': practice_details.solved_tasks_count
+        'solved-tasks-count': practice_details.solved_tasks_count,
+        'available-blocks': [block.to_json() for block in
+                             practice_details.available_blocks]
     }
     return JsonResponse(details_dict)
 

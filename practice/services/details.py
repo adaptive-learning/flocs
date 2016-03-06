@@ -3,14 +3,16 @@ from practice.models import StudentModel
 from practice.models import StudentTaskInfoModel
 
 PracticeDetails = namedtuple('PracticeDetails',
-        ['total_credits', 'free_credits', 'solved_tasks_count'])
+        ['total_credits', 'free_credits', 'solved_tasks_count',
+         'available_blocks'])
 
 def get_practice_details(user):
     student = StudentModel.objects.get_or_create(user=user)[0]
     practice_details = PracticeDetails(
         total_credits = student.total_credits,
         free_credits = student.free_credits,
-        solved_tasks_count = get_solved_tasks_count(student))
+        solved_tasks_count = get_solved_tasks_count(student),
+        available_blocks = student.get_available_blocks())
     return practice_details
 
 

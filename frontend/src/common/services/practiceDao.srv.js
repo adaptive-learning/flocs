@@ -45,6 +45,7 @@ angular.module('flocs.services')
         totalCredits: response.data['total-credits'],
         freeCredits: response.data['free-credits'],
         solvedTasksCount: response.data['solved-tasks-count'],
+        availableBlocks: response.data['available-blocks'],
       };
       return practiceDetails;
     }
