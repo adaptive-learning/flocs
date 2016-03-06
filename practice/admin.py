@@ -5,6 +5,8 @@ from .models import StudentModel
 from .models import TasksDifficultyModel
 from .models import TaskInstanceModel
 from .models import StudentTaskInfoModel
+from .models import PracticeSession
+from .models import SessionTaskInstance
 
 
 class StudentResource(resources.ModelResource):
@@ -36,7 +38,6 @@ class TaskInstanceAdmin(ImportExportModelAdmin):
 
 
 # other models registration
-#admin.site.register(StudentModel)
-#admin.site.register(TasksDifficultyModel)
-#admin.site.register(TaskInstanceModel, TaskInstanceAdmin)
 admin.site.register(StudentTaskInfoModel)
+admin.site.register(PracticeSession)
+admin.site.register(SessionTaskInstance)

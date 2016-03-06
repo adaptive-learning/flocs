@@ -21,6 +21,7 @@ from practice.core.task_selection import ScoreTaskSelector, IdSpecifidedTaskSele
 
 logger = logging.getLogger(__name__)
 
+# TODO: remove task field - it is redundant (task is in task_instance.task)
 TaskInfo = namedtuple('TaskInfo',
         ['task_instance', 'task', 'instructions', 'session'])
 
@@ -32,25 +33,17 @@ def get_task_by_id(user, task_id):
         active_task = sess_service.get_active_task_instance(session)
         if active_task.task.pk == task_id:
             # if the given task is same as active, go in session
-            return get_next_task_in_session(user)
+            return get_active_task_in_session(student)
     return get_task(student, IdSpecifidedTaskSelector(task_id))
 
 
 def get_next_task_in_session(user):
     student = StudentModel.objects.get_or_create(user=user)[0]
     if sess_service.has_unresolved_task(student):
-        # student is in the middle of solving a task in the session
-        session = sess_service.get_session(student)
-        active_task = sess_service.get_active_task_instance(session)
-        task_info = get_task(student, IdSpecifidedTaskSelector(active_task.task.pk))
-        # update task instance
-        session.last_task = task_info.task_instance
-        session.save()
-    else:
-        # next task in the session or new session
-        task_info = get_task(student, ScoreTaskSelector())
-        sess_service.next_task_in_session(student, task_info.task_instance)
-
+        return get_active_task_in_session(student)
+    # next task in the session or new session
+    task_info = get_task(student, ScoreTaskSelector())
+    sess_service.next_task_in_session(student, task_info.task_instance)
     # add info about session
     session = sess_service.get_session(student)
     task_info_with_sess = TaskInfo(
@@ -59,8 +52,21 @@ def get_next_task_in_session(user):
         instructions = task_info.instructions,
         session = session
     )
-
     return task_info_with_sess
+
+
+def get_active_task_in_session(student):
+    session = sess_service.get_session(student)
+    active_task_instance = sess_service.get_active_task_instance(session)
+    if not active_task_instance:
+        raise ValueError('Student {pk} does not have an active task.')
+    session_task_instance_info = TaskInfo(
+        task_instance = active_task_instance,
+        task = active_task_instance.task,
+        instructions = get_instructions(student, active_task_instance.task),
+        session = session
+    )
+    return session_task_instance_info
 
 
 def get_task(student, task_selector):
