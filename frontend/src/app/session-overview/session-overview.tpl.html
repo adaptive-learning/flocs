@@ -1,0 +1,23 @@
+<div class="jumbotron">
+  <div class="container">
+    <h2 translate>SESSION_OVERVIEW</h2>
+    <div ng-repeat="instance in overview.taskInstances">
+        <div class="well">
+          <b translate>TASK</b> {{instance.task.title}}
+          <div translate ng-if="instance.solved == true">SUCCESSFUL</div>
+          <div translate ng-if="instance.solved == false">UNSUCCESSFUL</div>
+        </div>
+      </dl>
+    </div>
+
+    <button
+        ng-click="cont()"
+        type="button"
+        class="btn btn-primary"
+        translate>
+      CONTINUE
+    </button>
+
+
+  </div>
+</div>

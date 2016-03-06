@@ -20,6 +20,7 @@ angular.module('flocs', [
     'flocs.taskPreview',
     'flocs.user',
     'flocs.profile',
+    'flocs.session-overview',
     'flocs.about',
 ])
 
@@ -76,6 +77,15 @@ angular.module('flocs', [
       controller: 'profileCtrl',
       data: {
           titleTraslationKey: 'PROFILE'
+      }
+    })
+
+    .state('session-overview', {
+      url: '/session-overview',
+      templateUrl: 'session-overview/session-overview.tpl.html',
+      controller: 'session-overviewCtrl',
+      data: {
+          titleTraslationKey: 'SESSION_OVERVIEW'
       }
     })
 

@@ -22,6 +22,9 @@ angular.module('flocs.practice')
     taskInstances: null,
     active: false
   };
+  var sessionOverview = {
+    taskInstances: null
+  };
 
   var attemptEvaluation = {
     earnedCredits: null
@@ -41,11 +44,14 @@ angular.module('flocs.practice')
     settingTaskById: settingTaskById,
     settingNextTask: settingNextTask,
     gettingPracticeInfo: gettingPracticeInfo,
+    isSessionOver: isSessionOver,
+    gettingSessionOverview: gettingSessionOverview,
     practicingTask: practicingTask,
     taskCompleted: taskCompleted,
     giveUpTask: giveUpTask,
     attemptEvaluation: attemptEvaluation,
     session: session,
+    sessionOverview: sessionOverview,
     practiceInfo: practiceInfo,
   };
 
@@ -68,6 +74,17 @@ angular.module('flocs.practice')
     }, function() {
       practiceInfo.available = false;
     });
+  }
+
+  function gettingSessionOverview() {
+    return practiceDao.gettingSessionOverview().then(function(overview) {
+      sessionOverview.taskInstances = overview.taskInstances;
+      return overview;
+    });
+  }
+
+  function isSessionOver() {
+    return (session.active && (session.task == session.max));
   }
 
   function settingNextTask() {

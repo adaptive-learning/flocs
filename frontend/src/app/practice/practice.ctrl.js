@@ -3,7 +3,7 @@
  * @ngInject
  */
 angular.module('flocs.practice')
-.controller('practiceCtrl', function ($scope, $timeout, ngDialog, $uibModal,
+.controller('practiceCtrl', function ($scope, $timeout, $state, ngDialog, $uibModal,
       $stateParams, practiceService, userService) {
 
   function practiceTask(taskId) {
@@ -20,11 +20,19 @@ angular.module('flocs.practice')
   }
 
   function taskFinished(result) {
-    practiceService.settingNextTask();
+    if (practiceService.isSessionOver()) {
+      $state.go('session-overview');
+    } else {
+      practiceService.settingNextTask();
+    }
   }
 
   function taskRejected() {
-    practiceService.settingNextTask();
+    if (practiceService.isSessionOver()) {
+      $state.go('session-overview');
+    } else {
+       practiceService.settingNextTask();
+    }
   }
 
   function taskAttempted(attemptResult) {

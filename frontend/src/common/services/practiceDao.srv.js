@@ -10,6 +10,7 @@ angular.module('flocs.services')
     gettingNextTask: gettingNextTask,
     gettingTaskById: gettingTaskById,
     gettingPracticeDetails: gettingPracticeDetails,
+    gettingSessionOverview: gettingSessionOverview,
     sendingAttemptReport: sendingAttemptReport,
     sendingFlowReport: sendingFlowReport,
     sendingGiveUpReport: sendingGiveUpReport,
@@ -48,6 +49,17 @@ angular.module('flocs.services')
         availableBlocks: response.data['available-blocks'],
       };
       return practiceDetails;
+    }
+  }
+
+  function gettingSessionOverview() {
+    return $http.get('/api/practice/session-overview').then(parseResponse);
+
+    function parseResponse(response) {
+      var sessionOverview = {
+        taskInstances: response.data['task-instances']
+      };
+      return sessionOverview;
     }
   }
 
