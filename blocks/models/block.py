@@ -5,7 +5,7 @@ from django.db import models
 import json
 
 class BlockModel(models.Model):
-    """Model for a block inside the Blockly environment
+    """Representation of a code block
     """
     name = models.TextField(
         verbose_name="name of a block")
@@ -14,8 +14,12 @@ class BlockModel(models.Model):
         verbose_name="unique identifier(s) of a block(s) used internally")
 
     price = models.IntegerField(
-        verbose_name="number of currency units required to buy this block",
+        help_text="number of currency units required to buy this block",
         default=0)
+
+    difficulty = models.FloatField(
+        help_text="real number between -1 (easiest) and 1 (most difficult)",
+        default=1.)
 
     def __str__(self):
         return '[{pk}] {name}'.format(pk=self.pk, name=self.name)

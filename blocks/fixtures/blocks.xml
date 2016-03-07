@@ -15,24 +15,12 @@
     <field name="price">
       0
     </field>
+    <field name="difficulty">
+      -1.0
+    </field>
   </object>
+
   <object pk="2" model="blocks.blockmodel">
-    <field name="name_en">
-      Step backward
-    </field>
-    <field name="name_cs">
-      Krok vzad
-    </field>
-    <field name="identifiers">
-      {
-      "identifiers": ["maze_move_backward"]
-      }
-    </field>
-    <field name="price">
-      0
-    </field>
-  </object>
-  <object pk="3" model="blocks.blockmodel">
     <field name="name_en">
       Make a turn
     </field>
@@ -45,25 +33,53 @@
       }
     </field>
     <field name="price">
-      0
+      1
+    </field>
+    <field name="difficulty">
+      -0.9
     </field>
   </object>
-  <object pk="4" model="blocks.blockmodel">
+
+  <object pk="3" model="blocks.blockmodel">
     <field name="name_en">
-      Check path
+      Repeat statement
     </field>
     <field name="name_cs">
-      Kontrola cesty
+      Cyklus repeat
     </field>
     <field name="identifiers">
       {
-      "identifiers": ["maze_check_path", "maze_check_path_left", "maze_check_path_right"]
+      "identifiers": ["controls_repeat", "controls_repeat:10"]
       }
     </field>
     <field name="price">
-      0
+      2
+    </field>
+    <field name="difficulty">
+      -0.7
     </field>
   </object>
+
+  <object pk="4" model="blocks.blockmodel">
+    <field name="name_en">
+      While loop
+    </field>
+    <field name="name_cs">
+      Cyklus while
+    </field>
+    <field name="identifiers">
+      {
+      "identifiers": ["controls_while"]
+      }
+    </field>
+    <field name="price">
+      3
+    </field>
+    <field name="difficulty">
+      -0.5
+    </field>
+  </object>
+
   <object pk="5" model="blocks.blockmodel">
     <field name="name_en">
       Check goal
@@ -77,10 +93,34 @@
       }
     </field>
     <field name="price">
-      0
+      3
+    </field>
+    <field name="difficulty">
+      -0.5
     </field>
   </object>
+
   <object pk="6" model="blocks.blockmodel">
+    <field name="name_en">
+      Check path
+    </field>
+    <field name="name_cs">
+      Kontrola cesty
+    </field>
+    <field name="identifiers">
+      {
+      "identifiers": ["maze_check_path", "maze_check_path_left", "maze_check_path_right"]
+      }
+    </field>
+    <field name="price">
+      4
+    </field>
+    <field name="difficulty">
+      -0.3
+    </field>
+  </object>
+
+  <object pk="7" model="blocks.blockmodel">
     <field name="name_en">
       Check color
     </field>
@@ -93,26 +133,75 @@
       }
     </field>
     <field name="price">
-      0
+      5
+    </field>
+    <field name="difficulty">
+      -0.1
     </field>
   </object>
-  <object pk="7" model="blocks.blockmodel">
+
+  <object pk="8" model="blocks.blockmodel">
     <field name="name_en">
-      If (else) statement
+      If statement
     </field>
     <field name="name_cs">
-      Podmínka If (else)
+      Podmínka pokud-pak
     </field>
     <field name="identifiers">
       {
-      "identifiers": ["controls_if", "controls_if_else"]
+      "identifiers": ["controls_if"]
       }
     </field>
     <field name="price">
-      0
+      7
+    </field>
+    <field name="difficulty">
+      0.1
     </field>
   </object>
-  <object pk="8" model="blocks.blockmodel">
+
+  <object pk="9" model="blocks.blockmodel">
+    <field name="name_en">
+      If-else statement
+    </field>
+    <field name="name_cs">
+      Podmínka pokud-pak-jinak
+    </field>
+    <field name="identifiers">
+      {
+      "identifiers": ["controls_if_else"]
+      }
+    </field>
+    <field name="price">
+      10
+    </field>
+    <field name="difficulty">
+      0.4
+    </field>
+  </object>
+
+  <object pk="10" model="blocks.blockmodel">
+    <field name="name_en">
+      Logical operators
+    </field>
+    <field name="name_cs">
+      Logické operace
+    </field>
+    <field name="identifiers">
+      {
+      "identifiers": ["logic_operation"]
+      }
+    </field>
+    <field name="price">
+      15
+    </field>
+    <field name="difficulty">
+      0.6
+    </field>
+  </object>
+
+  <!--
+  <object pk="11" model="blocks.blockmodel">
     <field name="name_en">
       Number constant
     </field>
@@ -125,42 +214,11 @@
       }
     </field>
     <field name="price">
-      0
+      15
     </field>
   </object>
-  <object pk="9" model="blocks.blockmodel">
-    <field name="name_en">
-      Repeat statement
-    </field>
-    <field name="name_cs">
-      Cyklus repeat
-    </field>
-    <field name="identifiers">
-      {
-      "identifiers": ["controls_repeat", "controls_repeat:10"]
-      }
-    </field>
-    <field name="price">
-      0
-    </field>
-  </object>
-  <object pk="10" model="blocks.blockmodel">
-    <field name="name_en">
-      While loop
-    </field>
-    <field name="name_cs">
-      Cyklus while
-    </field>
-    <field name="identifiers">
-      {
-      "identifiers": ["controls_while"]
-      }
-    </field>
-    <field name="price">
-      0
-    </field>
-  </object>
-  <object pk="11" model="blocks.blockmodel">
+
+  <object pk="12" model="blocks.blockmodel">
     <field name="name_en">
       Equals
     </field>
@@ -173,25 +231,10 @@
       }
     </field>
     <field name="price">
-      0
+      15
     </field>
   </object>
-  <object pk="12" model="blocks.blockmodel">
-    <field name="name_en">
-      Logical operator
-    </field>
-    <field name="name_cs">
-      Logická operace
-    </field>
-    <field name="identifiers">
-      {
-      "identifiers": ["logic_operation"]
-      }
-    </field>
-    <field name="price">
-      0
-    </field>
-  </object>
+
   <object pk="13" model="blocks.blockmodel">
     <field name="name_en">
       Variables
@@ -205,7 +248,9 @@
       }
     </field>
     <field name="price">
-      0
+      15
     </field>
   </object>
+  -->
+
 </django-objects>
