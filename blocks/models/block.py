@@ -4,9 +4,13 @@
 from django.db import models
 import json
 
+from .block_manager import BlockManager
+
 class BlockModel(models.Model):
     """Representation of a code block
     """
+    objects = BlockManager()
+
     name = models.TextField(
         verbose_name="name of a block")
 
