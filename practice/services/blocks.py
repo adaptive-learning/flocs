@@ -8,12 +8,12 @@ def get_next_block_for_student(student):
     Returns next block which is not yet owned by the student.
     Order is given by difficulties of blocks.
 
-    Raises NoNextBlock if the student already owns all blocks.
+    Raises NoNextBlockException if the student already owns all blocks.
     """
     try:
         return next(next_blocks_for_student(student))
     except StopIteration:
-        raise NoNextBlock('Student {0} already owns all blocks.'.format(student.pk))
+        raise NoNextBlockException('Student {0} already owns all blocks.'.format(student.pk))
 
 
 def next_blocks_for_student(student):
@@ -32,8 +32,16 @@ def next_blocks_for_student(student):
             yield block
 
 
-class NoNextBlock(LookupError):
+class NoNextBlockException(LookupError):
     """
     Exception raised when next block is requested, but there is no next block.
+    """
+    pass
+
+
+class NotEnoughtCreditsException(ValueError):
+    """
+    Exception raised when an operation requires more credits than how many are
+    available
     """
     pass

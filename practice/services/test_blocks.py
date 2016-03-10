@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from blocks.models import BlockModel
 from practice.models import StudentModel
-from practice.services.blocks import next_blocks_for_student, NoNextBlock
+from practice.services.blocks import next_blocks_for_student, NoNextBlockException
 from practice.services.blocks import get_next_block_for_student
 
 
@@ -42,5 +42,5 @@ class BlocksServiceTest(TestCase):
     def test_get_next_block_for_student_all(self):
         self.student.available_blocks = [self.block1, self.block2, self.block3, self.block4]
         self.student.save()
-        with self.assertRaises(NoNextBlock):
+        with self.assertRaises(NoNextBlockException):
             get_next_block_for_student(self.student)
