@@ -37,11 +37,3 @@ class NoNextBlockException(LookupError):
     Exception raised when next block is requested, but there is no next block.
     """
     pass
-
-
-class NotEnoughtCreditsException(ValueError):
-    """
-    Exception raised when an operation requires more credits than how many are
-    available
-    """
-    pass
