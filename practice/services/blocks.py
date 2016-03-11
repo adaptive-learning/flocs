@@ -3,6 +3,21 @@ from blocks.models import BlockModel
 from practice.models import StudentModel
 
 
+def get_next_purchasable_block(student):
+    """
+    Returns next block not yet owned by student, but only if the student can
+    afford to buy this block. Otherwise returns None.
+    """
+    try:
+        next_block = get_next_block_for_student(student)
+        if student.free_credits >= next_block.price:
+            return next_block
+        else:
+            return None
+    except NoNextBlockException:
+        return None
+
+
 def get_next_block_for_student(student):
     """
     Returns next block which is not yet owned by the student.
@@ -16,10 +31,20 @@ def get_next_block_for_student(student):
         raise NoNextBlockException('Student {0} already owns all blocks.'.format(student.pk))
 
 
+def next_purchasable_blocks(student):
+    """
+    Generator of blocks which the student doesn't own and can afford to buy
+    """
+    return next_blocks_for_student(student)
+
+
+
 def next_blocks_for_student(student):
     """
-    Returns generator of blocks not yet owned by given student.
-    Order is given by difficulties of blocks.
+    Generator of blocks not yet owned by given student
+
+    Yields:
+        blocks not owned by the student in order given by their difficulties
     """
     all_blocks_ordered = BlockModel.objects.all_ordered()
     owned_blocks_ordered = chain(student.available_blocks.all_ordered(),
