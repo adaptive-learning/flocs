@@ -15,6 +15,8 @@ from practice.models.task_instance import FlowRating
 from practice.services.parameters_update import update_parameters
 from practice.services.instructions_service import get_instructions
 from practice.services import practice_session_service as sess_service
+from practice.services.blocks import get_next_purchasable_block
+from practice.services.purchases import buy_block
 from practice.core.credits import difficulty_to_credits
 from practice.core.flow_prediction import predict_flow
 from practice.core.task_selection import ScoreTaskSelector, IdSpecifidedTaskSelector
@@ -174,6 +176,10 @@ def process_attempt_report(user, report):
             task_difficulty = practice_context.get(FlowFactors.TASK_BIAS, task=task.pk)
             credits = difficulty_to_credits(task_difficulty)
             student.earn_credits(credits)
+            new_block = get_next_purchasable_block(student)
+            if new_block:
+                buy_block(student=student, block=new_block)
+                logger.debug('Student {0} bought block {1}'.format(student.pk, new_block))
             student.save()
 
     task_solved_first_time = solved and not solved_before,
