@@ -77,13 +77,22 @@ def post_attempt_report(request):
     logger.log_request(request)
     body_unicode = request.body.decode('utf-8')
     data = json.loads(body_unicode)
-    task_solved_first_time, credits = practice_service.process_attempt_report(
+    processing_result = practice_service.process_attempt_report(
             user=request.user, report=data)
     response = {
-        'task-solved-first-time': task_solved_first_time,
-        'earned-credits': credits
+        'task-solved-first-time': processing_result.task_solved_first_time,
+        'earned-credits': processing_result.credits,
+        'purchases': [block_to_json(b) for b in processing_result.purchases]
     }
     return JsonResponse(response)
+
+
+def block_to_json(block):
+    json_dict = {
+        'name': block.name,
+        'price': block.price
+    }
+    return json_dict
 
 
 def post_giveup_report(request):
@@ -145,6 +154,7 @@ def get_practice_details(request):
     }
     return JsonResponse(details_dict)
 
+
 @allow_lazy_user
 def get_session_overview(request):
     """
@@ -189,6 +199,7 @@ def task_instance_to_json(task_instance):
         'attempt-count': task_instance.attempt_count
     }
     return task_instance_dict
+
 
 def session_overview_to_json(session_overview):
     sess_overview_dict = {

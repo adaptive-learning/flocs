@@ -19,6 +19,7 @@ angular.module('flocs.locales')
   PASSWORD: 'Heslo',
   PASSWORD_AGAIN: 'Heslo znovu',
   PRACTICE: 'Trénink',
+  PRICE: 'cena',
   PRIVACY: 'Soukromí',
   PROFILE: 'Profil',
   RUN_PROGRAM: 'Spusť program',
@@ -86,6 +87,7 @@ angular.module('flocs.locales')
   TASK_COMPLETION: {
     TASK_SOLVED: 'Úloha vyřešena!',
     CREDITS_INFO: 'Získal jsi {CREDITS, plural, one{1 kredit} few{# kredity} other{# kreditů} }.',
+    PURCHASED_BLOCKS: 'Nové bloky',
     FLOW_QUESTION: 'Jak těžká pro tebe úloha byla?',
     EASY: 'Lehká',
     RIGHT: 'Akorát',

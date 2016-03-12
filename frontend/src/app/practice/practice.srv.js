@@ -27,7 +27,8 @@ angular.module('flocs.practice')
   };
 
   var attemptEvaluation = {
-    earnedCredits: null
+    earnedCredits: null,
+    purchases: null,
   };
 
   var practiceInfo = {
@@ -182,6 +183,7 @@ angular.module('flocs.practice')
       attemptReport.solved = result.solved;
       practiceDao.sendingAttemptReport(attemptReport).then(function(response) {
         attemptEvaluation.earnedCredits = response['earned-credits'];
+        attemptEvaluation.purchases = response['purchases'];
         gettingPracticeInfo();
         taskFinishedDeferred.notify(result);
       });

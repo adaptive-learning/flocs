@@ -19,6 +19,7 @@ angular.module('flocs.locales')
   PASSWORD: 'Password',
   PASSWORD_AGAIN: 'Password again',
   PRACTICE: 'Practice',
+  PRICE: 'price',
   PRIVACY: 'Privacy',
   PROFILE: 'Profile',
   RUN_PROGRAM: 'Run program',
@@ -80,6 +81,7 @@ angular.module('flocs.locales')
   TASK_COMPLETION: {
     TASK_SOLVED: 'Task solved!',
     CREDITS_INFO: 'You have earned {CREDITS, plural, one{1 credit} other{# credits} }.',
+    PURCHASED_BLOCKS: 'New blocks',
     FLOW_QUESTION: 'How difficult was the task for you?',
     EASY: 'Too Easy',
     RIGHT: 'Just Right',

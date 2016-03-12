@@ -167,6 +167,7 @@ def process_attempt_report(user, report):
     student_task_info.save()
 
     credits = 0
+    purchases = []
     if solved:
         task = task_instance.task
         practice_context = create_practice_context(student=student, task=task)
@@ -179,12 +180,16 @@ def process_attempt_report(user, report):
             new_block = get_next_purchasable_block(student)
             if new_block:
                 buy_block(student=student, block=new_block)
+                purchases.append(new_block)
                 logger.debug('Student {0} bought block {1}'.format(student.pk, new_block))
             student.save()
 
     task_solved_first_time = solved and not solved_before,
     logger.info("Reporting attempt was successful for student %s with result %s", student.pk, solved)
-    return (task_solved_first_time, credits)
+    result = namedtuple('processAttemptReportResult',
+                        ['task_solved_first_time', 'credits', 'purchases'])\
+                        (task_solved_first_time, credits, purchases)
+    return result
 
 
 def process_giveup_report(user, task_instance_id, time_spent):
