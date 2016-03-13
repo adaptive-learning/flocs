@@ -1,0 +1,207 @@
+\documentclass[xcolor=dvipsnames, 14pt]{beamer}
+%\documentclass[xcolor=dvipsnames, bigger, aspectratio=169]{beamer}
+
+\definecolor{Saffron}{HTML}{F4C430}
+\usecolortheme[named=Saffron]{structure}
+
+\mode<presentation> {
+	\usetheme[height=2em]{Rochester}
+	\setbeamercovered{transparent}
+}
+
+\setbeamertemplate{caption}{\insertcaption\par}
+\setbeamertemplate{navigation symbols}{}%remove navigation symbols
+
+\setbeamercolor{frametitle}{fg=black}
+\setbeamercolor{title}{fg=black}
+\setbeamercolor{navigation symbols dimmed}{fg=black!10}
+\setbeamercolor{navigation symbols}{fg=black!30}
+\setbeamercolor{section number projected}{fg=black}
+\setbeamercolor{item projected}{fg=black}
+
+
+\usepackage[utf8x]{inputenc}
+\usepackage[resetfonts]{cmap}
+\usepackage{lmodern}
+\usepackage[czech]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{tikz}
+
+\usepackage{hyperref}
+\hypersetup{unicode=true}
+
+% ----- macros -----
+\newcommand{\imageW}[1]{%
+  \makebox[\textwidth][c]{\includegraphics[width=1.12\textwidth]{img/#1}}}
+\newcommand{\imageH}[1]{%
+  \makebox[\textwidth][c]{\includegraphics[height=1.0\textheight]{img/#1}}}
+
+% ---- info -----
+\title{Adaptabilní programování}
+\author{Jaroslav~Čechák \and Tomáš~Effenberger \and  Jiří~Mauritz}
+\institute{Fakulta informatiky, Masarykova univerzita}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Cíl}
+\begin{itemize}
+\item aplikace pro efektivní učení programování
+\item učení užitečných dovedností
+\item zábavné úlohy optimální obtížnosti
+\item stav \emph{flow} $\rightarrow$ maximalizace učení
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Flow}
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[font=\sffamily,xscale=5, yscale=5]
+  \large
+  %\draw [lightgray, fill=gray] (0,0) -- (0.1,0) -- (1,0.8) -- (0.8,1) -- (0,0.1) -- (0,0);
+  \draw (0.1,0) -- (1,0.8);
+  \draw (0,0.1) -- (0.8,1);
+  \draw [thick, <->] (0,1) node [left] {obtížnost} -- (0,0) -- (1,0) node [below right] {dovednost};
+  \node at (0.27,0.82) {\emph{frustrace}};
+  \node at (0.6,0.6) {\emph{flow}};
+  \node at (0.7,0.2) {\emph{nuda}};
+  \end{tikzpicture}
+  %\caption{Relationship between challenge and skill.}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Existující projekty a výzkum}
+\begin{itemize}
+\item mnoho stránek pro výuku programování
+  \begin{itemize}
+  \item code.org, codecademy.com, Khan Academy, \ldots
+  % NOTE: destiky online kurzu...
+  % casto i nejaka lokalizce do cestiny
+  \item skvělé v motivaci $\times$ žádná adaptabilita
+  \end{itemize}
+\item Problem Solving Tutor -- práce s časem %-- skills and difficulties estimation
+\item motivace: robot v mřížce, (želví) grafika
+\item odstranění překážek (např. syntaxe)
+\item výzkum: model studenta, výběr úloh, nápovědy
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{První prototyp}
+\imageW{easy-task-initial.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{První prototyp}
+\imageW{easy-task-program.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{První prototyp}
+\imageW{easy-task-solved.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{První prototyp}
+\imageW{task-loops-initial.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{První prototyp}
+\imageW{complex-program.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{První prototyp}
+\imageW{task-colors.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{První prototyp}
+\imageW{task-keys.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{První prototyp}
+\imageW{task-pits.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{Modely a výběr úloh}
+\begin{itemize}
+\item výběr úloh -- kritéria:
+  \begin{itemize}
+  \item predikované flow
+  \item čas od posledního pokusu
+  \end{itemize}
+\item model obtížnosti úloh
+\item model dovednosti studentů
+\item globální obtížnost/dovednost + koncepty
+\item iniciální nastavení parametrů
+\item online odhad parametrů (Elo)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Simulace}
+\imageH{practice-simulation-normal.pdf}
+\end{frame}
+
+\begin{frame}
+\frametitle{Reálné procvičování}
+\imageH{practice-session-real-student-15.pdf}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zpětná vazba}
+\begin{itemize}
+\item obtížnost roste správným tempem
+\item instrukce jasné $\times$ přehlédnutelné/ignorovatelné
+\item neintuitivní uživatelské rozhraní %(chybí vysvětlení, jak ho používat)
+\item neustálé změny bloků k dispozici
+\item tlačítko \emph{``Jednodušší úloha''} \checkmark
+\item nastavitelná rychlost robota \checkmark
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Na čem pracujeme}
+
+% NOTE: prvni prototyp byl takovy proof of concept
+% - ted: 2. prototyp - uz by mel byt opravdu pouzitelny
+
+\begin{itemize}
+\item konečné procvičovací relace
+\item motivace + interpretace dovednosti % kredity, kupovani bloku
+\item uspořádání bloků  % jako bonus z predchoziho
+\item statistiky a vizualizace % pro nas i pro uzivatele
+\item intuitivní a příjemné uživatelské rozhraní
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Shrnutí}
+\begin{itemize}
+\item systém pro adaptabilní výuku programování
+\item úlohy v bludišti, programování pomocí bloků
+\item flow, Elo model
+\item první prototyp: \small{\url{http://flocs.thran.cz}}\normalsize
+\item repozitář: \small{https://github.com/adaptive-learning/flocs}
+\end{itemize}
+\end{frame}
+
+\end{document}
