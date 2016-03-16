@@ -26,8 +26,11 @@
     </field>
     <field type="TextField" name="workspace_settings">
     {
-      "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right"]
+      "toolbox": ["maze_move_forward"]
     }
+    </field>
+    <field name="block_level">
+      1
     </field>
   </object>
 
@@ -60,6 +63,9 @@
       "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right"]
     }
     </field>
+    <field name="block_level">
+      2
+    </field>
   </object>
 
   <object pk="3" model="tasks.taskmodel">
@@ -90,6 +96,9 @@
     {
       "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right"]
     }
+    </field>
+    <field name="block_level">
+      2
     </field>
   </object>
 
@@ -122,6 +131,9 @@
       "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right"]
     }
     </field>
+    <field name="block_level">
+      2
+    </field>
   </object>
 
   <object pk="5" model="tasks.taskmodel">
@@ -153,6 +165,9 @@
       "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right"]
     }
     </field>
+    <field name="block_level">
+      2
+    </field>
   </object>
 
   <object pk="6" model="tasks.taskmodel">
@@ -183,6 +198,9 @@
     {
       "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right"]
     }
+    </field>
+    <field name="block_level">
+      2
     </field>
   </object>
 
@@ -216,6 +234,9 @@
       "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right"]
     }
     </field>
+    <field name="block_level">
+      2
+    </field>
   </object>
 
   <object pk="8" model="tasks.taskmodel">
@@ -246,6 +267,9 @@
     {
       "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right"]
     }
+    </field>
+    <field name="block_level">
+      2
     </field>
   </object>
 
@@ -278,6 +302,9 @@
       "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right"]
     }
     </field>
+    <field name="block_level">
+      2
+    </field>
   </object>
 
   <object pk="10" model="tasks.taskmodel">
@@ -308,6 +335,9 @@
     {
       "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right"]
     }
+    </field>
+    <field name="block_level">
+      2
     </field>
   </object>
 
@@ -343,6 +373,9 @@
       "blocksLimit": 6
     }
     </field>
+    <field name="block_level">
+      3
+    </field>
   </object>
 
  <!-- Repeat -->
@@ -376,6 +409,9 @@
       "toolbox": ["maze_move_forward", "maze_turn_right", "controls_repeat:10"],
       "blocksLimit": 7
     }
+    </field>
+    <field name="block_level">
+      3
     </field>
   </object>
 
@@ -414,6 +450,9 @@
       "blocksLimit": 7
     }
     </field>
+    <field name="block_level">
+      6
+    </field>
   </object>
 
 <!-- While -->
@@ -449,6 +488,9 @@
                     "controls_while"],
         "blocksLimit": 6
       }
+    </field>
+    <field name="block_level">
+      6
     </field>
   </object>
 
@@ -486,6 +528,9 @@
         "blocksLimit": 7
       }
     </field>
+    <field name="block_level">
+      6
+    </field>
   </object>
 
   <object pk="16" model="tasks.taskmodel">
@@ -521,6 +566,9 @@
                     "controls_while"],
         "blocksLimit": 6
       }
+    </field>
+    <field name="block_level">
+      6
     </field>
   </object>
 
@@ -560,6 +608,9 @@
       "blocksLimit": 6
     }
     </field>
+    <field name="block_level">
+      8
+    </field>
   </object>
 
 
@@ -596,6 +647,9 @@
                   "controls_repeat:10"],
       "blocksLimit": 3
     }
+    </field>
+    <field name="block_level">
+      3
     </field>
   </object>
 
@@ -642,6 +696,9 @@
       "blocksLimit": 3
     }
     </field>
+    <field name="block_level">
+      6
+    </field>
   </object>
 
   <object pk="20" model="tasks.taskmodel">
@@ -675,6 +732,9 @@
       "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right", "controls_repeat:10"],
       "blocksLimit": 7
     }
+    </field>
+    <field name="block_level">
+      3
     </field>
   </object>
 
@@ -714,6 +774,9 @@
       ],
       "blocksLimit": 7
     }
+    </field>
+    <field name="block_level">
+      3
     </field>
   </object>
 
@@ -755,6 +818,9 @@
       "blocksLimit": 7
     }
     </field>
+    <field name="block_level">
+      8
+    </field>
   </object>
 
   <object pk="23" model="tasks.taskmodel">
@@ -789,6 +855,9 @@
 
     }
     </field>
+    <field name="block_level">
+      3
+    </field>
   </object>
 
   <object pk="24" model="tasks.taskmodel">
@@ -821,6 +890,9 @@
       "toolbox": ["maze_category", "loops_category"],
       "blocksLimit": 8
     }
+    </field>
+    <field name="block_level">
+      7
     </field>
   </object>
 
@@ -855,6 +927,9 @@
       "blocksLimit": 6
     }
     </field>
+    <field name="block_level">
+      3
+    </field>
   </object>
 
   <object pk="26" model="tasks.taskmodel">
@@ -887,6 +962,9 @@
       "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right", "controls_repeat:10"],
       "blocksLimit": 10
     }
+    </field>
+    <field name="block_level">
+      3
     </field>
   </object>
 
@@ -932,6 +1010,9 @@
       ],
       "blocksLimit": 7
     }
+    </field>
+    <field name="block_level">
+      5
     </field>
   </object>
 
@@ -979,6 +1060,9 @@
       "blocksLimit": 7
     }
     </field>
+    <field name="block_level">
+      8
+    </field>
   </object>
 
   <object pk="29" model="tasks.taskmodel">
@@ -1023,6 +1107,9 @@
                   "controls_while"],
       "blocksLimit": 10
     }
+    </field>
+    <field name="block_level">
+      8
     </field>
   </object>
 
@@ -1070,6 +1157,9 @@
       "blocksLimit": 10
     }
     </field>
+    <field name="block_level">
+      9
+    </field>
   </object>
 
   <object pk="31" model="tasks.taskmodel">
@@ -1109,6 +1199,9 @@
                   "controls_while"],
       "blocksLimit": 6
     }
+    </field>
+    <field name="block_level">
+      8
     </field>
   </object>
 
@@ -1154,6 +1247,9 @@
                   "controls_while"],
       "blocksLimit": 9
     }
+    </field>
+    <field name="block_level">
+      8
     </field>
   </object>
 
@@ -1202,6 +1298,9 @@
       "blocksLimit": 15
     }
     </field>
+    <field name="block_level">
+      8
+    </field>
   </object>
 
   <object pk="34" model="tasks.taskmodel">
@@ -1248,6 +1347,9 @@
       "blocksLimit": 11
     }
     </field>
+    <field name="block_level">
+      8
+    </field>
   </object>
 
   <object pk="35" model="tasks.taskmodel">
@@ -1293,6 +1395,9 @@
                   "controls_while"],
       "blocksLimit": 19
     }
+    </field>
+    <field name="block_level">
+      8
     </field>
   </object>
 
@@ -1342,6 +1447,9 @@
       "blocksLimit": 15
     }
     </field>
+    <field name="block_level">
+      10
+    </field>
   </object>
 
   <object pk="37" model="tasks.taskmodel">
@@ -1383,6 +1491,9 @@
       "toolbox": ["maze_move_forward", "maze_turn_left", "maze_turn_right", "controls_while", "maze_check_goal", "maze_check_path"],
       "blocksLimit": 14
     }
+    </field>
+    <field name="block_level">
+      6
     </field>
   </object>
 
@@ -1432,6 +1543,9 @@
       "blocksLimit": 15
     }
     </field>
+    <field name="block_level">
+      8
+    </field>
   </object>
 
 
@@ -1478,6 +1592,9 @@
       "blocksLimit": 10
     }
     </field>
+    <field name="block_level">
+      6
+    </field>
   </object>
 
     <object pk="40" model="tasks.taskmodel">
@@ -1523,6 +1640,9 @@
                   "controls_if"],
       "blocksLimit": 15
     }
+    </field>
+    <field name="block_level">
+      8
     </field>
   </object>
 
@@ -1571,6 +1691,9 @@
       "blocksLimit": 15
       }
     </field>
+    <field name="block_level">
+      7
+    </field>
   </object>
 
   <object pk="42" model="tasks.taskmodel">
@@ -1611,6 +1734,9 @@
                 "maze_check_goal"],
       "blocksLimit": 6
     }
+    </field>
+    <field name="block_level">
+      6
     </field>
   </object>
 
@@ -1658,6 +1784,9 @@
       "blocksLimit": 15
       }
     </field>
+    <field name="block_level">
+      10
+    </field>
   </object>
 
   <object pk="44" model="tasks.taskmodel">
@@ -1699,6 +1828,9 @@
       "blocksLimit": 12
     }
     </field>
+    <field name="block_level">
+      10
+    </field>
   </object>
 
   <object pk="45" model="tasks.taskmodel">
@@ -1738,6 +1870,9 @@
                 "maze_check_path"],
       "blocksLimit": 21
     }
+    </field>
+    <field name="block_level">
+      7
     </field>
   </object>
 
@@ -1785,6 +1920,9 @@
       "blocksLimit": 15
       }
     </field>
+    <field name="block_level">
+      6
+    </field>
   </object>
 
  <object pk="47" model="tasks.taskmodel">
@@ -1831,12 +1969,16 @@
       "blocksLimit": 13
       }
     </field>
+    <field name="block_level">
+      7
+    </field>
   </object>
 
 
+<!-- IGNORED: missing variable blocks+concept
   <object pk="48" model="tasks.taskmodel">
     <field name="title_en">
-      Stpes counting
+      Steps counting
     </field>
     <field name="title_cs">
       Počítání kroků
@@ -1877,7 +2019,9 @@
     }
     </field>
   </object>
+-->
 
+<!-- IGNORED: missing variable blocks+concept
 <object pk="49" model="tasks.taskmodel">
     <field name="title_en">
       Linked list
@@ -1928,6 +2072,7 @@
       }
     </field>
   </object>
+-->
 
 <object pk="50" model="tasks.taskmodel">
     <field name="title_en">
@@ -1974,6 +2119,9 @@
       "blocksLimit": 14
       }
     </field>
+    <field name="block_level">
+      8
+    </field>
   </object>
 
   <object pk="51" model="tasks.taskmodel">
@@ -2013,10 +2161,13 @@
       "blocksLimit": 16
     }
     </field>
+    <field name="block_level">
+      7
+    </field>
   </object>
 
 
-  <!-- title: Mínus jedna -->
+<!-- IGNORED: missing variable blocks+concept
 <object pk="52" model="tasks.taskmodel">
     <field name="title_en">
       Shortening detours
@@ -2066,5 +2217,6 @@
       }
     </field>
   </object>
+-->
 
 </django-objects>

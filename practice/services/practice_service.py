@@ -16,6 +16,7 @@ from practice.services.parameters_update import update_parameters
 from practice.services.instructions_service import get_instructions
 from practice.services import practice_session_service as sess_service
 from practice.services.blocks import get_next_purchasable_block
+from practice.services.task_filtering import filter_tasks_with_purchased_blocks
 from practice.services.purchases import buy_block
 from practice.core.credits import difficulty_to_credits
 from practice.core.flow_prediction import predict_flow
@@ -80,19 +81,21 @@ def get_task(student, task_selector):
     to last task instance).
 
     Returns:
-        dictionary with information about assigned task
+        TaskInfo namedtuple
 
     Raises:
         ValueError: If the student argument is None.
         LookupError: If there is no task available.
     """
-    logger.info("Getting next task for student id %s", student.pk)
     if not student:
-        raise ValueError('Student is required for get_next_task_in_session')
+        raise ValueError('Student is required for get_task')
+    logger.info("Getting next task for student id %s", student.pk)
     practice_context = create_practice_context(student=student)
-    task_ids = practice_context.get_all_task_ids()
-    if not task_ids:
+    #task_ids = practice_context.get_all_task_ids()
+    tasks = filter_tasks_with_purchased_blocks(TaskModel.objects.all(), student)
+    if not tasks:
         raise LookupError('No tasks available.')
+    task_ids = [task.pk for task in tasks]
     task_id = task_selector.select(task_ids, student.pk, practice_context)
     predicted_flow = predict_flow(student.pk, task_id, practice_context)
     task = TaskModel.objects.get(pk=task_id)
