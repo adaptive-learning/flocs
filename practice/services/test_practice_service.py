@@ -4,12 +4,14 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 from tasks.models import TaskModel
+from blocks.models import BlockModel
 from practice.models import StudentModel
 from practice.models import TasksDifficultyModel
 from practice.models import TaskInstanceModel
 from practice.models import PracticeSession
 from practice.models import SessionTaskInstance
 from practice.models.task_instance import FlowRating
+from practice.core.task_selection import ScoreTaskSelector
 from . import practice_service
 
 
@@ -126,3 +128,14 @@ class PracticeServiceTest(TestCase):
         self.assertEquals(1, len(task_instances))
         self.assertEquals(task_instance, task_instances[0])
 
+    def test_get_task_filtering(self):
+        block1 = BlockModel.objects.create(pk=1)
+        block2 = BlockModel.objects.create(pk=2)
+        task1 = TaskModel.objects.create(block_level=1)
+        task2 = TaskModel.objects.create(block_level=2)
+        TasksDifficultyModel.objects.create(task=task1, programming=0.0)
+        TasksDifficultyModel.objects.create(task=task2, programming=1.0)
+        student = StudentModel.objects.create(user=self.user, programming=1.0)
+        student.available_blocks = [block1]
+        task_info = practice_service.get_task(student=student, task_selector=ScoreTaskSelector())
+        self.assertEqual(task_info.task_instance.task.pk, task1.pk)

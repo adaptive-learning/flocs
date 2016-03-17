@@ -104,10 +104,15 @@ class StudentModel(models.Model):
         return skill_dict
 
     def get_available_blocks(self):
-        # adds the first block almost immediatly after creation of student
-        if not self.available_blocks.all():
-            self.available_blocks.add(BlockModel.objects.get(pk=1))
         return self.available_blocks.all()
+
+    def save(self, *args, **kwargs):
+        super(StudentModel, self).save(*args, **kwargs)
+        # quick hack: if "first block" exist, then add
+        # this block to the list of student's available blocks
+        first_block = BlockModel.objects.filter(pk=1).first()
+        if first_block:
+            self.available_blocks.add(first_block)
 
     def __str__(self):
         skill_dict = self.get_skill_dict()
