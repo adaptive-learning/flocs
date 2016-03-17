@@ -56,6 +56,9 @@ class TaskInstanceModel(models.Model):
     attempt_count = models.IntegerField(
             default=0)
 
+    # earned credits for this task
+    earned_credits = models.SmallIntegerField(default=None, null=True)
+
     def __str__(self):
         templ = 'student={student}, task={task}, start={start}, time={time}' +\
                 ', solved={solved} reported_flow={reported_flow}' + \
@@ -123,6 +126,7 @@ class TaskInstanceModel(models.Model):
         self.time_end = datetime.now()
         self.time_spent = time_spent
         self.given_up = True
+        self.earned_credits = 0
 
     def set_reported_flow(self, reported_flow):
         """

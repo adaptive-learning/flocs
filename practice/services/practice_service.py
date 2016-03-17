@@ -180,12 +180,14 @@ def process_attempt_report(user, report):
             task_difficulty = practice_context.get(FlowFactors.TASK_BIAS, task=task.pk)
             credits = difficulty_to_credits(task_difficulty)
             student.earn_credits(credits)
+            task_instance.earned_credits = credits
             new_block = get_next_purchasable_block(student)
             if new_block:
                 buy_block(student=student, block=new_block)
                 purchases.append(new_block)
                 logger.debug('Student {0} bought block {1}'.format(student.pk, new_block))
             student.save()
+            task_instance.save()
 
     task_solved_first_time = solved and not solved_before,
     logger.info("Reporting attempt was successful for student %s with result %s", student.pk, solved)

@@ -196,7 +196,8 @@ def task_instance_to_json(task_instance):
         'given-up': task_instance.given_up,
         'time-spent': task_instance.time_spent,
         'reported-flow': task_instance.reported_flow,
-        'attempt-count': task_instance.attempt_count
+        'attempt-count': task_instance.attempt_count,
+        'earned-credits': task_instance.earned_credits
     }
     return task_instance_dict
 
