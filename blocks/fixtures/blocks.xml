@@ -125,7 +125,7 @@
       Check color
     </field>
     <field name="name_cs">
-      Krok barvy
+      Kontrola barvy
     </field>
     <field name="identifiers">
       {
