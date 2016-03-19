@@ -57,7 +57,7 @@ class TaskInstanceModel(models.Model):
             default=0)
 
     # earned credits for this task
-    earned_credits = models.SmallIntegerField(default=None, null=True)
+    earned_credits = models.SmallIntegerField(default=0, null=True)
 
     def __str__(self):
         templ = 'student={student}, task={task}, start={start}, time={time}' +\

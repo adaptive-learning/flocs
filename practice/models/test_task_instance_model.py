@@ -21,7 +21,7 @@ class TaskInstanceModelTest(TestCase):
         self.assertEquals(task_instance.given_up, False)
         self.assertEquals(task_instance.is_completed(), False)
         self.assertEquals(task_instance.reported_flow, 0)
-        self.assertEquals(task_instance.earned_credits, None)
+        self.assertEquals(task_instance.earned_credits, 0)
 
     def test_update_after_unsuccessful_attempt(self):
         task_instance = TaskInstanceModel()

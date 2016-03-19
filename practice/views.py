@@ -204,6 +204,8 @@ def task_instance_to_json(task_instance):
 
 def session_overview_to_json(session_overview):
     sess_overview_dict = {
-            'task-instances': list(map(task_instance_to_json, session_overview.task_instances))
+            'task-instances': list(map(task_instance_to_json, session_overview.task_instances)),
+            'overall-time': session_overview.overall_time,
+            'percentils': session_overview.percentils
             }
     return sess_overview_dict

@@ -1,0 +1,15 @@
+div.success {
+  background-color: rgba(100, 250, 100, 0.3);
+}
+
+div.fail {
+  background-color: rgba(250, 100, 100, 0.3);
+}
+
+p.counter {
+  font-size: 300%;
+}
+
+span.flow {
+  font-size: 3.0em;
+}

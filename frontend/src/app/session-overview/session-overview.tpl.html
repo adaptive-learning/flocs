@@ -1,23 +1,75 @@
 <div class="jumbotron">
   <div class="container">
-    <h2 translate>SESSION_OVERVIEW</h2>
-    <div ng-repeat="instance in overview.taskInstances">
-        <div class="well">
-          <b translate>TASK</b> {{instance.task.title}}
-          <div translate ng-if="instance.solved == true">SUCCESSFUL</div>
-          <div translate ng-if="instance.solved == false">UNSUCCESSFUL</div>
+    <h2 class="text-center" translate>SESSION_OVERVIEW</h2>
+    <br>
+    <p>
+    <dl class="dl-horizontal">
+      <dt translate>OVERALL_TIME</dt>
+      <dd>{{overview.overallTime | secondsToTime}}</dd>
+      <dt translate>GAINED_CREDITS</dt>
+      <dd>{{earnedCredits}}</dd>
+    </dl>
+    </p>
+    <div class="container-fluid">
+      <div class="row" ng-repeat="i in taskInstances" ng-if="$index % 2 == 0">
+        <div class="col-md-6" ng-repeat="instance in taskInstances.slice($index, $index + 2)">
+          <div class="well" ng-class="instance.solved ? 'success' : 'fail'">
+            <div class="row">
+              <div class="col-md-1">
+                <p class="text-info counter">{{$parent.$parent.$index + $index + 1}}</p>
+              </div>
+              <div class="col-md-11">
+                <h4><a ui-sref="practice-start" ui-sref-opts="{taskId: instance.task['task-id']}"> {{instance.task.title}}</a> </h4>
+                <div class="row">
+                  <div class="col-md-8">
+                    <table class="table table-condensed table-responsive"> 
+                      <tr>
+                        <td><div translate>TIME_SPENT</div></td>
+                        <td><div class="pull-right">{{instance['time-spent'] | secondsToTime}}</div></td>
+                      </tr>
+                      <tr ng-if="instance.solved == true">
+                        <td><div translate>SPEED</div></td>
+                        <td>
+                          <div class="pull-right">{{instance.percentil}}%</div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><div translate>GAINED_CREDITS</div></td>
+                        <td><div class="pull-right">{{instance['earned-credits']}}</div></td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-center" ng-if="instance['reported-flow'] == 1">
+                      <span class="glyphicon glyphicon-remove-sign flow"></span>
+                      <div translate>UNSUCCESSFUL</div>
+                    </div>
+                    <div class="text-center" ng-if="instance['reported-flow'] == 2">
+                      <span class="glyphicon glyphicon-hand-down flow"></span>
+                      <div translate>TASK_COMPLETION.DIFFICULT</div>
+                    </div>
+                    <div class="text-center" ng-if="instance['reported-flow'] == 3">
+                      <span class="glyphicon glyphicon-hand-right flow"></span>
+                      <div translate>TASK_COMPLETION.RIGHT</div>
+                    </div>
+                    <div class="text-center" ng-if="instance['reported-flow'] == 4">
+                      <span class="glyphicon glyphicon-hand-up flow"></span>
+                      <div translate>TASK_COMPLETION.EASY</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </dl>
+      </div>
+      <button ui-sref="practice-start"
+              ng-click="cont()"
+              type="button"
+              class="btn btn-primary"
+              translate>
+        CONTINUE
+      </button>
     </div>
-
-    <button
-        ng-click="cont()"
-        type="button"
-        class="btn btn-primary"
-        translate>
-      CONTINUE
-    </button>
-
-
   </div>
 </div>

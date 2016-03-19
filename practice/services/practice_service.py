@@ -15,6 +15,7 @@ from practice.models.task_instance import FlowRating
 from practice.services.parameters_update import update_parameters
 from practice.services.instructions_service import get_instructions
 from practice.services import practice_session_service as sess_service
+from practice.services import statistics_service
 from practice.services.blocks import get_next_purchasable_block
 from practice.services.task_filtering import filter_tasks_with_purchased_blocks
 from practice.services.purchases import buy_block
@@ -28,7 +29,7 @@ logger = logging.getLogger(__name__)
 TaskInfo = namedtuple('TaskInfo',
         ['task_instance', 'task', 'instructions', 'session'])
 SessionOverview = namedtuple('SessionOverview',
-        ['task_instances'])
+        ['task_instances', 'overall_time', 'percentils'])
 
 def get_task_by_id(user, task_id):
     student = StudentModel.objects.get_or_create(user=user)[0]
@@ -249,8 +250,17 @@ def get_session_overview(user):
         instances = []
     else:
         instances = session.get_task_instances()
+        if instances == [] or instances[-1].time_end is None:
+            overall_time = 0
+        else:
+            overall_delta = instances[-1].time_end - instances[0].time_start
+            overall_time = overall_delta.seconds
+    percentils = []
+    for instance in instances:
+        percentils.append(statistics_service.percentil(instance.time_spent, instance.task))
     return SessionOverview(
-            task_instances = instances
+            task_instances = instances,
+            overall_time = overall_time,
+            percentils = percentils
             )
-
 

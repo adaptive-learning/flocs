@@ -23,7 +23,6 @@ angular.module('flocs.practice')
     active: false
   };
   var sessionOverview = {
-    taskInstances: null
   };
 
   var attemptEvaluation = {
@@ -80,6 +79,8 @@ angular.module('flocs.practice')
   function gettingSessionOverview() {
     return practiceDao.gettingSessionOverview().then(function(overview) {
       sessionOverview.taskInstances = overview.taskInstances;
+      sessionOverview.overallTime = overview.overallTime;
+      sessionOverview.percentils = overview.percentils;
       return overview;
     });
   }

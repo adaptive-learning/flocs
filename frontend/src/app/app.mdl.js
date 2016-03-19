@@ -12,6 +12,7 @@ angular.module('flocs', [
     'flocs.locales',
     'flocs.services',
     'flocs.directives',
+    'flocs.filters',
     'flocs.header',
     'flocs.footer',
     'flocs.feedback',

@@ -57,7 +57,9 @@ angular.module('flocs.services')
 
     function parseResponse(response) {
       var sessionOverview = {
-        taskInstances: response.data['task-instances']
+        taskInstances: response.data['task-instances'],
+        overallTime: response.data['overall-time'],
+        percentils: response.data['percentils']
       };
       return sessionOverview;
     }

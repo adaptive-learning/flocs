@@ -1,6 +1,7 @@
 """Unit test of task service
 """
 
+from datetime import datetime
 from django.contrib.auth.models import User
 from django.test import TestCase
 from tasks.models import TaskModel
@@ -118,7 +119,7 @@ class PracticeServiceTest(TestCase):
         # set up
         student = StudentModel.objects.create(user=self.user)
         TaskModel.objects.create(id=1)
-        task_instance = TaskInstanceModel.objects.create(id=1, task_id=1, student=student)
+        task_instance = TaskInstanceModel.objects.create(id=1, task_id=1, student=student, time_end=datetime.now())
         session = PracticeSession.objects.create(id=1, student=student, last_task=task_instance)
         SessionTaskInstance.objects.create(session=session, task_instance=task_instance, order=1)
 
@@ -127,6 +128,9 @@ class PracticeServiceTest(TestCase):
         task_instances = sess_overview.task_instances
         self.assertEquals(1, len(task_instances))
         self.assertEquals(task_instance, task_instances[0])
+        overall_time = sess_overview.overall_time
+        actual_time = task_instance.time_end - task_instance.time_start
+        self.assertEquals(actual_time.seconds, overall_time)
 
     def test_get_task_filtering(self):
         block1 = BlockModel.objects.create(pk=1)
