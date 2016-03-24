@@ -12,9 +12,12 @@ class BlockModel(models.Model):
     objects = BlockManager()
 
     name = models.TextField(
-        verbose_name="name of a block")
+        help_text="name of a block")
 
     identifiers = models.TextField(
+        help_text="unique identifier(s) of all variants of a block(s) used internally")
+
+    identifiers_condensed = models.TextField(
         verbose_name="unique identifier(s) of a block(s) used internally")
 
     price = models.IntegerField(
@@ -35,6 +38,7 @@ class BlockModel(models.Model):
             'block-id': self.pk,
             'name': self.name,
             'identifiers': json.loads(self.identifiers),
+            'identifiers-condensed': json.loads(self.identifiers_condensed),
             'price': self.price
         }
         return block_dict

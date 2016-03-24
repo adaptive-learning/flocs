@@ -8,9 +8,10 @@
       Krok vpřed
     </field>
     <field name="identifiers">
-      {
-      "identifiers": ["maze_move_forward"]
-      }
+      ["maze_move_forward"]
+    </field>
+    <field name="identifiers_condensed">
+      ["maze_move_forward"]
     </field>
     <field name="price">
       0
@@ -28,10 +29,12 @@
       Zatoč
     </field>
     <field name="identifiers">
-      {
-      "identifiers": ["maze_turn", "maze_turn_left", "maze_turn_right"]
-      }
+      ["maze_turn_left", "maze_turn_right"]
     </field>
+    <field name="identifiers_condensed">
+      ["maze_turn"]
+    </field>
+
     <field name="price">
       1
     </field>
@@ -48,9 +51,10 @@
       Cyklus repeat
     </field>
     <field name="identifiers">
-      {
-      "identifiers": ["controls_repeat", "controls_repeat:10"]
-      }
+      ["controls_repeat:10"]
+    </field>
+    <field name="identifiers_condensed">
+      ["controls_repeat:10"]
     </field>
     <field name="price">
       2
@@ -68,10 +72,12 @@
       Cyklus while
     </field>
     <field name="identifiers">
-      {
-      "identifiers": ["controls_while"]
-      }
+      ["controls_while"]
     </field>
+    <field name="identifiers_condensed">
+      ["controls_while"]
+    </field>
+
     <field name="price">
       3
     </field>
@@ -88,9 +94,10 @@
       Kontrola cíle
     </field>
     <field name="identifiers">
-      {
-      "identifiers": ["maze_check_goal"]
-      }
+      ["maze_check_goal"]
+    </field>
+    <field name="identifiers_condensed">
+      ["maze_check_goal"]
     </field>
     <field name="price">
       3
@@ -108,9 +115,10 @@
       Kontrola cesty
     </field>
     <field name="identifiers">
-      {
-      "identifiers": ["maze_check_path", "maze_check_path_left", "maze_check_path_right"]
-      }
+      ["maze_check_path_left", "maze_check_path_right"]
+    </field>
+    <field name="identifiers_condensed">
+      ["maze_check_path"]
     </field>
     <field name="price">
       4
@@ -128,10 +136,12 @@
       Kontrola barvy
     </field>
     <field name="identifiers">
-      {
-      "identifiers": ["maze_check_color"]
-      }
+      ["maze_check_color"]
     </field>
+    <field name="identifiers_condensed">
+      ["maze_check_color"]
+    </field>
+
     <field name="price">
       5
     </field>
@@ -148,9 +158,10 @@
       Podmínka pokud-pak
     </field>
     <field name="identifiers">
-      {
-      "identifiers": ["controls_if"]
-      }
+      ["controls_if"]
+    </field>
+    <field name="identifiers_condensed">
+      ["controls_if"]
     </field>
     <field name="price">
       7
@@ -168,9 +179,10 @@
       Podmínka pokud-pak-jinak
     </field>
     <field name="identifiers">
-      {
-      "identifiers": ["controls_if_else"]
-      }
+      ["controls_if_else"]
+    </field>
+    <field name="identifiers_condensed">
+      ["controls_if_else"]
     </field>
     <field name="price">
       10
@@ -188,9 +200,10 @@
       Logické operace
     </field>
     <field name="identifiers">
-      {
-      "identifiers": ["logic_operation"]
-      }
+      ["logic_operation"]
+    </field>
+    <field name="identifiers_condensed">
+      ["logic_operation"]
     </field>
     <field name="price">
       15
@@ -209,9 +222,7 @@
       Číselná konstanta
     </field>
     <field name="identifiers">
-      {
-      "identifiers": ["math_number"]
-      }
+      ["math_number"]
     </field>
     <field name="price">
       15
@@ -226,9 +237,7 @@
       Rovná se
     </field>
     <field name="identifiers">
-      {
-      "identifiers": ["logic_compare"]
-      }
+      ["logic_compare"]
     </field>
     <field name="price">
       15
@@ -243,9 +252,7 @@
       Proměnné
     </field>
     <field name="identifiers">
-      {
-      "identifiers": ["variables_set", "variables_get"]
-      }
+      ["variables_set", "variables_get"]
     </field>
     <field name="price">
       15
