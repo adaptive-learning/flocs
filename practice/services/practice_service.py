@@ -19,9 +19,11 @@ from practice.services import statistics_service
 from practice.services.blocks import get_next_purchasable_block
 from practice.services.task_filtering import filter_tasks_with_purchased_blocks
 from practice.services.purchases import buy_block
+from practice.services.details import get_practice_details
 from practice.core.credits import difficulty_to_credits
 from practice.core.flow_prediction import predict_flow
 from practice.core.task_selection import ScoreTaskSelector, IdSpecifidedTaskSelector
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -107,6 +109,10 @@ def get_task(student, task_selector):
     student_task_info.last_instance = task_instance
     student_task_info.save()
 
+    # replace the toolbox in task with the user's toolbox
+    workspace_settings = json.loads(task.workspace_settings)
+    workspace_settings['toolbox'] = get_student_toolbox(student.user)
+    task.workspace_settings = json.dumps(workspace_settings)
     instructions = get_instructions(student, task)
 
     task_info = TaskInfo(
@@ -117,6 +123,28 @@ def get_task(student, task_selector):
     )
     logger.info("Task %s successfully picked for student %s", task_id, student.pk)
     return task_info
+
+def get_student_toolbox(user):
+    """Fetches the user toolbox.
+
+    Args:
+        user: current user
+
+    Returns:
+        list of identifiers of all available blocks for the user
+    """
+    details = get_practice_details(user)
+    toolbox = []
+    toolbox_condensed = []
+    for block in details.available_blocks:
+        toolbox = toolbox + block.get_identifiers_list()
+        toolbox_condensed = toolbox_condensed + block.get_identifiers_condensed_list()
+    # 10 is a magic constant defining maxium number of blocs before changing to
+    # condensed versions
+    if len(toolbox) > 10:
+        return toolbox_condensed
+    else:
+        return toolbox
 
 
 def process_attempt_report(user, report):

@@ -28,6 +28,12 @@ class BlockModel(models.Model):
         help_text="real number between -1 (easiest) and 1 (most difficult)",
         default=1.)
 
+    def get_identifiers_list(self):
+        return json.loads(self.identifiers)
+
+    def get_identifiers_condensed_list(self):
+        return json.loads(self.identifiers_condensed)
+
     def __str__(self):
         return '[{pk}] {name}'.format(pk=self.pk, name=self.name)
 
