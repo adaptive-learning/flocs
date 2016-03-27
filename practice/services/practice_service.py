@@ -111,7 +111,7 @@ def get_task(student, task_selector):
 
     # replace the toolbox in task with the user's toolbox
     workspace_settings = json.loads(task.workspace_settings)
-    workspace_settings['toolbox'] = get_student_toolbox(student.user)
+    workspace_settings['toolbox'] = get_student_toolbox(student)
     task.workspace_settings = json.dumps(workspace_settings)
     instructions = get_instructions(student, task)
 
@@ -124,16 +124,16 @@ def get_task(student, task_selector):
     logger.info("Task %s successfully picked for student %s", task_id, student.pk)
     return task_info
 
-def get_student_toolbox(user):
+def get_student_toolbox(student):
     """Fetches the user toolbox.
 
     Args:
-        user: current user
+        student: current stuent practicing tasks
 
     Returns:
         list of identifiers of all available blocks for the user
     """
-    details = get_practice_details(user)
+    details = get_practice_details(student.user)
     toolbox = []
     toolbox_condensed = []
     for block in details.available_blocks:
