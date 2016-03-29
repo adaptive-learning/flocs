@@ -93,12 +93,13 @@ angular.module('flocs.practice')
     return practiceDao.gettingNextTask().then(function(newTaskInstance) {
       taskInstance = newTaskInstance;
       var newTaskId = taskInstance.task['task-id'];
-      $state.go('practice-task', {'taskId': newTaskId});
+      $state.go('practice-task', {taskId: newTaskId}, {reload: true});
     });
   }
 
   function settingTaskById(taskId) {
     if (taskInstance === null || taskInstance.task['task-id'] != taskId) {
+      console.log('settingTaskById - If vetev');
       return practiceDao.gettingTaskById(taskId).then(function (newTaskInstance) {
         taskInstance = newTaskInstance;
         startCurrentTask();

@@ -26,22 +26,22 @@ def next_task_in_session(student, task_instance):
     """
     # get or create session
     session = get_session(student)
+
+    # TODO: sessions should be (if possible) finished earlier (after the
+    # processing of the results from the last task in the session)
+    if session and session.task_counter >= TASKS_IN_SESSION:
+        session.active = False
+        session.save()
+        logger.debug('Student id ', session.student.pk, ' finished current session.')
+        session = None
+
     if session is None:
         session = create_session(task_instance)
         logger.debug(('Session id {session_id}'
                       ' created for student {student}').format(
                          session_id=session.pk, student=student))
-    elif session.task_counter < TASKS_IN_SESSION:
-        add_task_instance_to_session(task_instance, session)
     else:
-        # student finished last task of the session, creating new one
-        session.active = False
-        session.save()
-        new_session = PracticeSession.objects.create(
-                student=session.student,
-                last_task=task_instance)
-        logger.debug('Student id ', session.student.pk, ' finished current session, '
-                     'creating new session id ', new_session.pk, ' .')
+        add_task_instance_to_session(task_instance, session)
 
 
 def add_task_instance_to_session(task_instance, session):
