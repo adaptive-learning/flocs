@@ -49,15 +49,12 @@ class TaskInstanceModel(models.Model):
     reported_flow = models.SmallIntegerField(choices=REPORTED_FLOW_VALUES,
             default=FlowRating.UNKNOWN)
 
-    # predicted flow value
     predicted_flow = models.FloatField(default=None, null=True)
-
-    # how many attempts did the student take (attempt = running a program)
     attempt_count = models.IntegerField(
-            default=0)
-
-    # earned credits for this task
+        default=0,
+        help_text='how many attempts did the student take (attempt = running a program)')
     earned_credits = models.SmallIntegerField(default=0, null=True)
+    speed_bonus = models.BooleanField(default=False)
 
     def __str__(self):
         templ = 'student={student}, task={task}, start={start}, time={time}' +\

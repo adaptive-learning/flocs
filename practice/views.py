@@ -82,6 +82,7 @@ def post_attempt_report(request):
     response = {
         'task-solved-first-time': processing_result.task_solved_first_time,
         'earned-credits': processing_result.credits,
+        'speed-bonus': processing_result.speed_bonus,
         'purchases': [block_to_json(b) for b in processing_result.purchases]
     }
     return JsonResponse(response)

@@ -83,6 +83,7 @@ angular.module('flocs.locales')
   TASK_COMPLETION: {
     TASK_SOLVED: 'Task solved!',
     CREDITS_INFO: 'You have earned {CREDITS, plural, one{1 credit} other{# credits} }.',
+    SPEED_BONUS: 'speed bonus',
     PURCHASED_BLOCKS: 'New blocks',
     FLOW_QUESTION: 'How difficult was the task for you?',
     EASY: 'Too Easy',

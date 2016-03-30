@@ -16,6 +16,7 @@
     <ul class="list-group">
       <li class="list-group-item" ng-show="evaluation.earnedCredits != 0">
         <span translate="TASK_COMPLETION.CREDITS_INFO" translate-values="{CREDITS: evaluation.earnedCredits}"/>
+          <span ng-if="evaluation.speedBonus"> (<span translate="TASK_COMPLETION.SPEED_BONUS"/>)</span>
       </li>
 
       <li class="list-group-item" ng-show="evaluation.purchases.length > 0">

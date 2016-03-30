@@ -1,6 +1,6 @@
 from django.test import SimpleTestCase
 from unittest import skipIf
-from .credits import difficulty_to_credits, MAX_CREDITS
+from .credits import difficulty_to_credits, compute_credits, MAX_CREDITS
 
 
 class CreditsTest(SimpleTestCase):
@@ -37,3 +37,17 @@ class CreditsTest(SimpleTestCase):
         for difficulty in [0.1 * n for n in range(-10, 11)]:
             print('{d:+.1f} -> {c}'.format(d=difficulty, c=difficulty_to_credits(difficulty)))
         print(difficulty_to_credits(-0.95), difficulty_to_credits(-0.88))
+
+    def test_compute_credits_without_speed_bonus(self):
+        ANY_DIFFICULTY = 0.5
+        LOW_PERCENTILE = 20
+        self.assertEquals(
+            (difficulty_to_credits(ANY_DIFFICULTY), False),
+            compute_credits(ANY_DIFFICULTY, LOW_PERCENTILE))
+
+    def test_compute_credits_with_speed_bonus(self):
+        ANY_DIFFICULTY = 0.5
+        HIGH_PERCENTILE = 90
+        earned_credits, speed_bonus = compute_credits(ANY_DIFFICULTY, HIGH_PERCENTILE)
+        self.assertEquals(speed_bonus, True)
+        self.assertGreater(earned_credits, difficulty_to_credits(ANY_DIFFICULTY))

@@ -20,7 +20,7 @@ from practice.services.blocks import get_next_purchasable_block
 from practice.services.task_filtering import filter_tasks_with_purchased_blocks
 from practice.services.purchases import buy_block
 from practice.services.details import get_practice_details
-from practice.core.credits import difficulty_to_credits
+from practice.core.credits import compute_credits
 from practice.core.flow_prediction import predict_flow
 from practice.core.task_selection import ScoreTaskSelector, IdSpecifidedTaskSelector
 import json
@@ -160,6 +160,7 @@ def process_attempt_report(user, report):
     Returns:
         - whether the task is solved for the first time
         - number of earned-credits
+        - speed-bonus: bool
     Raises:
         ValueError:
             - If the user argument is None.
@@ -199,6 +200,7 @@ def process_attempt_report(user, report):
     student_task_info.save()
 
     credits = 0
+    speed_bonus = False
     purchases = []
     if solved:
         task = task_instance.task
@@ -207,9 +209,11 @@ def process_attempt_report(user, report):
         practice_context.save()
         if not solved_before:
             task_difficulty = practice_context.get(FlowFactors.TASK_BIAS, task=task.pk)
-            credits = difficulty_to_credits(task_difficulty)
+            percentil = statistics_service.percentil(task_instance)
+            credits, speed_bonus = compute_credits(task_difficulty, percentil)
             student.earn_credits(credits)
             task_instance.earned_credits = credits
+            task_instance.speed_bonus = speed_bonus
             new_block = get_next_purchasable_block(student)
             if new_block:
                 buy_block(student=student, block=new_block)
@@ -221,8 +225,8 @@ def process_attempt_report(user, report):
     task_solved_first_time = solved and not solved_before,
     logger.info("Reporting attempt was successful for student %s with result %s", student.pk, solved)
     result = namedtuple('processAttemptReportResult',
-                        ['task_solved_first_time', 'credits', 'purchases'])\
-                        (task_solved_first_time, credits, purchases)
+                        ['task_solved_first_time', 'credits', 'speed_bonus', 'purchases'])\
+                        (task_solved_first_time, credits, speed_bonus, purchases)
     return result
 
 
@@ -285,7 +289,7 @@ def get_session_overview(user):
             overall_time = overall_delta.seconds
     percentils = []
     for instance in instances:
-        percentils.append(statistics_service.percentil(instance.time_spent, instance.task))
+        percentils.append(statistics_service.percentil(instance) if instance.solved else None)
     return SessionOverview(
             task_instances = instances,
             overall_time = overall_time,
