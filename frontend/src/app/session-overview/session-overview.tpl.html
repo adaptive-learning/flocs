@@ -19,7 +19,7 @@
                 <p class="text-info counter">{{$parent.$parent.$index + $index + 1}}</p>
               </div>
               <div class="col-md-11">
-                <h4><a ui-sref="practice-start" ui-sref-opts="{taskId: instance.task['task-id']}"> {{instance.task.title}}</a> </h4>
+                <h4><a ui-sref="practice-task({taskId: instance.task['task-id']})" ui-sref-opts="{reload: true}"> {{instance.task.title}}</a> </h4>
                 <div class="row">
                   <div class="col-md-8">
                     <table class="table table-condensed table-responsive"> 
