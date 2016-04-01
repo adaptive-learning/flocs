@@ -415,7 +415,7 @@
     </field>
   </object>
 
-<!-- While -->
+<!-- IGNORED: duplicate of task 12
   <object pk="13" model="tasks.taskmodel">
     <field name="title_en">
       Right angle
@@ -454,6 +454,7 @@
       6
     </field>
   </object>
+-->
 
 <!-- While -->
   <object pk="14" model="tasks.taskmodel">
@@ -475,8 +476,8 @@
         [1, 1, 2, 0, 0, 0, 0, 1],
         [1, 1, 1, 1, 1, 1, 1, 1]],
       "hero": {
-        "position": [1, 1],
-        "direction": 0
+        "position": [1, 5],
+        "direction": 1
       }
     }
     </field>
@@ -738,6 +739,8 @@
     </field>
   </object>
 
+
+<!-- IGNORED: same as task 20
   <object pk="21" model="tasks.taskmodel">
     <field name="title_en">
       Nearly streight line
@@ -779,6 +782,7 @@
       3
     </field>
   </object>
+-->
 
   <object pk="22" model="tasks.taskmodel">
     <field name="title_en">

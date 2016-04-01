@@ -11,22 +11,21 @@ angular.module('flocs.workspace')
     'maze_turn_left',
     'maze_turn_right',
 
-    'maze_check_path',
-    'maze_check_path_left',
-    'maze_check_path_right',
-    'maze_check_goal',
-    'maze_check_color',
-
-
-    'controls_if',
-    'controls_if_else',
-
     'controls_repeat',
     'controls_repeat:10',
     'controls_while',
     'controls_for',
     'controls_forEach',
     'controls_flow_statements',
+
+    'controls_if',
+    'controls_if_else',
+
+    'maze_check_path',
+    'maze_check_path_left',
+    'maze_check_path_right',
+    'maze_check_goal',
+    'maze_check_color',
 
     'logic_compare',
     'logic_operation',

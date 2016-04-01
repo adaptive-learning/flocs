@@ -100,7 +100,6 @@ angular.module('flocs.practice')
 
   function settingTaskById(taskId) {
     if (taskInstance === null || taskInstance.task['task-id'] != taskId) {
-      console.log('settingTaskById - If vetev');
       return practiceDao.gettingTaskById(taskId).then(function (newTaskInstance) {
         taskInstance = newTaskInstance;
         startCurrentTask();

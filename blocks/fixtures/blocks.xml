@@ -115,7 +115,7 @@
       Kontrola cesty
     </field>
     <field name="identifiers">
-      ["maze_check_path_left", "maze_check_path_right"]
+      ["maze_check_path", "maze_check_path_left", "maze_check_path_right"]
     </field>
     <field name="identifiers_condensed">
       ["maze_check_path"]
