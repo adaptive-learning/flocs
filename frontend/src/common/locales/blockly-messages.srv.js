@@ -59,7 +59,7 @@ angular.module('flocs.locales')
   messages.CONTROLS_IF_TOOLTIP_3 = "Je-li první hodnota pravdivá, proveď první blok příkazů. V opačném případě, je-li pravdivá druhá hodnota, proveď druhý blok příkazů.";
   messages.CONTROLS_IF_TOOLTIP_4 = "Je-li první hodnota pravda, proveď první blok příkazů.  Je-li druhá hodnota pravda, proveď druhý blok příkazů.  Pokud žádná hodnota není pravda, proveď poslední blok příkazů.";
   messages.CONTROLS_REPEAT_HELPURL = "https://cs.wikipedia.org/wiki/Cyklus_for";
-  messages.CONTROLS_REPEAT_INPUT_DO = "udělej";
+  messages.CONTROLS_REPEAT_INPUT_DO = ""; //"udělej";
   messages.CONTROLS_REPEAT_TITLE = "opakuj %1 krát";
   messages.CONTROLS_REPEAT_TOOLTIP = "Proveď určité příkazy několikrát.";
   messages.CONTROLS_WHILEUNTIL_HELPURL = "https://github.com/google/blockly/wiki/Loops#repeat";  // untranslated
@@ -464,7 +464,7 @@ angular.module('flocs.locales')
   messages.CONTROLS_IF_TOOLTIP_3 = "If the first value is true, then do the first block of statements. Otherwise, if the second value is true, do the second block of statements.";
   messages.CONTROLS_IF_TOOLTIP_4 = "If the first value is true, then do the first block of statements. Otherwise, if the second value is true, do the second block of statements. If none of the values are true, do the last block of statements.";
   messages.CONTROLS_REPEAT_HELPURL = "https://en.wikipedia.org/wiki/For_loop";
-  messages.CONTROLS_REPEAT_INPUT_DO = "do";
+  messages.CONTROLS_REPEAT_INPUT_DO = ""; //"do";
   messages.CONTROLS_REPEAT_TITLE = "repeat %1 times";
   messages.CONTROLS_REPEAT_TOOLTIP = "Do some statements several times.";
   messages.CONTROLS_WHILEUNTIL_HELPURL = "https://github.com/google/blockly/wiki/Loops#repeat";

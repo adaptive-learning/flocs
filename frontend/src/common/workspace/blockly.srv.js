@@ -4,6 +4,16 @@
 angular.module('flocs.workspace')
 .factory('blocklyService', function() {
 
+  var COLORS = {
+    commands: 180,
+    inputs: 65,
+    //values: 45,
+    //operands: 45,
+    loops: 120,
+    conditionals: 345,
+    headers: 45,
+  };
+
   /**
   * Blockly initialization (blocks description).
   */
@@ -17,7 +27,7 @@ angular.module('flocs.workspace')
         "args0": [],
         "previousStatement": true,
         "nextStatement": true,
-        "colour": 120,
+        "colour": COLORS.commands,
         "tooltip": "",
         "helpUrl": ""
       },
@@ -28,7 +38,7 @@ angular.module('flocs.workspace')
         "args0": [],
         "previousStatement": true,
         "nextStatement": true,
-        "colour": 120,
+        "colour": COLORS.commands,
         "tooltip": "",
         "helpUrl": ""
       },
@@ -55,7 +65,7 @@ angular.module('flocs.workspace')
         ],
         "previousStatement": true,
         "nextStatement": true,
-        "colour": 120,
+        "colour": COLORS.commands,
         "tooltip": "",
         "helpUrl": ""
       },
@@ -88,7 +98,7 @@ angular.module('flocs.workspace')
           },
         ],
         "output":"Boolean",
-        "colour": 210,
+        "colour": COLORS.inputs,
         "tooltip": "",
         "helpUrl": ""
       },
@@ -137,7 +147,7 @@ angular.module('flocs.workspace')
           }
         ],
         "output":"Boolean",
-        "colour": 210,
+        "colour": COLORS.inputs,
         "tooltip": "",
         "helpUrl": ""
       },
@@ -167,7 +177,7 @@ angular.module('flocs.workspace')
         }
         ],
         "output": "Boolean",
-        "colour": 210,
+        "colour": COLORS.inputs,
         "tooltip": "",
         "helpUrl": ""
       },
@@ -177,14 +187,14 @@ angular.module('flocs.workspace')
         "message0": Blockly.Msg.START,
         "args0": [],
         "nextStatement": null,
-        "colour": 60,
+        "colour": COLORS.headers,
         "tooltip": "",
         "helpUrl": ""
       },
 
       {
         "id": "controls_if",
-        "message0": Blockly.Msg.CONTROLS_IF_MSG_IF + " %1 %2 " + Blockly.Msg.THEN + " %3 %4",
+        "message0": Blockly.Msg.CONTROLS_IF_MSG_IF + " %1 %2 " + ":" + " %3 %4",
         "args0": [
         {
             "type": "input_dummy"
@@ -204,15 +214,15 @@ angular.module('flocs.workspace')
         ],
         "previousStatement": null,
         "nextStatement": null,
-        "colour": 210,
+        "colour": COLORS.conditionals,
         "tooltip": "",
         "helpUrl": ""
       },
       {
         "id": "controls_if_else",
         "message0": Blockly.Msg.CONTROLS_IF_MSG_IF + " %1 %2 " +
-                    Blockly.Msg.THEN + " %3 %4 " +
-                    Blockly.Msg.ELSE + " %5 %6",
+                    ":" + " %3 %4 " +
+                    Blockly.Msg.ELSE + ":" + " %5 %6",
         "args0": [
         {
             "type": "input_dummy"
@@ -239,7 +249,7 @@ angular.module('flocs.workspace')
         ],
         "previousStatement": null,
         "nextStatement": null,
-        "colour": 210,
+        "colour": COLORS.conditionals,
         "tooltip": "",
         "helpUrl": ""
       },
@@ -263,7 +273,7 @@ angular.module('flocs.workspace')
         ],
         "previousStatement": null,
         "nextStatement": null,
-        "colour": 120,
+        "colour": COLORS.loops,
         "tooltip": "",
         "helpUrl": ""
       }
