@@ -7,6 +7,7 @@ import logging
 from collections import namedtuple
 from common.flow_factors import FlowFactors
 from tasks.models import TaskModel
+from tasks.services.task_service import get_toolbox_from_blocks
 from practice.models.practice_context import create_practice_context
 from practice.models import TaskInstanceModel
 from practice.models import StudentTaskInfoModel
@@ -29,7 +30,7 @@ logger = logging.getLogger(__name__)
 
 # TODO: remove task field - it is redundant (task is in task_instance.task)
 TaskInfo = namedtuple('TaskInfo',
-        ['task_instance', 'task', 'instructions', 'session'])
+        ['task_instance', 'task', 'toolbox', 'instructions', 'session'])
 SessionOverview = namedtuple('SessionOverview',
         ['task_instances', 'overall_time', 'percentils'])
 
@@ -57,6 +58,7 @@ def get_next_task_in_session(user):
     task_info_with_sess = TaskInfo(
         task_instance = task_info.task_instance,
         task = task_info.task,
+        toolbox = task_info.toolbox,
         instructions = task_info.instructions,
         session = session
     )
@@ -71,6 +73,7 @@ def get_active_task_in_session(student):
     session_task_instance_info = TaskInfo(
         task_instance = active_task_instance,
         task = active_task_instance.task,
+        toolbox = get_student_toolbox(student),
         instructions = get_instructions(student, active_task_instance.task),
         session = session
     )
@@ -108,16 +111,12 @@ def get_task(student, task_selector):
             student=student, task=task)[0]
     student_task_info.last_instance = task_instance
     student_task_info.save()
-
-    # replace the toolbox in task with the user's toolbox
-    workspace_settings = json.loads(task.workspace_settings)
-    workspace_settings['toolbox'] = get_student_toolbox(student)
-    task.workspace_settings = json.dumps(workspace_settings)
     instructions = get_instructions(student, task)
 
     task_info = TaskInfo(
         task_instance = task_instance,
         task = task,
+        toolbox = get_student_toolbox(student),
         instructions = instructions,
         session = None
     )
@@ -134,17 +133,7 @@ def get_student_toolbox(student):
         list of identifiers of all available blocks for the user
     """
     details = get_practice_details(student.user)
-    toolbox = []
-    toolbox_condensed = []
-    for block in details.available_blocks:
-        toolbox = toolbox + block.get_identifiers_list()
-        toolbox_condensed = toolbox_condensed + block.get_identifiers_condensed_list()
-    # 10 is a magic constant defining maxium number of blocs before changing to
-    # condensed versions
-    if len(toolbox) > 10:
-        return toolbox_condensed
-    else:
-        return toolbox
+    return get_toolbox_from_blocks(details.available_blocks)
 
 
 def process_attempt_report(user, report):
@@ -176,7 +165,6 @@ def process_attempt_report(user, report):
     time = report['time']
 
     logger.info("Reporting attempt for student %s with result %s", student.pk, solved)
-
     task_instance = TaskInstanceModel.objects.get(id=task_instance_id)
     if  attempt_count < task_instance.attempt_count:
         # It means that this report is obsolete. Note that we allow for

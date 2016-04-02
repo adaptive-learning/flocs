@@ -187,6 +187,7 @@ def task_info_to_json(task_info):
         'instructions': task_info.instructions,
         'session': session_dict
     }
+    task_dict['task']['workspace-settings']['toolbox'] = task_info.toolbox
     return task_dict
 
 

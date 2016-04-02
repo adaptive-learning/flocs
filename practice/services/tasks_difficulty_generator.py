@@ -8,6 +8,7 @@ from math import tanh, log
 
 from tasks.models.task import TaskModel
 from practice.models.tasks_difficulty import TasksDifficultyModel
+from tasks.services.task_service import get_toolbox_from_blocks
 
 """
     Specifies which blocks in some task implies game concept of the task.
@@ -62,6 +63,9 @@ def generate(create_fixture=False):
         json_task = task.to_json()
         maze = json_task['maze-settings']
         workspace = json_task['workspace-settings']
+        workspace['toolbox'] = get_toolbox_from_blocks(
+            task.get_required_blocks())
+
         # initialize array of concepts
         concepts = []
 

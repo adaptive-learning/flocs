@@ -116,7 +116,7 @@ angular.module('flocs.practice')
   }
 
   function startCurrentTask() {
-    var returnedSession = taskInstance['session'];
+    var returnedSession = taskInstance.session;
     if (returnedSession !== null) {
       session.taskInstances = returnedSession['task-instances'];
       session.task = returnedSession.task;
@@ -129,10 +129,10 @@ angular.module('flocs.practice')
     }
     userService.setUserAvailable();
     attemptReport = null;
-    var newTask = taskInstance['task'];
+    var newTask = taskInstance.task;
     newAttemptReport(newTask);
     taskStartTimestamp = Date.now();
-    var instructionsText = taskInstance['instructions'];
+    var instructionsText = taskInstance.instructions;
     taskEnvironmentService.setTask(newTask, attemptFinished,
           instructionsText);
   }
@@ -209,7 +209,7 @@ angular.module('flocs.practice')
    */
   function newAttemptReport(task) {
     attemptReport = {
-      'task-instance-id': taskInstance['task-instance-id'],
+      'task-instance-id': taskInstance.taskInstanceId,
       'attempt': 0,
       'time': 0,
       'solved': false,

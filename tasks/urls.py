@@ -10,4 +10,5 @@ from tasks import views
 urlpatterns = [
     url(r'^get-ids$', views.get_all_tasks),
     url(r'^get-task/(?P<id>[0-9]+)$', views.get_task_by_id),
+    url(r'^get-task-and-toolbox/(?P<id>[0-9]+)$', views.get_task_by_id_with_toolbox),
 ]

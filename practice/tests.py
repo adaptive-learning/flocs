@@ -21,6 +21,7 @@ class PracticeViewsTest(TestCase):
         self.instance2 = TaskInstanceModel.objects.create(task=self.task, student=self.student, given_up=True)
         self.instance3 = TaskInstanceModel.objects.create(task=self.task, student=self.student)
         self.session = practice_session_service.create_session(self.instance1)
+        self.toolbox = ['foo', 'bar']
         practice_session_service.next_task_in_session(self.student, self.instance2)
         practice_session_service.next_task_in_session(self.student, self.instance3)
 
@@ -29,7 +30,9 @@ class PracticeViewsTest(TestCase):
             task_instance=self.instance3,
             task=self.task,
             instructions=None,
-            session=self.session)
+            session=self.session,
+            toolbox=self.toolbox
+        )
         json = task_info_to_json(task_info)
         self.assertEqual(len(json['session']['task-instances']), 3)
         self.assertEqual(json['session']['task-instances'][0]['solved'], True)

@@ -18,7 +18,7 @@ from . import practice_service
 
 class PracticeServiceTest(TestCase):
 
-    fixtures = ['instructions.json']
+    fixtures = ['instructions.json', 'blocks.xml']
 
     def setUp(self):
         self.user = User.objects.create()
@@ -133,8 +133,8 @@ class PracticeServiceTest(TestCase):
         self.assertEquals(actual_time.seconds, overall_time)
 
     def test_get_task_filtering(self):
-        block1 = BlockModel.objects.create(pk=1)
-        block2 = BlockModel.objects.create(pk=2)
+        block1 = BlockModel.objects.get(pk=1)
+        block2 = BlockModel.objects.get(pk=2)
         task1 = TaskModel.objects.create(block_level=1)
         task2 = TaskModel.objects.create(block_level=2)
         TasksDifficultyModel.objects.create(task=task1, programming=0.0)

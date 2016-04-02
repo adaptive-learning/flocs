@@ -24,7 +24,7 @@ angular.module('flocs.taskPreview')
       if ($stateParams.taskId !== undefined &&
           $scope.tasks.options.indexOf($stateParams.taskId) !== -1) {
         $scope.tasks.selected = $stateParams.taskId;
-        taskEnvironmentService.settingTaskById($scope.tasks.selected);
+        taskEnvironmentService.settingTaskByIdWithToolbox($scope.tasks.selected);
       }
     });
 

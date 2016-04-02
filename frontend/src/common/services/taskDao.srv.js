@@ -9,6 +9,7 @@ angular.module('flocs.services')
   return {
     gettingAllTaskIds: gettingAllTaskIds,
     gettingTaskById: gettingTaskById,
+    gettingTaskByIdWithToolbox: gettingTaskByIdWithToolbox,
   };
 
   // private implementation
@@ -32,5 +33,16 @@ angular.module('flocs.services')
         return response.data;
       });
   }
+
+  /**
+   * Return promise of getting task by given id.
+   */
+  function gettingTaskByIdWithToolbox(id) {
+    return $http.get('/api/tasks/get-task-and-toolbox/' + id)
+      .then(function(response) {
+        return response.data;
+      });
+  }
+
 
 });

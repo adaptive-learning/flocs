@@ -25,15 +25,12 @@ class TasksDifficultyGeneratorTest(TestCase):
                 ),
                 workspace_settings=('{' 
                 '"blocksLimit" : 5,'
-                '"toolbox": ['
-                '    "foobar_category", '
-                '    "loops_category", '
-                '    "logic_ternary" ]'
-                '}'))
+                '}'),
+                block_level=3)
 
         # create second task
         second_task = TaskModel.objects.create(pk=2, maze_settings="{}",
-                workspace_settings='{ "toolbox": ["maze_check_path"]}')
+                workspace_settings='{ }', block_level=1)
 
         # create task difficulty to the second task
         TasksDifficultyModel.objects.create(

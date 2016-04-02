@@ -23,9 +23,7 @@ angular.module('flocs.services')
    */
   function gettingNextTask() {
     return $http.get('/api/practice/next-task')
-      .then(function(response) {
-        return response.data;
-      });
+      .then(parseTask);
   }
 
   /**
@@ -33,9 +31,17 @@ angular.module('flocs.services')
    */
   function gettingTaskById(id) {
     return $http.get('/api/practice/task/' + id)
-      .then(function(response) {
-        return response.data;
-      });
+      .then(parseTask);
+  }
+
+  function parseTask(response) {
+    var taskInstance = {
+      taskInstanceId: response.data['task-instance-id'],
+      task: response.data['task'],
+      instructions: response.data['instructions'],
+      session: response.data['session'],
+    };
+    return taskInstance;
   }
 
   function gettingPracticeDetails() {

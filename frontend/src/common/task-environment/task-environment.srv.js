@@ -30,6 +30,7 @@ angular.module('flocs.taskEnvironment')
   return {
     setTask:         setTask,
     settingTaskById: settingTaskById,
+    settingTaskByIdWithToolbox: settingTaskByIdWithToolbox,
     //setInitialState: setInitialState,
     //attemptFinished: attemptFinished,
 
@@ -134,6 +135,14 @@ angular.module('flocs.taskEnvironment')
         setTask(newTask);
       });
   }
+  
+  function settingTaskByIdWithToolbox(id) {
+    taskDao.gettingTaskByIdWithToolbox(id)
+      .then(function(newTask) {
+        setTask(newTask);
+      });
+  }
+
 
   function attemptFinished(result) {
     if (afterAttemptCallback) {
