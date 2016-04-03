@@ -20,13 +20,9 @@ class BlockModel(models.Model):
     identifiers_condensed = models.TextField(
         verbose_name="unique identifier(s) of a block(s) used internally")
 
-    price = models.IntegerField(
-        help_text="number of currency units required to buy this block",
-        default=0)
-
-    difficulty = models.FloatField(
-        help_text="real number between -1 (easiest) and 1 (most difficult)",
-        default=1.)
+    level = models.SmallIntegerField(
+        help_text="level required to use this block",
+        default=1)
 
     def get_identifiers_list(self):
         return json.loads(self.identifiers)
@@ -45,6 +41,5 @@ class BlockModel(models.Model):
             'name': self.name,
             'identifiers': json.loads(self.identifiers),
             'identifiers-condensed': json.loads(self.identifiers_condensed),
-            'price': self.price
         }
         return block_dict

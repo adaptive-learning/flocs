@@ -5,7 +5,7 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.test import TestCase
 from tasks.models import TaskModel
-from blocks.models import BlockModel
+from levels.models import Level
 from practice.models import StudentModel
 from practice.models import TasksDifficultyModel
 from practice.models import TaskInstanceModel
@@ -133,13 +133,12 @@ class PracticeServiceTest(TestCase):
         self.assertEquals(actual_time.seconds, overall_time)
 
     def test_get_task_filtering(self):
-        block1 = BlockModel.objects.get(pk=1)
-        block2 = BlockModel.objects.get(pk=2)
-        task1 = TaskModel.objects.create(block_level=1)
-        task2 = TaskModel.objects.create(block_level=2)
+        level1 = Level.objects.create(block_level=1)
+        level2 = Level.objects.create(block_level=2)
+        task1 = TaskModel.objects.create(level=level1)
+        task2 = TaskModel.objects.create(level=level2)
         TasksDifficultyModel.objects.create(task=task1, programming=0.0)
         TasksDifficultyModel.objects.create(task=task2, programming=1.0)
-        student = StudentModel.objects.create(user=self.user, programming=1.0)
-        student.available_blocks = [block1]
+        student = StudentModel.objects.create(user=self.user, programming=1.0, level=level1)
         task_info = practice_service.get_task(student=student, task_selector=ScoreTaskSelector())
         self.assertEqual(task_info.task_instance.task.pk, task1.pk)

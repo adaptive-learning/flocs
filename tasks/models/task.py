@@ -1,21 +1,27 @@
 from django.db import models
 import json
-from blocks.models import BlockModel
+from levels.models import Level
 
 
 class TaskModel(models.Model):
     """Model for a task (exercise)
     """
     title = models.TextField()
-    maze_settings = models.TextField(verbose_name="Maze settings in JSON")
-    workspace_settings = models.TextField(verbose_name="Workspace settings in JSON")
-    block_level = models.PositiveSmallIntegerField(
-            default=0,
-            help_text="the most difficult block the task requires")
+    maze_settings = models.TextField(
+            verbose_name="Maze settings in JSON",
+            default='{}')
+    workspace_settings = models.TextField(
+            verbose_name="Workspace settings in JSON",
+            default='{}')
+
+    level = models.ForeignKey(Level,
+            help_text="minimum level required to attempt this task",
+            null=True, default=None)
 
     def get_required_blocks(self):
-        block_ids = list(range(1, self.block_level+1))
-        return list(BlockModel.objects.filter(pk__in=block_ids))
+        if self.level is None:
+            return []
+        return self.level.get_all_blocks()
 
     def __str__(self):
         return '[{pk}] {title}'.format(pk=self.pk, title=self.title)

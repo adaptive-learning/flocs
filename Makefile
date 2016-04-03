@@ -57,16 +57,15 @@ db-setup: db-migrate db-load-data db-generate-tasks-difficulty
 
 db-migrate:
 	@echo "===== Set up database ====="
+	# some migration errors can be fixed by flushing DB: `python manage.py flush`
 	python manage.py migrate --noinput
 
 db-load-data:
 	python manage.py flush --noinput
 	python manage.py create_admin
-	# tasks
-	python manage.py loaddata tasks/fixtures/tasks.xml
-	# blocks
 	python manage.py loaddata blocks/fixtures/blocks.xml
-	# instructions for flow factors
+	python manage.py loaddata levels/fixtures/levels.xml
+	python manage.py loaddata tasks/fixtures/tasks.xml
 	python manage.py loaddata practice/fixtures/instructions.json
 
 db-generate-tasks-difficulty:

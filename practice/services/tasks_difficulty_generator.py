@@ -150,7 +150,7 @@ def create_task_difficulties_fixture():
 
 
 def number_of_blocks(blocks):
-    if blocks[0].endswith('category'):
+    if blocks and blocks[0].endswith('category'):
         return 5*len(blocks)
     else:
         return len(blocks)

@@ -91,7 +91,6 @@ def post_attempt_report(request):
 def block_to_json(block):
     json_dict = {
         'name': block.name,
-        'price': block.price
     }
     return json_dict
 

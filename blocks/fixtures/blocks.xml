@@ -13,11 +13,8 @@
     <field name="identifiers_condensed">
       ["maze_move_forward"]
     </field>
-    <field name="price">
-      0
-    </field>
-    <field name="difficulty">
-      -1.0
+    <field name="level">
+      1
     </field>
   </object>
 
@@ -34,12 +31,8 @@
     <field name="identifiers_condensed">
       ["maze_turn"]
     </field>
-
-    <field name="price">
-      1
-    </field>
-    <field name="difficulty">
-      -0.9
+    <field name="level">
+      2
     </field>
   </object>
 
@@ -56,11 +49,8 @@
     <field name="identifiers_condensed">
       ["controls_repeat:10"]
     </field>
-    <field name="price">
-      2
-    </field>
-    <field name="difficulty">
-      -0.7
+    <field name="level">
+      3
     </field>
   </object>
 
@@ -77,12 +67,8 @@
     <field name="identifiers_condensed">
       ["controls_while"]
     </field>
-
-    <field name="price">
-      3
-    </field>
-    <field name="difficulty">
-      -0.5
+    <field name="level">
+      4
     </field>
   </object>
 
@@ -99,11 +85,8 @@
     <field name="identifiers_condensed">
       ["maze_check_goal"]
     </field>
-    <field name="price">
-      3
-    </field>
-    <field name="difficulty">
-      -0.5
+    <field name="level">
+      4
     </field>
   </object>
 
@@ -120,11 +103,8 @@
     <field name="identifiers_condensed">
       ["maze_check_path"]
     </field>
-    <field name="price">
-      4
-    </field>
-    <field name="difficulty">
-      -0.3
+    <field name="level">
+      5
     </field>
   </object>
 
@@ -141,12 +121,8 @@
     <field name="identifiers_condensed">
       ["maze_check_color"]
     </field>
-
-    <field name="price">
-      5
-    </field>
-    <field name="difficulty">
-      -0.1
+    <field name="level">
+      6
     </field>
   </object>
 
@@ -163,11 +139,8 @@
     <field name="identifiers_condensed">
       ["controls_if"]
     </field>
-    <field name="price">
+    <field name="level">
       7
-    </field>
-    <field name="difficulty">
-      0.1
     </field>
   </object>
 
@@ -184,11 +157,8 @@
     <field name="identifiers_condensed">
       ["controls_if_else"]
     </field>
-    <field name="price">
-      10
-    </field>
-    <field name="difficulty">
-      0.4
+    <field name="level">
+      8
     </field>
   </object>
 
@@ -205,11 +175,8 @@
     <field name="identifiers_condensed">
       ["logic_operation"]
     </field>
-    <field name="price">
-      15
-    </field>
-    <field name="difficulty">
-      0.6
+    <field name="level">
+      9
     </field>
   </object>
 

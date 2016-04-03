@@ -53,9 +53,10 @@ INSTALLED_APPS = (
     # our apps
     'common',
     'feedback',
+    'blocks',
+    'levels',
     'tasks',
     'practice',
-    'blocks',
     'flocs',
 )
 

@@ -5,14 +5,18 @@ from decimal import Decimal
 from common.flow_factors import FlowFactors
 from .tasks_difficulty import TasksDifficultyModel
 from django.db.models import Min
-from blocks.models import BlockModel
+from levels.models import Level
 
 
-def calculate_initial_skill():
+def _calculate_initial_skill():
     difficulty_of_easiest_task = TasksDifficultyModel.objects.all().aggregate(Min('programming'))['programming__min']
     if difficulty_of_easiest_task is None:
         return Decimal(-1)
     return difficulty_of_easiest_task
+
+
+def _get_lowest_level():
+    return Level.objects.get_lowest_level()
 
 
 class StudentModel(models.Model):
@@ -31,7 +35,7 @@ class StudentModel(models.Model):
 
     # programming concept difficulty
     programming = models.DecimalField(max_digits=4, decimal_places=3,
-            default=calculate_initial_skill,
+            default=_calculate_initial_skill,
             verbose_name="General skill")
 
     # conditions concept difficulty
@@ -72,8 +76,12 @@ class StudentModel(models.Model):
             verbose_name="number of free credits to spend",
             default=0)
 
-    available_blocks = models.ManyToManyField(BlockModel,
-            verbose_name="blocks that has been purchased by the student")
+    level = models.ForeignKey(Level,
+            default=_get_lowest_level,
+            null=True)
+
+    #available_blocks = models.ManyToManyField(BlockModel,
+    #        verbose_name="blocks that has been purchased by the student")
 
     def earn_credits(self, credits):
         self.total_credits += credits
@@ -104,15 +112,9 @@ class StudentModel(models.Model):
         return skill_dict
 
     def get_available_blocks(self):
-        return self.available_blocks.all()
-
-    def save(self, *args, **kwargs):
-        super(StudentModel, self).save(*args, **kwargs)
-        # quick hack: if "first block" exist, then add
-        # this block to the list of student's available blocks
-        first_block = BlockModel.objects.filter(pk=1).first()
-        if first_block:
-            self.available_blocks.add(first_block)
+        if self.level is None:
+            return []
+        return self.level.get_all_blocks()
 
     def __str__(self):
         skill_dict = self.get_skill_dict()

@@ -17,12 +17,11 @@ from practice.services.parameters_update import update_parameters
 from practice.services.instructions_service import get_instructions
 from practice.services import practice_session_service as sess_service
 from practice.services import statistics_service
-from practice.services.blocks import get_next_purchasable_block
-from practice.services.task_filtering import filter_tasks_with_purchased_blocks
-from practice.services.purchases import buy_block
 from practice.services.details import get_practice_details
+from practice.services.levels import try_levelup
 from practice.core.credits import compute_credits
 from practice.core.flow_prediction import predict_flow
+from practice.core.task_filtering import filter_tasks_by_level
 from practice.core.task_selection import ScoreTaskSelector, IdSpecifidedTaskSelector
 import json
 
@@ -98,7 +97,7 @@ def get_task(student, task_selector):
     logger.info("Getting next task for student id %s", student.pk)
     practice_context = create_practice_context(student=student)
     #task_ids = practice_context.get_all_task_ids()
-    tasks = filter_tasks_with_purchased_blocks(TaskModel.objects.all(), student)
+    tasks = filter_tasks_by_level(TaskModel.objects.all(), student)
     if not tasks:
         raise LookupError('No tasks available.')
     task_ids = [task.pk for task in tasks]
@@ -202,11 +201,12 @@ def process_attempt_report(user, report):
             student.earn_credits(credits)
             task_instance.earned_credits = credits
             task_instance.speed_bonus = speed_bonus
-            new_block = get_next_purchasable_block(student)
-            if new_block:
-                buy_block(student=student, block=new_block)
-                purchases.append(new_block)
-                logger.debug('Student {0} bought block {1}'.format(student.pk, new_block))
+
+            levelup_achieved = try_levelup(student)
+            if levelup_achieved:
+                purchases.extend(student.level.get_new_blocks())
+                #logger.debug('Student {0} bought block {1}'.format(student.pk, new_block))
+
             student.save()
             task_instance.save()
 
