@@ -15,7 +15,7 @@ class UpdateParametersTest(TestCase):
         expected = 0.151002504171
 
         result = parameters_update.update_global_skill_function(
-            skill, predicted_flow, reported_flow)
+            skill, predicted_flow, reported_flow, None)
 
         self.assertAlmostEquals(result, expected)
 
@@ -49,7 +49,7 @@ class UpdateParametersTest(TestCase):
         expected = 0.2071428571428 
 
         result = parameters_update.update_global_difficulty_function(
-            difficulty, solution_count, predicted_flow, reported_flow)
+            difficulty, solution_count, predicted_flow, reported_flow, None)
 
         self.assertAlmostEquals(result, expected)
 
@@ -89,7 +89,7 @@ class UpdateParametersTest(TestCase):
             (FlowFactors.PITS,          None, 2, 0),
             ('solution-count',          None, 2, 10)
         ])
-        parameters_update.update_parameters(context, 1, 2, 1, 0)
+        parameters_update.update_parameters(context, 1, 2, 1, 0, None)
 
         for key in context.get_skill_dict(1):
             self.assertAlmostEquals(
@@ -141,7 +141,7 @@ class UpdateParametersTest(TestCase):
 
         # action
         parameters_update.update_parameters(context, student_id=1, task_id=2,
-                reported_flow=-1.0, predicted_flow=-1.0)
+                reported_flow=-1.0, predicted_flow=-1.0, last_solved_delta=None)
 
         # assert
         for key in context.get_skill_dict(student=1):
@@ -192,7 +192,7 @@ class UpdateParametersTest(TestCase):
 
         # action
         parameters_update.update_parameters(context, student_id=1, task_id=2,
-                reported_flow=None, predicted_flow=1.2)
+                reported_flow=None, predicted_flow=1.2, last_solved_delta=None)
 
         # assert
         for key in context.get_skill_dict(student=1):
@@ -203,3 +203,36 @@ class UpdateParametersTest(TestCase):
             self.assertAlmostEquals(
                 context.get(key, task=2),
                 expected_context.get(key, task=2))
+
+    def test_forgetting(self):
+        """ Check that after one day the student forgets cca 1/2 """
+        time_delta = 24 * 3600 # day
+        forgotten = parameters_update.forgetting(time_delta)
+        self.assertAlmostEqual(0.5, forgotten, places = 5)
+
+    def test_update_global_skill_function_with_forgetting(self):
+        """ Retake the task after 1 minute -> small update """
+        skill = 0.25
+        predicted_flow = 1
+        reported_flow = 1
+        time_delta = 60
+
+        result = parameters_update.update_global_skill_function(
+            skill, predicted_flow, reported_flow, time_delta)
+
+        self.assertAlmostEquals(result, skill, places=3)
+
+    def test_update_global_difficulty_function_with_forgetting(self):
+        """ Retake the task after 1 minute -> small update """
+        difficulty = 0.25
+        solution_count = 10
+        predicted_flow = 0
+        reported_flow = 1
+        time_delta = 60
+        expected = 0.249979375
+
+        result = parameters_update.update_global_difficulty_function(
+            difficulty, solution_count, predicted_flow, reported_flow, time_delta)
+
+        self.assertAlmostEquals(result, expected)
+

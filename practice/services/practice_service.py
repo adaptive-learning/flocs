@@ -244,7 +244,8 @@ def process_flow_report(user, task_instance_id, reported_flow=None):
     practice_context = create_practice_context(student=student, task=task)
     update_parameters(practice_context, student.pk, task.pk,
             task_instance.get_reported_flow(),
-            task_instance.get_predicted_flow())
+            task_instance.get_predicted_flow(),
+            _get_last_solved_delta(student, task))
     # NOTE: There is a race condition when 2 students are updating parameters
     # for the same task at the same time. In the current conditons, this is
     # rare and if it happens it does not cause any problems (one update is
@@ -283,4 +284,23 @@ def get_session_overview(user):
             overall_time = overall_time,
             percentils = percentils
             )
+
+def _get_last_solved_delta(student, task):
+    """
+    Returns time delta in seconds between solving of the last two instances 
+    of the task by the student. None if there is only one or none instance.
+
+    Returns:
+        integer - seconds as time delta
+    """
+    task_instances = TaskInstanceModel.objects.filter(
+            student=student, task=task).order_by('time_end')
+    if len(task_instances) > 1:
+        delta = task_instances[len(task_instances) - 1].time_end - \
+                task_instances[len(task_instances) - 2].time_end
+        return int(delta.total_seconds())
+    else:
+        return None
+
+
 

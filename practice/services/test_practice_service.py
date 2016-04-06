@@ -142,3 +142,16 @@ class PracticeServiceTest(TestCase):
         student = StudentModel.objects.create(user=self.user, programming=1.0, level=level1)
         task_info = practice_service.get_task(student=student, task_selector=ScoreTaskSelector())
         self.assertEqual(task_info.task_instance.task.pk, task1.pk)
+
+    def test_get_last_solved_delta(self):
+        student = StudentModel.objects.create(user=self.user)
+        task = TaskModel.objects.create(id=1)
+        TaskInstanceModel.objects.create(id=1, task_id=1, student=student,
+                time_end=datetime(2016,4,6,18,26,7))
+        delta = practice_service._get_last_solved_delta(student, task)
+        self.assertIsNone(delta)
+        TaskInstanceModel.objects.create(id=2, task_id=1, student=student,
+                time_end=datetime(2016,4,8,10,20,0))
+        delta = practice_service._get_last_solved_delta(student, task)
+        self.assertEquals(143633, delta)
+
