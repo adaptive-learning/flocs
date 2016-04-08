@@ -12,7 +12,7 @@ class PracticeSession(models.Model):
     """
 
     # time for practice session expiration
-    EXPIRATION = 24 * 60 * 60 # one day
+    EXPIRATION = 12 * 60 * 60 # half a day
 
     # student, owner of the session
     student = models.ForeignKey(StudentModel, null=True)
