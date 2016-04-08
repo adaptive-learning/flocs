@@ -2,12 +2,17 @@ from django.db import models
 
 from practice.models import TaskInstanceModel
 from practice.models import StudentModel
+from datetime import datetime
+
 
 class PracticeSession(models.Model):
     """
     Representation of a practice session.
     The session keeps counter of tasks in the session.
     """
+
+    # time for practice session expiration
+    EXPIRATION = 24 * 60 * 60 # one day
 
     # student, owner of the session
     student = models.ForeignKey(StudentModel, null=True)
@@ -18,8 +23,24 @@ class PracticeSession(models.Model):
     # last task instance started in the session
     last_task = models.ForeignKey(TaskInstanceModel, null=True)
 
-    # active
-    active = models.BooleanField(default=True)
+    # active (private field)
+    _active = models.BooleanField(default=True)
+
+    # active (public property)
+    def _get_active(self):
+        # deactivate session if it is older then EXPIRATION parameter
+        session_instances = self.task_instances_set.order_by('order')
+        if len(session_instances) > 0:
+            delta = datetime.now() - session_instances[0].task_instance.time_start
+            if delta.total_seconds() > self.EXPIRATION:
+                self._active = False
+                self.save()
+        return self._active
+
+    def _set_active(self, input):
+        self._active = input
+
+    active = property(_get_active, _set_active)
 
     def get_task_instances(self):
         """

@@ -99,10 +99,11 @@ def get_session(student):
     Returns:
         session
     """
-    retrieved_sessions = PracticeSession.objects.filter(student=student, active=True)
-    if len(retrieved_sessions) == 1:
-        return retrieved_sessions[0]
-    elif len(retrieved_sessions) == 0:
+    retrieved_sessions = PracticeSession.objects.filter(student=student, _active=True)
+    sessions = [sess for sess in retrieved_sessions if sess.active == True]
+    if len(sessions) == 1:
+        return sessions[0]
+    elif len(sessions) == 0:
         # no session
         return None
     else:

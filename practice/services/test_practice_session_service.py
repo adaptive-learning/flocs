@@ -6,8 +6,11 @@ from django.test import TestCase
 from practice.models import StudentModel
 from practice.models import PracticeSession
 from practice.models import TaskInstanceModel
+from practice.models import SessionTaskInstance
 from practice.services import practice_session_service as service
 from tasks.models import TaskModel
+
+from datetime import datetime, timedelta
 
 class PracticeSessionServiceTest(TestCase):
 
@@ -31,7 +34,7 @@ class PracticeSessionServiceTest(TestCase):
         # start session
         service.next_task_in_session(self.student, taskInstance)
         # assert counter was increased
-        session = PracticeSession.objects.filter(student=self.student, active=True)[0]
+        session = PracticeSession.objects.filter(student=self.student, _active=True)[0]
         self.assertEquals(2, session.task_counter)
         self.assertEquals(taskInstance, session.last_task)
         # set last task
@@ -40,7 +43,7 @@ class PracticeSessionServiceTest(TestCase):
         service.next_task_in_session(self.student, taskInstance)
         # assert new session was created
         new_session = PracticeSession.objects.filter(
-                student=self.student, active=True)[0]
+                student=self.student, _active=True)[0]
         self.assertNotEquals(self.session, new_session)
         self.assertEquals(1, new_session.task_counter)
 
@@ -79,7 +82,7 @@ class PracticeSessionServiceTest(TestCase):
         service.end_session(self.session)
         # get session
         new_session = PracticeSession.objects.filter(
-                student=self.student, active=True)
+                student=self.student, _active=True)
         # assert it has really ended
         self.assertEquals(0, len(new_session))
 
@@ -93,3 +96,12 @@ class PracticeSessionServiceTest(TestCase):
         self.assertEquals(len(task_instances), 2)
         self.assertEquals(task_instances[0].pk, instance3.pk)
         self.assertEquals(task_instances[1].pk, instance1.pk)
+
+    def test_destroying_session_after_idle(self):
+        SessionTaskInstance.objects.create(session=self.session, order=self.session.task_counter,
+                task_instance=self.taskInstance)
+        expiration = PracticeSession.EXPIRATION + 3600
+        self.taskInstance.time_start = datetime.now() - timedelta(seconds=expiration)
+        self.taskInstance.save()
+        self.assertEquals(self.session.active, False)
+

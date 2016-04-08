@@ -34,7 +34,7 @@ class PracticeServiceTest(TestCase):
         self.assertEquals(TaskInstanceModel.objects.first().id,
                 task_info.task_instance.pk)
         student = StudentModel.objects.get(user=self.user)
-        session = PracticeSession.objects.filter(student=student, active=True)[0]
+        session = PracticeSession.objects.filter(student=student, _active=True)[0]
         self.assertEquals(session, task_info.session)
         task_instance = TaskInstanceModel.objects.get(student=student)
         self.assertEquals(session.last_task, task_instance)
