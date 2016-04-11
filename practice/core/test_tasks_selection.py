@@ -27,13 +27,13 @@ class ScoreTaskSelectorTest(TestCase):
         context = PracticeContext()
         context.get = lambda parameter_name, student=None, task=None: None
         context.get_difficulty_dict = lambda x: {FlowFactors.TASK_BIAS: 0.4}\
-                if x == 5 else {FlowFactors.TASK_BIAS: 0.3}
+                if x == 12 else {FlowFactors.TASK_BIAS: 0.3}
         context.get_skill_dict = lambda x: {FlowFactors.STUDENT_BIAS: 0.5}
 
         selector = ScoreTaskSelector()
         result = selector.select([i for i in range(20)], student_id=11,
                 practice_context=context)
-        self.assertEqual(5, result)
+        self.assertEqual(12, result)
 
     def test_select_prefer_not_seen_task(self):
         date1 = datetime(2015, 1, 1, 0, 0, 0)

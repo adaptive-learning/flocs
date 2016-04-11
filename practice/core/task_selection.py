@@ -5,6 +5,7 @@ Models for task selection.
 from random import choice
 from common.utils.activation import AMPLITUDE
 from practice.core.flow_prediction import predict_flow
+from practice.core.efficiency import estimate_efficiency
 import math
 
 
@@ -42,6 +43,7 @@ class ScoreTaskSelector(TaskSelector):
 
     WEIGHT_FLOW = 5
     WEIGHT_TIME = 10
+    WEIGHT_EFFICIENCY = 1
 
     # seconds from the last attempt to get half of the maximum penalization
     TIME_FOR_HALF_SCORE = 60 * 60  # 1 hour
@@ -49,8 +51,10 @@ class ScoreTaskSelector(TaskSelector):
 
     def select(self, task_ids, student_id, practice_context):
         """
-        Select task which maximizes score which is based on flow prediction
-        and time from the last attempt to solve this task.
+        Select task which maximizes score which is based on:
+            - flow prediction
+            - task efficiency (expected skill gain for unit of time)
+            - time from the last attempt to solve this task
 
         It may use additional criteria in future, e.g. task effetiveness or
         exploration gain (how much information a task brings to the system).
@@ -59,16 +63,20 @@ class ScoreTaskSelector(TaskSelector):
             id of selected task
         """
         def score(task_id):
+            # flow
             flow = predict_flow(student_id, task_id, practice_context)
             flow_score = self._score_flow(flow)
-
+            # efficiency
+            efficiency_score = estimate_efficiency(student_id, task_id, practice_context)
+            # time
             last_attempt_time = practice_context.get_last_attempt_time(
                     student=student_id, task=task_id)
             current_time = practice_context.get_time()
             time_score = self._score_time_since_last_attempt(
                     last_attempt_time, current_time)
-
-            score = self.WEIGHT_FLOW * flow_score\
+            # combine
+            score = self.WEIGHT_FLOW * flow_score \
+                    + self.WEIGHT_EFFICIENCY * efficiency_score \
                     + self.WEIGHT_TIME * time_score
             return score
 
