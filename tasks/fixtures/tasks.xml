@@ -654,7 +654,7 @@
     }
     </field>
     <field name="level">
-      5
+      4
     </field>
   </object>
 
@@ -834,7 +834,7 @@
     }
     </field>
     <field name="level">
-      6
+      5
     </field>
   </object>
 
@@ -1988,5 +1988,90 @@
     </field>
   </object>
 -->
+
+<object pk="53" model="tasks.taskmodel">
+    <field name="title_en">
+      Skewed path
+    </field>
+    <field name="title_cs">
+      Šikmá cesta
+    </field>
+    <field name="maze_settings">
+      {
+        "grid": [
+          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+          [1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1],
+          [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
+          [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
+          [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
+          [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+          [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+          [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+          [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+          [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1],
+          [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+          [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+          [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+          [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+        "hero": {
+          "position": [4,14],
+          "direction": 1
+        }
+      }
+    </field>
+    <field type="TextField" name="workspace_settings">
+      {
+      "blocksLimit": 8
+      }
+    </field>
+    <field name="level">
+      4
+    </field>
+  </object>
+
+  <object pk="54" model="tasks.taskmodel">
+    <field name="title_en">
+      Comb
+    </field>
+    <field name="title_cs">
+      Hřebínek
+    </field>
+    <field name="maze_settings">
+    {
+      "grid": [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 0, 0, 0, 0, 2, 1, 1, 1],
+        [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1],
+        [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1],
+        [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1],
+        [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1],
+        [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1],
+        [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+      "tokens": [[7,11], [7,9], [7,7], [7,5], [7,3]],
+      "hero": {
+        "position": [7,13],
+        "direction": 2
+      }
+    }
+    </field>
+    <field type="TextField" name="workspace_settings">
+    {
+      "blocksLimit": 14
+    }
+    </field>
+    <field name="level">
+      4
+    </field>
+  </object>
+
 
 </django-objects>
