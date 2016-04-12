@@ -6,7 +6,7 @@ from common.flow_factors import FlowFactors
 # Constants
 # Speed of prediction learning for student bias
 #STUDENT_GLOBAL_SPEED = 1
-STUDENT_GLOBAL_SPEED = 0.3
+STUDENT_GLOBAL_SPEED = 0.35
 
 # Speed of student learing for bias
 #STUDENT_GLOBAL_STEP = 1/4
@@ -210,6 +210,7 @@ def flow_deviation(predicted_flow, reported_flow):
     """
     return predicted_flow - reported_flow if reported_flow is not None else 0.
 
+
 def forgetting(time_delta):
     """
     Computes an amount of forgotten knowledge in the memory of the student about the task.
@@ -223,6 +224,3 @@ def forgetting(time_delta):
     if time_delta is None or time_delta < 0:
         return 1
     return 1 - exp(- time_delta / MEMORY_STRENGTH)
-
-
-

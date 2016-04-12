@@ -75,6 +75,7 @@ class _QuietTestResult(unittest.TextTestResult):
         pass
 
     def addError(self, test, err):
+        # TODO: propagate exception instead of just printing it
         print('Simulation aborted due to the following exception raised in {where}.'
               .format(where=test))
         print_exception(*err)

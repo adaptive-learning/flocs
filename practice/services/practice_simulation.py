@@ -16,10 +16,10 @@ class PracticeSimulation(Simulation):
     Simulation of a practice session.
     """
 
-    fixtures = ['tasks', 'task-difficulties', 'instructions']
+    fixtures = ['blocks', 'levels', 'tasks', 'task-difficulties', 'instructions']
     log_path_pattern = 'practice/simulated-data/practice-simulation-{timestamp}'
 
-    def prepare(self, behavior, max_instances=20, max_time=inf):
+    def prepare(self, behavior, max_instances=7, max_time=inf):
         """
         Set simulatation parameters.
 
@@ -44,22 +44,30 @@ class PracticeSimulation(Simulation):
             self.logger.new_round()
             self.logger.log('instance', instances_count + 1)
 
-            task_dict = practice_service.get_next_task(user)
-            task_id = task_dict['task']['task-id']
+            task_info = practice_service.get_next_task_in_session(user)
+            task_id = task_info.task.pk
             task_difficulty = TasksDifficultyModel.objects.get(task_id=task_id)
 
-            student_skill = StudentModel.objects.get(user=user).get_skill_dict()
+            student = StudentModel.objects.get(user=user)
+            self.logger.log('level', student.level)
+            self.logger.log('total-credits', student.total_credits)
+            self.logger.log('free-credits', student.free_credits)
+            student_skill = student.get_skill_dict()
             for factor in FlowFactors.student_factors():
                 self.logger.log('student-' + factor.name, student_skill[factor])
 
             self.logger.log('task-id', task_id)
+            self.logger.log('task-title', task_info.task.title)
+            self.logger.log('task-level', task_info.task.level)
             task_difficulty = task_difficulty.get_difficulty_dict()
             for factor in FlowFactors.task_factors():
                 self.logger.log('task-' + factor.name, task_difficulty[factor])
-            self.logger.log('instructions', ' '.join(task_dict['instructions']))
+            self.logger.log('instructions', ' '.join(task_info.instructions))
 
-            self.logger.log('flow-prediction', TaskInstanceModel.objects
-                .get(id=task_dict['task-instance-id']).predicted_flow)
+
+            #self.logger.log('flow-prediction', TaskInstanceModel.objects
+            #    .get(id=task_info.task_instance.['task-instance-id']).predicted_flow)
+            self.logger.log('flow-prediction', task_info.task_instance.predicted_flow)
 
             time = self.behavior.spent_time(task_difficulty)
             flow = self.behavior.report_flow(task_difficulty)
@@ -67,20 +75,24 @@ class PracticeSimulation(Simulation):
             self.logger.log('time-spent', time)
             self.logger.log('flow-report', flow)
 
-            report = {
-                'task-instance-id': task_dict['task-instance-id'],
+            result = practice_service.process_attempt_report(user, report={
+                'task-instance-id': task_info.task_instance.pk,
                 'attempt': 1,
                 'solved': True,
-                'given-up': False,
                 'time': time,
-                'flow-report': flow
-            }
-            practice_service.process_attempt_report(user, report)
+            })
+            practice_service.process_flow_report(
+                    user=user,
+                    task_instance_id=task_info.task_instance.pk,
+                    reported_flow=flow)
 
+            self.logger.log('result-earned-credits', result.credits)
+            self.logger.log('result-speed-bonus', result.speed_bonus)
+            self.logger.log('result-new-blocks', len(result.purchases))
             self.logger.log('updated-task-difficulty',
                     TasksDifficultyModel.objects.get(task_id=task_id) \
                     .get_difficulty_dict()[FlowFactors.TASK_BIAS])
 
             instances_count += 1
             time_spent += time
-            print(instances_count, ' ', time_spent)
+            #print(instances_count, ' ', time_spent)

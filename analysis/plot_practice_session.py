@@ -32,9 +32,9 @@ def plot_practice_session(simulation):
     Args:
         simulation: dataframe with simulation data
     """
-    too_difficult = simulation[simulation['flow-report'] == 1]
-    just_right = simulation[simulation['flow-report'] == 2]
-    too_easy = simulation[simulation['flow-report'] == 3]
+    too_difficult = simulation[simulation['flow-report'] == 2]
+    just_right = simulation[simulation['flow-report'] == 3]
+    too_easy = simulation[simulation['flow-report'] == 4]
 
     simulation = simulation.set_index('instance')
     difficulty = simulation['task-TASK_BIAS'] -\
