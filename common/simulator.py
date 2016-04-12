@@ -1,5 +1,6 @@
 from django.test.runner import DiscoverRunner
 from datetime import datetime
+from traceback import print_exception
 import unittest
 
 class Simulator(object):
@@ -58,8 +59,6 @@ class _QuietStream(object):
     Stream used for simulation runner.
     """
     def write(self, text):
-        #text = text.replace('test', 'simulation')
-        #print(text, end='')
         pass
 
     def flush(self):
@@ -68,7 +67,7 @@ class _QuietStream(object):
 
 class _QuietTestResult(unittest.TextTestResult):
     """
-    Test result class which is quit most of the time.
+    Test result class which is quiet most of the time.
     Used for simulations, we don't want to show dots etc.
     """
 
@@ -76,7 +75,9 @@ class _QuietTestResult(unittest.TextTestResult):
         pass
 
     def addError(self, test, err):
-        pass
+        print('Simulation aborted due to the following exception raised in {where}.'
+              .format(where=test))
+        print_exception(*err)
 
     def addFailure(self, test, err):
         pass
