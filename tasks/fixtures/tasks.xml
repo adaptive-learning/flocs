@@ -540,45 +540,9 @@
       }
     </field>
     <field name="level">
-      5
+      3
     </field>
   </object>
-
-<!-- Repeat with conditions-->
-  <object pk="17" model="tasks.taskmodel">
-    <field name="title_en">
-      Horseshoe
-    </field>
-    <field name="title_cs">
-      Podkova
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 1, 1, 1, 1, 0, 1],
-        [1, 0, 1, 1, 1, 1, 0, 1],
-        [1, 0, 1, 1, 1, 1, 0, 1],
-        [1, 0, 1, 1, 1, 1, 0, 1],
-        [1, 2, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [6, 6],
-        "direction": 1
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 6
-    }
-    </field>
-    <field name="level">
-      7
-    </field>
-  </object>
-
 
   <object pk="18" model="tasks.taskmodel">
     <field name="title_en">
@@ -2070,6 +2034,40 @@
     </field>
     <field name="level">
       4
+    </field>
+  </object>
+
+  <object pk="55" model="tasks.taskmodel">
+    <field name="title_en">
+      Letter C
+    </field>
+    <field name="title_cs">
+      Céčko
+    </field>
+    <field name="maze_settings">
+    {
+      "grid": [
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 0, 0, 0, 2, 1, 1, 1],
+        [1, 0, 1, 1, 1, 1, 1, 1],
+        [1, 0, 1, 1, 1, 1, 1, 1],
+        [1, 0, 1, 1, 1, 1, 1, 1],
+        [1, 0, 1, 1, 1, 1, 1, 1],
+        [1, 0, 0, 0, 0, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1]],
+      "hero": {
+        "position": [4, 6],
+        "direction": 2
+      }
+    }
+    </field>
+    <field type="TextField" name="workspace_settings">
+      {
+        "blocksLimit": 6
+      }
+    </field>
+    <field name="level">
+      5
     </field>
   </object>
 
