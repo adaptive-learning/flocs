@@ -70,7 +70,7 @@ class UpdateParametersTest(TestCase):
         ])
 
         expected_context = PracticeContext([
-            (FlowFactors.STUDENT_BIAS,  1, None, 0.7392970295907),
+            (FlowFactors.STUDENT_BIAS,  1, None, 0.622809612962),
             (FlowFactors.CONDITIONS,    1, None, 1),
             (FlowFactors.LOOPS,         1, None, 0),
             (FlowFactors.LOGIC_EXPR,    1, None, -1),
@@ -119,7 +119,7 @@ class UpdateParametersTest(TestCase):
         ])
 
         expected_context = PracticeContext([
-            (FlowFactors.STUDENT_BIAS,  1, None, 0.2),
+            (FlowFactors.STUDENT_BIAS,  1, None, 0.15),
             (FlowFactors.CONDITIONS,    1, None, 0),
             (FlowFactors.LOOPS,         1, None, 0),
             (FlowFactors.LOGIC_EXPR,    1, None, -1),
@@ -170,7 +170,7 @@ class UpdateParametersTest(TestCase):
         ])
 
         expected_context = PracticeContext([
-            (FlowFactors.STUDENT_BIAS,  1, None, 0.2),
+            (FlowFactors.STUDENT_BIAS,  1, None, 0.15),
             (FlowFactors.CONDITIONS,    1, None, 0),
             (FlowFactors.LOOPS,         1, None, 0),
             (FlowFactors.LOGIC_EXPR,    1, None, -1),

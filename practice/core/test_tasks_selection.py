@@ -74,7 +74,7 @@ class ScoreTaskSelectorTest(TestCase):
 
     def test_score_time(self):
         date1 = datetime(2015, 1, 1, 0, 0, 0)
-        date2 = datetime(2015, 1, 1, 0, 1, 0)
+        date2 = datetime(2015, 1, 1, 0, 12, 0)
         date3 = datetime(2015, 2, 1, 0, 0, 0)
         self.assertAlmostEquals(0,
             ScoreTaskSelector()._score_time_since_last_attempt(None, date1))

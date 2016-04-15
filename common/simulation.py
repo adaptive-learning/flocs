@@ -6,8 +6,6 @@ import csv
 import json
 import os
 
-from analysis.plot_practice_session import show_practice_session_plot
-
 
 class SimulationLogger(object):
 
@@ -28,7 +26,7 @@ class SimulationLogger(object):
         print('{key}: {value}'.format(key=key, value=value))
 
     def get_path(self, file_format):
-        timestamp = self.time.strftime('%Y-%m-%d-%H-%M-%S')
+        timestamp = self.time.strftime('%Y-%m-%d-%H-%M-%S-%f')
         path = self.path_pattern.format(timestamp=timestamp) + '.' + file_format
         return path
 
@@ -52,10 +50,6 @@ class SimulationLogger(object):
             writer = csv.DictWriter(outfile, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(self.rounds)
-
-    def show_plot(self):
-        path = self.get_path('csv')
-        show_practice_session_plot(path)
 
 
 class Simulation(TestCase, metaclass=ABCMeta):

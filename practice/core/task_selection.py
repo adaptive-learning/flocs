@@ -42,11 +42,11 @@ class RandomTaskSelector(TaskSelector):
 class ScoreTaskSelector(TaskSelector):
 
     WEIGHT_FLOW = 5
-    WEIGHT_TIME = 10
+    WEIGHT_TIME = 16
     WEIGHT_EFFICIENCY = 1
 
     # seconds from the last attempt to get half of the maximum penalization
-    TIME_FOR_HALF_SCORE = 60 * 60  # 1 hour
+    TIME_FOR_HALF_SCORE = 12 * 60 * 60  # 12 hours
 
 
     def select(self, task_ids, student_id, practice_context):

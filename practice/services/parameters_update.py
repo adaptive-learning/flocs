@@ -6,14 +6,14 @@ from common.flow_factors import FlowFactors
 # Constants
 # Speed of prediction learning for student bias
 #STUDENT_GLOBAL_SPEED = 1
-STUDENT_GLOBAL_SPEED = 0.35
+STUDENT_GLOBAL_SPEED = 0.3
 
-# Speed of student learing for bias
+# Speed of student learning for bias
 #STUDENT_GLOBAL_STEP = 1/4
-STUDENT_GLOBAL_STEP = 0.20
+STUDENT_GLOBAL_STEP = 0.15
 
 # Steepness of exponential increase for bias
-STUDENT_GLOBAL_STEEPNESS = 0.1
+STUDENT_GLOBAL_STEEPNESS = 0.4
 
 # Speed of task difficulty prediction learning
 TASK_GLOBAL_SPEED = 0.6

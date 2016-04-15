@@ -57,8 +57,8 @@ class InitialDifficultyEstimator(object):
     """
     LEVEL_WEIGHT = 1.0
     GAME_CONCEPT_WEIGHT = 0.8
-    MAZE_SIZE_WEIGHT = 1.0  # the logarithmic difference is already < 0.2
-    FREE_SPACE_WEIGHT = 0.15
+    MAZE_SIZE_WEIGHT = 1.2  # the logarithmic difference is already < 0.2
+    FREE_SPACE_WEIGHT = 0.5
 
     def __init__(self):
         """ Precomputes mean and std of intensity of all tasks in DB
