@@ -7,12 +7,15 @@ from .tasks_difficulty import TasksDifficultyModel
 from django.db.models import Min
 from levels.models import Level
 
+# denote task in the ascending list of tasks by the difficulty, which is used
+# to set initial skill of the student
+INITIAL_SKILL_AS_TASK = 1
 
 def _calculate_initial_skill():
-    difficulty_of_easiest_task = TasksDifficultyModel.objects.all().aggregate(Min('programming'))['programming__min']
-    if difficulty_of_easiest_task is None:
+    easiest_tasks = TasksDifficultyModel.objects.all().order_by('programming')
+    if len(easiest_tasks) < INITIAL_SKILL_AS_TASK + 1:
         return Decimal(-1)
-    return difficulty_of_easiest_task
+    return easiest_tasks[INITIAL_SKILL_AS_TASK].programming
 
 
 def _get_lowest_level():

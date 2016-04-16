@@ -1887,10 +1887,10 @@
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
-        [6, 0, 0, 0, 0, 0, 4, 0, 0, 6],
+        [6, 0, 0, 0, 0, 0, 0, 4, 0, 6],
         [6, 6, 6, 6, 6, 6, 6, 6, 0, 6],
-        [6, 6, 6, 6, 6, 6, 2, 0, 0, 6],
-        [6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
+        [6, 2, 6, 6, 6, 6, 6, 6, 4, 6],
+        [6, 0, 4, 0, 0, 0, 0, 0, 0, 6],
         [6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
@@ -1902,7 +1902,7 @@
     </field>
     <field type="TextField" name="workspace_settings">
     {
-      "blocksLimit": 16
+      "blocksLimit": 7
     }
     </field>
     <field name="level">
@@ -2068,6 +2068,39 @@
     </field>
     <field name="level">
       5
+    </field>
+  </object>
+
+  <object pk="56" model="tasks.taskmodel">
+    <field name="title_en">
+      Two steps forward
+    </field>
+    <field name="title_cs">
+      Dva kroky vpřed
+    </field>
+    <field name="maze_settings">
+    {
+      "grid": [
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 0, 0, 2, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1]],
+      "hero": {
+        "position": [2, 4],
+        "direction": 0
+      }
+    }
+    </field>
+    <field type="TextField" name="workspace_settings">
+      {
+      }
+    </field>
+    <field name="level">
+      1
     </field>
   </object>
 
