@@ -16,10 +16,8 @@ cd frontend && \
 cd $DIR
 
 # database
-python $DIR/manage.py migrate --noinput
-python $DIR/manage.py loaddata tasks/fixtures/tasks.xml
-python $DIR/manage.py loaddata practice/fixtures/instructions.json
-python $DIR/manage.py generate_tasks_difficulty
+make db-migrate
+make db-load-data
 
 # static files
 python $DIR/manage.py collectstatic --noinput

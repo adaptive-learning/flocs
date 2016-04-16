@@ -53,22 +53,20 @@ check-frontend:
 
 # -----------------------------------------------------------
 
-db-setup: db-migrate db-load-data db-generate-tasks-difficulty
+db-setup: db-flush db-migrate admin db-load-data
 
 db-migrate:
 	@echo "===== Set up database ====="
-	# some migration errors can be fixed by flushing DB: `python manage.py flush`
 	python manage.py migrate --noinput
 
-db-load-data:
+db-flush:
 	python manage.py flush --noinput
-	python manage.py create_admin
+
+db-load-data:
 	python manage.py loaddata blocks/fixtures/blocks.xml
 	python manage.py loaddata levels/fixtures/levels.xml
 	python manage.py loaddata tasks/fixtures/tasks.xml
 	python manage.py loaddata practice/fixtures/instructions.json
-
-db-generate-tasks-difficulty:
 	python manage.py generate_tasks_difficulty
 
 admin:
