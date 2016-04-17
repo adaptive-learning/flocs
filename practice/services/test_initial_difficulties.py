@@ -32,7 +32,7 @@ class InitialDifficultiesTest(TestCase):
         self.assertEqual(len(TaskConcepts(TaskModel.objects.get(pk=32))), 4)
         self.assertEqual(len(TaskConcepts(TaskModel.objects.get(pk=33))), 5)
         self.assertEqual(len(TaskConcepts(TaskModel.objects.get(pk=36))), 5)
-        self.assertEqual(len(TaskConcepts(TaskModel.objects.get(pk=38))), 5)
+        self.assertEqual(len(TaskConcepts(TaskModel.objects.get(pk=38))), 6)
 
     def test_generating_reasonable_difficulties(self):
         estimator = InitialDifficultyEstimator()

@@ -1033,7 +1033,7 @@
     </field>
     <field type="TextField" name="workspace_settings">
     {
-      "blocksLimit": 10
+      "blocksLimit": 9
     }
     </field>
     <field name="level">
@@ -1375,7 +1375,7 @@
     }
     </field>
     <field name="level">
-      7
+      9
     </field>
   </object>
 
