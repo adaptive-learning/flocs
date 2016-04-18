@@ -1284,7 +1284,7 @@
     </field>
     <field type="TextField" name="workspace_settings">
     {
-      "blocksLimit": 15
+      "blocksLimit": 8 
     }
     </field>
     <field name="level">
@@ -1622,7 +1622,7 @@
     </field>
     <field type="TextField" name="workspace_settings">
     {
-      "blocksLimit": 12
+      "blocksLimit": 8 
     }
     </field>
     <field name="level">
