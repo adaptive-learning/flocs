@@ -3,32 +3,41 @@
 
 from django.db import models
 import json
-
 from .block_manager import BlockManager
 
-class BlockModel(models.Model):
+class Block(models.Model):
     """Representation of a code block
     """
     objects = BlockManager()
 
     name = models.TextField(
-        help_text="name of a block")
+        help_text="name of a block shown to students")
 
-    identifiers = models.TextField(
-        help_text="unique identifier(s) of all variants of a block(s) used internally")
+    identifier = models.CharField(
+        max_length=50,
+        unique=True,
+        help_text="short unique identifier of the block")
 
-    identifiers_condensed = models.TextField(
-        verbose_name="unique identifier(s) of a block(s) used internally")
+    _expanded_identifiers = models.TextField(
+        null=True,
+        default=None,
+        help_text="JSON array of identifiers for all variants of the block"
+                  + "(null if there are no extra variants)")
 
     level = models.SmallIntegerField(
         help_text="level required to use this block",
         default=1)
 
+    def natural_key(self):
+        return (self.identifier,)
+
     def get_identifiers_list(self):
-        return json.loads(self.identifiers)
+        if not self._expanded_identifiers:
+            return [self.identifier]
+        return json.loads(self._expanded_identifiers)
 
     def get_identifiers_condensed_list(self):
-        return json.loads(self.identifiers_condensed)
+        return [self.identifier]
 
     def __str__(self):
         return '[{pk}] {name}'.format(pk=self.pk, name=self.name)
@@ -39,7 +48,7 @@ class BlockModel(models.Model):
         block_dict = {
             'block-id': self.pk,
             'name': self.name,
-            'identifiers': json.loads(self.identifiers),
-            'identifiers-condensed': json.loads(self.identifiers_condensed),
+            'identifiers': self.get_identifiers_list(),
+            'identifiers-condensed': self.get_identifiers_condensed_list()
         }
         return block_dict

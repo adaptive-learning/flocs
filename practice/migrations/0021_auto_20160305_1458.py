@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='studentmodel',
             name='available_blocks',
-            field=models.ManyToManyField(verbose_name='blocks that has been purchased by the student', to='blocks.BlockModel', default=[1]),
+            field=models.ManyToManyField(verbose_name='blocks that has been purchased by the student', to='blocks.Block', default=[1]),
         ),
     ]

@@ -1,3 +1,3 @@
 """Persistance layer (data model) of block app
 """
-from .block import BlockModel
+from .block import Block

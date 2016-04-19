@@ -55,6 +55,7 @@ INSTALLED_APPS = (
     'feedback',
     'blocks',
     'levels',
+    'concepts',
     'tasks',
     'practice',
     'flocs',

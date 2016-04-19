@@ -64,6 +64,7 @@ db-flush:
 
 db-load-data:
 	python manage.py loaddata blocks/fixtures/blocks.xml
+	python manage.py loaddata concepts/fixtures/concepts.xml
 	python manage.py loaddata levels/fixtures/levels.xml
 	python manage.py loaddata tasks/fixtures/tasks.xml
 	python manage.py loaddata practice/fixtures/instructions.json

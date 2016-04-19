@@ -5,7 +5,7 @@ from practice.models import StudentModel
 from practice.models import StudentTaskInfoModel
 from practice.models import TaskInstanceModel
 from practice.services import details
-from blocks.models import BlockModel
+from blocks.models import Block
 
 class DetailsServiceTest(TestCase):
 
@@ -15,7 +15,7 @@ class DetailsServiceTest(TestCase):
         self.task1 = TaskModel.objects.create(id=1)
         self.task2 = TaskModel.objects.create(id=2)
         self.task3 = TaskModel.objects.create(id=3)
-        BlockModel.objects.create(id=1, name="foo", identifiers="bar")
+        Block.objects.create(id=1, name="foo", identifier="bar")
 
     def test_get_practice_details_no_solved_tasks(self):
         self.student.total_credits = 7

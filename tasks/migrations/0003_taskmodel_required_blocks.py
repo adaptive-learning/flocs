@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='taskmodel',
             name='required_blocks',
-            field=models.ManyToManyField(to='blocks.BlockModel', help_text='blocks required to solve this task'),
+            field=models.ManyToManyField(to='blocks.Block', help_text='blocks required to solve this task'),
         ),
     ]

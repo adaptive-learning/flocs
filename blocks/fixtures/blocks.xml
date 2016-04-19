@@ -1,179 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
 <django-objects version="1.0">
-  <object pk="1" model="blocks.blockmodel">
+  <object pk="1" model="blocks.block">
+    <field name="identifier">
+      maze_move_forward
+    </field>
     <field name="name_en">
       Step forward
     </field>
     <field name="name_cs">
       Krok vpřed
     </field>
-    <field name="identifiers">
-      ["maze_move_forward"]
-    </field>
-    <field name="identifiers_condensed">
-      ["maze_move_forward"]
-    </field>
     <field name="level">
       1
     </field>
   </object>
 
-  <object pk="2" model="blocks.blockmodel">
+  <object pk="2" model="blocks.block">
+    <field name="identifier">
+      maze_turn
+    </field>
+    <field name="_expanded_identifiers">
+      ["maze_turn_left", "maze_turn_right"]
+    </field>
     <field name="name_en">
       Make a turn
     </field>
     <field name="name_cs">
       Zatoč
     </field>
-    <field name="identifiers">
-      ["maze_turn_left", "maze_turn_right"]
-    </field>
-    <field name="identifiers_condensed">
-      ["maze_turn"]
-    </field>
     <field name="level">
       2
     </field>
   </object>
 
-  <object pk="3" model="blocks.blockmodel">
+  <object pk="3" model="blocks.block">
+    <field name="identifier">
+      controls_repeat:10
+    </field>
     <field name="name_en">
       Repeat statement
     </field>
     <field name="name_cs">
       Cyklus repeat
     </field>
-    <field name="identifiers">
-      ["controls_repeat:10"]
-    </field>
-    <field name="identifiers_condensed">
-      ["controls_repeat:10"]
-    </field>
     <field name="level">
       3
     </field>
   </object>
 
-  <object pk="4" model="blocks.blockmodel">
+  <object pk="4" model="blocks.block">
+    <field name="identifier">
+      controls_while
+    </field>
     <field name="name_en">
       While loop
     </field>
     <field name="name_cs">
       Cyklus while
     </field>
-    <field name="identifiers">
-      ["controls_while"]
-    </field>
-    <field name="identifiers_condensed">
-      ["controls_while"]
-    </field>
     <field name="level">
       4
     </field>
   </object>
 
-  <object pk="5" model="blocks.blockmodel">
+  <object pk="5" model="blocks.block">
+    <field name="identifier">
+      maze_check_goal
+    </field>
     <field name="name_en">
       Check goal
     </field>
     <field name="name_cs">
       Kontrola cíle
     </field>
-    <field name="identifiers">
-      ["maze_check_goal"]
-    </field>
-    <field name="identifiers_condensed">
-      ["maze_check_goal"]
-    </field>
     <field name="level">
       4
     </field>
   </object>
 
-  <object pk="6" model="blocks.blockmodel">
+  <object pk="6" model="blocks.block">
+    <field name="identifier">
+      maze_check_path
+    </field>
+    <field name="_expanded_identifiers">
+      ["maze_check_path", "maze_check_path_left", "maze_check_path_right"]
+    </field>
     <field name="name_en">
       Check path
     </field>
     <field name="name_cs">
       Kontrola cesty
     </field>
-    <field name="identifiers">
-      ["maze_check_path", "maze_check_path_left", "maze_check_path_right"]
-    </field>
-    <field name="identifiers_condensed">
-      ["maze_check_path"]
-    </field>
     <field name="level">
       5
     </field>
   </object>
 
-  <object pk="7" model="blocks.blockmodel">
+  <object pk="7" model="blocks.block">
+    <field name="identifier">
+      maze_check_color
+    </field>
     <field name="name_en">
       Check color
     </field>
     <field name="name_cs">
       Kontrola barvy
     </field>
-    <field name="identifiers">
-      ["maze_check_color"]
-    </field>
-    <field name="identifiers_condensed">
-      ["maze_check_color"]
-    </field>
     <field name="level">
       6
     </field>
   </object>
 
-  <object pk="8" model="blocks.blockmodel">
+  <object pk="8" model="blocks.block">
+    <field name="identifier">
+      controls_if
+    </field>
     <field name="name_en">
       If statement
     </field>
     <field name="name_cs">
       Podmínka pokud-pak
     </field>
-    <field name="identifiers">
-      ["controls_if"]
-    </field>
-    <field name="identifiers_condensed">
-      ["controls_if"]
-    </field>
     <field name="level">
       7
     </field>
   </object>
 
-  <object pk="9" model="blocks.blockmodel">
+  <object pk="9" model="blocks.block">
+    <field name="identifier">
+      controls_if_else
+    </field>
     <field name="name_en">
       If-else statement
     </field>
     <field name="name_cs">
       Podmínka pokud-pak-jinak
     </field>
-    <field name="identifiers">
-      ["controls_if_else"]
-    </field>
-    <field name="identifiers_condensed">
-      ["controls_if_else"]
-    </field>
     <field name="level">
       8
     </field>
   </object>
 
-  <object pk="10" model="blocks.blockmodel">
+  <object pk="10" model="blocks.block">
+    <field name="identifier">
+      logic_operation
+    </field>
     <field name="name_en">
       Logical operators
     </field>
     <field name="name_cs">
       Logické operace
-    </field>
-    <field name="identifiers">
-      ["logic_operation"]
-    </field>
-    <field name="identifiers_condensed">
-      ["logic_operation"]
     </field>
     <field name="level">
       9
@@ -181,14 +157,14 @@
   </object>
 
   <!--
-  <object pk="11" model="blocks.blockmodel">
+  <object pk="11" model="blocks.block">
     <field name="name_en">
       Number constant
     </field>
     <field name="name_cs">
       Číselná konstanta
     </field>
-    <field name="identifiers">
+    <field name="_expanded_identifiers">
       ["math_number"]
     </field>
     <field name="price">
@@ -196,14 +172,14 @@
     </field>
   </object>
 
-  <object pk="12" model="blocks.blockmodel">
+  <object pk="12" model="blocks.block">
     <field name="name_en">
       Equals
     </field>
     <field name="name_cs">
       Rovná se
     </field>
-    <field name="identifiers">
+    <field name="_expanded_identifiers">
       ["logic_compare"]
     </field>
     <field name="price">
@@ -211,14 +187,14 @@
     </field>
   </object>
 
-  <object pk="13" model="blocks.blockmodel">
+  <object pk="13" model="blocks.block">
     <field name="name_en">
       Variables
     </field>
     <field name="name_cs">
       Proměnné
     </field>
-    <field name="identifiers">
+    <field name="_expanded_identifiers">
       ["variables_set", "variables_get"]
     </field>
     <field name="price">

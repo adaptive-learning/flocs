@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+
+  <object pk="1" model="concepts.concept">
+    <field name="name">block-move</field>
+  </object>
+  <object pk="1" model="concepts.blockconcept">
+    <field name="block"><natural>maze_move_forward</natural></field>
+  </object>
+
+  <object pk="2" model="concepts.concept">
+    <field name="name">block-turn</field>
+  </object>
+  <object pk="2" model="concepts.blockconcept">
+    <field name="block"><natural>maze_turn</natural></field>
+  </object>
+
+  <object pk="3" model="concepts.concept">
+    <field name="name">block-repeat</field>
+  </object>
+  <object pk="3" model="concepts.blockconcept">
+    <field name="block"><natural>controls_repeat:10</natural></field>
+  </object>
+
+  <object pk="4" model="concepts.concept">
+    <field name="name">block-while</field>
+  </object>
+  <object pk="4" model="concepts.blockconcept">
+    <field name="block"><natural>controls_while</natural></field>
+  </object>
+
+  <object pk="5" model="concepts.concept">
+    <field name="name">block-check-goal</field>
+  </object>
+  <object pk="5" model="concepts.blockconcept">
+    <field name="block"><natural>maze_check_goal</natural></field>
+  </object>
+
+  <object pk="6" model="concepts.concept">
+    <field name="name">block-check-path</field>
+  </object>
+  <object pk="6" model="concepts.blockconcept">
+    <field name="block"><natural>maze_check_path</natural></field>
+  </object>
+
+  <object pk="7" model="concepts.concept">
+    <field name="name">block-check-color</field>
+  </object>
+  <object pk="7" model="concepts.blockconcept">
+    <field name="block"><natural>maze_check_color</natural></field>
+  </object>
+
+  <object pk="8" model="concepts.concept">
+    <field name="name">block-if</field>
+  </object>
+  <object pk="8" model="concepts.blockconcept">
+    <field name="block"><natural>controls_if</natural></field>
+  </object>
+
+  <object pk="9" model="concepts.concept">
+    <field name="name">block-if-else</field>
+  </object>
+  <object pk="9" model="concepts.blockconcept">
+    <field name="block"><natural>controls_if_else</natural></field>
+  </object>
+
+  <object pk="10" model="concepts.concept">
+    <field name="name">block-logic</field>
+  </object>
+  <object pk="10" model="concepts.blockconcept">
+    <field name="block"><natural>logic_operation</natural></field>
+  </object>
+
+  <object pk="11" model="concepts.concept">
+    <field name="name">env-maze</field>
+  </object>
+
+  <object pk="12" model="concepts.concept">
+    <field name="name">env-toolbox</field>
+  </object>
+
+  <object pk="13" model="concepts.concept">
+    <field name="name">env-workspace</field>
+  </object>
+
+  <object pk="14" model="concepts.concept">
+    <field name="name">env-snapping</field>
+  </object>
+
+  <object pk="15" model="concepts.concept">
+    <field name="name">env-run-reset</field>
+  </object>
+
+  <object pk="16" model="concepts.concept">
+    <field name="name">game-block-limit</field>
+  </object>
+
+  <object pk="17" model="concepts.concept">
+    <field name="name">game-colors</field>
+  </object>
+
+  <object pk="18" model="concepts.concept">
+    <field name="name">game-pits</field>
+  </object>
+
+  <object pk="19" model="concepts.concept">
+    <field name="name">game-tokens</field>
+  </object>
+
+</django-objects>
