@@ -19,7 +19,6 @@ class StudentModel(models.Model):
        For every concept there is number between -1 and 1 representing skill in
        certain concept.
     """
-
     user = models.OneToOneField(User, primary_key=True)
 
     _seen_concepts = models.ManyToManyField(Concept,

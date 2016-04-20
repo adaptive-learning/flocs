@@ -31,3 +31,27 @@ class BlockConcept(Concept):
         if not name:
             self.name = 'block-' + block.identifier
         super().save()
+
+
+class GameConcept(Concept):
+    """ Concept describing some aspect of problem setting (e.g. tokens).
+        A student is either familiar with this aspect or is not.
+        A task either contains this aspect or does not .
+    """
+    checker = models.TextField(
+            default=None, null=True,
+            help_text="name of a Task method which check if it contains this concept")
+
+    def is_contained_in(self, task):
+        if not self.checker:
+            return False
+        concept_presence_checker = getattr(task, self.checker)
+        return concept_presence_checker()
+
+
+class EnvironmentConcept(Concept):
+    """ Concept describing some aspect of the system environment
+        A student is either familiar with this aspect or is not.
+        Currently, all tasks contain all environment aspects.
+    """
+    pass

@@ -1,5 +1,8 @@
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 import json
+from concepts.models import Concept, EnvironmentConcept, GameConcept, BlockConcept
 from levels.models import Level
 
 
@@ -14,6 +17,9 @@ class TaskModel(models.Model):
             verbose_name="Workspace settings in JSON",
             default='{}')
 
+    _contained_concepts = models.ManyToManyField(Concept,
+            help_text='concepts contained in the task')
+
     level = models.ForeignKey(Level,
             help_text="minimum level required to attempt this task",
             null=True, default=None)
@@ -23,16 +29,28 @@ class TaskModel(models.Model):
     _FREE_FIELDS = [0, 2, 3, 4, 5]
     _PIT_FIELD = 6
 
+    def get_contained_concepts(self):
+        return set(self._contained_concepts.all())
+
+    def infer_concepts(self):
+        """ It only adds concepts as we do not need to remove concepts.
+        """
+        for concept in EnvironmentConcept.objects.all():
+            self._add_concept(concept)
+        for concept in GameConcept.objects.all():
+            if concept.is_contained_in(self):
+                self._add_concept(concept)
+
+    def _add_concept(self, concept):
+        self._contained_concepts.add(concept)
+
     def get_required_blocks(self):
         if self.level is None:
             return []
         return self.level.get_all_blocks()
 
-    def get_grid(self):
-        """ Return 2D list representation of the maze
-        """
-        maze_settings_dict = json.loads(self.maze_settings)
-        return maze_settings_dict['grid']
+    def contains_tokens(self):
+        return bool(self.get_tokens())
 
     def get_tokens(self):
         """ Return list of tokens or None, if there are no tokens
@@ -42,6 +60,9 @@ class TaskModel(models.Model):
         if tokens == []:
             return None
         return tokens
+
+    def contains_block_limit(self):
+        return self.get_blocks_limit() is not None
 
     def get_blocks_limit(self):
         """ Return blocks limit or None, if there is no limit on blocks
@@ -69,6 +90,12 @@ class TaskModel(models.Model):
                     return True
         return False
 
+    def get_grid(self):
+        """ Return 2D list representation of the maze
+        """
+        maze_settings_dict = json.loads(self.maze_settings)
+        return maze_settings_dict['grid']
+
     def __str__(self):
         return '[{pk}] {title}'.format(pk=self.pk, title=self.title)
 
@@ -85,3 +112,12 @@ class TaskModel(models.Model):
         }
         return task_dict
 
+
+@receiver(post_save, sender=TaskModel)
+def task_saved(sender, instance, created, **kwargs):
+    """ After a task is saved for the first time, infer its concepts from its
+        settings.  Note that we use signals instead of overriding save(),
+        because save() is not called on loading fixtures.
+    """
+    if created:
+        instance.infer_concepts()

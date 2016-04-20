@@ -74,37 +74,59 @@
   <object pk="11" model="concepts.concept">
     <field name="name">env-maze</field>
   </object>
+  <object pk="11" model="concepts.environmentconcept">
+  </object>
 
   <object pk="12" model="concepts.concept">
     <field name="name">env-toolbox</field>
+  </object>
+  <object pk="12" model="concepts.environmentconcept">
   </object>
 
   <object pk="13" model="concepts.concept">
     <field name="name">env-workspace</field>
   </object>
+  <object pk="13" model="concepts.environmentconcept">
+  </object>
 
   <object pk="14" model="concepts.concept">
     <field name="name">env-snapping</field>
+  </object>
+  <object pk="14" model="concepts.environmentconcept">
   </object>
 
   <object pk="15" model="concepts.concept">
     <field name="name">env-run-reset</field>
   </object>
+  <object pk="15" model="concepts.environmentconcept">
+  </object>
 
   <object pk="16" model="concepts.concept">
     <field name="name">game-block-limit</field>
+  </object>
+  <object pk="16" model="concepts.gameconcept">
+    <field name="checker">contains_block_limit</field>
   </object>
 
   <object pk="17" model="concepts.concept">
     <field name="name">game-colors</field>
   </object>
+  <object pk="17" model="concepts.gameconcept">
+    <field name="checker">contains_colors</field>
+  </object>
 
   <object pk="18" model="concepts.concept">
     <field name="name">game-pits</field>
   </object>
+  <object pk="18" model="concepts.gameconcept">
+    <field name="checker">contains_pits</field>
+  </object>
 
   <object pk="19" model="concepts.concept">
     <field name="name">game-tokens</field>
+  </object>
+  <object pk="19" model="concepts.gameconcept">
+    <field name="checker">contains_tokens</field>
   </object>
 
 </django-objects>
