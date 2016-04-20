@@ -294,10 +294,11 @@ def _get_last_solved_delta(student, task):
         integer - seconds as time delta
     """
     task_instances = TaskInstanceModel.objects.filter(
-            student=student, task=task).order_by('time_end')
-    if len(task_instances) > 1:
-        delta = task_instances[len(task_instances) - 1].time_end - \
-                task_instances[len(task_instances) - 2].time_end
+            student=student, task=task).order_by('-time_end')
+    if len(task_instances) > 1 \
+       and task_instances[0].time_end is not None \
+       and task_instances[1].time_end is not None:
+        delta = task_instances[0].time_end - task_instances[1].time_end
         return int(delta.total_seconds())
     else:
         return None
