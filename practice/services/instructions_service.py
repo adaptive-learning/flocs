@@ -20,20 +20,8 @@ def get_instructions(student, task):
     Returns:
         list of strings with instructions
     """
-    skills = student.get_skill_dict()
-    difficulties = \
-            TasksDifficultyModel.objects.get(task=task).get_difficulty_dict()
-
-    instructions = [InstructionsModel.objects.get(
-        flow_factor=InstructionsModel.GENERAL_COMMENT).get_text()
-    ]
-
-    for factor in FlowFactors.game_factors() + FlowFactors.concept_factors():
-        #logger.info("Factor: %s, skill: %s, difficulty: %s", factor,\
-        #        skills[factor], difficulties[factor])
-        if skills[factor] < 0 and difficulties[factor] > 0:
-            instructions.append(InstructionsModel.objects.get(
-                flow_factor=factor.value).get_text()
-            )
-
+    # NOTE: temporarily we are completelly ignoring instrustions (due to
+    # massive refactoring)
+    # TODO: implement getting instructions using Concepts
+    instructions = []
     return instructions

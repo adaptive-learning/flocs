@@ -25,45 +25,9 @@ def create_practice_context(student=None, task=None, time=None):
         time (datetime.datetime): time of the practice
             or None to use current time
     """
-    time = time if time is not None else datetime.now()
-
-    #practice_context = self.model(time=time)
-    practice_context = PracticeContext(time=time)
-
-    if task is not None:
-        tasks = [task]
-        task_difficulties = [TasksDifficultyModel.objects.get(task=task)]
-    else:
-        tasks = TaskModel.objects.all()
-        task_difficulties = TasksDifficultyModel.objects.all()
-
-    for task_difficulty in task_difficulties:
-        task_id = task_difficulty.task.id
-        for key, value in task_difficulty.get_difficulty_dict().items():
-            practice_context.set(key, task=task_id, value=value)
-        practice_context.set('solution-count', task=task_id,
-                value=task_difficulty.solution_count)
-
-    students = [student] if student is not None else StudentModel.objects.all()
-
-    for student in students:
-        for key, value in student.get_skill_dict().items():
-            practice_context.set(key, student=student.pk, value=value)
-
-    # load last attempt time
-    for student in students:
-        for task in tasks:
-            # NOTE: we probably don't want to create info objects for all tasks
-            #last_instance = StudentTaskInfoModel.objects\
-            #        .get_or_create(student=student, task=task)[0].last_instance
-            try:
-                last_instance = StudentTaskInfoModel.objects.get(
-                    student=student, task=task).last_instance
-            except ObjectDoesNotExist:
-                last_instance = None
-            last_time = last_instance.time_end if last_instance is not None else None
-            practice_context.set('last-time', student.pk, task.pk, last_time)
-
+    # NOTE: massive refactoring -> temporarily return empty practice context
+    # (for the original version, see version control)
+    practice_context = PracticeContext()
     return practice_context
 
 

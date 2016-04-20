@@ -10,6 +10,7 @@ from tasks.models import TaskModel
 from tasks.services.task_service import get_toolbox_from_blocks
 from practice.models.practice_context import create_practice_context
 from practice.models import TaskInstanceModel
+from practice.models import TasksDifficultyModel
 from practice.models import StudentTaskInfoModel
 from practice.models import StudentModel
 from practice.models.task_instance import FlowRating
@@ -20,9 +21,8 @@ from practice.services import statistics_service
 from practice.services.details import get_practice_details
 from practice.services.levels import try_levelup
 from practice.core.credits import compute_credits
-from practice.core.flow_prediction import predict_flow
 from practice.core.task_filtering import filter_tasks_by_level
-from practice.core.task_selection import ScoreTaskSelector, IdSpecifidedTaskSelector
+from practice.core.task_selection import RandomTaskSelector, IdSpecifidedTaskSelector
 import json
 
 logger = logging.getLogger(__name__)
@@ -50,7 +50,7 @@ def get_next_task_in_session(user):
     if sess_service.has_unresolved_task(student):
         return get_active_task_in_session(student)
     # next task in the session or new session
-    task_info = get_task(student, ScoreTaskSelector())
+    task_info = get_task(student, RandomTaskSelector())
     sess_service.next_task_in_session(student, task_info.task_instance)
     # add info about session
     session = sess_service.get_session(student)
@@ -102,10 +102,9 @@ def get_task(student, task_selector):
         raise LookupError('No tasks available.')
     task_ids = [task.pk for task in tasks]
     task_id = task_selector.select(task_ids, student.pk, practice_context)
-    predicted_flow = predict_flow(student.pk, task_id, practice_context)
+    #predicted_flow = predict_flow(student.pk, task_id, practice_context)
     task = TaskModel.objects.get(pk=task_id)
-    task_instance = TaskInstanceModel.objects.create(student=student,
-            task=task, predicted_flow=predicted_flow)
+    task_instance = TaskInstanceModel.objects.create(student=student, task=task)
     student_task_info = StudentTaskInfoModel.objects.get_or_create(
             student=student, task=task)[0]
     student_task_info.last_instance = task_instance
@@ -191,11 +190,9 @@ def process_attempt_report(user, report):
     purchases = []
     if solved:
         task = task_instance.task
-        practice_context = create_practice_context(student=student, task=task)
-        practice_context.update('solution-count', task=task.id, update=lambda n: n + 1)
-        practice_context.save()
         if not solved_before:
-            task_difficulty = practice_context.get(FlowFactors.TASK_BIAS, task=task.pk)
+            # TODO: update computing credits using concepts
+            task_difficulty = float(TasksDifficultyModel.objects.get(task=task).programming)
             percentil = statistics_service.percentil(task_instance)
             credits, speed_bonus = compute_credits(task_difficulty, percentil)
             student.earn_credits(credits)
@@ -240,23 +237,26 @@ def process_flow_report(user, task_instance_id, reported_flow=None):
         raise ValueError("The task instance doesn't belong to this student.")
     task_instance.set_reported_flow(reported_flow)
     task_instance.save()
-    task = task_instance.task
-    practice_context = create_practice_context(student=student, task=task)
-    update_parameters(practice_context, student.pk, task.pk,
-            task_instance.get_reported_flow(),
-            task_instance.get_predicted_flow(),
-            _get_last_solved_delta(student, task))
-    # NOTE: There is a race condition when 2 students are updating parameters
-    # for the same task at the same time. In the current conditons, this is
-    # rare and if it happens it does not cause any problems (one update is
-    # ignored). But if it changes in the future (many users using the system at
-    # the same time), then we might want to eliminate the race condition.
-    # Possible solution is probably to use select_for_update, but then it's
-    # necessary to make sure that there is as little blocking as possible
-    # (assigning update functions to the practice_context then
-    # select_for_update current parameters, update them at once ("in parallel")
-    # and save.
-    practice_context.save()
+
+    ## NOTE: temporarily, we are using a dummy models without parameters, so
+    ## there is nothing to update
+    #task = task_instance.task
+    #practice_context = create_practice_context(student=student, task=task)
+    #update_parameters(practice_context, student.pk, task.pk,
+    #        task_instance.get_reported_flow(),
+    #        task_instance.get_predicted_flow(),
+    #        _get_last_solved_delta(student, task))
+    ## NOTE: There is a race condition when 2 students are updating parameters
+    ## for the same task at the same time. In the current conditons, this is
+    ## rare and if it happens it does not cause any problems (one update is
+    ## ignored). But if it changes in the future (many users using the system at
+    ## the same time), then we might want to eliminate the race condition.
+    ## Possible solution is probably to use select_for_update, but then it's
+    ## necessary to make sure that there is as little blocking as possible
+    ## (assigning update functions to the practice_context then
+    ## select_for_update current parameters, update them at once ("in parallel")
+    ## and save.
+    #practice_context.save()
 
 def get_session_overview(user):
     """
@@ -287,7 +287,7 @@ def get_session_overview(user):
 
 def _get_last_solved_delta(student, task):
     """
-    Returns time delta in seconds between solving of the last two instances 
+    Returns time delta in seconds between solving of the last two instances
     of the task by the student. None if there is only one or none instance.
 
     Returns:

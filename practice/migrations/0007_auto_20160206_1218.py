@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='studentsskillmodel',
             name='programming',
-            field=models.DecimalField(max_digits=4, verbose_name='General skill', decimal_places=3, default=practice.models.student._calculate_initial_skill),
+            field=models.DecimalField(max_digits=4, verbose_name='General skill', decimal_places=3, default=0),
         ),
     ]
