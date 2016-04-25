@@ -40,6 +40,10 @@ class TaskModel(models.Model):
         for concept in GameConcept.objects.all():
             if concept.is_contained_in(self):
                 self._add_concept(concept)
+        blocks = self.get_required_blocks()
+        for concept in BlockConcept.objects.all():
+            if concept.block in blocks:
+                self._add_concept(concept)
 
     def _add_concept(self, concept):
         self._contained_concepts.add(concept)
