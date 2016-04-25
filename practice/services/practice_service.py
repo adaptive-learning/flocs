@@ -185,6 +185,9 @@ def process_attempt_report(user, report):
     student_task_info.update(task_instance)
     student_task_info.save()
 
+    if solved:
+        see_task_concepts(student, task)
+
     credits = 0
     speed_bonus = False
     purchases = []
@@ -214,6 +217,10 @@ def process_attempt_report(user, report):
                         (task_solved_first_time, credits, speed_bonus, purchases)
     return result
 
+
+def see_task_concepts(student, task):
+    for concept in task.get_contained_concepts():
+        student.mark_concept_as_seen(concept)
 
 def process_giveup_report(user, task_instance_id, time_spent):
     student = StudentModel.objects.get(user=user)

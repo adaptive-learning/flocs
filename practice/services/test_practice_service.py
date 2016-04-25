@@ -17,9 +17,30 @@ from practice.core.task_selection import ScoreTaskSelector
 from . import practice_service
 
 
+class PracticeServiceWithFixturesTest(TestCase):
+
+    fixtures = ['instructions', 'levels', 'blocks', 'concepts', 'tasks']
+
+    def setUp(self):
+        self.user = User.objects.create()
+        self.student = StudentModel.objects.create(user=self.user)
+
+    def test_seen_concepts_marking(self):
+        self.assertEqual(len(self.student.get_seen_concepts()), 0)
+        instance = TaskInstanceModel.objects.create(task_id=1, student=self.student)
+        TasksDifficultyModel.objects.create(task_id=1)
+        practice_service.process_attempt_report(self.user, report={
+            "task-instance-id": instance.pk,
+            "task-id": 1,
+            "attempt": 12,
+            "solved": True,
+            "time": 234})
+        self.assertEqual(len(self.student.get_seen_concepts()), 6)
+
+
 class PracticeServiceTest(TestCase):
 
-    fixtures = ['instructions.json', 'blocks.xml']
+    fixtures = ['instructions', 'blocks']
 
     def setUp(self):
         self.user = User.objects.create()
