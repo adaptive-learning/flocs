@@ -1,53 +1,6 @@
 from math import log, sqrt
-from django.core import management
 import numpy as np
 from tasks.models.task import TaskModel
-from practice.models.tasks_difficulty import TasksDifficultyModel
-
-
-def generate(update=False, create_fixture=False):
-    """ Generates new task difficulties.
-
-    Args:
-        - update: if False (default), it won't update existing difficulties
-        - create_fixture: whether to dump a fixture of all difficulties
-    Returns:
-        - list of generated TaskDifficulties
-    """
-    tasks = TaskModel.objects.all()
-    if not update:
-        tasks = tasks.filter(tasksdifficultymodel__pk__isnull=True)
-    difficulty_creator = TaskDifficultyCreator()
-    difficulties = [difficulty_creator.create_task_difficulty(task, save=True)
-                    for task in tasks]
-    if create_fixture:
-        create_task_difficulties_fixture()
-    return difficulties
-
-
-class TaskDifficultyCreator(object):
-    """ Factory for creating initial TaskDifficultiesModels.
-    """
-    def __init__(self):
-        self.difficulty_estimator = InitialDifficultyEstimator()
-
-    def create_task_difficulty(self, task, save=False):
-        """ Returns TaskDifficultyModel object for given task
-        """
-        global_difficulty = self.difficulty_estimator.estimate_difficulty(task)
-        concepts = TaskConcepts(task)
-        task_difficulty = TasksDifficultyModel(
-            task=task,
-            programming=global_difficulty,
-            conditions='conditions' in concepts,
-            loops='loops' in concepts,
-            logic_expr='logic-expr' in concepts,
-            colors='colors' in concepts,
-            tokens='tokens' in concepts,
-            pits='pits' in concepts)
-        if save:
-            task_difficulty.save()
-        return task_difficulty
 
 
 class InitialDifficultyEstimator(object):
@@ -146,11 +99,3 @@ class TaskConcepts(set):
         if concept not in self.possible_keys:
             raise ValueError('<{0}> is not a valid concept.'.format(concept))
         return super().__contains__(concept)
-
-
-def create_task_difficulties_fixture():
-    """ Create fixture of all task difficultes
-    """
-    with open('practice/fixtures/task-difficulties.json', 'w') as f:
-        management.call_command('dumpdata', 'practice.TasksDifficultyModel',
-                indent=2, stdout=f)

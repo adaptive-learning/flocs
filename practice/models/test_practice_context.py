@@ -4,7 +4,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 from tasks.models import TaskModel
-from practice.models import TasksDifficultyModel
 from practice.models import StudentModel
 from common.flow_factors import FlowFactors
 from decimal import Decimal
@@ -102,24 +101,3 @@ class PracticeContextTest(TestCase):
         context.set('q', task=12, value=1)
         context.set('q', student=10, task=13, value=1)
         self.assertEquals({12, 13}, set(context.get_all_task_ids()))
-
-    def test_save_task(self):
-        task = TaskModel.objects.create()
-        TasksDifficultyModel.objects.create(
-                task=task,
-                programming=Decimal('-0.58'),
-                conditions=False,
-                loops=True,
-                logic_expr=False,
-                colors=False,
-                tokens=False,
-                pits=False,
-        )
-        context = PracticeContext([
-            (FlowFactors.TASK_BIAS, None, task.id, 1.1),
-            ('solution-count', None, task.id, 5),
-        ])
-        context.save()
-        new_difficulty = TasksDifficultyModel.objects.get(task_id=task.id)
-        self.assertAlmostEquals(1.1, float(new_difficulty.programming))
-        self.assertEquals(5, new_difficulty.solution_count)

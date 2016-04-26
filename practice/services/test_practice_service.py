@@ -8,7 +8,6 @@ from unittest import skipIf
 from tasks.models import TaskModel
 from levels.models import Level
 from practice.models import StudentModel
-from practice.models import TasksDifficultyModel
 from practice.models import TaskInstanceModel
 from practice.models import PracticeSession
 from practice.models import SessionTaskInstance
@@ -28,7 +27,6 @@ class PracticeServiceWithFixturesTest(TestCase):
     def test_seen_concepts_marking(self):
         self.assertEqual(len(self.student.get_seen_concepts()), 0)
         instance = TaskInstanceModel.objects.create(task_id=1, student=self.student)
-        TasksDifficultyModel.objects.create(task_id=1)
         practice_service.process_attempt_report(self.user, report={
             "task-instance-id": instance.pk,
             "task-id": 1,
@@ -48,7 +46,6 @@ class PracticeServiceTest(TestCase):
     def test_get_next_task_in_session(self):
         stored_task = TaskModel.objects.create(maze_settings="{}",
                 workspace_settings='{"foo": "bar"}')
-        TasksDifficultyModel.objects.create(task=stored_task)
         task_info = practice_service.get_next_task_in_session(user=self.user)
         self.assertIsNotNone(task_info)
         self.assertEquals('{"foo": "bar"}', task_info.task.workspace_settings)
@@ -70,7 +67,6 @@ class PracticeServiceTest(TestCase):
     def test_get_task_by_id(self):
         stored_task = TaskModel.objects.create(maze_settings="{}",
                 workspace_settings='{"foo": "bar"}')
-        TasksDifficultyModel.objects.create(task=stored_task)
         task_info = practice_service.get_task_by_id(user=self.user, task_id=stored_task.pk)
         self.assertIsNotNone(task_info)
         self.assertEquals('{"foo": "bar"}', task_info.task.workspace_settings)
@@ -82,7 +78,6 @@ class PracticeServiceTest(TestCase):
     def test_process_attempt_report(self):
         student = StudentModel.objects.create(user=self.user)
         TaskModel.objects.create(id=1)
-        TasksDifficultyModel.objects.create(task_id=1, solution_count=5)
         TaskInstanceModel.objects.create(id=1, task_id=1, student=student,
                 predicted_flow=0.22)
         report = {
@@ -93,7 +88,6 @@ class PracticeServiceTest(TestCase):
             "time": 234,
         }
         practice_service.process_attempt_report(self.user, report)
-        difficulty = TasksDifficultyModel.objects.get(task_id=1)
         task_instance = TaskInstanceModel.objects.get(id=1)
         self.assertAlmostEquals(0.22, task_instance.predicted_flow)
         self.assertEquals(12, task_instance.attempt_count)
@@ -102,32 +96,21 @@ class PracticeServiceTest(TestCase):
         self.assertGreater(student.total_credits, 0)
         self.assertEqual(student.total_credits, student.free_credits)
 
-    @skipIf(True, 'obsolete test - update using concepts needed')
     def test_process_flow_report_solved_task(self):
-        difficulty_before_report = 1.0
-        skill_before_report = -1.0
         TaskModel.objects.create(id=1)
-        TasksDifficultyModel.objects.create(task_id=1, programming=difficulty_before_report)
-        student = StudentModel.objects.create(user=self.user, programming=skill_before_report)
-        TaskInstanceModel.objects.create(id=1, task_id=1, student=student, predicted_flow=-1.0)
+        student = StudentModel.objects.create(user=self.user)
+        TaskInstanceModel.objects.create(id=1, task_id=1, student=student)
         practice_service.process_flow_report(
                 user=self.user,
                 task_instance_id=1,
                 reported_flow=FlowRating.EASY)
         task_instance = TaskInstanceModel.objects.get(id=1)
-        skill_after_report = StudentModel.objects.get(user_id=student.pk).programming
-        difficulty_after_report = TasksDifficultyModel.objects.get(task_id=1).programming
         self.assertEqual(task_instance.reported_flow, FlowRating.EASY)
-        self.assertGreater(skill_after_report, skill_before_report)
-        self.assertLess(difficulty_after_report, difficulty_before_report)
 
-    @skipIf(True, 'obsolete test - update using concepts needed')
     def test_process_giveup_report(self):
         TaskModel.objects.create(id=1)
-        TasksDifficultyModel.objects.create(task_id=1, programming=-1.0)
-        student = StudentModel.objects.create(user=self.user, programming=1.0)
-        TaskInstanceModel.objects.create(id=1, task_id=1, student=student, predicted_flow=1.0)
-        skill_before_report = student.programming
+        student = StudentModel.objects.create(user=self.user)
+        TaskInstanceModel.objects.create(id=1, task_id=1, student=student)
         practice_service.process_giveup_report(
                 user=self.user,
                 task_instance_id=1,
@@ -135,8 +118,6 @@ class PracticeServiceTest(TestCase):
         task_instance = TaskInstanceModel.objects.get(id=1)
         self.assertEqual(task_instance.reported_flow, FlowRating.VERY_DIFFICULT)
         self.assertEqual(task_instance.time_spent, 987)
-        skill_after_report = StudentModel.objects.get(user_id=student.pk).programming
-        self.assertLess(skill_after_report, skill_before_report)
 
     def test_get_session_overview(self):
         # set up
@@ -155,17 +136,11 @@ class PracticeServiceTest(TestCase):
         actual_time = task_instance.time_end - task_instance.time_start
         self.assertEquals(actual_time.seconds, overall_time)
 
-    @skipIf(True, 'obsolete test - update using concepts needed')
+    @skipIf(True, 'not implemented')
     def test_get_task_filtering(self):
-        level1 = Level.objects.create(block_level=1)
-        level2 = Level.objects.create(block_level=2)
-        task1 = TaskModel.objects.create(level=level1)
-        task2 = TaskModel.objects.create(level=level2)
-        TasksDifficultyModel.objects.create(task=task1, programming=0.0)
-        TasksDifficultyModel.objects.create(task=task2, programming=1.0)
-        student = StudentModel.objects.create(user=self.user, programming=1.0, level=level1)
-        task_info = practice_service.get_task(student=student, task_selector=ScoreTaskSelector())
-        self.assertEqual(task_info.task_instance.task.pk, task1.pk)
+        """ Tasks requiring blocks not in student's toolbox should be ignored
+        """
+        raise NotImplementedError
 
     def test_get_last_solved_delta(self):
         student = StudentModel.objects.create(user=self.user)

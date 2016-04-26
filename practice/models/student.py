@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from decimal import Decimal
 
 from common.flow_factors import FlowFactors
-from .tasks_difficulty import TasksDifficultyModel
 from levels.models import Level
 from concepts.models import Concept
 

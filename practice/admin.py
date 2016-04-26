@@ -2,7 +2,6 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from .models import StudentModel
-from .models import TasksDifficultyModel
 from .models import TaskInstanceModel
 from .models import StudentTaskInfoModel
 from .models import PracticeSession
@@ -14,11 +13,6 @@ class StudentResource(resources.ModelResource):
         model = StudentModel
 
 
-class TasksDifficultyResource(resources.ModelResource):
-    class Meta:
-        model = TasksDifficultyModel
-
-
 class TaskInstanceResource(resources.ModelResource):
     class Meta:
         model = TaskInstanceModel
@@ -28,9 +22,6 @@ class TaskInstanceResource(resources.ModelResource):
 class StudentsSkillAdmin(ImportExportModelAdmin):
     resource_class = StudentResource
 
-@admin.register(TasksDifficultyModel)
-class TasksDifficultyAdmin(ImportExportModelAdmin):
-    resource_class = TasksDifficultyResource
 
 @admin.register(TaskInstanceModel)
 class TaskInstanceAdmin(ImportExportModelAdmin):

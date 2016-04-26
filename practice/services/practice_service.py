@@ -10,7 +10,6 @@ from tasks.models import TaskModel
 from tasks.services.task_service import get_toolbox_from_blocks
 from practice.models.practice_context import create_practice_context
 from practice.models import TaskInstanceModel
-from practice.models import TasksDifficultyModel
 from practice.models import StudentTaskInfoModel
 from practice.models import StudentModel
 from practice.models.task_instance import FlowRating
@@ -194,8 +193,11 @@ def process_attempt_report(user, report):
     if solved:
         task = task_instance.task
         if not solved_before:
-            # TODO: update computing credits using concepts
-            task_difficulty = float(TasksDifficultyModel.objects.get(task=task).programming)
+            # NOTE: temporarily, we compute credits using number of concepts
+            # (as a proxy for non-available task difficulty)
+            concepts_count = len(task.get_contained_concepts())
+            CONCEPTS_MEAN, CONCEPTS_STD = 12, 4
+            task_difficulty = (concepts_count - CONCEPTS_MEAN) / CONCEPTS_STD
             percentil = statistics_service.percentil(task_instance)
             credits, speed_bonus = compute_credits(task_difficulty, percentil)
             student.earn_credits(credits)

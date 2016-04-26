@@ -2,10 +2,6 @@
 Service for obtaining correct instructions.
 """
 import logging
-from practice.models import StudentModel
-from practice.models import TasksDifficultyModel
-from practice.models import InstructionsModel
-from common.flow_factors import FlowFactors
 
 logger = logging.getLogger(__name__)
 

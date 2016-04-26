@@ -1,6 +1,5 @@
 """Persistence layer (data model) of practice app
 """
-from .tasks_difficulty import TasksDifficultyModel
 from .student import StudentModel
 from .task_instance import TaskInstanceModel
 from .practice_session import PracticeSession

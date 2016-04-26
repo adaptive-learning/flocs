@@ -1,7 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
 from common.flow_factors import FlowFactors
 from tasks.models import TaskModel
-from practice.models import TasksDifficultyModel
 from practice.models import StudentModel
 from practice.models import StudentTaskInfoModel
 from datetime import datetime
@@ -130,25 +129,3 @@ class PracticeContext(object):
         new_value = update(old_value)
         #self._parameters[(parameter_name, student, task)] = new_value
         self.set(parameter_name, student, task, new_value)
-
-
-    def save(self):
-        """Save changes in the practice context to DB
-        """
-        # NOTE: this is quite ugly ad-hoc solution and we should definitely
-        # change the underlaying model for parameters to be more flexible
-        for task in self.get_all_task_ids():
-            task_difficulty = TasksDifficultyModel.objects.get(pk=task)
-            task_difficulty.programming = self.get(FlowFactors.TASK_BIAS, task=task)
-            task_difficulty.solution_count = self.get_solution_count(task=task)
-            task_difficulty.save()
-        for student in self.get_all_student_ids():
-            student_skill = StudentModel.objects.get(pk=student)
-            student_skill.programming = self.get(FlowFactors.STUDENT_BIAS, student=student)
-            student_skill.conditions = self.get(FlowFactors.CONDITIONS, student=student)
-            student_skill.loops = self.get(FlowFactors.LOOPS, student=student)
-            student_skill.logic_expr = self.get(FlowFactors.LOGIC_EXPR, student=student)
-            student_skill.colors = self.get(FlowFactors.COLORS, student=student)
-            student_skill.tokens = self.get(FlowFactors.TOKENS, student=student)
-            student_skill.pits = self.get(FlowFactors.PITS, student=student)
-            student_skill.save()
