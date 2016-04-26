@@ -23,6 +23,28 @@ class TaskModelTest(TestCase):
                                              'block-check-goal']])
         self.assertSetEqual(inferred_concepts, expected_concepts)
 
+    def test_concepts_inference_no_game_concepts(self):
+        task = TaskModel.objects.get(pk=1)
+        inferred_concepts = task.get_contained_concepts()
+        expected_concepts = set([Concept.objects.get_by_natural_key(key)
+                                 for key in ['env-maze', 'env-toolbox',
+                                             'env-workspace', 'env-snapping',
+                                             'env-run-reset',
+                                             'block-move']])
+        self.assertSetEqual(inferred_concepts, expected_concepts)
+
+    def test_concepts_inference_colors(self):
+        task = TaskModel.objects.get(pk=33)
+        inferred_concepts = task.get_contained_concepts()
+        colors_concept = Concept.objects.get_by_natural_key('game-colors')
+        self.assertIn(colors_concept, inferred_concepts)
+
+    def test_concepts_inference_pits(self):
+        task = TaskModel.objects.get(pk=43)
+        inferred_concepts = task.get_contained_concepts()
+        pits_concept = Concept.objects.get_by_natural_key('game-pits')
+        self.assertIn(pits_concept, inferred_concepts)
+
     def test_to_json(self):
         task = TaskModel(
                 maze_settings='{"foo1": "bar1"}',
