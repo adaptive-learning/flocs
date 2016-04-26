@@ -24,6 +24,22 @@ class PracticeServiceWithFixturesTest(TestCase):
         self.user = User.objects.create()
         self.student = StudentModel.objects.create(user=self.user)
 
+    def test_process_attempt_report(self):
+        instance = TaskInstanceModel.objects.create(task_id=1, student=self.student)
+        report = {
+            "task-instance-id": instance.pk,
+            "task-id": 1,
+            "attempt": 12,
+            "solved": True,
+            "time": 234,
+        }
+        practice_service.process_attempt_report(self.user, report)
+        instance = TaskInstanceModel.objects.get(pk=instance.pk)
+        self.assertEquals(12, instance.attempt_count)
+        self.assertEquals(234, instance.time_spent)
+        student = StudentModel.objects.get(user=self.user)
+        self.assertGreater(student.total_credits, 0)
+
     def test_seen_concepts_marking(self):
         self.assertEqual(len(self.student.get_seen_concepts()), 0)
         instance = TaskInstanceModel.objects.create(task_id=1, student=self.student)
@@ -74,27 +90,6 @@ class PracticeServiceTest(TestCase):
         self.assertEquals(TaskInstanceModel.objects.first().id,
                 task_info.task_instance.pk)
         self.assertIsNone(task_info.session)
-
-    def test_process_attempt_report(self):
-        student = StudentModel.objects.create(user=self.user)
-        TaskModel.objects.create(id=1)
-        TaskInstanceModel.objects.create(id=1, task_id=1, student=student,
-                predicted_flow=0.22)
-        report = {
-            "task-instance-id": 1,
-            "task-id": 1,
-            "attempt": 12,
-            "solved": True,
-            "time": 234,
-        }
-        practice_service.process_attempt_report(self.user, report)
-        task_instance = TaskInstanceModel.objects.get(id=1)
-        self.assertAlmostEquals(0.22, task_instance.predicted_flow)
-        self.assertEquals(12, task_instance.attempt_count)
-        self.assertEquals(234, task_instance.time_spent)
-        student = StudentModel.objects.get(user=self.user)
-        self.assertGreater(student.total_credits, 0)
-        self.assertEqual(student.total_credits, student.free_credits)
 
     def test_process_flow_report_solved_task(self):
         TaskModel.objects.create(id=1)

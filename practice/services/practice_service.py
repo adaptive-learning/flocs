@@ -193,13 +193,9 @@ def process_attempt_report(user, report):
     if solved:
         task = task_instance.task
         if not solved_before:
-            # NOTE: temporarily, we compute credits using number of concepts
-            # (as a proxy for non-available task difficulty)
-            concepts_count = len(task.get_contained_concepts())
-            CONCEPTS_MEAN, CONCEPTS_STD = 12, 4
-            task_difficulty = (concepts_count - CONCEPTS_MEAN) / CONCEPTS_STD
             percentil = statistics_service.percentil(task_instance)
-            credits, speed_bonus = compute_credits(task_difficulty, percentil)
+            level = task.level.block_level
+            credits, speed_bonus = compute_credits(level, percentil)
             student.earn_credits(credits)
             task_instance.earned_credits = credits
             task_instance.speed_bonus = speed_bonus
