@@ -52,11 +52,10 @@ INSTALLED_APPS = (
     'lazysignup',
     # our apps
     'common',
-    'feedback',
     'blocks',
-    'levels',
     'concepts',
     'tasks',
+    'feedback',
     'practice',
     'flocs',
 )

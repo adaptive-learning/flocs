@@ -8,7 +8,7 @@ from concepts.models import Concept
 
 class TaskModelTest(TestCase):
 
-    fixtures = ['blocks', 'levels', 'concepts', 'tasks']
+    fixtures = ['blocks', 'toolboxes', 'concepts', 'tasks']
 
     def test_concepts_inference(self):
         task54 = TaskModel.objects.get(pk=54)

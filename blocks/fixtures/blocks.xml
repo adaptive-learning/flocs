@@ -10,9 +10,6 @@
     <field name="name_cs">
       Krok vpřed
     </field>
-    <field name="level">
-      1
-    </field>
   </object>
 
   <object pk="2" model="blocks.block">
@@ -28,9 +25,6 @@
     <field name="name_cs">
       Zatoč
     </field>
-    <field name="level">
-      2
-    </field>
   </object>
 
   <object pk="3" model="blocks.block">
@@ -42,9 +36,6 @@
     </field>
     <field name="name_cs">
       Cyklus repeat
-    </field>
-    <field name="level">
-      3
     </field>
   </object>
 
@@ -58,9 +49,6 @@
     <field name="name_cs">
       Cyklus while
     </field>
-    <field name="level">
-      4
-    </field>
   </object>
 
   <object pk="5" model="blocks.block">
@@ -72,9 +60,6 @@
     </field>
     <field name="name_cs">
       Kontrola cíle
-    </field>
-    <field name="level">
-      4
     </field>
   </object>
 
@@ -91,9 +76,6 @@
     <field name="name_cs">
       Kontrola cesty
     </field>
-    <field name="level">
-      5
-    </field>
   </object>
 
   <object pk="7" model="blocks.block">
@@ -105,9 +87,6 @@
     </field>
     <field name="name_cs">
       Kontrola barvy
-    </field>
-    <field name="level">
-      6
     </field>
   </object>
 
@@ -121,9 +100,6 @@
     <field name="name_cs">
       Podmínka pokud-pak
     </field>
-    <field name="level">
-      7
-    </field>
   </object>
 
   <object pk="9" model="blocks.block">
@@ -136,9 +112,6 @@
     <field name="name_cs">
       Podmínka pokud-pak-jinak
     </field>
-    <field name="level">
-      8
-    </field>
   </object>
 
   <object pk="10" model="blocks.block">
@@ -150,9 +123,6 @@
     </field>
     <field name="name_cs">
       Logické operace
-    </field>
-    <field name="level">
-      9
     </field>
   </object>
 

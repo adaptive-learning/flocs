@@ -1,10 +1,9 @@
 from practice.models import StudentModel
-from levels.models import Level
+from blocks.models import Toolbox
 
 
 def try_levelup(student):
-    """
-    If student has enough credits for next level, increase her level.
+    """ If student has enough credits for next level, increase her level.
 
     Return:
         whether next level was achived (bool)
@@ -17,24 +16,25 @@ def try_levelup(student):
 
 
 def levelup(student):
-    """Move student to next level, raises LevelupNotPossible if it's not possible.
+    """ Move student to next level.
+        Raise LevelupNotPossible if it's not possible.
     """
-    if not student.level:
+    if not student.toolbox:
         raise LevelupNotPossible(
-                'Student {s} does not have assigned level.'
+                'Student {s} does not have assigned toolbox.'
                 .format(s=student.pk))
-    next_level = Level.objects.next_level(student.level)
-    if not next_level:
+    next_toolbox = Toolbox.objects.get_next(student.toolbox)
+    if not next_toolbox:
         raise LevelupNotPossible(
-                'Student {s} has already achieved maximum level.'
+                'Student {s} already has full toolbox.'
                 .format(s=student.pk))
     try:
-        student.spend_credits(next_level.credits)
-        student.level = next_level
+        student.spend_credits(next_toolbox.credits)
+        student.toolbox = next_toolbox
         student.save()
     except ValueError:
         raise LevelupNotPossible(
-                'Student {s} does not have enough credits for next level.'
+                'Student {s} does not have enough credits for next toolbox.'
                 .format(s=student.pk))
 
 

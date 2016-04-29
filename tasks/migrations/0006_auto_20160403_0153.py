@@ -11,9 +11,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='taskmodel',
-            name='level',
-            field=models.ForeignKey(help_text='minimum level required to attempt this task', to='levels.Level', null=True, default=None),
-        ),
+        #migrations.AlterField(
+        #    model_name='taskmodel',
+        #    name='level',
+        #    field=models.ForeignKey(help_text='minimum level required to attempt this task', to='levels.Level', null=True, default=None),
+        #),
     ]

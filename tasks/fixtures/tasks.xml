@@ -1,2108 +1,1930 @@
 <?xml version="1.0" encoding="utf-8"?>
 <django-objects version="1.0">
-  <object pk="1" model="tasks.taskmodel">
-    <field name="title_en">
-      Three steps forward
-    </field>
-    <field name="title_cs">
-      Tři kroky vpřed
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 0, 0, 0, 2, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [2, 4],
-        "direction": 0
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-    }
-    </field>
-    <field name="level">
-      1
-    </field>
-  </object>
 
-  <object pk="2" model="tasks.taskmodel">
-    <field name="title_en">
-      Zig-zag
-    </field>
-    <field name="title_cs">
-      Cik-cak
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 0, 2, 1, 1, 1],
-        [1, 1, 1, 0, 1, 1, 1, 1],
-        [1, 1, 0, 0, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [2, 4],
-        "direction": 0
-      }
+<object pk="1" model="tasks.taskmodel">
+  <field name="title_en">
+    Three steps forward
+  </field>
+  <field name="title_cs">
+    Tři kroky vpřed
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 0, 0, 0, 2, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [2, 4],
+      "direction": 0
     }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-    }
-    </field>
-    <field name="level">
-      2
-    </field>
-  </object>
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+  }
+  </field>
+  <field name="toolbox"><natural>forward</natural></field>
+</object>
 
-  <object pk="3" model="tasks.taskmodel">
-    <field name="title_en">
-      Right turn
-    </field>
-    <field name="title_cs">
-      Pravá zatáčka
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 0, 0, 0, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1],
-        [1, 1, 1, 1, 2, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [2, 3],
-        "direction": 0
-      }
+<object pk="2" model="tasks.taskmodel">
+  <field name="title_en">
+    Zig-zag
+  </field>
+  <field name="title_cs">
+    Cik-cak
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 2, 1, 1, 1],
+      [1, 1, 1, 0, 1, 1, 1, 1],
+      [1, 1, 0, 0, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [2, 4],
+      "direction": 0
     }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-    }
-    </field>
-    <field name="level">
-      2
-    </field>
-  </object>
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+  }
+  </field>
+  <field name="toolbox"><natural>movement</natural></field>
+</object>
 
-  <object pk="4" model="tasks.taskmodel">
-    <field name="title_en">
-      Zig-zag-zag
-    </field>
-    <field name="title_cs">
-      Cik-cak-cak
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 0, 0, 1, 1, 1, 1],
-        [1, 1, 1, 0, 1, 1, 1, 1],
-        [1, 1, 1, 0, 0, 1, 1, 1],
-        [1, 1, 1, 1, 0, 2, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [2, 2],
-        "direction": 0
-      }
+<object pk="3" model="tasks.taskmodel">
+  <field name="title_en">
+    Right turn
+  </field>
+  <field name="title_cs">
+    Pravá zatáčka
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 0, 0, 0, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1],
+      [1, 1, 1, 1, 2, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [2, 3],
+      "direction": 0
     }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-    }
-    </field>
-    <field name="level">
-      2
-    </field>
-  </object>
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+  }
+  </field>
+  <field name="toolbox"><natural>movement</natural></field>
+</object>
 
-  <object pk="5" model="tasks.taskmodel">
-    <field name="title_en">
-      Small maze
-    </field>
-    <field name="title_cs">
-      Malé bludiště
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 1, 1, 1],
-        [1, 0, 0, 1, 0, 1, 1, 1],
-        [1, 1, 2, 1, 0, 1, 0, 1],
-        [1, 0, 1, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 1, 1, 1, 1],
-        [1, 1, 1, 0, 1, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [1, 4],
-        "direction": 0
-      }
+<object pk="4" model="tasks.taskmodel">
+  <field name="title_en">
+    Zig-zag-zag
+  </field>
+  <field name="title_cs">
+    Cik-cak-cak
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 0, 0, 1, 1, 1, 1],
+      [1, 1, 1, 0, 1, 1, 1, 1],
+      [1, 1, 1, 0, 0, 1, 1, 1],
+      [1, 1, 1, 1, 0, 2, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [2, 2],
+      "direction": 0
     }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-    }
-    </field>
-    <field name="level">
-      2
-    </field>
-  </object>
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+  }
+  </field>
+  <field name="toolbox"><natural>movement</natural></field>
+</object>
 
-  <object pk="6" model="tasks.taskmodel">
-    <field name="title_en">
-      Seven
-    </field>
-    <field name="title_cs">
-      Sedmička
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 2, 0, 0, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1],
-        [1, 1, 1, 0, 0, 0, 1, 1],
-        [1, 1, 1, 0, 1, 1, 1, 1],
-        [1, 1, 1, 0, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [3, 6],
-        "direction": 1
-      }
+<object pk="5" model="tasks.taskmodel">
+  <field name="title_en">
+    Small maze
+  </field>
+  <field name="title_cs">
+    Malé bludiště
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 1, 1, 1],
+      [1, 0, 0, 1, 0, 1, 1, 1],
+      [1, 1, 2, 1, 0, 1, 0, 1],
+      [1, 0, 1, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 1, 1, 1, 1],
+      [1, 1, 1, 0, 1, 0, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [1, 4],
+      "direction": 0
     }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-    }
-    </field>
-    <field name="level">
-      2
-    </field>
-  </object>
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+  }
+  </field>
+  <field name="toolbox"><natural>movement</natural></field>
+</object>
 
-  <object pk="7" model="tasks.taskmodel">
-    <field name="title_en">
-      Four paths
-    </field>
-    <field name="title_cs">
-      Čtyři cesty
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1],
-        [1, 1, 0, 0, 0, 0, 0, 1, 1],
-        [1, 1, 0, 1, 1, 1, 0, 1, 1],
-        [1, 0, 0, 0, 1, 0, 0, 0, 1],
-        [1, 0, 1, 0, 1, 0, 1, 0, 1],
-        [1, 0, 1, 0, 1, 0, 1, 0, 1],
-        [1, 0, 1, 0, 1, 2, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [4, 1],
-        "direction": 3
-      }
+<object pk="6" model="tasks.taskmodel">
+  <field name="title_en">
+    Seven
+  </field>
+  <field name="title_cs">
+    Sedmička
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 2, 0, 0, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1],
+      [1, 1, 1, 0, 0, 0, 1, 1],
+      [1, 1, 1, 0, 1, 1, 1, 1],
+      [1, 1, 1, 0, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [3, 6],
+      "direction": 1
     }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-    }
-    </field>
-    <field name="level">
-      2
-    </field>
-  </object>
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+  }
+  </field>
+  <field name="toolbox"><natural>movement</natural></field>
+</object>
 
-  <object pk="8" model="tasks.taskmodel">
-    <field name="title_en">
-      Smiley
-    </field>
-    <field name="title_cs">
-      Smajlík
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 0, 1, 1, 0, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 0, 0, 1, 1, 1],
-        [1, 0, 1, 1, 1, 1, 2, 1],
-        [1, 0, 0, 1, 1, 0, 0, 1],
-        [1, 1, 0, 0, 0, 0, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [1, 4],
-        "direction": 0
-      }
+<object pk="7" model="tasks.taskmodel">
+  <field name="title_en">
+    Four paths
+  </field>
+  <field name="title_cs">
+    Čtyři cesty
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1],
+      [1, 1, 0, 0, 0, 0, 0, 1, 1],
+      [1, 1, 0, 1, 1, 1, 0, 1, 1],
+      [1, 0, 0, 0, 1, 0, 0, 0, 1],
+      [1, 0, 1, 0, 1, 0, 1, 0, 1],
+      [1, 0, 1, 0, 1, 0, 1, 0, 1],
+      [1, 0, 1, 0, 1, 2, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [4, 1],
+      "direction": 3
     }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-    }
-    </field>
-    <field name="level">
-      2
-    </field>
-  </object>
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+  }
+  </field>
+  <field name="toolbox"><natural>movement</natural></field>
+</object>
 
-  <object pk="9" model="tasks.taskmodel">
-    <field name="title_en">
-      Bottom right corner
-    </field>
-    <field name="title_cs">
-      Pravý dolní roh
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 1, 0, 1, 0, 0, 1],
-        [1, 0, 0, 1, 0, 1, 0, 1],
-        [1, 0, 0, 0, 1, 0, 1, 1],
-        [1, 0, 1, 0, 0, 0, 0, 1],
-        [1, 0, 0, 1, 0, 1, 0, 1],
-        [1, 0, 0, 0, 1, 0, 2, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [1, 6],
-        "direction": 0
-      }
+<object pk="8" model="tasks.taskmodel">
+  <field name="title_en">
+    Smiley
+  </field>
+  <field name="title_cs">
+    Smajlík
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 0, 1, 1, 0, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 0, 1, 1, 1],
+      [1, 0, 1, 1, 1, 1, 2, 1],
+      [1, 0, 0, 1, 1, 0, 0, 1],
+      [1, 1, 0, 0, 0, 0, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [1, 4],
+      "direction": 0
     }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-    }
-    </field>
-    <field name="level">
-      2
-    </field>
-  </object>
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+  }
+  </field>
+  <field name="toolbox"><natural>movement</natural></field>
+</object>
 
-  <object pk="10" model="tasks.taskmodel">
-    <field name="title_en">
-      Small maze 2
-    </field>
-    <field name="title_cs">
-      Malé bludiště 2
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 1, 1],
-        [1, 1, 0, 0, 1, 0, 1, 1],
-        [1, 1, 1, 0, 0, 0, 1, 1],
-        [1, 1, 1, 0, 1, 0, 1, 1],
-        [1, 1, 1, 0, 2, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [1, 1],
-        "direction": 3
-      }
+<object pk="9" model="tasks.taskmodel">
+  <field name="title_en">
+    Bottom right corner
+  </field>
+  <field name="title_cs">
+    Pravý dolní roh
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 1, 0, 1, 0, 0, 1],
+      [1, 0, 0, 1, 0, 1, 0, 1],
+      [1, 0, 0, 0, 1, 0, 1, 1],
+      [1, 0, 1, 0, 0, 0, 0, 1],
+      [1, 0, 0, 1, 0, 1, 0, 1],
+      [1, 0, 0, 0, 1, 0, 2, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [1, 6],
+      "direction": 0
     }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-    }
-    </field>
-    <field name="level">
-      2
-    </field>
-  </object>
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+  }
+  </field>
+  <field name="toolbox"><natural>movement</natural></field>
+</object>
 
-  <!-- Repeat -->
-  <object pk="11" model="tasks.taskmodel">
-    <field name="title_en">
-      Stairs
-    </field>
-    <field name="title_cs">
-      Schody
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 1, 1, 1, 1, 1, 1],
-        [1, 1, 0, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 0, 0, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 0, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 1],
-        [1, 1, 1, 1, 1, 1, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 2, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [1, 1],
-        "direction": 0
-      }
+<object pk="10" model="tasks.taskmodel">
+  <field name="title_en">
+    Small maze 2
+  </field>
+  <field name="title_cs">
+    Malé bludiště 2
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 0, 1, 1],
+      [1, 1, 0, 0, 1, 0, 1, 1],
+      [1, 1, 1, 0, 0, 0, 1, 1],
+      [1, 1, 1, 0, 1, 0, 1, 1],
+      [1, 1, 1, 0, 2, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [1, 1],
+      "direction": 3
     }
-    </field>
-    <field type="TextField" name="workspace_settings">
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+  }
+  </field>
+  <field name="toolbox"><natural>movement</natural></field>
+</object>
+
+<!-- Repeat -->
+<object pk="11" model="tasks.taskmodel">
+  <field name="title_en">
+    Stairs
+  </field>
+  <field name="title_cs">
+    Schody
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 1, 1, 1, 1, 1, 1],
+      [1, 1, 0, 0, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 0, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 0, 1, 1, 1],
+      [1, 1, 1, 1, 1, 0, 0, 1, 1],
+      [1, 1, 1, 1, 1, 1, 0, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 2, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [1, 1],
+      "direction": 0
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 6
+  }
+  </field>
+  <field name="toolbox"><natural>repeat</natural></field>
+</object>
+
+<!-- Repeat -->
+<object pk="12" model="tasks.taskmodel">
+  <field name="title_en">
+    Right angle
+  </field>
+  <field name="title_cs">
+    Pravý úhel
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 2, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [1, 1],
+      "direction": 0
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 7
+  }
+  </field>
+  <field name="toolbox"><natural>repeat</natural></field>
+</object>
+
+<object pk="14" model="tasks.taskmodel">
+  <field name="title_en">
+    Diagonal wall
+  </field>
+  <field name="title_cs">
+    Úhlopříčná zeď
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 1, 0, 1],
+      [1, 0, 0, 0, 1, 0, 0, 1],
+      [1, 0, 0, 1, 0, 0, 0, 1],
+      [1, 0, 1, 0, 0, 0, 0, 1],
+      [1, 1, 2, 0, 0, 0, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [1, 5],
+      "direction": 1
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
     {
       "blocksLimit": 6
     }
-    </field>
-    <field name="level">
-      3
-    </field>
-  </object>
-
- <!-- Repeat -->
-  <object pk="12" model="tasks.taskmodel">
-    <field name="title_en">
-      Right angle
-    </field>
-    <field name="title_cs">
-      Pravý úhel
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 2, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [1, 1],
-        "direction": 0
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 7
-    }
-    </field>
-    <field name="level">
-      3
-    </field>
-  </object>
-
-<!-- IGNORED: duplicate of task 12
-  <object pk="13" model="tasks.taskmodel">
-    <field name="title_en">
-      Right angle
-    </field>
-    <field name="title_cs">
-      Pravý úhel
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 2, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [1, 1],
-        "direction": 0
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 7
-    }
-    </field>
-    <field name="level">
-      6
-    </field>
-  </object>
--->
-
-<!-- While -->
-  <object pk="14" model="tasks.taskmodel">
-    <field name="title_en">
-      Diagonal wall
-    </field>
-    <field name="title_cs">
-      Úhlopříčná zeď
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 1, 0, 1],
-        [1, 0, 0, 0, 1, 0, 0, 1],
-        [1, 0, 0, 1, 0, 0, 0, 1],
-        [1, 0, 1, 0, 0, 0, 0, 1],
-        [1, 1, 2, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [1, 5],
-        "direction": 1
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-      {
-        "blocksLimit": 6
-      }
-    </field>
-    <field name="level">
-      5
-    </field>
-  </object>
+  </field>
+  <field name="toolbox"><natural>check-path</natural></field>
+</object>
 
 <!-- Until -->
-  <object pk="15" model="tasks.taskmodel">
-    <field name="title_en">
-      Opposite corner
-    </field>
-    <field name="title_cs">
-      Opačný roh
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 0, 0, 0, 0, 0, 1],
-        [1, 1, 0, 0, 0, 0, 1, 1],
-        [1, 1, 0, 0, 0, 1, 0, 1],
-        [1, 1, 0, 0, 1, 0, 0, 1],
-        [1, 1, 0, 1, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 2, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [2, 1],
-        "direction": 3
-      }
+<object pk="15" model="tasks.taskmodel">
+  <field name="title_en">
+    Opposite corner
+  </field>
+  <field name="title_cs">
+    Opačný roh
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 0, 0, 0, 0, 0, 1],
+      [1, 1, 0, 0, 0, 0, 1, 1],
+      [1, 1, 0, 0, 0, 1, 0, 1],
+      [1, 1, 0, 0, 1, 0, 0, 1],
+      [1, 1, 0, 1, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 2, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [2, 1],
+      "direction": 3
     }
-    </field>
-    <field type="TextField" name="workspace_settings">
-      {
-        "blocksLimit": 7
-      }
-    </field>
-    <field name="level">
-      5
-    </field>
-  </object>
-
-  <object pk="16" model="tasks.taskmodel">
-    <field name="title_en">
-      Horseshoe
-    </field>
-    <field name="title_cs">
-      Podkova
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 1, 1, 1, 1, 0, 1],
-        [1, 0, 1, 1, 1, 1, 0, 1],
-        [1, 0, 1, 1, 1, 1, 0, 1],
-        [1, 0, 1, 1, 1, 1, 0, 1],
-        [1, 2, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [6, 6],
-        "direction": 1
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-      {
-        "blocksLimit": 6
-      }
-    </field>
-    <field name="level">
-      3
-    </field>
-  </object>
-
-  <object pk="18" model="tasks.taskmodel">
-    <field name="title_en">
-      Streight line
-    </field>
-    <field name="title_cs">
-      Rovinka
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 2, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [1, 4],
-        "direction": 0
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 3
-    }
-    </field>
-    <field name="level">
-      3
-    </field>
-  </object>
-
-
-  <object pk="19" model="tasks.taskmodel">
-    <field name="title_en">
-      Shortest path
-    </field>
-    <field name="title_cs">
-      Nejkratší cesta
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1],
-        [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1],
-        [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
-        [1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
-        [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1],
-        [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
-        [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1],
-        [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [4, 1],
-        "direction": 3
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 3
-    }
-    </field>
-    <field name="level">
-      4
-    </field>
-  </object>
-
-  <object pk="20" model="tasks.taskmodel">
-    <field name="title_en">
-      Nearly streight line
-    </field>
-    <field name="title_cs">
-      Skoro rovinka
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 2, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [1, 3],
-        "direction": 3
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
     {
       "blocksLimit": 7
     }
-    </field>
-    <field name="level">
-      3
-    </field>
-  </object>
+  </field>
+  <field name="toolbox"><natural>check-path</natural></field>
+</object>
 
-
-<!-- IGNORED: same as task 20
-  <object pk="21" model="tasks.taskmodel">
-    <field name="title_en">
-      Nearly streight line
-    </field>
-    <field name="title_cs">
-      Skoro rovinka
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 2, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [1, 3],
-        "direction": 3
-      }
+<object pk="16" model="tasks.taskmodel">
+  <field name="title_en">
+    Horseshoe
+  </field>
+  <field name="title_cs">
+    Podkova
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 1, 1, 1, 1, 0, 1],
+      [1, 0, 1, 1, 1, 1, 0, 1],
+      [1, 0, 1, 1, 1, 1, 0, 1],
+      [1, 0, 1, 1, 1, 1, 0, 1],
+      [1, 2, 1, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [6, 6],
+      "direction": 1
     }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 7
-    }
-    </field>
-    <field name="level">
-      3
-    </field>
-  </object>
--->
-
-  <object pk="22" model="tasks.taskmodel">
-    <field name="title_en">
-      On the crossroad to the left
-    </field>
-    <field name="title_cs">
-      Na křižovatce doleva
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 0, 1, 0, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 1, 0, 1, 0, 1, 0, 1],
-        [1, 1, 1, 0, 1, 0, 1, 1, 1],
-        [1, 1, 1, 0, 1, 0, 1, 1, 1],
-        [1, 1, 1, 2, 1, 0, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [5, 7],
-        "direction": 1
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 7
-    }
-    </field>
-    <field name="level">
-      7
-    </field>
-  </object>
-
-  <object pk="23" model="tasks.taskmodel">
-    <field name="title_en">
-      Small u
-    </field>
-    <field name="title_cs">
-      Malé účko
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 0, 1, 2, 1, 1, 1],
-        [1, 1, 0, 1, 0, 1, 1, 1],
-        [1, 1, 0, 0, 0, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [2, 2],
-        "direction": 3
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-
-      "blocksLimit": 5
-
-    }
-    </field>
-    <field name="level">
-      3
-    </field>
-  </object>
-
-  <object pk="24" model="tasks.taskmodel">
-    <field name="title_en">
-      Spiral
-    </field>
-    <field name="title_cs">
-      Spirála
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 2, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 0, 0, 0, 0, 0, 1, 0, 1],
-        [1, 0, 1, 1, 1, 0, 1, 0, 1],
-        [1, 0, 1, 0, 1, 0, 1, 0, 1],
-        [1, 0, 1, 0, 0, 0, 1, 0, 1],
-        [1, 0, 1, 1, 1, 1, 1, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [3, 4],
-        "direction": 3
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 8
-    }
-    </field>
-    <field name="level">
-      5
-    </field>
-  </object>
-
-  <object pk="25" model="tasks.taskmodel">
-    <field name="title_en">
-      Left curve
-    </field>
-    <field name="title_cs">
-      Levý oblouk
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 2, 0, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [1, 7],
-        "direction": 0
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
     {
       "blocksLimit": 6
     }
-    </field>
-    <field name="level">
-      3
-    </field>
-  </object>
+  </field>
+  <field name="toolbox"><natural>repeat</natural></field>
+</object>
 
-  <object pk="26" model="tasks.taskmodel">
-    <field name="title_en">
-      Three quarters of a circle
-    </field>
-    <field name="title_cs">
-      Tři čtvrtiny kruhu
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 0, 0, 0, 0, 0, 1, 1],
-        [1, 2, 0, 1, 1, 1, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 0, 0, 1],
-        [1, 1, 0, 0, 0, 0, 0, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [2, 7],
-        "direction": 0
-      }
+<object pk="18" model="tasks.taskmodel">
+  <field name="title_en">
+    Streight line
+  </field>
+  <field name="title_cs">
+    Rovinka
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 2, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [1, 4],
+      "direction": 0
     }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 10
-    }
-    </field>
-    <field name="level">
-      3
-    </field>
-  </object>
-
-  <object pk="27" model="tasks.taskmodel">
-    <field name="title_en">
-      Steep staircase
-    </field>
-    <field name="title_cs">
-      Strmé schodiště
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [1, 1],
-        "direction": 0
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 7
-    }
-    </field>
-    <field name="level">
-      4
-    </field>
-  </object>
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 3
+  }
+  </field>
+  <field name="toolbox"><natural>repeat</natural></field>
+</object>
 
 
-  <object pk="28" model="tasks.taskmodel">
-    <field name="title_en">
-      Twisted path
-    </field>
-    <field name="title_cs">
-      Zamotaná cesta
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1],
-        [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
-        [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
-        [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
-        [1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 2, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [4, 8],
-        "direction": 1
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 7
-    }
-    </field>
-    <field name="level">
-      7
-    </field>
-  </object>
-
-  <object pk="29" model="tasks.taskmodel">
-    <field name="title_en">
-      Winding path
-    </field>
-    <field name="title_cs">
-      Klikatá cesta
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
-        [1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 2, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [1, 1],
-        "direction": 0
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 10
-    }
-    </field>
-    <field name="level">
-      7
-    </field>
-  </object>
-
-  <object pk="30" model="tasks.taskmodel">
-    <field name="title_en">
-      Don't turn too early
-    </field>
-    <field name="title_cs">
-      Nazatáčej předčasně
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1],
-        [1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1],
-        [1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1],
-        [1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1],
-        [1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1],
-        [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [1, 5],
-        "direction": 0
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 9
-    }
-    </field>
-    <field name="level">
-      8
-    </field>
-  </object>
-
-  <object pk="31" model="tasks.taskmodel">
-    <field name="title_en">
-      On the yellow to the left
-    </field>
-    <field name="title_cs">
-      Na žluté doleva
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 2, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 3, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "tokens": [[4,7], [5,7], [7,4], [7,5]],
-      "hero": {
-        "position": [2, 7],
-        "direction": 0
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 6
-    }
-    </field>
-    <field name="level">
-      7
-    </field>
-  </object>
-
-  <object pk="32" model="tasks.taskmodel">
-    <field name="title_en">
-      Yellow and green turns
-    </field>
-    <field name="title_cs">
-      Žluté a zelené zatáčky
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 4, 0, 0, 0, 2, 1, 1, 1, 1],
-        [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 4, 0, 0, 0, 3, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 4, 0, 3, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [1,14],
-        "direction": 0
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 9
-    }
-    </field>
-    <field name="level">
-      7
-    </field>
-  </object>
-
-  <object pk="33" model="tasks.taskmodel">
-    <field name="title_en">
-      Yellow detours
-    </field>
-    <field name="title_cs">
-      Žluté odbočky
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 3, 0, 0, 0, 0, 4, 1, 1, 1, 1, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 3, 0, 0, 0, 4, 1, 1, 1, 1, 1, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 3, 0, 0, 4, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "tokens": [[6,2], [5,4], [4,9]],
-      "hero": {
-        "position": [1,1],
-        "direction": 3
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 15
-    }
-    </field>
-    <field name="level">
-      7
-    </field>
-  </object>
-
-  <object pk="34" model="tasks.taskmodel">
-    <field name="title_en">
-      Key niches
-    </field>
-    <field name="title_cs">
-      Klíčové výklenky
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "tokens": [[5,3], [5,7], [5,9], [5,12]],
-      "hero": {
-        "position": [4,1],
-        "direction": 3
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 11
-    }
-    </field>
-    <field name="level">
-      7
-    </field>
-  </object>
-
-  <object pk="35" model="tasks.taskmodel">
-    <field name="title_en">
-      Left and right niches
-    </field>
-    <field name="title_cs">
-      Výklenky vlevo a vpravo
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 3, 0, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 0, 4, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 0, 3, 0, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 3, 0, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 0, 4, 0, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 0, 4, 0, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "tokens": [[5,3], [5,7], [5,9], [3,5], [3,11], [3,13]],
-      "hero": {
-        "position": [4,1],
-        "direction": 3
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 19
-    }
-    </field>
-    <field name="level">
-      7
-    </field>
-  </object>
-
-  <object pk="36" model="tasks.taskmodel">
-    <field name="title_en">
-      Blue turns
-    </field>
-    <field name="title_cs">
-      Modré odbočky
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 0, 1, 5, 0, 5, 0, 0, 5, 1, 0, 1],
-        [1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1],
-        [1, 5, 1, 0, 1, 1, 1, 1, 5, 1, 0, 1],
-        [1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1],
-        [1, 0, 1, 5, 0, 2, 1, 0, 0, 1, 0, 1],
-        [1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1, 5, 1, 0, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1],
-        [1, 5, 0, 0, 0, 0, 0, 0, 5, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "tokens": [],
-      "hero": {
-        "position": [1,1],
-        "direction": 3
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 8 
-    }
-    </field>
-    <field name="level">
-      9
-    </field>
-  </object>
-
-  <object pk="37" model="tasks.taskmodel">
-    <field name="title_en">
-      Room full of keys
-    </field>
-    <field name="title_cs">
-      Místnost plná klíčů
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 2, 1],
-        [1, 0, 0, 0, 0, 0, 0, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "tokens": [
-        [1,7], [1,6], [1,5], [1,4], [1,3], [1,2],
-        [2,7], [2,6], [2,5], [2,4], [2,3], [2,2], [2,1],
-        [3,7], [3,6], [3,5], [3,4], [3,3], [3,2], [3,1],
-        [4,7], [4,6], [4,5], [4,4], [4,3], [4,2], [4,1],
-        [5,7], [5,6], [5,5], [5,4], [5,3], [5,2], [5,1],
-        [6,7], [6,6], [6,5], [6,4], [6,3], [6,2], [6,1]
-        ],
-
-      "hero": {
-        "position": [1, 1],
-        "direction": 0
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 14
-    }
-    </field>
-    <field name="level">
-      5
-    </field>
-  </object>
-
-  <object pk="38" model="tasks.taskmodel">
-    <field name="title_en">
-      Multicolour turns
-    </field>
-    <field name="title_cs">
-      Různobarevné zatáčení
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
-        [1, 1, 1, 6, 0, 0, 3, 0, 0, 0, 5, 1],
-        [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 0, 1, 6, 1, 0, 1],
-        [1, 1, 1, 6, 0, 0, 3, 1, 0, 1, 6, 1],
-        [1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1],
-        [1, 1, 1, 1, 6, 1, 3, 0, 5, 5, 6, 1],
-        [1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1],
-        [1, 1, 1, 1, 0, 1, 6, 1, 1, 0, 1, 1],
-        [1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1],
-        [1, 2, 0, 0, 3, 0, 0, 0, 0, 5, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 6, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "tokens": [],
-      "hero": {
-        "position": [10,1],
-        "direction": 3
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 15
-    }
-    </field>
-    <field name="level">
-      9
-    </field>
-  </object>
-
-
-  <object pk="39" model="tasks.taskmodel">
-    <field name="title_en">
-      Streight ahead and to the left
-    </field>
-    <field name="title_cs">
-      Rovně a vlevo
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1],
-        [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
-        [1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1],
-        [1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "tokens": [ [1,7] ],
-      "hero": {
-        "position": [10,1],
-        "direction": 2
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 10
-    }
-    </field>
-    <field name="level">
-      5
-    </field>
-  </object>
-
-    <object pk="40" model="tasks.taskmodel">
-    <field name="title_en">
-      Turns on colours
-    </field>
-    <field name="title_cs">
-      Zatáčení na barvách
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 4, 0, 5, 0, 4, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 5, 0, 0, 3, 3, 0, 1],
-        [1, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 1],
-        [1, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1],
-        [1, 5, 0, 0, 1, 4, 5, 1, 0, 5, 0, 1],
-        [1, 0, 0, 0, 1, 3, 0, 1, 0, 0, 0, 1],
-        [1, 0, 5, 0, 1, 1, 1, 1, 0, 0, 0, 1],
-        [1, 2, 0, 0, 0, 0, 0, 5, 0, 0, 0, 1],
-        [1, 3, 0, 5, 0, 0, 0, 0, 0, 3, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 5, 0, 0, 3, 3, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "tokens": [ [9,12], [9,3], [3,3]],
-      "hero": {
-        "position": [1,14],
-        "direction": 1
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 15
-    }
-    </field>
-    <field name="level">
-      7
-    </field>
-  </object>
-
-  <object pk="41" model="tasks.taskmodel">
-    <field name="title_en">
-      Odd blues
-    </field>
-    <field name="title_cs">
-      Liché modré
-    </field>
-    <field name="maze_settings">
-      {
-      "grid": [
+<object pk="19" model="tasks.taskmodel">
+  <field name="title_en">
+    Shortest path
+  </field>
+  <field name="title_cs">
+    Nejkratší cesta
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 5, 0, 5, 0, 5, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 1],
-      [1, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 5, 0, 0, 5, 0, 0, 5, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1],
+      [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1],
+      [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
+      [1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
+      [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1],
+      [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
+      [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1],
+      [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "tokens": [ [3,1], [2,2], [2,7], [3,11],[6,11],
-                  [8,10],[8,6], [7,4], [5,4], [4,5],
-                  [4,9], [4,13] ],
-      "hero": {
+    "hero": {
+      "position": [4, 1],
+      "direction": 3
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 3
+  }
+  </field>
+  <field name="toolbox"><natural>check-goal</natural></field>
+</object>
+
+<object pk="20" model="tasks.taskmodel">
+  <field name="title_en">
+    Nearly streight line
+  </field>
+  <field name="title_cs">
+    Skoro rovinka
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 2, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [1, 3],
+      "direction": 3
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 7
+  }
+  </field>
+  <field name="toolbox"><natural>repeat</natural></field>
+</object>
+
+<object pk="22" model="tasks.taskmodel">
+  <field name="title_en">
+    On the crossroad to the left
+  </field>
+  <field name="title_cs">
+    Na křižovatce doleva
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 1, 0, 1, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 1, 0, 1, 0, 1, 0, 1],
+      [1, 1, 1, 0, 1, 0, 1, 1, 1],
+      [1, 1, 1, 0, 1, 0, 1, 1, 1],
+      [1, 1, 1, 2, 1, 0, 1, 1, 1],
+      [1, 1, 1, 1, 1, 0, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [5, 7],
+      "direction": 1
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 7
+  }
+  </field>
+  <field name="toolbox"><natural>if</natural></field>
+</object>
+
+<object pk="23" model="tasks.taskmodel">
+  <field name="title_en">
+    Small u
+  </field>
+  <field name="title_cs">
+    Malé účko
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 0, 1, 2, 1, 1, 1],
+      [1, 1, 0, 1, 0, 1, 1, 1],
+      [1, 1, 0, 0, 0, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [2, 2],
+      "direction": 3
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+
+    "blocksLimit": 5
+
+  }
+  </field>
+  <field name="toolbox"><natural>repeat</natural></field>
+</object>
+
+<object pk="24" model="tasks.taskmodel">
+  <field name="title_en">
+    Spiral
+  </field>
+  <field name="title_cs">
+    Spirála
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 2, 1],
+      [1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 0, 0, 0, 0, 0, 1, 0, 1],
+      [1, 0, 1, 1, 1, 0, 1, 0, 1],
+      [1, 0, 1, 0, 1, 0, 1, 0, 1],
+      [1, 0, 1, 0, 0, 0, 1, 0, 1],
+      [1, 0, 1, 1, 1, 1, 1, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [3, 4],
+      "direction": 3
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 8
+  }
+  </field>
+  <field name="toolbox"><natural>check-path</natural></field>
+</object>
+
+<object pk="25" model="tasks.taskmodel">
+  <field name="title_en">
+    Left curve
+  </field>
+  <field name="title_cs">
+    Levý oblouk
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 2, 0, 0, 0, 0, 0, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [1, 7],
+      "direction": 0
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 6
+  }
+  </field>
+  <field name="toolbox"><natural>repeat</natural></field>
+</object>
+
+<object pk="26" model="tasks.taskmodel">
+  <field name="title_en">
+    Three quarters of a circle
+  </field>
+  <field name="title_cs">
+    Tři čtvrtiny kruhu
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 0, 0, 0, 0, 0, 1, 1],
+      [1, 2, 0, 1, 1, 1, 0, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 0, 0, 1],
+      [1, 1, 0, 0, 0, 0, 0, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [2, 7],
+      "direction": 0
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 10
+  }
+  </field>
+  <field name="toolbox"><natural>repeat</natural></field>
+</object>
+
+<object pk="27" model="tasks.taskmodel">
+  <field name="title_en">
+    Steep staircase
+  </field>
+  <field name="title_cs">
+    Strmé schodiště
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [1, 1],
+      "direction": 0
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 7
+  }
+  </field>
+  <field name="toolbox"><natural>check-goal</natural></field>
+</object>
+
+
+<object pk="28" model="tasks.taskmodel">
+  <field name="title_en">
+    Twisted path
+  </field>
+  <field name="title_cs">
+    Zamotaná cesta
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1],
+      [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
+      [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
+      [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
+      [1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 0, 2, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [4, 8],
+      "direction": 1
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 7
+  }
+  </field>
+  <field name="toolbox"><natural>if</natural></field>
+</object>
+
+<object pk="29" model="tasks.taskmodel">
+  <field name="title_en">
+    Winding path
+  </field>
+  <field name="title_cs">
+    Klikatá cesta
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
+      [1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 2, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [1, 1],
+      "direction": 0
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 10
+  }
+  </field>
+  <field name="toolbox"><natural>if</natural></field>
+</object>
+
+<object pk="30" model="tasks.taskmodel">
+  <field name="title_en">
+    Don't turn too early
+  </field>
+  <field name="title_cs">
+    Nazatáčej předčasně
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1],
+      [1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1],
+      [1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1],
+      [1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1],
+      [1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+      [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+      [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1],
+      [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [1, 5],
+      "direction": 0
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 9
+  }
+  </field>
+  <field name="toolbox"><natural>if-else</natural></field>
+</object>
+
+<object pk="31" model="tasks.taskmodel">
+  <field name="title_en">
+    On the yellow to the left
+  </field>
+  <field name="title_cs">
+    Na žluté doleva
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 2, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 3, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "tokens": [[4,7], [5,7], [7,4], [7,5]],
+    "hero": {
+      "position": [2, 7],
+      "direction": 0
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 6
+  }
+  </field>
+  <field name="toolbox"><natural>if</natural></field>
+</object>
+
+<object pk="32" model="tasks.taskmodel">
+  <field name="title_en">
+    Yellow and green turns
+  </field>
+  <field name="title_cs">
+    Žluté a zelené zatáčky
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 4, 0, 0, 0, 2, 1, 1, 1, 1],
+      [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 4, 0, 0, 0, 3, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 4, 0, 3, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [1,14],
+      "direction": 0
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 9
+  }
+  </field>
+  <field name="toolbox"><natural>if</natural></field>
+</object>
+
+<object pk="33" model="tasks.taskmodel">
+  <field name="title_en">
+    Yellow detours
+  </field>
+  <field name="title_cs">
+    Žluté odbočky
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 3, 0, 0, 0, 0, 4, 1, 1, 1, 1, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 3, 0, 0, 0, 4, 1, 1, 1, 1, 1, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 3, 0, 0, 4, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "tokens": [[6,2], [5,4], [4,9]],
+    "hero": {
+      "position": [1,1],
+      "direction": 3
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 15
+  }
+  </field>
+  <field name="toolbox"><natural>if</natural></field>
+</object>
+
+<object pk="34" model="tasks.taskmodel">
+  <field name="title_en">
+    Key niches
+  </field>
+  <field name="title_cs">
+    Klíčové výklenky
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "tokens": [[5,3], [5,7], [5,9], [5,12]],
+    "hero": {
+      "position": [4,1],
+      "direction": 3
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 11
+  }
+  </field>
+  <field name="toolbox"><natural>if</natural></field>
+</object>
+
+<object pk="35" model="tasks.taskmodel">
+  <field name="title_en">
+    Left and right niches
+  </field>
+  <field name="title_cs">
+    Výklenky vlevo a vpravo
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 3, 0, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 4, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 3, 0, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 3, 0, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 4, 0, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 4, 0, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "tokens": [[5,3], [5,7], [5,9], [3,5], [3,11], [3,13]],
+    "hero": {
+      "position": [4,1],
+      "direction": 3
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 19
+  }
+  </field>
+  <field name="toolbox"><natural>if</natural></field>
+</object>
+
+<object pk="36" model="tasks.taskmodel">
+  <field name="title_en">
+    Blue turns
+  </field>
+  <field name="title_cs">
+    Modré odbočky
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 0, 1, 5, 0, 5, 0, 0, 5, 1, 0, 1],
+      [1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1],
+      [1, 5, 1, 0, 1, 1, 1, 1, 5, 1, 0, 1],
+      [1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1],
+      [1, 0, 1, 5, 0, 2, 1, 0, 0, 1, 0, 1],
+      [1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1, 5, 1, 0, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1],
+      [1, 5, 0, 0, 0, 0, 0, 0, 5, 0, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "tokens": [],
+    "hero": {
+      "position": [1,1],
+      "direction": 3
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 8
+  }
+  </field>
+  <field name="toolbox"><natural>logic</natural></field>
+</object>
+
+<object pk="37" model="tasks.taskmodel">
+  <field name="title_en">
+    Room full of keys
+  </field>
+  <field name="title_cs">
+    Místnost plná klíčů
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 2, 1],
+      [1, 0, 0, 0, 0, 0, 0, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "tokens": [
+      [1,7], [1,6], [1,5], [1,4], [1,3], [1,2],
+      [2,7], [2,6], [2,5], [2,4], [2,3], [2,2], [2,1],
+      [3,7], [3,6], [3,5], [3,4], [3,3], [3,2], [3,1],
+      [4,7], [4,6], [4,5], [4,4], [4,3], [4,2], [4,1],
+      [5,7], [5,6], [5,5], [5,4], [5,3], [5,2], [5,1],
+      [6,7], [6,6], [6,5], [6,4], [6,3], [6,2], [6,1]
+      ],
+
+    "hero": {
+      "position": [1, 1],
+      "direction": 0
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 14
+  }
+  </field>
+  <field name="toolbox"><natural>check-path</natural></field>
+</object>
+
+<object pk="38" model="tasks.taskmodel">
+  <field name="title_en">
+    Multicolour turns
+  </field>
+  <field name="title_cs">
+    Různobarevné zatáčení
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+      [1, 1, 1, 6, 0, 0, 3, 0, 0, 0, 5, 1],
+      [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 0, 1, 6, 1, 0, 1],
+      [1, 1, 1, 6, 0, 0, 3, 1, 0, 1, 6, 1],
+      [1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1],
+      [1, 1, 1, 1, 6, 1, 3, 0, 5, 5, 6, 1],
+      [1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1],
+      [1, 1, 1, 1, 0, 1, 6, 1, 1, 0, 1, 1],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1],
+      [1, 2, 0, 0, 3, 0, 0, 0, 0, 5, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 6, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "tokens": [],
+    "hero": {
+      "position": [10,1],
+      "direction": 3
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 15
+  }
+  </field>
+  <field name="toolbox"><natural>logic</natural></field>
+</object>
+
+
+<object pk="39" model="tasks.taskmodel">
+  <field name="title_en">
+    Streight ahead and to the left
+  </field>
+  <field name="title_cs">
+    Rovně a vlevo
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1],
+      [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+      [1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+      [1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "tokens": [ [1,7] ],
+    "hero": {
       "position": [10,1],
       "direction": 2
-      }
-      }
-    </field>
-    <field type="TextField" name="workspace_settings">
-      {
-      "blocksLimit": 15
-      }
-    </field>
-    <field name="level">
-      6
-    </field>
-  </object>
-
-  <object pk="42" model="tasks.taskmodel">
-    <field name="title_en">
-      Square using knight moves
-    </field>
-    <field name="title_cs">
-      Čtverec pohyby jezdce
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 6, 0, 0, 6, 0, 0, 1],
-        [1, 6, 0, 0, 0, 0, 0, 0, 1],
-        [1, 6, 0, 6, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 6, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 2, 6, 0, 1],
-        [1, 0, 6, 0, 0, 6, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "tokens": [
-        [2,2], [2,5]
-        ],
-
-      "hero": {
-        "position": [5, 4],
-        "direction": 1
-      }
     }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 6
-    }
-    </field>
-    <field name="level">
-      5
-    </field>
-  </object>
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 10
+  }
+  </field>
+  <field name="toolbox"><natural>check-path</natural></field>
+</object>
 
-  <object pk="43" model="tasks.taskmodel">
-    <field name="title_en">
-      Between two walls
-    </field>
-    <field name="title_cs">
-      Mezi dvěma stěnami
-    </field>
-    <field name="maze_settings">
-      {
-      "grid": [
+  <object pk="40" model="tasks.taskmodel">
+  <field name="title_en">
+    Turns on colours
+  </field>
+  <field name="title_cs">
+    Zatáčení na barvách
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1],
-      [1, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1],
-      [1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
-      [1, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0, 1],
-      [1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
-      [1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 6, 1],
-      [1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1],
-      [1, 0, 0, 1, 6, 1, 0, 0, 0, 0, 0, 1],
+      [1, 4, 0, 5, 0, 4, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 5, 0, 0, 3, 3, 0, 1],
+      [1, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 1],
+      [1, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1],
+      [1, 5, 0, 0, 1, 4, 5, 1, 0, 5, 0, 1],
+      [1, 0, 0, 0, 1, 3, 0, 1, 0, 0, 0, 1],
+      [1, 0, 5, 0, 1, 1, 1, 1, 0, 0, 0, 1],
+      [1, 2, 0, 0, 0, 0, 0, 5, 0, 0, 0, 1],
+      [1, 3, 0, 5, 0, 0, 0, 0, 0, 3, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 5, 0, 0, 3, 3, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "tokens": [ [3,2], [4,13], [9,12]],
-      "hero": {
-      "position": [10,2],
-      "direction": 2
-      }
-      }
-    </field>
-    <field type="TextField" name="workspace_settings">
-      {
-      "blocksLimit": 15
-      }
-    </field>
-    <field name="level">
-      9
-    </field>
-  </object>
-
-  <object pk="44" model="tasks.taskmodel">
-    <field name="title_en">
-      Well-judged turns
-    </field>
-    <field name="title_cs">
-      Rozvážné zatáčení
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 6, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 6, 0, 1],
-        [1, 1, 1, 1, 1, 0, 1, 0, 1],
-        [1, 0, 0, 0, 6, 0, 1, 0, 1],
-        [1, 2, 0, 0, 0, 0, 6, 0, 1],
-        [1, 1, 1, 1, 1, 6, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "tokens": [],
-
-      "hero": {
-        "position": [1, 2],
-        "direction": 0
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 8 
-    }
-    </field>
-    <field name="level">
-      9
-    </field>
-  </object>
-
-  <object pk="45" model="tasks.taskmodel">
-    <field name="title_en">
-      Keys to the left and right
-    </field>
-    <field name="title_cs">
-      Klíče vlevo i vpravo
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 6, 0, 1],
-        [1, 0, 4, 0, 0, 4, 0, 4, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 6, 0, 0, 0, 2, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "tokens": [[2,1], [5,1], [7,1], [2,7], [5,7]],
-
-      "hero": {
-        "position": [1, 4],
-        "direction": 0
-      }
-    }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 21
-    }
-    </field>
-    <field name="level">
-      6
-    </field>
-  </object>
-
-  <object pk="46" model="tasks.taskmodel">
-    <field name="title_en">
-      Very winding path
-    </field>
-    <field name="title_cs">
-      Velmi klikatá cesta
-    </field>
-    <field name="maze_settings">
-      {
-        "grid": [
-          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-          [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
-          [1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1],
-          [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
-          [1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1],
-          [1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1],
-          [1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1],
-          [1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1],
-          [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1],
-          [1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1],
-          [1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1],
-          [1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1],
-          [1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
-          [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-          [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 2, 1],
-          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-        "tokens": [],
-        "hero": {
-          "position": [1,1],
-          "direction": 0
-          }
-      }
-    </field>
-    <field type="TextField" name="workspace_settings">
-      {
-        "blocksLimit": 12
-      }
-    </field>
-    <field name="level">
-      7
-    </field>
-  </object>
-
- <object pk="47" model="tasks.taskmodel">
-    <field name="title_en">
-      North, west, south, east
-    </field>
-    <field name="title_cs">
-      Sever, západ, jih, východ
-    </field>
-    <field name="maze_settings">
-      {
-      "grid": [
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 6, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 5, 0, 0, 0, 2, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-      [1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 6, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "tokens": [ [6,1], [1,8], [6,14]],
-      "hero": {
-      "position": [6,8],
+    "tokens": [ [9,12], [9,3], [3,3]],
+    "hero": {
+      "position": [1,14],
       "direction": 1
-      }
-      }
-    </field>
-    <field type="TextField" name="workspace_settings">
-      {
-      "blocksLimit": 13
-      }
-    </field>
-    <field name="level">
-      6
-    </field>
-  </object>
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 15
+  }
+  </field>
+  <field name="toolbox"><natural>if</natural></field>
+</object>
 
+<object pk="41" model="tasks.taskmodel">
+  <field name="title_en">
+    Odd blues
+  </field>
+  <field name="title_cs">
+    Liché modré
+  </field>
+  <field name="maze_settings">
+    {
+    "grid": [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 5, 0, 5, 0, 5, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 1],
+    [1, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 5, 0, 0, 5, 0, 0, 5, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "tokens": [ [3,1], [2,2], [2,7], [3,11],[6,11],
+                [8,10],[8,6], [7,4], [5,4], [4,5],
+                [4,9], [4,13] ],
+    "hero": {
+    "position": [10,1],
+    "direction": 2
+    }
+    }
+  </field>
+  <field type="TextField" name="workspace_settings">
+    {
+    "blocksLimit": 15
+    }
+  </field>
+  <field name="toolbox"><natural>check-color</natural></field>
+</object>
+
+<object pk="42" model="tasks.taskmodel">
+  <field name="title_en">
+    Square using knight moves
+  </field>
+  <field name="title_cs">
+    Čtverec pohyby jezdce
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 6, 0, 0, 6, 0, 0, 1],
+      [1, 6, 0, 0, 0, 0, 0, 0, 1],
+      [1, 6, 0, 6, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 6, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 2, 6, 0, 1],
+      [1, 0, 6, 0, 0, 6, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "tokens": [
+      [2,2], [2,5]
+      ],
+
+    "hero": {
+      "position": [5, 4],
+      "direction": 1
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 6
+  }
+  </field>
+  <field name="toolbox"><natural>check-path</natural></field>
+</object>
+
+<object pk="43" model="tasks.taskmodel">
+  <field name="title_en">
+    Between two walls
+  </field>
+  <field name="title_cs">
+    Mezi dvěma stěnami
+  </field>
+  <field name="maze_settings">
+    {
+    "grid": [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1],
+    [1, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1],
+    [1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+    [1, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0, 1],
+    [1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+    [1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 6, 1],
+    [1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1],
+    [1, 0, 0, 1, 6, 1, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "tokens": [ [3,2], [4,13], [9,12]],
+    "hero": {
+    "position": [10,2],
+    "direction": 2
+    }
+    }
+  </field>
+  <field type="TextField" name="workspace_settings">
+    {
+    "blocksLimit": 15
+    }
+  </field>
+  <field name="toolbox"><natural>logic</natural></field>
+</object>
+
+<object pk="44" model="tasks.taskmodel">
+  <field name="title_en">
+    Well-judged turns
+  </field>
+  <field name="title_cs">
+    Rozvážné zatáčení
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 6, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 6, 0, 1],
+      [1, 1, 1, 1, 1, 0, 1, 0, 1],
+      [1, 0, 0, 0, 6, 0, 1, 0, 1],
+      [1, 2, 0, 0, 0, 0, 6, 0, 1],
+      [1, 1, 1, 1, 1, 6, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "tokens": [],
+
+    "hero": {
+      "position": [1, 2],
+      "direction": 0
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 8
+  }
+  </field>
+  <field name="toolbox"><natural>logic</natural></field>
+</object>
+
+<object pk="45" model="tasks.taskmodel">
+  <field name="title_en">
+    Keys to the left and right
+  </field>
+  <field name="title_cs">
+    Klíče vlevo i vpravo
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 6, 0, 1],
+      [1, 0, 4, 0, 0, 4, 0, 4, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 6, 0, 0, 0, 2, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "tokens": [[2,1], [5,1], [7,1], [2,7], [5,7]],
+
+    "hero": {
+      "position": [1, 4],
+      "direction": 0
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 21
+  }
+  </field>
+  <field name="toolbox"><natural>check-color</natural></field>
+</object>
+
+<object pk="46" model="tasks.taskmodel">
+  <field name="title_en">
+    Very winding path
+  </field>
+  <field name="title_cs">
+    Velmi klikatá cesta
+  </field>
+  <field name="maze_settings">
+    {
+      "grid": [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+        [1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1],
+        [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+        [1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1],
+        [1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1],
+        [1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1],
+        [1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1],
+        [1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1],
+        [1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
+        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 2, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+      "tokens": [],
+      "hero": {
+        "position": [1,1],
+        "direction": 0
+        }
+    }
+  </field>
+  <field type="TextField" name="workspace_settings">
+    {
+      "blocksLimit": 12
+    }
+  </field>
+  <field name="toolbox"><natural>if</natural></field>
+</object>
+
+<object pk="47" model="tasks.taskmodel">
+  <field name="title_en">
+    North, west, south, east
+  </field>
+  <field name="title_cs">
+    Sever, západ, jih, východ
+  </field>
+  <field name="maze_settings">
+    {
+    "grid": [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 6, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 5, 0, 0, 0, 2, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 6, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "tokens": [ [6,1], [1,8], [6,14]],
+    "hero": {
+    "position": [6,8],
+    "direction": 1
+    }
+    }
+  </field>
+  <field type="TextField" name="workspace_settings">
+    {
+    "blocksLimit": 13
+    }
+  </field>
+  <field name="toolbox"><natural>check-color</natural></field>
+</object>
 
 <!-- IGNORED: missing variable blocks+concept
-  <object pk="48" model="tasks.taskmodel">
-    <field name="title_en">
-      Steps counting
-    </field>
-    <field name="title_cs">
-      Počítání kroků
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 6, 1],
-        [1, 0, 1, 1, 1, 1, 1, 0, 1, 1],
-        [1, 0, 1, 0, 0, 2, 1, 0, 1, 1],
-        [1, 0, 1, 0, 1, 1, 1, 0, 1, 1],
-        [1, 0, 6, 0, 0, 0, 0, 0, 1, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [1, 8],
-        "direction": 1
-      }
+<object pk="48" model="tasks.taskmodel">
+  <field name="title_en">
+    Steps counting
+  </field>
+  <field name="title_cs">
+    Počítání kroků
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 6, 1],
+      [1, 0, 1, 1, 1, 1, 1, 0, 1, 1],
+      [1, 0, 1, 0, 0, 2, 1, 0, 1, 1],
+      [1, 0, 1, 0, 1, 1, 1, 0, 1, 1],
+      [1, 0, 6, 0, 0, 0, 0, 0, 1, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [1, 8],
+      "direction": 1
     }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 16
-    }
-    </field>
-  </object>
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 16
+  }
+  </field>
+</object>
 -->
 
 <!-- IGNORED: missing variable blocks+concept
 <object pk="49" model="tasks.taskmodel">
-    <field name="title_en">
-      Linked list
-    </field>
-    <field name="title_cs">
-      Zřetězený seznam
-    </field>
-    <field name="maze_settings">
-      {
-      "grid": [
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [6, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [6, 4, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1],
-      [6, 4, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1],
-      [6, 4, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
-      [6, 4, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
-      [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-      [6, 4, 0, 0, 0, 0, 0, 0, 2, 6, 1, 1],
-      [6, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [6, 4, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
-      [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-      [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-      [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-      [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-      [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "tokens": [ [5,2], [3,5], [6,3], [9, 6], [4, 9], [7, 4]],
-      "hero": {
-      "position": [1,2],
-      "direction": 0
-      }
-      }
-    </field>
-    <field type="TextField" name="workspace_settings">
-      {
-      "blocksLimit": 30
-      }
-    </field>
-  </object>
+  <field name="title_en">
+    Linked list
+  </field>
+  <field name="title_cs">
+    Zřetězený seznam
+  </field>
+  <field name="maze_settings">
+    {
+    "grid": [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [6, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [6, 4, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1],
+    [6, 4, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1],
+    [6, 4, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
+    [6, 4, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+    [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+    [6, 4, 0, 0, 0, 0, 0, 0, 2, 6, 1, 1],
+    [6, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [6, 4, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
+    [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+    [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+    [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+    [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+    [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "tokens": [ [5,2], [3,5], [6,3], [9, 6], [4, 9], [7, 4]],
+    "hero": {
+    "position": [1,2],
+    "direction": 0
+    }
+    }
+  </field>
+  <field type="TextField" name="workspace_settings">
+    {
+    "blocksLimit": 30
+    }
+  </field>
+</object>
 -->
 
 <object pk="50" model="tasks.taskmodel">
-    <field name="title_en">
-      Knight L move
-    </field>
-    <field name="title_cs">
-      Tah jezdce do L
-    </field>
-    <field name="maze_settings">
-      {
-      "grid": [
-      [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
-      [6, 3, 0, 0, 6, 6, 6, 6, 6, 6, 6, 6],
-      [6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6],
-      [6, 6, 6, 0, 6, 6, 6, 6, 6, 6, 6, 6],
-      [6, 6, 6, 0, 3, 0, 0, 6, 6, 6, 6, 6],
-      [6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6],
-      [6, 6, 6, 6, 6, 6, 0, 6, 6, 6, 6, 6],
-      [6, 6, 6, 6, 6, 6, 0, 3, 0, 0, 6, 6],
-      [6, 6, 6, 6, 6, 6, 6, 6, 6, 3, 6, 6],
-      [6, 6, 6, 6, 6, 6, 6, 6, 6, 0, 6, 6],
-      [6, 6, 2, 0, 6, 6, 0, 0, 4, 0, 6, 6],
-      [6, 6, 6, 0, 6, 6, 3, 6, 6, 6, 6, 6],
-      [6, 6, 6, 4, 6, 6, 0, 6, 6, 6, 6, 6],
-      [6, 6, 6, 0, 0, 3, 0, 6, 6, 6, 6, 6],
-      [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
-      [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]],
-      "tokens": [],
-      "hero": {
-      "position": [1,1],
+  <field name="title_en">
+    Knight L move
+  </field>
+  <field name="title_cs">
+    Tah jezdce do L
+  </field>
+  <field name="maze_settings">
+    {
+    "grid": [
+    [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
+    [6, 3, 0, 0, 6, 6, 6, 6, 6, 6, 6, 6],
+    [6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6],
+    [6, 6, 6, 0, 6, 6, 6, 6, 6, 6, 6, 6],
+    [6, 6, 6, 0, 3, 0, 0, 6, 6, 6, 6, 6],
+    [6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6],
+    [6, 6, 6, 6, 6, 6, 0, 6, 6, 6, 6, 6],
+    [6, 6, 6, 6, 6, 6, 0, 3, 0, 0, 6, 6],
+    [6, 6, 6, 6, 6, 6, 6, 6, 6, 3, 6, 6],
+    [6, 6, 6, 6, 6, 6, 6, 6, 6, 0, 6, 6],
+    [6, 6, 2, 0, 6, 6, 0, 0, 4, 0, 6, 6],
+    [6, 6, 6, 0, 6, 6, 3, 6, 6, 6, 6, 6],
+    [6, 6, 6, 4, 6, 6, 0, 6, 6, 6, 6, 6],
+    [6, 6, 6, 0, 0, 3, 0, 6, 6, 6, 6, 6],
+    [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
+    [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]],
+    "tokens": [],
+    "hero": {
+    "position": [1,1],
+    "direction": 0
+    }
+    }
+  </field>
+  <field type="TextField" name="workspace_settings">
+    {
+    "blocksLimit": 14
+    }
+  </field>
+  <field name="toolbox"><natural>if</natural></field>
+</object>
+
+<object pk="51" model="tasks.taskmodel">
+  <field name="title_en">
+    Change on the green
+  </field>
+  <field name="title_cs">
+    Změna na zelené
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
+      [6, 0, 0, 0, 0, 0, 0, 4, 0, 6],
+      [6, 6, 6, 6, 6, 6, 6, 6, 0, 6],
+      [6, 2, 6, 6, 6, 6, 6, 6, 4, 6],
+      [6, 0, 4, 0, 0, 0, 0, 0, 0, 6],
+      [6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [1, 3],
       "direction": 0
-      }
-      }
-    </field>
-    <field type="TextField" name="workspace_settings">
-      {
-      "blocksLimit": 14
-      }
-    </field>
-    <field name="level">
-      7
-    </field>
-  </object>
-
-  <object pk="51" model="tasks.taskmodel">
-    <field name="title_en">
-      Change on the green
-    </field>
-    <field name="title_cs">
-      Změna na zelené
-    </field>
-    <field name="maze_settings">
-    {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
-        [6, 0, 0, 0, 0, 0, 0, 4, 0, 6],
-        [6, 6, 6, 6, 6, 6, 6, 6, 0, 6],
-        [6, 2, 6, 6, 6, 6, 6, 6, 4, 6],
-        [6, 0, 4, 0, 0, 0, 0, 0, 0, 6],
-        [6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [1, 3],
-        "direction": 0
-      }
     }
-    </field>
-    <field type="TextField" name="workspace_settings">
-    {
-      "blocksLimit": 7
-    }
-    </field>
-    <field name="level">
-      6
-    </field>
-  </object>
-
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 7
+  }
+  </field>
+  <field name="toolbox"><natural>check-color</natural></field>
+</object>
 
 <!-- IGNORED: missing variable blocks+concept
 <object pk="52" model="tasks.taskmodel">
-    <field name="title_en">
-      Shortening detours
-    </field>
-    <field name="title_cs">
-      Zkracující se odbočky
-    </field>
-    <field name="maze_settings">
-      {
-      "grid": [
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1],
-      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-      [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
-      [1, 0, 1, 0, 1, 0, 1, 0, 1, 2, 1, 1],
-      [1, 0, 1, 0, 1, 0, 1, 0, 1, 6, 1, 1],
-      [1, 0, 1, 0, 1, 0, 1, 6, 1, 1, 1, 1],
-      [1, 0, 1, 0, 1, 6, 1, 1, 1, 1, 1, 1],
-      [1, 0, 1, 6, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "tokens": [ [3, 7], [5, 6], [7, 5]],
-      "hero": {
-      "position": [1,8],
-      "direction": 1
-      }
-      }
-    </field>
-    <field type="TextField" name="workspace_settings">
+  <field name="title_en">
+    Shortening detours
+  </field>
+  <field name="title_cs">
+    Zkracující se odbočky
+  </field>
+  <field name="maze_settings">
     {
-         "blocksLimit": 20
-      }
-    </field>
-  </object>
+    "grid": [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
+    [1, 0, 1, 0, 1, 0, 1, 0, 1, 2, 1, 1],
+    [1, 0, 1, 0, 1, 0, 1, 0, 1, 6, 1, 1],
+    [1, 0, 1, 0, 1, 0, 1, 6, 1, 1, 1, 1],
+    [1, 0, 1, 0, 1, 6, 1, 1, 1, 1, 1, 1],
+    [1, 0, 1, 6, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "tokens": [ [3, 7], [5, 6], [7, 5]],
+    "hero": {
+    "position": [1,8],
+    "direction": 1
+    }
+    }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+        "blocksLimit": 20
+    }
+  </field>
+</object>
 -->
 
 <object pk="53" model="tasks.taskmodel">
-    <field name="title_en">
-      Skewed path
-    </field>
-    <field name="title_cs">
-      Šikmá cesta
-    </field>
-    <field name="maze_settings">
-      {
-        "grid": [
-          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-          [1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1],
-          [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
-          [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
-          [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
-          [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-          [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
-          [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
-          [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
-          [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1],
-          [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-          [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-          [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-          [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-        "hero": {
-          "position": [4,14],
-          "direction": 1
-        }
-      }
-    </field>
-    <field type="TextField" name="workspace_settings">
-      {
-      "blocksLimit": 8
-      }
-    </field>
-    <field name="level">
-      4
-    </field>
-  </object>
-
-  <object pk="54" model="tasks.taskmodel">
-    <field name="title_en">
-      Comb
-    </field>
-    <field name="title_cs">
-      Hřebínek
-    </field>
-    <field name="maze_settings">
+  <field name="title_en">
+    Skewed path
+  </field>
+  <field name="title_cs">
+    Šikmá cesta
+  </field>
+  <field name="maze_settings">
     {
       "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 0, 0, 0, 0, 2, 1, 1, 1],
-        [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1],
-        [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1],
-        [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1],
-        [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1],
-        [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1],
-        [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-      "tokens": [[7,11], [7,9], [7,7], [7,5], [7,3]],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
       "hero": {
-        "position": [7,13],
-        "direction": 2
+        "position": [4,14],
+        "direction": 1
       }
     }
-    </field>
-    <field type="TextField" name="workspace_settings">
+  </field>
+  <field type="TextField" name="workspace_settings">
     {
-      "blocksLimit": 14
+    "blocksLimit": 8
     }
-    </field>
-    <field name="level">
-      4
-    </field>
-  </object>
+  </field>
+  <field name="toolbox"><natural>check-goal</natural></field>
+</object>
 
-  <object pk="55" model="tasks.taskmodel">
-    <field name="title_en">
-      Letter C
-    </field>
-    <field name="title_cs">
-      Céčko
-    </field>
-    <field name="maze_settings">
+<object pk="54" model="tasks.taskmodel">
+  <field name="title_en">
+    Comb
+  </field>
+  <field name="title_cs">
+    Hřebínek
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 0, 0, 0, 2, 1, 1, 1],
+      [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1],
+      [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1],
+      [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1],
+      [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1],
+      [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1],
+      [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    "tokens": [[7,11], [7,9], [7,7], [7,5], [7,3]],
+    "hero": {
+      "position": [7,13],
+      "direction": 2
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
+  {
+    "blocksLimit": 14
+  }
+  </field>
+  <field name="toolbox"><natural>check-goal</natural></field>
+</object>
+
+<object pk="55" model="tasks.taskmodel">
+  <field name="title_en">
+    Letter C
+  </field>
+  <field name="title_cs">
+    Céčko
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 2, 1, 1, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1],
+      [1, 0, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [4, 6],
+      "direction": 2
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
     {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 2, 1, 1, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1],
-        [1, 0, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [4, 6],
-        "direction": 2
-      }
+      "blocksLimit": 6
     }
-    </field>
-    <field type="TextField" name="workspace_settings">
-      {
-        "blocksLimit": 6
-      }
-    </field>
-    <field name="level">
-      5
-    </field>
-  </object>
+  </field>
+  <field name="toolbox"><natural>check-path</natural></field>
+</object>
 
-  <object pk="56" model="tasks.taskmodel">
-    <field name="title_en">
-      Two steps forward
-    </field>
-    <field name="title_cs">
-      Dva kroky vpřed
-    </field>
-    <field name="maze_settings">
+<object pk="56" model="tasks.taskmodel">
+  <field name="title_en">
+    Two steps forward
+  </field>
+  <field name="title_cs">
+    Dva kroky vpřed
+  </field>
+  <field name="maze_settings">
+  {
+    "grid": [
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 0, 0, 2, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1]],
+    "hero": {
+      "position": [2, 4],
+      "direction": 0
+    }
+  }
+  </field>
+  <field type="TextField" name="workspace_settings">
     {
-      "grid": [
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 0, 0, 2, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1]],
-      "hero": {
-        "position": [2, 4],
-        "direction": 0
-      }
     }
-    </field>
-    <field type="TextField" name="workspace_settings">
-      {
-      }
-    </field>
-    <field name="level">
-      1
-    </field>
-  </object>
-
+  </field>
+  <field name="toolbox"><natural>forward</natural></field>
+</object>
 
 </django-objects>

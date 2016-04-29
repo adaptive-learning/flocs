@@ -7,7 +7,7 @@ from .initial_difficulties import InitialDifficultyEstimator
 
 class InitialDifficultiesTest(TestCase):
 
-    fixtures = ['levels', 'tasks']
+    fixtures = ['blocks', 'toolboxes', 'tasks']
 
     def setUp(self):
         self.tasks_sorted_by_difficulty = [

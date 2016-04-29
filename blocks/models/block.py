@@ -24,10 +24,6 @@ class Block(models.Model):
         help_text="JSON array of identifiers for all variants of the block"
                   + "(null if there are no extra variants)")
 
-    level = models.SmallIntegerField(
-        help_text="level required to use this block",
-        default=1)
-
     def natural_key(self):
         return (self.identifier,)
 

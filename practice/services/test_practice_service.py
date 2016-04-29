@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from unittest import skipIf
 from tasks.models import TaskModel
-from levels.models import Level
 from practice.models import StudentModel
 from practice.models import TaskInstanceModel
 from practice.models import PracticeSession
@@ -18,7 +17,7 @@ from . import practice_service
 
 class PracticeServiceWithFixturesTest(TestCase):
 
-    fixtures = ['instructions', 'levels', 'blocks', 'concepts', 'tasks']
+    fixtures = ['instructions', 'blocks', 'toolboxes', 'concepts', 'tasks']
 
     def setUp(self):
         self.user = User.objects.create()

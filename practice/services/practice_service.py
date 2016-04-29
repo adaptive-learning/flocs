@@ -194,7 +194,7 @@ def process_attempt_report(user, report):
         task = task_instance.task
         if not solved_before:
             percentil = statistics_service.percentil(task_instance)
-            level = task.level.block_level
+            level = task.toolbox.level
             credits, speed_bonus = compute_credits(level, percentil)
             student.earn_credits(credits)
             task_instance.earned_credits = credits
@@ -202,7 +202,7 @@ def process_attempt_report(user, report):
 
             levelup_achieved = try_levelup(student)
             if levelup_achieved:
-                purchases.extend(student.level.get_new_blocks())
+                purchases.extend(student.toolbox.get_new_blocks())
                 #logger.debug('Student {0} bought block {1}'.format(student.pk, new_block))
 
             student.save()

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+<object pk="1" model="blocks.toolbox">
+  <field name="level">1</field>
+  <field name="name">forward</field>
+  <field name="blocks">
+    <object><natural>maze_move_forward</natural></object>
+  </field>
+  <field name="credits">0</field>
+</object>
+
+<object pk="2" model="blocks.toolbox">
+  <field name="level">2</field>
+  <field name="name">movement</field>
+  <field name="blocks">
+    <object><natural>maze_move_forward</natural></object>
+    <object><natural>maze_turn</natural></object>
+  </field>
+  <field name="credits">1</field>
+</object>
+
+<object pk="3" model="blocks.toolbox">
+  <field name="level">3</field>
+  <field name="name">repeat</field>
+  <field name="blocks">
+    <object><natural>maze_move_forward</natural></object>
+    <object><natural>maze_turn</natural></object>
+    <object><natural>controls_repeat:10</natural></object>
+  </field>
+  <field name="credits">2</field>
+</object>
+
+<object pk="4" model="blocks.toolbox">
+  <field name="level">4</field>
+  <field name="name">check-goal</field>
+  <field name="blocks">
+    <object><natural>maze_move_forward</natural></object>
+    <object><natural>maze_turn</natural></object>
+    <object><natural>controls_repeat:10</natural></object>
+    <object><natural>controls_while</natural></object>
+    <object><natural>maze_check_goal</natural></object>
+  </field>
+  <field name="credits">5</field>
+</object>
+
+<object pk="5" model="blocks.toolbox">
+  <field name="level">5</field>
+  <field name="name">check-path</field>
+  <field name="blocks">
+    <object><natural>maze_move_forward</natural></object>
+    <object><natural>maze_turn</natural></object>
+    <object><natural>controls_repeat:10</natural></object>
+    <object><natural>controls_while</natural></object>
+    <object><natural>maze_check_goal</natural></object>
+    <object><natural>maze_check_path</natural></object>
+  </field>
+  <field name="credits">10</field>
+</object>
+
+<object pk="6" model="blocks.toolbox">
+  <field name="level">6</field>
+  <field name="name">check-color</field>
+  <field name="blocks">
+    <object><natural>maze_move_forward</natural></object>
+    <object><natural>maze_turn</natural></object>
+    <object><natural>controls_repeat:10</natural></object>
+    <object><natural>controls_while</natural></object>
+    <object><natural>maze_check_goal</natural></object>
+    <object><natural>maze_check_path</natural></object>
+    <object><natural>maze_check_color</natural></object>
+  </field>
+  <field name="credits">10</field>
+</object>
+
+<object pk="7" model="blocks.toolbox">
+  <field name="level">7</field>
+  <field name="name">if</field>
+  <field name="blocks">
+    <object><natural>maze_move_forward</natural></object>
+    <object><natural>maze_turn</natural></object>
+    <object><natural>controls_repeat:10</natural></object>
+    <object><natural>controls_while</natural></object>
+    <object><natural>maze_check_goal</natural></object>
+    <object><natural>maze_check_path</natural></object>
+    <object><natural>maze_check_color</natural></object>
+    <object><natural>controls_if</natural></object>
+  </field>
+  <field name="credits">20</field>
+</object>
+
+<object pk="8" model="blocks.toolbox">
+  <field name="level">8</field>
+  <field name="name">if-else</field>
+  <field name="blocks">
+    <object><natural>maze_move_forward</natural></object>
+    <object><natural>maze_turn</natural></object>
+    <object><natural>controls_repeat:10</natural></object>
+    <object><natural>controls_while</natural></object>
+    <object><natural>maze_check_goal</natural></object>
+    <object><natural>maze_check_path</natural></object>
+    <object><natural>maze_check_color</natural></object>
+    <object><natural>controls_if</natural></object>
+    <object><natural>controls_if_else</natural></object>
+  </field>
+  <field name="credits">20</field>
+</object>
+
+<object pk="9" model="blocks.toolbox">
+  <field name="level">9</field>
+  <field name="name">logic</field>
+  <field name="blocks">
+    <object><natural>maze_move_forward</natural></object>
+    <object><natural>maze_turn</natural></object>
+    <object><natural>controls_repeat:10</natural></object>
+    <object><natural>controls_while</natural></object>
+    <object><natural>maze_check_goal</natural></object>
+    <object><natural>maze_check_path</natural></object>
+    <object><natural>maze_check_color</natural></object>
+    <object><natural>controls_if</natural></object>
+    <object><natural>controls_if_else</natural></object>
+    <object><natural>logic_operation</natural></object>
+  </field>
+  <field name="credits">30</field>
+</object>
+
+</django-objects>

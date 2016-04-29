@@ -3,7 +3,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 import json
 from concepts.models import Concept, EnvironmentConcept, GameConcept, BlockConcept
-from levels.models import Level
+from blocks.models import Block, Toolbox
 
 
 class TaskModel(models.Model):
@@ -20,8 +20,8 @@ class TaskModel(models.Model):
     _contained_concepts = models.ManyToManyField(Concept,
             help_text='concepts contained in the task')
 
-    level = models.ForeignKey(Level,
-            help_text="minimum level required to attempt this task",
+    toolbox = models.ForeignKey(Toolbox,
+            help_text="minimal toolbox requried to solve this task",
             null=True, default=None)
 
     #  constants describing semantic of a maze grid
@@ -49,9 +49,9 @@ class TaskModel(models.Model):
         self._contained_concepts.add(concept)
 
     def get_required_blocks(self):
-        if self.level is None:
-            return []
-        return self.level.get_all_blocks()
+        if self.toolbox is None:
+            return list(Block.objects.all())
+        return self.toolbox.get_all_blocks()
 
     def contains_tokens(self):
         return bool(self.get_tokens())

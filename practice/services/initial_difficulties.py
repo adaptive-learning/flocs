@@ -43,8 +43,8 @@ class InitialDifficultyEstimator(object):
             - size of the maze (relative and on logarithmic scale [0..1]
             - relative amount of free space (paths) [0..1]
         """
-        assert task.level is not None
-        level = task.level.block_level
+        assert task.toolbox is not None
+        level = task.toolbox.level
         game_concepts = self._number_of_game_concepts(task)
         fields = self._number_of_fields(task)
         maze_size = log(sqrt(fields)) / log(self._max_maze_size)
@@ -75,9 +75,9 @@ class InitialDifficultyEstimator(object):
 
 class TaskConcepts(set):
     CONCEPT_CHECKERS = {
-        'loops':        lambda task: task.level >= 3,
-        'conditions':   lambda task: task.level >= 7,
-        'logic-expr':   lambda task: task.level >= 9,
+        'loops':        lambda task: task.toolbox.level >= 3,
+        'conditions':   lambda task: task.toolbox.level >= 7,
+        'logic-expr':   lambda task: task.toolbox.level >= 9,
         'blocks-limit': lambda task: task.get_blocks_limit() is not None,
         'colors':       lambda task: task.contains_colors(),
         'tokens':       lambda task: bool(task.get_tokens()),

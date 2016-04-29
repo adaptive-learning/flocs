@@ -3,12 +3,12 @@ from django.contrib.auth.models import User
 from decimal import Decimal
 
 from common.flow_factors import FlowFactors
-from levels.models import Level
 from concepts.models import Concept
+from blocks.models import Block, Toolbox
 
 
-def _get_lowest_level():
-    return Level.objects.get_lowest_level()
+def _get_initial_toolbox():
+    return Toolbox.objects.get_initial_toolbox()
 
 
 class StudentModel(models.Model):
@@ -31,8 +31,9 @@ class StudentModel(models.Model):
             help_text="number of free credits to spend",
             default=0)
 
-    level = models.ForeignKey(Level,
-            default=_get_lowest_level,
+    toolbox = models.ForeignKey(Toolbox,
+            help_text="blocks available to the student",
+            default=_get_initial_toolbox,
             null=True)
 
     def get_seen_concepts(self):
@@ -51,9 +52,9 @@ class StudentModel(models.Model):
         self.free_credits -= credits
 
     def get_available_blocks(self):
-        if self.level is None:
-            return []
-        return self.level.get_all_blocks()
+        if self.toolbox is None:
+            return list(Block.objects.all())
+        return self.toolbox.get_all_blocks()
 
     def __str__(self):
         return 'pk={pk}'.format(pk=self.pk)

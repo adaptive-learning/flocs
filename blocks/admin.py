@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models.block import Block
+from .models.toolbox import Toolbox
 
-# Register your models here.
 admin.site.register(Block)
+admin.site.register(Toolbox)
