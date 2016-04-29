@@ -183,7 +183,7 @@ def task_info_to_json(task_info):
     task_dict = {
         'task-instance-id': task_info.task_instance.pk,
         'task': task_info.task.to_json(),
-        'instructions': task_info.instructions,
+        'instructions': instructions_to_json(task_info.instructions),
         'session': session_dict
     }
     task_dict['task']['workspace-settings']['toolbox'] = task_info.toolbox
@@ -210,3 +210,9 @@ def session_overview_to_json(session_overview):
             'percentils': session_overview.percentils
             }
     return sess_overview_dict
+
+def instructions_to_json(instructions):
+    output = []
+    for inst in instructions:
+        output.append(inst.text)
+    return output

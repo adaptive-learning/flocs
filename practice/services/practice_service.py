@@ -14,7 +14,6 @@ from practice.models import StudentTaskInfoModel
 from practice.models import StudentModel
 from practice.models.task_instance import FlowRating
 from practice.services.parameters_update import update_parameters
-from practice.services.instructions_service import get_instructions
 from practice.services import practice_session_service as sess_service
 from practice.services import statistics_service
 from practice.services.details import get_practice_details
@@ -22,6 +21,7 @@ from practice.services.levels import try_levelup
 from practice.core.credits import compute_credits
 from practice.core.task_filtering import filter_tasks_by_level
 from practice.core.task_selection import RandomTaskSelector, IdSpecifidedTaskSelector
+from concepts.models import Instruction
 import json
 
 logger = logging.getLogger(__name__)
@@ -308,5 +308,13 @@ def _get_last_solved_delta(student, task):
     else:
         return None
 
-
-
+def get_instructions(student, task):
+    if student is None or task is None:
+        return []
+    seen_concepts = student.get_seen_concepts()
+    task_concepts   = task.get_contained_concepts()
+    concepts = task_concepts.difference(seen_concepts)
+    instructions = []
+    for concept in concepts:
+        instructions = instructions + list(Instruction.objects.filter(concept=concept))
+    return instructions

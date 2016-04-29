@@ -134,7 +134,7 @@ MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
 MODELTRANSLATION_TRANSLATION_FILES = (
     'tasks.models.translation',
     'blocks.models.translation',
-    'practice.models.translation',
+    'concepts.models.translation',
 )
 
 

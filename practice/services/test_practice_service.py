@@ -12,12 +12,14 @@ from practice.models import PracticeSession
 from practice.models import SessionTaskInstance
 from practice.models.task_instance import FlowRating
 from practice.core.task_selection import ScoreTaskSelector
+from concepts.models import Concept
+from concepts.models import Instruction
 from . import practice_service
 
 
 class PracticeServiceWithFixturesTest(TestCase):
 
-    fixtures = ['instructions', 'blocks', 'toolboxes', 'concepts', 'tasks']
+    fixtures = ['blocks', 'concepts', 'levels', 'tasks', 'instructions']
 
     def setUp(self):
         self.user = User.objects.create()
@@ -50,10 +52,36 @@ class PracticeServiceWithFixturesTest(TestCase):
             "time": 234})
         self.assertEqual(len(self.student.get_seen_concepts()), 6)
 
+    def test_get_last_solved_delta(self):
+        task = TaskModel.objects.get(pk=1)
+        TaskInstanceModel.objects.create(id=1, task_id=1, student=self.student,
+                time_end=datetime(2016,4,6,18,26,7))
+        delta = practice_service._get_last_solved_delta(self.student, task)
+        self.assertIsNone(delta)
+        TaskInstanceModel.objects.create(id=2, task_id=1, student=self.student,
+                time_end=datetime(2016,4,8,10,20,0))
+        delta = practice_service._get_last_solved_delta(self.student, task)
+        self.assertEquals(143633, delta)
+
+    def test_get_instructions(self):
+        task = TaskModel.objects.get(pk=1)
+        conc1 = Concept.objects.get_by_natural_key('block-move')
+        conc2 = Concept.objects.get_by_natural_key('block-turn')
+        task._add_concept(conc1)
+        task._add_concept(conc2)
+        self.student.mark_concept_as_seen(conc1)
+        instructions = practice_service.get_instructions(self.student, task)
+        expected = Instruction.objects.filter(concept=conc2)
+        not_expected = Instruction.objects.filter(concept=conc1)
+        for inst in expected:
+            self.assertIn(inst, instructions)
+        for inst in not_expected:
+            self.assertNotIn(inst, instructions)
+
 
 class PracticeServiceTest(TestCase):
 
-    fixtures = ['instructions', 'blocks']
+    fixtures = ['blocks']
 
     def setUp(self):
         self.user = User.objects.create()
@@ -135,16 +163,3 @@ class PracticeServiceTest(TestCase):
         """ Tasks requiring blocks not in student's toolbox should be ignored
         """
         raise NotImplementedError
-
-    def test_get_last_solved_delta(self):
-        student = StudentModel.objects.create(user=self.user)
-        task = TaskModel.objects.create(id=1)
-        TaskInstanceModel.objects.create(id=1, task_id=1, student=student,
-                time_end=datetime(2016,4,6,18,26,7))
-        delta = practice_service._get_last_solved_delta(student, task)
-        self.assertIsNone(delta)
-        TaskInstanceModel.objects.create(id=2, task_id=1, student=student,
-                time_end=datetime(2016,4,8,10,20,0))
-        delta = practice_service._get_last_solved_delta(student, task)
-        self.assertEquals(143633, delta)
-

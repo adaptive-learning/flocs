@@ -1,7 +1,7 @@
 from modeltranslation import translator
-from .instructions_model import InstructionsModel
+from .instruction import Instruction
 
-@translator.register(InstructionsModel)
+@translator.register(Instruction)
 class InstructionsTranslationOptions(translator.TranslationOptions):
     fields = ('text',)
     fallback_values = '[MISSING TRANSLATION]'
