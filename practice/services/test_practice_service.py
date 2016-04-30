@@ -19,7 +19,7 @@ from . import practice_service
 
 class PracticeServiceWithFixturesTest(TestCase):
 
-    fixtures = ['blocks', 'concepts', 'levels', 'tasks', 'instructions']
+    fixtures = ['blocks', 'toolboxes', 'concepts', 'levels', 'tasks', 'instructions']
 
     def setUp(self):
         self.user = User.objects.create()

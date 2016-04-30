@@ -212,6 +212,8 @@ def session_overview_to_json(session_overview):
     return sess_overview_dict
 
 def instructions_to_json(instructions):
+    if instructions is None:
+        return []
     output = []
     for inst in instructions:
         output.append(inst.text)
