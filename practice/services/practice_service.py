@@ -72,7 +72,7 @@ def get_active_task_in_session(student):
         task_instance = active_task_instance,
         task = active_task_instance.task,
         toolbox = get_student_toolbox(student),
-        instructions = get_instructions(student, active_task_instance.task),
+        instructions = get_instructions(active_task_instance.task, student),
         session = session
     )
     return session_task_instance_info
@@ -108,7 +108,7 @@ def get_task(student, task_selector):
             student=student, task=task)[0]
     student_task_info.last_instance = task_instance
     student_task_info.save()
-    instructions = get_instructions(student, task)
+    instructions = get_instructions(task, student)
 
     task_info = TaskInfo(
         task_instance = task_instance,
@@ -308,13 +308,16 @@ def _get_last_solved_delta(student, task):
     else:
         return None
 
-def get_instructions(student, task):
-    if student is None or task is None:
+def get_instructions(task, student=None):
+    """ Return list of instruction for given task.
+        If a student is specified, only those instructions not seen by the
+        student are returned.
+    """
+    if task is None:
         return []
-    seen_concepts = student.get_seen_concepts()
-    task_concepts   = task.get_contained_concepts()
-    concepts = task_concepts.difference(seen_concepts)
-    instructions = []
-    for concept in concepts:
-        instructions = instructions + list(Instruction.objects.filter(concept=concept))
+    concepts = task.get_contained_concepts()
+    if student:
+        seen_concepts = student.get_seen_concepts()
+        concepts = concepts.difference(seen_concepts)
+    instructions = list(Instruction.objects.filter(concept__in=concepts))
     return instructions

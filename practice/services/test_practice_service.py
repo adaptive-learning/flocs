@@ -70,7 +70,7 @@ class PracticeServiceWithFixturesTest(TestCase):
         task._add_concept(conc1)
         task._add_concept(conc2)
         self.student.mark_concept_as_seen(conc1)
-        instructions = practice_service.get_instructions(self.student, task)
+        instructions = practice_service.get_instructions(task, self.student)
         expected = Instruction.objects.filter(concept=conc2)
         not_expected = Instruction.objects.filter(concept=conc1)
         for inst in expected:
