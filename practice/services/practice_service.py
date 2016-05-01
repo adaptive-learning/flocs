@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 
 # TODO: remove task field - it is redundant (task is in task_instance.task)
 TaskInfo = namedtuple('TaskInfo',
-        ['task_instance', 'task', 'toolbox', 'instructions', 'session'])
+        ['task_instance', 'task', 'toolbox', 'new_instructions', 'all_instructions', 'session'])
 SessionOverview = namedtuple('SessionOverview',
         ['task_instances', 'overall_time', 'percentils'])
 
@@ -54,11 +54,12 @@ def get_next_task_in_session(user):
     # add info about session
     session = sess_service.get_session(student)
     task_info_with_sess = TaskInfo(
-        task_instance = task_info.task_instance,
-        task = task_info.task,
-        toolbox = task_info.toolbox,
-        instructions = task_info.instructions,
-        session = session
+        task_instance=task_info.task_instance,
+        task=task_info.task,
+        toolbox=task_info.toolbox,
+        new_instructions=task_info.new_instructions,
+        all_instructions=task_info.all_instructions,
+        session=session
     )
     return task_info_with_sess
 
@@ -69,10 +70,11 @@ def get_active_task_in_session(student):
     if not active_task_instance:
         raise ValueError('Student {pk} does not have an active task.')
     session_task_instance_info = TaskInfo(
-        task_instance = active_task_instance,
-        task = active_task_instance.task,
-        toolbox = get_student_toolbox(student),
-        instructions = get_instructions(active_task_instance.task, student),
+        task_instance=active_task_instance,
+        task=active_task_instance.task,
+        toolbox=get_student_toolbox(student),
+        new_instructions=get_instructions(active_task_instance.task, student),
+        all_instructions=get_instructions(active_task_instance.task),
         session = session
     )
     return session_task_instance_info
@@ -111,10 +113,11 @@ def get_task(student, task_selector):
     instructions = get_instructions(task, student)
 
     task_info = TaskInfo(
-        task_instance = task_instance,
-        task = task,
-        toolbox = get_student_toolbox(student),
-        instructions = instructions,
+        task_instance=task_instance,
+        task=task,
+        toolbox=get_student_toolbox(student),
+        new_instructions=get_instructions(task, student),
+        all_instructions=get_instructions(task),
         session = None
     )
     logger.info("Task %s successfully picked for student %s", task_id, student.pk)

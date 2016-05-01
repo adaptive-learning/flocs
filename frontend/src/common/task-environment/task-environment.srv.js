@@ -113,15 +113,15 @@ angular.module('flocs.taskEnvironment')
    * Set a new task in the environment. Optionally specify a callback to call
    * after each attempt of the user.
    */
-  function setTask(newTask, _afterAttemptCallback, instructionsText) {
+  function setTask(newTask, newInstructions, _afterAttemptCallback) {
+    newInstructions = newInstructions || [];
     afterAttemptCallback = _afterAttemptCallback || null;
-    instructionsText = instructionsText || [];
     currentTask = newTask;
     mazeService.set(getMazeSettings());
     workspaceService.set(getWorkspaceSettings());
     executionStatus.initialState = true;
     //changeNotification();
-    instructions.text = instructionsText.join(' ');
+    instructions.text = newInstructions.join(' ');
   }
 
   function setInitialState() {
@@ -135,7 +135,7 @@ angular.module('flocs.taskEnvironment')
         setTask(newTask);
       });
   }
-  
+
   function settingTaskByIdWithToolbox(id) {
     taskDao.gettingTaskByIdWithToolbox(id)
       .then(function(newTask) {

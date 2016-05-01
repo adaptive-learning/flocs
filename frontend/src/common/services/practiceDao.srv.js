@@ -38,7 +38,8 @@ angular.module('flocs.services')
     var taskInstance = {
       taskInstanceId: response.data['task-instance-id'],
       task: response.data['task'],
-      instructions: response.data['instructions'],
+      newInstructions: response.data['new-instructions'],
+      allInstructions: response.data['all-instructions'],
       session: response.data['session'],
     };
     return taskInstance;

@@ -183,7 +183,8 @@ def task_info_to_json(task_info):
     task_dict = {
         'task-instance-id': task_info.task_instance.pk,
         'task': task_info.task.to_json(),
-        'instructions': instructions_to_json(task_info.instructions),
+        'new-instructions': instructions_to_json(task_info.new_instructions),
+        'all-instructions': instructions_to_json(task_info.all_instructions),
         'session': session_dict
     }
     task_dict['task']['workspace-settings']['toolbox'] = task_info.toolbox
@@ -214,7 +215,4 @@ def session_overview_to_json(session_overview):
 def instructions_to_json(instructions):
     if instructions is None:
         return []
-    output = []
-    for inst in instructions:
-        output.append(inst.text)
-    return output
+    return [instruction.text for instruction in instructions]

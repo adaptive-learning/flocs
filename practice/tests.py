@@ -29,7 +29,8 @@ class PracticeViewsTest(TestCase):
         task_info = TaskInfo(
             task_instance=self.instance3,
             task=self.task,
-            instructions=None,
+            new_instructions=None,
+            all_instructions=None,
             session=self.session,
             toolbox=self.toolbox
         )

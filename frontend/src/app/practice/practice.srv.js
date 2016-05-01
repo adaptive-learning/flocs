@@ -132,9 +132,10 @@ angular.module('flocs.practice')
     var newTask = taskInstance.task;
     newAttemptReport(newTask);
     taskStartTimestamp = Date.now();
-    var instructionsText = taskInstance.instructions;
-    taskEnvironmentService.setTask(newTask, attemptFinished,
-          instructionsText);
+    taskEnvironmentService.setTask(newTask, taskInstance.newInstructions,
+                                   attemptFinished);
+    //console.log('new instructions', taskInstance.newInstructions);
+    //console.log('all instructions', taskInstance.allInstructions);
   }
 
   function giveUpTask() {
