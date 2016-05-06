@@ -3,17 +3,16 @@ Models for task selection.
 """
 
 from random import choice
-from common.utils.activation import AMPLITUDE
-from practice.core.flow_prediction import predict_flow
-from practice.core.efficiency import estimate_efficiency
-import math
+from common.utils.random import weighted_choice
+from common.utils.math import product
+from practice.core.scores import CombinedScoreComputer
+from practice.core.scores import score_efficiency, score_flow, score_level
+from practice.core.scores import score_time_since_last_attempt
 
 
 class TaskSelector(object):
+    """ Base class for task selection.
     """
-    Base class for task selection.
-    """
-
     def select(self, task_ids, student_id, practice_context):
         NotImplementedError("Abstract method 'select' not implemented.")
 
@@ -32,82 +31,56 @@ class IdSpecifidedTaskSelector(TaskSelector):
 class RandomTaskSelector(TaskSelector):
 
     def select(self, task_ids, student_id, practice_context):
-        """
-        Select a random task.
+        """ Select a random task.
         """
         task_id = choice(task_ids)
         return task_id
 
 
-class ScoreTaskSelector(TaskSelector):
+class RandomizedScoreTaskSelector(TaskSelector):
+    """ Select task at random, but with probability of being selected according
+        to its score.
+    """
+    # NOTE: for the plain product combinator, the weights are irrelevant
+    CRITERIA_WEIGHTS = [
+        (score_time_since_last_attempt, 1),
+        (score_efficiency, 1),
+        (score_level, 1),
+    ]
 
-    WEIGHT_FLOW = 5
-    WEIGHT_TIME = 16
-    WEIGHT_EFFICIENCY = 1
+    def select(self, task_ids, student_id, practice_context):
+        score_computer = CombinedScoreComputer(
+                criteria=self.CRITERIA_WEIGHTS,
+                combinator=product,
+                practice_context=practice_context,
+                student=student_id)
+        scored_tasks = score_computer.combined_scores(task_ids)
+        #print('Random choice from:', sorted(scored_tasks))
+        selected_task_id = weighted_choice(scored_tasks)
+        return selected_task_id
 
-    # seconds from the last attempt to get half of the maximum penalization
-    TIME_FOR_HALF_SCORE = 12 * 60 * 60  # 12 hours
+
+class BestScoreTaskSelector(TaskSelector):
+
+    """ Select task which maximizes score which is based on:
+        - flow prediction
+        - task efficiency (expected skill gain for unit of time)
+        - time from the last attempt to solve this task
+    """
+
+    CRITERIA_WEIGHTS = [
+        (score_flow, 5),
+        (score_time_since_last_attempt, 16),
+        (score_efficiency, 1),
+    ]
 
 
     def select(self, task_ids, student_id, practice_context):
-        """
-        Select task which maximizes score which is based on:
-            - flow prediction
-            - task efficiency (expected skill gain for unit of time)
-            - time from the last attempt to solve this task
-
-        It may use additional criteria in future, e.g. task effetiveness or
-        exploration gain (how much information a task brings to the system).
-
-        Return:
-            id of selected task
-        """
-        def score(task_id):
-            # flow
-            flow = predict_flow(student_id, task_id, practice_context)
-            flow_score = self._score_flow(flow)
-            # efficiency
-            efficiency_score = estimate_efficiency(student_id, task_id, practice_context)
-            # time
-            last_attempt_time = practice_context.get_last_attempt_time(
-                    student=student_id, task=task_id)
-            current_time = practice_context.get_time()
-            time_score = self._score_time_since_last_attempt(
-                    last_attempt_time, current_time)
-            # combine
-            score = self.WEIGHT_FLOW * flow_score \
-                    + self.WEIGHT_EFFICIENCY * efficiency_score \
-                    + self.WEIGHT_TIME * time_score
-            return score
-
-        scored_tasks = [(score(task_id), task_id) for task_id in task_ids]
-        ## necessary to sort only according to the 0th column (scores) only
-        ## (because TaskModel in unsortable)
-        #best_task = max(scored_tasks, key=lambda st: st[0])[1]
+        score_computer = CombinedScoreComputer(
+                criteria=self.CRITERIA_WEIGHTS,
+                combinator=product,
+                practice_context=practice_context,
+                student=student_id)
+        scored_tasks = score_computer.combined_scores(task_ids)
         best_task_id = max(scored_tasks)[1]
         return best_task_id
-
-    def _score_flow(self, flow):
-        """
-        Compute partial score for flow prediction.
-
-        Return:
-            score - real number between -1 and 0
-        """
-        score = (-1) * ((flow / AMPLITUDE) ** 2)
-        return score
-
-
-    def _score_time_since_last_attempt(self, last_attempt_time, time):
-        """
-        Compute partial score for time since last attempt.
-
-        The score is a real number between -1 (the last attempt is recent) and 0
-        (= the last attempt was long time ago).
-        """
-        if last_attempt_time is None:
-            return 0.0
-        #seconds = time - last_attempt_time
-        seconds = (time - last_attempt_time).total_seconds()
-        score = -1 * math.pow(0.5, seconds / self.TIME_FOR_HALF_SCORE)
-        return score

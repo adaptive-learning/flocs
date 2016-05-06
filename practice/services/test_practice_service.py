@@ -11,7 +11,6 @@ from practice.models import TaskInstanceModel
 from practice.models import PracticeSession
 from practice.models import SessionTaskInstance
 from practice.models.task_instance import FlowRating
-from practice.core.task_selection import ScoreTaskSelector
 from concepts.models import Concept
 from concepts.models import Instruction
 from . import practice_service

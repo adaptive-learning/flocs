@@ -24,9 +24,28 @@ def create_practice_context(student=None, task=None, time=None):
         time (datetime.datetime): time of the practice
             or None to use current time
     """
-    # NOTE: massive refactoring -> temporarily return empty practice context
-    # (for the original version, see version control)
-    practice_context = PracticeContext()
+    tasks = [task] if task is not None else TaskModel.objects.all()
+    students = [student] if student is not None else StudentModel.objects.all()
+    time = time if time is not None else datetime.now()
+
+    practice_context = PracticeContext(time=time)
+    # load last attempt times
+    for student in students:
+        for task in tasks:
+            try:
+                last_instance = StudentTaskInfoModel.objects.get(
+                    student=student, task=task).last_instance
+            except ObjectDoesNotExist:
+                last_instance = None
+            last_time = last_instance.time_end if last_instance is not None else None
+            practice_context.set('last-time', student.pk, task.pk, last_time)
+    # load levels
+    for student in students:
+        practice_context.set('level', student=student.pk, value=student.get_level())
+    for task in tasks:
+        practice_context.set('level', task=task.pk, value=task.get_level())
+
+
     return practice_context
 
 

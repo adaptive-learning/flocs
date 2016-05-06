@@ -36,6 +36,11 @@ class StudentModel(models.Model):
             default=_get_initial_toolbox,
             null=True)
 
+    def get_level(self):
+        if not self.toolbox:
+            return 1
+        return self.toolbox.level
+
     def get_seen_concepts(self):
         return set(self._seen_concepts.all())
 

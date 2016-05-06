@@ -20,7 +20,8 @@ from practice.services.details import get_practice_details
 from practice.services.levels import try_levelup
 from practice.core.credits import compute_credits
 from practice.core.task_filtering import filter_tasks_by_level
-from practice.core.task_selection import RandomTaskSelector, IdSpecifidedTaskSelector
+from practice.core.task_selection import IdSpecifidedTaskSelector
+from practice.core.task_selection import RandomizedScoreTaskSelector
 from concepts.models import Instruction
 import json
 
@@ -49,7 +50,7 @@ def get_next_task_in_session(user):
     if sess_service.has_unresolved_task(student):
         return get_active_task_in_session(student)
     # next task in the session or new session
-    task_info = get_task(student, RandomTaskSelector())
+    task_info = get_task(student, RandomizedScoreTaskSelector())
     sess_service.next_task_in_session(student, task_info.task_instance)
     # add info about session
     session = sess_service.get_session(student)

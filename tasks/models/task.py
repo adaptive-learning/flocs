@@ -29,6 +29,11 @@ class TaskModel(models.Model):
     _FREE_FIELDS = [0, 2, 3, 4, 5]
     _PIT_FIELD = 6
 
+    def get_level(self):
+        if not self.toolbox:
+            return 1
+        return self.toolbox.level
+
     def get_contained_concepts(self):
         return set(self._contained_concepts.all())
 
