@@ -138,6 +138,16 @@ angular.module('flocs.workspace')
   }
 
   /**
+   * Return dump (XML text) of Blockly program in the current workspace
+   */
+  function getBlocklyCode() {
+    //var xml_dom = Blockly.Xml.blockToDom_(startBlock);
+    var xml_dom = Blockly.Xml.workspaceToDom(blocklyDiv);
+    var xml_text = Blockly.Xml.domToText(xml_dom); // alt: domToPrettyText
+    return xml_text;
+  }
+
+  /**
    * Return JavaScript representation of current code in the workspace
    */
   function getJavaScriptCode() {
@@ -182,6 +192,7 @@ angular.module('flocs.workspace')
     addChangeListener: addChangeListener,
     highlightBlock: highlightBlock,
     noHighlight: noHighlight,
+    getBlocklyCode: getBlocklyCode,
     getJavaScriptCode: getJavaScriptCode,
     getPythonCode: getPythonCode,
     getBlocksUsed: getBlocksUsed,
