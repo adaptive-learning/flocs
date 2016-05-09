@@ -2,7 +2,7 @@
  * Task Environment Service
  */
 angular.module('flocs.taskEnvironment')
-.factory('taskEnvironmentService', function (taskDao, mazeService,
+.factory('taskEnvironmentService', function ($timeout, taskDao, mazeService,
       workspaceService, interpreterService) {
 
   var currentTask = null;
@@ -136,17 +136,17 @@ angular.module('flocs.taskEnvironment')
       });
   }
 
-  function settingTaskByIdWithToolbox(id) {
+  function settingTaskByIdWithToolbox(id, afterAttemptCallback) {
     taskDao.gettingTaskByIdWithToolbox(id)
       .then(function(newTask) {
-        setTask(newTask);
+        setTask(newTask, null, afterAttemptCallback);
       });
   }
 
 
   function attemptFinished(result) {
     if (afterAttemptCallback) {
-      afterAttemptCallback(result);
+      $timeout(function() {afterAttemptCallback(result);});
     }
 
     //$rootScope.$broadcast('task:attemptFinished');

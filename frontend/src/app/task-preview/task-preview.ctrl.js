@@ -10,6 +10,14 @@ angular.module('flocs.taskPreview')
     $state.go('task-preview-set', {taskId: $scope.tasks.selected});
   }
 
+  function attemptFinished(result) {
+    if (result.solved) {
+      console.log('Solved! Code:');
+      console.log(result.code);
+      window.prompt("Solved! Code:", result.code);
+    }
+  }
+
   $scope.tasks = {
     selected: null,
     options: []
@@ -24,7 +32,9 @@ angular.module('flocs.taskPreview')
       if ($stateParams.taskId !== undefined &&
           $scope.tasks.options.indexOf($stateParams.taskId) !== -1) {
         $scope.tasks.selected = $stateParams.taskId;
-        taskEnvironmentService.settingTaskByIdWithToolbox($scope.tasks.selected);
+        taskEnvironmentService.settingTaskByIdWithToolbox(
+            $scope.tasks.selected,
+            attemptFinished);
       }
     });
 
