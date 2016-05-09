@@ -20,6 +20,10 @@ class TaskModel(models.Model):
     _contained_concepts = models.ManyToManyField(Concept,
             help_text='concepts contained in the task')
 
+    solution = models.TextField(
+            help_text="XML representation of a Blockly program",
+            null=True, default=None)
+
     toolbox = models.ForeignKey(Toolbox,
             help_text="minimal toolbox requried to solve this task",
             null=True, default=None)

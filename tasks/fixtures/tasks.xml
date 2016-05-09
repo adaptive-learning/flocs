@@ -30,6 +30,11 @@
   }
   </field>
   <field name="toolbox"><natural>forward</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_move_forward"></block></next></block></next></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="2" model="tasks.taskmodel">
@@ -344,6 +349,11 @@
   }
   </field>
   <field name="toolbox"><natural>repeat</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_repeat_ext"><value name="TIMES"><block type="math_number" movable="false"><field name="NUM">6</field></block></value><statement name="DO"><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field></block></next></block></next></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <!-- Repeat -->
