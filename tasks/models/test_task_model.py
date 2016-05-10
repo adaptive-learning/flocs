@@ -45,12 +45,6 @@ class TaskModelTest(TestCase):
         pits_concept = Concept.objects.get_by_natural_key('game-pits')
         self.assertIn(pits_concept, inferred_concepts)
 
-    def test_to_json(self):
-        task = TaskModel(
-                maze_settings='{"foo1": "bar1"}',
-                workspace_settings='{"foo2": "bar2"}')
-        task_json = task.to_json()
-        self.assertIn('maze-settings', task_json)
-        self.assertIn('workspace-settings', task_json)
-        self.assertEquals(task_json['maze-settings'], {'foo1': 'bar1'})
-        self.assertEquals(task_json['workspace-settings'], {'foo2': 'bar2'})
+    def test_blocks_limit_inference(self):
+        self.assertEquals(TaskModel.objects.get(pk=1).get_blocks_limit(), None)
+        self.assertEquals(TaskModel.objects.get(pk=11).get_blocks_limit(), 7)

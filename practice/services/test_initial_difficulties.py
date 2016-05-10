@@ -22,6 +22,7 @@ class InitialDifficultiesTest(TestCase):
             TaskModel.objects.get(pk=36),   # logical expressions
         ]
 
+    @skipIf(True, 'obsolete test - use Concepts and move to Tasks package')
     def test_task_concepts_inference(self):
         self.assertEqual(len(TaskConcepts(TaskModel.objects.get(pk=1))), 0)
         self.assertEqual(len(TaskConcepts(TaskModel.objects.get(pk=18))), 2)
@@ -31,6 +32,7 @@ class InitialDifficultiesTest(TestCase):
         self.assertEqual(len(TaskConcepts(TaskModel.objects.get(pk=36))), 5)
         self.assertEqual(len(TaskConcepts(TaskModel.objects.get(pk=38))), 6)
 
+    @skipIf(True, 'obsolete test - use Concepts model')
     def test_generating_reasonable_difficulties(self):
         estimator = InitialDifficultyEstimator()
         tasks = self.tasks_sorted_by_difficulty

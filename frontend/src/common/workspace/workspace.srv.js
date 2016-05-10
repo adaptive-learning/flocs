@@ -51,9 +51,6 @@ angular.module('flocs.workspace')
     if (!settings.blocksLimit) {
       // make sure blocksLimit is not undefined
       settings.blocksLimit = null;
-    } else {
-      // +1 for the start block
-      settings.blocksLimit += 1;
     }
     reset();
   }

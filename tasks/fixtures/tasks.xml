@@ -345,7 +345,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 6
   }
   </field>
   <field name="toolbox"><natural>repeat</natural></field>
@@ -384,7 +383,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 7
   }
   </field>
   <field name="toolbox"><natural>repeat</natural></field>
@@ -416,7 +414,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
     {
-      "blocksLimit": 6
     }
   </field>
   <field name="toolbox"><natural>check-path</natural></field>
@@ -449,7 +446,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
     {
-      "blocksLimit": 7
     }
   </field>
   <field name="toolbox"><natural>check-path</natural></field>
@@ -481,7 +477,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
     {
-      "blocksLimit": 6
     }
   </field>
   <field name="toolbox"><natural>repeat</natural></field>
@@ -514,10 +509,14 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 3
   }
   </field>
   <field name="toolbox"><natural>repeat</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_repeat_ext"><value name="TIMES"><block type="math_number" movable="false"><field name="NUM">6</field></block></value><statement name="DO"><block type="maze_move_forward"></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 
@@ -555,7 +554,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 3
   }
   </field>
   <field name="toolbox"><natural>check-goal</natural></field>
@@ -589,7 +587,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 7
   }
   </field>
   <field name="toolbox"><natural>repeat</natural></field>
@@ -622,7 +619,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 7
   }
   </field>
   <field name="toolbox"><natural>if</natural></field>
@@ -655,7 +651,6 @@
   <field type="TextField" name="workspace_settings">
   {
 
-    "blocksLimit": 5
 
   }
   </field>
@@ -689,7 +684,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 8
   }
   </field>
   <field name="toolbox"><natural>check-path</natural></field>
@@ -722,7 +716,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 6
   }
   </field>
   <field name="toolbox"><natural>repeat</natural></field>
@@ -755,7 +748,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 10
   }
   </field>
   <field name="toolbox"><natural>repeat</natural></field>
@@ -795,7 +787,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 7
   }
   </field>
   <field name="toolbox"><natural>check-goal</natural></field>
@@ -836,7 +827,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 7
   }
   </field>
   <field name="toolbox"><natural>if</natural></field>
@@ -876,7 +866,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 10
   }
   </field>
   <field name="toolbox"><natural>if</natural></field>
@@ -916,7 +905,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 9
   }
   </field>
   <field name="toolbox"><natural>if-else</natural></field>
@@ -951,7 +939,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 6
   }
   </field>
   <field name="toolbox"><natural>if</natural></field>
@@ -991,7 +978,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 9
   }
   </field>
   <field name="toolbox"><natural>if</natural></field>
@@ -1032,7 +1018,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 15
   }
   </field>
   <field name="toolbox"><natural>if</natural></field>
@@ -1073,7 +1058,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 11
   }
   </field>
   <field name="toolbox"><natural>if</natural></field>
@@ -1114,7 +1098,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 19
   }
   </field>
   <field name="toolbox"><natural>if</natural></field>
@@ -1155,7 +1138,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 8
   }
   </field>
   <field name="toolbox"><natural>logic</natural></field>
@@ -1197,7 +1179,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 14
   }
   </field>
   <field name="toolbox"><natural>check-path</natural></field>
@@ -1238,7 +1219,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 15
   }
   </field>
   <field name="toolbox"><natural>logic</natural></field>
@@ -1280,7 +1260,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 10
   }
   </field>
   <field name="toolbox"><natural>check-path</natural></field>
@@ -1321,7 +1300,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 15
   }
   </field>
   <field name="toolbox"><natural>if</natural></field>
@@ -1364,7 +1342,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
     {
-    "blocksLimit": 15
     }
   </field>
   <field name="toolbox"><natural>check-color</natural></field>
@@ -1401,7 +1378,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 6
   }
   </field>
   <field name="toolbox"><natural>check-path</natural></field>
@@ -1442,7 +1418,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
     {
-    "blocksLimit": 15
     }
   </field>
   <field name="toolbox"><natural>logic</natural></field>
@@ -1477,7 +1452,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 8
   }
   </field>
   <field name="toolbox"><natural>logic</natural></field>
@@ -1512,7 +1486,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 21
   }
   </field>
   <field name="toolbox"><natural>check-color</natural></field>
@@ -1553,7 +1526,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
     {
-      "blocksLimit": 12
     }
   </field>
   <field name="toolbox"><natural>if</natural></field>
@@ -1594,7 +1566,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
     {
-    "blocksLimit": 13
     }
   </field>
   <field name="toolbox"><natural>check-color</natural></field>
@@ -1629,7 +1600,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 16
   }
   </field>
 </object>
@@ -1671,7 +1641,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
     {
-    "blocksLimit": 30
     }
   </field>
 </object>
@@ -1712,7 +1681,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
     {
-    "blocksLimit": 14
     }
   </field>
   <field name="toolbox"><natural>if</natural></field>
@@ -1746,7 +1714,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 7
   }
   </field>
   <field name="toolbox"><natural>check-color</natural></field>
@@ -1788,7 +1755,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-        "blocksLimit": 20
     }
   </field>
 </object>
@@ -1828,7 +1794,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
     {
-    "blocksLimit": 8
     }
   </field>
   <field name="toolbox"><natural>check-goal</natural></field>
@@ -1868,10 +1833,14 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-    "blocksLimit": 14
   }
   </field>
   <field name="toolbox"><natural>check-goal</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="controls_repeat_ext"><value name="TIMES"><block type="math_number" movable="false"><field name="NUM">4</field></block></value><statement name="DO"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="controls_repeat_ext"><value name="TIMES"><block type="math_number" movable="false"><field name="NUM">4</field></block></value><statement name="DO"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_turn"><field name="direction">1</field></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="55" model="tasks.taskmodel">
@@ -1900,7 +1869,6 @@
   </field>
   <field type="TextField" name="workspace_settings">
     {
-      "blocksLimit": 6
     }
   </field>
   <field name="toolbox"><natural>check-path</natural></field>

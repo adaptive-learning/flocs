@@ -1,7 +1,8 @@
+import json
+import re
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-import json
 from concepts.models import Concept, EnvironmentConcept, GameConcept, BlockConcept
 from blocks.models import Block, Toolbox
 
@@ -10,12 +11,18 @@ class TaskModel(models.Model):
     """Model for a task (exercise)
     """
     title = models.TextField()
+
     maze_settings = models.TextField(
-            verbose_name="Maze settings in JSON",
+            verbose_name="maze settings (in JSON)",
             default='{}')
+
     workspace_settings = models.TextField(
-            verbose_name="Workspace settings in JSON",
+            verbose_name="workspace settings (in JSON)",
             default='{}')
+
+    _blocks_limit = models.PositiveSmallIntegerField(
+            help_text="Limit on number of blocks student can use, including start block",
+            null=True, default=None)
 
     _contained_concepts = models.ManyToManyField(Concept,
             help_text='concepts contained in the task')
@@ -32,6 +39,9 @@ class TaskModel(models.Model):
     _COLORS_FIELDS = [3, 4, 5]
     _FREE_FIELDS = [0, 2, 3, 4, 5]
     _PIT_FIELD = 6
+
+    # from which level to use block limit
+    _BLOCK_LIMIT_LEVEL = 3
 
     def get_level(self):
         if not self.toolbox:
@@ -54,8 +64,25 @@ class TaskModel(models.Model):
             if concept.block in blocks:
                 self._add_concept(concept)
 
+    def infer_blocks_limit(self):
+        """ It only overrides block limit, if it's not already set to
+            a non-null value, if the task level is not small and if there
+            is a solution to infer the block limit from
+        """
+        if self._blocks_limit is not None:
+            return  # don't override non-null blocks limits
+        if not self.solution or self.get_level() < self._BLOCK_LIMIT_LEVEL:
+            return
+        blocks = re.findall(r'<block type="(.*?)"', self.solution)
+        self._blocks_limit = len(blocks)
+
     def _add_concept(self, concept):
         self._contained_concepts.add(concept)
+
+    def get_blocks_limit(self):
+        """ Return blocks limit or None, if there is no limit on blocks
+        """
+        return self._blocks_limit
 
     def get_required_blocks(self):
         if self.toolbox is None:
@@ -74,14 +101,8 @@ class TaskModel(models.Model):
             return None
         return tokens
 
-    def contains_block_limit(self):
+    def contains_blocks_limit(self):
         return self.get_blocks_limit() is not None
-
-    def get_blocks_limit(self):
-        """ Return blocks limit or None, if there is no limit on blocks
-        """
-        workspace_settings_dict = json.loads(self.workspace_settings)
-        return workspace_settings_dict.get('blocksLimit', None)
 
     def contains_pits(self):
         """ Return True if the task contains pits
@@ -109,6 +130,12 @@ class TaskModel(models.Model):
         maze_settings_dict = json.loads(self.maze_settings)
         return maze_settings_dict['grid']
 
+    def get_workspace_settings(self):
+        workspace_dict = json.loads(self.workspace_settings)
+        workspace_dict['blocksLimit'] = self.get_blocks_limit()
+        return workspace_dict
+
+
     def __str__(self):
         return '[{pk}] {title}'.format(pk=self.pk, title=self.title)
 
@@ -121,7 +148,7 @@ class TaskModel(models.Model):
             'task-id': self.pk,
             'title': self.title,
             'maze-settings': maze_settings_dict,
-            'workspace-settings': workspace_settings_dict
+            'workspace-settings': self.get_workspace_settings()
         }
         return task_dict
 
@@ -133,4 +160,6 @@ def task_saved(sender, instance, created, **kwargs):
         because save() is not called on loading fixtures.
     """
     if created:
+        instance.infer_blocks_limit()
         instance.infer_concepts()
+        instance.save()

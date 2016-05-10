@@ -105,7 +105,7 @@
     <field name="name">game-block-limit</field>
   </object>
   <object pk="16" model="concepts.gameconcept">
-    <field name="checker">contains_block_limit</field>
+    <field name="checker">contains_blocks_limit</field>
   </object>
 
   <object pk="17" model="concepts.concept">
