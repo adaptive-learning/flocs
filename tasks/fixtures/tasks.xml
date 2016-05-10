@@ -1141,6 +1141,11 @@
   }
   </field>
   <field name="toolbox"><natural>logic</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="controls_if"><value name="condition"><block type="logic_operation"><field name="OP">AND</field><value name="A"><block type="maze_check_path"><field name="direction">1</field></block></value><value name="B"><block type="maze_check_color"><field name="negation"></field><field name="color">BLUE</field></block></value></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">1</field></block></statement><next><block type="maze_move_forward"></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="37" model="tasks.taskmodel">
@@ -1455,6 +1460,11 @@
   }
   </field>
   <field name="toolbox"><natural>logic</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="20" y="38"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="controls_if"><value name="condition"><block type="logic_operation"><field name="OP">AND</field><value name="A"><block type="maze_check_path"><field name="direction">1</field></block></value><value name="B"><block type="maze_check_path"><field name="direction">-1</field></block></value></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">-1</field></block></statement><next><block type="maze_move_forward"></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="45" model="tasks.taskmodel">

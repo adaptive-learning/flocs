@@ -25,7 +25,7 @@
   <field name="blocks">
     <object><natural>maze_move_forward</natural></object>
     <object><natural>maze_turn</natural></object>
-    <object><natural>controls_repeat:10</natural></object>
+    <object><natural>controls_repeat_ext</natural></object>
   </field>
   <field name="credits">2</field>
 </object>
@@ -36,7 +36,7 @@
   <field name="blocks">
     <object><natural>maze_move_forward</natural></object>
     <object><natural>maze_turn</natural></object>
-    <object><natural>controls_repeat:10</natural></object>
+    <object><natural>controls_repeat_ext</natural></object>
     <object><natural>controls_while</natural></object>
     <object><natural>maze_check_goal</natural></object>
   </field>
@@ -49,7 +49,7 @@
   <field name="blocks">
     <object><natural>maze_move_forward</natural></object>
     <object><natural>maze_turn</natural></object>
-    <object><natural>controls_repeat:10</natural></object>
+    <object><natural>controls_repeat_ext</natural></object>
     <object><natural>controls_while</natural></object>
     <object><natural>maze_check_goal</natural></object>
     <object><natural>maze_check_path</natural></object>
@@ -63,7 +63,7 @@
   <field name="blocks">
     <object><natural>maze_move_forward</natural></object>
     <object><natural>maze_turn</natural></object>
-    <object><natural>controls_repeat:10</natural></object>
+    <object><natural>controls_repeat_ext</natural></object>
     <object><natural>controls_while</natural></object>
     <object><natural>maze_check_goal</natural></object>
     <object><natural>maze_check_path</natural></object>
@@ -78,7 +78,7 @@
   <field name="blocks">
     <object><natural>maze_move_forward</natural></object>
     <object><natural>maze_turn</natural></object>
-    <object><natural>controls_repeat:10</natural></object>
+    <object><natural>controls_repeat_ext</natural></object>
     <object><natural>controls_while</natural></object>
     <object><natural>maze_check_goal</natural></object>
     <object><natural>maze_check_path</natural></object>
@@ -94,7 +94,7 @@
   <field name="blocks">
     <object><natural>maze_move_forward</natural></object>
     <object><natural>maze_turn</natural></object>
-    <object><natural>controls_repeat:10</natural></object>
+    <object><natural>controls_repeat_ext</natural></object>
     <object><natural>controls_while</natural></object>
     <object><natural>maze_check_goal</natural></object>
     <object><natural>maze_check_path</natural></object>
@@ -111,7 +111,7 @@
   <field name="blocks">
     <object><natural>maze_move_forward</natural></object>
     <object><natural>maze_turn</natural></object>
-    <object><natural>controls_repeat:10</natural></object>
+    <object><natural>controls_repeat_ext</natural></object>
     <object><natural>controls_while</natural></object>
     <object><natural>maze_check_goal</natural></object>
     <object><natural>maze_check_path</natural></object>

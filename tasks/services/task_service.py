@@ -53,15 +53,14 @@ def get_task_by_id_with_toolbox(request_id):
 
     response = task.to_json()
     response['workspace-settings']['toolbox'] = get_toolbox_from_blocks(
-        task.get_required_blocks())
-    print(response)
+            task.toolbox.get_all_blocks())
     return response
 
 def get_toolbox_from_blocks(blocks):
     """Returns usable toolbox generated from the list of blocks.
 
     Args:
-        blocks: list of blocks that will compose the toolbox 
+        blocks: list of blocks that will compose the toolbox
 
     Returns:
         list of strings (idenfitifiers)

@@ -19,7 +19,7 @@
     <field name="name">block-repeat</field>
   </object>
   <object pk="3" model="concepts.blockconcept">
-    <field name="block"><natural>controls_repeat:10</natural></field>
+    <field name="block"><natural>controls_repeat_ext</natural></field>
   </object>
 
   <object pk="4" model="concepts.concept">

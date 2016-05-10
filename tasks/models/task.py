@@ -59,9 +59,11 @@ class TaskModel(models.Model):
         for concept in GameConcept.objects.all():
             if concept.is_contained_in(self):
                 self._add_concept(concept)
-        blocks = self.get_required_blocks()
+        blocks_identifiers = self._get_blocks_identifiers_in_solution()
+        if not blocks_identifiers:
+            return  # no solution -> no block concepts
         for concept in BlockConcept.objects.all():
-            if concept.block in blocks:
+            if concept.block.identifier in blocks_identifiers:
                 self._add_concept(concept)
 
     def infer_blocks_limit(self):
@@ -73,7 +75,7 @@ class TaskModel(models.Model):
             return  # don't override non-null blocks limits
         if not self.solution or self.get_level() < self._BLOCK_LIMIT_LEVEL:
             return
-        blocks = re.findall(r'<block type="(.*?)"', self.solution)
+        blocks = self._get_blocks_identifiers_in_solution()
         self._blocks_limit = len(blocks)
 
     def _add_concept(self, concept):
@@ -84,10 +86,14 @@ class TaskModel(models.Model):
         """
         return self._blocks_limit
 
-    def get_required_blocks(self):
-        if self.toolbox is None:
-            return list(Block.objects.all())
-        return self.toolbox.get_all_blocks()
+    def _get_blocks_identifiers_in_solution(self):
+        """ Return list of blocks identifiers as they appear in the solution
+            If the solution is not provided, return None
+        """
+        if not self.solution:
+            return None
+        blocks = re.findall(r'<block type="(.*?)"', self.solution)
+        return blocks
 
     def contains_tokens(self):
         return bool(self.get_tokens())

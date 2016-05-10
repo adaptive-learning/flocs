@@ -50,7 +50,7 @@ angular.module('flocs.workspace')
         '<block type="controls_if"></block>' +
         '<block type="controls_if_else"></block>' +
       '</category>',
-    
+
     'loops_category':
       '<category name="' + Blockly.Msg.LOOPS + '">' +
         '<block type="controls_repeat_ext">' +
@@ -87,7 +87,7 @@ angular.module('flocs.workspace')
       '<block type="controls_repeat_ext">' +
       '</block>',
 
-    'controls_repeat:10':
+    'controls_repeat_ext':
       '<block type="controls_repeat_ext">' +
         '<value name="TIMES">' +
         '<block type="math_number" movable="false">' +

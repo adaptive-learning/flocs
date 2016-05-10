@@ -10,7 +10,7 @@ class TaskModelTest(TestCase):
 
     fixtures = ['blocks', 'toolboxes', 'concepts', 'tasks']
 
-    def test_concepts_inference(self):
+    def test_concepts_inference_task_54(self):
         task54 = TaskModel.objects.get(pk=54)
         inferred_concepts = task54.get_contained_concepts()
         expected_concepts = set([Concept.objects.get_by_natural_key(key)
@@ -22,6 +22,21 @@ class TaskModelTest(TestCase):
                                              'block-repeat', 'block-while',
                                              'block-check-goal']])
         self.assertSetEqual(inferred_concepts, expected_concepts)
+
+    def test_concepts_inference_task_36(self):
+        task36 = TaskModel.objects.get(pk=36)
+        inferred_concepts = task36.get_contained_concepts()
+        expected_concepts = set([Concept.objects.get_by_natural_key(key)
+                                 for key in ['env-maze', 'env-toolbox',
+                                             'env-workspace', 'env-snapping',
+                                             'env-run-reset',
+                                             'game-block-limit', 'game-colors',
+                                             'block-move', 'block-turn',
+                                             'block-while', 'block-check-goal',
+                                             'block-check-color', 'block-check-path',
+                                             'block-if', 'block-logic']])
+        self.assertSetEqual(inferred_concepts, expected_concepts)
+
 
     def test_concepts_inference_no_game_concepts(self):
         task = TaskModel.objects.get(pk=1)

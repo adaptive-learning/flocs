@@ -29,7 +29,7 @@
 
   <object pk="3" model="blocks.block">
     <field name="identifier">
-      controls_repeat:10
+      controls_repeat_ext
     </field>
     <field name="name_en">
       Repeat statement
