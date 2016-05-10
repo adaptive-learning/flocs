@@ -32,6 +32,7 @@ class PracticeServiceWithFixturesTest(TestCase):
             "attempt": 12,
             "solved": True,
             "time": 234,
+            "code": '<xml>'
         }
         practice_service.process_attempt_report(self.user, report)
         instance = TaskInstanceModel.objects.get(pk=instance.pk)
@@ -48,7 +49,8 @@ class PracticeServiceWithFixturesTest(TestCase):
             "task-id": 1,
             "attempt": 12,
             "solved": True,
-            "time": 234})
+            "time": 234,
+            "code": '<xml>'})
         self.assertEqual(len(self.student.get_seen_concepts()), 6)
 
     def test_get_last_solved_delta(self):

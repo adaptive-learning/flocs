@@ -184,6 +184,7 @@ angular.module('flocs.practice')
       attemptReport.time = calculateSolvingTime();
       attemptReport.attempt += 1;
       attemptReport.solved = result.solved;
+      attemptReport.code = result.code;
       practiceDao.sendingAttemptReport(attemptReport).then(function(response) {
         attemptEvaluation.earnedCredits = response['earned-credits'];
         attemptEvaluation.speedBonus = response['speed-bonus'];

@@ -26,6 +26,7 @@ from concepts.models import Instruction
 import json
 
 logger = logging.getLogger(__name__)
+code_logger = logging.getLogger('student-code')
 
 # TODO: remove task field - it is redundant (task is in task_instance.task)
 TaskInfo = namedtuple('TaskInfo',
@@ -142,11 +143,12 @@ def process_attempt_report(user, report):
 
     Args:
         user: current user (user who took the attempt
-        report: dictionary with the following fiels:
+        report: dictionary with the following fields:
             - task-instance-id
             - attempt
             - solved
             - time
+            - code
     Returns:
         - whether the task is solved for the first time
         - number of earned-credits
@@ -164,6 +166,7 @@ def process_attempt_report(user, report):
     attempt_count = report['attempt']
     solved = report['solved']
     time = report['time']
+    code = report['code']
 
     logger.info("Reporting attempt for student %s with result %s", student.pk, solved)
     task_instance = TaskInstanceModel.objects.get(id=task_instance_id)
@@ -211,6 +214,8 @@ def process_attempt_report(user, report):
 
             student.save()
             task_instance.save()
+
+    code_logger.info('student_id: %s, task_instance_id: %s, code: %s', student.pk, task_instance_id, code)
 
     task_solved_first_time = solved and not solved_before,
     logger.info("Reporting attempt was successful for student %s with result %s", student.pk, solved)

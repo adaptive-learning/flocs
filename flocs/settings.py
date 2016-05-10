@@ -175,6 +175,9 @@ LOGGING = {
         'simple': {
             'format': '[%(asctime)s] %(levelname)s %(message)s'
         },
+        'brief': {
+            'format': '[%(asctime)s] %(message)s'
+        },
         'long-messages': {
             'format': '[%(asctime)s] %(message)s----------'
         },
@@ -206,6 +209,12 @@ LOGGING = {
             'filename': LOGGING_DIR + '/requests.log',
             'formatter': 'simple'
         },
+        'student-code-file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': LOGGING_DIR + '/student-code.log',
+            'formatter': 'brief'
+        },
         'mail-admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
@@ -225,6 +234,11 @@ LOGGING = {
         'django.request' : {
             'handlers': ['requests-file', 'mail-admins'],
             'level': 'DEBUG',
+            'propagate': True
+        },
+        'student-code' : {
+            'handlers': ['student-code-file'],
+            'level': 'INFO',
             'propagate': True
         }
     }
