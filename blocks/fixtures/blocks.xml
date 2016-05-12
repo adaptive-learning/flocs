@@ -126,22 +126,31 @@
     </field>
   </object>
 
-  <!--
   <object pk="11" model="blocks.block">
+    <field name="identifier">
+      math_number
+    </field>
     <field name="name_en">
-      Number constant
+      Number
     </field>
     <field name="name_cs">
-      Číselná konstanta
-    </field>
-    <field name="_expanded_identifiers">
-      ["math_number"]
-    </field>
-    <field name="price">
-      15
+      Číslo
     </field>
   </object>
 
+  <object pk="12" model="blocks.block">
+    <field name="identifier">
+      start
+    </field>
+    <field name="name_en">
+      Program start
+    </field>
+    <field name="name_cs">
+      Začátek programu
+    </field>
+  </object>
+
+  <!--
   <object pk="12" model="blocks.block">
     <field name="name_en">
       Equals

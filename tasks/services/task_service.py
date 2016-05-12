@@ -53,7 +53,7 @@ def get_task_by_id_with_toolbox(request_id):
 
     response = task.to_json()
     response['workspace-settings']['toolbox'] = get_toolbox_from_blocks(
-            task.toolbox.get_all_blocks())
+            task.get_required_blocks())
     return response
 
 def get_toolbox_from_blocks(blocks):
