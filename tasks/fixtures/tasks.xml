@@ -64,7 +64,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>movement</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"></block></next></block></next></block></next></block></next></block></next></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="3" model="tasks.taskmodel">
@@ -95,7 +99,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>movement</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"></block></next></block></next></block></next></block></next></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="4" model="tasks.taskmodel">
@@ -126,7 +134,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>movement</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="5" model="tasks.taskmodel">
@@ -157,7 +169,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>movement</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_move_forward"></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="6" model="tasks.taskmodel">
@@ -188,7 +204,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>movement</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="7" model="tasks.taskmodel">
@@ -220,7 +240,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>movement</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_move_forward"></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="8" model="tasks.taskmodel">
@@ -251,7 +275,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>movement</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="9" model="tasks.taskmodel">
@@ -282,7 +310,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>movement</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="10" model="tasks.taskmodel">
@@ -313,10 +345,13 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>movement</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
-<!-- Repeat -->
 <object pk="11" model="tasks.taskmodel">
   <field name="title_en">
     Stairs
@@ -346,7 +381,6 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>repeat</natural></field>
   <field name="solution">
   <![CDATA[
   <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_repeat_ext"><value name="TIMES"><block type="math_number" movable="false"><field name="NUM">6</field></block></value><statement name="DO"><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field></block></next></block></next></block></next></block></statement></block></next></block></xml>
@@ -354,7 +388,6 @@
   </field>
 </object>
 
-<!-- Repeat -->
 <object pk="12" model="tasks.taskmodel">
   <field name="title_en">
     Right angle
@@ -384,7 +417,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>repeat</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_repeat_ext"><value name="TIMES"><block type="math_number" movable="false"><field name="NUM">6</field></block></value><statement name="DO"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">-1</field><next><block type="controls_repeat_ext"><value name="TIMES"><block type="math_number" movable="false"><field name="NUM">6</field></block></value><statement name="DO"><block type="maze_move_forward"></block></statement></block></next></block></next></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="14" model="tasks.taskmodel">
@@ -415,10 +452,13 @@
     {
     }
   </field>
-  <field name="toolbox"><natural>check-path</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="controls_while"><value name="condition"><block type="maze_check_path"><field name="direction">0</field></block></value><statement name="body"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">-1</field></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
-<!-- Until -->
 <object pk="15" model="tasks.taskmodel">
   <field name="title_en">
     Opposite corner
@@ -447,7 +487,11 @@
     {
     }
   </field>
-  <field name="toolbox"><natural>check-path</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="controls_while"><value name="condition"><block type="maze_check_path"><field name="direction">0</field></block></value><statement name="body"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">1</field><next><block type="controls_while"><value name="condition"><block type="maze_check_path"><field name="direction">0</field></block></value><statement name="body"><block type="maze_move_forward"></block></statement></block></next></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="16" model="tasks.taskmodel">
@@ -478,7 +522,11 @@
     {
     }
   </field>
-  <field name="toolbox"><natural>repeat</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_repeat_ext"><value name="TIMES"><block type="math_number" movable="false"><field name="NUM">3</field></block></value><statement name="DO"><block type="controls_repeat_ext"><value name="TIMES"><block type="math_number" movable="false"><field name="NUM">5</field></block></value><statement name="DO"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">1</field></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="18" model="tasks.taskmodel">
@@ -510,7 +558,6 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>repeat</natural></field>
   <field name="solution">
   <![CDATA[
   <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_repeat_ext"><value name="TIMES"><block type="math_number" movable="false"><field name="NUM">6</field></block></value><statement name="DO"><block type="maze_move_forward"></block></statement></block></next></block></xml>
@@ -555,7 +602,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>check-goal</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="maze_move_forward"></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="20" model="tasks.taskmodel">
@@ -588,7 +639,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>repeat</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="controls_repeat_ext"><value name="TIMES"><block type="math_number" movable="false"><field name="NUM">7</field></block></value><statement name="DO"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"></block></next></block></next></block></next></block></next></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="22" model="tasks.taskmodel">
@@ -620,7 +675,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>if</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="maze_move_forward"><next><block type="controls_if"><value name="condition"><block type="maze_check_path"><field name="direction">1</field></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">1</field></block></statement></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="23" model="tasks.taskmodel">
@@ -649,11 +708,13 @@
   </field>
   <field type="TextField" name="workspace_settings">
   {
-
-
   }
   </field>
-  <field name="toolbox"><natural>repeat</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_repeat_ext"><value name="TIMES"><block type="math_number" movable="false"><field name="NUM">3</field></block></value><statement name="DO"><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field></block></next></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="24" model="tasks.taskmodel">
@@ -685,7 +746,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>check-path</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="controls_while"><value name="condition"><block type="maze_check_path"><field name="direction">0</field></block></value><statement name="body"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">1</field></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="25" model="tasks.taskmodel">
@@ -717,7 +782,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>repeat</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_repeat_ext"><value name="TIMES"><block type="math_number" movable="false"><field name="NUM">3</field></block></value><statement name="DO"><block type="controls_repeat_ext"><value name="TIMES"><block type="math_number" movable="false"><field name="NUM">6</field></block></value><statement name="DO"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">1</field></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="26" model="tasks.taskmodel">
@@ -749,7 +818,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>repeat</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_repeat_ext"><value name="TIMES"><block type="math_number" movable="false"><field name="NUM">3</field></block></value><statement name="DO"><block type="controls_repeat_ext"><value name="TIMES"><block type="math_number" movable="false"><field name="NUM">4</field></block></value><statement name="DO"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field></block></next></block></next></block></next></block></next></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="27" model="tasks.taskmodel">
@@ -788,7 +861,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>check-goal</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field></block></next></block></next></block></next></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 
@@ -806,8 +883,8 @@
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
       [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
-      [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
-      [1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1],
+      [1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
+      [1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1],
       [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
       [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
       [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
@@ -828,7 +905,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>if</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="maze_move_forward"><next><block type="controls_if"><value name="condition"><block type="maze_check_path"><field name="direction">-1</field></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">-1</field></block></statement></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="29" model="tasks.taskmodel">
@@ -867,7 +948,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>if</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="maze_move_forward"><next><block type="controls_if"><value name="condition"><block type="maze_check_path"><field name="direction">-1</field></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">-1</field></block></statement><next><block type="controls_if"><value name="condition"><block type="maze_check_path"><field name="direction">1</field></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">1</field></block></statement></block></next></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="30" model="tasks.taskmodel">
@@ -906,7 +991,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>if-else</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="controls_if_else"><value name="condition"><block type="maze_check_path"><field name="direction">0</field></block></value><statement name="condition_true"><block type="maze_move_forward"></block></statement><statement name="condition_false"><block type="controls_if_else"><value name="condition"><block type="maze_check_path"><field name="direction">-1</field></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">-1</field></block></statement><statement name="condition_false"><block type="maze_turn"><field name="direction">1</field></block></statement></block></statement></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="31" model="tasks.taskmodel">
@@ -940,7 +1029,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>if</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="maze_move_forward"><next><block type="controls_if"><value name="condition"><block type="maze_check_color"><field name="negation"></field><field name="color">YELLOW</field></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">1</field></block></statement></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="32" model="tasks.taskmodel">
@@ -979,7 +1072,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>if</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="maze_move_forward"><next><block type="controls_if"><value name="condition"><block type="maze_check_color"><field name="negation"></field><field name="color">YELLOW</field></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">1</field></block></statement><next><block type="controls_if"><value name="condition"><block type="maze_check_color"><field name="negation"></field><field name="color">GREEN</field></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">-1</field></block></statement></block></next></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="33" model="tasks.taskmodel">
@@ -1063,7 +1160,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>if</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="maze_move_forward"><next><block type="controls_if"><value name="condition"><block type="maze_check_path"><field name="direction">1</field></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field></block></next></block></next></block></next></block></next></block></next></block></statement></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="35" model="tasks.taskmodel">
@@ -1103,7 +1204,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>if</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="maze_move_forward"><next><block type="controls_if"><value name="condition"><block type="maze_check_color"><field name="negation"></field><field name="color">YELLOW</field></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field></block></next></block></next></block></next></block></next></block></next></block></statement><next><block type="controls_if"><value name="condition"><block type="maze_check_color"><field name="negation"></field><field name="color">GREEN</field></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field></block></next></block></next></block></next></block></next></block></next></block></statement></block></next></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="36" model="tasks.taskmodel">
@@ -1143,7 +1248,6 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>logic</natural></field>
   <field name="solution">
   <![CDATA[
   <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="controls_if"><value name="condition"><block type="logic_operation"><field name="OP">AND</field><value name="A"><block type="maze_check_path"><field name="direction">1</field></block></value><value name="B"><block type="maze_check_color"><field name="negation"></field><field name="color">BLUE</field></block></value></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">1</field></block></statement><next><block type="maze_move_forward"></block></next></block></statement></block></next></block></xml>
@@ -1189,7 +1293,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>check-path</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="maze_turn"><field name="direction">-1</field><next><block type="controls_while"><value name="condition"><block type="maze_check_path"><field name="direction">0</field></block></value><statement name="body"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="controls_while"><value name="condition"><block type="maze_check_path"><field name="direction">0</field></block></value><statement name="body"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="38" model="tasks.taskmodel">
@@ -1229,7 +1337,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>logic</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="controls_if"><value name="condition"><block type="logic_operation"><field name="OP">AND</field><value name="A"><block type="maze_check_path"><field name="direction">1</field></block></value><value name="B"><block type="maze_check_color"><field name="negation"></field><field name="color">YELLOW</field></block></value></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">1</field></block></statement><next><block type="controls_if"><value name="condition"><block type="logic_operation"><field name="OP">AND</field><value name="A"><block type="maze_check_path"><field name="direction">-1</field></block></value><value name="B"><block type="maze_check_color"><field name="negation"></field><field name="color">BLUE</field></block></value></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">-1</field></block></statement><next><block type="maze_move_forward"></block></next></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 
@@ -1270,7 +1382,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>check-path</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="controls_while"><value name="condition"><block type="maze_check_path"><field name="direction">0</field></block></value><statement name="body"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">1</field></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
   <object pk="40" model="tasks.taskmodel">
@@ -1310,7 +1426,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>if</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="maze_move_forward"><next><block type="controls_if"><value name="condition"><block type="maze_check_color"><field name="negation"></field><field name="color">YELLOW</field></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">-1</field></block></statement><next><block type="controls_if"><value name="condition"><block type="maze_check_color"><field name="negation"></field><field name="color">GREEN</field></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">1</field></block></statement></block></next></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="41" model="tasks.taskmodel">
@@ -1392,7 +1512,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>check-path</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"></block></next></block></next></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="43" model="tasks.taskmodel">
@@ -1432,7 +1556,6 @@
     {
     }
   </field>
-  <field name="toolbox"><natural>logic</natural></field>
   <field name="solution">
   <![CDATA[
   <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="controls_if_else"><value name="condition"><block type="logic_operation"><field name="OP">OR</field><value name="A"><block type="maze_check_path"><field name="direction">1</field></block></value><value name="B"><block type="maze_check_path"><field name="direction">-1</field></block></value></block></value><statement name="condition_true"><block type="maze_move_forward"></block></statement><statement name="condition_false"><block type="maze_turn"><field name="direction">1</field><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field></block></next></block></next></block></next></block></statement></block></statement></block></next></block></xml>
@@ -1471,7 +1594,6 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>logic</natural></field>
   <field name="solution">
   <![CDATA[
   <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="20" y="38"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="controls_if"><value name="condition"><block type="logic_operation"><field name="OP">AND</field><value name="A"><block type="maze_check_path"><field name="direction">1</field></block></value><value name="B"><block type="maze_check_path"><field name="direction">-1</field></block></value></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">-1</field></block></statement><next><block type="maze_move_forward"></block></next></block></statement></block></next></block></xml>
@@ -1510,7 +1632,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>check-color</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="maze_move_forward"><next><block type="controls_if"><value name="condition"><block type="maze_check_color"><field name="negation"></field><field name="color">GREEN</field></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">1</field><next><block type="controls_while"><value name="condition"><block type="maze_check_path"><field name="direction">0</field></block></value><statement name="body"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_turn"><field name="direction">-1</field><next><block type="controls_while"><value name="condition"><block type="maze_check_path"><field name="direction">0</field></block></value><statement name="body"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_turn"><field name="direction">1</field><next><block type="controls_while"><value name="condition"><block type="maze_check_color"><field name="negation">!</field><field name="color">GREEN</field></block></value><statement name="body"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">-1</field></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></statement></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="46" model="tasks.taskmodel">
@@ -1550,7 +1676,11 @@
     {
     }
   </field>
-  <field name="toolbox"><natural>if</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="maze_move_forward"><next><block type="controls_if"><value name="condition"><block type="maze_check_path"><field name="direction">1</field></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">1</field></block></statement><next><block type="controls_if"><value name="condition"><block type="maze_check_path"><field name="direction">-1</field></block></value><statement name="condition_true"><block type="maze_turn"><field name="direction">-1</field></block></statement></block></next></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="47" model="tasks.taskmodel">
@@ -1590,7 +1720,11 @@
     {
     }
   </field>
-  <field name="toolbox"><natural>check-color</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="controls_while"><value name="condition"><block type="maze_check_path"><field name="direction">0</field></block></value><statement name="body"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_turn"><field name="direction">1</field><next><block type="controls_while"><value name="condition"><block type="maze_check_color"><field name="negation">!</field><field name="color">BLUE</field></block></value><statement name="body"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">-1</field></block></next></block></next></block></next></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <!-- IGNORED: missing variable blocks+concept
@@ -1705,7 +1839,11 @@
     {
     }
   </field>
-  <field name="toolbox"><natural>if</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="controls_if"><value name="condition"><block type="maze_check_color"><field name="negation"></field><field name="color">YELLOW</field></block></value><statement name="condition_true"><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"></block></next></block></next></block></next></block></statement><next><block type="controls_if"><value name="condition"><block type="maze_check_color"><field name="negation"></field><field name="color">GREEN</field></block></value><statement name="condition_true"><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_move_forward"></block></next></block></next></block></next></block></statement></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="51" model="tasks.taskmodel">
@@ -1738,7 +1876,11 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>check-color</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="controls_while"><value name="condition"><block type="maze_check_color"><field name="negation">!</field><field name="color">GREEN</field></block></value><statement name="body"><block type="maze_move_forward"></block></statement><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field></block></next></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <!-- IGNORED: missing variable blocks+concept
@@ -1818,7 +1960,11 @@
     {
     }
   </field>
-  <field name="toolbox"><natural>check-goal</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="controls_repeat_ext"><value name="TIMES"><block type="math_number" movable="false"><field name="NUM">4</field></block></value><statement name="DO"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">1</field></block></next></block></next></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="54" model="tasks.taskmodel">
@@ -1857,7 +2003,6 @@
   {
   }
   </field>
-  <field name="toolbox"><natural>check-goal</natural></field>
   <field name="solution">
   <![CDATA[
   <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="controls_repeat_ext"><value name="TIMES"><block type="math_number" movable="false"><field name="NUM">4</field></block></value><statement name="DO"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">-1</field><next><block type="maze_move_forward"><next><block type="maze_move_forward"><next><block type="maze_turn"><field name="direction">-1</field><next><block type="controls_repeat_ext"><value name="TIMES"><block type="math_number" movable="false"><field name="NUM">4</field></block></value><statement name="DO"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">1</field><next><block type="maze_turn"><field name="direction">1</field></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></statement></block></next></block></xml>
@@ -1893,7 +2038,11 @@
     {
     }
   </field>
-  <field name="toolbox"><natural>check-path</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="controls_while"><value name="condition"><block type="maze_check_goal"><field name="negation">!</field></block></value><statement name="body"><block type="controls_while"><value name="condition"><block type="maze_check_path"><field name="direction">0</field></block></value><statement name="body"><block type="maze_move_forward"></block></statement><next><block type="maze_turn"><field name="direction">-1</field></block></next></block></statement></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 <object pk="56" model="tasks.taskmodel">
@@ -1924,7 +2073,11 @@
     {
     }
   </field>
-  <field name="toolbox"><natural>forward</natural></field>
+  <field name="solution">
+  <![CDATA[
+  <xml xmlns="http://www.w3.org/1999/xhtml"><block type="start" deletable="false" x="10" y="10"><next><block type="maze_move_forward"><next><block type="maze_move_forward"></block></next></block></next></block></xml>
+  ]]>
+  </field>
 </object>
 
 </django-objects>
