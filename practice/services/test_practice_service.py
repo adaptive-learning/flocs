@@ -66,8 +66,8 @@ class PracticeServiceWithFixturesTest(TestCase):
         task = TaskModel.objects.get(pk=1)
         conc1 = Concept.objects.get_by_natural_key('block-move')
         conc2 = Concept.objects.get_by_natural_key('block-turn')
-        task._add_concept(conc1)
-        task._add_concept(conc2)
+        task._contained_concepts = [conc1, conc2]
+        task.save()
         self.student.mark_concept_as_seen(conc1)
         instructions = practice_service.get_instructions(task, self.student)
         expected = Instruction.objects.filter(concept=conc2)

@@ -22,27 +22,44 @@ angular.module('flocs.services')
    * Return promise of getting next task instance in current session.
    */
   function gettingNextTask() {
-    return $http.get('/api/practice/next-task')
-      .then(parseTask);
+    return $http.get('/api/practice/next-task').then(parseTaskInstance);
   }
 
   /**
    * Return promise of getting task by given id (in the current session).
    */
   function gettingTaskById(id) {
-    return $http.get('/api/practice/task/' + id)
-      .then(parseTask);
+    return $http.get('/api/practice/task/' + id).then(parseTaskInstance);
   }
 
-  function parseTask(response) {
+  function parseTaskInstance(response) {
     var taskInstance = {
       taskInstanceId: response.data['task-instance-id'],
-      task: response.data['task'],
+      task: parseTask(response.data['task']),
       newInstructions: response.data['new-instructions'],
       allInstructions: response.data['all-instructions'],
       session: response.data['session'],
     };
     return taskInstance;
+  }
+
+  function parseTask(response) {
+    // TODO: replace hyphen-case for camelCase (on frontend)
+    var task = {
+      'task-id': response['task-id'],
+      'title': response['title'],
+      'maze-settings': response['maze-settings'],
+      'workspace-settings': parseWorkspaceSettings(response['workspace-settings']),
+    };
+    return task;
+  }
+
+  function parseWorkspaceSettings(response) {
+    var workspaceSettings = {
+      toolbox: response['toolbox'],
+      blocksLimit: response['blocks-limit']
+    };
+    return workspaceSettings;
   }
 
   function gettingPracticeDetails() {

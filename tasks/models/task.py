@@ -12,6 +12,14 @@ class TaskModel(models.Model):
     """
     title = models.TextField()
 
+    toolbox = models.ForeignKey(Toolbox,
+            help_text="minimal toolbox required to solve this task",
+            null=True, default=None)
+
+    solution = models.TextField(
+            help_text="XML representation of a Blockly program",
+            null=True, default=None)
+
     maze_settings = models.TextField(
             verbose_name="maze settings (in JSON)",
             default='{}')
@@ -27,14 +35,6 @@ class TaskModel(models.Model):
     _contained_concepts = models.ManyToManyField(Concept,
             help_text='concepts contained in the task')
 
-    solution = models.TextField(
-            help_text="XML representation of a Blockly program",
-            null=True, default=None)
-
-    toolbox = models.ForeignKey(Toolbox,
-            help_text="minimal toolbox required to solve this task",
-            null=True, default=None)
-
     #  constants describing semantic of a maze grid
     _COLORS_FIELDS = [3, 4, 5]
     _FREE_FIELDS = [0, 2, 3, 4, 5]
@@ -42,6 +42,11 @@ class TaskModel(models.Model):
 
     # from which level to use block limit
     _BLOCK_LIMIT_LEVEL = 3
+
+    def get_toolbox(self, complete_if_none=True):
+        if not self.toolbox and complete_if_none:
+            return Toolbox.objects.get_complete_toolbox()
+        return self.toolbox
 
     def get_level(self):
         toolbox = self.get_toolbox()
@@ -52,11 +57,6 @@ class TaskModel(models.Model):
 
     def get_required_blocks(self):
         return self.get_toolbox().get_all_blocks()
-
-    def get_toolbox(self, complete_if_none=True):
-        if not self.toolbox and complete_if_none:
-            return Toolbox.objects.get_complete_toolbox()
-        return self.toolbox
 
     def get_blocks_limit(self):
         """ Return blocks limit or None, if there is no limit on blocks
@@ -106,9 +106,8 @@ class TaskModel(models.Model):
 
     def get_workspace_settings(self):
         workspace_dict = json.loads(self.workspace_settings)
-        workspace_dict['blocksLimit'] = self.get_blocks_limit()
+        workspace_dict['blocks-limit'] = self.get_blocks_limit()
         return workspace_dict
-
 
     def __str__(self):
         return '[{pk}] {title}'.format(pk=self.pk, title=self.title)
@@ -152,25 +151,23 @@ class TaskModel(models.Model):
     def _infer_concepts(self):
         """ It only adds concepts as we do not need to remove concepts.
         """
+        assert self.solution is not None
+        concepts = set()
         for concept in EnvironmentConcept.objects.all():
-            self._add_concept(concept)
+            concepts.add(concept)
         for concept in GameConcept.objects.all():
             if concept.is_contained_in(self):
-                self._add_concept(concept)
-        blocks_identifiers = self._get_blocks_identifiers_in_solution()
-        if not blocks_identifiers:
-            return  # no solution -> no block concepts
+                concepts.add(concept)
+        blocks = self._get_blocks_in_solution()
         for concept in BlockConcept.objects.all():
-            if concept.block.identifier in blocks_identifiers:
-                self._add_concept(concept)
+            if concept.block in blocks:
+                concepts.add(concept)
+        self._contained_concepts = list(concepts)
 
     def _infer_toolbox(self):
         assert self.solution is not None
         blocks = self._get_blocks_in_solution()
         self.toolbox = Toolbox.objects.get_first_toolbox_containing(blocks)
-
-    def _add_concept(self, concept):
-        self._contained_concepts.add(concept)
 
     def _get_blocks_in_solution(self):
         blocks_identifiers = self._get_blocks_identifiers_in_solution()
