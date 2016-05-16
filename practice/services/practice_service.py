@@ -201,7 +201,7 @@ def process_attempt_report(user, report):
         task = task_instance.task
         if not solved_before:
             percentil = statistics_service.percentil(task_instance)
-            level = task.toolbox.level
+            level = task.get_level()
             credits, speed_bonus = compute_credits(level, percentil)
             student.earn_credits(credits)
             task_instance.earned_credits = credits
@@ -328,5 +328,6 @@ def get_instructions(task, student=None):
     if student:
         seen_concepts = student.get_seen_concepts()
         concepts = concepts.difference(seen_concepts)
+    # NOTE: order of instructions is enforced on DB level
     instructions = list(Instruction.objects.filter(concept__in=concepts))
     return instructions

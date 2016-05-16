@@ -16,6 +16,13 @@ class Instruction(models.Model):
     text = models.TextField(
             help_text='Text of the instruction shown to the student.')
 
+    order = models.SmallIntegerField(
+        help_text='instructions with lower "order" will be shown first',
+        default=0)
+
+    class Meta:
+        ordering = ['order']
+
     def __str__(self):
         templ = 'concept={concept}, text={text}'
         return templ.format(concept=self.concept, text=self.text)
