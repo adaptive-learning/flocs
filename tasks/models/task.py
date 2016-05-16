@@ -192,6 +192,9 @@ def task_saved(sender, instance, created, **kwargs):
         because save() is not called on loading fixtures.
     """
     task = instance  # Django needs the argument to be called "instance"
-    if created and task.maze_settings is not None and task.solution is not None:
+    data_for_inference = task.maze_settings is not None and task.solution is not None
+    # NOTE: on loading data, task is not created, but is missing toolbox
+    inference_needed = created or task.toolbox is None
+    if data_for_inference and inference_needed:
         task.infer_attributes_from_setting_and_solution()
         task.save()
