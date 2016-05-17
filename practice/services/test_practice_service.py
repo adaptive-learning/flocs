@@ -51,7 +51,7 @@ class PracticeServiceWithFixturesTest(TestCase):
             "solved": True,
             "time": 234,
             "code": '<xml>'})
-        self.assertEqual(len(self.student.get_seen_concepts()), 6)
+        self.assertEqual(len(self.student.get_seen_concepts()), 7)
 
     def test_get_last_solved_delta(self):
         task = TaskModel.objects.get(pk=1)

@@ -20,7 +20,11 @@ class TaskModelTest(TestCase):
                                              'game-block-limit', 'game-tokens',
                                              'block-move', 'block-turn',
                                              'block-repeat', 'block-while',
-                                             'block-check-goal']])
+                                             'block-check-goal',
+                                             'programming-sequence',
+                                             'programming-repeat',
+                                             'programming-while',
+                                             ]])
         self.assertSetEqual(inferred_concepts, expected_concepts)
 
     def test_concepts_inference_task_36(self):
@@ -34,7 +38,12 @@ class TaskModelTest(TestCase):
                                              'block-move', 'block-turn',
                                              'block-while', 'block-check-goal',
                                              'block-check-color', 'block-check-path',
-                                             'block-if', 'block-logic']])
+                                             'block-if', 'block-logic',
+                                             'programming-sequence',
+                                             'programming-while',
+                                             'programming-if',
+                                             'programming-logic',
+                                             ]])
         self.assertSetEqual(inferred_concepts, expected_concepts)
 
 
@@ -45,7 +54,9 @@ class TaskModelTest(TestCase):
                                  for key in ['env-maze', 'env-toolbox',
                                              'env-workspace', 'env-snapping',
                                              'env-run-reset',
-                                             'block-move']])
+                                             'block-move',
+                                             'programming-sequence',
+                                             ]])
         self.assertSetEqual(inferred_concepts, expected_concepts)
 
     def test_concepts_inference_colors(self):

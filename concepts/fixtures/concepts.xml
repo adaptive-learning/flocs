@@ -129,4 +129,51 @@
     <field name="checker">contains_tokens</field>
   </object>
 
+  <object pk="20" model="concepts.concept">
+    <field name="name">programming-sequence</field>
+    <field name="subconcepts">
+      <object><natural>block-move</natural></object>
+      <object><natural>block-turn</natural></object>
+    </field>
+  </object>
+  <object pk="20" model="concepts.programmingconcept">
+  </object>
+
+  <object pk="21" model="concepts.concept">
+    <field name="name">programming-repeat</field>
+    <field name="subconcepts">
+      <object><natural>block-repeat</natural></object>
+    </field>
+  </object>
+  <object pk="21" model="concepts.programmingconcept">
+  </object>
+
+  <object pk="22" model="concepts.concept">
+    <field name="name">programming-while</field>
+    <field name="subconcepts">
+      <object><natural>block-while</natural></object>
+    </field>
+  </object>
+  <object pk="22" model="concepts.programmingconcept">
+  </object>
+
+  <object pk="23" model="concepts.concept">
+    <field name="name">programming-if</field>
+    <field name="subconcepts">
+      <object><natural>block-if</natural></object>
+      <object><natural>block-if-else</natural></object>
+    </field>
+  </object>
+  <object pk="23" model="concepts.programmingconcept">
+  </object>
+
+  <object pk="24" model="concepts.concept">
+    <field name="name">programming-logic</field>
+    <field name="subconcepts">
+      <object><natural>block-logic</natural></object>
+    </field>
+  </object>
+  <object pk="24" model="concepts.programmingconcept">
+  </object>
+
 </django-objects>

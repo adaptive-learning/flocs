@@ -15,9 +15,20 @@ class Concept(models.Model):
     objects = ConceptManager()
 
     name = models.CharField(max_length=50, unique=True)
+    subconcepts = models.ManyToManyField('self')
+
+    def get_subconcepts(self):
+        return self.subconcepts.all()
 
     def __str__(self):
         return self.name
+
+
+class ProgrammingConcept(Concept):
+    """ Concept of a certain programming skill, such as usage of commands,
+        loops, conditions or functions.
+    """
+    pass
 
 
 class BlockConcept(Concept):

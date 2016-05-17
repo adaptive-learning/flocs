@@ -3,7 +3,9 @@ import re
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from concepts.models import Concept, EnvironmentConcept, GameConcept, BlockConcept
+from concepts.models import Concept
+from concepts.models import EnvironmentConcept, GameConcept
+from concepts.models import BlockConcept, ProgrammingConcept
 from blocks.models import Block, Toolbox
 
 
@@ -153,15 +155,18 @@ class TaskModel(models.Model):
         """
         assert self.solution is not None
         concepts = set()
-        for concept in EnvironmentConcept.objects.all():
-            concepts.add(concept)
-        for concept in GameConcept.objects.all():
-            if concept.is_contained_in(self):
-                concepts.add(concept)
+        for env_concept in EnvironmentConcept.objects.all():
+            concepts.add(env_concept.concept_ptr)
+        for game_concept in GameConcept.objects.all():
+            if game_concept.is_contained_in(self):
+                concepts.add(game_concept.concept_ptr)
         blocks = self._get_blocks_in_solution()
-        for concept in BlockConcept.objects.all():
-            if concept.block in blocks:
-                concepts.add(concept)
+        for block_concept in BlockConcept.objects.all():
+            if block_concept.block in blocks:
+                concepts.add(block_concept.concept_ptr)
+        for prog_concept in ProgrammingConcept.objects.all():
+            if not concepts.isdisjoint(prog_concept.get_subconcepts()):
+                concepts.add(prog_concept.concept_ptr)
         self._contained_concepts = list(concepts)
 
     def _infer_toolbox(self):
