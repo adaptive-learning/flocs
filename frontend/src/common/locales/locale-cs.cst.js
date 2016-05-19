@@ -86,6 +86,10 @@ angular.module('flocs.locales')
     USERPROFILE: 'Uživatelský profil',
   },
 
+  STATISTICS_PAGE: {
+    TITLE: 'Statistiky',
+  },
+
   TASK_COMPLETION: {
     TASK_SOLVED: 'Úloha vyřešena!',
     CREDITS_INFO: 'Získal jsi {CREDITS, plural, one{1 kredit} few{# kredity} other{# kreditů} }.',

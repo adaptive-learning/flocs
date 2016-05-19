@@ -21,6 +21,7 @@ angular.module('flocs', [
     'flocs.taskPreview',
     'flocs.user',
     'flocs.profile',
+    'flocs.statistics',
     'flocs.session-overview',
     'flocs.about',
 ])
@@ -78,6 +79,15 @@ angular.module('flocs', [
       controller: 'profileCtrl',
       data: {
           titleTraslationKey: 'PROFILE'
+      }
+    })
+
+    .state('statistics', {
+      url: '/statistics',
+      templateUrl: 'statistics/statistics.tpl.html',
+      controller: 'statisticsCtrl',
+      data: {
+          titleTraslationKey: 'STATISTICS_PAGE.TITLE'
       }
     })
 

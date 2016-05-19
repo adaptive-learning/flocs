@@ -1,0 +1,26 @@
+<div class="container">
+  <h2 translate>STATISTICS_PAGE.TITLE</h2>
+
+  <h3>Vyresene ulohy</h3>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>nazev</th>
+      <th>kredity</th>
+      <th>koncepty</th>
+      <th>cas</th>
+      <th>flow</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="task in statistics.finishedTasks">
+      <td>{{task.title}}</td>
+      <td>{{task.credits}}</td>
+      <td>{{task.concepts}}</td>
+      <td>{{task.time}}</td>
+      <td>{{task.flow}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>

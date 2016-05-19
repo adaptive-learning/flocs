@@ -57,6 +57,7 @@ INSTALLED_APPS = (
     'tasks',
     'feedback',
     'practice',
+    'stats',
     'flocs',
 )
 
