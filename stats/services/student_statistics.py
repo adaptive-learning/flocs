@@ -1,6 +1,7 @@
 from collections import namedtuple
 from practice.models import StudentModel
 from practice.models import StudentTaskInfoModel
+from practice.services.statistics_service import percentil as compute_percentil
 
 
 
@@ -19,9 +20,10 @@ def get_finished_tasks(student):
     task_infos = StudentTaskInfoModel.objects.filter(student=student)
     finished_tasks_instances = [t_info.last_solved_instance
                                 for t_info in task_infos if t_info.is_solved()]
-    # TODO: sorting (according to (credits,pk)?)
+    sorted_finished_tasks_instances = sorted(finished_tasks_instances,
+            key=lambda instance: (instance.task.get_level(), instance.task.pk))
     finished_tasks = [FinishedTask.from_task_instance(task_instance)
-                      for task_instance in finished_tasks_instances]
+                      for task_instance in sorted_finished_tasks_instances]
     return finished_tasks
 
 
@@ -42,8 +44,9 @@ class FinishedTask(namedtuple('FinishedTaskTuple',
         finished_task = FinishedTask(
             title=task.title,
             credits=task.get_level(), # hack -> TODO: synchronize with computing credits
-            concepts=["programming-sequence","programming-repeat"],
-            time=30,  # fake -> TODO: compute real time
-            percentil=100,  # fake -> TODO: compute real percentil
-            flow=2)  # fake -> TODO: compute real flow
+            concepts=task.get_programming_concepts(),
+            time=instance.time_spent,  # fake -> TODO: compute real time
+            percentil=compute_percentil(instance),
+            flow=instance.reported_flow)
         return finished_task
+

@@ -18,8 +18,7 @@ def finished_task_to_json(finished_task):
     finished_task_dict = {
       'title': finished_task.title,
       'credits': finished_task.credits,
-      #'concepts': [concept.identifier for concept in finished_task.concepts],
-      'concepts': [concept for concept in finished_task.concepts],
+      'concepts': [concept.name for concept in finished_task.concepts],
       'time': finished_task.time,
       'percentil': finished_task.percentil,
       'flow': finished_task.flow,

@@ -57,6 +57,9 @@ class TaskModel(models.Model):
     def get_contained_concepts(self):
         return set(self._contained_concepts.all())
 
+    def get_programming_concepts(self):
+        return list(self._contained_concepts.filter(programmingconcept__isnull=False))
+
     def get_required_blocks(self):
         return self.get_toolbox().get_all_blocks()
 
