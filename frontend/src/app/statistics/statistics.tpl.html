@@ -16,7 +16,14 @@
     <tr ng-repeat="task in statistics.finishedTasks">
       <td>{{task.title}}</td>
       <td>{{task.credits}}</td>
-      <td>{{task.concepts}}</td>
+      <td>
+        <span ng-repeat="concept in task.concepts">
+          <img ng-src="/static/assets/img/{{concept.icon}}"
+               height="21"
+               title="{{concept.getTranslationKey() | translate}}"
+               alt="{{concept.getTranslationKey() | translate}}">
+        </span>
+      </td>
       <td>{{task.time | secondsToTime}}</td>
       <td translate>{{task.flow.getTranslationKey()}}</td>
     </tr>

@@ -66,8 +66,8 @@ class PracticeServiceWithFixturesTest(TestCase):
 
     def test_get_instructions(self):
         task = TaskModel.objects.get(pk=1)
-        conc1 = Concept.objects.get_by_natural_key('block-move')
-        conc2 = Concept.objects.get_by_natural_key('block-turn')
+        conc1 = Concept.objects.get_by_natural_key('BLOCK_MOVE')
+        conc2 = Concept.objects.get_by_natural_key('BLOCK_TURN')
         task._contained_concepts = [conc1, conc2]
         task.save()
         self.student.mark_concept_as_seen(conc1)

@@ -60,6 +60,15 @@ angular.module('flocs.locales')
                   ' Login data is only used to determine identity during repeated visits, otherwise we do not work with it.'
   },
 
+  CONCEPT: {
+    PROGRAMMING_SEQUENCE: 'sequence of commands',
+    PROGRAMMING_REPEAT: 'repeat N-times loop',
+    PROGRAMMING_WHILE: 'while loop',
+    PROGRAMMING_IF: 'conditional statements',
+    PROGRAMMING_LOGIC: 'logic operators',
+  },
+
+
   FEEDBACK_MODAL: {
     MESSAGE_FIELD: 'Message:',
     EMAIL_FIELD: 'Your email address (optional):',

@@ -2,175 +2,175 @@
 <django-objects version="1.0">
 
   <object pk="1" model="concepts.concept">
-    <field name="name">block-move</field>
+    <field name="name">BLOCK_MOVE</field>
   </object>
   <object pk="1" model="concepts.blockconcept">
     <field name="block"><natural>maze_move_forward</natural></field>
   </object>
 
   <object pk="2" model="concepts.concept">
-    <field name="name">block-turn</field>
+    <field name="name">BLOCK_TURN</field>
   </object>
   <object pk="2" model="concepts.blockconcept">
     <field name="block"><natural>maze_turn</natural></field>
   </object>
 
   <object pk="3" model="concepts.concept">
-    <field name="name">block-repeat</field>
+    <field name="name">BLOCK_REPEAT</field>
   </object>
   <object pk="3" model="concepts.blockconcept">
     <field name="block"><natural>controls_repeat_ext</natural></field>
   </object>
 
   <object pk="4" model="concepts.concept">
-    <field name="name">block-while</field>
+    <field name="name">BLOCK_WHILE</field>
   </object>
   <object pk="4" model="concepts.blockconcept">
     <field name="block"><natural>controls_while</natural></field>
   </object>
 
   <object pk="5" model="concepts.concept">
-    <field name="name">block-check-goal</field>
+    <field name="name">BLOCK_CHECK_GOAL</field>
   </object>
   <object pk="5" model="concepts.blockconcept">
     <field name="block"><natural>maze_check_goal</natural></field>
   </object>
 
   <object pk="6" model="concepts.concept">
-    <field name="name">block-check-path</field>
+    <field name="name">BLOCK_CHECK_PATH</field>
   </object>
   <object pk="6" model="concepts.blockconcept">
     <field name="block"><natural>maze_check_path</natural></field>
   </object>
 
   <object pk="7" model="concepts.concept">
-    <field name="name">block-check-color</field>
+    <field name="name">BLOCK_CHECK_COLOR</field>
   </object>
   <object pk="7" model="concepts.blockconcept">
     <field name="block"><natural>maze_check_color</natural></field>
   </object>
 
   <object pk="8" model="concepts.concept">
-    <field name="name">block-if</field>
+    <field name="name">BLOCK_IF</field>
   </object>
   <object pk="8" model="concepts.blockconcept">
     <field name="block"><natural>controls_if</natural></field>
   </object>
 
   <object pk="9" model="concepts.concept">
-    <field name="name">block-if-else</field>
+    <field name="name">BLOCK_IF_ELSE</field>
   </object>
   <object pk="9" model="concepts.blockconcept">
     <field name="block"><natural>controls_if_else</natural></field>
   </object>
 
   <object pk="10" model="concepts.concept">
-    <field name="name">block-logic</field>
+    <field name="name">BLOCK_LOGIC</field>
   </object>
   <object pk="10" model="concepts.blockconcept">
     <field name="block"><natural>logic_operation</natural></field>
   </object>
 
   <object pk="11" model="concepts.concept">
-    <field name="name">env-maze</field>
+    <field name="name">ENV_MAZE</field>
   </object>
   <object pk="11" model="concepts.environmentconcept">
   </object>
 
   <object pk="12" model="concepts.concept">
-    <field name="name">env-toolbox</field>
+    <field name="name">ENV_TOOLBOX</field>
   </object>
   <object pk="12" model="concepts.environmentconcept">
   </object>
 
   <object pk="13" model="concepts.concept">
-    <field name="name">env-workspace</field>
+    <field name="name">ENV_WORKSPACE</field>
   </object>
   <object pk="13" model="concepts.environmentconcept">
   </object>
 
   <object pk="14" model="concepts.concept">
-    <field name="name">env-snapping</field>
+    <field name="name">ENV_SNAPPING</field>
   </object>
   <object pk="14" model="concepts.environmentconcept">
   </object>
 
   <object pk="15" model="concepts.concept">
-    <field name="name">env-run-reset</field>
+    <field name="name">ENV_RUN_RESET</field>
   </object>
   <object pk="15" model="concepts.environmentconcept">
   </object>
 
   <object pk="16" model="concepts.concept">
-    <field name="name">game-block-limit</field>
+    <field name="name">GAME_BLOCK_LIMIT</field>
   </object>
   <object pk="16" model="concepts.gameconcept">
     <field name="checker">contains_blocks_limit</field>
   </object>
 
   <object pk="17" model="concepts.concept">
-    <field name="name">game-colors</field>
+    <field name="name">GAME_COLORS</field>
   </object>
   <object pk="17" model="concepts.gameconcept">
     <field name="checker">contains_colors</field>
   </object>
 
   <object pk="18" model="concepts.concept">
-    <field name="name">game-pits</field>
+    <field name="name">GAME_PITS</field>
   </object>
   <object pk="18" model="concepts.gameconcept">
     <field name="checker">contains_pits</field>
   </object>
 
   <object pk="19" model="concepts.concept">
-    <field name="name">game-tokens</field>
+    <field name="name">GAME_TOKENS</field>
   </object>
   <object pk="19" model="concepts.gameconcept">
     <field name="checker">contains_tokens</field>
   </object>
 
   <object pk="20" model="concepts.concept">
-    <field name="name">programming-sequence</field>
+    <field name="name">PROGRAMMING_SEQUENCE</field>
     <field name="subconcepts">
-      <object><natural>block-move</natural></object>
-      <object><natural>block-turn</natural></object>
+      <object><natural>BLOCK_MOVE</natural></object>
+      <object><natural>BLOCK_TURN</natural></object>
     </field>
   </object>
   <object pk="20" model="concepts.programmingconcept">
   </object>
 
   <object pk="21" model="concepts.concept">
-    <field name="name">programming-repeat</field>
+    <field name="name">PROGRAMMING_REPEAT</field>
     <field name="subconcepts">
-      <object><natural>block-repeat</natural></object>
+      <object><natural>BLOCK_REPEAT</natural></object>
     </field>
   </object>
   <object pk="21" model="concepts.programmingconcept">
   </object>
 
   <object pk="22" model="concepts.concept">
-    <field name="name">programming-while</field>
+    <field name="name">PROGRAMMING_WHILE</field>
     <field name="subconcepts">
-      <object><natural>block-while</natural></object>
+      <object><natural>BLOCK_WHILE</natural></object>
     </field>
   </object>
   <object pk="22" model="concepts.programmingconcept">
   </object>
 
   <object pk="23" model="concepts.concept">
-    <field name="name">programming-if</field>
+    <field name="name">PROGRAMMING_IF</field>
     <field name="subconcepts">
-      <object><natural>block-if</natural></object>
-      <object><natural>block-if-else</natural></object>
+      <object><natural>BLOCK_IF</natural></object>
+      <object><natural>BLOCK_IF_ELSE</natural></object>
     </field>
   </object>
   <object pk="23" model="concepts.programmingconcept">
   </object>
 
   <object pk="24" model="concepts.concept">
-    <field name="name">programming-logic</field>
+    <field name="name">PROGRAMMING_LOGIC</field>
     <field name="subconcepts">
-      <object><natural>block-logic</natural></object>
+      <object><natural>BLOCK_LOGIC</natural></object>
     </field>
   </object>
   <object pk="24" model="concepts.programmingconcept">

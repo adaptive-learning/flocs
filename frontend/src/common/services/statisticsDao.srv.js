@@ -3,7 +3,7 @@
  * @ngInject
  */
 angular.module('flocs.services')
-.factory('statisticsDao', function ($http, flowFactory) {
+.factory('statisticsDao', function ($http, conceptFactory, flowFactory) {
 
   // public API
   return {
@@ -27,7 +27,7 @@ angular.module('flocs.services')
     var finishedTask = {
       'title': record['title'],
       'credits': record['credits'],
-      'concepts': record['concepts'],
+      'concepts': record['concepts'].map(conceptFactory.fromKey),
       'time': record['time'],
       'percentil': record['percentil'],
       'flow': flowFactory.fromKey(record['flow']),

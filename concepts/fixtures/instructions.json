@@ -3,7 +3,7 @@
     "model": "concepts.instruction",
     "pk": 1,
     "fields": {
-        "concept": ["block-move"],
+        "concept": ["BLOCK_MOVE"],
         "order": 310,
         "text_en": "This block makes the robot move to the next tile in front of him.",
         "text_cs": "Použitím tohoto bloku robot popojede o jedno políčko ve směru, kam se dívá."
@@ -13,7 +13,7 @@
     "model": "concepts.instruction",
     "pk": 2,
     "fields": {
-        "concept": ["block-turn"],
+        "concept": ["BLOCK_TURN"],
         "order": 315,
         "text_en": "With this block, you can make the robot turn left or right.",
         "text_cs": "Tímto blokem přikážeš robotovy, aby se otočil doprava nebo doleva."
@@ -23,7 +23,7 @@
     "model": "concepts.instruction",
     "pk": 3,
       "fields": {
-        "concept": ["block-repeat"],
+        "concept": ["BLOCK_REPEAT"],
         "order": 320,
         "text_en": "The 'repeat' block enables you to repeat the same commands multiple times.",
         "text_cs": "Blok 'opakuj' použij pro opakované vykonávání stejných příkazů, kolikrát jen chceš."
@@ -33,7 +33,7 @@
     "model": "concepts.instruction",
     "pk": 4,
     "fields": {
-        "concept": ["block-while"],
+        "concept": ["BLOCK_WHILE"],
         "order": 330,
         "text_en": "This block let you repeat your commands until some condition is satisfied.",
         "text_cs": "Tento blok ti dovoluje opakovat stejné příkazy, dokud není splněna nějaká podmínka."
@@ -43,7 +43,7 @@
     "model": "concepts.instruction",
     "pk": 5,
     "fields": {
-        "concept": ["block-check-goal"],
+        "concept": ["BLOCK_CHECK_GOAL"],
         "order": 340,
         "text_en": "You can use this condition for checking, if the robot stands on the tile with the goal.",
         "text_cs": "Touto podmínkou můžeš kontrolovat, zda se robot nachází na políčku s truhlou."
@@ -53,7 +53,7 @@
     "model": "concepts.instruction",
     "pk": 6,
     "fields": {
-        "concept": ["block-check-path"],
+        "concept": ["BLOCK_CHECK_PATH"],
         "order": 345,
         "text_en": "This condition allows you to check, if there is a free path in front of, left of, or right of the robot.",
         "text_cs": "Tato podmínka ti dovoluje kontrolovat, jestli je volná cesta před, napravo nebo nalevo od robota."
@@ -63,7 +63,7 @@
     "model": "concepts.instruction",
     "pk": 7,
     "fields": {
-        "concept": ["block-check-color"],
+        "concept": ["BLOCK_CHECK_COLOR"],
         "order": 350,
         "text_en": "Use this condition to check, whether the robot stands on the specified color.",
         "text_cs": "Použij tuto podmínku pro kontrolu, zda robot stojí na určité barvě."
@@ -73,7 +73,7 @@
     "model": "concepts.instruction",
     "pk": 8,
     "fields": {
-        "concept": ["block-if"],
+        "concept": ["BLOCK_IF"],
         "order": 360,
         "text_en": "Use 'if' block for branching the program based on conditions. The robot can perform different actions based on the current situation.",
         "text_cs": "Blok 'pokud' používej pro větvení programu na základě podmínek. V určité chvíli se bude robot muset rozhodnout, jakou další akci vykoná podle aktuální situace, ve které se bude nacházet."
@@ -83,7 +83,7 @@
     "model": "concepts.instruction",
     "pk": 9,
     "fields": {
-        "concept": ["block-if-else"],
+        "concept": ["BLOCK_IF_ELSE"],
         "order": 365,
         "text_en": "This block works the same way as 'if' block, but when the condition is not satisfied, the robot will perform commands in the section'else'.",
         "text_cs": "Tento blok funguje stejně jako 'pokud' blok, ale při nesplnění podmínky vykoná příkazy v sekci 'jinak'."
@@ -93,7 +93,7 @@
     "model": "concepts.instruction",
     "pk": 10,
     "fields": {
-        "concept": ["block-logic"],
+        "concept": ["BLOCK_LOGIC"],
         "order": 380,
         "text_en": "Use this blok to compose two basic conditions into one complex condition. If you compose them with 'and', both of the basic conditions has to be satisfied. If you compose them with 'or', at least one of them has to be satisfied, so that the complex condition is also satisfied.",
         "text_cs": "Použij tento blok pro složení dvou základních podmínek do jedné složitější. Pokud je složíš pomocí 'a', musí obě platit současně. Pokud je složíš pomocí 'nebo', stačí aby platila alespoň jedna z nich."
@@ -103,7 +103,7 @@
     "model": "concepts.instruction",
     "pk": 11,
     "fields": {
-        "concept": ["env-maze"],
+        "concept": ["ENV_MAZE"],
         "order": 110,
         "text_en": "Your task is to get the robot to the treasure chest. The robot can go one step forward or turn itself to the left or right on the spot. If the robot hits a wall, it breaks down.",
         "text_cs": "Úkolem hry je dostat robota k truhle s pokladem. Robot může chodit dopředu nebo se otáčet na místě doprava a doleva. Pokud robot narazí do zdi, rozbije se."
@@ -113,7 +113,7 @@
     "model": "concepts.instruction",
     "pk": 12,
     "fields": {
-        "concept": ["env-toolbox"],
+        "concept": ["ENV_TOOLBOX"],
         "order": 120,
         "text_en": "Here is a toolbox for your blocks. If you do well, you will get other blocks, which will be added to your toolbox. You can use them in your program multiple times.",
         "text_cs": "Zde je místo pro tvoje bloky. Pokud budeš šikovný, budeš dostávat během hry další bloky, které se objeví na tomto místě. Můžeš je v programu používat opakovaně."
@@ -123,7 +123,7 @@
     "model": "concepts.instruction",
     "pk": 13,
     "fields": {
-        "concept": ["env-workspace"],
+        "concept": ["ENV_WORKSPACE"],
         "order": 130,
         "text_en": "Create your programs in this window. Connect your blocks to each other to make the robot move. Robot performs every block that is connected to the starting block 'program start'.",
         "text_cs": "Tvoř svoje programy v tomto okně. Skládej bloky za sebe, aby se robot pohyboval v bludišti. Robot vykoná všechno co zapojíš do startovního bloku 'začátek programu'."
@@ -133,7 +133,7 @@
     "model": "concepts.instruction",
     "pk": 14,
     "fields": {
-        "concept": ["env-snapping"],
+        "concept": ["ENV_SNAPPING"],
         "order": 140,
         "text_en": "Drag the blocks from your toolbox with the mouse and drop them in the workspace window. Notice that every block has a little hook, so that you can connect them together. And don't forget: robot will perform only blocks connected to the starting block 'program start'!",
         "text_cs": "Bloky z tvé sady přetáhni myší do okna pro program. Všimni si, že každý blok má nahoře i dole malé zobáčky, kterými je můžeš zapojovat do sebe. A nezapomeň: robot bude vykonávat jen příkazy zapojené do startovního bloku 'začátek programu'!"
@@ -143,7 +143,7 @@
     "model": "concepts.instruction",
     "pk": 15,
     "fields": {
-        "concept": ["env-run-reset"],
+        "concept": ["ENV_RUN_RESET"],
         "order": 150,
         "text_en": "As soon as you are satisfied with your program in the workspace, run the program with this button. If the robot doesn't reach the goal, you can return it to its original position by clicking on the 'Reset' button and try another program.",
         "text_cs": "Jakmile jsi spokojený se svým programem, spusť ho pomocí tohoto tlačítka. Pokud robot nedorazí k truhle, můžeš ho vrátit na původní pozici stisknutím 'Reset' tlačítka a zkusit jiný program."
@@ -153,7 +153,7 @@
     "model": "concepts.instruction",
     "pk": 16,
     "fields": {
-        "concept": ["game-block-limit"],
+        "concept": ["GAME_BLOCK_LIMIT"],
         "order": 210,
         "text_en": "Some of the tasks limit the number of blocks you can use in the program. Here you can see, how many blocks you used and how many you can use all together.",
         "text_cs": "Některé úlohy omezují celkový počet bloků, které můžeš použít v programu. Zde vidíš, kolik bloků už jsi použil, a kolik můžeš použít celkově. "
@@ -163,7 +163,7 @@
     "model": "concepts.instruction",
     "pk": 17,
     "fields": {
-        "concept": ["game-colors"],
+        "concept": ["GAME_COLORS"],
         "order": 220,
         "text_en": "There are different colors of the tiles. The robot can detect colors and use them to navigate through the maze.",
         "text_cs": "Některá políčka v tomto bludišti mají jinou než bílou barvu. Robot umí barvy rozlišovat a využít je k navigaci v bludišti."
@@ -173,7 +173,7 @@
     "model": "concepts.instruction",
     "pk": 18,
     "fields": {
-        "concept": ["game-pits"],
+        "concept": ["GAME_PITS"],
         "order": 230,
         "text_en": "Mind the pits! Robot can't detect them and if he falls into one, he can't get out.",
         "text_cs": "Při procházení bludiště si dej pozor na jámy! Robot je neumí odhalit a pokud do některé spadne, tak se z nich už neumí dostat."
@@ -183,7 +183,7 @@
     "model": "concepts.instruction",
     "pk": 19,
     "fields": {
-        "concept": ["game-tokens"],
+        "concept": ["GAME_TOKENS"],
         "order": 240,
         "text_en": "There are keys located in the maze and the robot must pick all of them in order to open the treasure chest.",
         "text_cs": "Po bludišti jsou různě rozmístěné klíče od truhly, které robot potřebuje sesbírat. Bez nich nelze truhlu s pokladem otevřít."

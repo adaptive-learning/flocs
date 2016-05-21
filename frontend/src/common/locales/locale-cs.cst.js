@@ -70,6 +70,14 @@ angular.module('flocs.locales')
     INVALID_MESSAGE: 'Neplatná zpráva!',
   },
 
+  CONCEPT: {
+    PROGRAMMING_SEQUENCE: 'sekvence příkazů',
+    PROGRAMMING_REPEAT: 'cyklus s daným počtem opakování',
+    PROGRAMMING_WHILE: 'cyklus s podmínkou',
+    PROGRAMMING_IF: 'podmíněné příkazy',
+    PROGRAMMING_LOGIC: 'logické operátory',
+  },
+
   FLOW: {
     UNKNOWN: 'neznámé',
     VERY_DIFFICULT: 'velmi složité',
