@@ -13,6 +13,7 @@ from common.logUtils import LoggingUtils
 from practice.services import practice_service
 from practice.services import practice_session_service
 from practice.services import details
+from practice.models.task_instance import FlowRating
 
 logger = LoggingUtils()
 
@@ -130,7 +131,7 @@ def post_flow_report(request):
     result = practice_service.process_flow_report(
             user=request.user,
             task_instance_id=data['task-instance-id'],
-            reported_flow=data.get('flow-report'))
+            reported_flow=FlowRating.from_key(data.get('flow-report')))
     return HttpResponse('ok')
 
 

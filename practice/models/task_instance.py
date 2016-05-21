@@ -11,6 +11,11 @@ class FlowRating(object):
     RIGHT = 3
     EASY = 4
 
+    @classmethod
+    def from_key(cls, key):
+        return getattr(cls, key)
+
+
 class TaskInstanceModel(models.Model):
     """
     Representation of a task taken by a student.
@@ -40,11 +45,11 @@ class TaskInstanceModel(models.Model):
 
     # self-report about subjective difficulty feeling
     REPORTED_FLOW_VALUES = (
-        (FlowRating.UNKNOWN,   'unknown'),
-        (FlowRating.VERY_DIFFICULT, 'very difficult'),
-        (FlowRating.DIFFICULT, 'difficult'),
-        (FlowRating.RIGHT, 'just right'),
-        (FlowRating.EASY, 'easy'),
+        (FlowRating.UNKNOWN,   'UNKNOWN'),
+        (FlowRating.VERY_DIFFICULT, 'VERY_DIFFICULT'),
+        (FlowRating.DIFFICULT, 'DIFFICULT'),
+        (FlowRating.RIGHT, 'RIGHT'),
+        (FlowRating.EASY, 'EASY'),
     )
     reported_flow = models.SmallIntegerField(choices=REPORTED_FLOW_VALUES,
             default=FlowRating.UNKNOWN)
@@ -69,6 +74,9 @@ class TaskInstanceModel(models.Model):
             reported_flow=self.reported_flow,
             predicted_flow=self.predicted_flow
         )
+
+    def get_reported_flow_key(self):
+        return self.get_reported_flow_display()
 
     def get_reported_flow(self):
         """

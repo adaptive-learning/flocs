@@ -47,6 +47,6 @@ class FinishedTask(namedtuple('FinishedTaskTuple',
             concepts=task.get_programming_concepts(),
             time=instance.time_spent,  # fake -> TODO: compute real time
             percentil=compute_percentil(instance),
-            flow=instance.reported_flow)
+            flow=instance.get_reported_flow_key())
         return finished_task
 

@@ -70,6 +70,14 @@ angular.module('flocs.locales')
     INVALID_MESSAGE: 'Neplatná zpráva!',
   },
 
+  FLOW: {
+    UNKNOWN: 'neznámé',
+    VERY_DIFFICULT: 'velmi složité',
+    DIFFICULT: 'složité',
+    RIGHT: 'akorát',
+    EASY: 'jednoduché',
+  },
+
   HOME: {
     INTRO_TEXT: 'Toto je první prototyp aplikace pro adaptabilní výuku programování.' +
                 ' Pomoz nám aplikaci vylepšit tím, že po vyzkoušení zodpovíš krátký ' +

@@ -10,6 +10,7 @@ angular.module('flocs', [
     'ngDialog',
     'pascalprecht.translate',
     'flocs.locales',
+    'flocs.models',
     'flocs.services',
     'flocs.directives',
     'flocs.filters',

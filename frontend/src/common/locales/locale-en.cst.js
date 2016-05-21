@@ -67,6 +67,15 @@ angular.module('flocs.locales')
     INVALID_MESSAGE: 'Invalid message!',
   },
 
+  FLOW: {
+    UNKNOWN: 'unknown',
+    VERY_DIFFICULT: 'very difficult',
+    DIFFICULT: 'difficult',
+    RIGHT: 'right',
+    EASY: 'easy',
+  },
+
+
   HOME: {
     INTRO_TEXT: 'This is a first prototype of application for adaptive learning of programming.',
   },
