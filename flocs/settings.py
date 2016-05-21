@@ -177,7 +177,7 @@ LOGGING = {
             'format': '[%(asctime)s] %(levelname)s %(message)s'
         },
         'brief': {
-            'format': '[%(asctime)s] %(message)s'
+            'format': '%(message)s'
         },
         'long-messages': {
             'format': '[%(asctime)s] %(message)s----------'

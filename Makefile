@@ -78,3 +78,7 @@ logs:
 	@mkdir -p logs >/dev/null
 	touch logs/practice.log
 	touch logs/requests.log
+	if [ ! -f logs/student-code.log ] ; \
+	then \
+		echo 'DATE,STUDENT_ID,TASK_INSTANCE_ID,ATTEMPT_COUNT,SOLVED,TIME_SPENT,CODE' >> logs/student-code.log ; \
+	fi;

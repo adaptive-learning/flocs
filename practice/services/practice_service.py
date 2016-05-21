@@ -23,7 +23,7 @@ from practice.core.task_filtering import filter_tasks_by_level
 from practice.core.task_selection import IdSpecifidedTaskSelector
 from practice.core.task_selection import RandomizedScoreTaskSelector
 from concepts.models import Instruction
-import json
+import json, csv, io
 
 logger = logging.getLogger(__name__)
 code_logger = logging.getLogger('student-code')
@@ -215,7 +215,15 @@ def process_attempt_report(user, report):
             student.save()
             task_instance.save()
 
-    code_logger.info('student_id: %s, task_instance_id: %s, code: %s', student.pk, task_instance_id, code)
+    
+    code_logger.info(_escape_csv([ 
+            task_instance.time_start.date(),
+            student.pk, 
+            task_instance.pk,
+            task_instance.attempt_count,
+            task_instance.solved,
+            task_instance.time_spent,
+            code]))
 
     task_solved_first_time = solved and not solved_before,
     logger.info("Reporting attempt was successful for student %s with result %s", student.pk, solved)
@@ -331,3 +339,11 @@ def get_instructions(task, student=None):
     # NOTE: order of instructions is enforced on DB level
     instructions = list(Instruction.objects.filter(concept__in=concepts))
     return instructions
+
+def _escape_csv(csv_data):
+    output = io.StringIO()
+    writer = csv.writer(output)
+    _ = writer.writerow(csv_data)
+    escaped = output.getvalue()
+    output.close()
+    return escaped
