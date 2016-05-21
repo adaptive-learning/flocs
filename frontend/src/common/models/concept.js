@@ -11,19 +11,19 @@ angular.module('flocs.models')
     },
     {
       key: 'PROGRAMMING_REPEAT',
-      icon: 'concept-sequence.svg', // TODO: create icon
+      icon: 'concept-repeat.svg',
     },
     {
       key: 'PROGRAMMING_WHILE',
-      icon: 'concept-sequence.svg', // TODO: create icon
+      icon: 'concept-while.svg',
     },
     {
       key: 'PROGRAMMING_IF',
-      icon: 'concept-sequence.svg', // TODO: create icon
+      icon: 'concept-if.svg',
     },
     {
       key: 'PROGRAMMING_LOGIC',
-      icon: 'concept-sequence.svg', // TODO: create icon
+      icon: 'concept-logic.svg',
     },
 ])
 .factory('conceptFactory', function(CONCEPTS_DATA) {
@@ -39,9 +39,11 @@ angular.module('flocs.models')
 
   // build dictionary of all used concepts
   var CONCEPTS = {};
+  var KEYS = [];
   for (var i=0; i < CONCEPTS_DATA.length; i++) {
     var data = CONCEPTS_DATA[i];
     CONCEPTS[data.key] = new Concept(data);
+    KEYS.push(data.key);
   }
 
   function fromKey(key) {
@@ -52,8 +54,16 @@ angular.module('flocs.models')
     }
   }
 
-  // only publish fromKey builder to disallow creating new concepts
+  function all() {
+    var allConcepts = [];
+    for (var i=0; i < KEYS.length; i++) {
+      allConcepts.push(CONCEPTS[KEYS[i]]);
+    }
+    return allConcepts;
+  }
+
   return {
     fromKey: fromKey,
+    all: all,
   };
 });
