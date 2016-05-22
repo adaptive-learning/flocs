@@ -25,6 +25,7 @@ angular.module('flocs.services')
 
   function parseFinishedTask(record) {
     var finishedTask = {
+      'id': record['task-id'],
       'title': record['title'],
       'credits': record['credits'],
       'concepts': record['concepts'].map(conceptFactory.fromKey),

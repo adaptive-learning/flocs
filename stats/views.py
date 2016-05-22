@@ -16,6 +16,7 @@ def get_student_statistics(request):
 
 def finished_task_to_json(finished_task):
     finished_task_dict = {
+      'task-id': finished_task.task_id,
       'title': finished_task.title,
       'credits': finished_task.credits,
       'concepts': [concept.name for concept in finished_task.concepts],

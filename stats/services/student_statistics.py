@@ -28,20 +28,13 @@ def get_finished_tasks(student):
 
 
 class FinishedTask(namedtuple('FinishedTaskTuple',
-                   'title credits concepts time percentil flow')):
-
-    #def __init__(self, title, credits, concepts, time, percentil, flow):
-    #    self.title = title
-    #    self.credits = credits
-    #    self.concepts = concepts
-    #    self.time = time
-    #    self.percentil = percentil
-    #    self.flow = flow
+                   'task_id title credits concepts time percentil flow')):
 
     @staticmethod
     def from_task_instance(instance):
         task = instance.task
         finished_task = FinishedTask(
+            task_id=task.pk,
             title=task.title,
             credits=task.get_level(), # hack -> TODO: synchronize with computing credits
             concepts=task.get_programming_concepts(),
