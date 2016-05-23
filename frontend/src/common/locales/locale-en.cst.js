@@ -7,7 +7,9 @@ angular.module('flocs.locales')
   AUTHORS: 'About Authors',
   BLOCKS: 'Blocks',
   CLOSE: 'Close',
+  CONCEPTS: 'Concepts',
   CONTINUE: 'Continue',
+  CREDITS: 'Credits',
   ERROR_404: "This page doesn't exist.",
   FEEDBACK: 'Feedback',
   FREE_CREDITS: 'Credits to spend',
@@ -31,6 +33,7 @@ angular.module('flocs.locales')
   SPEED: 'Speed',
   SUPPORT: 'Support',
   TASK: 'Task',
+  TASK_TITLE: 'Task title',
   TIME_SPENT: 'Time',
   TITLE: 'Adaptive programming',
   TOGGLE_NAVIGATION: 'Toggle navigation',
@@ -77,6 +80,7 @@ angular.module('flocs.locales')
   },
 
   FLOW: {
+    FLOW: 'Flow',
     UNKNOWN: 'unknown',
     VERY_DIFFICULT: 'very difficult',
     DIFFICULT: 'difficult',
@@ -96,6 +100,11 @@ angular.module('flocs.locales')
     SOLVED_TASKS_COUNT: 'Number of solved tasks',
     SOLVED_DISTINCT_TASKS_COUNT: 'Of which distinct',
     USERPROFILE: 'User profile',
+  },
+
+  STATISTICS_PAGE: {
+    SOLVED_TASKS: 'Solved tasks',
+    TITLE: 'Statistics',
   },
 
   TASK_COMPLETION: {

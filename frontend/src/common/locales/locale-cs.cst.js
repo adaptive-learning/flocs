@@ -7,7 +7,9 @@ angular.module('flocs.locales')
   AUTHORS: 'Kdo za tím stojí',
   BLOCKS: 'Bloky',
   CLOSE: 'Zavřít',
+  CONCEPTS: 'Koncepty',
   CONTINUE: 'Pokračovat',
+  CREDITS: 'Kredity',
   ERROR_404: "Tato stránka neexistuje.",
   FEEDBACK: 'Napiš nám',
   FREE_CREDITS: 'Neutracených kreditů',
@@ -31,6 +33,7 @@ angular.module('flocs.locales')
   SPEED: 'Rychlost',
   SUPPORT: 'Podpora',
   TASK: 'Úkol',
+  TASK_TITLE: 'Název úlohy',
   TIME_SPENT: 'Čas',
   TITLE: 'Adaptabilní programování',
   TOGGLE_NAVIGATION: 'Přepnout navigaci',
@@ -79,6 +82,7 @@ angular.module('flocs.locales')
   },
 
   FLOW: {
+    FLOW: 'Flow',
     UNKNOWN: 'neznámé',
     VERY_DIFFICULT: 'velmi složité',
     DIFFICULT: 'složité',
@@ -103,6 +107,7 @@ angular.module('flocs.locales')
   },
 
   STATISTICS_PAGE: {
+    SOLVED_TASKS: 'Vyřešené úlohy',
     TITLE: 'Statistiky',
   },
 
