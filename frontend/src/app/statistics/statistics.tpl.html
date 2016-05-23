@@ -29,7 +29,9 @@
       <td>
         <flocs-time-meter time="{{task.time}}" percentil="{{task.percentil}}"></flocs-time-meter>
       </td>
-      <td translate>{{task.flow.getTranslationKey()}}</td>
+      <td>
+        <flocs-flow-meter flow="task.flow" editable="false"></flocs-flow-meter>
+      </td>
     </tr>
     </tbody>
   </table>

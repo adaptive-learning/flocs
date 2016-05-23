@@ -2,6 +2,7 @@
  * Module for all flocs directives.
  */
 angular.module('flocs.directives', [
+  'rzModule',  // for slider
 ])
 
 .directive('flocsTimeMeter', function() {

@@ -14,6 +14,7 @@
     "angular-bootstrap": "~0.14.3",
     "angular-spinkit": "~0.3.3",
     "angular-translate": "~2.9.1",
-    "angular-translate-interpolation-messageformat": "~2.9.1"
+    "angular-translate-interpolation-messageformat": "~2.9.1",
+    "angularjs-slider": "^2.14.0"
   }
 }

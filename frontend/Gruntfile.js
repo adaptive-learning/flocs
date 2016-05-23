@@ -66,13 +66,15 @@ module.exports = function (grunt) {
         'vendor/messageformat/locale/cs.js',
         'vendor/messageformat/locale/en.js',
         'vendor/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.min.js',
+        'vendor/angularjs-slider/dist/rzslider.js',
       ],
       css: [
         'vendor/bootstrap/dist/css/bootstrap.min.css',
         'vendor/ngDialog/css/ngDialog.css',
         'vendor/ngDialog/css/ngDialog-theme-plain.css',
         'vendor/ngDialog/css/ngDialog-theme-default.css',
-        'vendor/angular-spinkit/build/angular-spinkit.min.css'
+        'vendor/angular-spinkit/build/angular-spinkit.min.css',
+        'vendor/angularjs-slider/dist/rzslider.css',
       ],
       fonts: [
         'vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.svg',

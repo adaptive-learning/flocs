@@ -4,20 +4,28 @@
  */
 angular.module('flocs.models')
 .constant('FLOWS_DATA', [
-    {key: 'UNKNOWN'},
-    {key: 'VERY_DIFFICULT'},
-    {key: 'DIFFICULT'},
-    {key: 'RIGHT'},
-    {key: 'EASY'},
+    {key: 'UNKNOWN', value: null},
+    {key: 'VERY_DIFFICULT', value: -1},
+    {key: 'DIFFICULT', value: -1},
+    {key: 'RIGHT', value: 0},
+    {key: 'EASY', value: 1},
 ])
 .factory('flowFactory', function(FLOWS_DATA) {
 
   function Flow(data) {
     this.key = data.key;
+    this.value = data.value;
   }
 
-  Flow.prototype.getTranslationKey = function () {
+  Flow.prototype.getTranslationKey = function() {
     return 'FLOW.' + this.key;
+  };
+
+  /**
+   * Return normalized flow value (-1 difficilt, 0 right, 1 easy)
+   */
+  Flow.prototype.getFlowValue = function() {
+    return this.value;
   };
 
   // build dictionary of all possible flows
@@ -35,8 +43,20 @@ angular.module('flocs.models')
     }
   }
 
+  /**
+   * Return color corresponding to normalized flow value
+   * -1 -> red
+   *  0 -> green
+   * +1 -> blue
+   */
+  function valueToColor(value) {
+      var hue = (value + 1) * 120;
+      return 'hsl(' + hue + ',100%, 50%)';
+  }
+
   // only publish fromKey builder to disallow creating new flows
   return {
     fromKey: flowFromKey,
+    valueToColor: valueToColor,
   };
 });

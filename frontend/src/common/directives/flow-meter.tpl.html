@@ -1,0 +1,8 @@
+<span class="flow-meter" title="{{flow.getTranslationKey() | translate}}">
+  <span ng-if="flowValue !== null">
+    <rzslider rz-slider-model="slider.value" rz-slider-options="slider.options" class="slider-without-labels"></rzslider>
+  </span>
+  <span ng-if="flowValue == null">
+    ?
+  </span>
+</span>
