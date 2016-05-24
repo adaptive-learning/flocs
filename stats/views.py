@@ -9,9 +9,22 @@ def get_student_statistics(request):
     """
     statistics = get_statistics_for_user(user=request.user)
     statistics_dict = {
-        'finished-tasks': [finished_task_to_json(t) for t in statistics.finished_tasks]
+        'blocks': [block_to_json(b) for b in statistics.blocks],
+        'finished-tasks': [finished_task_to_json(t) for t in statistics.finished_tasks],
     }
     return JsonResponse(statistics_dict)
+
+
+def block_to_json(block):
+    block_dict = {
+      'identifier': block.identifier,
+      'level': block.level,
+      'purchased': block.purchased,
+      'active': block.active,
+      'credits': block.credits,
+      'credits-paid': block.credits_paid,
+    }
+    return block_dict
 
 
 def finished_task_to_json(finished_task):

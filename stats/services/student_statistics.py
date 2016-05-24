@@ -1,4 +1,5 @@
 from collections import namedtuple
+from blocks.models import Toolbox
 from practice.models import StudentModel
 from practice.models import StudentTaskInfoModel
 from practice.services.statistics_service import percentil as compute_percentil
@@ -11,9 +12,41 @@ def get_statistics_for_user(user):
 
 
 def get_statistics_for_student(student):
-    StudentStatistics = namedtuple('StudentStatistics', ['finished_tasks'])
-    statistics = StudentStatistics(finished_tasks=get_finished_tasks(student))
+    StudentStatistics = namedtuple('StudentStatistics',
+                                  ['blocks', 'finished_tasks'])
+    statistics = StudentStatistics(
+            blocks=get_blocks(student),
+            finished_tasks=get_finished_tasks(student))
     return statistics
+
+
+StudentBlockInfo = namedtuple('StudentBlockInfo',
+        'identifier level purchased active credits credits_paid')
+def get_blocks(student):
+    # NOTE: current model is not very suitable for this query and should be
+    # changed (problems: we need to recalculate a lot of information and some
+    # extension to toolbox model or credits handling could brake the current
+    # logic)
+    block_infos = []
+    for toolbox in Toolbox.objects.all():
+        for block in toolbox.get_new_blocks():
+            purchased = (toolbox.level < student.get_level())
+            active = (toolbox.level == student.get_level())
+            if purchased:
+                credits_paid = toolbox.credits
+            elif active:
+                credits_paid = student.free_credits
+            else:
+                credits_paid = 0
+            block_info = StudentBlockInfo(
+                identifier=block.identifier,
+                level=toolbox.level,
+                purchased=purchased,
+                active=active,
+                credits=toolbox.credits,
+                credits_paid=credits_paid)
+            block_infos.append(block_info)
+    return block_infos
 
 
 def get_finished_tasks(student):
@@ -42,4 +75,3 @@ class FinishedTask(namedtuple('FinishedTaskTuple',
             percentil=compute_percentil(instance),
             flow=instance.get_reported_flow_key())
         return finished_task
-

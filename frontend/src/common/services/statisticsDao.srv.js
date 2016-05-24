@@ -18,9 +18,15 @@ angular.module('flocs.services')
 
   function parseStatistics(response) {
     var statistics = {
+      'blocks': response.data['blocks'].map(parseBlock),
       'finishedTasks': response.data['finished-tasks'].map(parseFinishedTask),
     };
     return statistics;
+  }
+
+  function parseBlock(record) {
+    console.log('parse block:', record);
+    return null;
   }
 
   function parseFinishedTask(record) {
