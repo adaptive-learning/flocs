@@ -21,7 +21,7 @@ def get_statistics_for_student(student):
 
 
 StudentBlockInfo = namedtuple('StudentBlockInfo',
-        'identifier level purchased active credits credits_paid')
+        'identifier name level purchased active credits credits_paid')
 def get_blocks(student):
     # NOTE: current model is not very suitable for this query and should be
     # changed (problems: we need to recalculate a lot of information and some
@@ -40,6 +40,7 @@ def get_blocks(student):
                 credits_paid = 0
             block_info = StudentBlockInfo(
                 identifier=block.identifier,
+                name=block.name,
                 level=toolbox.level,
                 purchased=purchased,
                 active=active,

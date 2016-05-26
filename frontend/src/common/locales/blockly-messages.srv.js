@@ -386,8 +386,8 @@ angular.module('flocs.locales')
   messages.LISTS_INDEX_OF_INPUT_IN_LIST = messages.LISTS_INLIST;
   messages.LISTS_SET_INDEX_INPUT_IN_LIST = messages.LISTS_INLIST;
 
-  messages.MAZE_CHECK_COLOR = 'robot %1 na políčku %2 barvy';
-  messages.MAZE_CHECK_GOAL = 'robot %1 na políčku s %2';
+  messages.MAZE_CHECK_COLOR = '%1 na %2 barvě';
+  messages.MAZE_CHECK_GOAL = '%1 na políčku s %2';
   messages.MAZE_CHECK_PATH = "je cesta %1";
   messages.MAZE_MOVE_FORWARD = 'krok vpřed';
   messages.MAZE_MOVE_BACKWARD = 'krok dozadu';
@@ -397,6 +397,8 @@ angular.module('flocs.locales')
   messages.TO_THE_LEFT = 'vlevo';
   messages.TO_THE_RIGHT = 'vpravo';
   messages.AHEAD = 'vpředu';
+  messages.ARE = 'jsi';
+  messages.ARE_NOT = 'nejsi';
   messages.IS = 'je';
   messages.IS_NOT = 'není';
   messages.OF_YELLOW = 'žluté';
@@ -791,8 +793,8 @@ angular.module('flocs.locales')
   messages.LISTS_INDEX_OF_INPUT_IN_LIST = messages.LISTS_INLIST;
   messages.LISTS_SET_INDEX_INPUT_IN_LIST = messages.LISTS_INLIST;
 
-  messages.MAZE_CHECK_COLOR = 'robot %1 at %2 field';
-  messages.MAZE_CHECK_GOAL = 'robot %1 at %2';
+  messages.MAZE_CHECK_COLOR = 'you %1 at %2';
+  messages.MAZE_CHECK_GOAL = 'you %1 at %2';
   messages.MAZE_CHECK_PATH = "path %1";
   messages.MAZE_MOVE_FORWARD = 'move forward';
   messages.MAZE_MOVE_BACKWARD = 'move backward';
@@ -802,6 +804,8 @@ angular.module('flocs.locales')
   messages.TO_THE_LEFT = 'to the left';
   messages.TO_THE_RIGHT = 'to the right';
   messages.AHEAD = 'ahead';
+  messages.ARE = 'are';
+  messages.ARE_NOT = 'are not';
   messages.IS = 'is';
   messages.IS_NOT = 'is not';
   messages.OF_YELLOW = 'yellow';

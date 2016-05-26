@@ -1,7 +1,32 @@
 <div class="container">
-  <h2 translate>STATISTICS_PAGE.TITLE</h2>
+  <h1 translate>STATISTICS_PAGE.TITLE</h1>
 
-  <h3 translate>STATISTICS_PAGE.SOLVED_TASKS</h3>
+  <h2 class="page-header" translate>STATISTICS_PAGE.BLOCKS</h2>
+
+  <div class="row">
+    <div ng-repeat="block in statistics.blocks" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="thumbnail" ng-class="{disabled: block.isPassive(), purchased: block.purchased}">
+        <h4 class="thumbnail-heading">{{ block.name }}</h4>
+        <div>
+          <flocs-block-preview block="block"></flocs-block-preview>
+        </div>
+        <div class="caption">
+          <uib-progressbar
+              value="block.creditsPaid"
+              max="block.credits"
+              animate="false"
+              type="{{ block.active ? 'success' : 'primary' }}"
+              >
+              <span class="progressbar-caption">
+                {{block.creditsPaid}} / {{block.credits}}
+              </span>
+          </uib-progressbar>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="page-header" translate>STATISTICS_PAGE.SOLVED_TASKS</h2>
   <table class="table table-striped">
     <thead>
     <tr>

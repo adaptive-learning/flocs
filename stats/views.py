@@ -18,6 +18,7 @@ def get_student_statistics(request):
 def block_to_json(block):
     block_dict = {
       'identifier': block.identifier,
+      'name': block.name,
       'level': block.level,
       'purchased': block.purchased,
       'active': block.active,

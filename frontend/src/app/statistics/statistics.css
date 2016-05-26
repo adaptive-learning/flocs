@@ -1,0 +1,26 @@
+.progress {
+  margin-bottom: 0px;
+}
+
+.thumbnail-heading {
+  text-align: center;
+}
+
+.progressbar-caption {
+  color:  white;
+  white-space: nowrap;
+}
+
+.purchased {
+  background-color: #f0f6ff;
+}
+
+.disabled {
+  z-index: 1000;
+  background-color: #eee;
+  opacity: 0.5;
+}
+
+.disabled .progressbar-caption {
+  color: #aaa;
+}

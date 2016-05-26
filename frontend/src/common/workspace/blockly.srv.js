@@ -80,11 +80,11 @@ angular.module('flocs.workspace')
             "name":"negation",
             "options":[
                 [
-                    Blockly.Msg.IS_NOT,
+                    Blockly.Msg.ARE_NOT,
                     "!"
                 ],
                 [
-                    Blockly.Msg.IS,
+                    Blockly.Msg.ARE,
                     ""
                 ]
             ],
@@ -113,11 +113,11 @@ angular.module('flocs.workspace')
             "name":"negation",
             "options":[
                 [
-                    Blockly.Msg.IS,
+                    Blockly.Msg.ARE,
                     ""
                 ],
                 [
-                    Blockly.Msg.IS_NOT,
+                    Blockly.Msg.ARE_NOT,
                     "!"
                 ],
             ],

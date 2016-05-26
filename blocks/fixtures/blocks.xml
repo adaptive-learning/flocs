@@ -20,7 +20,7 @@
       ["maze_turn_left", "maze_turn_right"]
     </field>
     <field name="name_en">
-      Make a turn
+      Turn
     </field>
     <field name="name_cs">
       Zatoč
@@ -32,10 +32,10 @@
       controls_repeat_ext
     </field>
     <field name="name_en">
-      Repeat statement
+      Repeat N-times
     </field>
     <field name="name_cs">
-      Cyklus repeat
+      Opakuj N-krát
     </field>
   </object>
 
@@ -44,10 +44,10 @@
       controls_while
     </field>
     <field name="name_en">
-      While loop
+      Loop while
     </field>
     <field name="name_cs">
-      Cyklus while
+      Opakuj dokud
     </field>
   </object>
 
@@ -95,10 +95,10 @@
       controls_if
     </field>
     <field name="name_en">
-      If statement
+      If-then
     </field>
     <field name="name_cs">
-      Podmínka pokud-pak
+      Pokud-pak
     </field>
   </object>
 
@@ -107,10 +107,10 @@
       controls_if_else
     </field>
     <field name="name_en">
-      If-else statement
+      If-then-else
     </field>
     <field name="name_cs">
-      Podmínka pokud-pak-jinak
+      Pokud-pak-jinak
     </field>
   </object>
 
@@ -122,7 +122,7 @@
       Logical operators
     </field>
     <field name="name_cs">
-      Logické operace
+      Logické operátory
     </field>
   </object>
 

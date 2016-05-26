@@ -3,7 +3,7 @@
  * @ngInject
  */
 angular.module('flocs.services')
-.factory('statisticsDao', function ($http, conceptFactory, flowFactory) {
+.factory('statisticsDao', function ($http, conceptFactory, flowFactory, Block) {
 
   // public API
   return {
@@ -25,8 +25,15 @@ angular.module('flocs.services')
   }
 
   function parseBlock(record) {
-    console.log('parse block:', record);
-    return null;
+    var block = new Block(
+        record['identifier'],
+        record['name'],
+        record['level'],
+        record['credits']);
+    block.setCreditsPaid(record['credits-paid']);
+    block.setPurchased(record['purchased']);
+    block.setActive(record['active']);
+    return block;
   }
 
   function parseFinishedTask(record) {
