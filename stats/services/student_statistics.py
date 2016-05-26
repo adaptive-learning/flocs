@@ -27,11 +27,12 @@ def get_blocks(student):
     # changed (problems: we need to recalculate a lot of information and some
     # extension to toolbox model or credits handling could brake the current
     # logic)
+    acquiring_level = student.get_level() + 1
     block_infos = []
     for toolbox in Toolbox.objects.all():
         for block in toolbox.get_new_blocks():
-            purchased = (toolbox.level < student.get_level())
-            active = (toolbox.level == student.get_level())
+            purchased = (toolbox.level < acquiring_level)
+            active = (toolbox.level == acquiring_level)
             if purchased:
                 credits_paid = toolbox.credits
             elif active:
