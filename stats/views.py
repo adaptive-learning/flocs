@@ -17,25 +17,35 @@ def get_student_statistics(request):
 
 def block_to_json(block):
     block_dict = {
-      'identifier': block.identifier,
-      'name': block.name,
-      'level': block.level,
-      'purchased': block.purchased,
-      'active': block.active,
-      'credits': block.credits,
-      'credits-paid': block.credits_paid,
+        'identifier': block.identifier,
+        'name': block.name,
+        'level': block.level,
+        'purchased': block.purchased,
+        'active': block.active,
+        'credits': block.credits,
+        'credits-paid': block.credits_paid,
+        'concept-stats': concept_stats_to_json(block.concept_stats),
     }
     return block_dict
 
 
 def finished_task_to_json(finished_task):
     finished_task_dict = {
-      'task-id': finished_task.task_id,
-      'title': finished_task.title,
-      'credits': finished_task.credits,
-      'concepts': [concept.name for concept in finished_task.concepts],
-      'time': finished_task.time,
-      'percentil': finished_task.percentil,
-      'flow': finished_task.flow,
+        'task-id': finished_task.task_id,
+        'title': finished_task.title,
+        'credits': finished_task.credits,
+        'concepts': [concept.name for concept in finished_task.concepts],
+        'time': finished_task.time,
+        'percentil': finished_task.percentil,
+        'flow': finished_task.flow,
     }
     return finished_task_dict
+
+
+def concept_stats_to_json(concept):
+    concept_stats_dict = {
+        'identifier': concept.identifier,
+        'solved-count': concept.solved_count,
+        'mastered': concept.mastered,
+    }
+    return concept_stats_dict

@@ -33,6 +33,7 @@ angular.module('flocs.services')
     block.setCreditsPaid(record['credits-paid']);
     block.setPurchased(record['purchased']);
     block.setActive(record['active']);
+    block.setConceptStats(parseConceptStats(record['concept-stats']));
     return block;
   }
 
@@ -47,6 +48,14 @@ angular.module('flocs.services')
       'flow': flowFactory.fromKey(record['flow']),
     };
     return finishedTask;
+  }
+
+  function parseConceptStats(record) {
+    return {
+      identifier: record['identifier'],
+      solvedCount: record['solved-count'],
+      mastered: record['mastered'],
+    };
   }
 
 });

@@ -14,6 +14,7 @@ angular.module('flocs.models')
     this.creditsPaid = 0;
     this.active = false;
     this.purchased = false;
+    this.conceptStats = null;
   }
 
   Block.prototype.setCreditsPaid = function(creditsPaid) {
@@ -28,8 +29,20 @@ angular.module('flocs.models')
     this.purchased = purchased;
   };
 
+  Block.prototype.setConceptStats = function(conceptStats) {
+    this.conceptStats = conceptStats;
+  };
+
+  Block.prototype.getSolvedCount = function() {
+    return this.conceptStats.solvedCount;
+  };
+
   Block.prototype.isPassive = function() {
     return (!this.active) && (!this.purchased);
+  };
+
+  Block.prototype.isMastered = function() {
+    return this.conceptStats.mastered;
   };
 
   return Block;

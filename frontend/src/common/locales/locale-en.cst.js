@@ -106,6 +106,7 @@ angular.module('flocs.locales')
     BLOCKS: 'Blocks',
     SOLVED_TASKS: 'Solved tasks',
     TITLE: 'Statistics',
+    TASKS_COUNT: 'tasks'
   },
 
   TASK_COMPLETION: {

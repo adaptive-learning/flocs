@@ -34,6 +34,18 @@ footer{
   color: #7EB5D6;
 }
 
+.bg-easy {
+  background-color: #337ab7;
+}
+
+.bg-flow {
+  background-color: #5cb85c;
+}
+
+.bg-difficult {
+  background-color: #d9534f;
+}
+
 /* ===== Other styles ===== */
 a {
   cursor: pointer;

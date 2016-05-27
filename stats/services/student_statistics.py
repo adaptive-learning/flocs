@@ -1,5 +1,6 @@
 from collections import namedtuple
 from blocks.models import Toolbox
+from concepts.models import BlockConcept
 from practice.models import StudentModel
 from practice.models import StudentTaskInfoModel
 from practice.services.statistics_service import percentil as compute_percentil
@@ -21,7 +22,7 @@ def get_statistics_for_student(student):
 
 
 StudentBlockInfo = namedtuple('StudentBlockInfo',
-        'identifier name level purchased active credits credits_paid')
+        'identifier name level purchased active credits credits_paid concept_stats')
 def get_blocks(student):
     # NOTE: current model is not very suitable for this query and should be
     # changed (problems: we need to recalculate a lot of information and some
@@ -39,6 +40,7 @@ def get_blocks(student):
                 credits_paid = student.free_credits
             else:
                 credits_paid = 0
+            concept = BlockConcept.objects.get(block=block).concept_ptr
             block_info = StudentBlockInfo(
                 identifier=block.identifier,
                 name=block.name,
@@ -46,7 +48,8 @@ def get_blocks(student):
                 purchased=purchased,
                 active=active,
                 credits=toolbox.credits,
-                credits_paid=credits_paid)
+                credits_paid=credits_paid,
+                concept_stats=compute_concept_stats(student, concept))
             block_infos.append(block_info)
     return block_infos
 
@@ -73,7 +76,21 @@ class FinishedTask(namedtuple('FinishedTaskTuple',
             title=task.title,
             credits=task.get_level(), # hack -> TODO: synchronize with computing credits
             concepts=task.get_programming_concepts(),
-            time=instance.time_spent,  # fake -> TODO: compute real time
+            time=instance.time_spent,
             percentil=compute_percentil(instance),
             flow=instance.get_reported_flow_key())
         return finished_task
+
+
+ConceptStats = namedtuple('ConceptStats', 'identifier solved_count mastered')
+TASKS_TO_MASTER = 5
+def compute_concept_stats(student, concept):
+    solved_count = len([t_info
+                        for t_info in StudentTaskInfoModel.objects.filter(student=student)
+                        if t_info.is_solved()
+                           and concept in t_info.task.get_contained_concepts()])
+    concept_stats = ConceptStats(
+        identifier=concept.name,
+        solved_count=solved_count,
+        mastered=solved_count >= TASKS_TO_MASTER)
+    return concept_stats

@@ -6,6 +6,12 @@
   text-align: center;
 }
 
+.thumbnail-heading .icon{
+  float: right;
+  margin-right: 8px;
+  margin-top: -1px;
+}
+
 .progressbar-caption {
   color:  white;
   white-space: nowrap;

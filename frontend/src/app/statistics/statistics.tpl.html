@@ -6,7 +6,16 @@
   <div class="row">
     <div ng-repeat="block in statistics.blocks" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
       <div class="thumbnail" ng-class="{disabled: block.isPassive(), purchased: block.purchased}">
-        <h4 class="thumbnail-heading">{{ block.name }}</h4>
+        <h4 class="thumbnail-heading">
+          {{ block.name }}
+          <span ng-if="block.purchased" class="icon badge" ng-class="{'bg-easy': block.isMastered()}">
+            <span translate>STATISTICS_PAGE.TASKS_COUNT</span>:
+            {{ block.getSolvedCount() }}
+          </span>
+          <span ng-if="!block.purchased" class="icon">
+            <span class="glyphicon glyphicon-lock"></span>
+          </span>
+        </h4>
         <div>
           <flocs-block-preview block="block"></flocs-block-preview>
         </div>
@@ -15,10 +24,11 @@
               value="block.creditsPaid"
               max="block.credits"
               animate="false"
-              type="{{ block.active ? 'success' : 'primary' }}"
+              type="{{ block.active ? 'warning' : 'info' }}"
               >
               <span class="progressbar-caption">
-                {{block.creditsPaid}} / {{block.credits}}
+                &nbsp;{{block.creditsPaid}} / {{block.credits}}
+                &nbsp;<span class="glyphicon glyphicon-cd"></span>
               </span>
           </uib-progressbar>
         </div>
