@@ -1,26 +1,46 @@
 <footer class="container-fluid" ng-controller="footerCtrl">
-    <span class="pull-left">
+    <div class="pull-left">
       <div class="btn-toolbar">
         <button
             type="button"
             class="navbar-btn btn btn-primary"
             ng-click="openFeedbackModal()"
-            translate
             >
-          FEEDBACK
+          <span class="glyphicon glyphicon-pencil"></span>&nbsp;
+          <span translate>FEEDBACK</span>
         </button>
         <button
             type="button"
-            class="navbar-btn btn btn-primary"
+            class="navbar-btn btn btn-default"
             ui-sref="about"
-            translate
             >
-          ABOUT
+          <span class="glyphicon glyphicon-info-sign"></span>&nbsp;
+          <span translate>ABOUT</span>
         </button>
+        <span uib-dropdown id="language-selector" class="dropup">
+          <button type="button" class="navbar-btn btn btn-default" id="language-selector-button"
+              uib-dropdown-toggle
+              class="dropdown-toggle"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+              >
+            <span class="glyphicon glyphicon-globe"></span>&nbsp;
+            {{currentLanguageCode}} <span class="caret"></span>
+          </button>
+          <ul uib-dropdown-menu
+              class="dropdown-menu"
+              role="menu"
+              aria-labelled-by="language-selector-button"
+              >
+            <li ng-repeat="(code, domain) in languageDomains" role="menuitem">
+              <a switch-domain="http://{{domain}}">{{code | languageNativeName}}</a>
+            </li>
+          </ul>
+        </span>
       </div>
-    </span>
+    </div>
 
-    </span>
     <span class="pull-right">
       <a href="http://www.fi.muni.cz/adaptivelearning/">
         <img src="/static/assets/img/alg-logo.png" alt="Adaptive Learning Group logo"/>

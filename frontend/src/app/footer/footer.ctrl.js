@@ -4,7 +4,10 @@
  * @ngInject
  */
 angular.module('flocs.footer')
-.controller('footerCtrl', function($scope, $uibModal) {
+.controller('footerCtrl', function($scope, $uibModal, localesService) {
+
+  $scope.currentLanguageCode = localesService.getLanguage();
+  $scope.languageDomains = localesService.getLanguageDomains();
 
   $scope.openFeedbackModal = function() {
     var modalInstance = $uibModal.open({

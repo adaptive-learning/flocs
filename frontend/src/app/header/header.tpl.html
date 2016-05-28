@@ -37,27 +37,6 @@
 
       <ul class="nav navbar-nav navbar-right">
 
-        <li uib-dropdown id="language-selector" class="dropdown">
-          <a href id="language-selector-button"
-              uib-dropdown-toggle
-              class="dropdown-toggle"
-              role="button"
-              aria-haspopup="true"
-              aria-expanded="false"
-              >
-            {{currentLanguageCode}} <span class="caret"></span>
-          </a>
-          <ul uib-dropdown-menu
-              class="dropdown-menu"
-              role="menu"
-              aria-labelled-by="language-selector-button"
-              >
-            <li ng-repeat="(code, domain) in languageDomains" role="menuitem">
-              <a switch-domain="http://{{domain}}">{{code | languageNativeName}}</a>
-            </li>
-          </ul>
-        </li>
-
         <li ng-if="practiceInfo.available" uib-dropdown id="credtis-info" class="dropdown">
           <a href id="credits-info-button"
               uib-dropdown-toggle

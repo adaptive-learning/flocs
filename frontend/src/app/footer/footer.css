@@ -1,0 +1,9 @@
+footer .btn {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+footer .btn-default {
+  background-color: #999;
+  border-color: #777;
+}
