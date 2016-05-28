@@ -6,6 +6,7 @@ angular.module('flocs.directives')
     scope: {
       flow: '=',
       editable: '=',
+      size: '@',
     },
 
     templateUrl: 'directives/flow-meter.tpl.html',

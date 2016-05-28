@@ -30,3 +30,7 @@
 .disabled .progressbar-caption {
   color: #aaa;
 }
+
+.small-meter-container {
+  width: 100px;
+}

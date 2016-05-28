@@ -44,7 +44,7 @@
       <th translate>CREDITS</th>
       <th translate>CONCEPTS</th>
       <th translate>TIME_SPENT</th>
-      <th translate>FLOW</th>
+      <th class="small-meter-container" translate>FLOW</th>
     </tr>
     </thead>
     <tbody>
@@ -65,7 +65,7 @@
         <flocs-time-meter time="{{task.time}}" percentil="{{task.percentil}}"></flocs-time-meter>
       </td>
       <td>
-        <flocs-flow-meter flow="task.flow" editable="false"></flocs-flow-meter>
+        <flocs-flow-meter flow="task.flow" editable="false" size="small"></flocs-flow-meter>
       </td>
     </tr>
     </tbody>
