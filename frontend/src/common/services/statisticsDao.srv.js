@@ -18,10 +18,24 @@ angular.module('flocs.services')
 
   function parseStatistics(response) {
     var statistics = {
-      'blocks': response.data['blocks'].map(parseBlock),
-      'finishedTasks': response.data['finished-tasks'].map(parseFinishedTask),
+      overview: parseOverview(response.data['overview']),
+      blocks: response.data['blocks'].map(parseBlock),
+      finishedTasks: response.data['finished-tasks'].map(parseFinishedTask),
     };
     return statistics;
+  }
+
+  function parseOverview(record) {
+    var overview = {
+      solvedCount: record['solved-count'],
+      sessionsCount: record['sessions-count'],
+      totalFlowTime: record['total-flow-time'],
+      totalCredits: record['total-credits'],
+      freeCredits: record['free-credits'],
+      blocksCount: record['blocks-count'],
+      conceptsCount: record['concepts-count'],
+    };
+    return overview;
   }
 
   function parseBlock(record) {

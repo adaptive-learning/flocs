@@ -1,74 +1,115 @@
 <div class="container">
   <h1 translate>STATISTICS_PAGE.TITLE</h1>
 
-  <h2 class="page-header" translate>STATISTICS_PAGE.BLOCKS</h2>
+  <div ng-show="statistics.overview">
+    <h2 class="page-header" translate>STATISTICS_PAGE.OVERVIEW</h2>
+    <div class="row">
+      <flocs-overview-block
+          section="tasks-stats"
+          count="{{statistics.overview.solvedCount}}"
+          label="vyresenych uloh">
+      </flocs-overview-block>
 
-  <div class="row">
-    <div ng-repeat="block in statistics.blocks" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-      <div class="thumbnail" ng-class="{disabled: block.isPassive(), purchased: block.purchased}">
-        <h4 class="thumbnail-heading">
-          {{ block.name }}
-          <span ng-if="block.purchased" class="icon badge" ng-class="{'bg-easy': block.isMastered()}">
-            <span translate>STATISTICS_PAGE.TASKS_COUNT</span>:
-            {{ block.getSolvedCount() }}
-          </span>
-          <span ng-if="!block.purchased" class="icon">
-            <span class="glyphicon glyphicon-lock"></span>
-          </span>
-        </h4>
-        <div>
-          <flocs-block-preview block="block"></flocs-block-preview>
-        </div>
-        <div class="caption">
-          <uib-progressbar
-              value="block.creditsPaid"
-              max="block.credits"
-              animate="false"
-              type="{{ block.active ? 'warning' : 'info' }}"
-              >
-              <span class="progressbar-caption">
-                &nbsp;{{block.creditsPaid}} / {{block.credits}}
-                &nbsp;<span class="glyphicon glyphicon-cd"></span>
-              </span>
-          </uib-progressbar>
+      <flocs-overview-block
+        count="{{statistics.overview.sessionsCount}}"
+        label="dokoncenych treninku">
+      </flocs-overview-block>
+
+      <flocs-overview-block
+        count="{{ statistics.overview.totalFlowTime | secondsToHoursMins }}"
+        label="hod/min ve flow">
+      </flocs-overview-block>
+
+      <flocs-overview-block
+        count="{{ statistics.overview.totalCredits }}"
+        label="vydelanych kreditu">
+      </flocs-overview-block>
+
+      <flocs-overview-block
+        section="blocks-stats"
+        count="{{ statistics.overview.blocksCount }}"
+        label="získaných bloků">
+      </flocs-overview-block>
+
+      <flocs-overview-block
+        count="{{ statistics.overview.conceptsCount }}"
+        label="procvičovaných konceptů">
+      </flocs-overview-block>
+    </div>
+  </div>
+
+
+  <div id="blocks-stats" ng-show="statistics.blocks">
+    <h2 class="page-header" translate>STATISTICS_PAGE.BLOCKS</h2>
+    <div class="row">
+      <div ng-repeat="block in statistics.blocks" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="thumbnail" ng-class="{disabled: block.isPassive(), purchased: block.purchased}">
+          <h4 class="thumbnail-heading">
+            {{ block.name }}
+            <span ng-if="block.purchased" class="icon badge" ng-class="{'bg-easy': block.isMastered()}">
+              <span translate>STATISTICS_PAGE.TASKS_COUNT</span>:
+              {{ block.getSolvedCount() }}
+            </span>
+            <span ng-if="!block.purchased" class="icon">
+              <span class="glyphicon glyphicon-lock"></span>
+            </span>
+          </h4>
+          <div>
+            <flocs-block-preview block="block" visible="{{statistics.blocks}}"></flocs-block-preview>
+          </div>
+          <div class="caption">
+            <uib-progressbar
+                value="block.creditsPaid"
+                max="block.credits"
+                animate="false"
+                type="{{ block.active ? 'warning' : 'info' }}"
+                >
+                <span class="progressbar-caption">
+                  &nbsp;{{block.creditsPaid}} / {{block.credits}}
+                  &nbsp;<span class="glyphicon glyphicon-cd"></span>
+                </span>
+            </uib-progressbar>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <h2 class="page-header" translate>STATISTICS_PAGE.SOLVED_TASKS</h2>
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th translate>TASK_TITLE</th>
-      <th translate>CREDITS</th>
-      <th translate>CONCEPTS</th>
-      <th class="small-meter-container" translate>TIME_SPENT</th>
-      <th class="small-meter-container" translate>FLOW</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="task in statistics.finishedTasks">
-      <td>
-        <a ui-sref="practice-task({taskId: task.id})">{{task.title}}</a>
-      </td>
-      <td>{{task.credits}}</td>
-      <td>
-        <span ng-repeat="concept in task.concepts">
-          <img ng-src="/static/assets/img/{{concept.icon}}"
-               height="22"
-               title="{{concept.getTranslationKey() | translate}}"
-               alt="{{concept.getTranslationKey() | translate}}">
-        </span>
-      </td>
-      <td>
-        <flocs-time-meter time="{{task.time}}" percentil="{{task.percentil}}"></flocs-time-meter>
-      </td>
-      <td>
-        <flocs-flow-meter flow="task.flow" editable="false" size="small"></flocs-flow-meter>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <div id="tasks-stats" ng-show="statistics.finishedTasks">
+    <h2 class="page-header" translate>STATISTICS_PAGE.SOLVED_TASKS</h2>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th translate>TASK_TITLE</th>
+        <th translate>CREDITS</th>
+        <th translate>CONCEPTS</th>
+        <th class="small-meter-container" translate>TIME_SPENT</th>
+        <th class="small-meter-container" translate>FLOW</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="task in statistics.finishedTasks">
+        <td>
+          <a ui-sref="practice-task({taskId: task.id})">{{task.title}}</a>
+        </td>
+        <td>{{task.credits}}</td>
+        <td>
+          <span ng-repeat="concept in task.concepts">
+            <img ng-src="/static/assets/img/{{concept.icon}}"
+                  height="22"
+                  title="{{concept.getTranslationKey() | translate}}"
+                  alt="{{concept.getTranslationKey() | translate}}">
+          </span>
+        </td>
+        <td>
+          <flocs-time-meter time="{{task.time}}" percentil="{{task.percentil}}"></flocs-time-meter>
+        </td>
+        <td>
+          <flocs-flow-meter flow="task.flow" editable="false" size="small"></flocs-flow-meter>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 
 </div>

@@ -9,10 +9,24 @@ def get_student_statistics(request):
     """
     statistics = get_statistics_for_user(user=request.user)
     statistics_dict = {
+        'overview': overview_to_json(statistics.overview),
         'blocks': [block_to_json(b) for b in statistics.blocks],
         'finished-tasks': [finished_task_to_json(t) for t in statistics.finished_tasks],
     }
     return JsonResponse(statistics_dict)
+
+
+def overview_to_json(overview):
+    overview_dict = {
+        'solved-count': overview.solved_count,
+        'sessions-count': overview.sessions_count,
+        'total-credits': overview.total_credits,
+        'free-credits': overview.free_credits,
+        'total-flow-time': overview.total_flow_time,
+        'blocks-count': overview.blocks_count,
+        'concepts-count': overview.concepts_count,
+    }
+    return overview_dict
 
 
 def block_to_json(block):

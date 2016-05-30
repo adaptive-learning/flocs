@@ -1,3 +1,38 @@
+.well-with-icon {
+  display: table;
+  min-height: 78px;
+  width: 100%;
+  padding: 2px 14px;
+}
+
+.well-icon {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 40px;
+  width: 50px;
+  padding-right: 4px;
+}
+
+.well-headline {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 40px;
+  text-align: left;
+  padding-top: 5px;
+  padding-bottom: 0px;
+}
+
+.well-headline .well-count {
+  font-size: 40px;
+  vertical-align: middle;
+}
+
+.well-headline .well-label {
+  font-size: 22px;
+  vertical-align: baseline;
+}
+
+
 .progress {
   margin-bottom: 0px;
 }
@@ -6,7 +41,7 @@
   text-align: center;
 }
 
-.thumbnail-heading .icon{
+.thumbnail-heading .icon {
   float: right;
   margin-right: 8px;
   margin-top: -1px;

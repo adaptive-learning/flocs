@@ -1,10 +1,12 @@
 from collections import namedtuple
 from blocks.models import Toolbox
 from concepts.models import BlockConcept
+from practice.models import PracticeSession
 from practice.models import StudentModel
 from practice.models import StudentTaskInfoModel
+from practice.models.task_instance import FlowRating
 from practice.services.statistics_service import percentil as compute_percentil
-
+from practice.services.practice_session_service import TASKS_IN_SESSION
 
 
 def get_statistics_for_user(user):
@@ -14,11 +16,46 @@ def get_statistics_for_user(user):
 
 def get_statistics_for_student(student):
     StudentStatistics = namedtuple('StudentStatistics',
-                                  ['blocks', 'finished_tasks'])
+            ['overview', 'blocks', 'finished_tasks'])
+    finished_tasks = get_finished_tasks(student)
+    blocks = get_blocks(student)
     statistics = StudentStatistics(
-            blocks=get_blocks(student),
-            finished_tasks=get_finished_tasks(student))
+            blocks=blocks,
+            finished_tasks=finished_tasks,
+            overview=extract_overview(student, finished_tasks, blocks))
     return statistics
+
+
+StudentStatsOverview = namedtuple('StudentStatsOverview',
+            ['solved_count', 'sessions_count', 'concepts_count',
+             'total_flow_time', 'blocks_count', 'total_credits', 'free_credits',
+            ])
+def extract_overview(student, finished_tasks, blocks):
+    overview = StudentStatsOverview(
+            solved_count=len(finished_tasks),
+            blocks_count=sum(1 for block in blocks if block.purchased),
+            concepts_count=compute_practiced_concepts_count(student),
+            sessions_count=compute_completed_sessions_count(student),
+            total_credits=student.total_credits,
+            free_credits=student.free_credits,
+            total_flow_time=sum_flow_time(finished_tasks))
+    return overview
+
+
+def compute_practiced_concepts_count(student):
+    programming_concepts = student._seen_concepts.filter(programmingconcept__isnull=False)
+    return programming_concepts.count()
+
+
+def compute_completed_sessions_count(student):
+    sessions = PracticeSession.objects.filter(student=student, task_counter=TASKS_IN_SESSION)
+    return sessions.count()
+
+
+def sum_flow_time(tasks):
+    total_time = sum(task.time for task in tasks
+                     if FlowRating.from_key(task.flow) == FlowRating.RIGHT)
+    return total_time
 
 
 StudentBlockInfo = namedtuple('StudentBlockInfo',
