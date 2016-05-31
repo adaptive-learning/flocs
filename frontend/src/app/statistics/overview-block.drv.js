@@ -4,6 +4,7 @@ angular.module('flocs.statistics')
     restrict: 'E',
     scope: {
       section: '@',
+      icon: '@',
       count: '@',
       label: '@',
     },

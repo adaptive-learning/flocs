@@ -26,6 +26,7 @@ angular.module('flocs.locales')
   PRICE: 'cena',
   PRIVACY: 'Soukromí',
   PROFILE: 'Profil',
+  RESOURCES: 'Zdroje',
   RUN_PROGRAM: 'Spusť program',
   SEND: 'Odeslat',
   SESSION_OVERVIEW: 'Jak se dařilo?',

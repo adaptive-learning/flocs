@@ -8,9 +8,13 @@
 .well-icon {
   display: table-cell;
   vertical-align: middle;
-  font-size: 40px;
+  /*font-size: 40px;*/
   width: 50px;
-  padding-right: 4px;
+  padding: 0px 20px 0px 10px;
+}
+
+.well-icon img {
+  height: 50px;
 }
 
 .well-headline {

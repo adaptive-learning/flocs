@@ -26,6 +26,7 @@ angular.module('flocs.locales')
   PRICE: 'price',
   PRIVACY: 'Privacy',
   PROFILE: 'Profile',
+  RESOURCES: 'Resources',
   RUN_PROGRAM: 'Run program',
   SEND: 'Send',
   SESSION_OVERVIEW: 'How did it go?',

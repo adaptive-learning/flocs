@@ -5,33 +5,44 @@
     <h2 class="page-header" translate>STATISTICS_PAGE.OVERVIEW</h2>
     <div class="row">
       <flocs-overview-block
-          section="tasks-stats"
-          count="{{statistics.overview.solvedCount}}"
-          label="vyresenych uloh">
+        section="tasks-stats"
+        icon="task"
+        count="{{statistics.overview.solvedCount}}"
+        label="vyresenych uloh">
       </flocs-overview-block>
 
       <flocs-overview-block
-        count="{{statistics.overview.sessionsCount}}"
-        label="dokoncenych treninku">
-      </flocs-overview-block>
-
-      <flocs-overview-block
-        count="{{ statistics.overview.totalFlowTime | secondsToHoursMins }}"
-        label="hod/min ve flow">
-      </flocs-overview-block>
-
-      <flocs-overview-block
+        icon="credits"
         count="{{ statistics.overview.totalCredits }}"
         label="vydelanych kreditu">
       </flocs-overview-block>
 
       <flocs-overview-block
+        icon="training"
+        count="{{statistics.overview.sessionsCount}}"
+        label="dokoncenych treninku">
+      </flocs-overview-block>
+
+      <flocs-overview-block ng-if="statistics.overview.totalFlowTime < 3600"
+        icon="flow-time"
+        count="{{ statistics.overview.totalFlowTime | secondsToMins }}"
+        label="mins ve flow">
+      </flocs-overview-block>
+      <flocs-overview-block ng-if="statistics.overview.totalFlowTime >= 3600"
+        icon="flow-time"
+        count="{{ statistics.overview.totalFlowTime | secondsToHours }}"
+        label="hodin ve flow">
+      </flocs-overview-block>
+
+      <flocs-overview-block
+        icon="block"
         section="blocks-stats"
         count="{{ statistics.overview.blocksCount }}"
         label="získaných bloků">
       </flocs-overview-block>
 
       <flocs-overview-block
+        icon="concept"
         count="{{ statistics.overview.conceptsCount }}"
         label="procvičovaných konceptů">
       </flocs-overview-block>
