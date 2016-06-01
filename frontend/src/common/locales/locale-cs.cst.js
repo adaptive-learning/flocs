@@ -26,7 +26,6 @@ angular.module('flocs.locales')
   PRICE: 'cena',
   PRIVACY: 'Soukromí',
   PROFILE: 'Profil',
-  RESOURCES: 'Zdroje',
   RUN_PROGRAM: 'Spusť program',
   SEND: 'Odeslat',
   SESSION_OVERVIEW: 'Jak se dařilo?',
@@ -105,6 +104,13 @@ angular.module('flocs.locales')
     SOLVED_TASKS_COUNT: 'Počet vyřešených úloh',
     SOLVED_DISTINCT_TASKS_COUNT: 'Z toho unikátních úloh',
     USERPROFILE: 'Uživatelský profil',
+  },
+
+  RESOURCES: {
+    RESOURCES: 'Zdroje',
+    IMAGE_RESOURCES: 'Obrázkové zdroje',
+    BY: 'od',
+    FROM: 'převzaté z',
   },
 
   STATISTICS_PAGE: {

@@ -13,5 +13,15 @@
   <p translate>ABOUT_PAGE.PRIVACY_TEXT</p>
 
   <h2 translate>RESOURCES</h2>
-  TBA
+  <p>
+    <span translate>RESOURCES.IMAGE_RESOURCES</span>:
+    <ul>
+      <li ng-repeat="resource in imageResources">
+        <a ng-href="{{ resource.link }}">{{ resource.name }}</a>
+        <span translate>RESOURCES.BY</span> {{ resource.author }},
+        <span translate>RESOURCES.FROM</span> <a ng-href="{{ resource.projectLink }}">{{ resource.project }}</a>.
+      </li>
+    </ul>
+  </p>
+
 </div>

@@ -10,6 +10,7 @@ angular.module('flocs', [
     'ngDialog',
     'pascalprecht.translate',
     'flocs.locales',
+    'flocs.resources',
     'flocs.models',
     'flocs.services',
     'flocs.directives',
@@ -104,6 +105,7 @@ angular.module('flocs', [
     .state('about', {
       url: '/about',
       templateUrl: 'about/about.tpl.html',
+      controller: 'aboutCtrl',
       data: {
           titleTraslationKey: 'ABOUT'
       }

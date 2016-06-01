@@ -26,7 +26,6 @@ angular.module('flocs.locales')
   PRICE: 'price',
   PRIVACY: 'Privacy',
   PROFILE: 'Profile',
-  RESOURCES: 'Resources',
   RUN_PROGRAM: 'Run program',
   SEND: 'Send',
   SESSION_OVERVIEW: 'How did it go?',
@@ -101,6 +100,13 @@ angular.module('flocs.locales')
     SOLVED_TASKS_COUNT: 'Number of solved tasks',
     SOLVED_DISTINCT_TASKS_COUNT: 'Of which distinct',
     USERPROFILE: 'User profile',
+  },
+
+  RESOURCES: {
+    RESOURCES: 'Resources',
+    IMAGE_RESOURCES: 'Image resources',
+    BY: 'by',
+    FROM: 'from',
   },
 
   STATISTICS_PAGE: {
