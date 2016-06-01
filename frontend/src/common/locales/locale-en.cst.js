@@ -110,9 +110,17 @@ angular.module('flocs.locales')
   },
 
   STATISTICS_PAGE: {
+    TITLE: 'Statistics',
+    OVERVIEW: 'Overview',
+    N_CREDITS: '{N, plural, one{credit} other{credits}}',
+    N_TASKS: '{N, plural, one{solved task} other{solved tasks}}',
+    N_TRAININGS: '{N, plural, one{training} other{trainings}}',
+    N_FLOW_HOURS: '{N, plural, one{hour in flow} other{hours in flow}}',
+    N_FLOW_MINS: '{N, plural, one{minute in flow} other{minutes in flow}}',
+    N_BLOCKS: '{N, plural, one{block} other{blocks}}',
+    N_CONCEPTS: '{N, plural, one{concept} other{concepts}}',
     BLOCKS: 'Blocks',
     SOLVED_TASKS: 'Solved tasks',
-    TITLE: 'Statistics',
     TASKS_COUNT: 'tasks'
   },
 

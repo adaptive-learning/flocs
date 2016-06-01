@@ -114,9 +114,17 @@ angular.module('flocs.locales')
   },
 
   STATISTICS_PAGE: {
+    TITLE: 'Statistiky',
+    OVERVIEW: 'Přehled',
+    N_CREDITS: '{N, plural, one{kredit} few{kredity} other{kreditů}}',
+    N_TASKS: '{N, plural, one{vyřešené úloha} few{vyřešené úlohy} other{vyřešených úloh}}',
+    N_TRAININGS: '{N, plural, one{trénink} few{tréninky} other{tréninků}}',
+    N_FLOW_HOURS: '{N, plural, one{hodina ve flow} few{hodiny ve flow} other{hodin ve flow}}',
+    N_FLOW_MINS: '{N, plural, one{minuta ve flow} few{minuty ve flow} other{minut ve flow}}',
+    N_BLOCKS: '{N, plural, one{blok} few{bloky} other{bloků}}',
+    N_CONCEPTS: '{N, plural, one{koncept} few{koncepty} other{konceptů}}',
     BLOCKS: 'Bloky',
     SOLVED_TASKS: 'Vyřešené úlohy',
-    TITLE: 'Statistiky',
     TASKS_COUNT: 'úloh'
   },
 

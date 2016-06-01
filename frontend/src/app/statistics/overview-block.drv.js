@@ -6,7 +6,7 @@ angular.module('flocs.statistics')
       section: '@',
       icon: '@',
       count: '@',
-      label: '@',
+      labelTranslationKey: '@',
     },
 
     templateUrl: 'statistics/overview-block.tpl.html',
