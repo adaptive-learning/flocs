@@ -3,7 +3,7 @@
 		test test-backend test-frontend \
 		check check-backend check-frontend \
 		db-setup db-migrate db-load-data db-generate-tasks-difficulty admin \
-		logs
+		export-data-to-csv logs
 
 # -----------------------------------------------------------
 
@@ -82,3 +82,8 @@ logs:
 	then \
 		echo 'DATE,STUDENT_ID,TASK_INSTANCE_ID,ATTEMPT_COUNT,SOLVED,TIME_SPENT,CODE' >> logs/student-code.log ; \
 	fi;
+
+# -----------------------------------------------------------
+
+export-data-to-csv:
+	python manage.py export_data_to_csv
