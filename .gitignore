@@ -2,20 +2,19 @@
 __pycache__/
 *.py[cod]
 
+# Unversioned data
+exported-data/
+simulated-data/
+db.*
+
 # Generated files
 *.pdf
 *.ps
 *.dvi
 
-#  Generated data
-simulated-data/
-practice/fixtures/task-difficulties.json
-
 # Temporary data
 .tmp
 
-# DB
-db.*
 
 # C extensions
 *.so

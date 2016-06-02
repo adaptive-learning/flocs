@@ -14,7 +14,7 @@ import dj_database_url
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+EXPORTED_DATA_DIR = os.path.join(BASE_DIR, 'exported-data')
 FRONTEND_DIR = os.path.join(BASE_DIR, 'frontend')
 
 # Quick-start development settings - unsuitable for production

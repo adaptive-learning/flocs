@@ -1,3 +1,4 @@
+from collections import namedtuple
 from django.db import models
 from blocks.models import Block
 
@@ -13,12 +14,30 @@ class Concept(models.Model):
         Concepts of a task determine its difficulty.
     """
     objects = ConceptManager()
+    export_class = namedtuple('Concept', ['concept_id', 'name', 'type'])
+    TYPES = ['environment', 'game', 'block', 'programming']
 
     name = models.CharField(max_length=50, unique=True)
     subconcepts = models.ManyToManyField('self')
 
     def get_subconcepts(self):
         return self.subconcepts.all()
+
+    def get_type(self):
+        """ Return string representing type of concept, see self.TYPES
+        """
+        for type_name in self.TYPES:
+            # if a concept is SomeConcept, django creates someconcept field
+            if hasattr(self, type_name + 'concept'):
+                return type_name
+        return 'none'
+
+    def to_export_tuple(self):
+        export_tuple = self.export_class(
+                concept_id=self.pk,
+                name=self.name,
+                type=self.get_type())
+        return export_tuple
 
     def __str__(self):
         return self.name
