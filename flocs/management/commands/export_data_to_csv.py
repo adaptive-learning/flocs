@@ -1,8 +1,10 @@
+from datetime import datetime
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from concepts.models import Concept, Instruction
 import csv
 import os
+import re
 
 
 class Command(BaseCommand):
@@ -15,7 +17,10 @@ class Command(BaseCommand):
         self.export_all_tables()
 
     def export_all_tables(self):
-        self.export_directory = settings.EXPORTED_DATA_DIR + '/tady-bude-datum/'
+        datestamp = datetime.now().strftime('%Y-%m-%d')
+        # the last empty path ('') is there to make it a directory, not a file
+        self.export_directory = os.path.join(settings.EXPORTED_DATA_DIR,
+                                             datestamp, '')
         os.makedirs(self.export_directory, exist_ok=True)
         self.stdout.write("Creating export of all data in {0}".format(self.export_directory))
         for model in self.models_to_export:
@@ -23,8 +28,9 @@ class Command(BaseCommand):
 
     def export_model(self, model):
         model_name = model.__name__
-        self.stdout.write("- exporting model {0}".format(model_name))
-        destination = self.export_directory +  model_name + '.csv'
+        file_name = model_name_to_file_name(model_name)
+        self.stdout.write("- exporting model {0} to {1}".format(model_name, file_name))
+        destination = os.path.join(self.export_directory, file_name)
         fieldnames = model.export_class._fields
         with open(destination, 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
@@ -32,3 +38,12 @@ class Command(BaseCommand):
             for instance in model.objects.all():
                 export_tuple = instance.to_export_tuple()
                 writer.writerow(export_tuple)
+
+def model_name_to_file_name(name, extension='csv'):
+    """ Convert name of a model (CamelCase) into a file name (hyphen-cases.csv)
+
+    For example: Concept -> concepts.csv; HappyRabbit -> happy-rabbits.csv
+    """
+    hyphened = re.sub('(.)([A-Z][a-z]+)', r'\1-\2', name)
+    file_name = hyphened.lower() + 's.' + extension
+    return file_name
