@@ -1,7 +1,9 @@
 from datetime import datetime
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
+from blocks.models import Block
 from concepts.models import Concept, Instruction
+from tasks.models import TaskModel
 import csv
 import os
 import re
@@ -11,7 +13,7 @@ class Command(BaseCommand):
     help = "Export all data for analysis into CSV files."
 
     # all models to export need to define to_export_tuple() function
-    models_to_export = [Concept, Instruction]
+    models_to_export = [Block, Concept, Instruction, TaskModel]
 
     def handle(self, *args, **options):
         self.export_all_tables()
@@ -33,7 +35,7 @@ class Command(BaseCommand):
         destination = os.path.join(self.export_directory, file_name)
         fieldnames = model.export_class._fields
         with open(destination, 'w', newline='') as csvfile:
-            writer = csv.writer(csvfile)
+            writer = csv.writer(csvfile, quoting=csv.QUOTE_NONNUMERIC)
             writer.writerow(fieldnames)
             for instance in model.objects.all():
                 export_tuple = instance.to_export_tuple()
@@ -44,6 +46,7 @@ def model_name_to_file_name(name, extension='csv'):
 
     For example: Concept -> concepts.csv; HappyRabbit -> happy-rabbits.csv
     """
+    name = name if name[-5:] != 'Model' else name[:-5]
     hyphened = re.sub('(.)([A-Z][a-z]+)', r'\1-\2', name)
     file_name = hyphened.lower() + 's.' + extension
     return file_name

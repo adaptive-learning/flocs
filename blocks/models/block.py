@@ -1,14 +1,15 @@
-"""Definition of block model
+""" DB model for a command block, e.g. "Move forward" or "Repeat N-times"
 """
-
-from django.db import models
 import json
+from collections import namedtuple
+from django.db import models
 from .block_manager import BlockManager
 
 class Block(models.Model):
     """Representation of a code block
     """
     objects = BlockManager()
+    export_class = namedtuple('Block', ['block_id', 'identifier', 'name'])
 
     name = models.TextField(
         help_text="name of a block shown to students")
@@ -37,6 +38,13 @@ class Block(models.Model):
 
     def __str__(self):
         return '[{pk}] {name}'.format(pk=self.pk, name=self.name)
+
+    def to_export_tuple(self):
+        export_tuple = self.export_class(
+                block_id=self.pk,
+                identifier=self.identifier,
+                name=self.name_en)
+        return export_tuple
 
     def to_json(self):
         """Returns JSON (dictionary) representation of the block.

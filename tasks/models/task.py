@@ -1,5 +1,6 @@
 import json
 import re
+from collections import namedtuple
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -10,8 +11,12 @@ from blocks.models import Block, Toolbox
 
 
 class TaskModel(models.Model):
-    """Model for a task (exercise)
+    """ Model for a task (exercise)
     """
+    export_class = namedtuple('Task', ['task_id', 'title', 'level',
+                                       'concepts_ids', 'blocks_ids',
+                                       'maze_settings', 'solution'])
+
     title = models.TextField()
 
     toolbox = models.ForeignKey(Toolbox,
@@ -116,6 +121,18 @@ class TaskModel(models.Model):
 
     def __str__(self):
         return '[{pk}] {title}'.format(pk=self.pk, title=self.title)
+
+
+    def to_export_tuple(self):
+        export_tuple = self.export_class(
+                task_id=self.pk,
+                title=self.title_en,
+                concepts_ids=[concept.pk for concept in self.get_contained_concepts()],
+                blocks_ids=[block.pk for block in self.get_required_blocks()],
+                maze_settings=self.maze_settings.replace('\n', ' '),
+                solution=self.solution.replace('\n', ' '),
+                level=self.get_level())
+        return export_tuple
 
     def to_json(self):
         """Return JSON (dictionary) representation of the task.
