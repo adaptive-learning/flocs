@@ -1,7 +1,7 @@
 #task-preview-selector {
-  position: absolute;
+  /*position: absolute;*/
   z-index: 100;
-  padding: 10px;
-  background-color: rgba(200, 200, 200, 0.3);
-  right: 410px;
+  padding: 5px;
+  background-color: rgba(220, 220, 20, 0.3);
+  /*right: 410px;*/
 }

@@ -17,10 +17,10 @@
 
 </head>
 <body>
-<div id="page-wrapper">
-  <ng-include src="'header/header.tpl.html'"/></ng-include>
-  <ui-view id="content"></ui-view>
+  <div id="header-content-wrapper">
+    <ng-include src="'header/header.tpl.html'"/></ng-include>
+    <ui-view id="content" class="full-vertical-flex"></ui-view>
+  </div>
   <ng-include src="'footer/footer.tpl.html'"></ng-include>
-</div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<div>
+<div class="full-vertical-flex">
 
   <flocs-task-environment ng-class="{'invisible': !taskPrepared}">
     <button id="giveUpBtn"
@@ -10,7 +10,7 @@
     </button>
   </flocs-task-environment>
 
-  <div ng-show="taskLoading">
+  <div ng-show="taskLoading" class="loading-indicator">
     <wave-spinner></wave-spinner>
   </div>
 

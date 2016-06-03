@@ -1,14 +1,25 @@
+flocs-task-environment {
+  display: flex;
+  flex: 1;
+}
+
+#taskEnvironment {
+  display: flex;
+  flex: 1;
+  position: relative;
+}
+
 #mainPanel {
-  /*width: 400px;
-  float: left;
-  margin-right: 20px;*/
   position: absolute;
-  top: 50px;
+  float: right;
+  top: 0px;
   bottom: 0px;
   right: 0px;
   width: 400px;
   background-color: #eee;
-  padding: 2px 4px;
+  padding: 2px 4px 12px 4px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 #maze {
@@ -30,7 +41,7 @@
 #workspace {
   /*float: left;*/
   position: absolute;
-  top: 50px;
+  top: 0px;
   bottom: 0px;
   left: 0px;
   right: 400px;

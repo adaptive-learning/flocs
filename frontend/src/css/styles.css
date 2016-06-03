@@ -9,14 +9,20 @@ html {
   overflow-y: scroll;
 }
 
-#page-wrapper {
+#header-content-wrapper {
   display: flex;
   flex-direction: column;
   min-height: 100%;
 }
 
-#content {
+.full-vertical-flex {
+  display: flex;
+  flex-direction: column;
   flex: 1;
+}
+
+.container {
+  margin-bottom: 30px;
 }
 
 .navbar {
@@ -26,7 +32,6 @@ html {
 footer{
   width: 100%;
   padding: 10px 15px;
-  margin-top: 40px;
 }
 
 /* ===== Colors ===== */
@@ -54,6 +59,16 @@ a {
 
 .invisible {
   visibility: hidden;
+}
+
+.loading-indicator {
+  position: absolute;
+  left: 49%;
+  top: 49%;
+}
+
+.wave-spinner {
+  margin: 0;
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
