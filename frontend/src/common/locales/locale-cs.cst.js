@@ -20,6 +20,7 @@ angular.module('flocs.locales')
   LOG_IN: 'Přihlásit se',
   LOG_OUT: 'Odhlásit se',
   OVERALL_TIME: 'Celkový čas',
+  NOT_LOGGED: 'Nejsi přihlášen/a',
   PASSWORD: 'Heslo',
   PASSWORD_AGAIN: 'Heslo znovu',
   PRACTICE: 'Trénink',
@@ -115,6 +116,7 @@ angular.module('flocs.locales')
 
   STATISTICS_PAGE: {
     TITLE: 'Statistiky',
+    NOT_LOGGED: 'Pro zobrazení statistik je potřeba se přihlásit.',
     OVERVIEW: 'Přehled',
     N_CREDITS: '{N, plural, one{kredit} few{kredity} other{kreditů}}',
     N_TASKS: '{N, plural, one{vyřešené úloha} few{vyřešené úlohy} other{vyřešených úloh}}',

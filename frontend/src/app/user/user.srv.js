@@ -107,6 +107,18 @@ angular.module('flocs.user')
       }
     }
 
+    function waitUntilLogged() {
+      var userLogged = $q.defer();
+      checkingIfLoggedIn().then(function(logged) {
+        if (logged) {
+          userLogged.resolve();
+        } else {
+          userLogged.notify('NOT_LOGGED_YET');
+        }
+      });
+      return userLogged.promise;
+    }
+
     // public API
 	return {
       user: user,
@@ -118,6 +130,7 @@ angular.module('flocs.user')
       signingUp: signingUp,
       gettingUserDetails: gettingUserDetails,
       onUserChange: onUserChange,
+      waitUntilLogged: waitUntilLogged,
 	};
 
 });

@@ -1,5 +1,12 @@
 <div class="container">
+  <!--
   <h1 translate>STATISTICS_PAGE.TITLE</h1>
+  -->
+
+  <div ng-if="logged === false">
+    <h2 translate>NOT_LOGGED</h2>
+    <p translate>STATISTICS_PAGE.NOT_LOGGED</p>
+  </div>
 
   <div ng-show="statistics.overview">
     <h2 class="page-header" translate>STATISTICS_PAGE.OVERVIEW</h2>

@@ -20,6 +20,7 @@ angular.module('flocs.locales')
   LOG_IN: 'Log in',
   LOG_OUT: 'Log out',
   OVERALL_TIME: 'Overall time',
+  NOT_LOGGED: 'Not logged',
   PASSWORD: 'Password',
   PASSWORD_AGAIN: 'Password again',
   PRACTICE: 'Practice',
@@ -111,6 +112,7 @@ angular.module('flocs.locales')
 
   STATISTICS_PAGE: {
     TITLE: 'Statistics',
+    NOT_LOGGED: "You need to log in to see your statistics.",
     OVERVIEW: 'Overview',
     N_CREDITS: '{N, plural, one{credit} other{credits}}',
     N_TASKS: '{N, plural, one{solved task} other{solved tasks}}',
