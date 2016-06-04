@@ -37,6 +37,20 @@
 
       <ul class="nav navbar-nav navbar-right">
 
+        <li ui-sref-active="{active: ['practice-start', 'practice-task']}">
+          <a ui-sref="practice-start">
+            <span class="glyphicon glyphicon-play"></span>&nbsp;
+            <span translate>PRACTICE</span>
+          </a>
+        </li>
+
+        <li ui-sref-active="active">
+          <a ui-sref="statistics">
+            <span class="glyphicon glyphicon-stats"></span>&nbsp;
+            <span translate>STATISTICS_PAGE.TITLE</span>
+          </a>
+        </li>
+
         <li ng-if="practiceInfo.available" uib-dropdown id="credtis-info" class="dropdown">
           <a href id="credits-info-button"
               uib-dropdown-toggle
@@ -45,7 +59,7 @@
               aria-haspopup="true"
               aria-expanded="false"
               >
-            <span class="glyphicon glyphicon-cd"></span> {{practiceInfo.freeCredits}} <span class="caret"></span>
+            <span class="glyphicon glyphicon-cd"></span> {{practiceInfo.totalCredits}} <span class="caret"></span>
           </a>
           <ul uib-dropdown-menu
               class="dropdown-menu"
@@ -70,6 +84,7 @@
               aria-haspopup="true"
               aria-expanded="false"
               >
+            <span class="glyphicon glyphicon-user"></span>&nbsp;
             {{user.username}} <span class="caret"></span>
           </a>
           <ul uib-dropdown-menu
@@ -78,18 +93,24 @@
               aria-labelled-by="logged-menu-button"
               >
             <li role="menuitem">
-              <a ui-sref="statistics" translate>STATISTICS_PAGE.TITLE</a>
+              <a ui-sref="profile">
+                <span class="glyphicon glyphicon-wrench"></span>&nbsp;
+                <span translate>PROFILE</span>
+              </a>
             </li>
             <li role="menuitem">
-              <a ui-sref="profile" translate>PROFILE</a>
-            </li>
-            <li role="menuitem">
-              <a href ng-click="logout()" translate>LOG_OUT</a>
+              <a href ng-click="logout()">
+                <span class="glyphicon glyphicon-off"></span>&nbsp;
+                <span translate>LOG_OUT</span>
+              </a>
             </li>
           </ul>
         </li>
         <li ng-if="!user.logged">
-          <a href ng-click="openLoginModal()" translate>LOG_IN</a>
+          <a href ng-click="openLoginModal()">
+            <span class="glyphicon glyphicon-user"></span>&nbsp;
+            <span translate>LOG_IN</span>
+          </a>
         </li>
 
       </ul>
