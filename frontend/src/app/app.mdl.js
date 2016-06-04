@@ -41,8 +41,12 @@ angular.module('flocs', [
 
     .state('home', {
       url: '/',
-      templateUrl: 'home/home.tpl.html',
-      controller: 'homeCtrl'
+      //templateUrl: 'home/home.tpl.html',
+      //controller: 'homeCtrl',
+      // NOTE: home page is replaced by the immediate training
+      onEnter: function($state) {
+        $state.go('practice-start');
+      }
     })
 
     .state('task-preview-unset', {
