@@ -19,6 +19,7 @@ angular.module('flocs.locales')
   LEARN_PROGRAMMING: 'Learn programming!',
   LOG_IN: 'Log in',
   LOG_OUT: 'Log out',
+  LOGGED_OUT: 'Successfully logged out!',
   OVERALL_TIME: 'Overall time',
   NOT_LOGGED: 'Not logged',
   PASSWORD: 'Password',

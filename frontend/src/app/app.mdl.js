@@ -115,6 +115,11 @@ angular.module('flocs', [
       }
     })
 
+    .state('logout-success', {
+      url: '/logout',
+      templateUrl: 'user/logout-success.tpl.html',
+    })
+
     .state('404', {
       url: '/*path',
       templateUrl: '404/404.tpl.html'

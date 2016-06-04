@@ -2,7 +2,7 @@
  * User service
  */
 angular.module('flocs.user')
-.factory('userService', function($rootScope, $q, $state, $uibModal, userDao) {
+.factory('userService', function($rootScope, $q, $state, $uibModal, $timeout, userDao) {
     var user = {
       logged: false,
       lazyLogged: false,
@@ -22,6 +22,9 @@ angular.module('flocs.user')
           user.logged = true;
           user.username = username;
           $rootScope.$emit("flocs:user:change");
+          if ($state.is('logout-success')) {
+            $timeout(function() {$state.go('home');});
+          }
         } else {
           return $q.reject('authentication failed');
         }
@@ -52,7 +55,7 @@ angular.module('flocs.user')
       return userDao.logout().then(function(){
         user.logged = false;
         user.lazyLogged = false;
-        $state.go('home', {});
+        $state.go('logout-success', {});
         $rootScope.$emit("flocs:user:change");
       });
     }

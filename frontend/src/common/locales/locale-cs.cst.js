@@ -19,6 +19,7 @@ angular.module('flocs.locales')
   LEARN_PROGRAMMING: 'Nauč se programovat!',
   LOG_IN: 'Přihlásit se',
   LOG_OUT: 'Odhlásit se',
+  LOGGED_OUT: 'Úspěšně odhlášen!',
   OVERALL_TIME: 'Celkový čas',
   NOT_LOGGED: 'Nejsi přihlášen/a',
   PASSWORD: 'Heslo',
