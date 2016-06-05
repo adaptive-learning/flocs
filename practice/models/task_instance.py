@@ -1,8 +1,11 @@
+from collections import namedtuple
+from datetime import datetime
 from django.db import models
+from blocks.models import Block
 from common.utils import activation
+from concepts.models import Instruction
 from tasks.models import TaskModel
 from practice.models import StudentModel
-from datetime import datetime
 
 class FlowRating(object):
     UNKNOWN = 0
@@ -20,6 +23,11 @@ class TaskInstanceModel(models.Model):
     """
     Representation of a task taken by a student.
     """
+    export_class = namedtuple('TaskInstnace',
+            ['task_instance_id', 'student_id', 'task_id',
+             'time_start', 'time_end', 'time_spent',
+             'solved', 'given_up', 'attempts', 'reported_flow',
+             'instructions_ids', 'blocks_ids', 'session_order'])
 
     # student who took the task
     student = models.ForeignKey(StudentModel)
@@ -61,6 +69,12 @@ class TaskInstanceModel(models.Model):
     earned_credits = models.SmallIntegerField(default=0, null=True)
     speed_bonus = models.BooleanField(default=False)
 
+    instructions = models.ManyToManyField(Instruction,
+        help_text='instructions presented to the student')
+
+    blocks = models.ManyToManyField(Block,
+        help_text='blocks available in toolbox')
+
     def __str__(self):
         templ = 'student={student}, task={task}, start={start}, time={time}' +\
                 ', solved={solved} reported_flow={reported_flow}' + \
@@ -74,6 +88,29 @@ class TaskInstanceModel(models.Model):
             reported_flow=self.reported_flow,
             predicted_flow=self.predicted_flow
         )
+
+    def to_export_tuple(self):
+        export_tuple = self.export_class(
+                task_instance_id=self.pk,
+                student_id=self.student.pk,
+                task_id=self.task.pk,
+                time_start=self.time_start,
+                time_end=self.time_end,
+                time_spent=self.time_spent,
+                solved=self.solved,
+                given_up=self.given_up,
+                reported_flow=self.get_reported_flow_key(),
+                attempts=self.attempt_count,
+                session_order=self.get_session_order(),
+                blocks_ids=[block.pk for block in self.blocks.all()],
+                instructions_ids=[instruction.pk for instruction in self.instructions.all()])
+        return export_tuple
+
+    def get_session_order(self):
+        session_instance = self.sessiontaskinstance_set.first()
+        if session_instance is None:
+            return None
+        return session_instance.order
 
     def get_reported_flow_key(self):
         return self.get_reported_flow_display()

@@ -108,17 +108,19 @@ def get_task(student, task_selector):
     #predicted_flow = predict_flow(student.pk, task_id, practice_context)
     task = TaskModel.objects.get(pk=task_id)
     task_instance = TaskInstanceModel.objects.create(student=student, task=task)
+    new_instructions = get_instructions(task, student)
+    task_instance.instructions.add(*new_instructions)
+    student_toolbox = get_student_toolbox(student)
+    task_instance.blocks.add(*student.get_available_blocks())
     student_task_info = StudentTaskInfoModel.objects.get_or_create(
             student=student, task=task)[0]
     student_task_info.last_instance = task_instance
     student_task_info.save()
-    instructions = get_instructions(task, student)
-
     task_info = TaskInfo(
         task_instance=task_instance,
         task=task,
-        toolbox=get_student_toolbox(student),
-        new_instructions=get_instructions(task, student),
+        toolbox=student_toolbox,
+        new_instructions=new_instructions,
         all_instructions=get_instructions(task),
         session = None
     )
@@ -129,7 +131,7 @@ def get_student_toolbox(student):
     """Fetches the user toolbox.
 
     Args:
-        student: current stuent practicing tasks
+        student: current student practicing tasks
 
     Returns:
         list of identifiers of all available blocks for the user
@@ -215,10 +217,10 @@ def process_attempt_report(user, report):
             student.save()
             task_instance.save()
 
-    
-    code_logger.info(_escape_csv([ 
+
+    code_logger.info(_escape_csv([
             task_instance.time_start.date(),
-            student.pk, 
+            student.pk,
             task_instance.pk,
             task_instance.attempt_count,
             task_instance.solved,

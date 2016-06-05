@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from blocks.models import Block
 from concepts.models import Concept, Instruction
+from practice.models import TaskInstanceModel
 from tasks.models import TaskModel
 import csv
 import os
@@ -13,7 +14,7 @@ class Command(BaseCommand):
     help = "Export all data for analysis into CSV files."
 
     # all models to export need to define to_export_tuple() function
-    models_to_export = [Block, Concept, Instruction, TaskModel]
+    models_to_export = [Block, Concept, Instruction, TaskModel, TaskInstanceModel]
 
     def handle(self, *args, **options):
         self.export_all_tables()
