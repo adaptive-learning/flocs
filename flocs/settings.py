@@ -215,12 +215,6 @@ LOGGING = {
             'filename': LOGGING_DIR + '/requests.log',
             'formatter': 'simple'
         },
-        'student-code-file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': LOGGING_DIR + '/student-code.log',
-            'formatter': 'brief'
-        },
         'mail-admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
@@ -242,10 +236,5 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True
         },
-        'student-code' : {
-            'handlers': ['student-code-file'],
-            'level': 'INFO',
-            'propagate': True
-        }
     }
 }

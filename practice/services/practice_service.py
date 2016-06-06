@@ -10,6 +10,7 @@ from tasks.models import TaskModel
 from tasks.services.task_service import get_toolbox_from_blocks
 from practice.models.practice_context import create_practice_context
 from practice.models import TaskInstanceModel
+from practice.models import Attempt
 from practice.models import StudentTaskInfoModel
 from practice.models import StudentModel
 from practice.models.task_instance import FlowRating
@@ -26,7 +27,6 @@ from concepts.models import Instruction
 import json, csv, io
 
 logger = logging.getLogger(__name__)
-code_logger = logging.getLogger('student-code')
 
 # TODO: remove task field - it is redundant (task is in task_instance.task)
 TaskInfo = namedtuple('TaskInfo',
@@ -218,14 +218,12 @@ def process_attempt_report(user, report):
             task_instance.save()
 
 
-    code_logger.info(_escape_csv([
-            task_instance.time_start.date(),
-            student.pk,
-            task_instance.pk,
-            task_instance.attempt_count,
-            task_instance.solved,
-            task_instance.time_spent,
-            code]))
+    Attempt.objects.create(
+        task_instance=task_instance,
+        order=task_instance.attempt_count,
+        success=task_instance.solved,
+        code=code
+    )
 
     task_solved_first_time = solved and not solved_before,
     logger.info("Reporting attempt was successful for student %s with result %s", student.pk, solved)
@@ -341,11 +339,3 @@ def get_instructions(task, student=None):
     # NOTE: order of instructions is enforced on DB level
     instructions = list(Instruction.objects.filter(concept__in=concepts))
     return instructions
-
-def _escape_csv(csv_data):
-    output = io.StringIO()
-    writer = csv.writer(output)
-    _ = writer.writerow(csv_data)
-    escaped = output.getvalue()
-    output.close()
-    return escaped

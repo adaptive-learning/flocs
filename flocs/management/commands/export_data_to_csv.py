@@ -3,7 +3,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from blocks.models import Block
 from concepts.models import Concept, Instruction
-from practice.models import TaskInstanceModel, StudentModel
+from practice.models import TaskInstanceModel, StudentModel, Attempt
 from tasks.models import TaskModel
 import csv
 import os
@@ -15,7 +15,7 @@ class Command(BaseCommand):
 
     # all models to export need to define to_export_tuple() function
     models_to_export = [Block, Concept, Instruction, TaskModel,
-                        TaskInstanceModel, StudentModel]
+                        TaskInstanceModel, Attempt, StudentModel]
 
     def handle(self, *args, **options):
         self.export_all_tables()
