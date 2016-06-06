@@ -1,3 +1,4 @@
+from collections import namedtuple
 from django.db import models
 from django.contrib.auth.models import User
 from decimal import Decimal
@@ -18,6 +19,10 @@ class StudentModel(models.Model):
        For every concept there is number between -1 and 1 representing skill in
        certain concept.
     """
+    export_class = namedtuple('Student',
+                              ['student_id', 'credits', 'blocks_ids',
+                               'level', 'seen_concepts_ids'])
+
     user = models.OneToOneField(User, primary_key=True)
 
     _seen_concepts = models.ManyToManyField(Concept,
@@ -63,3 +68,13 @@ class StudentModel(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    def to_export_tuple(self):
+        export_tuple = self.export_class(
+            student_id=self.pk,
+            credits=self.total_credits,
+            blocks_ids=[block.pk for block in self.get_available_blocks()],
+            level=self.get_level(),
+            seen_concepts_ids=[concept.pk for concept in self.get_seen_concepts()],
+        )
+        return export_tuple
