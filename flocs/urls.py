@@ -26,6 +26,7 @@ from user import urls as user_urls
 urlpatterns = [
     # admin
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
 
     # server API
     url(r'^api/tasks/', include(tasks_urls)),

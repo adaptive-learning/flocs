@@ -9,6 +9,7 @@ django-extensions==1.5.5
 django-import-export==0.4.1
 django-lazysignup==1.0.2
 django-modeltranslation==0.10.2
+django-grappelli==2.8.1
 entrypoints==0.2
 ipykernel==4.3.1
 ipython==4.1.2

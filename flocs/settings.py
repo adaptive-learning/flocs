@@ -40,10 +40,12 @@ else:
 # Application definition
 
 INSTALLED_APPS = (
+    'django.contrib.contenttypes',
     'modeltranslation', # must be before django.contrib.admin
+    'grappelli.dashboard', # must be before django.contrib.admin
+    'grappelli', # must be before django.contrib.admin
     'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -137,6 +139,9 @@ MODELTRANSLATION_TRANSLATION_FILES = (
     'blocks.models.translation',
     'concepts.models.translation',
 )
+
+# Grappelli
+GRAPPELLI_INDEX_DASHBOARD = 'flocs.dashboard.CustomIndexDashboard'
 
 
 # Static files (CSS, JavaScript, Images)

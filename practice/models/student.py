@@ -62,4 +62,4 @@ class StudentModel(models.Model):
         return self.toolbox.get_all_blocks()
 
     def __str__(self):
-        return 'pk={pk}'.format(pk=self.pk)
+        return self.user.username
