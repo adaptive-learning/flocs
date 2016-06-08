@@ -1,6 +1,7 @@
-# Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
 *.py[cod]
+.ipynb_checkpoints
 
 # Unversioned data
 exported-data/
