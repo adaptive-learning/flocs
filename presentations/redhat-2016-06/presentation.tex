@@ -1,0 +1,157 @@
+\documentclass[xcolor=dvipsnames, 14pt]{beamer}
+%\documentclass[xcolor=dvipsnames, bigger, aspectratio=169]{beamer}
+
+\definecolor{Saffron}{HTML}{F4C430}
+\usecolortheme[named=Saffron]{structure}
+
+\mode<presentation> {
+	\usetheme[height=2em]{Rochester}
+	\setbeamercovered{transparent}
+}
+
+\setbeamertemplate{caption}{\insertcaption\par}
+\setbeamertemplate{navigation symbols}{}%remove navigation symbols
+
+\setbeamercolor{frametitle}{fg=black}
+\setbeamercolor{title}{fg=black}
+\setbeamercolor{navigation symbols dimmed}{fg=black!10}
+\setbeamercolor{navigation symbols}{fg=black!30}
+\setbeamercolor{section number projected}{fg=black}
+\setbeamercolor{item projected}{fg=black}
+
+
+\usepackage[utf8x]{inputenc}
+\usepackage[resetfonts]{cmap}
+\usepackage{lmodern}
+\usepackage[czech]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{tikz}
+
+\usepackage{hyperref}
+\hypersetup{unicode=true}
+
+% ----- macros -----
+\newcommand{\imageW}[1]{%
+  \makebox[\textwidth][c]{\includegraphics[width=1.12\textwidth]{img/#1}}}
+\newcommand{\imageH}[1]{%
+  \makebox[\textwidth][c]{\includegraphics[height=0.97\textheight]{img/#1}}}
+
+% ---- info -----
+\title{Adaptabilní programování}
+\author{Jaroslav~Čechák \and Tomáš~Effenberger \and  Jiří~Mauritz}
+\institute{Fakulta informatiky, Masarykova univerzita}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Cíl}
+\begin{itemize}
+\item aplikace pro efektivní učení programování
+\item učení užitečných dovedností
+\item zábavné úlohy optimální obtížnosti
+\item stav \emph{flow} $\rightarrow$ maximalizace učení
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Flow}
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[font=\sffamily,xscale=5, yscale=5]
+  \large
+  %\draw [lightgray, fill=gray] (0,0) -- (0.1,0) -- (1,0.8) -- (0.8,1) -- (0,0.1) -- (0,0);
+  \draw (0.1,0) -- (1,0.8);
+  \draw (0,0.1) -- (0.8,1);
+  \draw [thick, <->] (0,1) node [left] {obtížnost} -- (0,0) -- (1,0) node [below right] {dovednost};
+  \node at (0.27,0.82) {\emph{frustrace}};
+  \node at (0.6,0.6) {\emph{flow}};
+  \node at (0.7,0.2) {\emph{nuda}};
+  \end{tikzpicture}
+  %\caption{Relationship between challenge and skill.}
+\end{figure}
+\end{frame}
+% NOTE: jak to delame: Elo model
+
+\begin{frame}
+\frametitle{Druhý prototyp}
+% NOTE: prvni prototyp byl takovy proof of concept
+% - ted: 2. prototyp - uz by mel byt opravdu pouzitelny, chceme publikovat do par tydny
+\imageW{practice.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{Druhý prototyp}
+\imageW{task-completion-modal.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{Druhý prototyp}
+\imageH{task-example.png}
+% NOTE: ulohy muzou obsahovat klice, jamy, barvy
+\end{frame}
+
+\begin{frame}
+\frametitle{Druhý prototyp}
+\imageW{statistiky.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{Druhý prototyp}
+\imageW{bloky.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{Druhý prototyp}
+\imageW{solved-tasks.png}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Co jsme dělali} % zmeny od 1. prototypu tj. od ledna
+\begin{itemize}
+\item konečné procvičovací relace
+\item motivace + interpretace dovednosti % kredity, kupovani bloku
+\item nové úlohy
+\item uživatelské rozhraní
+\item uživatelské statistiky
+\item sbírání a export dat
+\item modely pro koncepty a instrukce
+\item i18n and l10n
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Na čem pracujeme}
+\begin{itemize}
+\item intuitivní a příjemné uživatelské rozhraní
+\item vizualizace instrukcí
+\item admin statistiky
+\item ještě více úloh
+\end{itemize}
+% NOTE: a nejake technicke veci, napr. doreseni autentizace uzivatelu
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Shrnutí}
+\begin{itemize}
+\item systém pro adaptabilní výuku programování % snaha o flow
+\item úlohy v bludišti, programování pomocí bloků
+\item první prototyp: \small{\url{http://flocs.thran.cz}}\normalsize
+\item druhý prototyp: začátek července
+\item repozitář: \small{https://github.com/adaptive-learning/flocs}
+\end{itemize}
+\end{frame}
+
+\end{document}
