@@ -3,6 +3,8 @@ Service functions of practice session.
 """
 
 import logging
+from datetime import datetime
+import math
 
 from practice.models import StudentModel
 from practice.models import PracticeSession
@@ -30,7 +32,7 @@ def next_task_in_session(student, task_instance):
     # TODO: sessions should be (if possible) finished earlier (after the
     # processing of the results from the last task in the session)
     if session and session.task_counter >= TASKS_IN_SESSION:
-        session.active = False
+        end_session(session)
         session.save()
         logger.debug('Student id ', session.student.pk, ' finished current session.')
         session = None
@@ -137,4 +139,8 @@ def end_session(session):
     Ends session even if the student did not reach the session limit for tasks.
     """
     session.active = False
+    instances = session.get_task_instances()
+    if len(instances) > 0:
+        delta = datetime.now() - instances[0].time_start
+        session.duration = math.floor(delta.total_seconds())
     session.save()

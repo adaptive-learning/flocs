@@ -10,6 +10,7 @@ from practice.models import SessionTaskInstance
 from practice.services import practice_session_service as service
 from tasks.models import TaskModel
 
+import datetime as dt_module
 from datetime import datetime, timedelta
 
 class PracticeSessionServiceTest(TestCase):
@@ -78,6 +79,10 @@ class PracticeSessionServiceTest(TestCase):
         self.assertEquals(1, new_session.task_counter)
 
     def test_end_session(self):
+        # fake starting time of instance
+        self.taskInstance.time_start = datetime.now() - dt_module.timedelta(seconds=10)
+        self.taskInstance.save()
+        service.add_task_instance_to_session(self.taskInstance, self.session)
         # end session
         service.end_session(self.session)
         # get session
@@ -85,6 +90,8 @@ class PracticeSessionServiceTest(TestCase):
                 student=self.student, _active=True)
         # assert it has really ended
         self.assertEquals(0, len(new_session))
+        # assert duration is set
+        self.assertGreaterEqual(self.session.duration, 10)
 
     def test_get_all_task_instances(self):
         instance1 = TaskInstanceModel.objects.create(task=self.task, student=self.student)

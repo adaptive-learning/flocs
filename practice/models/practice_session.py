@@ -23,12 +23,16 @@ class PracticeSession(models.Model):
     # last task instance started in the session
     last_task = models.ForeignKey(TaskInstanceModel, null=True)
 
+    # duration of the session in sec, valid only after session termination
+    duration = models.PositiveIntegerField(default=0)
+
     # active (private field)
     _active = models.BooleanField(default=True)
 
     # active (public property)
     def _get_active(self):
         # deactivate session if it is older then EXPIRATION parameter
+        # keep duration = 0 if expired
         session_instances = self.task_instances_set.order_by('order')
         if len(session_instances) > 0:
             delta = datetime.now() - session_instances[0].task_instance.time_start
