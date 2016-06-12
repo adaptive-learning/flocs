@@ -77,4 +77,5 @@ def details(request):
     details_dict = {}
     details_dict["username"] = user.username
     details_dict["email"] = user.email
+    details_dict["is_staff"] = user.is_staff
     return JsonResponse(details_dict)

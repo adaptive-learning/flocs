@@ -20,3 +20,14 @@ def dict_product(dict1, dict2):
 
 def product(iterable):
     return reduce(operator.mul, iterable, 1)
+
+def median(iterable):
+    iterable = sorted(iterable)
+    n = len(iterable)
+    if n == 0:
+        return 0
+    elif n % 2 == 0:
+        return (iterable[n//2 - 1] + iterable[n//2]) / 2
+    else:
+        return iterable[n//2]
+
