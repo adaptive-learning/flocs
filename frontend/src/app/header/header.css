@@ -9,4 +9,6 @@
       display: inline-block;
       float: none;
   }
+  .admin-stats {
+    background-color: #003d66;
 }

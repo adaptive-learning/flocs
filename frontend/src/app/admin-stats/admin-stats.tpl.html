@@ -1,0 +1,172 @@
+<div class="container">
+
+  <div id="mySidenav" class="sidenav" ng-mouseover="openNav()" ng-mouseleave="closeNav()">
+    <a href="#" ng-click="switchTo('daily_stats')">Daily</a>
+    <a href="#" ng-click="switchTo('task_stats')">Tasks</a>
+    <a href="#" ng-click="switchTo('concept_stats')">Concepts</a>
+    <a href="#" ng-click="switchTo('block_stats')">Blocks</a>
+    <a href="#" ng-click="switchTo('session_stats')">Sessions</a>
+  </div>
+
+  <div ng-if="logged === false">
+    <h2>Not authorized</h2>
+    <p>You need to be a staff for accessing admin statistics.</p>
+  </div>
+
+  <div ng-if="logged === true">
+
+    <div id="daily-stats" ng-show="daily_stats">
+      <h2 class="page-header">Daily statistics</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Students</th>
+            <th>Solved tasks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="day in statistics.daily_stats">
+            <td>
+              {{day.date}}
+            </td>
+            <td>
+              {{day.students}}
+            </td>
+            <td>
+              {{day.solved_tasks}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="task-stats" ng-show="task_stats">
+      <h2 class="page-header">Task statistics</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Solved count</th>
+            <th>Time median</th>
+            <th>Concepts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="task in statistics.task_stats">
+            <td>
+              {{task.id}}
+            </td>
+            <td>
+              <a ui-sref="practice-task({taskId: task.id})">{{task.title}}</a>
+            </td>
+            <td>
+              {{task.solved_count}}
+            </td>
+            <td>
+              {{task.time_median}}
+            </td>
+            <td>
+              <span ng-repeat="concept in task.concepts">
+                <img ng-src="/static/assets/img/{{concept.icon}}"
+                     height="22"
+                     title="{{concept.getTranslationKey() | translate}}"
+                     alt="{{concept.getTranslationKey() | translate}}">
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="concept-stats" ng-show="concept_stats">
+      <h2 class="page-header">Concept statistics</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Number of tasks</th>
+            <th>Number of students</th>
+            <th>Number of solved tasks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="concept in statistics.concept_stats">
+            <td>
+              {{concept.name}}
+            </td>
+            <td>
+              {{concept.type}}
+            </td>
+            <td>
+              {{concept.num_of_tasks}}
+            </td>
+            <td>
+              {{concept.num_of_students}}
+            </td>
+            <td>
+              {{concept.num_of_solved_tasks}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="block-stats" ng-show="block_stats">
+      <h2 class="page-header">Block statistics</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Number of tasks</th>
+            <th>Number of students</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="block in statistics.block_stats">
+            <td>
+              {{block.name}}
+            </td>
+            <td>
+              {{block.num_of_tasks}}
+            </td>
+            <td>
+              {{block.num_of_students}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="session-stats" ng-show="session_stats">
+      <h2 class="page-header">Session statistics</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Median of the session length</th>
+            <th>Ratio of finished/unfinished sessions</th>
+            <th>Number of unfinished sessions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              {{statistics.session_stats.length_median}}
+            </td>
+            <td>
+              {{statistics.session_stats.solved_ratio}}
+            </td>
+            <td>
+              {{statistics.session_stats.unfinished}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
+
+</div>

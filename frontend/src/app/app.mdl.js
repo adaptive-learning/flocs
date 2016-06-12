@@ -24,6 +24,7 @@ angular.module('flocs', [
     'flocs.user',
     'flocs.profile',
     'flocs.statistics',
+    'flocs.admin-stats',
     'flocs.session-overview',
     'flocs.about',
 ])
@@ -104,6 +105,12 @@ angular.module('flocs', [
       data: {
           titleTraslationKey: 'SESSION_OVERVIEW'
       }
+    })
+
+    .state('admin-stats', {
+      url: '/admin-stats',
+      templateUrl: 'admin-stats/admin-stats.tpl.html',
+      controller: 'adminStatsCtrl',
     })
 
     .state('about', {

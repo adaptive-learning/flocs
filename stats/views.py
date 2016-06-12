@@ -100,11 +100,11 @@ def daily_stat_to_json(daily_stat):
     }
     return daily_stat_dict
 
-def block_stat_to_json(block_stat):
+def block_stat_to_json(block_stats):
     block_stat_dict = {
-            'name': block_stat.name,
-            'num_of_tasks': block_stat.num_of_tasks,
-            'num_of_students': block_stat.num_of_students
+            'name': block_stats.name,
+            'num_of_tasks': block_stats.num_of_tasks,
+            'num_of_students': block_stats.num_of_students
     }
     return block_stat_dict
 

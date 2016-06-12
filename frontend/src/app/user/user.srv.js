@@ -51,6 +51,26 @@ angular.module('flocs.user')
       });
     }
 
+    function ensuringAdminLoggedIn() {
+      return checkingIfLoggedIn().then(function(isLogged) {
+        if (isLogged) {
+          return gettingUserDetails().then(function(user) {
+            if (user.isStaff){
+              return;
+            } else {
+              return $q.reject();
+            }
+          });
+        }
+        // if not logged, open login modal
+        var loginModal = $uibModal.open({
+          templateUrl: 'user/login-modal.tpl.html',
+          controller: 'loginModalCtrl',
+        });
+        return loginModal.result;
+      });
+    }
+
     function loggingOut() {
       return userDao.logout().then(function(){
         user.logged = false;
@@ -79,6 +99,7 @@ angular.module('flocs.user')
       return userDao.gettingUserDetails().then(function(details) {
         user.username = details.username;
         user.email = details.email;
+        user.isStaff = details.is_staff;
         return user;
       });
     }
@@ -128,6 +149,7 @@ angular.module('flocs.user')
       setUserAvailable: setUserAvailable,
       isUserAvailable: isUserAvailable,
       ensuringLoggedIn: ensuringLoggedIn,
+      ensuringAdminLoggedIn: ensuringAdminLoggedIn,
       loggingIn: loggingIn,
       loggingOut: loggingOut,
       signingUp: signingUp,
