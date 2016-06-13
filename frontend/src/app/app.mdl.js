@@ -27,6 +27,8 @@ angular.module('flocs', [
     'flocs.admin-stats',
     'flocs.session-overview',
     'flocs.about',
+    'flocs.taskEnvironment',
+    'flocs.instructions',
 ])
 
 // routes configuration

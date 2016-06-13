@@ -34,10 +34,6 @@ flocs-task-environment {
   padding: 3px 7px;
 }
 
-#instructions {
-  margin-top: 10px;
-}
-
 #workspace {
   /*float: left;*/
   position: absolute;

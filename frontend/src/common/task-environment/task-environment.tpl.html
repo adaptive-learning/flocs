@@ -21,6 +21,7 @@
     <div>
       <span ng-switch="executionStatus.initialState">
         <span ng-switch-when="true">
+          <flocs-instruction-area key="ENV_RUN_RESET">
           <button
               id="runBtn"
               ng-click="run()"
@@ -29,6 +30,7 @@
               translate>
             RUN_PROGRAM
           </button>
+          </flocs-instruction-area>
         </span>
         <span ng-switch-default>
           <button id="resetBtn"
@@ -48,12 +50,6 @@
               uib-btn-radio="s">{{s}}</label>
         </span>
       </span>
-    </div>
-
-    <div id="instructions">
-      <p>
-        {{instructions.text}}
-      </p>
     </div>
 
     <ng-transclude></ng-transclude>

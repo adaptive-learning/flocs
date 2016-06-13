@@ -1,0 +1,14 @@
+.instruction-area {
+}
+
+.instruction-content {
+  display: inline-block;
+}
+
+.active-instruction {
+  border: 1px dashed black;
+  background-color: rgba(0, 0, 250, 0.5);
+  display: inline-block;
+  overflow: hidden;
+  /*padding: 5px;*/
+}

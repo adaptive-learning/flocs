@@ -3,7 +3,7 @@
  */
 angular.module('flocs.taskEnvironment')
 .factory('taskEnvironmentService', function ($timeout, taskDao, mazeService,
-      workspaceService, interpreterService) {
+      workspaceService, interpreterService, instructionsService) {
 
   var currentTask = null;
   var afterAttemptCallback = null;
@@ -18,9 +18,6 @@ angular.module('flocs.taskEnvironment')
   };
   var executionStatus = {
     initialState: true
-  };
-  var instructions = {
-      text: null
   };
 
   workspaceService.addChangeListener(handleWorkspaceChange);
@@ -47,7 +44,6 @@ angular.module('flocs.taskEnvironment')
     blocksStatus: blocksStatus,
     toolsStatus: toolsStatus,
     executionStatus: executionStatus,
-    instructions: instructions,
     getCurrentTask: getCurrentTask,
 
     //getMazeSettings: getMazeSettings,
@@ -114,14 +110,14 @@ angular.module('flocs.taskEnvironment')
    * after each attempt of the user.
    */
   function setTask(newTask, newInstructions, _afterAttemptCallback) {
-    newInstructions = newInstructions || [];
     afterAttemptCallback = _afterAttemptCallback || null;
     currentTask = newTask;
     mazeService.set(getMazeSettings());
     workspaceService.set(getWorkspaceSettings());
     executionStatus.initialState = true;
     //changeNotification();
-    instructions.text = newInstructions.join(' ');
+    instructionsService.setInstructions(newInstructions, newInstructions);
+    instructionsService.showingScheduledInstructions();
   }
 
   function setInitialState() {
