@@ -15,14 +15,14 @@ angular.module('flocs.instructions')
         priority: 300,
         text: "Jakmile jsi spokojený se svým programem, spusť ho pomocí tohoto tlačítka. Pokud robot nedorazí k truhle, můžeš ho vrátit na původní pozici stisknutím 'Reset' tlačítka a zkusit jiný program.",
       },
-      "ENV_TOOLBOX": {
-        concept: "ENV_TOOLBOX",
+      "ENV_MAZE": {
+        concept: "ENV_MAZE",
         priority: 200,
-        text: "Zde je místo pro tvoje bloky. Pokud budeš šikovný, budeš dostávat během hry další bloky, které se objeví na tomto místě. Můžeš je v programu používat opakovaně.",
+        text: "Tady je bludiste...",
       }
     };
     // pozor na poradi pushovani / pripadne popovat z druhe strany?
-    instructionsToShow.push("ENV_TOOLBOX");
+    instructionsToShow.push("ENV_MAZE");
     instructionsToShow.push("ENV_RUN_RESET");
     console.log('instructions are set');
   };

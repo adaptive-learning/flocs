@@ -1,8 +1,24 @@
-<span class="instruction-area"
+<span class="instruction-area-container">
+  <!--
+  <span
+      class="instruction-overlay"
       ng-class="{'active-instruction': active}"
-      uib-popover="{{ text }}"
+      uib-popover-template="'instructions/instruction.tpl.html'"
+      popover-trigger="none"
+      popover-placement="auto right"
       popover-is-open="active">
-  <span class="instruction-content">
+  </span>
+  -->
+  <span
+      class="instruction-area-overlay"
+      ng-class="{'instruction-area-visible': visible}"
+      uib-popover-template="'instructions/instruction.tpl.html'"
+      popover-trigger="none"
+      popover-placement="auto right"
+      popover-is-open="active"
+      >
+  </span>
+  <span class="instruction-area-content">
     <ng-transclude></ng-transclude>
   </span>
 </span>
