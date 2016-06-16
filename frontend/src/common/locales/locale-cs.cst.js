@@ -40,6 +40,7 @@ angular.module('flocs.locales')
   TITLE: 'Adaptabilní programování',
   TOGGLE_NAVIGATION: 'Přepnout navigaci',
   TOTAL_CREDITS: 'Kreditů celkem',
+  UNDERSTAND: 'Rozumím',
   UNSUCCESSFUL: 'Nesplněno',
   USERNAME:  'Uživatelské jméno',
 

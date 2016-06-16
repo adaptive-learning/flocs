@@ -16,14 +16,14 @@
       </span>
     </div>
 
-    <flocs-instruction-area key="ENV_MAZE">
+    <flocs-instruction-area key="ENV_MAZE" popover-position="left">
       <flocs-maze id="maze"></flocs-maze>
     </flocs-instruction-area>
 
     <div>
       <span ng-switch="executionStatus.initialState">
         <span ng-switch-when="true">
-          <flocs-instruction-area key="ENV_RUN_RESET">
+          <flocs-instruction-area key="ENV_RUN_RESET" popover-position="top">
           <button
               id="runBtn"
               ng-click="run()"

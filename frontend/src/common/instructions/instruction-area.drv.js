@@ -6,27 +6,35 @@ angular.module('flocs.instructions')
     transclude: true,
     scope: {
       key: '@',
+      popoverPosition: '@',
     },
     templateUrl: 'instructions/instruction-area.tpl.html',
     link: function(scope, element, attrs) {
       var instructionSeen = null;
-      scope.visible = false;
-      scope.active = false;
+      scope.area = {
+        visible: false
+      };
+      scope.instruction = {
+        active: false,
+        text: '',
+        position: 'top', //scope.popoverPosition,
+      };
 
       scope.showing = function(instruction) {
         if (instructionSeen === null) {
           instructionSeen = $q.defer();
         }
-        scope.text = instruction.text;
-        scope.visible = true;
-        scope.active = true;
+        scope.instruction.text = instruction.text;
+        scope.instruction.position = scope.popoverPosition || 'top';
+        scope.instruction.active = true;
+        scope.area.visible = true;
         console.log('showing:', instruction);
         return instructionSeen.promise;
       };
 
       scope.close = function() {
-        scope.visible = false;
-        scope.active = false;
+        scope.area.visible = false;
+        scope.instruction.active = false;
         if (instructionSeen !== null) {
           instructionSeen.resolve();
         }

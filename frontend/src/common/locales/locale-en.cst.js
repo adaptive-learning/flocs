@@ -40,8 +40,9 @@ angular.module('flocs.locales')
   TITLE: 'Adaptive programming',
   TOGGLE_NAVIGATION: 'Toggle navigation',
   TOTAL_CREDITS: 'Total credits',
-  USERNAME:  'Username',
+  UNDERSTAND: 'I understand',
   UNSUCCESSFUL: 'Unsuccessful',
+  USERNAME:  'Username',
 
   ABOUT_PAGE: {
     INTRO_TEXT: 'The goal of the project is efficient and entertaining learning of programming for everybody.',

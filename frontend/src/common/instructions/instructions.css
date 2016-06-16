@@ -23,6 +23,10 @@
   background-color: rgba(166, 27, 26, 0.1);
 }
 
+.instruction-ok-btn {
+  width: 100%;
+}
+
 
 /*.active-instruction {
   border: 1px dashed black;
