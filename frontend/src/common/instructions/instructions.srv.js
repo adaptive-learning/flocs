@@ -1,11 +1,12 @@
 // @ngInject
 angular.module('flocs.instructions')
-.service('instructionsService', function ($q, $timeout) {
+.service('instructionsService', function ($q, $timeout, workspaceService) {
 
   var instructions = {};
   var instructionsToShow = [];
   var instructionAreas = {};
 
+  this.blockInstructionsPlacements = {};
 
   this.setInstructions = function(allInstructions, newInstructions) {
     // fake for now, TODO: implement
@@ -19,12 +20,32 @@ angular.module('flocs.instructions')
         concept: "ENV_MAZE",
         priority: 200,
         text: "Tady je bludiste...",
+      },
+      "ENV_TOOLBOX": {
+        concept: "ENV_TOOLBOX",
+        priority: 200,
+        text: "Tady je toolbox...",
+      },
+      "BLOCK_MOVE": {
+        concept: "BLOCK_MOVE",
+        type: 'block',
+        blockKey: 'maze_move_forward',
+        priority: 200,
+        text: "Tady je blok pohybu..",
       }
     };
     // pozor na poradi pushovani / pripadne popovat z druhe strany?
+    instructionsToShow.push("BLOCK_MOVE");
+    //instructionsToShow.push("ENV_TOOLBOX");
+    //instructionsToShow.push("ENV_RUN_RESET");
     instructionsToShow.push("ENV_MAZE");
-    instructionsToShow.push("ENV_RUN_RESET");
-    console.log('instructions are set');
+    //console.log('instructions are set');
+
+    // get blocks in toolbox
+    var blockPlacement = workspaceService.getBlockInToolbox('maze_move_forward');
+    blockPlacement.position = 'absolute';
+    this.blockInstructionsPlacements['BLOCK_MOVE'] = blockPlacement;
+    //console.log('path:', blockPlacement);
   };
 
   this.registerInstructionArea = function(area) {
@@ -32,7 +53,6 @@ angular.module('flocs.instructions')
     console.log('registered instruction-area for key:', key);
     instructionAreas[key] = area;
   };
-
 
   this.showingSelectedInstruction = function(key) {
     var instruction = instructions[key];

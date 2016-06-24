@@ -178,6 +178,27 @@ angular.module('flocs.workspace')
     return code;
   }
 
+  function getBlockInToolbox(key) {
+    // TODO: find blocks in toolbox using public attributes only
+    var blocks = blocklyDiv.flyout_.workspace_.getAllBlocks();
+    for (var i=0; i <= blocks.length; i++) {
+      var block = blocks[i];
+      if (block.type == key) {
+        var xy = block.getRelativeToSurfaceXY();
+        var hw = block.getHeightWidth();
+        //var path = blocks[i].svgPath_;
+        //var bbox = path.getBBox();
+        var blockPlacement = {
+          left: Math.round(xy.x),
+          top: Math.round(xy.y),
+          width: Math.round(hw.width),
+          height: Math.round(hw.height),
+        };
+        return blockPlacement;
+      }
+    }
+  }
+
   // initialization
   blocklyService.initializeBlockly();
 
@@ -193,6 +214,7 @@ angular.module('flocs.workspace')
     getJavaScriptCode: getJavaScriptCode,
     getPythonCode: getPythonCode,
     getBlocksUsed: getBlocksUsed,
-    getBlocksLimit: getBlocksLimit
+    getBlocksLimit: getBlocksLimit,
+    getBlockInToolbox: getBlockInToolbox,
   };
 });

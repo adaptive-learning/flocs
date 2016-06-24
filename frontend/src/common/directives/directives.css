@@ -1,4 +1,10 @@
-/* Styles for rz-slider */
+flocs-proxy-element {
+  display: inline-block;
+}
+
+
+/* ----------------------------------------------------- */
+/* Styles for rz-slider                                  */
 /* ----------------------------------------------------- */
 
 .rz-pointer {

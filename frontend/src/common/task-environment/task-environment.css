@@ -17,9 +17,12 @@ flocs-task-environment {
   right: 0px;
   width: 400px;
   background-color: #eee;
-  padding: 2px 4px 12px 4px;
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+.main-panel-section {
+  padding: 3px 4px 3px 4px;
 }
 
 #maze {

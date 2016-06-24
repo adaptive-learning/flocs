@@ -2,7 +2,7 @@
  * Task Environment controller
  */
 angular.module('flocs.taskEnvironment')
-.controller('taskEnvironmentCtrl', function($scope, taskEnvironmentService, interpreterService) {
+.controller('taskEnvironmentCtrl', function($scope, taskEnvironmentService, interpreterService, instructionsService) {
 
   function run() {
     //$scope.initialState = false;
@@ -41,5 +41,6 @@ angular.module('flocs.taskEnvironment')
   $scope.getCurrentTask = taskEnvironmentService.getCurrentTask;
   $scope.run = run;
   $scope.reset = reset;
+  $scope.blockInstructionsPlacements = instructionsService.blockInstructionsPlacements;
 
 });

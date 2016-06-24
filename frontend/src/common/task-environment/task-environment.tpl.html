@@ -1,12 +1,21 @@
 <div id="taskEnvironment">
 
   <flocs-workspace id="workspace"></flocs-workspace>
+  <flocs-instruction-area key="ENV_TOOLBOX" popover-position="right">
+    <flocs-proxy-element selector="#workspace svg .blocklyWorkspace .blocklyFlyout"></flocs-proxy-element>
+  </flocs-instruction-area>
+  <flocs-instruction-area
+    ng-repeat="(key, placement) in blockInstructionsPlacements"
+    key="{{ key }}"
+    ng-style="placement"
+    popover-position="right">
+  </flocs-instruction-area>
 
   <div id="workspace-separator"></div>
 
   <div id="mainPanel">
 
-    <div id="statusPanel">
+    <div id="statusPanel" class="main-panel-section">
       {{getCurrentTask().title}}
       <span ng-show='blocksStatus.limit !== null'>
         | <span translate>BLOCKS</span>: {{blocksStatus.used}} / {{blocksStatus.limit}}
@@ -20,7 +29,7 @@
       <flocs-maze id="maze"></flocs-maze>
     </flocs-instruction-area>
 
-    <div>
+    <div class="main-panel-section">
       <span ng-switch="executionStatus.initialState">
         <span ng-switch-when="true">
           <flocs-instruction-area key="ENV_RUN_RESET" popover-position="top">
