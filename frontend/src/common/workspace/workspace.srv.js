@@ -181,21 +181,34 @@ angular.module('flocs.workspace')
   function getBlockInToolbox(key) {
     // TODO: find blocks in toolbox using public attributes only
     var blocks = blocklyDiv.flyout_.workspace_.getAllBlocks();
+    var block = null;
     for (var i=0; i <= blocks.length; i++) {
-      var block = blocks[i];
-      if (block.type == key) {
-        var xy = block.getRelativeToSurfaceXY();
-        var hw = block.getHeightWidth();
-        //var path = blocks[i].svgPath_;
-        //var bbox = path.getBBox();
-        var blockPlacement = {
-          left: Math.round(xy.x),
-          top: Math.round(xy.y),
-          width: Math.round(hw.width),
-          height: Math.round(hw.height),
-        };
-        return blockPlacement;
+      if (blocks[i].type == key) {
+        block = blocks[i];
+        break;
       }
+    }
+    if (block !== null) {
+      //var path = blocks[i].svgPath_;
+      //var bbox = path.getBBox();
+      // enrich block by functions for getting size and offset
+      block.getSize = function() {
+        var hw = block.getHeightWidth();
+        // convert to POJO
+        return {
+          width: hw.width,
+          height: hw.height,
+        };
+      };
+      block.getOffset = function() {
+        var xy = block.getRelativeToSurfaceXY();
+        // convert to POJO
+        return {
+          x: xy.x,
+          y: xy.y,
+        };
+      };
+      return block;
     }
   }
 

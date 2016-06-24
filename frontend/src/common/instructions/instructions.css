@@ -1,41 +1,18 @@
-.instruction-area-container {
-  position: relative;
-  display: inline-block;
-}
-/*.instruction-area-container {
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-}*/
-
-.instruction-area-content {
-  display: inline-block;
-}
-
-.instruction-area-overlay {
+.instruction-area-wrapper {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  z-index: 100;
+  display: inline-block;
   box-sizing: border-box;
-}
-
-.instruction-area-visible {
-  /*border: 5px dashed #286090;*/
-  /*background-color: rgba(16, 38, 56, 0.1);*/
   border: 4px dashed rgba(166, 27, 26, 0.9);
   background-color: rgba(166, 27, 26, 0.1);
+}
+.instruction-area-overlay {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
 }
 
 .instruction-ok-btn {
   width: 100%;
 }
-
-
-/*.active-instruction {
-  border: 1px dashed black;
-  background-color: rgba(0, 0, 250, 0.5);
-  display: inline-block;
-  overflow: hidden;
-}*/

@@ -1,15 +1,29 @@
 <div id="taskEnvironment">
+  <div id="workspace-instructions-layer">
+    <flocs-instruction-area
+      key="ENV_TOOLBOX"
+      placement="{selector: '#workspace svg .blocklyWorkspace .blocklyFlyout'}"
+      popover-position="right">
+    </flocs-instruction-area>
+    <flocs-instruction-area
+      key="ENV_WORKSPACE"
+      placement="{selector: '#workspace svg .blocklyWorkspace'}"
+      popover-position="right">
+    </flocs-instruction-area>
+    <flocs-instruction-area
+      key="ENV_SNAPPING"
+      placement="{selector: '#workspace svg'}"
+      popover-position="bottom">
+    </flocs-instruction-area>
+    <flocs-instruction-area
+      ng-repeat="block in blockInstructionsPlacements"
+      key="{{ block.key }}"
+      placement="{selector: '#workspace svg', offset: block.offset, size: block.size}"
+      popover-position="right">
+    </flocs-instruction-area>
+  </div>
 
   <flocs-workspace id="workspace"></flocs-workspace>
-  <flocs-instruction-area key="ENV_TOOLBOX" popover-position="right">
-    <flocs-proxy-element selector="#workspace svg .blocklyWorkspace .blocklyFlyout"></flocs-proxy-element>
-  </flocs-instruction-area>
-  <flocs-instruction-area
-    ng-repeat="(key, placement) in blockInstructionsPlacements"
-    key="{{ key }}"
-    ng-style="placement"
-    popover-position="right">
-  </flocs-instruction-area>
 
   <div id="workspace-separator"></div>
 
@@ -25,14 +39,11 @@
       </span>
     </div>
 
-    <flocs-instruction-area key="ENV_MAZE" popover-position="left">
-      <flocs-maze id="maze"></flocs-maze>
-    </flocs-instruction-area>
+    <flocs-maze id="maze"></flocs-maze>
 
     <div class="main-panel-section">
       <span ng-switch="executionStatus.initialState">
         <span ng-switch-when="true">
-          <flocs-instruction-area key="ENV_RUN_RESET" popover-position="top">
           <button
               id="runBtn"
               ng-click="run()"
@@ -41,7 +52,6 @@
               translate>
             RUN_PROGRAM
           </button>
-          </flocs-instruction-area>
         </span>
         <span ng-switch-default>
           <button id="resetBtn"
@@ -64,6 +74,19 @@
     </div>
 
     <ng-transclude></ng-transclude>
+
+    <div id="main-panel-instructions-layer">
+      <flocs-instruction-area
+        key="ENV_MAZE"
+        placement="{selector: '#maze'}"
+        popover-position="left">
+      </flocs-instruction-area>
+      <flocs-instruction-area
+        key="ENV_RUN_RESET"
+        placement="{selector: '#runBtn'}"
+        popover-position="top">
+      </flocs-instruction-area>
+    </div>
 
   </div>
 

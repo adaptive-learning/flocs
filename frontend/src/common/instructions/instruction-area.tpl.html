@@ -1,14 +1,14 @@
-<span class="instruction-area-container">
+<span
+  ng-if="area.visible"
+  class="instruction-area-wrapper"
+  ng-style="placementCss">
   <span
-      class="instruction-area-overlay"
-      ng-class="{'instruction-area-visible': area.visible}"
-      uib-popover-template="'instructions/instruction.tpl.html'"
-      popover-trigger="none"
-      popover-is-open="instruction.active"
-      popover-append-to-body='true'
-      popover-placement="{{ instruction.position }}"
-      >
-  </span>
-  <span ng-transclude class="instruction-area-content">
+    class="instruction-area-overlay"
+    uib-popover-template="'instructions/instruction.tpl.html'"
+    popover-trigger="none"
+    popover-is-open="instruction.active"
+    popover-placement="{{ instruction.position }}"
+    popover-append-to-body='true'>
   </span>
 </span>
+

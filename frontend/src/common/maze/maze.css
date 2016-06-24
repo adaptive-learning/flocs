@@ -1,4 +1,7 @@
+flocs-maze {
+  display: inline-block;
+}
+
 #svgMaze {
-  /*border: 1px solid gray;*/
   margin-left: -4px;
 }

@@ -6,7 +6,7 @@ angular.module('flocs.instructions')
   var instructionsToShow = [];
   var instructionAreas = {};
 
-  this.blockInstructionsPlacements = {};
+  this.blockInstructionsPlacements = [];
 
   this.setInstructions = function(allInstructions, newInstructions) {
     // fake for now, TODO: implement
@@ -21,10 +21,20 @@ angular.module('flocs.instructions')
         priority: 200,
         text: "Tady je bludiste...",
       },
+      "ENV_WORKSPACE": {
+        concept: "ENV_WORKSPACE",
+        priority: 200,
+        text: "Tady je workspace...",
+      },
       "ENV_TOOLBOX": {
         concept: "ENV_TOOLBOX",
         priority: 200,
         text: "Tady je toolbox...",
+      },
+      "ENV_SNAPPING": {
+        concept: "ENV_SNAPPING",
+        priority: 200,
+        text: "Takhle se snappuje...",
       },
       "BLOCK_MOVE": {
         concept: "BLOCK_MOVE",
@@ -36,16 +46,21 @@ angular.module('flocs.instructions')
     };
     // pozor na poradi pushovani / pripadne popovat z druhe strany?
     instructionsToShow.push("BLOCK_MOVE");
-    //instructionsToShow.push("ENV_TOOLBOX");
-    //instructionsToShow.push("ENV_RUN_RESET");
+    //instructionsToShow.push("ENV_SNAPPING");
+    instructionsToShow.push("ENV_TOOLBOX");
+    instructionsToShow.push("ENV_WORKSPACE");
     instructionsToShow.push("ENV_MAZE");
+    //instructionsToShow.push("ENV_RUN_RESET");
     //console.log('instructions are set');
 
-    // get blocks in toolbox
-    var blockPlacement = workspaceService.getBlockInToolbox('maze_move_forward');
-    blockPlacement.position = 'absolute';
-    this.blockInstructionsPlacements['BLOCK_MOVE'] = blockPlacement;
-    //console.log('path:', blockPlacement);
+    // get blocks in toolbox (only for corresponding instructions)
+    var block = workspaceService.getBlockInToolbox('maze_move_forward');
+    this.blockInstructionsPlacements.push({
+      key: 'BLOCK_MOVE',
+      offset: block.getOffset(),
+      size: block.getSize(),
+    });
+    ////console.log('path:', blockPlacement);
   };
 
   this.registerInstructionArea = function(area) {
@@ -83,6 +98,7 @@ angular.module('flocs.instructions')
 
     var showNextInstructionIfAny = function() {
       if (instructionsToShow.length === 0) {
+        // TODO: try to remove $timeout...
         $timeout(function() {
           scheduledInstructionsSeen.resolve();
         });
