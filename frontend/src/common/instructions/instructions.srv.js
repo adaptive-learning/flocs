@@ -42,25 +42,31 @@ angular.module('flocs.instructions')
         blockKey: 'maze_move_forward',
         priority: 200,
         text: "Tady je blok pohybu..",
+      },
+      "GAME_BLOCK_LIMIT": {
+        concept: "GAME_BLOCK_LIMIT",
+        priority: 200,
+        text: "Tady je limit na bloky..",
       }
     };
     // pozor na poradi pushovani / pripadne popovat z druhe strany?
-    instructionsToShow.push("BLOCK_MOVE");
+    //instructionsToShow.push("BLOCK_MOVE");
     //instructionsToShow.push("ENV_SNAPPING");
-    instructionsToShow.push("ENV_TOOLBOX");
-    instructionsToShow.push("ENV_WORKSPACE");
-    instructionsToShow.push("ENV_MAZE");
+    //instructionsToShow.push("ENV_TOOLBOX");
+    //instructionsToShow.push("ENV_WORKSPACE");
+    //instructionsToShow.push("ENV_MAZE");
+    instructionsToShow.push("GAME_BLOCK_LIMIT");
     //instructionsToShow.push("ENV_RUN_RESET");
     //console.log('instructions are set');
 
     // get blocks in toolbox (only for corresponding instructions)
+    this.blockInstructionsPlacements.length = 0;
     var block = workspaceService.getBlockInToolbox('maze_move_forward');
     this.blockInstructionsPlacements.push({
       key: 'BLOCK_MOVE',
       offset: block.getOffset(),
       size: block.getSize(),
     });
-    ////console.log('path:', blockPlacement);
   };
 
   this.registerInstructionArea = function(area) {
