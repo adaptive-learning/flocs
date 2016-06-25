@@ -178,12 +178,27 @@ angular.module('flocs.workspace')
     return code;
   }
 
+  /**
+   * Return first block with given key in current program in workspace
+   */
+  function getBlockInProgram(key) {
+    var blocks = blocklyDiv.getAllBlocks();
+    return findFirstBlockOfType(key, blocks);
+  }
+
+  /**
+   * Return block in toolbox by key
+   */
   function getBlockInToolbox(key) {
     // TODO: find blocks in toolbox using public attributes only
     var blocks = blocklyDiv.flyout_.workspace_.getAllBlocks();
+    return findFirstBlockOfType(key, blocks);
+  }
+
+  function findFirstBlockOfType(type, blocks) {
     var block = null;
     for (var i=0; i <= blocks.length; i++) {
-      if (blocks[i].type == key) {
+      if (blocks[i].type == type) {
         block = blocks[i];
         break;
       }
@@ -191,6 +206,7 @@ angular.module('flocs.workspace')
     if (block !== null) {
       //var path = blocks[i].svgPath_;
       //var bbox = path.getBBox();
+
       // enrich block by functions for getting size and offset
       block.getSize = function() {
         var hw = block.getHeightWidth();
@@ -200,14 +216,23 @@ angular.module('flocs.workspace')
           height: hw.height,
         };
       };
+
       block.getOffset = function() {
-        var xy = block.getRelativeToSurfaceXY();
+        var blockly_xy = block.getRelativeToSurfaceXY();
         // convert to POJO
-        return {
-          x: xy.x,
-          y: xy.y,
+        var xy = {
+          x: blockly_xy.x,
+          y: blockly_xy.y,
         };
+        // add offset caused by flyout
+        if (!block.isInFlyout) {
+          // TODO: factor out each access to Blockly private attributes to a
+          // special service
+          xy.x += blocklyDiv.flyout_.width_;
+        }
+        return xy;
       };
+
       return block;
     }
   }
@@ -229,5 +254,6 @@ angular.module('flocs.workspace')
     getBlocksUsed: getBlocksUsed,
     getBlocksLimit: getBlocksLimit,
     getBlockInToolbox: getBlockInToolbox,
+    getBlockInProgram: getBlockInProgram,
   };
 });

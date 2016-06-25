@@ -116,8 +116,8 @@ angular.module('flocs.taskEnvironment')
     workspaceService.set(getWorkspaceSettings());
     executionStatus.initialState = true;
     //changeNotification();
-    instructionsService.setInstructions(newInstructions, newInstructions);
-    instructionsService.showingScheduledInstructions();
+    instructionsService.settingInstructions(newInstructions, newInstructions)
+      .then(instructionsService.showingScheduledInstructions);
   }
 
   function setInitialState() {

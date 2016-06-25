@@ -2,13 +2,15 @@
 angular.module('flocs.instructions')
 .service('instructionsService', function ($q, $timeout, workspaceService) {
 
+  var self = this;  // necessary to access this service in different calling contexts
   var instructions = {};
   var instructionsToShow = [];
   var instructionAreas = {};
 
-  this.blockInstructionsPlacements = [];
+  self.instructionsPlacements = {};
 
-  this.setInstructions = function(allInstructions, newInstructions) {
+  self.settingInstructions = function(allInstructions, newInstructions) {
+    var instructionsSet = $q.defer();
     // fake for now, TODO: implement
     instructions = {
       "ENV_RUN_RESET": {
@@ -49,33 +51,57 @@ angular.module('flocs.instructions')
         text: "Tady je limit na bloky..",
       }
     };
-    // pozor na poradi pushovani / pripadne popovat z druhe strany?
-    //instructionsToShow.push("BLOCK_MOVE");
-    //instructionsToShow.push("ENV_SNAPPING");
-    //instructionsToShow.push("ENV_TOOLBOX");
-    //instructionsToShow.push("ENV_WORKSPACE");
-    //instructionsToShow.push("ENV_MAZE");
-    instructionsToShow.push("GAME_BLOCK_LIMIT");
-    //instructionsToShow.push("ENV_RUN_RESET");
-    //console.log('instructions are set');
 
     // get blocks in toolbox (only for corresponding instructions)
-    this.blockInstructionsPlacements.length = 0;
+    //self.blockInstructionsPlacements.length = 0;
     var block = workspaceService.getBlockInToolbox('maze_move_forward');
-    this.blockInstructionsPlacements.push({
+    //self.blockInstructionsPlacements.push({
+    //  key: 'BLOCK_MOVE',
+    //  offset: block.getOffset(),
+    //  size: block.getSize(),
+    //});
+    self.instructionsPlacements.blocks = [];
+    self.instructionsPlacements.blocks.push({
       key: 'BLOCK_MOVE',
       offset: block.getOffset(),
       size: block.getSize(),
     });
+    // TODO: decomposition...
+    var startBlock = workspaceService.getBlockInProgram('start');
+    var startOffset = startBlock.getOffset();
+    var startSize = startBlock.getSize();
+    startOffset.y += 0.6 * startSize.height;
+    startSize.width *= 0.3;
+    startSize.height *= 0.8;
+    self.instructionsPlacements.snapping = {
+      offset: startOffset,
+      size: startSize
+    };
+
+
+    // pozor na poradi pushovani / pripadne popovat z druhe strany?
+    instructionsToShow.push("ENV_SNAPPING");
+    instructionsToShow.push("BLOCK_MOVE");
+    //instructionsToShow.push("ENV_TOOLBOX");
+    //instructionsToShow.push("ENV_WORKSPACE");
+    //instructionsToShow.push("ENV_MAZE");
+    //instructionsToShow.push("GAME_BLOCK_LIMIT");
+    //instructionsToShow.push("ENV_RUN_RESET");
+    //console.log('instructions are set');
+
+    // just let the dynamic instruction areas to be rendered, then resolve
+    $timeout(instructionsSet.resolve);
+
+    return instructionsSet.promise;
   };
 
-  this.registerInstructionArea = function(area) {
+  self.registerInstructionArea = function(area) {
     var key = area.key;
     console.log('registered instruction-area for key:', key);
     instructionAreas[key] = area;
   };
 
-  this.showingSelectedInstruction = function(key) {
+  self.showingSelectedInstruction = function(key) {
     var instruction = instructions[key];
     if (!instruction) {
       throw(new Error('no instruction for key: ' + key));
@@ -97,10 +123,8 @@ angular.module('flocs.instructions')
   };
 
 
-  this.showingScheduledInstructions = function() {
+  self.showingScheduledInstructions = function() {
     var scheduledInstructionsSeen = $q.defer();
-    // the following line is necessary to access this function inside closure
-    var showingSelectedInstruction = this.showingSelectedInstruction;
 
     var showNextInstructionIfAny = function() {
       if (instructionsToShow.length === 0) {
@@ -110,7 +134,8 @@ angular.module('flocs.instructions')
         });
       } else {
         var instructionKey = instructionsToShow.pop();
-        showingSelectedInstruction(instructionKey).then(showNextInstructionIfAny);
+        self.showingSelectedInstruction(instructionKey)
+            .then(showNextInstructionIfAny);
       }
     };
 
