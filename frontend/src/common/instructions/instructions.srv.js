@@ -10,6 +10,7 @@ angular.module('flocs.instructions')
   self.instructionsPlacements = {};
 
   self.settingInstructions = function(allInstructions, newInstructions) {
+    console.log('instructions:', newInstructions);
     var instructionsSet = $q.defer();
     // fake for now, TODO: implement
     instructions = {
@@ -45,24 +46,47 @@ angular.module('flocs.instructions')
         priority: 200,
         text: "Tady je blok pohybu..",
       },
+      "BLOCK_TURN": {
+        concept: "BLOCK_TURN",
+        type: 'block',
+        blockKey: 'maze_turn',
+        priority: 200,
+        text: "Tady je blok pohybu..",
+      },
       "GAME_BLOCK_LIMIT": {
         concept: "GAME_BLOCK_LIMIT",
         priority: 200,
         text: "Tady je limit na bloky..",
+      },
+      "GAME_COLORS": {
+        concept: "GAME_COLORS",
+        priority: 200,
+        text: "Tady jsou barvy!",
+      },
+      "GAME_PITS": {
+        concept: "GAME_PITS",
+        priority: 200,
+        text: "Tady jsou jamy!",
+      },
+      "GAME_TOKENS": {
+        concept: "GAME_TOKENS",
+        priority: 200,
+        text: "Tady jsou tokeny!",
       }
     };
 
     // get blocks in toolbox (only for corresponding instructions)
     //self.blockInstructionsPlacements.length = 0;
-    var block = workspaceService.getBlockInToolbox('maze_move_forward');
-    //self.blockInstructionsPlacements.push({
-    //  key: 'BLOCK_MOVE',
-    //  offset: block.getOffset(),
-    //  size: block.getSize(),
-    //});
     self.instructionsPlacements.blocks = [];
+    var block = workspaceService.getBlockInToolbox('maze_move_forward');
     self.instructionsPlacements.blocks.push({
       key: 'BLOCK_MOVE',
+      offset: block.getOffset(),
+      size: block.getSize(),
+    });
+    block = workspaceService.getBlockInToolbox('maze_turn');
+    self.instructionsPlacements.blocks.push({
+      key: 'BLOCK_TURN',
       offset: block.getOffset(),
       size: block.getSize(),
     });
@@ -78,15 +102,17 @@ angular.module('flocs.instructions')
       size: startSize
     };
 
-
     // pozor na poradi pushovani / pripadne popovat z druhe strany?
-    instructionsToShow.push("ENV_SNAPPING");
-    instructionsToShow.push("BLOCK_MOVE");
-    //instructionsToShow.push("ENV_TOOLBOX");
-    //instructionsToShow.push("ENV_WORKSPACE");
+    //instructionsToShow.push("ENV_SNAPPING");
+    //instructionsToShow.push("BLOCK_MOVE");
+    //instructionsToShow.push("BLOCK_TURN");
+    instructionsToShow.push("ENV_TOOLBOX");
+    instructionsToShow.push("ENV_WORKSPACE");
     //instructionsToShow.push("ENV_MAZE");
     //instructionsToShow.push("GAME_BLOCK_LIMIT");
     //instructionsToShow.push("ENV_RUN_RESET");
+    //instructionsToShow.push("GAME_PITS");
+    //instructionsToShow.push("GAME_TOKENS");
     //console.log('instructions are set');
 
     // just let the dynamic instruction areas to be rendered, then resolve

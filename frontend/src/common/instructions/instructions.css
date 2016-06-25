@@ -3,7 +3,7 @@
   z-index: 100;
   display: inline-block;
   box-sizing: border-box;
-  border: 4px dashed rgba(166, 27, 26, 0.9);
+  border: 1px dashed rgba(166, 27, 26, 0.9);
   background-color: rgba(166, 27, 26, 0.1);
 }
 .instruction-area-overlay {

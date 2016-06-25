@@ -28,6 +28,18 @@ angular.module('flocs.maze')
           default: return null;
         }
       };
+      var boxToType = function(box) {
+        switch (box) {
+          case BoxType.WALL: return 'WALL';
+          case BoxType.GOAL: return 'GOAL';
+          case BoxType.YELLOW: return 'COLOR';
+          case BoxType.GREEN: return 'COLOR';
+          case BoxType.BLUE: return 'COLOR';
+          case BoxType.PIT: return 'PIT';
+          case BoxType.FREE: return 'FREE';
+          default: return 'UNKNOWN';
+        }
+      };
 
       var getHeroImagePath = function(direction) {
         switch(direction) {
@@ -66,6 +78,7 @@ angular.module('flocs.maze')
         for (var i = 0; i < gridHeight; i++) {
           for (var j = 0; j < gridWidth; j++) {
             scope.visualization.boxes.push({
+              type: boxToType(state.grid[i][j]),
               x: j, // * visualization.boxSize,
               y: i, // * visualization.boxSize,
               width: scope.visualization.boxSize,
@@ -77,6 +90,7 @@ angular.module('flocs.maze')
         // boxes for tools
         angular.forEach(state.tokens, function(tokenPosition) {
             scope.visualization.boxes.push({
+              type: 'TOKEN',
               x: tokenPosition[0],
               y: tokenPosition[1],
               width: scope.visualization.boxSize,

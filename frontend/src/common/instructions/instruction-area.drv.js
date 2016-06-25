@@ -13,7 +13,6 @@ angular.module('flocs.instructions')
     }
 
     var selector = placementParams.selector;
-    var isSvg = selector.indexOf('svg') > -1;
     var element = angular.element(document.querySelector(selector));
     var adjustPlacement = function(placement) {
       if (placementParams.offset) {
@@ -26,12 +25,15 @@ angular.module('flocs.instructions')
       }
     };
     var getPlacement = null;
-    if (isSvg) {
+    if ('svg' in placementParams) {
+      var svgSelector = selector + ' svg ' + placementParams.svg;
+      var svgElement = angular.element(document.querySelector(svgSelector));
       getPlacement = function() {
-        var bbox = element[0].getBBox();
+        var parentPosition = element.position();
+        var bbox = svgElement[0].getBBox();
         var placement = {
-          left: bbox.x,
-          top: bbox.y,
+          left: parentPosition.left + bbox.x,
+          top: parentPosition.top + bbox.y,
           width: bbox.width,
           height: bbox.height,
         };

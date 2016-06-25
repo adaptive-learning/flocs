@@ -2,24 +2,24 @@
   <div id="workspace-instructions-layer">
     <flocs-instruction-area
       key="ENV_TOOLBOX"
-      placement="{selector: '#workspace svg .blocklyWorkspace .blocklyFlyout'}"
+      placement="{selector: '#workspace', svg: '.blocklyWorkspace .blocklyFlyout'}"
       popover-position="right">
     </flocs-instruction-area>
     <flocs-instruction-area
       key="ENV_WORKSPACE"
-      placement="{selector: '#workspace svg .blocklyWorkspace'}"
+      placement="{selector: '#workspace'}"
       popover-position="right">
     </flocs-instruction-area>
     <flocs-instruction-area
       ng-if="instructionsPlacements.snapping"
       key="ENV_SNAPPING"
-      placement="{selector: '#workspace svg .blocklyWorkspace', offset: instructionsPlacements.snapping.offset, size: instructionsPlacements.snapping.size}"
+      placement="{selector: '#workspace', svg: '.blocklyWorkspace', offset: instructionsPlacements.snapping.offset, size: instructionsPlacements.snapping.size}"
       popover-position="bottom">
     </flocs-instruction-area>
     <flocs-instruction-area
       ng-repeat="block in instructionsPlacements.blocks"
       key="{{ block.key }}"
-      placement="{selector: '#workspace svg', offset: block.offset, size: block.size}"
+      placement="{selector: '#workspace', svg: '', offset: block.offset, size: block.size}"
       popover-position="right">
     </flocs-instruction-area>
   </div>
@@ -91,6 +91,21 @@
         key="GAME_BLOCK_LIMIT"
         placement="{selector: '#statusPanel'}"
         popover-position="bottom">
+      </flocs-instruction-area>
+      <flocs-instruction-area
+        key="GAME_COLORS"
+        placement="{selector: '#maze', svg: 'image[flocs-box-type=COLOR]'}"
+        popover-position="left">
+      </flocs-instruction-area>
+      <flocs-instruction-area
+        key="GAME_TOKENS"
+        placement="{selector: '#maze', svg: 'image[flocs-box-type=TOKEN]'}"
+        popover-position="left">
+      </flocs-instruction-area>
+      <flocs-instruction-area
+        key="GAME_PITS"
+        placement="{selector: '#maze', svg: 'image[flocs-box-type=PIT]'}"
+        popover-position="left">
       </flocs-instruction-area>
     </div>
 
