@@ -10,87 +10,37 @@ angular.module('flocs.instructions')
   self.instructionsPlacements = {};
 
   self.settingInstructions = function(allInstructions, newInstructions) {
-    console.log('instructions:', newInstructions);
+    // NOTE: currently, only behavior for new instructions is implemented,
+    // other instructions are ignored (in future we would like to have a
+    // possibility to see all previous instructions related to current task)
     var instructionsSet = $q.defer();
-    // fake for now, TODO: implement
-    instructions = {
-      "ENV_RUN_RESET": {
-        concept: "ENV_RUN_RESET",
-        priority: 300,
-        text: "Jakmile jsi spokojený se svým programem, spusť ho pomocí tohoto tlačítka. Pokud robot nedorazí k truhle, můžeš ho vrátit na původní pozici stisknutím 'Reset' tlačítka a zkusit jiný program.",
-      },
-      "ENV_MAZE": {
-        concept: "ENV_MAZE",
-        priority: 200,
-        text: "Tady je bludiste...",
-      },
-      "ENV_WORKSPACE": {
-        concept: "ENV_WORKSPACE",
-        priority: 200,
-        text: "Tady je workspace...",
-      },
-      "ENV_TOOLBOX": {
-        concept: "ENV_TOOLBOX",
-        priority: 200,
-        text: "Tady je toolbox...",
-      },
-      "ENV_SNAPPING": {
-        concept: "ENV_SNAPPING",
-        priority: 200,
-        text: "Takhle se snappuje...",
-      },
-      "BLOCK_MOVE": {
-        concept: "BLOCK_MOVE",
-        type: 'block',
-        blockKey: 'maze_move_forward',
-        priority: 200,
-        text: "Tady je blok pohybu..",
-      },
-      "BLOCK_TURN": {
-        concept: "BLOCK_TURN",
-        type: 'block',
-        blockKey: 'maze_turn',
-        priority: 200,
-        text: "Tady je blok pohybu..",
-      },
-      "GAME_BLOCK_LIMIT": {
-        concept: "GAME_BLOCK_LIMIT",
-        priority: 200,
-        text: "Tady je limit na bloky..",
-      },
-      "GAME_COLORS": {
-        concept: "GAME_COLORS",
-        priority: 200,
-        text: "Tady jsou barvy!",
-      },
-      "GAME_PITS": {
-        concept: "GAME_PITS",
-        priority: 200,
-        text: "Tady jsou jamy!",
-      },
-      "GAME_TOKENS": {
-        concept: "GAME_TOKENS",
-        priority: 200,
-        text: "Tady jsou tokeny!",
-      }
-    };
+    angular.forEach(newInstructions, function(instruction) {
+      var key = instruction.concept;
+      instructions[key] = instruction;
+      instructionsToShow.push(key);
+    });
+    findPlacementsForBlockInstructions();
+    findPlacementForSnappingInstruction();
+    // just let the dynamic instruction areas to be rendered, then resolve
+    $timeout(instructionsSet.resolve);
+    return instructionsSet.promise;
+  };
 
-    // get blocks in toolbox (only for corresponding instructions)
-    //self.blockInstructionsPlacements.length = 0;
+  function findPlacementsForBlockInstructions() {
     self.instructionsPlacements.blocks = [];
-    var block = workspaceService.getBlockInToolbox('maze_move_forward');
-    self.instructionsPlacements.blocks.push({
-      key: 'BLOCK_MOVE',
-      offset: block.getOffset(),
-      size: block.getSize(),
+    angular.forEach(instructions, function(instruction, key) {
+      if (instruction.type == 'block') {
+        var block = workspaceService.getBlockInToolbox(instruction.blockKey);
+        self.instructionsPlacements.blocks.push({
+          key: key,
+          offset: block.getOffset(),
+          size: block.getSize(),
+        });
+      }
     });
-    block = workspaceService.getBlockInToolbox('maze_turn');
-    self.instructionsPlacements.blocks.push({
-      key: 'BLOCK_TURN',
-      offset: block.getOffset(),
-      size: block.getSize(),
-    });
-    // TODO: decomposition...
+  }
+
+  function findPlacementForSnappingInstruction() {
     var startBlock = workspaceService.getBlockInProgram('start');
     var startOffset = startBlock.getOffset();
     var startSize = startBlock.getSize();
@@ -101,29 +51,10 @@ angular.module('flocs.instructions')
       offset: startOffset,
       size: startSize
     };
-
-    // pozor na poradi pushovani / pripadne popovat z druhe strany?
-    //instructionsToShow.push("ENV_SNAPPING");
-    //instructionsToShow.push("BLOCK_MOVE");
-    //instructionsToShow.push("BLOCK_TURN");
-    instructionsToShow.push("ENV_TOOLBOX");
-    instructionsToShow.push("ENV_WORKSPACE");
-    //instructionsToShow.push("ENV_MAZE");
-    //instructionsToShow.push("GAME_BLOCK_LIMIT");
-    //instructionsToShow.push("ENV_RUN_RESET");
-    //instructionsToShow.push("GAME_PITS");
-    //instructionsToShow.push("GAME_TOKENS");
-    //console.log('instructions are set');
-
-    // just let the dynamic instruction areas to be rendered, then resolve
-    $timeout(instructionsSet.resolve);
-
-    return instructionsSet.promise;
-  };
+  }
 
   self.registerInstructionArea = function(area) {
     var key = area.key;
-    console.log('registered instruction-area for key:', key);
     instructionAreas[key] = area;
   };
 
@@ -136,15 +67,6 @@ angular.module('flocs.instructions')
     if (!area) {
       throw(new Error('no registered instruction area for key: ' + key));
     }
-    /*
-    var instructionSeen = $q.defer();
-    //console.log('showing instruction:', instruction);
-    instruction.showing().then(function() {
-      console.log('seen');
-      instructionSeen.resolve();
-    });
-    return instructionSeen.promise;
-    */
     return area.showing(instruction);
   };
 
@@ -154,12 +76,9 @@ angular.module('flocs.instructions')
 
     var showNextInstructionIfAny = function() {
       if (instructionsToShow.length === 0) {
-        // TODO: try to remove $timeout...
-        $timeout(function() {
-          scheduledInstructionsSeen.resolve();
-        });
+        scheduledInstructionsSeen.resolve();
       } else {
-        var instructionKey = instructionsToShow.pop();
+        var instructionKey = instructionsToShow.shift();
         self.showingSelectedInstruction(instructionKey)
             .then(showNextInstructionIfAny);
       }

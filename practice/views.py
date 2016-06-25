@@ -213,7 +213,20 @@ def session_overview_to_json(session_overview):
             }
     return sess_overview_dict
 
+
 def instructions_to_json(instructions):
     if instructions is None:
         return []
-    return [instruction.text for instruction in instructions]
+    return [instruction_to_json(instruction) for instruction in instructions]
+
+
+def instruction_to_json(instruction):
+    concept = instruction.concept
+    instruction_dict = {
+        'concept': concept.name,
+        'type': concept.get_type(),
+        'text': instruction.text,
+    }
+    if concept.get_type() == 'block':
+        instruction_dict['blockKey'] = concept.blockconcept.block.identifier
+    return instruction_dict

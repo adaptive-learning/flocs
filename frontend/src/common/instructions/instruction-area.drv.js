@@ -9,7 +9,6 @@ angular.module('flocs.instructions')
       scope.placementCss.top = placement.top + 'px';
       scope.placementCss.width = placement.width + 'px';
       scope.placementCss.height = placement.height + 'px';
-      //console.log('new placement:', scope.placementCss);
     }
 
     var selector = placementParams.selector;
@@ -91,7 +90,6 @@ angular.module('flocs.instructions')
           scope.area.visible = true;
         });
         setPlacementWatcher(scope, scope.placement);
-        console.log('showing:', instruction);
         return instructionSeen.promise;
       };
 
