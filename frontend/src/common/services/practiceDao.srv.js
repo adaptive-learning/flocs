@@ -36,10 +36,13 @@ angular.module('flocs.services')
     var taskInstance = {
       taskInstanceId: response.data['task-instance-id'],
       task: parseTask(response.data['task']),
+      studentToolbox: response.data['student-toolbox'],
       newInstructions: response.data['new-instructions'],
       allInstructions: response.data['all-instructions'],
       session: response.data['session'],
     };
+    // hack to pass student toolbox into workspace service easily
+    taskInstance.task['workspace-settings'].studentToolbox = taskInstance.studentToolbox;
     return taskInstance;
   }
 

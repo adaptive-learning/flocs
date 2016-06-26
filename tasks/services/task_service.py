@@ -33,9 +33,10 @@ def get_task_by_id(request_id):
         task = TaskModel.objects.get(id = request_id)
     except TaskModel.DoesNotExist:
         raise LookupError('Task with id ' + str(request_id) + ' does not exist.')
-
     return task.to_json()
 
+# TODO: remove this redundant call (it became a complete duplicate of
+# get_task_by_id
 def get_task_by_id_with_toolbox(request_id):
     """Return task by its id. Include minimal required toolbox.
 
@@ -50,30 +51,5 @@ def get_task_by_id_with_toolbox(request_id):
         task = TaskModel.objects.get(id = request_id)
     except TaskModel.DoesNotExist:
         raise LookupError('Task with id ' + str(request_id) + ' does not exist.')
-
     response = task.to_json()
-    response['workspace-settings']['toolbox'] = get_toolbox_from_blocks(
-            task.get_required_blocks())
     return response
-
-def get_toolbox_from_blocks(blocks):
-    """Returns usable toolbox generated from the list of blocks.
-
-    Args:
-        blocks: list of blocks that will compose the toolbox
-
-    Returns:
-        list of strings (idenfitifiers)
-    """
-    toolbox = []
-    toolbox_condensed = []
-    for block in blocks:
-        toolbox += block.get_identifiers_list()
-        toolbox_condensed += block.get_identifiers_condensed_list()
-    # 10 is a magic constant defining maxium number of blocs before changing to
-    # condensed versions. It does correspond to roughly the limit of screen
-    # with height of 766 px.
-    if len(toolbox) > 10:
-        return toolbox_condensed
-    else:
-        return toolbox

@@ -66,7 +66,7 @@ class TaskModel(models.Model):
         return list(self._contained_concepts.filter(programmingconcept__isnull=False))
 
     def get_required_blocks(self):
-        return self.get_toolbox().get_all_blocks()
+        return self.get_toolbox(complete_if_none=True).get_all_blocks()
 
     def get_blocks_limit(self):
         """ Return blocks limit or None, if there is no limit on blocks
@@ -117,6 +117,7 @@ class TaskModel(models.Model):
     def get_workspace_settings(self):
         workspace_dict = json.loads(self.workspace_settings)
         workspace_dict['blocks-limit'] = self.get_blocks_limit()
+        workspace_dict['toolbox'] = [block.to_json() for block in self.get_required_blocks()]
         return workspace_dict
 
     def __str__(self):

@@ -184,11 +184,11 @@ def task_info_to_json(task_info):
     task_dict = {
         'task-instance-id': task_info.task_instance.pk,
         'task': task_info.task.to_json(),
+        'student-toolbox': [block.to_json() for block in task_info.student_toolbox],
         'new-instructions': instructions_to_json(task_info.new_instructions),
         'all-instructions': instructions_to_json(task_info.all_instructions),
         'session': session_dict
     }
-    task_dict['task']['workspace-settings']['toolbox'] = task_info.toolbox
     return task_dict
 
 

@@ -7,7 +7,6 @@ import logging
 from collections import namedtuple
 from common.flow_factors import FlowFactors
 from tasks.models import TaskModel
-from tasks.services.task_service import get_toolbox_from_blocks
 from practice.models.practice_context import create_practice_context
 from practice.models import TaskInstanceModel
 from practice.models import Attempt
@@ -30,7 +29,7 @@ logger = logging.getLogger(__name__)
 
 # TODO: remove task field - it is redundant (task is in task_instance.task)
 TaskInfo = namedtuple('TaskInfo',
-        ['task_instance', 'task', 'toolbox', 'new_instructions', 'all_instructions', 'session'])
+        ['task_instance', 'task', 'student_toolbox', 'new_instructions', 'all_instructions', 'session'])
 SessionOverview = namedtuple('SessionOverview',
         ['task_instances', 'overall_time', 'percentils'])
 
@@ -58,7 +57,7 @@ def get_next_task_in_session(user):
     task_info_with_sess = TaskInfo(
         task_instance=task_info.task_instance,
         task=task_info.task,
-        toolbox=task_info.toolbox,
+        student_toolbox=task_info.student_toolbox,
         new_instructions=task_info.new_instructions,
         all_instructions=task_info.all_instructions,
         session=session
@@ -74,7 +73,7 @@ def get_active_task_in_session(student):
     session_task_instance_info = TaskInfo(
         task_instance=active_task_instance,
         task=active_task_instance.task,
-        toolbox=get_student_toolbox(student),
+        student_toolbox=get_student_toolbox(student),
         new_instructions=get_instructions(active_task_instance.task, student),
         all_instructions=get_instructions(active_task_instance.task),
         session = session
@@ -119,7 +118,7 @@ def get_task(student, task_selector):
     task_info = TaskInfo(
         task_instance=task_instance,
         task=task,
-        toolbox=student_toolbox,
+        student_toolbox=student_toolbox,
         new_instructions=new_instructions,
         all_instructions=get_instructions(task),
         session = None
@@ -137,7 +136,7 @@ def get_student_toolbox(student):
         list of identifiers of all available blocks for the user
     """
     details = get_practice_details(student.user)
-    return get_toolbox_from_blocks(details.available_blocks)
+    return details.available_blocks
 
 
 def process_attempt_report(user, report):

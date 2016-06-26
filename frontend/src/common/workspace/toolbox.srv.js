@@ -8,64 +8,96 @@ angular.module('flocs.workspace')
 
   // public API
   return {
-    createToolboxXml: createToolboxXml
+    prepareToolbox: prepareToolbox,
+    toolboxToXml: toolboxToXml
   };
 
   /**
-   * Encapsulates recursively generated toolbox XML in root <xml> element.
-   *
-   * @param blockNames {Array.<Object>} List of block names and categories.
-   * @return {string} string of XML
+   * Creates a single toolbox combining task and student toolbox, sorting all
+   * blocks and expanding them, if there is enough space.
    */
-  function createToolboxXml(blockNames) {
-    // generate toolbox from sorted list
-    return '<xml>' + blocksToXml(blockNames.sort(blockComparator)) + '</xml>';
+  function prepareToolbox(taskToolbox, studentToolbox) {
+    var toolbox =  mergeTaskAndStudentToolbox(taskToolbox, studentToolbox);
+    return sortToolbox(expandToolbox(toolbox));
   }
 
   /**
-   * Creates XML string describing the toolbox.
-   *
-   * @param blockNames {Array.<Object>} List of block names and categories.
-   * @return {string} string of XML without root element
+   * Creates a single toolbox combining task and student toolbox.
+   * The current behavior is to mark all blocks in student toolbox, which are
+   * not in task toolbox as disabled.
    */
-  function blocksToXml(blockNames) {
-    // no more blocks to process
-    if (typeof blockNames === 'undefined' || blockNames.length === 0) {
-        return;
-    }
-
-    var xmlString = '';
-
-    angular.forEach(blockNames, function(blockName) {
-        // is blockName a string (block or category name)
-        if (typeof blockName === 'string' || blockName instanceof String) {
-            // is it custom defined block/category
-            if (blocksXml[blockName]) {
-                // custom defined block/category identifier
-                xmlString += blocksXml[blockName];
-            } else {
-                // the it better be an exact name of block
-                xmlString += '<block type="' + blockName + '"></block>';
-            }
-
-        // blockName is a definiton of category
-        } else {
-            // does it contain attribute custom
-            if (blockName.custom) {
-                xmlString += '<category ' +
-                    'name="' + blockName.category + '" ' +
-                    'custom="' + blockName.custom + '">';
-            } else {
-                xmlString += '<category name="' + blockName.category + '">';
-            }
-            // process all category's items
-            xmlString += blocksToXml(blockName.items);
-            xmlString += '</category>';
+  function mergeTaskAndStudentToolbox(taskToolbox, studentToolbox) {
+    var toolbox = taskToolbox.slice();
+    angular.forEach(studentToolbox, function(block) {
+      var alreadyIncluded = false;
+      for (var i=0; i<taskToolbox.length; i++) {
+        if (block.identifier == taskToolbox[i].identifier) {
+          alreadyIncluded = true;
+          break;
         }
+      }
+      if (!alreadyIncluded) {
+        block.disabled = true;
+        toolbox.push(block);
+      }
     });
-    //console.log(xmlString);
+    return toolbox;
+  }
+
+  function expandToolbox(toolbox) {
+    var MAX_BLOCKS = 9;
+    var expandedToolbox = [];
+    for (var i=0; i<toolbox.length; i++) {
+      var identifiersExpanded = toolbox[i]['identifiers-expanded'];
+      var remainingBlocks = toolbox.length - i - 1;
+      var expandedLength = expandedToolbox.length + identifiersExpanded.length + remainingBlocks;
+      if (toolbox[i].disabled || expandedLength > MAX_BLOCKS) {
+        expandedToolbox.push(toolbox[i]);
+      } else {
+        for (var j=0; j<identifiersExpanded.length; j++) {
+          var newBlock = angular.copy(toolbox[i]);
+          newBlock.identifier = identifiersExpanded[j];
+          expandedToolbox.push(newBlock);
+        }
+      }
+    }
+    return expandedToolbox;
+  }
+
+  function sortToolbox(toolbox) {
+    var sortedToolbox =  toolbox.sort(function(a, b) {
+      return blockComparator(a.identifier, b.identifier);
+    });
+    return sortedToolbox;
+  }
+
+
+  /**
+   * Convert toolbox represented as a string of block objects into a string
+   * describing the toolbox in XML.
+   */
+  function toolboxToXml(toolbox) {
+    // TODO: unhack work with XML -- according to Blockly docs, it should be
+    // possible to work just with XML nodes, no need to convert it to text
+    var xmlLines = ['<xml>'];
+    angular.forEach(toolbox, function(block) {
+      var key = block.identifier;
+      var line = blocksXml[key];
+      if (!line) {
+        // if not custom block, then it should be Blockly default block
+        line = '<block type="' + key + '"></block>';
+      }
+      if (block.disabled) {
+        // hack to mark disabled blocks
+        line = line.replace('<block', '<block editable="false" disabled="true"');
+      }
+      xmlLines.push(line);
+    });
+    xmlLines.push('</xml>');
+    var xmlString = xmlLines.join('\n');
     return xmlString;
   }
+
 
   /*
    * Coparator for comparing two blocks

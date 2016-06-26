@@ -9,7 +9,10 @@ class ToolboxManager(models.Manager):
         return self.first()
 
     def get_complete_toolbox(self):
-        return self.last()
+        last_toolbox = self.last()
+        if not last_toolbox:
+            return self.create(name="auxiliary empty toolbox")
+        return last_toolbox
 
     def get_first_toolbox_containing(self, blocks):
         """ Return toolbox with lowest level which contains given blocks

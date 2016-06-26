@@ -28,13 +28,10 @@ class Block(models.Model):
     def natural_key(self):
         return (self.identifier,)
 
-    def get_identifiers_list(self):
+    def get_identifiers_expanded_list(self):
         if not self._expanded_identifiers:
             return [self.identifier]
         return json.loads(self._expanded_identifiers)
-
-    def get_identifiers_condensed_list(self):
-        return [self.identifier]
 
     def __str__(self):
         return '[{pk}] {name}'.format(pk=self.pk, name=self.name)
@@ -52,7 +49,7 @@ class Block(models.Model):
         block_dict = {
             'block-id': self.pk,
             'name': self.name,
-            'identifiers': self.get_identifiers_list(),
-            'identifiers-condensed': self.get_identifiers_condensed_list()
+            'identifier': self.identifier,
+            'identifiers-expanded': self.get_identifiers_expanded_list()
         }
         return block_dict

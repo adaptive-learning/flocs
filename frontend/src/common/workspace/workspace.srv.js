@@ -2,7 +2,7 @@
  * Workspace Service
  */
 angular.module('flocs.workspace')
-.factory('workspaceService', function($rootScope, $log, blocklyService,
+.factory('workspaceService', function($rootScope, $log, $timeout, blocklyService,
       toolboxService) {
 
   var blocklyDiv = null;
@@ -68,11 +68,11 @@ angular.module('flocs.workspace')
     }
 
     // prepare toolbox
-    //console.log("settings.toolbox is " + settings.toolbox);
-    var toolboxXml = toolboxService.createToolboxXml(settings.toolbox);
-
+    var toolbox = toolboxService.prepareToolbox(settings.toolbox, settings.studentToolbox);
+    var toolboxXml = toolboxService.toolboxToXml(toolbox);
     // inject blockly into the workspace with new toolbox
     blocklyDiv = Blockly.inject('blocklyDiv', {
+      disable: true,
       toolbox: toolboxXml,
       maxBlocks: settings.blocksLimit || Infinity,
       trashcan: true
@@ -92,6 +92,19 @@ angular.module('flocs.workspace')
     // NOTE: now we create (inject) new blockly div on reset, so there we do
     // not need to clear it (clear = set an empty program in workspace)
     //blocklyDiv.clear();
+
+    // There seems to be a bug in Blockly - blocks are not disabled, so we will
+    // need to disable them manually. But even if set as disabled, blocks are
+    // reenabled after some events, e.g. user picking another block from
+    // toolbox. So we also need to prevent these reenablings...
+    // TODO: update to the new version of Blockly and remove this hack
+    angular.forEach(toolbox, function(block) {
+      if (block.disabled) {
+        var blocklyBlock = getBlockInToolbox(block.identifier);
+        blocklyBlock.setDisabled(true);
+        blocklyBlock.setDisabled = function() {};
+      }
+    });
   }
 
   /**
