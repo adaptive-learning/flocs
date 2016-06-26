@@ -23,11 +23,11 @@ class TaskInstanceModel(models.Model):
     """
     Representation of a task taken by a student.
     """
-    export_class = namedtuple('TaskInstnace',
+    export_class = namedtuple('TaskInstance',
             ['task_instance_id', 'student_id', 'task_id',
              'time_start', 'time_end', 'time_spent',
              'solved', 'given_up', 'attempts', 'reported_flow',
-             'instructions_ids', 'blocks_ids', 'session_order'])
+             'instructions_ids', 'session_order'])
 
     # student who took the task
     student = models.ForeignKey(StudentModel)
@@ -73,7 +73,7 @@ class TaskInstanceModel(models.Model):
         help_text='instructions presented to the student')
 
     blocks = models.ManyToManyField(Block,
-        help_text='blocks available in toolbox')
+        help_text='all blocks in toolbox (but only those required by the task were available)')
 
     def __str__(self):
         templ = 'student={student}, task={task}, start={start}, time={time}' +\
@@ -102,7 +102,6 @@ class TaskInstanceModel(models.Model):
                 reported_flow=self.get_reported_flow_key(),
                 attempts=self.attempt_count,
                 session_order=self.get_session_order(),
-                blocks_ids=[block.pk for block in self.blocks.all()],
                 instructions_ids=[instruction.pk for instruction in self.instructions.all()])
         return export_tuple
 
