@@ -134,8 +134,8 @@ angular.module('flocs.locales')
 
   TASK_COMPLETION: {
     TASK_SOLVED: 'Úloha vyřešena!',
-    CREDITS_INFO: 'Získal jsi {CREDITS, plural, one{1 kredit} few{# kredity} other{# kreditů} }.',
-    SPEED_BONUS: 'bonus za rychlost',
+    CREDITS_INFO: 'Získal/a jsi {CREDITS, plural, one{1 kredit} few{# kredity} other{# kreditů} }.',
+    SPEED_BONUS_COMMENT: 'Skvělá práce!',
     PURCHASED_BLOCKS: 'Nové bloky',
     FLOW_QUESTION: 'Jak těžká pro tebe úloha byla?',
     EASY: 'Lehká',

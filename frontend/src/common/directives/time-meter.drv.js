@@ -28,6 +28,9 @@ angular.module('flocs.directives')
           readOnly: true,
         }
       };
+      // need to force rerendering of the slider (at least in task-completion
+      // modal, it does not render correctly first time)
+      $scope.$$postDigest(function () {$scope.$broadcast('rzSliderForceRender');});
     },
     link: function(scope, element, attrs) {
     }

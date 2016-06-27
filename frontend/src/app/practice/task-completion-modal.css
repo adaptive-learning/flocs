@@ -1,3 +1,15 @@
 .flow-report-form {
   text-align: center;
 }
+
+.modal-body p .time-meter-wrapper {
+  position: relative;
+  top: -1px;
+  left: 10px;
+}
+
+.modal-body p .block-label {
+  margin: 0px 3px;
+  position: relative;
+  top: -1px;
+}

@@ -13,26 +13,48 @@
   </div>
 
   <div class="modal-body">
-    <ul class="list-group">
-      <li class="list-group-item" ng-show="evaluation.earnedCredits != 0">
+      <p>
+        <span class="glyphicon glyphicon-time"></span>&nbsp;
+        {{ evaluation.time | secondsToTime }}, percentil: {{ evaluation.percentil }}&nbsp;%
+        <span class="time-meter-wrapper">
+          <flocs-time-meter time="{{evaluation.time}}" percentil="{{evaluation.percentil}}"></flocs-time-meter>
+        </span>
+      </p>
+      <div ng-if="evaluation.speedBonus">
+        <p>
+          <span class="glyphicon glyphicon-flash"></span>&nbsp;
+          <span translate="TASK_COMPLETION.SPEED_BONUS_COMMENT"/>
+        </p>
+      </div>
+
+      <p ng-show="evaluation.earnedCredits != 0">
+        <span class="glyphicon glyphicon-cd"></span>&nbsp;
         <span translate="TASK_COMPLETION.CREDITS_INFO" translate-values="{CREDITS: evaluation.earnedCredits}"/>
-          <span ng-if="evaluation.speedBonus"> (<span translate="TASK_COMPLETION.SPEED_BONUS"/>)</span>
-      </li>
+      </p>
 
-      <li class="list-group-item" ng-show="evaluation.purchases.length > 0">
+      <p>
+        <uib-progressbar
+          ng-repeat="level in evaluation.progress"
+          ng-if="$index == state.step"
+          value="level.credits"
+          max="level.maxCredits"
+          animate="true">
+          <span class="progressbar-caption">
+            &nbsp;{{level.credits}} / {{level.maxCredits}}
+            &nbsp;<span class="glyphicon glyphicon-cd"></span>
+          </span>
+        </uib-progressbar>
+      </p>
+
+      <p ng-show="state.newBlocks.length > 0">
         <span translate>TASK_COMPLETION.PURCHASED_BLOCKS</span>:
-        <ul>
-          <li ng-repeat="p in evaluation.purchases">{{p.name}}</li>
-        </ul>
-      </li>
+        <span
+          ng-repeat="block in state.newBlocks"
+          class="label label-default block-label">
+          {{block.name}}
+        </span>
+      </p>
 
-      <li class="list-group-item" ng-show="evaluation.earnedCredits != 0">
-        <ul class="list-unstyled">
-          <li><span translate>TOTAL_CREDITS</span>: {{practiceInfo.totalCredits}}</li>
-          <li><span translate>FREE_CREDITS</span>: {{practiceInfo.freeCredits}}</li>
-        </ul>
-      </li>
-    </ul>
   </div>
 
   <div class="modal-footer">
