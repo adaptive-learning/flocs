@@ -13,6 +13,7 @@
   </div>
 
   <div class="modal-body">
+    <div ng-if="evaluation">
       <p>
         <span class="glyphicon glyphicon-time"></span>&nbsp;
         {{ evaluation.time | secondsToTime }}, percentil: {{ evaluation.percentil }}&nbsp;%
@@ -27,34 +28,34 @@
         </p>
       </div>
 
-      <p ng-show="evaluation.earnedCredits != 0">
-        <span class="glyphicon glyphicon-cd"></span>&nbsp;
-        <span translate="TASK_COMPLETION.CREDITS_INFO" translate-values="{CREDITS: evaluation.earnedCredits}"/>
-      </p>
-
-      <p>
-        <uib-progressbar
-          ng-repeat="level in evaluation.progress"
-          ng-if="$index == state.step"
-          value="level.credits"
-          max="level.maxCredits"
-          animate="true">
-          <span class="progressbar-caption">
-            &nbsp;{{level.credits}} / {{level.maxCredits}}
-            &nbsp;<span class="glyphicon glyphicon-cd"></span>
+      <div ng-if="evaluation.taskSolvedFirstTime">
+        <p>
+          <span class="glyphicon glyphicon-cd"></span>&nbsp;
+          <span translate="TASK_COMPLETION.CREDITS_INFO" translate-values="{CREDITS: evaluation.earnedCredits}"/>
+        </p>
+        <p>
+          <uib-progressbar
+            ng-repeat="level in evaluation.progress"
+            ng-if="$index == state.step"
+            value="level.partialCredits"
+            max="level.maxCredits"
+            animate="true">
+            <span class="progressbar-caption">
+              &nbsp;{{level.credits}} / {{level.maxCredits}}
+              &nbsp;<span class="glyphicon glyphicon-cd"></span>
+            </span>
+          </uib-progressbar>
+        </p>
+        <p ng-show="state.newBlocks.length > 0">
+          <span translate>TASK_COMPLETION.PURCHASED_BLOCKS</span>:
+          <span
+            ng-repeat="block in state.newBlocks"
+            class="label label-default block-label">
+            {{block.name}}
           </span>
-        </uib-progressbar>
-      </p>
-
-      <p ng-show="state.newBlocks.length > 0">
-        <span translate>TASK_COMPLETION.PURCHASED_BLOCKS</span>:
-        <span
-          ng-repeat="block in state.newBlocks"
-          class="label label-default block-label">
-          {{block.name}}
-        </span>
-      </p>
-
+        </p>
+      </div>
+    </div>
   </div>
 
   <div class="modal-footer">

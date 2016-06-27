@@ -17,7 +17,7 @@ from practice.services.parameters_update import update_parameters
 from practice.services import practice_session_service as sess_service
 from practice.services import statistics_service
 from practice.services.details import get_practice_details
-from practice.services.levels import try_levelup
+from practice.services.levels import level_progress
 from practice.core.credits import compute_credits
 from practice.core.task_filtering import filter_tasks_by_level
 from practice.core.task_selection import IdSpecifidedTaskSelector
@@ -197,25 +197,21 @@ def process_attempt_report(user, report):
 
     credits = 0
     speed_bonus = False
-    purchases = []
+    progress = []
+    time, percentil = None, None
+
     if solved:
         task = task_instance.task
+        time = task_instance.time_spent
+        percentil = statistics_service.percentil(task_instance)
         if not solved_before:
-            percentil = statistics_service.percentil(task_instance)
             level = task.get_level()
             credits, speed_bonus = compute_credits(level, percentil)
-            student.earn_credits(credits)
             task_instance.earned_credits = credits
             task_instance.speed_bonus = speed_bonus
-
-            levelup_achieved = try_levelup(student)
-            if levelup_achieved:
-                purchases.extend(student.toolbox.get_new_blocks())
-                #logger.debug('Student {0} bought block {1}'.format(student.pk, new_block))
-
+            progress = level_progress(student, credits)
             student.save()
             task_instance.save()
-
 
     Attempt.objects.create(
         task_instance=task_instance,
@@ -224,11 +220,11 @@ def process_attempt_report(user, report):
         code=code
     )
 
-    task_solved_first_time = solved and not solved_before,
+    task_solved_first_time = solved and not solved_before
     logger.info("Reporting attempt was successful for student %s with result %s", student.pk, solved)
     result = namedtuple('processAttemptReportResult',
-                        ['task_solved_first_time', 'credits', 'speed_bonus', 'purchases'])\
-                        (task_solved_first_time, credits, speed_bonus, purchases)
+                        ['task_solved_first_time', 'time', 'percentil', 'credits', 'speed_bonus', 'progress'])\
+                        (task_solved_first_time, time, percentil, credits, speed_bonus, progress)
     return result
 
 

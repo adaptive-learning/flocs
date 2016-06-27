@@ -95,8 +95,30 @@ angular.module('flocs.services')
   function sendingAttemptReport(report) {
     return $http.post('/api/practice/attempt-report', report)
       .then(function(response) {
-        return response.data;
+        var evaluation = parseEvaluationResponse(response.data);
+        return evaluation;
       });
+  }
+
+  function parseEvaluationResponse(response) {
+    var report = {
+      taskSolvedFirstTime: response['task-solved-first-time'],
+      time: response['time'],
+      percentil: response['percentil'],
+      speedBonus: response['speed-bonus'],
+      earnedCredits: response['earned-credits'],
+      progress: response['progress'].map(parseProgress),
+    };
+    return report;
+  }
+
+  function parseProgress(progress) {
+    return {
+      creditsFrom: progress['credits-from'],
+      creditsTo: progress['credits-to'],
+      maxCredits: progress['max-credits'],
+      blocks: progress['blocks'],
+    };
   }
 
   function sendingGiveUpReport(report) {

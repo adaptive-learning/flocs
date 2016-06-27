@@ -25,11 +25,8 @@ angular.module('flocs.practice')
   var sessionOverview = {
   };
 
-  var attemptEvaluation = {
-    earnedCredits: null,
-    purchases: null,
-    speedBonus: null,
-  };
+  var attemptEvaluation = null;
+  var attemptEvaluationDeferred = null;
 
   var practiceInfo = {
     available: false,
@@ -50,7 +47,7 @@ angular.module('flocs.practice')
     practicingTask: practicingTask,
     taskCompleted: taskCompleted,
     giveUpTask: giveUpTask,
-    attemptEvaluation: attemptEvaluation,
+    gettingAttemtpEvaluation: gettingAttemtpEvaluation,
     session: session,
     sessionOverview: sessionOverview,
     practiceInfo: practiceInfo,
@@ -185,14 +182,18 @@ angular.module('flocs.practice')
       attemptReport.attempt += 1;
       attemptReport.solved = result.solved;
       attemptReport.code = result.code;
-      practiceDao.sendingAttemptReport(attemptReport).then(function(response) {
-        attemptEvaluation.earnedCredits = response['earned-credits'];
-        attemptEvaluation.speedBonus = response['speed-bonus'];
-        attemptEvaluation.purchases = response['purchases'];
+      attemptEvaluationDeferred = $q.defer();
+      practiceDao.sendingAttemptReport(attemptReport).then(function(newEvaluation) {
+        attemptEvaluation = newEvaluation;
+        attemptEvaluationDeferred.resolve(attemptEvaluation);
         gettingPracticeInfo();
         taskFinishedDeferred.notify(result);
       });
     }
+  }
+
+  function gettingAttemtpEvaluation() {
+    return attemptEvaluationDeferred.promise;
   }
 
   /*

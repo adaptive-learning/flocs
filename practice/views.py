@@ -82,11 +82,23 @@ def post_attempt_report(request):
             user=request.user, report=data)
     response = {
         'task-solved-first-time': processing_result.task_solved_first_time,
-        'earned-credits': processing_result.credits,
+        'time': processing_result.time,
+        'percentil': processing_result.percentil,
         'speed-bonus': processing_result.speed_bonus,
-        'purchases': [block_to_json(b) for b in processing_result.purchases]
+        'earned-credits': processing_result.credits,
+        'progress': [progress_level_to_json(pl) for pl in processing_result.progress]
     }
     return JsonResponse(response)
+
+
+def progress_level_to_json(progress_level):
+    json_dict = {
+        'credits-from': progress_level.credits_from,
+        'credits-to': progress_level.credits_to,
+        'max-credits': progress_level.max_credits,
+        'blocks': [block_to_json(b) for b in progress_level.blocks],
+    }
+    return json_dict
 
 
 def block_to_json(block):
