@@ -26,8 +26,8 @@ class TaskInstanceModel(models.Model):
     export_class = namedtuple('TaskInstance',
             ['task_instance_id', 'student_id', 'task_id',
              'time_start', 'time_end', 'time_spent',
-             'solved', 'given_up', 'attempts', 'reported_flow',
-             'instructions_ids', 'session_order'])
+             'solved', 'given_up', 'attempts', 'solution_size', 'reported_flow',
+             'instructions_ids', 'session_id', 'session_order'])
 
     # student who took the task
     student = models.ForeignKey(StudentModel)
@@ -90,6 +90,7 @@ class TaskInstanceModel(models.Model):
         )
 
     def to_export_tuple(self):
+        session = self.get_session()
         export_tuple = self.export_class(
                 task_instance_id=self.pk,
                 student_id=self.student.pk,
@@ -100,16 +101,32 @@ class TaskInstanceModel(models.Model):
                 solved=self.solved,
                 given_up=self.given_up,
                 reported_flow=self.get_reported_flow_key(),
+                solution_size=self.get_solution_size(),
                 attempts=self.attempt_count,
-                session_order=self.get_session_order(),
+                session_id=session.pk if session else None,
+                session_order=session.pk if session else None,
                 instructions_ids=[instruction.pk for instruction in self.instructions.all()])
         return export_tuple
+
+    def get_solution_size(self):
+        last_attempt = self.attempt_set.last()
+        if not last_attempt:
+            return None
+        # quick hack to find size of the solution
+        size = last_attempt.code.count('<block')
+        return size
 
     def get_session_order(self):
         session_instance = self.sessiontaskinstance_set.first()
         if session_instance is None:
             return None
         return session_instance.order
+
+    def get_session(self):
+        session_instance = self.sessiontaskinstance_set.first()
+        if session_instance is None:
+            return None
+        return session_instance.session
 
     def get_reported_flow_key(self):
         return self.get_reported_flow_display()
