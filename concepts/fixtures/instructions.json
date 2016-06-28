@@ -4,9 +4,9 @@
     "pk": 1,
     "fields": {
         "concept": ["BLOCK_MOVE"],
-        "order": 310,
-        "text_en": "This block makes the robot move to the next tile in front of him.",
-        "text_cs": "Použitím tohoto bloku robot popojede o jedno políčko ve směru, kam se dívá."
+        "order": 135,
+        "text_en": "This command tells the robot to move to the next tile in front of him.",
+        "text_cs": "Tento příkaz říká robotovi, aby popojel o jedno políčko ve směru, kterým se dívá."
     }
   },
   {
@@ -15,8 +15,8 @@
     "fields": {
         "concept": ["BLOCK_TURN"],
         "order": 315,
-        "text_en": "With this block, you can make the robot turn left or right.",
-        "text_cs": "Tímto blokem přikážeš robotovy, aby se otočil doprava nebo doleva."
+        "text_en": "This command tells the robot to turn left or right.",
+        "text_cs": "Tento příkaz říká roboti, aby se otočil doleva nebo doprava."
     }
   },
   {
@@ -25,8 +25,8 @@
       "fields": {
         "concept": ["BLOCK_REPEAT"],
         "order": 320,
-        "text_en": "The 'repeat' block enables you to repeat the same commands multiple times.",
-        "text_cs": "Blok 'opakuj' použij pro opakované vykonávání stejných příkazů, kolikrát jen chceš."
+        "text_en": "This block tells the robot to execute a group of commands N-times.",
+        "text_cs": "Tento blok říká robotovi, aby N-krát zopakoval nějakou skupinu příkazů."
       }
   },
   {
@@ -35,8 +35,8 @@
     "fields": {
         "concept": ["BLOCK_WHILE"],
         "order": 330,
-        "text_en": "This block let you repeat your commands until some condition is satisfied.",
-        "text_cs": "Tento blok ti dovoluje opakovat stejné příkazy, dokud není splněna nějaká podmínka."
+        "text_en": "This block tells the robot to repeat a group of commands while some condition is satisfied.",
+        "text_cs": "Tento blok říká robotovi, aby opakoval nějakou skupinu příkazů, dokud je splněna zadaná podmínka."
     }
   },
   {
@@ -45,7 +45,7 @@
     "fields": {
         "concept": ["BLOCK_CHECK_GOAL"],
         "order": 340,
-        "text_en": "You can use this condition for checking, if the robot stands on the tile with the goal.",
+        "text_en": "Use this condition to check if the robot stands on the tile with the treasure chest.",
         "text_cs": "Touto podmínkou můžeš kontrolovat, zda se robot nachází na políčku s truhlou."
     }
   },
@@ -55,8 +55,8 @@
     "fields": {
         "concept": ["BLOCK_CHECK_PATH"],
         "order": 345,
-        "text_en": "This condition allows you to check, if there is a free path in front of, left of, or right of the robot.",
-        "text_cs": "Tato podmínka ti dovoluje kontrolovat, jestli je volná cesta před, napravo nebo nalevo od robota."
+        "text_en": "Use this condition to check if there is a free path in front of, left of, or right of the robot.",
+        "text_cs": "Touto podmínkou můžeš kontrolovat, jestli je volná cesta před, nalevo nebo napravo od robota."
     }
   },
   {
@@ -65,8 +65,8 @@
     "fields": {
         "concept": ["BLOCK_CHECK_COLOR"],
         "order": 350,
-        "text_en": "Use this condition to check, whether the robot stands on the specified color.",
-        "text_cs": "Použij tuto podmínku pro kontrolu, zda robot stojí na určité barvě."
+        "text_en": "Use this condition to check if the robot stands on the specified color.",
+        "text_cs": "Touto podmínkou můžeš kontrolovat, zda robot stojí na políčku určité barvy."
     }
   },
   {
@@ -75,8 +75,8 @@
     "fields": {
         "concept": ["BLOCK_IF"],
         "order": 360,
-        "text_en": "Use 'if' block for branching the program based on conditions. The robot can perform different actions based on the current situation.",
-        "text_cs": "Blok 'pokud' používej pro větvení programu na základě podmínek. V určité chvíli se bude robot muset rozhodnout, jakou další akci vykoná podle aktuální situace, ve které se bude nacházet."
+        "text_en": "This block tells the robot to execute a group of commands, only if some condition is satisfied.",
+        "text_cs": "Tento blok říká robotovi, aby vykonal nějakou skupinu příkazů, pouze pokud je splněná zadaná podmínka."
     }
   },
   {
@@ -85,8 +85,8 @@
     "fields": {
         "concept": ["BLOCK_IF_ELSE"],
         "order": 365,
-        "text_en": "This block works the same way as 'if' block, but when the condition is not satisfied, the robot will perform commands in the section'else'.",
-        "text_cs": "Tento blok funguje stejně jako 'pokud' blok, ale při nesplnění podmínky vykoná příkazy v sekci 'jinak'."
+        "text_en": "This block tells the robot to execute a group of commands, if some condition is satisfied, and another group of commands, if the condition is not satisfied.",
+        "text_cs": "Tento blok říká robotovi, aby vykonal nějakou skupinu příkazů, pokud je splněná zadaná podmínka, a jinou skupinu příkazů, pokud podmínka splněná není."
     }
   },
   {
@@ -95,8 +95,8 @@
     "fields": {
         "concept": ["BLOCK_LOGIC"],
         "order": 380,
-        "text_en": "Use this blok to compose two basic conditions into one complex condition. If you compose them with 'and', both of the basic conditions has to be satisfied. If you compose them with 'or', at least one of them has to be satisfied, so that the complex condition is also satisfied.",
-        "text_cs": "Použij tento blok pro složení dvou základních podmínek do jedné složitější. Pokud je složíš pomocí 'a', musí obě platit současně. Pokud je složíš pomocí 'nebo', stačí aby platila alespoň jedna z nich."
+        "text_en": "Use this blok to combine two simple conditions into one complex condition. If you compose them with \"AND\", both of them must be satisfied. If you compose them with \"OR\", at least one of them must be satisfied.",
+        "text_cs": "Tímto blokem spojíš dvě jednoduché podmínky do jedné složitější. Pokud je spojíš pomocí \"A\", musí obě platit současně. Pokud je spojíš pomocí \"NEBO\", stačí aby platila alespoň jedna z nich."
     }
   },
   {
@@ -105,18 +105,8 @@
     "fields": {
         "concept": ["ENV_MAZE"],
         "order": 110,
-        "text_en": "Your task is to get the robot to the treasure chest. The robot can go one step forward or turn itself to the left or right on the spot. If the robot hits a wall, it breaks down.",
-        "text_cs": "Úkolem hry je dostat robota k truhle s pokladem. Robot může chodit dopředu nebo se otáčet na místě doprava a doleva. Pokud robot narazí do zdi, rozbije se."
-    }
-  },
-  {
-    "model": "concepts.instruction",
-    "pk": 12,
-    "fields": {
-        "concept": ["ENV_TOOLBOX"],
-        "order": 120,
-        "text_en": "Here is a toolbox for your blocks. If you do well, you will get other blocks, which will be added to your toolbox. You can use them in your program multiple times.",
-        "text_cs": "Zde je místo pro tvoje bloky. Pokud budeš šikovný, budeš dostávat během hry další bloky, které se objeví na tomto místě. Můžeš je v programu používat opakovaně."
+        "text_en": "Your task is to get the robot to the treasure chest. The robot can move forward and turn on the spot. If the robot hits a wall, it breaks down.",
+        "text_cs": "Tvým úkolem je dostat robota k truhle s pokladem. Robot umí jezdit dopředu a zatáčet na místě. Pokud narazí do zdi, tak se rozbije."
     }
   },
   {
@@ -124,9 +114,19 @@
     "pk": 13,
     "fields": {
         "concept": ["ENV_WORKSPACE"],
+        "order": 120,
+        "text_en": "Create your programs in this window. Robot will sequentially execute all commands which you connect to the \"program start\" block.",
+        "text_cs": "Tvoř svoje programy v tomto okně. Robot postupně vykoná všechny příkazy, které zapojíš do bloku \"začátek programu\"."
+    }
+  },
+  {
+    "model": "concepts.instruction",
+    "pk": 12,
+    "fields": {
+        "concept": ["ENV_TOOLBOX"],
         "order": 130,
-        "text_en": "Create your programs in this window. Connect your blocks to each other to make the robot move. Robot performs every block that is connected to the starting block 'program start'.",
-        "text_cs": "Tvoř svoje programy v tomto okně. Skládej bloky za sebe, aby se robot pohyboval v bludišti. Robot vykoná všechno co zapojíš do startovního bloku 'začátek programu'."
+        "text_en": "Here is a toolbox for your blocks, from where you can drag them into the program repeatedly.",
+        "text_cs": "Zde je místo pro tvoje bloky, odkud je můžeš opakovaně přetahovat do programu."
     }
   },
   {
@@ -135,8 +135,8 @@
     "fields": {
         "concept": ["ENV_SNAPPING"],
         "order": 140,
-        "text_en": "Drag the blocks from your toolbox with the mouse and drop them in the workspace window. Notice that every block has a little hook, so that you can connect them together. And don't forget: robot will perform only blocks connected to the starting block 'program start'!",
-        "text_cs": "Bloky z tvé sady přetáhni myší do okna pro program. Všimni si, že každý blok má nahoře i dole malé zobáčky, kterými je můžeš zapojovat do sebe. A nezapomeň: robot bude vykonávat jen příkazy zapojené do startovního bloku 'začátek programu'!"
+        "text_en": "Every block has a little hook, so that you can connect them together. The robot will only perform blocks connected to the starting block.",
+        "text_cs": "Každý blok má nahoře i dole malé zobáčky, kterými je můžeš zapojovat do sebe. Robot bude vykonávat jen příkazy zapojené do startovního bloku."
     }
   },
   {
@@ -145,8 +145,8 @@
     "fields": {
         "concept": ["ENV_RUN_RESET"],
         "order": 150,
-        "text_en": "As soon as you are satisfied with your program in the workspace, run the program with this button. If the robot doesn't reach the goal, you can return it to its original position by clicking on the 'Reset' button and try another program.",
-        "text_cs": "Jakmile jsi spokojený se svým programem, spusť ho pomocí tohoto tlačítka. Pokud robot nedorazí k truhle, můžeš ho vrátit na původní pozici stisknutím 'Reset' tlačítka a zkusit jiný program."
+        "text_en": "Run the program with this button. If the robot doesn't reach the goal, return it to its original position by clicking on the \"Reset\" button and try another program.",
+        "text_cs": "Tvůj program spustíš pomocí tohoto tlačítka. Pokud robot nedorazí k truhle, vrať ho na původní pozici stisknutím tlačítka \"Reset\" a zkus jiný program."
     }
   },
   {
@@ -176,7 +176,7 @@
         "concept": ["GAME_PITS"],
         "order": 230,
         "text_en": "Mind the pits! Robot can't detect them and if he falls into one, he can't get out.",
-        "text_cs": "Při procházení bludiště si dej pozor na jámy! Robot je neumí odhalit a pokud do některé spadne, tak se z nich už neumí dostat."
+        "text_cs": "Pozor na jámy! Robot je neumí odhalit a pokud do některé spadne, tak už se z ní neumí dostat."
     }
   },
   {
@@ -186,7 +186,7 @@
         "concept": ["GAME_TOKENS"],
         "order": 240,
         "text_en": "There are keys located in the maze and the robot must pick all of them in order to open the treasure chest.",
-        "text_cs": "Po bludišti jsou různě rozmístěné klíče od truhly, které robot potřebuje sesbírat. Bez nich nelze truhlu s pokladem otevřít."
+        "text_cs": "Po bludišti jsou různě rozmístěné klíče od truhly a robot je musí všechny sesbírat. Bez nich nelze truhlu s pokladem otevřít."
     }
   }
 ]
