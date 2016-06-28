@@ -19,6 +19,7 @@ angular.module('flocs', [
     'flocs.footer',
     'flocs.feedback',
     'flocs.home',
+    'flocs.httpErrors',
     'flocs.practice',
     'flocs.taskPreview',
     'flocs.user',
@@ -129,9 +130,10 @@ angular.module('flocs', [
       templateUrl: 'user/logout-success.tpl.html',
     })
 
-    .state('404', {
-      url: '/*path',
-      templateUrl: '404/404.tpl.html'
+    .state('httpErrors', {
+      url: '/*path:event',
+      templateUrl: 'httpErrors/httpErrors.tpl.html',
+      controller: 'httpErrorsCtrl'
     });
 
   // Use URLs without hashes (if the browser supports HTML5 history).

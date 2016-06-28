@@ -101,8 +101,13 @@ angular.module('flocs.practice')
         taskInstance = newTaskInstance;
         startCurrentTask();
         return taskInstance;
-      }, function() {
-        $state.go('404', null, {'location': false});
+      }, function(response) {
+        if (response.status == 404) {
+          $state.go('httpErrors', {'event': 'taskNotExists'}, {'location': false});
+        }
+        if (response.status == 403) {
+          $state.go('httpErrors', {'event': 'lowLevelForTask'}, {'location': false});
+        }
       });
     } else {
       return $timeout(function() {

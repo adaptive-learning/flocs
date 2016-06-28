@@ -6,10 +6,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import JsonResponse, HttpResponse
 from django.http import HttpResponseBadRequest
-from django.http import Http404
+from django.http import Http404, HttpResponseForbidden
 import json
 
 from common.logUtils import LoggingUtils
+from common.exceptions import LowLevelForTaskException
 from practice.services import practice_service
 from practice.services import practice_session_service
 from practice.services import details
@@ -58,6 +59,8 @@ def get_task_by_id(request, id):
         return JsonResponse(task_info_to_json(task))
     except LookupError:
         raise Http404('This task is not available.')
+    except LowLevelForTaskException:
+        return HttpResponseForbidden('Student has low level for accessing this task.')
 
 
 def post_attempt_report(request):

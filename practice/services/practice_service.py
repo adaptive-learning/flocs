@@ -6,6 +6,7 @@ import logging
 
 from collections import namedtuple
 from common.flow_factors import FlowFactors
+from common.exceptions import LowLevelForTaskException
 from tasks.models import TaskModel
 from practice.models.practice_context import create_practice_context
 from practice.models import TaskInstanceModel
@@ -42,7 +43,14 @@ def get_task_by_id(user, task_id):
         if active_task.task.pk == task_id:
             # if the given task is same as active, go in session
             return get_active_task_in_session(student)
-    return get_task(student, IdSpecifidedTaskSelector(task_id))
+    if len(TaskModel.objects.filter(pk=task_id)) == 0:
+        # task does not exist
+        raise LookupError('Task does not exists.')
+    try:
+        return get_task(student, IdSpecifidedTaskSelector(task_id))
+    except LookupError:
+        # student has low level to solve the task
+        raise LowLevelForTaskException()
 
 
 def get_next_task_in_session(user):
