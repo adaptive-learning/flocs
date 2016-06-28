@@ -36,7 +36,7 @@ angular.module('flocs.user')
       var level = $scope.evaluation.progress[step];
       return animatingProgressWithinLevel(level).then(function() {
         return $timeout(levelup, 300).then(function() {
-          return $timeout(nextStep, 2000);
+          return $timeout(nextStep, 2500);
         });
       });
       function levelup() {
