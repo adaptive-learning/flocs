@@ -2,7 +2,7 @@
 		dependencies backend-dependencies frontend-dependencies \
 		test test-backend test-frontend \
 		check check-backend check-frontend \
-		db-setup db-migrate db-load-data db-generate-tasks-difficulty admin \
+		db-setup db-migrate db-load-data admin \
 		export-data-to-csv logs
 
 # -----------------------------------------------------------
