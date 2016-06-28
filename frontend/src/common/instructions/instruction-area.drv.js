@@ -14,13 +14,15 @@ angular.module('flocs.instructions')
     var selector = placementParams.selector;
     var element = angular.element(document.querySelector(selector));
     var adjustPlacement = function(placement) {
-      if (placementParams.offset) {
-        placement.left += placementParams.offset.x;
-        placement.top += placementParams.offset.y;
+      if (placementParams.getOffset) {
+        var offset = placementParams.getOffset();
+        placement.left += offset.x;
+        placement.top += offset.y;
       }
-      if (placementParams.size) {
-        placement.width = placementParams.size.width;
-        placement.height = placementParams.size.height;
+      if (placementParams.getSize) {
+        var size = placementParams.getSize();
+        placement.width = size.width;
+        placement.height = size.height;
       }
     };
     var getPlacement = null;

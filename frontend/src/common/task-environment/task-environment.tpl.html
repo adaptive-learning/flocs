@@ -13,13 +13,13 @@
     <flocs-instruction-area
       ng-if="instructionsPlacements.snapping"
       key="ENV_SNAPPING"
-      placement="{selector: '#workspace', svg: '.blocklyWorkspace', offset: instructionsPlacements.snapping.offset, size: instructionsPlacements.snapping.size}"
+      placement="{selector: '#workspace', svg: '.blocklyWorkspace', getOffset: instructionsPlacements.snapping.getOffset, getSize: instructionsPlacements.snapping.getSize}"
       popover-position="bottom">
     </flocs-instruction-area>
     <flocs-instruction-area
       ng-repeat="block in instructionsPlacements.blocks"
       key="{{ block.key }}"
-      placement="{selector: '#workspace', svg: '', offset: block.offset, size: block.size}"
+      placement="{selector: '#workspace', svg: '', getOffset: block.getOffset, getSize: block.getSize}"
       popover-position="right">
     </flocs-instruction-area>
   </div>

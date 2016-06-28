@@ -19,37 +19,50 @@ angular.module('flocs.instructions')
       instructions[key] = instruction;
       instructionsToShow.push(key);
     });
-    findPlacementsForBlockInstructions();
-    findPlacementForSnappingInstruction();
+    setPlacementGettersForBlockInstructions();
+    setPlacementGettersForSnappingInstruction();
     // just let the dynamic instruction areas to be rendered, then resolve
     $timeout(instructionsSet.resolve);
     return instructionsSet.promise;
   };
 
-  function findPlacementsForBlockInstructions() {
+  function setPlacementGettersForBlockInstructions() {
     self.instructionsPlacements.blocks = [];
     angular.forEach(instructions, function(instruction, key) {
       if (instruction.type == 'block') {
-        var block = workspaceService.getBlockInToolbox(instruction.blockKey);
         self.instructionsPlacements.blocks.push({
           key: key,
-          offset: block.getOffset(),
-          size: block.getSize(),
+          getOffset: function() {
+            var block = workspaceService.getBlockInToolbox(instruction.blockKey);
+            return block.getOffset();
+          },
+          getSize: function() {
+            var block = workspaceService.getBlockInToolbox(instruction.blockKey);
+            return block.getSize();
+          }
         });
       }
     });
   }
 
-  function findPlacementForSnappingInstruction() {
-    var startBlock = workspaceService.getBlockInProgram('start');
-    var startOffset = startBlock.getOffset();
-    var startSize = startBlock.getSize();
-    startOffset.y += 0.6 * startSize.height;
-    startSize.width *= 0.3;
-    startSize.height *= 0.8;
+  function setPlacementGettersForSnappingInstruction() {
+    var getStartOffset = function() {
+      var startBlock = workspaceService.getBlockInProgram('start');
+      var startOffset = startBlock.getOffset();
+      var startSize = startBlock.getSize();
+      startOffset.y += 0.6 * startSize.height;
+      return startOffset;
+    };
+    var getStartSize = function() {
+      var startBlock = workspaceService.getBlockInProgram('start');
+      var startSize = startBlock.getSize();
+      startSize.width *= 0.3;
+      startSize.height *= 0.8;
+      return startSize;
+    };
     self.instructionsPlacements.snapping = {
-      offset: startOffset,
-      size: startSize
+      getOffset: getStartOffset,
+      getSize: getStartSize
     };
   }
 
