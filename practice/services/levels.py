@@ -3,7 +3,7 @@ from practice.models import StudentModel
 from blocks.models import Toolbox
 
 ProgressLevel = namedtuple('ProgressLevel',
-        ['credits_from', 'credits_to', 'max_credits', 'blocks'])
+        ['level', 'credits_from', 'credits_to', 'max_credits', 'blocks'])
 Level = namedtuple('Level',
         ['level', 'max_credits', 'blocks'])
 
@@ -36,6 +36,7 @@ def progress_within_level(student, level, credits_from):
             # if there is no next level, then just spend credits
             student.spend_credits(level.max_credits)
     progress_info = ProgressLevel(
+        level=level.level,
         credits_from=credits_from,
         credits_to=credits_to,
         max_credits=level.max_credits,

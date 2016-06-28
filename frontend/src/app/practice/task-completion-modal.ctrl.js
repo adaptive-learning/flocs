@@ -8,7 +8,7 @@ angular.module('flocs.user')
   $scope.reportFlow = function(flowKey) {
     // we try to convert the key to flow just to make sure the key corresponds
     // to an actual flow (to throw explicit error if the set of possible values
-    // chagne)
+    // change)
     var flow = flowFactory.fromKey(flowKey);
     var report = {'flow': flow.key};
     $uibModalInstance.close(report);
@@ -17,21 +17,13 @@ angular.module('flocs.user')
   // TODO: decomposition
   practiceService.gettingAttemtpEvaluation().then(function(evaluation) {
     $scope.evaluation = evaluation;
-    /*$scope.evaluation.taskSolvedFirstTime = true;
-    $scope.evaluation.progress = [
-    {
-      creditsFrom: 0,
-      creditsTo: 40,
-      maxCredits: 40,
-      blocks: {name: 'super blok'},
-    }
-    ];*/
     if (!evaluation.taskSolvedFirstTime) {
       return;
     }
 
     $scope.state = {
       step: 0,
+      level: $scope.evaluation.progress.length > 0 ? $scope.evaluation.progress[0].level : null,
       newBlocks: [],
     };
     angular.forEach($scope.evaluation.progress, function(level) {
@@ -48,6 +40,9 @@ angular.module('flocs.user')
         });
       });
       function levelup() {
+        if (step + 1 < $scope.evaluation.progress.length) {
+          $scope.state.level = $scope.evaluation.progress[step+1].level;
+        }
         angular.forEach(level.blocks, function(block) {
           $scope.state.newBlocks.push(block);
         });

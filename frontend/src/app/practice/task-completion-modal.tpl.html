@@ -33,19 +33,26 @@
           <span class="glyphicon glyphicon-cd"></span>&nbsp;
           <span translate="TASK_COMPLETION.CREDITS_INFO" translate-values="{CREDITS: evaluation.earnedCredits}"/>
         </p>
-        <p>
-          <uib-progressbar
-            ng-repeat="level in evaluation.progress"
-            ng-if="$index == state.step"
-            value="level.partialCredits"
-            max="level.maxCredits"
-            animate="true">
-            <span class="progressbar-caption">
-              &nbsp;{{level.credits}} / {{level.maxCredits}}
-              &nbsp;<span class="glyphicon glyphicon-cd"></span>
-            </span>
-          </uib-progressbar>
-        </p>
+
+        <div
+          ng-repeat="level in evaluation.progress"
+          ng-if="$index == state.step"
+          class="level-progressbar-wrapper">
+          <div class="progressbar-left-side-caption" ng-class="{'highlight-text': state.level != level.level}">
+            L{{ state.level }}
+          </div>
+          <div class="progressbar-right-side-caption">
+            {{level.credits}} / {{level.maxCredits}}
+            &nbsp;<span class="glyphicon glyphicon-cd"></span>
+          </div>
+          <div class="progressbar-in-middle-wrapper">
+              <uib-progressbar
+              value="level.partialCredits"
+              max="level.maxCredits"
+              animate="true">
+            </uib-progressbar>
+          </div>
+        </div>
         <p ng-show="state.newBlocks.length > 0">
           <span translate>TASK_COMPLETION.PURCHASED_BLOCKS</span>:
           <span

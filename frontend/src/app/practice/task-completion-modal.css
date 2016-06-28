@@ -13,3 +13,32 @@
   position: relative;
   top: -1px;
 }
+
+.progressbar-left-side-caption {
+  float: left;
+  padding: 0 2px;
+}
+
+.progressbar-right-side-caption {
+  float: right;
+  text-align: right;
+}
+
+.progressbar-in-middle-wrapper {
+  margin: 0 6em 0 2.3em;
+}
+
+.level-progressbar-wrapper {
+  margin-bottom: 10px
+}
+
+.highlight-text-add, .highlight-text-remove {
+  transition: all 500ms linear;
+}
+.highlight-text,
+.highlight-text-add.highlight-text-add-active {
+  background-color: rgb(255, 220, 0);
+}
+.highlight-text-remove.highlight-text-remove-active {
+  background-color: transparent;
+}

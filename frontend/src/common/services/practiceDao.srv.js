@@ -114,6 +114,7 @@ angular.module('flocs.services')
 
   function parseProgress(progress) {
     return {
+      level: progress['level'],
       creditsFrom: progress['credits-from'],
       creditsTo: progress['credits-to'],
       maxCredits: progress['max-credits'],

@@ -93,6 +93,7 @@ def post_attempt_report(request):
 
 def progress_level_to_json(progress_level):
     json_dict = {
+        'level': progress_level.level,
         'credits-from': progress_level.credits_from,
         'credits-to': progress_level.credits_to,
         'max-credits': progress_level.max_credits,
