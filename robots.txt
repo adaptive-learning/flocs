@@ -1,3 +1,11 @@
 User-agent: *
 Disallow: /api/
 Disallow: /admin/
+Disallow: /grappelli/
+Disallow: /practice/
+Disallow: /task-preview
+Disallow: /admin-stats
+Disallow: /profile
+Disallow: /statistics
+Disallow: /session-overview
+Disallow: /logout
