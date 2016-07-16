@@ -2,21 +2,35 @@ from lazysignup.models import LazyUser
 from lazysignup.signals import converted
 from lazysignup.utils import is_lazy_user
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login as log, logout as djangologout
+from django.contrib.auth.models import AnonymousUser
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as djangologin, logout as djangologout
+from social.apps.django_app.default.models import UserSocialAuth
 
-def register(request, username, firstname, lastname, email, passwd):
+
+def signup(request, username, firstname, lastname, email, password):
+    # check is username is still available
+    qs = User.objects.filter(username=username)
+    if qs.count() > 0:
+        return None
+
     user = request.user
     if is_lazy_user(user):
-        convert_lazy_user(user, username, email, passwd)
-    elif user.is_anonymous():
-        user = User.objects.create_user(username, email=email, password=passwd,
-                first_name=firstname, last_name=lastname)
-    login(request, username, passwd)
+        convert_lazy_user(user, username, email, password)
+    else:
+        User.objects.create_user(username, email=email, password=password,
+                                 first_name=firstname, last_name=lastname)
+    # TODO: what if login fails?
+    user = login(request, username, password)
+    return user
 
 
 def convert_lazy_user(user, username, email, password):
-    # TODO: proper error handling of user with the used username (or email,
-    # depending what we will use for identification)
+    # check is username is still available
+    qs = User.objects.filter(username=username)
+    if qs.count() > 0:
+        return None
+
     user.username = username
     user.email = email
     user.set_password(password)
@@ -24,45 +38,77 @@ def convert_lazy_user(user, username, email, password):
     user.save()
     LazyUser.objects.filter(user=user).delete()
     converted.send(None, user=user)
-    assert is_lazy_user(user) == False
+    assert not is_lazy_user(user)
 
 
 def login(request, username, password):
     user = authenticate(username=username, password=password)
-    if user is not None:
-        if user.is_active:
-            if is_lazy_user(request.user):
-                LazyUser.objects.filter(user=request.user).delete()
-                request.user.delete()
-            log(request, user)
-            return True
-        else:
-            return False
-    else:
-        return False
+    # TODO: properly handle these scenarios
+    if user is None:
+        return None
+    if not user.is_active:
+        return None
+
+    # TODO: Throws away any progress made befor login, this should probably
+    # not happen. Also seems to throw some exceptions.
+    if is_lazy_user(request.user):
+        LazyUser.objects.filter(user=request.user).delete()
+        request.user.delete()
+    djangologin(request, user)
+    return user
 
 
 def logout(request):
-    return djangologout(request)
+    djangologout(request)
 
 
-def loggedIn(request):
-    if request.user.is_authenticated():
-        return request.user.username
+def get_user_details(user):
+    if user is None:
+        return empty_user_details()
+    if isinstance(user, AnonymousUser):
+        qs = []
     else:
-        return None
+        # does not work with anonymous/lazy users
+        qs = UserSocialAuth.objects.filter(user=user)
+    details_dict = {}
+    details_dict["authenticated"] = user.is_authenticated()
+    details_dict["username"] = user.get_username()
+    details_dict["is-lazy-user"] = is_lazy_user(user)
 
-def get_user_information(request):
-    """
-    Returns user with all the fields from the database.
-
-    Args:
-        request: request that envoked this method
-
-    Returns:
-        Object holding all the user information or None if there is not any.
-    """
-    if not (request.user.is_anonymous() or is_lazy_user(request.user)):
-        return User.objects.get(username=request.user)
+    if hasattr(user, 'first_name'):
+        details_dict["first-name"] = user.first_name
     else:
-        return None
+        details_dict["first-name"] = ''
+
+    if hasattr(user, 'last_name'):
+        details_dict["last-name"] = user.last_name
+    else:
+        details_dict["last-name"] = ''
+
+    if hasattr(user, 'email'):
+        details_dict["email"] = user.email
+    else:
+        details_dict["email"] = ''
+
+    if hasattr(user, 'is_staff'):
+        details_dict["is-staff"] = user.is_staff
+    else:
+        details_dict["is-staff"] = False
+
+    details_dict["providers"] = []
+    for social_user in qs:
+        details_dict["providers"].append(social_user.provider)
+    return details_dict
+
+
+def empty_user_details():
+    details_dict = {}
+    details_dict["authenticated"] = False
+    details_dict["username"] = ''
+    details_dict["is-lazy-user"] = False
+    details_dict["first-name"] = ''
+    details_dict["last-name"] = ''
+    details_dict["email"] = ''
+    details_dict["is-staff"] = False
+    details_dict["providers"] = []
+    return details_dict

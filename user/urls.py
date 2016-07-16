@@ -1,13 +1,9 @@
-from django.conf.urls import include, url
-from django.contrib import admin
-from django.views.generic import TemplateView
-
+from django.conf.urls import url
 from user import views
 
-urlpatterns= [
+urlpatterns = [
     url(r'^login', views.login),
-    url(r'^register', views.register),
+    url(r'^signup', views.signup),
     url(r'^logout', views.logout),
-    url(r'^loggedin', views.loggedIn),
     url(r'^details', views.details),
 ]
