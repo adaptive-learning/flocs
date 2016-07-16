@@ -22,19 +22,23 @@ from practice import urls as practice_urls
 from stats import urls as stats_urls
 from tasks import urls as tasks_urls
 from user import urls as user_urls
+from social.apps.django_app import urls as social_urls
 
 urlpatterns = [
     # admin
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
+    url(r'^grappelli/', include('grappelli.urls')),  # grappelli URLS
 
     # server API
     url(r'^api/tasks/', include(tasks_urls)),
-    url(r'^api/user/',include(user_urls)),
-    url(r'^api/feedback/',include(feedback_urls)),
+    url(r'^api/user/', include(user_urls)),
+    url(r'^api/feedback/', include(feedback_urls)),
     url(r'^api/practice/', include(practice_urls)),
     url(r'^api/stats/', include(stats_urls)),
     url(r'^api/.*$', 'flocs.views.wrong_api_call'),
+
+    # OAuth related urls
+    url(r'^social/', include(social_urls, namespace='social')),
 
     # all other requests are resolved by the frontend app
     url('^.*$', 'flocs.views.frontend_app'),

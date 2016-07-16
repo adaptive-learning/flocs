@@ -12,6 +12,14 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 import dj_database_url
 import os
+try:
+    import flocs.private_settings as private_settings
+except ImportError:
+    import logging
+    logger = logging.getLogger(__name__)
+    logger.error('Using default private settings! Security is compromised ' +
+                 'and OAuth logins are not available!')
+    import flocs.private_settings_template as private_settings
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EXPORTED_DATA_DIR = os.path.join(BASE_DIR, 'exported-data')
@@ -21,7 +29,7 @@ FRONTEND_DIR = os.path.join(BASE_DIR, 'frontend')
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '-zocq!_l$gw_@cc1u7l$7j8y=b&+t2e4^e9bmx1&rk0ztp*&dj'
+SECRET_KEY = private_settings.SECRET_KEY
 
 ON_STAGING = os.getenv('ON_STAGING', "False") == "True"
 ON_PRODUCTION = os.getenv('ON_AL', "False") == "True" and not ON_STAGING
@@ -34,16 +42,17 @@ ALLOWED_HOSTS = [
 if ON_PRODUCTION or ON_STAGING:
     FRONTEND_BUILD_DIR = os.path.join(BASE_DIR, 'frontend', 'production-build')
 else:
-    FRONTEND_BUILD_DIR = os.path.join(BASE_DIR, 'frontend', 'development-build')
+    FRONTEND_BUILD_DIR = os.path.join(BASE_DIR, 'frontend',
+                                      'development-build')
 
 
 # Application definition
 
 INSTALLED_APPS = (
     'django.contrib.contenttypes',
-    'modeltranslation', # must be before django.contrib.admin
-    'grappelli.dashboard', # must be before django.contrib.admin
-    'grappelli', # must be before django.contrib.admin
+    'modeltranslation',  # must be before django.contrib.admin
+    'grappelli.dashboard',  # must be before django.contrib.admin
+    'grappelli',  # must be before django.contrib.admin
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sessions',
@@ -52,6 +61,7 @@ INSTALLED_APPS = (
     'django_extensions',
     'import_export',
     'lazysignup',
+    'social.apps.django_app.default',  # OAuth
     # our apps
     'common',
     'blocks',
@@ -105,14 +115,17 @@ WSGI_APPLICATION = 'flocs.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DATABASES = {"default": dj_database_url.config(default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'))}
+DATABASES = {
+    "default": dj_database_url.config(default='sqlite:///' +
+                                      os.path.join(BASE_DIR, 'db.sqlite3'))
+}
 
 
 # Internationalization
 USE_I18N = True
 USE_L10N = True
 USE_TZ = False
-#TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
 LANGUAGES = [
     ('cs', 'Czech'),
     ('en', 'English')
@@ -157,7 +170,24 @@ STATIC_ROOT = os.path.join(BASE_DIR, '../static')
 AUTHENTICATION_BACKENDS = (
   'django.contrib.auth.backends.ModelBackend',
   'lazysignup.backends.LazySignupBackend',
+  'social.backends.facebook.FacebookOAuth2',
+  'social.backends.google.GoogleOAuth2',
 )
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = private_settings.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = private_settings.SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
+
+SOCIAL_AUTH_FACEBOOK_KEY = private_settings.SOCIAL_AUTH_FACEBOOK_KEY
+SOCIAL_AUTH_FACEBOOK_SECRET = private_settings.SOCIAL_AUTH_FACEBOOK_SECRET
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+# SOCIAL_AUTH_USER_MODEL = 'django.contrib.auth.models.User'
+SOCIAL_AUTH_SANITIZE_REDIRECTS = True
+
+# http://stackoverflow.com/questions/22005841/is-not-json-serializable-django-social-auth-facebook-login
+# SECRET_KEY MUST remain secret
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 # --------------------------------------------------------------------------
 # Email
@@ -188,7 +218,8 @@ LOGGING = {
             'format': '[%(asctime)s] %(message)s----------'
         },
         'verbose': {
-            'format': '[%(asctime)s] %(levelname)s %(module)s : "%(message)s" in %(filename)s:%(lineno)s'
+            'format': '[%(asctime)s] %(levelname)s %(module)s : ' +
+                      '"%(message)s" in %(filename)s:%(lineno)s'
         },
     },
     'handlers': {
@@ -231,7 +262,7 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True
             },
-        'django.request' : {
+        'django.request': {
             'handlers': ['requests-file', 'mail-admins'],
             'level': 'DEBUG',
             'propagate': True
