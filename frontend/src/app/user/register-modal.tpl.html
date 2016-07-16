@@ -14,6 +14,10 @@
 
   <div class="modal-body">
 
+    <div class="alert alert-danger" role="alert" ng-show="errorMessage" translate>
+      {{errorMessage}}
+    </div>
+
     <form name="registerForm" ng-submit="register()">
       <div class="form-group">
         <input
@@ -23,6 +27,7 @@
             ng-model="registrationData.username"
             autofocus
             placeholder="{{'USERNAME' | translate}}"
+            required
         />
       </div>
 
@@ -42,6 +47,7 @@
             name="email"
             ng-model="registrationData.email"
             placeholder="E-mail"
+            required
         />
       </div>
 
@@ -52,6 +58,7 @@
             name="password"
             ng-model="registrationData.password"
             placeholder="{{'PASSWORD' | translate}}"
+            required
         />
       </div>
 
@@ -62,6 +69,7 @@
             name="validatePassword"
             ng-model="registrationData.vpassword"
             placeholder="{{'PASSWORD_AGAIN' | translate}}"
+            required
         />
       </div>
 
@@ -74,11 +82,6 @@
         </button>
       </div>
     </form>
-
-    <div class="alert alert-danger" role="alert" ng-show="errormsg">
-      {{errormsg}}
-    </div>
-
   </div>
 
 </div>

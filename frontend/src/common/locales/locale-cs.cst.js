@@ -10,6 +10,8 @@ angular.module('flocs.locales')
   CONCEPTS: 'Koncepty',
   CONTINUE: 'Pokračovat',
   CREDITS: 'Kredity',
+  ERROR_401: "Pro zobrazení této stránky je potřeba se přihlásit.",
+  ERROR_403: "Tato stránka není přístupná.",
   ERROR_404: "Tato stránka neexistuje.",
   FEEDBACK: 'Napiš nám',
   FREE_CREDITS: 'Neutracených kreditů',
@@ -144,5 +146,14 @@ angular.module('flocs.locales')
     RIGHT: 'Akorát',
     DIFFICULT: 'Těžká'
   },
+  
+  REGISTER_MODAL: {
+    PASSWORDS_DIFFER: 'Zadaná hesla se neshodují.',
+    USERNAME_TAKEN: 'Zadaené uživateské jméno je už zabrené.',
+    OTHER_ERROR: 'Registrace se nezdařila, zkus to prosím znovu.',
+  },
 
+  LOGIN_MODAL: {
+    INCORRECT_USERNAME_OR_PASSWORD: 'Zadali jste špatné jméno nebo heslo.'
+  }
 });

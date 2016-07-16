@@ -10,6 +10,8 @@ angular.module('flocs.locales')
   CONCEPTS: 'Concepts',
   CONTINUE: 'Continue',
   CREDITS: 'Credits',
+  ERROR_401: "You need to log in in order to view this page.",
+  ERROR_403: "This page is not accessible.",
   ERROR_404: "This page doesn't exist.",
   FEEDBACK: 'Feedback',
   FREE_CREDITS: 'Credits to spend',
@@ -141,4 +143,13 @@ angular.module('flocs.locales')
     DIFFICULT: 'Too Difficult'
   },
 
+  REGISTER_MODAL: {
+    PASSWORDS_DIFFER: 'Filled passwords do not match.',
+    USERNAME_TAKEN: 'Filled username is already taken.',
+    OTHER_ERROR: 'Registration did not succeeded, please try again.',
+  },
+
+  LOGIN_MODAL: {
+    INCORRECT_USERNAME_OR_PASSWORD: 'Either username of password is incorrect.'
+  }
 });

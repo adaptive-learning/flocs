@@ -12,6 +12,10 @@
       <h4 class="modal-title" translate>LOG_IN</h4>
   </div>
 
+  <div class="alert alert-danger" role="alert" ng-show="errorMessage" translate>
+      {{errorMessage}}
+    </div>
+
   <div class="modal-body">
       <form name="loginForm" ng-submit="login()">
         <div class="form-group">
@@ -37,9 +41,6 @@
           </button>
         </div>
       </form>
-      <div class="alert alert-danger" role="alert" ng-show="errormsg">
-        {{errormsg}}
-      </div>
   </div>
 
   <div class="modal-footer">

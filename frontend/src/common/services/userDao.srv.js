@@ -6,47 +6,51 @@ angular.module('flocs.services')
 .factory('userDao', function($http, $log) {
 	return {
         signingUp: signingUp,
-        login : login,
-        loggedIn : loggedIn,
-        logout: logout,
+        loggingIn : loggingIn,
+        loggingOut: loggingOut,
         gettingUserDetails: gettingUserDetails,
 	};
 
-	function signingUp(username, email, passwd) {
+	function signingUp(username, email, password) {
       var data = {
           'username': username,
           'firstname': null, //firstname,
           'lastname': null, //lastname,
           'email': email,
-          'password': passwd
+          'password': password
       };
-      return $http.post('/api/user/register', data);
+      // succes and failure differentiated by HTTP codes
+      return $http.post('/api/user/signup', data);
     }
 
-     function login (username,passwd){
+     function loggingIn (username,password){
 		var data = {
 			'username':username,
-			'password':passwd
+			'password':password
 		};
-		return $http.post('/api/user/login',data)
-            .success(function(response){
-		  return response;
-		});
+        // succes and failure differentiated by HTTP codes
+		return $http.post('/api/user/login',data);
 	}
 
-    function loggedIn(){
-      return $http.get('/api/user/loggedin');
-    }
-
-    function logout(){
-      // TODO: logout should not be GET!
-      return $http.get('/api/user/logout');
+    function loggingOut(){
+      return $http.post('/api/user/logout');
     }
 
     function gettingUserDetails() {
-      return $http.get('/api/user/details')
-        .then(function(response) {
-          return response.data;
-        });
+      return $http.get('/api/user/details').then(parseUserDetails);
+    }
+
+    function parseUserDetails(response) {
+      var user = {
+        username: response.data['username'],
+        firstName: response.data['first-name'],
+        lastName: response.data['last-name'],
+        authenticated: response.data['authenticated'],
+        isLazyUser: response.data['is-lazy-user'],
+        email: response.data['email'],
+        isStaff: response.data['is-staff'],
+        providers: response.data['providers'],
+      };
+      return user;
     }
 });

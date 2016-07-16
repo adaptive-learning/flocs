@@ -1,5 +1,5 @@
 /*
- * Modul for login formular
+ * Modul for user managment
  */
 
 angular.module("flocs.user", []);
