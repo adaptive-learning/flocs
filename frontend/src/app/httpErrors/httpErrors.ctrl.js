@@ -3,6 +3,5 @@
  */
 angular.module('flocs.httpErrors')
 .controller('httpErrorsCtrl', function($scope, $stateParams) {
-  $scope.event= $stateParams.event;
-
+  $scope.event = $stateParams.event;
 });

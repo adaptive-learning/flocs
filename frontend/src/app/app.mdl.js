@@ -30,6 +30,7 @@ angular.module('flocs', [
     'flocs.about',
     'flocs.taskEnvironment',
     'flocs.instructions',
+    'flocs.access',
 ])
 
 // routes configuration
@@ -89,6 +90,11 @@ angular.module('flocs', [
       controller: 'profileCtrl',
       data: {
           titleTraslationKey: 'PROFILE'
+      },
+      resolve: {
+        access: function(accessService) {
+          return accessService.isAuthenticated();
+        },
       }
     })
 
@@ -98,6 +104,11 @@ angular.module('flocs', [
       controller: 'statisticsCtrl',
       data: {
           titleTraslationKey: 'STATISTICS_PAGE.TITLE'
+      },
+      resolve: {
+        access: function(accessService) {
+          return accessService.isAuthenticated();
+        },
       }
     })
 
@@ -114,6 +125,12 @@ angular.module('flocs', [
       url: '/admin-stats',
       templateUrl: 'admin-stats/admin-stats.tpl.html',
       controller: 'adminStatsCtrl',
+      resolve: {
+        access: function(accessService) {
+          return accessService.isStaff();
+        },
+      }
+
     })
 
     .state('about', {
@@ -125,11 +142,11 @@ angular.module('flocs', [
       }
     })
 
-    .state('logout-success', {
+    .state('logout', {
       url: '/logout',
-      templateUrl: 'user/logout-success.tpl.html',
+      templateUrl: 'user/logout.tpl.html',
     })
-
+    
     .state('httpErrors', {
       url: '/*path:event',
       templateUrl: 'httpErrors/httpErrors.tpl.html',
@@ -178,4 +195,30 @@ angular.module('flocs', [
       console.log('default pre-close callback');
     }
   });
+})
+
+// Handling of errors due to user not being logged in
+.run(function ($rootScope, accessService, $state, $uibModal) {
+  var handler = 
+    function (event, toState, toParams, fromState, fromParams, error) {
+      if (error == accessService.UNAUTHORIZED) {
+        var loginModal = $uibModal.open({
+          templateUrl: 'user/login-modal.tpl.html',
+          controller: 'loginModalNoTransitionsCtrl',
+        });
+
+        loginModal.result.then(function success() {
+            $state.go(toState, toParams);
+          }, function dismiss() {
+            $state.go('httpErrors', {'event': '401'}, {'location': false});
+          });
+      } else if (error == accessService.FORBIDDEN) {
+        $state.go('httpErrors', {'event': '403'}, {'location': false});
+      }
+    };
+
+  // catches trasitions via $state
+  $rootScope.$on("$stateChangeError", handler);
+  // catches trasitions via ngRout (probably not used)
+  $rootScope.$on("$routeChangeError", handler);
 });
