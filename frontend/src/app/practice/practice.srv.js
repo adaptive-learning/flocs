@@ -129,7 +129,7 @@ angular.module('flocs.practice')
     } else {
       session.active = false;
     }
-    userService.setUserAvailable();
+    //userService.setUserAvailable();
     attemptReport = null;
     var newTask = taskInstance.task;
     newAttemptReport(newTask);

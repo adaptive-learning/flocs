@@ -7,13 +7,8 @@
     <a href="#" ng-click="switchTo('block_stats')">Blocks</a>
     <a href="#" ng-click="switchTo('session_stats')">Sessions</a>
   </div>
-
-  <div ng-if="logged === false">
-    <h2>Not authorized</h2>
-    <p>You need to be a staff for accessing admin statistics.</p>
-  </div>
-
-  <div ng-if="logged === true">
+  
+  <div>
 
     <div id="daily-stats" ng-show="daily_stats">
       <h2 class="page-header">Daily statistics</h2>

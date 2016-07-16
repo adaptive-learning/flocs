@@ -2,7 +2,6 @@
   <div class="container">
     <h2 translate>PROFILE_PAGE.USERPROFILE</h2>
 
-    <div ng-if="user.logged">
     <p>
       <dl class="dl-horizontal">
         <dt translate>USERNAME</dt>
@@ -11,14 +10,7 @@
         <dd>{{user.email}}</dd>
       </dl>
     </p>
-    </div>
-
-    <div ng-if="!user.logged">
-      <p translate>
-      PROFILE_PAGE.LOGGED_USER_NEEDED
-      </p>
-    </div>
-
+    
     <div ng-if="practiceInfo.available">
     <p>
       <dl class="dl-horizontal">

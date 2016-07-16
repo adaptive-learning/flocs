@@ -1,16 +1,5 @@
 angular.module('flocs.admin-stats')
-.controller('adminStatsCtrl', function($scope, userService, adminStatsService, $uibModal) {
-
-  function whenLogged() {
-    $scope.logged = true;
-    adminStatsService.gettingStatistics().then(function(statistics) {
-      $scope.statistics = statistics;
-    });
-  }
-
-  function notLoggedNotification() {
-    $scope.logged = false;
-  }
+.controller('adminStatsCtrl', function($scope, adminStatsService, $uibModal) {
 
   /* Set the width of the side navigation to 250px */
   function openNav() {
@@ -40,8 +29,9 @@ angular.module('flocs.admin-stats')
     closeNav();
   }
 
-  $scope.logged = null;
-  userService.ensuringAdminLoggedIn().then(whenLogged, notLoggedNotification, null);
+  adminStatsService.gettingStatistics().then(function(statistics) {
+      $scope.statistics = statistics;
+    });
   closeNav(); // close navbar at the beginning
   $scope.daily_stats = true; // title statistics
   $scope.openNav = openNav;

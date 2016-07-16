@@ -76,7 +76,7 @@
           </ul>
         </li>
 
-        <li ng-if="user.logged" uib-dropdown class="dropdown">
+        <li ng-if="user.authenticated && !user.isLazyUser" uib-dropdown class="dropdown">
           <a href id="logged-menu-button"
               uib-dropdown-toggle
               class="dropdown-toggle"
@@ -85,7 +85,9 @@
               aria-expanded="false"
               >
             <span class="glyphicon glyphicon-user"></span>&nbsp;
-            {{user.username}} <span class="caret"></span>
+            <span ng-if='user.firstName'>{{user.firstName}}</span>
+            <span ng-if='!user.firstName'>{{user.username}}</span>
+            <span class="caret"></span>
           </a>
           <ul uib-dropdown-menu
               class="dropdown-menu"
@@ -106,7 +108,7 @@
             </li>
           </ul>
         </li>
-        <li ng-if="!user.logged">
+        <li ng-if="!user.authenticated || user.isLazyUser">
           <a href ng-click="openLoginModal()">
             <span class="glyphicon glyphicon-user"></span>&nbsp;
             <span translate>LOG_IN</span>
