@@ -54,6 +54,14 @@ angular.module('flocs', [
       }
     })
 
+    // facebook login appends #_=_ to redirect urls after authentication
+    .state('after-facebook', {
+      url: '/_=_',
+      onEnter: function($state) {
+        $state.go('home');
+      }
+    })
+
     .state('task-preview-unset', {
       url: '/task-preview',
       templateUrl: 'task-preview/task-preview.tpl.html',

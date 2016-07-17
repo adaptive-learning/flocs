@@ -3,9 +3,8 @@
  */
 angular.module('flocs.user')
 .controller('loginModalNoTransitionsCtrl', function($scope, $log, $uibModalInstance,
-      $uibModal, userService){
+      $uibModal, userService, $window){
 
-  $scope.loginForm = {};
   $scope.credentials = {
       username: undefined,
       password: undefined
@@ -13,9 +12,8 @@ angular.module('flocs.user')
   $scope.errorMessage = "";
 
   function login() {
-    var username = $scope.model.username;
-    var password = $scope.model.password;
-    userService.loggingIn(username, password)
+    userService.loggingIn($scope.credentials.username,
+                          $scope.credentials.password)
       .then(function success() {
         $uibModalInstance.close();
       }, function error() {
@@ -24,10 +22,10 @@ angular.module('flocs.user')
       });
   }
 
-  function register() {
+  function signUp() {
     var modalInstance = $uibModal.open({
-        templateUrl: 'user/register-modal.tpl.html',
-        controller: 'registerModalCtrl',
+        templateUrl: 'user/sign-up-modal.tpl.html',
+        controller: 'signUpModalCtrl',
     });
     modalInstance.result.then(function success() {
         // NOTE: logging after successful signing up was moved to the server
@@ -41,7 +39,12 @@ angular.module('flocs.user')
     $uibModalInstance.dismiss();
   }
 
+  function socialLogin(backend) {
+    $window.location = '/social/login/' + backend + '/';
+  }
+
   $scope.login = login;
-  $scope.register = register;
+  $scope.socialLogin = socialLogin;
+  $scope.signUp = signUp;
   $scope.close = close;
 });

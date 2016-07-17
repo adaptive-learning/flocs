@@ -12,19 +12,31 @@
       <h4 class="modal-title" translate>SIGN_UP</h4>
   </div>
 
-  <div class="modal-body">
-
-    <div class="alert alert-danger" role="alert" ng-show="errorMessage" translate>
+  <div class="alert alert-danger" role="alert" ng-show="errorMessage" translate>
       {{errorMessage}}
     </div>
 
-    <form name="registerForm" ng-submit="register()">
+  <div class="modal-body">
+      <a class="btn btn-danger btn-lg btn-block" ng-click="socialLogin('google-oauth2')">
+        <img ng-src="/static/assets/img/icons/fi-social-google-plus.svg" class="social-icon"/>
+          {{'LOG_IN' | translate}} {{'VIA_GOOGLE' | translate}}
+      </a>
+      <a class="btn btn-primary btn-lg btn-block" ng-click="socialLogin('facebook')">
+        <img ng-src="/static/assets/img/icons/fi-social-facebook.svg" class="social-icon"/>
+          {{'LOG_IN' | translate}} {{'VIA_FACEBOOK' | translate}}
+      </a>
+
+      <hr/>
+
+    
+    <form name="registerForm" ng-submit="signUp()">
+      
       <div class="form-group">
         <input
             class="form-control"
             type="text"
             name="username"
-            ng-model="registrationData.username"
+            ng-model="personalDetails.username"
             autofocus
             placeholder="{{'USERNAME' | translate}}"
             required
@@ -45,7 +57,7 @@
             class="form-control"
             type="email"
             name="email"
-            ng-model="registrationData.email"
+            ng-model="personalDetails.email"
             placeholder="E-mail"
             required
         />
@@ -56,7 +68,7 @@
             class="form-control"
             type="password"
             name="password"
-            ng-model="registrationData.password"
+            ng-model="personalDetails.password"
             placeholder="{{'PASSWORD' | translate}}"
             required
         />
@@ -67,7 +79,7 @@
             class="form-control"
             type="password"
             name="validatePassword"
-            ng-model="registrationData.vpassword"
+            ng-model="personalDetails.vpassword"
             placeholder="{{'PASSWORD_AGAIN' | translate}}"
             required
         />

@@ -2,7 +2,7 @@
  * User service
  */
 angular.module('flocs.user')
-.factory('userService', function($rootScope, $state, $uibModal, $timeout, userDao) {
+.factory('userService', function($rootScope, $state, userDao) {
 
     var user = {
         username: "",
@@ -37,7 +37,7 @@ angular.module('flocs.user')
           $rootScope.$emit("flocs:user:change");
         });
     }
-
+    
     function loggingOut() {
       return userDao.loggingOut().then(function(){
         setUserToEmpty();

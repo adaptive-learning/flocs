@@ -22,6 +22,8 @@ angular.module('flocs.locales')
   LOG_IN: 'Přihlásit se',
   LOG_OUT: 'Odhlásit se',
   LOGGED_OUT: 'Úspěšně odhlášen!',
+  VIA_GOOGLE: 'skrze Google+',
+  VIA_FACEBOOK: 'skrze Facebook',
   LOW_LEVEL_FOR_TASK: 'Bohužel, na tento úkol nemáš bloky :(',
   OVERALL_TIME: 'Celkový čas',
   NOT_LOGGED: 'Nejsi přihlášen/a',
@@ -147,9 +149,9 @@ angular.module('flocs.locales')
     DIFFICULT: 'Těžká'
   },
   
-  REGISTER_MODAL: {
+  SIGN_UP_MODAL: {
     PASSWORDS_DIFFER: 'Zadaná hesla se neshodují.',
-    USERNAME_TAKEN: 'Zadaené uživateské jméno je už zabrené.',
+    USERNAME_TAKEN: 'Zadané uživateské jméno je už zabrené.',
     OTHER_ERROR: 'Registrace se nezdařila, zkus to prosím znovu.',
   },
 

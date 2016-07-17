@@ -22,6 +22,8 @@ angular.module('flocs.locales')
   LOG_IN: 'Log in',
   LOG_OUT: 'Log out',
   LOGGED_OUT: 'Successfully logged out!',
+  VIA_GOOGLE: 'using Google+',
+  VIA_FACEBOOK: 'using Facebook',
   LOW_LEVEL_FOR_TASK: 'Unfortunatelly, you do not have blocks to solve this task :(',
   OVERALL_TIME: 'Overall time',
   NOT_LOGGED: 'Not logged',
@@ -143,7 +145,7 @@ angular.module('flocs.locales')
     DIFFICULT: 'Too Difficult'
   },
 
-  REGISTER_MODAL: {
+  SIGN_UP_MODAL: {
     PASSWORDS_DIFFER: 'Filled passwords do not match.',
     USERNAME_TAKEN: 'Filled username is already taken.',
     OTHER_ERROR: 'Registration did not succeeded, please try again.',

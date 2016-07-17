@@ -15,14 +15,25 @@
   <div class="alert alert-danger" role="alert" ng-show="errorMessage" translate>
       {{errorMessage}}
     </div>
-
+  
   <div class="modal-body">
+      <a class="btn btn-danger btn-lg btn-block" ng-click="socialLogin('google-oauth2')">
+        <img ng-src="/static/assets/img/icons/fi-social-google-plus.svg" class="social-icon"/>
+          {{'LOG_IN' | translate}} {{'VIA_GOOGLE' | translate}}
+      </a>
+      <a class="btn btn-primary btn-lg btn-block" ng-click="socialLogin('facebook')">
+        <img ng-src="/static/assets/img/icons/fi-social-facebook.svg" class="social-icon"/>
+          {{'LOG_IN' | translate}} {{'VIA_FACEBOOK' | translate}}
+      </a>
+
+      <hr/>
+
       <form name="loginForm" ng-submit="login()">
         <div class="form-group">
           <input
               class="form-control"
               type="text"
-              ng-model="model.username"
+              ng-model="credentials.username"
               placeholder="{{'USERNAME' | translate}}"
               autofocus
           />
@@ -31,7 +42,7 @@
           <input
               class="form-control"
               type="password"
-              ng-model="model.password"
+              ng-model="credentials.password"
               placeholder="{{'PASSWORD' | translate}}"
           />
         </div>
@@ -44,7 +55,7 @@
   </div>
 
   <div class="modal-footer">
-    <a href ng-click="register()" translate>SIGN_UP</a>
+    <a href ng-click="signUp()" translate>SIGN_UP</a>
   </div>
 
 </div>
