@@ -1,8 +1,8 @@
-from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from stats.services.student_statistics import get_statistics_for_user
 from stats.services import admin_statistics
-from django.contrib.admin.views.decorators import staff_member_required
+from user.decorators import staff_member_required
+from user.decorators import login_required
 
 
 @login_required
@@ -17,6 +17,7 @@ def get_student_statistics(request):
     }
     return JsonResponse(statistics_dict)
 
+
 @staff_member_required
 def get_admin_stats(request):
     """ Return response with the admin statistics
@@ -30,7 +31,6 @@ def get_admin_stats(request):
             'session_stats': session_stats_to_json(statistics.session_stats)
     }
     return JsonResponse(statistics_dict)
-
 
 
 def overview_to_json(overview):
@@ -81,6 +81,7 @@ def concept_stats_to_json(concept):
     }
     return concept_stats_dict
 
+
 def task_stat_to_json(task_stat):
     task_stat_dict = {
             'id': task_stat.id,
@@ -92,6 +93,7 @@ def task_stat_to_json(task_stat):
     }
     return task_stat_dict
 
+
 def daily_stat_to_json(daily_stat):
     daily_stat_dict = {
             'date': daily_stat.date,
@@ -100,6 +102,7 @@ def daily_stat_to_json(daily_stat):
     }
     return daily_stat_dict
 
+
 def block_stat_to_json(block_stats):
     block_stat_dict = {
             'name': block_stats.name,
@@ -107,6 +110,7 @@ def block_stat_to_json(block_stats):
             'num_of_students': block_stats.num_of_students
     }
     return block_stat_dict
+
 
 def concept_stat_to_json(concept_stat):
     concept_stat_dict = {
@@ -117,6 +121,7 @@ def concept_stat_to_json(concept_stat):
             'num_of_solved_tasks': concept_stat.num_of_solved_tasks
     }
     return concept_stat_dict
+
 
 def session_stats_to_json(session_stats):
     session_stat_dict = {

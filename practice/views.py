@@ -2,7 +2,6 @@
 """
 
 from lazysignup.decorators import allow_lazy_user
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import JsonResponse, HttpResponse
 from django.http import HttpResponseBadRequest
@@ -15,6 +14,7 @@ from practice.services import practice_service
 from practice.services import practice_session_service
 from practice.services import details
 from practice.models.task_instance import FlowRating
+from user.decorators import login_required
 
 logger = LoggingUtils()
 

@@ -11,7 +11,7 @@ from social.apps.django_app.default.models import UserSocialAuth
 def signup(request, username, firstname, lastname, email, password):
     # check is username is still available
     qs = User.objects.filter(username=username)
-    if qs.count() > 0:
+    if qs:
         return None
 
     user = request.user
@@ -28,7 +28,7 @@ def signup(request, username, firstname, lastname, email, password):
 def convert_lazy_user(user, username, email, password):
     # check is username is still available
     qs = User.objects.filter(username=username)
-    if qs.count() > 0:
+    if qs:
         return None
 
     user.username = username
@@ -36,8 +36,16 @@ def convert_lazy_user(user, username, email, password):
     user.set_password(password)
     user.backend = None
     user.save()
-    LazyUser.objects.filter(user=user).delete()
-    converted.send(None, user=user)
+    delete_lazy_user(user)
+    assert not is_lazy_user(user)
+
+
+def delete_lazy_user(user):
+    qs = LazyUser.objects.filter(user=user).delete()
+    if qs:
+        qs.delete()
+        LazyUser.objects.update()
+        converted.send(None, user=user)
     assert not is_lazy_user(user)
 
 
