@@ -42,7 +42,6 @@ def convert_lazy_user(user, username, email, password):
 
 def delete_lazy_user(user):
     qs = LazyUser.objects.filter(user=user)
-    print(qs)
     if qs:
         qs.delete()
         LazyUser.objects.update()
