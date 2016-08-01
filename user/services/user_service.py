@@ -41,11 +41,15 @@ def convert_lazy_user(user, username, email, password):
 
 
 def delete_lazy_user(user):
-    qs = LazyUser.objects.filter(user=user).delete()
+    qs = LazyUser.objects.filter(user=user)
+    print(qs)
     if qs:
         qs.delete()
         LazyUser.objects.update()
         converted.send(None, user=user)
+    # remove lazy sign up backend
+    user.backend = None
+    user.save()
     assert not is_lazy_user(user)
 
 

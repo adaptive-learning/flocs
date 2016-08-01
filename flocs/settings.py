@@ -189,6 +189,20 @@ SOCIAL_AUTH_SANITIZE_REDIRECTS = True
 # SECRET_KEY MUST remain secret
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'user.pipeline.remove_current_user',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+    'user.pipeline.manual_login',
+)
+
 # --------------------------------------------------------------------------
 # Email
 # --------------------------------------------------------------------------
