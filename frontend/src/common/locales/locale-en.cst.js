@@ -43,7 +43,7 @@ angular.module('flocs.locales')
   TASK_TITLE: 'Task title',
   TASK_NOT_EXISTS: 'The task does not exists.',
   TIME_SPENT: 'Time',
-  TITLE: 'Adaptive programming',
+  TITLE: 'RoboMission',
   TOGGLE_NAVIGATION: 'Toggle navigation',
   TOTAL_CREDITS: 'Total credits',
   UNDERSTAND: 'I understand',

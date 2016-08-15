@@ -43,7 +43,7 @@ angular.module('flocs.locales')
   TASK_TITLE: 'Název úlohy',
   TASK_NOT_EXISTS: 'Tato úloha neexistuje.',
   TIME_SPENT: 'Čas',
-  TITLE: 'Adaptabilní programování',
+  TITLE: 'RoboMise',
   TOGGLE_NAVIGATION: 'Přepnout navigaci',
   TOTAL_CREDITS: 'Kreditů celkem',
   UNDERSTAND: 'Rozumím',
@@ -148,7 +148,7 @@ angular.module('flocs.locales')
     RIGHT: 'Akorát',
     DIFFICULT: 'Těžká'
   },
-  
+
   SIGN_UP_MODAL: {
     PASSWORDS_DIFFER: 'Zadaná hesla se neshodují.',
     USERNAME_TAKEN: 'Zadané uživateské jméno je už zabrené.',
