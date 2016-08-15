@@ -1,7 +1,7 @@
 .instruction-area-wrapper {
   position: absolute;
-  z-index: 100;
   display: inline-block;
+  z-index: 1000;
   box-sizing: border-box;
   border: 1px dashed rgba(166, 27, 26, 0.9);
   background-color: rgba(166, 27, 26, 0.1);
@@ -15,4 +15,10 @@
 
 .instruction-ok-btn {
   width: 100%;
+}
+
+/* push the actual popover (which  is appended to the body)
+   below modals, but above blockly and header */
+.popover {
+  z-index: 1010;
 }
